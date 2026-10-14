@@ -7141,3 +7141,2543 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 :::
 
 光線系呪文（睡眠、マジックミサイル、死の指、および未熟練状態の冷気や火炎）の命中率も、スキルランクに応じて上昇します。
+
+### モンスター図鑑一覧表 (Bestiary Tables)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 monsters.h: no corrections. ~100% of the numeric columns (Lvl/Spd/AC/MR), color, and full attack lists verified across all ~55 tables, including the tricky cases (floating eye 0d70, black dragon disint, AD_DRST-as-poison stings, deferred/#if0 monsters correctly excluded).
+-->
+
+ダンジョンで遭遇しうるあらゆるモンスターをマップ記号ごとに分類した一覧です。**レベル (Lvl)**はモンスターの基本レベル、**速度 (Spd)**は移動速度（プレイヤーの標準速度は 12）、**AC**はアーマークラス（低いほど強固）、**MR**は魔法防御率（プレイヤーの呪文や魔法攻撃に抵抗する確率%）を表します。**攻撃方法 (Attacks)**は各攻撃の種別、ダメージダイス、追加効果を記載しており、`·` で区切られた攻撃は1ターン内にすべて連続して繰り出されます。**備考 (Notes)**には飛行能力、不可視視認、自動回復、死体に毒があるかなど、戦闘を一変させる重要な特性をまとめています。
+
+#### 蟻および昆虫 `a` (Ants and insects `a`)
+
+<!-- audit
+2026-05-19:
+- 6 rows (S_ANT) sourced from monsters.h:89-133.
+- giant ant L2/Spd18/AC3 bite 1d4 (monsters.h:89-95).
+- killer bee L1/Spd18/AC-1 sting 1d3 AD_DRST, G_LGROUP, MR_POISON (monsters.h:96-102).
+- soldier ant L3/Spd18/AC3 bite 2d4 + sting 3d4 AD_DRST, M1_POIS (monsters.h:103-110).
+- fire ant L3/Spd18/AC3 bite 2d4 phys + 2d4 fire, MR_FIRE (monsters.h:111-118).
+- giant beetle L5/Spd6/AC4 bite 3d6, M1_POIS, MR_POISON (monsters.h:119-125).
+- queen bee L9/Spd24/AC-4 sting 1d8 AD_DRST, G_NOGEN, M2_FEMALE|M2_PRINCE (monsters.h:126-133).
+- Killer/soldier/queen stings are AD_DRST (Str-drain, poison-family); shown as "poison" for beginner voice.
+- Killer bee is G_LGROUP; others are smaller groups.
+-->
+
+昆虫類。多くは集団で群れをなして出現します。兵隊蟻の毒針攻撃は筋力を吸い取ります。殺人蜂は大群で襲いかかり、蜂の巣の部屋にいる女王蜂は単体でも手ごわい相手です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 巨大蟻 (giant ant) | 茶色 | 2 | 18 | 3 | 0 | 噛みつき 1d4 |  |
+| 殺人蜂 (killer bee) | 黄色 | 1 | 18 | -1 | 0 | 毒針 1d3 毒 | 飛行, 死体に毒あり, 毒耐性. 毒針攻撃。 |
+| 兵隊蟻 (soldier ant) | 青色 | 3 | 18 | 3 | 0 | 噛みつき 2d4 · 毒針 3d4 毒 | 死体に毒あり, 毒耐性. 毒針攻撃。 |
+| 火蟻 (fire ant) | 赤色 | 3 | 18 | 3 | 10 | 噛みつき 2d4 · 噛みつき 2d4 火炎 | 火炎耐性. |
+| 巨大カブト虫 (giant beetle) | 黒色 | 5 | 6 | 4 | 0 | 噛みつき 3d6 | 死体に毒あり, 毒耐性. |
+| 女王蜂 (queen bee) | 赤紫 | 9 | 24 | -4 | 0 | 毒針 1d8 毒 | 飛行, 死体に毒あり, 毒耐性. |
+
+:::
+
+#### ブロッブ `b` (Blobs `b`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (S_BLOB) sourced from monsters.h:137-166.
+- Acid blob passive: 50% splash + 1/30 corrode armor, plus passive_obj 1/6 erode on uwep/uarmg (uhitm.c:5906-5933).
+- Gelatinous cube paralysis: 2/3 rate, free-action blocks (uhitm.c:6019-6064).
+- Gelatinous cube in 5.0 is AT_TUCH only, NOT AT_ENGL like older versions. (monsters.h:157-158 AT_TUCH AD_PLYS 2d4 + AT_NONE AD_PLYS 1d4)
+-->
+
+動きが遅く、精神を持ちません。酸のブロッブを素手や大切な金属武器で近接攻撃してはいけません。相手の酸による反撃で武器や防具が腐食します。ゼラチンキューブは接触時にプレイヤーを麻痺させます。
+
+すべてのブロッブは精神を持たず（マインドレス）、睡眠耐性と毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 酸のブロッブ (acid blob) | 緑色 | 1 | 3 | 8 | 0 | 反撃 1d8 酸 | 不定形, 酸耐性, 石化耐性. 酸の反撃ダメージ。素手で殴ると手袋が腐食する。 |
+| 震えるブロッブ (quivering blob) | 白色 | 5 | 1 | 8 | 0 | 接触 1d8 |  |
+| ゼラチンキューブ (gelatinous cube) | 水色 | 6 | 6 | 8 | 0 | 接触 2d4 麻痺 · 反撃 1d4 麻痺 | 火炎耐性, 冷気耐性, 電撃耐性, 酸耐性, 石化耐性. 鈍足だが接触時に麻痺。自由行動なしでの近接戦は厳禁。 |
+
+:::
+
+#### コカトリス `c` (Cockatrices `c`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (chickatrice/cockatrice/pyrolisk) sourced from monsters.h:167-195.
+- Chickatrice/cockatrice carry MR_POISON|MR_STONE; pyrolisk carries MR_POISON|MR_FIRE and does NOT stone. (monsters.h:174-175 chickatrice, 182-183 cockatrice both MR_POISON|MR_STONE; 191-192 pyrolisk MR_POISON|MR_FIRE; pyrolisk attacks are AT_GAZE AD_FIRE + AT_BITE AD_PHYS — no AD_STON)
+- Wielding cockatrice corpse bare-handed instapetrifies regardless of role (wield.c:146-152).
+-->
+
+中世の動物寓話に登場する怪物。蛇の尾を持つ鶏の姿をしており、その接触は肉体を瞬時に石化させます。トカゲの死体を常時携帯し、必ず手袋を着用して戦ってください。どの職業も初期状態では石化耐性を持っておらず、コカトリスの死体を素手で装備すると即死します。[石化](#petrification-stoning)の項目を参照してください。
+
+すべてのコカトリス類は毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| チカトリス (chickatrice) | 茶色 | 4 | 4 | 8 | 30 | 噛みつき 1d2 · 接触 石化 · 反撃 石化 | 石化耐性. 小型のコカトリス。同様の石化ルールが適用される。 |
+| コカトリス (cockatrice) | 黄色 | 5 | 6 | 6 | 30 | 噛みつき 1d3 · 接触 石化 · 反撃 石化 | 石化耐性. 触れると石化。常にトカゲの死体を携帯すること。 |
+| ピロリスク (pyrolisk) | 赤色 | 6 | 6 | 6 | 30 | 凝視 2d6 火炎 · 噛みつき 1d6 | 火炎耐性. |
+
+:::
+
+#### 犬およびイヌ科 `d` (Dogs and canines `d`)
+
+野生のイヌ科生物は群れで狩りを行います。飼いならされたものは食料を与えることでペットにできます（[仲間の増やし方](#making-friends)参照）。ジャッカル人間や狼人間はプレイヤーを獣化（ライカンスロープ）に感染させることがあります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ジャッカル (jackal) | 茶色 | 0 | 12 | 7 | 0 | 噛みつき 1d2 | 冒険者を最初に葬り去った相手。 |
+| 狐 (fox) | 赤色 | 0 | 15 | 7 | 0 | 噛みつき 1d3 |  |
+| コヨーテ (coyote) | 茶色 | 1 | 12 | 7 | 0 | 噛みつき 1d4 |  |
+| ジャッカル人間 (werejackal) | 茶色 | 2 | 12 | 7 | 10 | 噛みつき 1d4 獣化 | 自動回復, 毒耐性. 死体を残さない。 |
+| 仔犬 (little dog) | 白色 | 2 | 18 | 6 | 0 | 噛みつき 1d6 | 手懐け可能. 洞窟人、野伏、侍の確定初期ペット。 |
+| 野犬 (dingo) | 黄色 | 4 | 16 | 5 | 0 | 噛みつき 1d6 |  |
+| 犬 (dog) | 白色 | 4 | 16 | 5 | 0 | 噛みつき 1d6 | 手懐け可能. |
+| 大きな犬 (large dog) | 白色 | 6 | 15 | 4 | 0 | 噛みつき 2d4 | 手懐け可能. |
+| 狼 (wolf) | 灰色 | 5 | 12 | 4 | 0 | 噛みつき 2d4 |  |
+| 狼人間 (werewolf) | 灰色 | 5 | 12 | 4 | 20 | 噛みつき 2d6 獣化 | 自動回復, 毒耐性. 死体を残さない。 |
+| 冬狼の子 (winter wolf cub) | 水色 | 5 | 12 | 4 | 0 | 噛みつき 1d8 · ブレス 1d6 冷気 | 冷気耐性. |
+| ワーグ (warg) | 黒色 | 7 | 12 | 4 | 0 | 噛みつき 2d6 |  |
+| 冬狼 (winter wolf) | 水色 | 7 | 12 | 4 | 20 | 噛みつき 2d6 · ブレス 2d6 冷気 | 冷気耐性. |
+| ヘルハウンドの仔 (hell hound pup) | 赤色 | 7 | 12 | 4 | 20 | 噛みつき 2d6 · ブレス 2d6 火炎 | 火炎耐性. |
+| ヘルハウンド (hell hound) | 赤色 | 12 | 14 | 2 | 20 | 噛みつき 3d6 · ブレス 3d6 火炎 | 火炎耐性. |
+
+:::
+
+#### 目および球体 `e` (Eyes and spheres `e`)
+
+<!-- audit
+2026-05-19:
+- Roster sourced from monsters.h:325-366 (beholder omitted, `#if 0`).
+- Floating eye paralysis requires mutual sight (canseemon + mon->mcansee per uhitm.c:6022-6053), NOT "in daylight."
+- Floating eye corpse grants telepathy (eat.c:1071 TELEPAT case).
+- No close-eyes command exists in 5.0; to break sight you must be Blind (status or worn blindfold/towel).
+- Newbie-killer framing aligned with NetHackWiki: floating eye is "an infamous source of early game deaths" (https://nethackwiki.com/wiki/Floating_eye).
+-->
+
+さまよう目の反撃麻痺凝視は、ダンジョン序盤において最も有名な死因の一つです。自由行動（Free action）、盲目状態、または遠距離攻撃の手段を持たずに近接攻撃を仕掛けてはなりません。倒した後は死体を食べてください。恒久的なテレパシー能力（内在能力）を獲得できます。
+
+すべての目および球体は飛行能力を持ちます。また、*さまよう目*を除きすべて精神を持ちません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 包子ガス (gas spore) | 灰色 | 1 | 3 | 10 | 0 | 爆発(死亡時) 4d6 |  |
+| さまよう目 (floating eye) | 青色 | 2 | 1 | 9 | 10 | 反撃 3d70 麻痺 | 水陸両用. 互いに視界が通っている状態で近接攻撃すると反撃麻痺。遠距離攻撃を行うか、目隠しやタオルで視覚を遮って対処。死体を食べると必ずテレパシーを獲得。 |
+| 氷の球体 (freezing sphere) | 白色 | 6 | 13 | 4 | 0 | 自爆 4d6 冷気 | 冷気耐性. |
+| 炎の球体 (flaming sphere) | 赤色 | 6 | 13 | 4 | 0 | 自爆 4d6 火炎 | 火炎耐性. |
+| 電撃の球体 (shocking sphere) | 明青 | 6 | 13 | 4 | 0 | 自爆 4d6 電撃 | 電撃耐性. |
+
+:::
+
+#### ネコ科 `f` (Felines `f`)
+
+<!-- audit
+2026-05-19:
+- 8 rows (S_FELINE) sourced from monsters.h:381-444.
+- kitten L2/Spd18/AC6 bite 1d6 (monsters.h:381-388).
+- housecat L4/Spd16/AC5 bite 1d6 (monsters.h:389-396).
+- large cat L6/Spd15/AC4 bite 2d4 (monsters.h:421-428).
+- displacer beast L12/Spd12/AC-10 claw 4d4 + claw 4d4 + bite 2d10 (monsters.h:437-444).
+- Tigers are M2_HOSTILE, difficulty 8: tameable only via charm-monster/scroll-of-taming/magic-flute, NOT tripe. (monsters.h:429-436 tiger has M2_HOSTILE only — no M2_DOMESTIC; befriend_with_obj at mondata.h:255-261 requires is_domestic for FOOD_CLASS items)
+- Only Wizard guarantees a kitten (urole.petnum=PM_KITTEN per role.c:548); every role without a fixed pet rolls 50/50 kitten-or-dog (dog.c:90-101).
+-->
+
+野生のネコ科生物は素早く敵対的です。虎やディスプレイスビーストは、何気ない通路での遭遇を命がけの戦いに変えてしまいます。魔法使いは必ず小猫を連れてスタートし、初期ペットが固定されていない職業は小猫か仔犬のいずれかを 50% の確率で連れて開始します。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 小猫 (kitten) | 白色 | 2 | 18 | 6 | 0 | 噛みつき 1d6 | 手懐け可能. 一般的なペット。 |
+| 家猫 (housecat) | 白色 | 4 | 16 | 5 | 0 | 噛みつき 1d6 | 手懐け可能. |
+| ジャガー (jaguar) | 茶色 | 4 | 15 | 6 | 0 | 爪 1d4 ×2 · 噛みつき 1d8 |  |
+| 山猫 (lynx) | 水色 | 5 | 15 | 6 | 0 | 爪 1d4 ×2 · 噛みつき 1d10 |  |
+| パンサー (panther) | 黒色 | 5 | 15 | 6 | 0 | 爪 1d6 ×2 · 噛みつき 1d10 |  |
+| 大きな猫 (large cat) | 白色 | 6 | 15 | 4 | 0 | 噛みつき 2d4 | 手懐け可能. |
+| 虎 (tiger) | 黄色 | 6 | 12 | 6 | 0 | 爪 2d4 ×2 · 噛みつき 1d10 |  |
+| ディスプレイサービースト (displacer beast) | 青色 | 12 | 12 | -10 | 0 | 爪 4d4 ×2 · 噛みつき 2d10 |  |
+
+:::
+
+#### グレムリン `g` (Gremlins `g`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (gremlin/gargoyle/winged gargoyle) sourced from monsters.h:448-473.
+- Gremlin water/fountain trigger SPLIT: clones themselves, 2/3 chance per step (mon.c:987-992); does NOT touch your intrinsics.
+- Gremlin night attack is AD_CURS: strips one random intrinsic, 1/10 per hit, night-only, blocked by cancellation (uhitm.c:3040-3057, sit.c:644+).
+- Gargoyles do NOT petrify by touch or corpse: touch_petrifies is cockatrice/chickatrice only (mondata.h:200-201).
+-->
+
+夜間（または光源がない暗闇）に水に触れると分裂増殖する厄介な小型怪物です。暗闇の中でプレイヤーから内在能力を盗み取る攻撃を行います。明るい光源を持ち歩くか、明かりの巻物・呪文で部屋を照らすのが有効な対抗策です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| グレムリン (gremlin) | 緑色 | 5 | 12 | 2 | 25 | 爪 1d6 ×2 · 噛みつき 1d4 · 爪 呪い | 遊泳, 死体に毒あり, follows stairs, 毒耐性. |
+| ガーゴイル (gargoyle) | 茶色 | 6 | 10 | -4 | 0 | 爪 2d6 ×2 · 噛みつき 2d4 | 石化耐性. |
+| 羽のあるガーゴイル (winged gargoyle) | 赤紫 | 9 | 15 | -2 | 0 | 爪 3d6 ×2 · 噛みつき 3d4 | 飛行, 石化耐性. |
+
+:::
+
+#### 人型生物 `h` (Humanoids `h`)
+
+<!-- audit
+2026-05-19:
+- 7 rows (S_HUMANOID) sourced from monsters.h:477-542.
+- hobbit L1/Spd9/AC10 weapon 1d6 (monsters.h:477-484).
+- dwarf L2/Spd6/AC10 weapon 1d8, M1_TUNNEL (monsters.h:485-493).
+- dwarf lord L4/Spd6/AC10 weapon 2d4 ×2 (monsters.h:502-510).
+- dwarf king L6/Spd6/AC10 weapon 2d6 ×2, MR 20% (monsters.h:511-520).
+- mind flayer L9/Spd12/AC5 MR 90%, 3× tentacle AD_DRLI (monsters.h:521-530).
+- master mind flayer L13/Spd12/AC0 MR 90%, 5× tentacle (monsters.h:531-542).
+- helmet blocks mind-flayer tentacle 7/8 of the time (uhitm.c:3235, `uarmh && rn2(8)`).
+- Any helmet blocks the mind flayer attack, NOT only alignment-matching or telepathy/free-action helmets.
+- Bugbear is AT_WEAP only, no bite (monsters.h:494-501).
+- Dwarf race peacefulness for Dwarf PCs via race_peaceful() at makemon.c:2283.
+-->
+
+小人族、ホビット、ドワーフ、巨人など多彩な人型生物が含まれます。ノームの鉱山ではドワーフが中立または友好的に出現することが多く、彼らの落とすミスリル服や鉄兜は序盤の貴重な防具供給源となります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ホビット (hobbit) | 緑色 | 1 | 9 | 10 | 0 | 武器攻撃 1d6 |  |
+| ドワーフ (dwarf) | 赤色 | 2 | 6 | 10 | 10 | 武器攻撃 1d8 | tunnels. |
+| バグベアー (bugbear) | 茶色 | 3 | 9 | 5 | 0 | 武器攻撃 2d4 |  |
+| dwarf lord | 青色 | 4 | 6 | 10 | 10 | 武器攻撃 2d4 ×2 | tunnels. |
+| dwarf king | 赤紫 | 6 | 6 | 10 | 20 | 武器攻撃 2d6 ×2 | tunnels. |
+| マインドフレア (mind flayer) | 明紫 | 9 | 12 | 5 | 90 | 武器攻撃 1d4 · tentacle 2d1 エナジードレイン-Int ×3 | 飛行, sees-不可視. Tentacles drain Int; once it reaches 3, the next tentacle that lands kills you. Any helmet blocks 7/8 of tentacles. |
+| マスターマインドフレア (master mind flayer) | 明紫 | 13 | 12 | 0 | 90 | 武器攻撃 1d8 · tentacle 2d1 エナジードレイン-Int ×5 | 飛行, sees-不可視. Five tentacles per turn. Any helmet blocks 7/8 of tentacles. |
+
+:::
+
+#### 小悪魔および下級悪魔 `i` (Imps and minor demons `i`)
+
+インプ、ホムンクルス、テングなどの下級悪魔です。テングは頻繁にテレポートを行い、その死体を食べることでテレポート能力やテレポート制御能力を獲得できるチャンスがあります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 亡霊 (manes) | 赤色 | 1 | 3 | 7 | 0 | 爪 1d3 ×2 · 噛みつき 1d4 | 睡眠耐性. 死体を残さない。 |
+| ホムンクルス (homunculus) | 緑色 | 2 | 12 | 6 | 10 | 噛みつき 1d3 sleep | 飛行, 死体に毒あり, 睡眠耐性. |
+| インプ (imp) | 赤色 | 3 | 12 | 2 | 20 | 爪 1d4 | 自動回復. |
+| レムレース (lemure) | 茶色 | 3 | 3 | 7 | 0 | 爪 1d3 | Gehennom-only, 自動回復, 睡眠耐性. 死体を残さない。 |
+| クアシト (quasit) | 青色 | 3 | 15 | 2 | 20 | 爪 1d2 エナジードレイン-Dx ×2 · 噛みつき 1d4 | 自動回復. |
+| 天狗 (tengu) | 水色 | 6 | 13 | 5 | 30 | 噛みつき 1d7 | テレポート, teleport-control. |
+
+:::
+
+#### ゼリー `j` (Jellies `j`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (blue/spotted/ochre jelly) sourced from monsters.h:591-620; all carry M1_AMORPHOUS|M1_MINDLESS.
+- Blue jelly corpse conveys cold + poison resistance permanently (eat.c:983-988 should_givit).
+- Spotted/ochre corpses convey acid + stone resistance TIMED (eat.c:991-997 temp_givit).
+- A passive attack written as 0dN in the monster definition rolls (monster level + 1)dN in combat; blue jelly is therefore 6d6 and spotted jelly 7d6 (uhitm.c:5885-5888).
+-->
+
+壁際や床に張り付く不定形の怪物です。青色ゼリーは冷気、赤色ゼリーは火炎の反撃ダメージを与えます。金属武器を腐食させる斑点ゼリーにも注意が必要です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 青色ゼリー (blue jelly) | 青色 | 4 | 0 | 8 | 10 | 反撃 5d6 冷気 | corpse: cold + poison resistance. |
+| まだらゼリー (spotted jelly) | 緑色 | 5 | 0 | 8 | 10 | 反撃 6d6 酸 | corpse: temp acid + stone resistance. |
+| 黄土色ゼリー (ochre jelly) | 茶色 | 6 | 3 | 8 | 20 | engulf 3d6 酸 · 反撃 3d6 酸 | corpse: temp acid + stone resistance. |
+
+:::
+
+#### コボルド `k` (Kobolds `k`)
+
+<!-- audit
+2026-05-19:
+- 4 rows (kobold/large/lord/shaman) sourced from monsters.h:624-657.
+- kobold L0/Spd6/AC10 weapon 1d4 (monsters.h:624-631).
+- large kobold L1/Spd6/AC10 weapon 1d6 (monsters.h:632-639).
+- kobold lord L2/Spd6/AC10 weapon 2d4 (monsters.h:640-648).
+- kobold shaman L2/Spd6/AC6 MR 10% (monsters.h:649-657).
+- All four carry M1_POIS (poisonous corpse) and MR_POISON.
+- Kobold shaman has only one AT_MAGC/AD_SPEL attack (monsters.h:651); notation is "cast spell," not "cast spell."
+-->
+
+序盤に群れで現れる小型の邪悪な生物。毒矢を放ってくることがあり、毒耐性がない最序盤では1発で致命傷になり得ます。死体にも毒が含まれているため、毒耐性を得るまでは食べてはいけません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| コボルド (kobold) | 茶色 | 0 | 6 | 10 | 0 | 武器攻撃 1d4 |  |
+| 大きなコボルド (large kobold) | 赤色 | 1 | 6 | 10 | 0 | 武器攻撃 1d6 |  |
+| kobold lord | 赤紫 | 2 | 6 | 10 | 0 | 武器攻撃 2d4 |  |
+| コボルドの呪術師 (kobold shaman) | 明青 | 2 | 6 | 6 | 10 | cast spell |  |
+
+:::
+
+#### レプラコーン `l` (Leprechauns `l`)
+
+<!-- audit
+2026-05-19:
+- Leprechaun (Lvl 5, Spd 15, AC 8, MR 20, green, claw 1d2 AD_SGLD), M1_TPORT, AT_CLAW (not bite): monsters.h:660-666, steal.c:58-115.
+- Stolen gold goes into mtmp->minvent and drops on death.
+- An unseen leprechaun off the shop floor can bury its gold 1-in-4 per turn (monmove.c:1152-1171 leppie_stash); killing later may not recover it.
+-->
+
+金貨を盗んで即座にフロアの別の場所へテレポートする妖精です。攻撃力は高くありませんが、全財産を奪われて逃げられると回収に手間取ります。テレパシーで位置を特定して仕留めれば、大量の金貨を取り戻せます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| レプラコーン (leprechaun) | 緑色 | 5 | 15 | 8 | 20 | 爪 1d2 盗み-gold | テレポート. Steals gold and テレポート away. Carry no gold near them. |
+
+:::
+
+#### ミミック `m` (Mimics `m`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (small/large/giant mimic) sourced from monsters.h:670-698.
+- All carry M1_AMORPHOUS|M1_HIDE|MR_ACID; large/giant also have AD_STCK and M2_STRONG.
+- Disguise via set_mimic_sym (makemon.c:2393-2472), including STRANGE_OBJECT in shops at sufficient depth.
+- AD_STCK is MC-blocked (uhitm.c:3310/3324).
+-->
+
+扉、階段、金貨、あるいは貴重なアイテムに擬態して獲物を待ち伏せます。触れると貼り付かれて移動不能になり、噛みつき攻撃を受けます。不自然な位置にある階段や扉、未識別の高価なアイテムには遠距離攻撃で確認を入れるのが賢明です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 小さなミミック (small mimic) | 茶色 | 7 | 3 | 7 | 0 | 爪 3d4 |  |
+| 大きなミミック (large mimic) | 赤色 | 8 | 3 | 7 | 10 | 爪 3d4 sticky |  |
+| 巨大なミミック (giant mimic) | 赤紫 | 9 | 3 | 7 | 20 | 爪 3d6 sticky ×2 |  |
+
+:::
+
+#### ニンフ `n` (Nymphs `n`)
+
+<!-- audit
+2026-05-19:
+- 3 nymphs (wood/water/mountain): LVL 3, Spd 12, AC 9, MR 20%, AT_CLAW AD_SITM + AT_CLAW AD_SEDU, M1_TPORT (monsters.h:702-723).
+- Water nymph has M1_SWIM (line 714); all three carry M1_TPORT|MR_POISON.
+- AD_SITM steal-and-teleport at uhitm.c:4724,4798; AD_SEDU at uhitm.c:4642.
+- Corpse grants intrinsic teleportitis at 10% per should_givit (eat.c:936-975).
+2026-05-31:
+- Post-theft teleport calls rloc(mon, RLOC_MSG) at mhitu.c:2303, which is the within-level relocation routine (teleport.c:1799). The nymph does NOT migrate to another level after stealing; she ends up at a random valid position on the SAME level.
+- The book's earlier claim that a nymph might "walk off the level with my bag of holding" was an overstatement of the rare incidental case where she later falls through a trapdoor or wanders onto a staircase.
+- The Amulet of Yendor has no return-to-Sanctum mechanic on theft. A nymph carrying the Amulet stays on the same level, so the Ascension Run warning was corrected to point at the turn-budget cost of searching the level while the Mysterious Force keeps pulling.
+-->
+
+所持品からアイテムを1つ盗み取り、同じフロアのランダムな場所へテレポートします。遠距離から攻撃するか、ペットで進路を塞ぐか、エルベレスの文字を刻んで近寄らせないようにしてください。もしアイテムを盗まれた場合は、フロア全体を捜索して倒せば盗まれたアイテムをすべて回収できます。
+
+すべてのニンフはテレポート能力を持ちます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 森のニンフ (wood nymph) | 緑色 | 3 | 12 | 9 | 20 | 爪 盗み-item · 爪 誘惑 |  |
+| 水のニンフ (water nymph) | 青色 | 3 | 12 | 9 | 20 | 爪 盗み-item · 爪 誘惑 | 遊泳. |
+| 山のニンフ (mountain nymph) | 茶色 | 3 | 12 | 9 | 20 | 爪 盗み-item · 爪 誘惑 |  |
+
+:::
+
+#### オーク `o` (Orcs `o`)
+
+<!-- audit
+2026-05-19:
+- 8 rows (S_ORC) sourced from monsters.h:727-796.
+- goblin L0/Spd6/AC10 weapon 1d4 (monsters.h:727-733).
+- hobgoblin L1/Spd9/AC10 weapon 1d6 (monsters.h:734-742).
+- orc L1/Spd9/AC10 weapon 1d8, MR_POISON (monsters.h:743-751).
+- hill orc L2/Spd9/AC10 weapon 1d6 (monsters.h:752-760).
+- Mordor orc L3/Spd5/AC10 weapon 1d6 (monsters.h:761-769); Spd 5 is correct in 5.0.
+- Uruk-hai L3/Spd7/AC10 weapon 1d8 (monsters.h:770-778).
+- orc shaman L3/Spd9/AC5 single AT_MAGC/AD_SPEL (monsters.h:779-787); "spell," not "cast spell."
+- orc-captain L5/Spd5/AC10 weapon 2d4 ×2 (monsters.h:788-796).
+- Goblin is correctly placed in S_ORC (monsters.h:727).
+-->
+
+集団で現れ、弓矢や毒矢、短剣を投げつけてきます。オークの弓や矢、盾、鎖かたびらなどを装備していることが多く、序盤の装備集めや飛び道具の補給に役立ちます。エルフのPCに対しては特に強い敵意を燃やします。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ゴブリン (goblin) | 灰色 | 0 | 6 | 10 | 0 | 武器攻撃 1d4 |  |
+| ホブゴブリン (hobgoblin) | 茶色 | 1 | 9 | 10 | 0 | 武器攻撃 1d6 |  |
+| オーク (orc) | 赤色 | 1 | 9 | 10 | 0 | 武器攻撃 1d8 | 毒耐性. |
+| 丘のオーク (hill orc) | 黄色 | 2 | 9 | 10 | 0 | 武器攻撃 1d6 | 毒耐性. |
+| モルドールのオーク (Mordor orc) | 青色 | 3 | 5 | 10 | 0 | 武器攻撃 1d6 | 毒耐性. |
+| Uruk-hai | 黒色 | 3 | 7 | 10 | 0 | 武器攻撃 1d8 | 毒耐性. |
+| オークの呪術師 (orc shaman) | 明青 | 3 | 9 | 5 | 10 | cast | 毒耐性. |
+| orc-captain | 赤紫 | 5 | 5 | 10 | 0 | 武器攻撃 2d4 ×2 | 毒耐性. Hits hard. Drops decent loot. |
+
+:::
+
+#### ピアサー `p` (Piercers `p`)
+
+天井の鍾乳石に擬態し、直下を通った冒険者の頭上へ落下して大ダメージを与えます。天井を見上げるか、怪しい通路の天井を注意深く探索することで事前に察知できます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 岩喰い (rock piercer) | 灰色 | 3 | 1 | 3 | 0 | 噛みつき 2d6 |  |
+| 鉄喰い (iron piercer) | 水色 | 5 | 1 | 0 | 0 | 噛みつき 3d6 |  |
+| ガラス喰い (glass piercer) | 白色 | 7 | 1 | 0 | 0 | 噛みつき 4d6 | 酸耐性. |
+
+:::
+
+#### 四足獣 `q` (Quadrupeds `q`)
+
+<!-- audit
+2026-05-19:
+- 7 rows (rothe through mastodon) sourced from monsters.h:831-885.
+- rothe L2/Spd9/AC7 claw 1d3 + bite 1d3 + bite 1d8 (monsters.h:831-837).
+- mumak L5/Spd9/AC0 butt 4d12 + bite 2d6 (monsters.h:838-845).
+- leocrotta L6/Spd18/AC4 (monsters.h:846-853).
+- wumpus L8/Spd3/AC2 bite 3d6, M1_CLING (monsters.h:854-861).
+- mastodon L20/Spd12/AC5 butt 4d8 ×2 (monsters.h:878-885).
+-->
+
+ロテやマンティコア、マムモスなどの四足歩行獣です。ロテは死体を急速に腐敗させて食べ尽くす能力を持ち、マンティコアは遠距離から大量のトゲを撃ち込んできます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ロゼ (rothe) | 茶色 | 2 | 9 | 7 | 0 | 爪 1d3 · 噛みつき 1d3 · 噛みつき 1d8 |  |
+| ムーマク (mumak) | 灰色 | 5 | 9 | 0 | 0 | 頭突き 4d12 · 噛みつき 2d6 |  |
+| レオクロッタ (leocrotta) | 赤色 | 6 | 18 | 4 | 10 | 爪 2d6 · 噛みつき 2d6 · 爪 2d6 |  |
+| ワンパス (wumpus) | 水色 | 8 | 3 | 2 | 10 | 噛みつき 3d6 | clings. |
+| チタノゼア (titanothere) | 灰色 | 12 | 12 | 6 | 0 | 爪 2d8 |  |
+| バルキテリウム (baluchitherium) | 灰色 | 14 | 12 | 5 | 0 | 爪 5d4 ×2 |  |
+| マストドン (mastodon) | 黒色 | 20 | 12 | 5 | 0 | 頭突き 4d8 ×2 |  |
+
+:::
+
+#### 齧歯類 `r` (Rodents `r`)
+
+<!-- audit
+2026-05-19:
+- 6 rows (S_RODENT) sourced from monsters.h:889-936.
+- Woodchuck color is brown (CLR_BROWN at monsters.h:936).
+- Rock mole is M1_METALLIVORE: eats metal, including bag of gold and unattended weapons (mondata.c:561, hack.c:769-784).
+-->
+
+ネズミや巨大ネズミの群れ。兇暴ネズミは狂犬病に感染させてくる危険があります。ねずみ人間は噛みつきによってプレイヤーを獣化（ネズミ人間）させます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ドブネズミ (sewer rat) | 茶色 | 0 | 12 | 7 | 0 | 噛みつき 1d3 |  |
+| 巨大ネズミ (giant rat) | 茶色 | 1 | 10 | 7 | 0 | 噛みつき 1d3 |  |
+| 兇暴ネズミ (rabid rat) | 茶色 | 2 | 12 | 6 | 0 | 噛みつき 2d4 エナジードレイン-Co | 死体に毒あり, 毒耐性. |
+| ねずみ人間 (wererat) | 茶色 | 2 | 12 | 6 | 10 | 噛みつき 1d4 獣化 | 自動回復, 毒耐性. 死体を残さない。 |
+| 岩もぐら (rock mole) | 灰色 | 3 | 3 | 0 | 20 | 噛みつき 1d6 | tunnels, eats metal objects left on the floor. |
+| リス (woodchuck) | 茶色 | 3 | 3 | 0 | 20 | 噛みつき 1d6 | 遊泳, tunnels. |
+
+:::
+
+#### 蜘蛛および百足 `s` (Arachnids and centipedes `s`)
+
+<!-- audit
+2026-05-19:
+- 5 rows (cave spider, centipede, giant spider, scorpion, Scorpius) sourced from monsters.h:940-972, 3713-3722.
+- Webmaker only on cave spider + giant spider (mondata.h:147-148); M1_CONCEAL on all except giant spider.
+- Cave spider/centipede corpses safe (no M1_POIS); giant spider/scorpion corpses poisonous (M1_POIS).
+- Scorpius MR_STONE confers stoning resistance via corpse.
+-->
+
+巨大グモは足元に蜘蛛の巣を張って動きを封じ、毒を注入してきます。ムカデは器用さを吸い取る毒を持ちます。洞窟グモの巣はユニコーンの角や火炎の杖で焼き払うことができます。
+
+すべての蜘蛛および百足は毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 洞窟グモ (cave spider) | 灰色 | 1 | 12 | 3 | 0 | 噛みつき 1d2 | 潜伏. |
+| ムカデ (centipede) | 黄色 | 2 | 4 | 3 | 0 | 噛みつき 1d3 毒 | 潜伏. |
+| 巨大グモ (giant spider) | 赤紫 | 5 | 15 | 4 | 0 | 噛みつき 2d4 毒 | 死体に毒あり. |
+| サソリ (scorpion) | 赤色 | 5 | 15 | 3 | 0 | 爪 1d2 ×2 · 毒針 1d4 毒 | 潜伏, 死体に毒あり. |
+| 大蠍 (Scorpius) | 赤紫 | 15 | 12 | 10 | 0 | 爪 2d6 · 爪 2d6 盗み-amulet · 毒針 1d4 disease | 死体に毒あり, follows stairs, 石化耐性. |
+
+:::
+
+#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`)
+
+<!-- audit
+2026-05-19:
+- Lurker above (gray L10 Spd3 AC3 MR0, engulf 1d6 + wrap 2d6) and trapper (green L12 Spd3 AC3 MR0, engulf 1d8 + wrap 2d8): monsters.h:981-998.
+- Both have M1_HIDE; lurker is M1_FLY (ceiling hider per mondata.h:43-45); trapper is floor hider.
+- Damage is AD_WRAP+AD_PHYS, NOT AD_DGST (monsters.h:973-980 retcon).
+- Both M2_STALK (follow stairs).
+-->
+
+床や天井に擬態する固定型の包み込み捕食者です。遠見（Farlook）でも隠れたラーカーを見抜くことはできません。怪しいマスには乗る前に隣から探索（Search）を行って正体を暴いてください。
+
+トラッパーとラーカーはすべて潜伏能力を持ち、階段の上り下りにも追従してきます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ラーカー (lurker above) | 灰色 | 10 | 3 | 3 | 0 | engulf 1d6 wrap · engulf 2d6 | 飛行. |
+| トラッパー (trapper) | 緑色 | 12 | 3 | 3 | 0 | engulf 1d8 wrap · engulf 2d8 |  |
+
+:::
+
+#### ユニコーンおよび馬 `u` (Unicorns and horses `u`)
+
+馬（ポニー、馬、軍馬）は野生では敵対的に出現しますが、リンゴやニンジンを与えることで容易に手懐けられ、騎乗（Riding）スキルに活用できます。
+
+ユニコーン（白、灰、黒）はそれぞれ秩序、中立、混沌の属性を持ち、同属性のプレイヤーには友好的です。宝石を投げ与えると幸運値を高めてくれます。角（ユニコーンの角）は万能の治療道具となります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 仔馬 (pony) | 茶色 | 3 | 16 | 6 | 0 | 蹴り 1d6 · 噛みつき 1d2 | 手懐け可能. Knight's starting steed. |
+| 白ユニコーン (white unicorn) | 白色 | 4 | 24 | 2 | 70 | 頭突き 1d12 · 蹴り 1d6 | 毒耐性. |
+| 灰色ユニコーン (gray unicorn) | 灰色 | 4 | 24 | 2 | 70 | 頭突き 1d12 · 蹴り 1d6 | 毒耐性. |
+| 黒ユニコーン (black unicorn) | 黒色 | 4 | 24 | 2 | 70 | 頭突き 1d12 · 蹴り 1d6 | 毒耐性. |
+| 馬 (horse) | 茶色 | 5 | 20 | 5 | 0 | 蹴り 1d8 · 噛みつき 1d3 | 手懐け可能. |
+| 戦闘用の馬 (warhorse) | 茶色 | 7 | 24 | 4 | 0 | 蹴り 1d10 · 噛みつき 1d4 | 手懐け可能. |
+
+:::
+
+#### 渦 `v` (Vortices `v`)
+
+<!-- audit
+2026-05-19:
+- 6 rows (S_VORTEX) sourced from monsters.h:1053-1110.
+- Damage types are physical/blinding/cold/shock+drain/fire; NO vortex deals poison.
+- Speeds: fog cloud Lvl 3/Spd 1; dust/ice/energy Spd 20; steam/fire Spd 22. Only fog cloud is slow, NOT all stationary. (monsters.h:1052 fog cloud LVL(3,1,...); 1062 dust LVL(4,20,...); 1071 ice LVL(5,20,...); 1081 energy LVL(6,20,...); 1091 steam LVL(7,22,...); 1101 fire LVL(8,22,...))
+- Energy vortex: AT_NONE+AD_ELEC passive 0d4 + AD_DREN drain (monsters.h:1081-1090).
+- Fire vortex: AT_NONE+AD_FIRE passive 0d4 (monsters.h:1101-1110).
+- All carry M1_FLY|M1_MINDLESS|G_NOCORPSE.
+-->
+
+プレイヤーを包み込んで元素ダメージを与える雲状の怪物です。色によって盲目砂嵐、冷気、電撃、火炎などの異なる属性ダメージを毎ターン与えてきます。包み込まれたら脱出の巻物や衝撃波、あるいは即座に倒す手段が必要です。
+
+すべての渦は飛行能力を持ち、精神を持たず、死体を残しません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 霧の雲 (fog cloud) | 灰色 | 3 | 1 | 0 | 0 | engulf 1d6 | 不定形. |
+| ほこりの渦 (dust vortex) | 茶色 | 4 | 20 | 2 | 30 | engulf 2d8 盲目 |  |
+| 氷の渦 (ice vortex) | 水色 | 5 | 20 | 2 | 30 | engulf 1d6 冷気 |  |
+| エネルギーの渦 (energy vortex) | 明青 | 6 | 20 | 2 | 30 | engulf 1d6 電撃 · engulf 2d6 エナジードレイン-Pw · 反撃 7d4 電撃 |  |
+| 蒸気の渦 (steam vortex) | 青色 | 7 | 22 | 2 | 30 | engulf 1d8 火炎 |  |
+| 炎の渦 (fire vortex) | 黄色 | 8 | 22 | 2 | 30 | engulf 1d10 火炎 · 反撃 9d4 火炎 |  |
+
+:::
+
+#### ワーム `w` (Worms `w`)
+
+<!-- audit
+2026-05-19:
+- 4 rows (S_WORM) sourced from monsters.h:1114-1145: baby long worm 1118, baby purple 1124, long worm 1130, purple worm 1138.
+- Long worm tail and segment mechanics in worm.c; purple worm AT_ENGL/AD_DGST swallow at monsters.h:1141.
+- Long worm drops worm tooth on death; fires only for PM_LONG_WORM, not baby (mon.c:618-620).
+- Long worm grown segments tracked via mtmp->wormno (mon.c:5451, get_wormno on polymorph to PM_LONG_WORM).
+-->
+
+長いワームは攻撃を受けるたびに尾のセグメントへ分裂して増殖します。紫ワーム（Purple worm）はプレイヤーを一撃で丸呑み（胃袋へ収容）して消化死させる極めて危険な怪物です。消化死を防ぐ手段（不変の魔除けなど）や、胃袋の内側から脱出する手段を用意してください。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ロングワームの子供 (baby long worm) | 茶色 | 5 | 3 | 5 | 0 | 噛みつき 1d4 |  |
+| 紫ワームの子供 (baby purple worm) | 赤紫 | 8 | 3 | 5 | 0 | 噛みつき 1d6 |  |
+| ロングワーム (long worm) | 茶色 | 9 | 3 | 5 | 10 | 噛みつき 2d4 | drops a worm tooth. |
+| 紫ワーム (purple worm) | 赤紫 | 15 | 9 | 6 | 20 | 噛みつき 2d8 · engulf 1d10 digest |  |
+
+:::
+
+#### ザンおよび幻想昆虫 `x` (Xans and fantastic insects `x`)
+
+<!-- audit
+2026-05-19:
+- Grid bug row at monsters.h:1149-1156; xan row at monsters.h:1157-1164.
+- Grid bug AT_BITE/AD_ELEC 1d1; xan AT_STNG/AD_LEGS 1d4, M1_FLY plus M1_POIS (poisonous corpse).
+- Xan AD_LEGS / Wounded_legs reduces carry capacity (hack.c:4331-4336) and abuses Dex (attrib.c:472, 581); it does NOT slow movement.
+-->
+
+グリッドバグは電気を帯びた単純な昆虫ですが、直角方向にしか移動できません。大型の近縁種であるザンは脚を刺して傷口を負わせ、最大所持重量（運搬能力）を急激に低下させます。
+
+すべてのザンおよび幻想昆虫は毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| グリッドバグ (grid bug) | 赤紫 | 0 | 12 | 9 | 0 | 噛みつき 1d1 電撃 | 電撃耐性. |
+| ザン (xan) | 赤色 | 7 | 18 | -4 | 0 | 毒針 1d4 leg-wound | 飛行, 死体に毒あり. |
+
+:::
+
+#### 光 `y` (Lights `y`)
+
+<!-- audit
+2026-05-19:
+- 2 rows (yellow light L3 yellow, black light L5 black) sourced from monsters.h:1168-1191.
+- Attacks AT_EXPL/AD_BLND 10d20 (yellow) and AT_EXPL/AD_HALU 10d12 (black).
+- M1_FLY|M1_AMORPHOUS|M1_MINDLESS on both; black light adds M1_SEE_INVIS.
+- 10d20 is blindness DURATION, NOT HP damage. (uhitm.c:2978-2985 mhitm_ad_blnd: `make_blinded(BlindedTimeout + (long) mhm->damage, FALSE); mhm->damage = 0;` — rolled value feeds timer, HP damage zeroed)
+- AT_EXPL means the monster dies on attack ("bursts on contact").
+-->
+
+黄色い光は接触時に自爆閃光を放ち、10d20ターンの間プレイヤーを盲目にします。黒い光は自爆して幻覚状態を引き起こします。遠距離武器や魔法で接近される前に撃ち落とすのが鉄則です。
+
+すべての光は飛行能力を持ち、不定形で精神を持ちません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 黄色い光 (yellow light) | 黄色 | 3 | 15 | 0 | 0 | 自爆 10d20 盲目 |  |
+| 黒い光 (black light) | 黒色 | 5 | 15 | 0 | 0 | 自爆 10d12 hallu | sees-不可視. |
+
+:::
+
+#### ズリティ `z` (Zruties `z`)
+
+中盤に出現する手強い野獣で、2本の爪と強力な噛みつき攻撃を繰り出してきます。激しい連撃に耐えきることができれば、まとまった経験値を獲得できます。名称はスラブ神話の毛深い野生人に由来しています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ズルティ (zruty) | 茶色 | 9 | 8 | 3 | 0 | 爪 3d4 ×2 · 噛みつき 3d6 |  |
+
+:::
+
+#### 天使・神聖なる存在 `A` (Angelic beings `A`)
+
+<!-- audit
+2026-05-19:
+- 5 rows at monsters.h:1206-1265 (couatl 1206, Aleax 1216, Angel 1225, ki-rin 1240, Archon 1252).
+- All Angels have G_NOCORPSE; couatl leaves no corpse (MR_POISON still matters for combat).
+- AD_MAGM ("magic") on Angel; AD_SPEL ("spell") on ki-rin/Archon.
+- Ki-rin HI_GOLD = yellow; Archon HI_LORD = magenta (color.h:38,46).
+- Archon has M1_REGEN, M1_SEE_INVIS, plus 5-attack chain (weapon, weapon, gaze, claw, spell).
+-->
+
+武器を振るい、強力な魔法を操る終盤の強敵です。星界の面（Astral Plane）では各大祭司を護衛して立ち塞がります。[星界の面](#the-astral-plane)の項目を参照してください。
+
+すべての天使・神聖なる存在は階段の上り下りに追従し、死体を残しません。*アレアクス (Aleax)* を除きすべて飛行し、*コアトル (couatl)* を除きすべて不可視を看破します。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| コウアトル (couatl) | 緑色 | 8 | 10 | 5 | 30 | 噛みつき 2d4 毒 · 噛みつき 1d3 · 締め付け 2d4 wrap | 毒耐性. |
+| アレアックス (Aleax) | 黄色 | 10 | 8 | 0 | 30 | 武器攻撃 1d6 ×2 · 蹴り 1d4 |  |
+| 天使 (Angel) | 白色 | 14 | 10 | -4 | 55 | 武器攻撃 1d6 ×2 · 爪 1d4 · cast 2d6 魔法 |  |
+| ki-rin | 黄色 | 16 | 18 | -5 | 90 | 蹴り 2d4 ×2 · 頭突き 3d6 · cast 2d6 spell |  |
+| アルコン (Archon) | 赤紫 | 19 | 16 | -6 | 80 | 武器攻撃 2d4 ×2 · 凝視 2d6 盲目 · 爪 1d8 · cast 4d6 spell | 自動回復. |
+
+:::
+
+#### こうもりおよび鳥 `B` (Bats and birds `B`)
+
+不規則に飛び回る飛行生物。吸血こうもりは毒のある噛みつきで筋力を吸い取ります（毒耐性があれば防げます）。オオガラスは目をつついて盲目にしようとします。
+
+すべてのこうもりおよび鳥は飛行能力を持ちます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| こうもり (bat) | 茶色 | 0 | 22 | 8 | 0 | 噛みつき 1d4 |  |
+| 巨大こうもり (giant bat) | 赤色 | 2 | 22 | 7 | 0 | 噛みつき 1d6 |  |
+| オオガラス (raven) | 黒色 | 4 | 20 | 6 | 0 | 噛みつき 1d6 · 爪 1d6 盲目 |  |
+| 吸血こうもり (vampire bat) | 黒色 | 5 | 20 | 6 | 0 | 噛みつき 1d6 · 噛みつき エナジードレイン-Str | 自動回復, 死体に毒あり, 睡眠耐性, 毒耐性. |
+
+:::
+
+#### ケンタウロス `C` (Centaurs `C`)
+
+<!-- audit
+2026-05-19:
+- 3 rows (plains/forest/mountain) sourced from monsters.h:1301-1323; complete S_CENTAUR roster.
+- Centaurs are half-horse, NOT mounted on a horse. (https://nethackwiki.com/wiki/Centaur)
+- Forest centaurs spawn with BOW+arrows; plains and mountain centaurs spawn with CROSSBOW+bolts (50% armed rate per makemon.c:474-484).
+-->
+
+強力な弓矢と近接攻撃を兼ね備えた半人半馬の射手です。森のケンタウロスは弓を放ち、平原や山のケンタウロスは複合弓を用いて強烈な矢の連射を浴びせてきます。離れた位置からの射撃戦は危険なため、角を曲がって誘い込むか接近戦に持ち込んでください。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 草原のケンタウロス (plains centaur) | 茶色 | 4 | 18 | 4 | 0 | 武器攻撃 1d6 · 蹴り 1d6 |  |
+| 森のケンタウロス (forest centaur) | 緑色 | 5 | 18 | 3 | 10 | 武器攻撃 1d8 · 蹴り 1d6 |  |
+| 山のケンタウロス (mountain centaur) | 水色 | 6 | 20 | 2 | 10 | 武器攻撃 1d10 · 蹴り 1d6 ×2 |  |
+
+:::
+
+#### ドラゴン `D` (Dragons `D`)
+
+<!-- audit
+2026-05-19:
+- 10 baby + 10 adult + Chromatic + Ixoth sourced from monsters.h:1325-1562; Ixoth at monsters.h:3642-3690.
+- Shimmering dragon is `#if 0 DEFERRED`, NOT in 5.0 (monsters.h:1365-1374 baby and 1466-1482 adult shimmering dragon blocks are inside `#if 0 /* DEFERRED */`).
+- Silver dragon color is CLR_BRIGHT_CYAN (color.h:54), NOT gray, for both baby and adult.
+- Baby blue dragon has only bite 2d6; NO breath weapon (monsters.h:1408-1415, no AT_BREA). Babies don't breathe.
+- Black dragon breath is AD_DISN 1d255 (instakill without reflection or disint-res), monsters.h:1494.
+- Chromatic random-breath AT_BREA/AD_RBRE selects breath type per zap (mhitu.c).
+-->
+
+成体のドラゴンは各自の属性に応じた強烈なブレスを直線状に吐き出します。反射（Reflection）能力があれば、遠距離ブレスを跳ね返して逆に大ダメージを与えられます。**幼体（子ドラゴン）はブレスを吐きません**。
+
+*多色ドラゴン (Chromatic Dragon)* を除き、すべてのドラゴンは飛行能力を持ちます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 灰色ドラゴンの子供 (baby gray dragon) | 灰色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 金色ドラゴンの子供 (baby gold dragon) | 黄色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 銀色ドラゴンの幼体 (baby silver dragon) | 明水 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 赤色ドラゴンの子供 (baby red dragon) | 赤色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 白ドラゴンの子供 (baby white dragon) | 白色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| オレンジドラゴンの子供 (baby orange dragon) | 橙色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 黒ドラゴンの子供 (baby black dragon) | 黒色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 青ドラゴンの子供 (baby blue dragon) | 青色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 緑ドラゴンの子供 (baby green dragon) | 緑色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 | 死体に毒あり. |
+| 黄色ドラゴンの子供 (baby yellow dragon) | 黄色 | 12 | 9 | 2 | 10 | 噛みつき 2d6 |  |
+| 灰色ドラゴン (gray dragon) | 灰色 | 15 | 9 | -1 | 20 | ブレス 4d6 魔法 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Anti-magic breath. Magic resistance helps; reflection doesn't. |
+| 金色ドラゴン (gold dragon) | 黄色 | 15 | 9 | -1 | 20 | ブレス 4d6 火炎 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Fire breath. Drops gold-colored scales (light source). |
+| 銀色ドラゴン (silver dragon) | 明水 | 15 | 9 | -1 | 20 | ブレス 4d6 冷気 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Cold breath plus reflection scales: your reflection target. |
+| 赤色ドラゴン (red dragon) | 赤色 | 15 | 9 | -1 | 20 | ブレス 6d6 火炎 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Cone of fire. Get fire resistance before you meet one. |
+| 白ドラゴン (white dragon) | 白色 | 15 | 9 | -1 | 20 | ブレス 4d6 冷気 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Cone of cold. Cold resistance. |
+| オレンジドラゴン (orange dragon) | 橙色 | 15 | 9 | -1 | 20 | ブレス 4d25 sleep · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Sleep ray. Sleep resistance trivialises. |
+| 黒ドラゴン (black dragon) | 黒色 | 15 | 9 | -1 | 20 | ブレス 1d255 分解 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Disintegration breath. Disint resistance OR reflection. |
+| 青ドラゴン (blue dragon) | 青色 | 15 | 9 | -1 | 20 | ブレス 4d6 電撃 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Cone of lightning. Shock resistance. |
+| 緑ドラゴン (green dragon) | 緑色 | 15 | 9 | -1 | 20 | ブレス 4d6 毒 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視, 死体に毒あり. Poison breath; poison resistance is enough. |
+| 黄色ドラゴン (yellow dragon) | 黄色 | 15 | 9 | -1 | 20 | ブレス 4d6 酸 · 噛みつき 3d8 · 爪 1d4 ×2 | sees-不可視. Acid breath. |
+| クロマティック・ドラゴン (Chromatic Dragon) | 赤紫 | 16 | 12 | 0 | 30 | ブレス 6d6 rnd-ブレス · cast spell · 爪 2d8 盗み-amulet · 噛みつき 4d8 ×2 · 毒針 1d6 | sees-不可視, 死体に毒あり, follows stairs. |
+| イクソス (Ixoth) | 赤色 | 15 | 12 | -1 | 20 | ブレス 8d6 火炎 · 噛みつき 4d8 · cast spell · 爪 2d4 · 爪 2d4 盗み-amulet | sees-不可視, follows stairs. |
+
+:::
+
+#### 精霊・エレメンタル `E` (Elementals `E`)
+
+<!-- audit
+2026-05-19:
+- 5 rows (stalker/air/fire/earth/water elemental) sourced from monsters.h:1566-1610.
+- Stalker: sees-invis, M2_STALK; NOT mindless. (monsters.h:1566-1573 has M1_SEE_INVIS and M2_STALK; no M1_MINDLESS in flags1)
+- Air: AT_ENGL AD_PHYS 1d10. "Air suffocates" is engulf flavor for AD_PHYS, NOT a separate AD_DRST. (monsters.h:1576 air elemental single AT_ENGL AD_PHYS 1d10; no AD_DRST attack)
+- Fire: claw 3d6 AD_FIRE + passive 0d4 fire.
+- Earth: claw 4d6; MR_FIRE|MR_COLD|MR_POISON|MR_STONE.
+- Water: claw 5d6; M1_SWIM|M1_AMPHIBIOUS; MR_POISON|MR_STONE. Water elementals lack a drown attack, but spawn only on water tiles so encounters happen near drowning risk.
+-->
+
+風の精はプレイヤーを包み込んで瓦礫の嵐で叩きのめします。火の精は周囲を灼熱で焼き焦がし、水の精は強打を繰り出し、土の精は動きは鈍いものの極めて強固です。
+
+*ストーカー*を除き、すべてのエレメンタルは精神を持ちません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ストーカー (stalker) | 白色 | 8 | 12 | 3 | 0 | 爪 4d4 | 飛行, sees-不可視, follows stairs. |
+| 風の精 (air elemental) | 水色 | 8 | 36 | 2 | 30 | engulf 1d10 | 飛行. |
+| 火の精 (fire elemental) | 黄色 | 8 | 12 | 2 | 30 | 爪 3d6 火炎 · 反撃 9d4 火炎 | 飛行. |
+| 土の精 (earth elemental) | 茶色 | 8 | 6 | 2 | 30 | 爪 4d6 | 火炎耐性, 冷気耐性, 毒耐性, 石化耐性. |
+| 水の精 (water elemental) | 青色 | 8 | 5 | 2 | 30 | 爪 5d6 | 遊泳, 水陸両用, 毒耐性, 石化耐性. |
+
+:::
+
+#### 菌類およびモールド `F` (Fungi and molds `F`)
+
+<!-- audit
+2026-05-19:
+- 7 rows sourced from monsters.h:1614-1676; elemental molds are brown/green/red, NOT violet/yellow.
+- Lichen corpse never rots (mkobj.c:1402, eat.c:59); also never out of season as iron rations.
+- Yellow mold has M1_POIS (poisonous corpse, monsters.h yellow-mold row).
+- Other molds have MR_POISON resistance but no M1_POIS, so their corpses are NOT poisonous.
+- Brown mold passive 0d6 cold (HP drain), green 0d4 acid, red 0d4 fire, yellow 0d4 stun (monsters.h:1614-1666).
+- Violet fungus AT_TUCH/AD_PHYS 1d4 plus AT_TUCH/AD_PLYS sticky (monsters.h:1668-1676).
+-->
+
+移動しない固定型の生物です。苔の怪物（Lichen）の死体は決して腐敗しないため、非常用の携帯食糧として最適です。茶色、緑、赤のモールドはそれぞれ冷気、酸、火炎の反撃ダメージを放ちます。
+
+すべての菌類およびモールドは精神を持ちません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 苔の怪物 (lichen) | 明緑 | 0 | 1 | 9 | 0 | 接触 sticky |  |
+| 茶色モールド (brown mold) | 茶色 | 1 | 0 | 9 | 0 | 反撃 2d6 冷気 | 冷気耐性, 毒耐性. |
+| 黄色モールド (yellow mold) | 黄色 | 1 | 0 | 9 | 0 | 反撃 2d4 stun | 死体に毒あり, 毒耐性. |
+| 緑モールド (green mold) | 緑色 | 1 | 0 | 9 | 0 | 反撃 2d4 酸 | 酸耐性, 石化耐性. |
+| 赤色モールド (red mold) | 赤色 | 1 | 0 | 9 | 0 | 反撃 2d4 火炎 | 火炎耐性, 毒耐性. |
+| シュリーカー (shrieker) | 赤紫 | 3 | 1 | 7 | 0 | — | 毒耐性. |
+| 紫キノコ (violet fungus) | 赤紫 | 3 | 1 | 7 | 0 | 接触 1d4 · 接触 sticky | 毒耐性. |
+
+:::
+
+#### ノーム `G` (Gnomes `G`)
+
+<!-- audit
+2026-05-19:
+- All four S_GNOME entries match monsters.h:1681-1709.
+- Gnomish wizard has one AT_MAGC/AD_SPEL attack, "cast spell" (monsters.h:1697), NOT two spell attacks.
+- No "deep gnome" exists in 5.0 (correctly omitted).
+- Gnome PCs (Archeologist default) see most S_GNOME as peaceful via MH_GNOME lovemask (makemon.c:2283).
+-->
+
+ノームのPCにとってはノームの鉱山の住人の大半が友好的です。ノームの君主は通常種よりも高い攻撃力を持ち、ノームの魔法使いは強力な魔法攻撃を放ってきます。どちらも侮ってはなりません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ノーム (gnome) | 茶色 | 1 | 6 | 10 | 4 | 武器攻撃 1d6 |  |
+| gnome lord | 青色 | 3 | 8 | 10 | 4 | 武器攻撃 1d8 |  |
+| ノームの魔法使い (gnomish wizard) | 明青 | 3 | 10 | 4 | 10 | cast spell |  |
+| gnome king | 赤紫 | 5 | 10 | 10 | 20 | 武器攻撃 2d6 |  |
+
+:::
+
+#### 巨人 `H` (Giant humanoids `H`)
+
+<!-- audit
+2026-05-19:
+- Frost giant and storm giant melee is AD_PHYS only; cold/shock resistance does NOT reduce damage (monsters.h frost/storm rows at 1748, 1772).
+- Fire giant melee is AD_PHYS only; fire resistance does NOT make them weak offensively (monsters.h:1738).
+- Cyclops is the Healer quest nemesis (Hea-goal.lua:74, monsters.h:1792-1800), NOT Caveman.
+- Surtur does NOT carry Mjollnir (Mjollnir is a Valkyrie quest artifact, artilist.h).
+- Ettin and minotaur are NOT M2_GIANT, so their corpses do not grant Str (eat.c:1345; monsters.h:1758, 1782).
+- Minotaur roams Gehennom mazes (mkmaze.c:1112, makemon at maze fill), NOT vaults.
+-->
+
+巨岩を投げつけてくる怪力の人型生物です。火の巨人、霜の巨人、嵐の巨人はそれぞれの属性ダメージを扱い、その死体を食べることで火炎耐性、冷気耐性、電撃耐性や筋力上昇を獲得できるチャンスがあります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 巨人 (giant) | 赤色 | 6 | 6 | 0 | 0 | 武器攻撃 2d10 |  |
+| 岩石巨人 (stone giant) | 灰色 | 6 | 6 | 0 | 0 | 武器攻撃 2d10 |  |
+| 丘の巨人 (hill giant) | 水色 | 8 | 10 | 6 | 0 | 武器攻撃 2d8 |  |
+| 炎の巨人 (fire giant) | 黄色 | 9 | 12 | 4 | 5 | 武器攻撃 2d10 | 火炎耐性. Throws boulders. |
+| 吹雪の巨人 (frost giant) | 白色 | 10 | 12 | 3 | 10 | 武器攻撃 2d12 | 冷気耐性. Throws boulders. |
+| エティン (ettin) | 茶色 | 10 | 12 | 3 | 0 | 武器攻撃 2d8 · 武器攻撃 3d6 |  |
+| 雷の巨人 (storm giant) | 青色 | 16 | 12 | 3 | 10 | 武器攻撃 2d12 | 電撃耐性. Throws boulders for big damage. |
+| タイタン (titan) | 赤紫 | 16 | 18 | -3 | 70 | 武器攻撃 2d8 · cast spell | 飛行. Tough humanoid with magic missiles. Casts spells. |
+| ミノタウロス (minotaur) | 茶色 | 15 | 15 | 6 | 0 | 爪 3d10 ×2 · 頭突き 2d8 | Two claws plus a butt. Heavy hitter; roams the Gehennom mazes. |
+| サイクロプス (Cyclops) | 灰色 | 18 | 12 | 0 | 0 | 武器攻撃 4d8 ×2 · 爪 2d6 盗み-amulet | follows stairs, 石化耐性. Healer quest nemesis. Throws boulders. |
+| 支配者スルト (Lord Surtur) | 赤紫 | 15 | 12 | 2 | 50 | 武器攻撃 2d10 ×2 · 爪 2d6 盗み-amulet | follows stairs, 火炎耐性, 石化耐性. Valkyrie quest nemesis. |
+
+:::
+
+#### ジャバウォック `J` (Jabberwocks `J`)
+
+<!-- audit
+2026-05-19:
+- Jabberwock: L15 Spd12 AC-2 MR50, 4x 2d10 attacks, M1_FLY, G_GENO|1 (monsters.h:1806-1814).
+- Speed 12 is player baseline, NOT slow; most dragons are speed 9 (slower).
+- Vorpal Blade auto-beheads PM_JABBERWOCK, short-circuiting the dieroll==1 check (artifact.c:1595-1623).
+- Deferred "vorpal jabberwock" at monsters.h:1816-1824 is wrapped in `#if 0` and correctly excluded.
+-->
+
+ルイス・キャロルの詩『ジャバウォックの詩』に登場する獰猛な怪物。プレイヤーと同等の速度で移動し、鋭い爪と噛みつきによる連続攻撃を繰り出してきます。十分なACと武器強化が整うまでは警戒が必要です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ジャバウォック (jabberwock) | 橙色 | 15 | 12 | -2 | 50 | 噛みつき 2d10 ×2 · 爪 2d10 ×2 | 飛行. Four heavy attacks; baseline speed. |
+
+:::
+
+#### キーストン・コップ `K` (Keystone Kops `K`)
+
+<!-- audit
+2026-05-19:
+- All Kop stats match monsters.h:1829-1860.
+- Shopkeeper-anger triggers Kop summoning via makekops (shk.c:623, 680, 5113).
+- Dead Kops respawn per rnd(5) at mon.c:3147-3164: 1/5 near DOWN-stairs, 1/5 at random location, 3/5 stay dead.
+- Respawn lands near DOWN-stairs, NOT up-stairs (stairs.c:89-95, mklev.c:2193).
+- All four Kops carry G_GENO, so genocide permanently clears them.
+-->
+
+店で泥棒を働くか、店主を傷つけた際に笛を鳴らして駆けつける警官隊です。個々の戦闘力は高くありませんが、群れをなして現れ、クリームパイを投げつけてプレイヤーの視界を塞ごうとします。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 警備員 (Keystone Kop) | 青色 | 1 | 6 | 10 | 10 | 武器攻撃 1d4 |  |
+| 巡査 (Kop Sergeant) | 青色 | 2 | 8 | 10 | 10 | 武器攻撃 1d6 |  |
+| 巡査部長 (Kop Lieutenant) | 水色 | 3 | 10 | 10 | 20 | 武器攻撃 1d8 |  |
+| 警部補 (Kop Kaptain) | 赤紫 | 4 | 12 | 10 | 20 | 武器攻撃 2d6 |  |
+
+:::
+
+#### リッチ `L` (Liches `L`)
+
+<!-- audit
+2026-05-19:
+- 4 lich rows at monsters.h:1864-1897 (lich 1864, demilich 1872, master lich 1880, arch-lich 1889).
+- All carry G_NOCORPSE, so no eatable corpse regardless of M1_POIS flavor.
+- Only the arch-lich (m_lev=25) reaches DEATH_TOUCH at spell-level 20; master lich m_lev=17 cannot (mcastu.c:111).
+- Double-trouble is Wizard-of-Yendor only, NOT a lich ability.
+- Arch-lich casts touch of death, NOT rays.
+2026-05-31:
+- Touch of death (mcastu.c:389-408): without Antimagic, `rn2(mtmp->m_lev) > 12` gates the effect. At m_lev 25 that succeeds 12/25 of the time; touch_of_death then deals 50+8d6 damage and drains half that amount from max HP. Magic resistance blocks the effect (mcastu.c:315-347).
+- Only the Wizard of Yendor literally has M3_COVETOUS in 5.0 (monsters.h:2857; single row). Arch-liches do NOT teleport-away-to-heal. Their threat profile is the touch-of-death spell, not the covetous return-at-full-HP behavior the Wizard has.
+-->
+
+骸骨姿の強力な魔法使いアンデッド。マスターリッチやアーチリッチは死の指（Touch of death）を詠唱し、モンスターを大量召喚し、冷気光線を放ってきます。魔法防御（Magic resistance）がなければ即死する危険極まりない強敵です。
+
+すべてのリッチは自動回復し、死体を残さず、アンデッドであり、冷気耐性、睡眠耐性、毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| リッチ (lich) | 茶色 | 11 | 6 | 0 | 30 | 接触 1d10 冷気 · cast spell |  |
+| デミリッチ (demilich) | 赤色 | 14 | 9 | -2 | 60 | 接触 3d4 冷気 · cast spell |  |
+| マスターリッチ (master lich) | 赤紫 | 17 | 9 | -4 | 90 | 接触 3d6 冷気 · cast spell | 火炎耐性. Casts wizard spells. Kill from afar. |
+| arch-lich | 赤紫 | 25 | 9 | -6 | 90 | 接触 5d6 冷気 · cast spell | 火炎耐性, 電撃耐性. Casts touch of death; magic resistance mandatory. |
+
+:::
+
+#### ミイラ `M` (Mummies `M`)
+
+<!-- audit
+2026-05-19:
+- Every mummy attack is plain AD_PHYS (monsters.h:1901-1968); mummies do NOT curse worn items (only gremlins have AD_CURS, monattk.h:92).
+- All M-class rows carry G_NOCORPSE, which prevents random mummy corpses and tins. The death handler overrides it and creates an already-old corpse of the mummy's base race (mon.c:620-646).
+- Mummies are vulnerable to undead-turning.
+-->
+
+精神を持たないアンデッド。アンデッド退散の杖や呪文を使うと 1d8 のダメージを受けて逃走します。死亡時には元となった種族の古びた死体を残すため、病気耐性なしで食べると食中毒を起こす危険があります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| コボルドのミイラ (kobold mummy) | 茶色 | 3 | 8 | 6 | 20 | 爪 1d4 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old kobold corpse. |
+| ノームのミイラ (gnome mummy) | 赤色 | 4 | 10 | 6 | 20 | 爪 1d6 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old gnome corpse. |
+| オークのミイラ (orc mummy) | 灰色 | 5 | 10 | 5 | 20 | 爪 1d6 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old orc corpse. |
+| ドワーフのミイラ (dwarf mummy) | 赤色 | 5 | 10 | 5 | 20 | 爪 1d6 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old dwarf corpse. |
+| エルフのミイラ (elf mummy) | 緑色 | 6 | 12 | 4 | 30 | 爪 2d4 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old elf corpse. |
+| 人間のミイラ (human mummy) | 灰色 | 6 | 12 | 4 | 30 | 爪 2d4 ×2 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old 人間 corpse. |
+| エティンのミイラ (ettin mummy) | 青色 | 7 | 12 | 4 | 30 | 爪 2d6 ×2 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old ettin corpse. |
+| 巨人のミイラ (giant mummy) | 水色 | 8 | 14 | 3 | 30 | 爪 3d4 ×2 | 冷気耐性, 睡眠耐性, 毒耐性. Drops an old 巨人 corpse. |
+
+:::
+
+#### ナーガ `N` (Nagas `N`)
+
+蛇の体を持つ人型生物で、遠距離から酸や毒のブレス・吐瀉攻撃を行ってきます。すべてのナーガは毒耐性を備えています。黒ナーガの死体を食べると恒久的な毒耐性を獲得できることがあり、酸耐性と石化耐性も一時的に得られます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 赤色ナーガの雛 (red naga hatchling) | 赤色 | 3 | 10 | 6 | 0 | 噛みつき 1d4 | 火炎耐性. |
+| 黒ナーガの雛 (black naga hatchling) | 黒色 | 3 | 10 | 6 | 0 | 噛みつき 1d4 | 酸耐性, 石化耐性. |
+| 金色ナーガの雛 (golden naga hatchling) | 黄色 | 3 | 10 | 6 | 0 | 噛みつき 1d4 |  |
+| 番兵ナーガの雛 (guardian naga hatchling) | 緑色 | 3 | 10 | 6 | 0 | 噛みつき 1d4 |  |
+| 赤色ナーガ (red naga) | 赤色 | 6 | 12 | 4 | 0 | 噛みつき 2d4 · ブレス 2d6 火炎 | 火炎耐性. |
+| 黒ナーガ (black naga) | 黒色 | 8 | 14 | 2 | 10 | 噛みつき 2d6 · 吐瀉 酸 | 酸耐性, 石化耐性. |
+| 金色ナーガ (golden naga) | 黄色 | 10 | 14 | 2 | 70 | 噛みつき 2d6 · cast spell 4d6 |  |
+| 番兵ナーガ (guardian naga) | 緑色 | 12 | 16 | 0 | 50 | 吐瀉 1d6 毒 · 噛みつき 1d6 麻痺 · 接触 · 締め付け 2d4 wrap | 死体に毒あり. Lawful PCs may find them peaceful. |
+
+:::
+
+#### オーガ `O` (Ogres `O`)
+
+<!-- audit
+2026-05-19:
+- 3 ogre rows match monsters.h: ogre 2052, ogre lord 2060, ogre king 2068.
+- Ogres wield weapons (AT_WEAP); they do NOT throw boulders (no M2_ROCKTHROW — that's giants/Cyclops/ettins/titans).
+- All three carry M2_STRONG plus G_GENO|1 (genocidable, freq 1).
+-->
+
+強大な筋力を持つ近接戦闘の巨人です。こん棒や戦斧を振り回して大ダメージを与えてきますが、防具を着けていないためACは低く、遠距離から削るのが有効です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| オーガ (ogre) | 茶色 | 5 | 10 | 5 | 0 | 武器攻撃 2d5 |  |
+| ogre lord | 赤色 | 7 | 12 | 3 | 30 | 武器攻撃 2d6 |  |
+| ogre king | 赤紫 | 9 | 14 | 4 | 60 | 武器攻撃 3d5 |  |
+
+:::
+
+#### プリンおよびウーズ `P` (Puddings and oozes `P`)
+
+<!-- audit
+2026-05-19:
+- Green slime: make_slimed sets a 10-turn countdown, NOT 9 (uhitm.c:3199, 3570; polyself.c:456; eat.c:854). The 5-turn case is engulf+digest only (uhitm.c:5099).
+- Brown puddings rot wood/leather/cloth/bone (AD_DCAY = ERODE_ROT, uhitm.c:2389). They do NOT corrode armor.
+- Black puddings corrode metal (AD_CORR, uhitm.c:2338-2356).
+- Gray ooze rusts armor (AD_RUST).
+- Splitting on iron/metal melee is gated to PM_BLACK_PUDDING || PM_BROWN_PUDDING (uhitm.c:1609-1621). Gray ooze and green slime do NOT split.
+-->
+
+**茶色および黒色プリンは鉄製や金属製の刃物で攻撃すると分裂します**。無傷の死体ではなく塊を残します。
+
+**緑スライム**は[ゲヘナ](#gehennom)にのみ現れる例外で、分裂はしませんが接触した相手を緑スライムへと徐々に変異させていきます（石化に似た即死タイマー）。
+
+すべてのプリンおよびウーズは不定形で、精神を持たず、冷気耐性、毒耐性、酸耐性、石化耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 灰色ウーズ (gray ooze) | 灰色 | 3 | 1 | 8 | 0 | 噛みつき 2d8 錆び | 火炎耐性. |
+| 茶色プリン (brown pudding) | 茶色 | 5 | 3 | 8 | 0 | 噛みつき decay |  |
+| 緑スライム (green slime) | 緑色 | 6 | 6 | 6 | 0 | 接触 1d4 slime · 反撃 slime | 死体を残さない。 |
+| 黒プリン (black pudding) | 黒色 | 10 | 6 | 6 | 0 | 噛みつき 3d8 corrode · 反撃 corrode |  |
+
+:::
+
+#### 量子力学士 `Q` (Quantum mechanics `Q`)
+
+<!-- audit
+2026-05-19:
+- Quantum mechanic teleports you (AD_TLPT, monsters.h:2127); genetic engineer polymorphs you (AD_POLY, monsters.h:2136, new in 5.0 per fixes5-0-0.txt:2696). NOT both teleporting.
+- Both have speed 12 (NOT 24), poisonous corpses (M1_POIS), and self-teleport (M1_TPORT).
+- Quantum corpse toggles Fast (eat.c:1227); genetic engineer corpse triggers polyself (eat.c:1247).
+-->
+
+特殊な爪攻撃を持つ2種類の生物です。**量子力学士 (Quantum mechanic)**は命中時にプレイヤーをランダムな場所へテレポートさせます。**遺伝子工学者 (Genetic engineer)**はプレイヤーを変身（ポリモルフ）させます。不変（Unchanging）の魔除けや魔法防御がなければ、一撃で別の生物に変えられてしまいます。
+
+両種とも自らランダムにテレポートし、毒のある死体を残します。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 量子物理学者 (quantum mechanic) | 水色 | 7 | 12 | 3 | 10 | 爪 1d4 teleport | Self-テレポート. Corpse toggles intrinsic Fast. |
+| 遺伝子工学者 (genetic engineer) | 緑色 | 12 | 12 | 3 | 10 | 爪 1d4 polymorph | Self-テレポート. Corpse triggers polyself. |
+
+:::
+
+#### 錆の怪物および魔法中和者 `R` (Rust monsters and disenchanters `R`)
+
+<!-- audit
+2026-05-19:
+- Rust monster active attack erodes worn iron armor (uhitm.c:2311); passive damages weapon when you hit it; greased weapons consume a charge instead. Silver/mithril/wood weapons immune (is_rustprone).
+- Disenchanter active claw drains armor first (uhitm.c:3611-3644, some_armor + rn2(5) for rings/amulet/blindfold); weapon drain is passive-only.
+- Active threat for both is armor, NOT weapons (e.g. long sword).
+-->
+
+錆の怪物は接触時に鉄製の武器や防具を急速に錆びさせます。ディスエンチャンター（魔法中和者）は命中時に装備している防具や武器の強化値（+値）を吸い取って低下させます。油を塗った防具や、魔法防御、木製・銀製・革製の装備で対抗してください。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 錆の怪物 (rust monster) | 茶色 | 5 | 18 | 2 | 0 | 接触 錆び ×2 · 反撃 錆び | 遊泳. Touch rusts iron. Strip armor before engaging or use silver. |
+| 吸魔の怪物 (disenchanter) | 青色 | 12 | 12 | -10 | 0 | 爪 4d4 disenchant · 反撃 disenchant | Gehennom-only. Active drains armor; passive drains weapon when you melee it. |
+
+:::
+
+#### ヘビ `S` (Snakes `S`)
+
+<!-- audit
+2026-05-19:
+- 6 snake rows at monsters.h:2167-2221: garter 2167, snake 2174, water moccasin 2182, python 2190, pit viper 2204, cobra 2213.
+- "Pit viper" is the snake, NOT "pit fiend" (pit fiend is a `&` major demon at monsters.h:3104-3112).
+- M1_SWIM universal across the section; M1_CONCEAL on all except python.
+- Python has an AT_TUCH plus AT_HUGS pair (monsters.h:2193-2199), wrap and crush.
+- Cobra AT_SPIT/AD_BLND blind at monsters.h:2218 (blind spit out to 6 squares).
+-->
+
+大半が猛毒を持っています。クサリヘビ（マムシ）やコブラは致命的な毒を持ち、ガータースネークなどは無害な獲物です。
+
+すべてのヘビは遊泳能力を持ち、*ニシキヘビ (python)* を除いて潜伏能力を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 小さなヘビ (garter snake) | 緑色 | 1 | 8 | 8 | 0 | 噛みつき 1d2 |  |
+| ヘビ (snake) | 茶色 | 4 | 15 | 3 | 0 | 噛みつき 1d6 毒 | 死体に毒あり, 毒耐性. |
+| 水ヘビ (water moccasin) | 赤色 | 4 | 15 | 3 | 0 | 噛みつき 1d6 毒 | 死体に毒あり, 毒耐性. |
+| ニシキヘビ (python) | 赤紫 | 6 | 3 | 5 | 0 | 噛みつき 1d4 · 接触 · 締め付け 1d4 wrap · 締め付け 2d4 |  |
+| ハブ (pit viper) | 青色 | 6 | 15 | 2 | 0 | 噛みつき 1d4 毒 ×2 | 死体に毒あり, 毒耐性. |
+| コブラ (cobra) | 青色 | 6 | 18 | 2 | 0 | 噛みつき 2d4 毒 · 吐瀉 盲目 | 死体に毒あり, 毒耐性. |
+
+:::
+
+#### トロール `T` (Trolls `T`)
+
+<!-- audit
+2026-05-19:
+- All 5 troll rows (troll, ice, rock, water, Olog-hai) match monsters.h:2225-2266.
+- All carry M1_REGEN | M2_STALK; S_TROLL is is_reviver (mondata.h:170).
+- Fire/water/force-bolt do NOT destroy corpses; burn_floor_objects only burns scrolls/spellbooks/slime.
+- Trollsbane sets mkcorpstat_norevive (uhitm.c:1906, 4867; mhitm.c:1082).
+- Stoning leaves a statue (mon.c:671), so no corpse to revive from.
+-->
+
+倒しても一定時間後に死体から自動復活します。確実にトロールの息の根を止めるには、**復活する前に死体を食べる**、缶詰作成キットで缶詰にする、あるいは火炎の杖や火炎の魔法で死体を焼き尽くす必要があります。
+
+すべてのトロールは自動回復能力を持ち、階段の上り下りにも追従してきます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| トロル (troll) | 茶色 | 7 | 12 | 4 | 0 | 武器攻撃 4d2 · 爪 4d2 · 噛みつき 2d6 |  |
+| 氷のトロル (ice troll) | 白色 | 9 | 10 | 2 | 20 | 武器攻撃 2d6 · 爪 2d6 冷気 · 噛みつき 2d6 | 冷気耐性. |
+| 岩のトロル (rock troll) | 水色 | 9 | 12 | 0 | 0 | 武器攻撃 3d6 · 爪 2d8 · 噛みつき 2d6 |  |
+| 水のトロル (water troll) | 青色 | 11 | 14 | 4 | 40 | 武器攻撃 2d8 · 爪 2d8 · 噛みつき 2d6 | 遊泳. |
+| Olog-hai | 赤紫 | 13 | 12 | -4 | 0 | 武器攻撃 3d6 · 爪 2d8 · 噛みつき 2d6 |  |
+
+:::
+
+#### アンバーハルク `U` (Umber hulks `U`)
+
+混乱の凝視。視線が合うだけでプレイヤーを激しく混乱させます。目隠しやタオルを巻いて盲目状態で戦うか、遠距離から仕留めるのが定石です。混乱耐性やテレパシーを活用してください。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| アンバーハルク (umber hulk) | 茶色 | 9 | 6 | 2 | 25 | 爪 3d4 ×2 · 噛みつき 2d5 · 凝視 confuse | tunnels. Confusion gaze. Hard to navigate around. Hits hard too. |
+
+:::
+
+#### 吸血鬼 `V` (Vampires `V`)
+
+<!-- audit
+2026-05-19:
+- 3 vampire rows at monsters.h: vampire 2282, vampire lord 2292, Vlad 2306.
+- Vampire and vampire lord carry G_NOCORPSE, but the death handler substitutes an already-old human corpse. Vlad leaves none (mon.c:613-646).
+- All have M1_REGEN | M1_FLY plus M2_STALK (follows stairs) and shapeshift via M2_WERE-equivalent vamp branch (mon.c).
+- Vampire mage is #if 0 DEFERRED in 5.0 (correctly omitted).
+- Vlad inhabits Vlad's Tower; holds the Candelabrum of Invocation (mkobj.c spawn for PM_VLAD).
+-->
+
+噛みつき攻撃によってプレイヤーの経験値レベルを吸い取ります（エナジードレイン）。こうもりや霧の雲に変身して逃亡・奇襲を行います。通常の吸血鬼や吸血鬼の貴族は古びた人間の死体を残しますが、ヴラドは死体を残しません。ヴラド公は[ヴラドの塔](#vlads-tower)のボスです。
+
+すべての吸血鬼は飛行し、自動回復し、アンデッドであり、階段に追従し、変身能力を持ちます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 吸血鬼 (vampire) | 赤色 | 10 | 12 | 1 | 25 | 爪 1d6 · 噛みつき 1d6 エナジードレイン-XL | Drops an old 人間 corpse. |
+| vampire lord | 青色 | 12 | 14 | 0 | 50 | 爪 1d8 · 噛みつき 1d8 エナジードレイン-XL | Drops an old 人間 corpse. |
+| 吸血鬼ヴラド (Vlad the Impaler) | 赤紫 | 28 | 26 | -6 | 80 | 武器攻撃 2d10 · 噛みつき 1d12 エナジードレイン-XL | Vampire boss in Vlad's Tower. Has the Candelabrum. |
+
+:::
+
+#### レイス `W` (Wraiths `W`)
+
+<!-- audit
+2026-05-19:
+- 3 wraith rows at monsters.h: barrow wight 2326, wraith 2336, Nazgul 2343-2353.
+- Only plain wraith leaves an eatable corpse; barrow wight and Nazgul carry G_NOCORPSE.
+- Wraith corpse grants experience-level gain (eat.c:1141-1142, pluslvl).
+- Nazgul AT_BREA/AD_SLEE breath 2d25 sleep (monsters.h Nazgul row); sleep resistance trivializes.
+-->
+
+接触によってプレイヤーの経験値レベルを1段階吸い取ります。しかし、倒した後に残る新鮮なレイスの死体を食べれば、逆に経験値レベルが1上昇するという大きな見返りがあります。アンデッド退散や銀の武器が有効です。
+
+すべてのレイスはアンデッドであり、階段の上り下りに追従してきます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| バロウ・ワイト (barrow wight) | 灰色 | 3 | 12 | 5 | 5 | 武器攻撃 エナジードレイン-XL · cast spell · 爪 1d4 · 接触 1d4 冷気 | 冷気耐性, 睡眠耐性, 毒耐性. |
+| レイス (wraith) | 黒色 | 6 | 12 | 4 | 15 | 接触 1d6 エナジードレイン-XL | 飛行. |
+| ナズグル (Nazgul) | 赤紫 | 13 | 12 | 0 | 25 | 武器攻撃 1d4 エナジードレイン-XL · ブレス 2d25 sleep | sees-不可視. |
+
+:::
+
+#### ゾーン `X` (Xorns `X`)
+
+<!-- audit
+2026-05-19:
+- Xorn stats match monsters.h:2357-2366: speed 9 (NOT fast), 3-claw + bite, MR_FIRE|MR_COLD|MR_STONE.
+- Xorns phase through walls via M1_WALLWALK; they do NOT tunnel (no M1_TUNNEL, no rubble left behind).
+- Xorn attacks are AD_PHYS only; worn weapons/armor are NOT at risk. Metallivore behavior eats metal off the floor only (monmove.c:1664).
+- Xorn corpse grants temporary stone resistance.
+-->
+
+D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異形の怪物です。彼らは**固い岩壁をすり抜けて移動**し、突然壁の中から奇襲を仕掛けてきます。金属や宝石を好んで食べます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| ゾーン (xorn) | 茶色 | 8 | 9 | -2 | 20 | 爪 1d3 ×3 · 噛みつき 4d6 | 火炎耐性, 冷気耐性, 石化耐性. |
+
+:::
+
+#### 類人猿 `Y` (Apelike creatures `Y`)
+
+<!-- audit
+2026-05-19:
+- 6 ape/yeti rows at monsters.h:2372-2417 (monkey 2372, ape 2379, owlbear 2386, yeti 2393, carnivorous ape 2402, sasquatch 2409).
+- Monkey steals via AT_CLAW/AD_SITM (monsters.h:2376); yeti M1_POIS-free, M2_BRUTE plus MR_COLD intrinsic donor.
+- Sasquatch has M1_SEE_INVIS (monsters.h:2413); both yeti and sasquatch speed 15.
+-->
+
+類人猿や大猿が中心です。サスクワッチ（雪男）は素早い動きで殴りかかってきます。肉食獣の死体は安全な食料となります。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 猿 (monkey) | 灰色 | 2 | 12 | 6 | 0 | 爪 盗み-item · 噛みつき 1d3 |  |
+| 類人猿 (ape) | 茶色 | 4 | 12 | 6 | 0 | 爪 1d3 ×2 · 噛みつき 1d6 |  |
+| アウルベア (owlbear) | 茶色 | 5 | 12 | 5 | 0 | 爪 1d6 ×2 · 締め付け 2d8 |  |
+| イエティ (yeti) | 白色 | 5 | 15 | 6 | 0 | 爪 1d6 ×2 · 噛みつき 1d4 | 冷気耐性. |
+| 人喰い猿 (carnivorous ape) | 黒色 | 6 | 12 | 6 | 0 | 爪 1d4 ×2 · 締め付け 1d8 |  |
+| サスカッチ (sasquatch) | 灰色 | 7 | 15 | 6 | 0 | 爪 1d6 ×2 · 蹴り 1d8 | sees-不可視. |
+
+:::
+
+#### ゾンビ `Z` (Zombies `Z`)
+
+<!-- audit
+2026-05-19:
+- All Z-class stats/attacks match monsters.h:2421-2504.
+- Race-based zombies carry G_NOCORPSE, but the death handler substitutes an already-old corpse of their base race (mon.c:620-646). Ghouls and skeletons leave none.
+- Skeleton has G_NOGEN: never randomly generated, only from Orcus Town or a bone devil's summons.
+- M2_UNDEAD is the class flag (NOT "M3_UNDEAD"); M2_STALK is universal across this section.
+-->
+
+動きの鈍いアンデッド。距離を取りながら戦えば容易に倒せます。種族ごとのゾンビは元となった種族の古びた死体を残すため、病気耐性なしで食べると食中毒の危険があります。アンデッド退散の杖や呪文を使うと逃走します。ガイコツ（スケルトン）は自然生成されず、オルクスの町やボーンデビルによって召喚されます。
+
+すべてのゾンビは精神を持たず、アンデッドです。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| コボルドのゾンビ (kobold zombie) | 茶色 | 0 | 6 | 10 | 0 | 爪 1d4 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old kobold corpse. |
+| ノームのゾンビ (gnome zombie) | 茶色 | 1 | 6 | 10 | 0 | 爪 1d5 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old gnome corpse. |
+| オークのゾンビ (orc zombie) | 灰色 | 2 | 6 | 9 | 0 | 爪 1d6 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old orc corpse. |
+| ドワーフのゾンビ (dwarf zombie) | 赤色 | 2 | 6 | 9 | 0 | 爪 1d6 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old dwarf corpse. |
+| エルフのゾンビ (elf zombie) | 緑色 | 3 | 6 | 9 | 0 | 爪 1d7 | follows stairs. Drops an old elf corpse. |
+| 人間のゾンビ (human zombie) | 白色 | 4 | 6 | 8 | 0 | 爪 1d8 | follows stairs. Drops an old 人間 corpse. |
+| エティンのゾンビ (ettin zombie) | 青色 | 6 | 8 | 6 | 0 | 爪 1d10 ×2 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old ettin corpse. |
+| グール (ghoul) | 黒色 | 3 | 6 | 10 | 0 | 爪 1d2 麻痺 · 爪 1d3 | 冷気耐性, 睡眠耐性, 毒耐性. 死体を残さない。 |
+| 巨人のゾンビ (giant zombie) | 水色 | 8 | 8 | 6 | 0 | 爪 2d8 ×2 | follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old 巨人 corpse. |
+| 骸骨 (skeleton) | 白色 | 12 | 8 | 4 | 0 | 武器攻撃 2d6 · 接触 1d6 slow | 冷気耐性, 睡眠耐性, 毒耐性, 石化耐性. |
+
+:::
+
+#### 人間およびエルフ `@` (Humans and elves `@`)
+
+<!-- audit
+2026-05-19:
+- 43 human rows match monsters.h.
+- Kops are class K, NOT @.
+- Wizard of Yendor row: bright-magenta, L30 Spd12 AC-8 MR100, claw 2d12 steal-amulet + spell, flies/regen/sees-invis/fire-res/poison-res, covetous (monsters.h:2847-2858).
+- Master of Thieves is the Rogue quest LEADER (Rog-strt.lua:106) AND the Tourist quest nemesis (Tou-goal.lua:117, monsters.h:3564), NOT the Rogue quest nemesis.
+- Master Assassin is the primary Rogue quest nemesis (Rog-goal.lua:72), NOT a backup.
+-->
+
+`@` のシンボルだけで相手を判断してはなりません。平和的な店主、僧侶、番兵、クエストリーダーであることもあれば、メデューサ、各職業のネメシス、富豪クロイソス、あるいはイェンダーの魔法使いである可能性もあります。動く前に対象の名前を必ず確認してください。このクラスには兵士、忍者、ドッペルゲンガー、獣人、冒険者、そしてプレイヤー自身も含まれます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 人間 (human) | 白色 | 0 | 12 | 10 | 0 | 武器攻撃 1d6 |  |
+| ねずみ人間 (wererat) | 茶色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
+| ジャッカル人間 (werejackal) | 赤色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
+| 狼人間 (werewolf) | 橙色 | 5 | 12 | 10 | 20 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
+| エルフ (elf) | 白色 | 0 | 12 | 10 | 2 | 武器攻撃 1d8 | sees-不可視. |
+| Woodland-elf | 緑色 | 4 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
+| Green-elf | 明緑 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
+| Grey-elf | 灰色 | 6 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
+| elf-lord | 明青 | 8 | 12 | 10 | 20 | 武器攻撃 2d4 ×2 | sees-不可視. |
+| Elvenking | 赤紫 | 9 | 12 | 10 | 25 | 武器攻撃 2d4 ×2 | sees-不可視. |
+| ドッペルゲンガー (doppelganger) | 白色 | 9 | 12 | 5 | 20 | 武器攻撃 1d12 | shapeshifter. |
+| 店主 (shopkeeper) | 白色 | 12 | 16 | 0 | 50 | 武器攻撃 4d4 ×2 | starts peaceful. Don't anger one. |
+| 番兵 (guard) | 青色 | 12 | 12 | 10 | 40 | 武器攻撃 4d10 | starts peaceful. |
+| 囚人 (prisoner) | 白色 | 12 | 12 | 10 | 0 | 武器攻撃 1d6 | starts peaceful. |
+| 賢者 (Oracle) | 明青 | 12 | 0 | 0 | 50 | 反撃 13d4 魔法 | starts peaceful. |
+| priest | 白色 | 12 | 12 | 10 | 50 | 武器攻撃 4d10 · 蹴り 1d4 · cast cleric | starts peaceful. Temple defenders. Convert their altars or sacrifice on them. |
+| high priest | 白色 | 25 | 15 | 7 | 70 | 武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視. Endgame altar guardian. Don't fight one head-on. |
+| 兵士 (soldier) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | follows stairs. |
+| 下士官 (sergeant) | 赤色 | 8 | 10 | 10 | 5 | 武器攻撃 2d6 | follows stairs. |
+| 看護婦 (nurse) | 白色 | 11 | 6 | 0 | 0 | 爪 2d6 heal |  |
+| 副官 (lieutenant) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | follows stairs. |
+| 指揮官 (captain) | 青色 | 12 | 10 | 10 | 15 | 武器攻撃 4d4 ×2 | follows stairs. |
+| 見張り (watchman) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | follows stairs, starts peaceful. |
+| 見張りの隊長 (watch captain) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | follows stairs, starts peaceful. |
+| メデューサ (Medusa) | 明緑 | 20 | 12 | 2 | 50 | 武器攻撃 2d4 · 爪 1d8 · 凝視 石化 · 噛みつき 1d6 毒 | 飛行, 遊泳, 水陸両用, 死体に毒あり. |
+| イェンダーの魔法使い (Wizard of Yendor) | 明紫 | 30 | 12 | -8 | 100 | 爪 2d12 盗み-amulet · cast spell | 飛行, 自動回復, sees-不可視, 火炎耐性, poison-res. Covetous: テレポート to you in late Gehennom and on the planes. The final boss. |
+| クロイソス (Croesus) | 赤紫 | 20 | 15 | 0 | 40 | 武器攻撃 4d10 | sees-不可視, follows stairs. Vault guardian on Fort Ludios. Wields a two-handed sword and hoards gold, gems, and magic items off the floor. |
+| 考古学者 (archeologist) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 | tunnels. |
+| 野蛮人 (barbarian) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
+| caveman | 白色 | 10 | 12 | 10 | 0 | 武器攻撃 2d4 |  |
+| 治療師 (healer) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 |  |
+| 騎士 (knight) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
+| 武闘家 (monk) | 白色 | 10 | 12 | 10 | 2 | 爪 1d8 · 蹴り 1d8 |  |
+| priest | 白色 | 10 | 12 | 10 | 2 | 武器攻撃 1d6 · cast cleric | Temple defenders. Convert their altars or sacrifice on them. |
+| レンジャー (ranger) | 白色 | 10 | 12 | 10 | 2 | 武器攻撃 1d4 |  |
+| 盗賊 (rogue) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
+| 侍 (samurai) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d8 ×2 |  |
+| 観光客 (tourist) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
+| ワルキューレ (valkyrie) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d8 ×2 |  |
+| 魔法使い (wizard) | 白色 | 10 | 12 | 10 | 3 | 武器攻撃 1d6 · cast spell |  |
+| カーナボン卿 (Lord Carnarvon) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 4d8 spell | tunnels, starts peaceful. Archeologist quest leader. |
+| ペリアス (Pelias) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Barbarian quest leader. |
+| 呪術師カルノフ (Shaman Karnov) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 2d8 cleric | starts peaceful. Cave Dweller quest leader. |
+| ヒポクラテス (Hippocrates) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 1d6 · cast 3d8 cleric ×2 | starts peaceful. Healer quest leader. |
+| アーサー王 (King Arthur) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Knight quest leader. Holds Excalibur if you didn't get it. |
+| 総師範 (Grand Master) | 黒色 | 25 | 15 | 0 | 90 | 爪 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視, starts peaceful. Monk quest leader. |
+| 主席司祭 (Arch Priest) | 白色 | 25 | 15 | 7 | 90 | 武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視, starts peaceful. Priest quest leader. |
+| 勇者オリオン (Orion) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 4d8 spell | 遊泳, 水陸両用, sees-不可視, starts peaceful. Ranger quest leader. Bow user. |
+| 盗賊の頭領 (Master of Thieves) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 武器攻撃 2d6 · 爪 2d4 盗み-amulet | starts peaceful. Rogue quest leader; also Tourist quest nemesis. |
+| 大名佐藤 (Lord Sato) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Samurai quest leader. |
+| ツーフラワー (Twoflower) | 白色 | 20 | 15 | 10 | 90 | 武器攻撃 4d10 | starts peaceful. Tourist quest leader. |
+| ノルン (Norn) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful, 冷気耐性. Valkyrie quest leader. |
+| 緑のネフェレト (Neferet the Green) | 緑色 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 2d8 spell ×2 | starts peaceful. Wizard quest leader. |
+| トート・アモン (Thoth Amon) | 赤紫 | 16 | 12 | 0 | 10 | 武器攻撃 1d6 · cast spell ×2 · 爪 1d4 盗み-amulet | follows stairs. Barbarian quest nemesis. |
+| カエン (Master Kaen) | 赤紫 | 25 | 12 | -10 | 10 | 爪 16d2 ×2 · cast cleric · 爪 1d4 盗み-amulet | sees-不可視, follows stairs. Monk quest nemesis. |
+| 暗殺者の頭領 (Master Assassin) | 赤紫 | 15 | 12 | 0 | 30 | 武器攻撃 2d6 毒 · 武器攻撃 2d8 · 爪 2d6 盗み-amulet | follows stairs. Rogue quest nemesis. |
+| 足利尊氏 (Ashikaga Takauji) | 赤紫 | 15 | 12 | 0 | 40 | 武器攻撃 2d6 ×2 · 爪 2d6 盗み-amulet | follows stairs. Samurai quest nemesis. |
+| 暗きもの (Dark One) | 黒色 | 15 | 12 | 0 | 80 | 武器攻撃 1d6 ×2 · 爪 1d4 盗み-amulet · cast spell | follows stairs. Wizard quest nemesis. |
+| 学生 (student) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | tunnels, starts peaceful. |
+| 首領 (chieftain) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | starts peaceful. |
+| ネアンデルタール人 (neanderthal) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | starts peaceful. |
+| 随行員 (attendant) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | starts peaceful. |
+| 小姓 (page) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | starts peaceful. |
+| 師範 (abbot) | 白色 | 5 | 12 | 10 | 20 | 爪 8d2 · 蹴り 3d2 stun · cast cleric | starts peaceful. |
+| 侍者 (acolyte) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · cast cleric | starts peaceful. |
+| ハンター (hunter) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d4 | sees-不可視, starts peaceful. |
+| ちんぴら (thug) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | starts peaceful. |
+| 忍者 (ninja) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 |  |
+| 浪士 (roshi) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | starts peaceful. |
+| ガイド (guide) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · cast spell | starts peaceful. |
+| 戦士 (warrior) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | starts peaceful. |
+| 実習生 (apprentice) | 白色 | 5 | 12 | 10 | 30 | 武器攻撃 1d6 · cast spell | starts peaceful. |
+
+:::
+
+#### 大悪魔 `&` (Major demons `&`)
+
+<!-- audit
+2026-05-19:
+- Bone devil, Orcus, Geryon "sting 2d4" and Baalzebub "bite 2d6" cells are AD_DRST drain-Str, NOT AD_POISON (monsters.h:2999, 3082, 3093, 3112).
+- Poison resistance protects against these Strength-draining attacks.
+-->
+
+強力無比な大悪魔たちです。多くは同胞の悪魔を呼び出すゲート召喚能力を持ちます（1体の有刺デビルが瞬く間に5体に増えることもあります）。銀の武器やデーモンベインが特効の大ダメージを与えます。ゲリュオン、ディスパテル、ベルゼブブ、アスモデウスのみが賄賂（金貨）による停戦に応じますが、エクスカリバーやデーモンベインを構えているときは交渉に応じません。
+
+すべて階段の上り下りに追従してきます。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 水の魔神 (water demon) | 青色 | 8 | 12 | -4 | 30 | 武器攻撃 1d3 · 爪 1d3 · 噛みつき 1d3 | 遊泳, demonic. |
+| [amorous demon](#seduction) | 灰色 | 6 | 12 | 0 | 70 | seduction (see Seduction) | 飛行, demonic. Displays as succubus or incubus by the 悪魔's own randomly-assigned gender. |
+| 角のある悪魔 (horned devil) | 茶色 | 6 | 9 | -5 | 50 | 武器攻撃 1d4 · 爪 1d4 · 噛みつき 2d3 · 毒針 1d3 | demonic. |
+| イリニス (erinys) | 赤色 | 7 | 12 | 2 | 30 | 武器攻撃 2d4 Str-エナジードレイン | 火炎耐性, 毒耐性. Grows stronger as your alignment record falls, gaining harder blows, flight, regeneration, and a second attack. |
+| 棘の悪魔 (barbed devil) | 赤色 | 8 | 12 | 0 | 35 | 爪 2d4 · 爪 2d4 sticky · 毒針 3d4 | demonic. |
+| マリリス (marilith) | 赤色 | 7 | 12 | -6 | 80 | 武器攻撃 2d4 ×2 · 爪 2d4 ×4 | sees-不可視, demonic. |
+| ヴァロック (vrock) | 緑色 | 8 | 12 | 0 | 50 | 爪 1d4 ×2 · 爪 1d8 ×2 · 噛みつき 1d6 | demonic. |
+| ヘズロウ (hezrou) | 緑色 | 9 | 6 | -2 | 55 | 爪 1d3 ×2 · 噛みつき 4d4 | demonic. |
+| 骨の悪魔 (bone devil) | 灰色 | 9 | 15 | -1 | 40 | 武器攻撃 3d4 · 毒針 2d4 エナジードレイン-Str | demonic. |
+| 氷の悪魔 (ice devil) | 白色 | 11 | 6 | -4 | 55 | 爪 1d4 ×2 · 噛みつき 2d4 · 毒針 3d4 冷気 · 接触 1d1 slow | sees-不可視, demonic. |
+| ナルフェシニ (nalfeshnee) | 赤色 | 11 | 9 | -1 | 65 | 爪 1d4 ×2 · 噛みつき 2d4 · cast spell | demonic. |
+| 穴の悪霊 (pit fiend) | 赤色 | 13 | 6 | -3 | 65 | 武器攻撃 4d2 ×2 · 締め付け 2d4 | sees-不可視, demonic. |
+| サンデスティン (sandestin) | 灰色 | 13 | 12 | 4 | 60 | 武器攻撃 2d6 ×2 | shapeshifter, 石化耐性. |
+| バルログ (balrog) | 赤色 | 16 | 5 | -2 | 75 | 武器攻撃 8d4 · 武器攻撃 4d6 | 飛行, sees-不可視, demonic. |
+| ジョウビレックス (Juiblex) | 明緑 | 50 | 3 | -7 | 65 | engulf 4d10 disease · 吐瀉 3d6 酸 | 飛行, 水陸両用, 不定形, sees-不可視, demonic, 火炎耐性, 毒耐性, 酸耐性, 石化耐性. |
+| イーノグ (Yeenoghu) | 赤紫 | 56 | 18 | -5 | 80 | 武器攻撃 3d6 · 武器攻撃 2d8 confuse · 爪 1d6 麻痺 · cast 2d6 魔法 | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| オーケス (Orcus) | 赤紫 | 66 | 9 | -6 | 85 | 武器攻撃 3d6 · 爪 3d4 ×2 · cast 8d6 spell · 毒針 2d4 エナジードレイン-Str | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| ゲーリュオーン (Geryon) | 赤紫 | 72 | 3 | -3 | 75 | 爪 3d6 ×2 · 毒針 2d4 エナジードレイン-Str | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| ディスペータ (Dispater) | 赤紫 | 78 | 15 | -2 | 80 | 武器攻撃 4d6 · cast 6d6 spell | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| ベルゼブブ (Baalzebub) | 赤紫 | 89 | 9 | -5 | 85 | 噛みつき 2d6 エナジードレイン-Str · 凝視 2d6 stun | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| アスモデウス (Asmodeus) | 赤紫 | 105 | 12 | -7 | 90 | 爪 4d4 · cast 6d6 冷気 | 飛行, sees-不可視, demonic, 火炎耐性, 冷気耐性, 毒耐性. |
+| デモゴルゴン (Demogorgon) | 赤紫 | 106 | 15 | -8 | 95 | cast 8d6 spell · 毒針 1d4 エナジードレイン-XL · 爪 1d6 disease ×2 | 飛行, sees-不可視, demonic, 火炎耐性, 毒耐性. |
+| デス (Death) | 明紫 | 30 | 12 | -5 | 100 | 接触 8d8 death ×2 | 飛行, 自動回復, sees-不可視, teleport-control. Rider of the Apocalypse. Vanquish three to ascend. |
+| ペスティレンス (Pestilence) | 明紫 | 30 | 12 | -5 | 100 | 接触 8d8 pestilence ×2 | 飛行, 自動回復, sees-不可視, teleport-control. Rider; spreads disease. |
+| フェミン (Famine) | 明紫 | 30 | 12 | -5 | 100 | 接触 8d8 famine ×2 | 飛行, 自動回復, sees-不可視, teleport-control. Rider; drains nutrition to starvation. |
+| メイルデーモン (mail daemon) | 明青 | 56 | 24 | 10 | 127 | — | 飛行, 遊泳, sees-不可視, starts peaceful, 火炎耐性, 冷気耐性, 睡眠耐性, 電撃耐性, 毒耐性, 石化耐性. Appears only to deliver in-game mail, then leaves. |
+| 風のジン (djinni) | 黄色 | 7 | 12 | 4 | 30 | 武器攻撃 2d8 | 飛行, 毒耐性, 石化耐性. |
+| フヘトトルの使い (Minion of Huhetotl) | 橙色 | 16 | 12 | -2 | 75 | 武器攻撃 8d4 · 武器攻撃 4d6 · cast spell · 爪 2d6 盗み-amulet | 飛行, sees-不可視, demonic. |
+| ナルゾク (Nalzok) | 橙色 | 16 | 12 | -2 | 85 | 武器攻撃 8d4 · 武器攻撃 4d6 · cast spell · 爪 2d6 盗み-amulet | 飛行, sees-不可視, demonic. |
+
+:::
+
+#### ゴーレム `'` (Golems `'`)
+
+<!-- audit
+2026-05-19:
+- 11 golem rows at monsters.h:2509-2594 (straw 2509, paper, rope, gold, leather, wood, flesh, clay, stone, glass, iron 2587).
+- Iron golem has G_NOCORPSE (monsters.h:2587); it leaves NO corpse, NOT a poisonous one.
+- poly_when_stoned (mondata.c:80-85) covers ALL golems except stone golem.
+- Iron golem AT_BREA/AD_DRST 4d6 poison breath at monsters.h:2592 — poison resistance critical.
+- Clay golem inscription "ATHEIST" wears off via shatter_floor message; clay golem corpse grants nothing on eat.
+-->
+
+鉄、石、粘土のゴーレムは非常に強固で危険です。木や革のゴーレムは序盤の敵です。極めて稀に出現する黄金ゴーレムは、歩く財宝の山と言えます。
+
+すべてのゴーレムは精神を持たず、睡眠耐性と毒耐性を備えています。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| 藁のゴーレム (straw golem) | 黄色 | 3 | 12 | 10 | 0 | 爪 1d2 ×2 | 冷気耐性. |
+| 紙のゴーレム (paper golem) | 白色 | 3 | 12 | 10 | 0 | 爪 1d3 | 冷気耐性. |
+| 紐のゴーレム (rope golem) | 茶色 | 4 | 9 | 8 | 0 | 爪 1d4 ×2 · 締め付け 6d1 |  |
+| 金のゴーレム (gold golem) | 黄色 | 5 | 9 | 6 | 0 | 爪 2d3 ×2 | 酸耐性. |
+| 皮のゴーレム (leather golem) | 茶色 | 6 | 6 | 6 | 0 | 爪 1d6 ×2 |  |
+| 木のゴーレム (wood golem) | 茶色 | 7 | 3 | 4 | 0 | 爪 3d4 | 冷気耐性. |
+| 肉のゴーレム (flesh golem) | 赤色 | 9 | 8 | 9 | 30 | 爪 2d8 ×2 | 火炎耐性, 冷気耐性, 電撃耐性. |
+| 土のゴーレム (clay golem) | 茶色 | 11 | 7 | 7 | 40 | 爪 3d10 |  |
+| 岩のゴーレム (stone golem) | 灰色 | 14 | 6 | 5 | 50 | 爪 3d8 | 石化耐性. |
+| ガラスのゴーレム (glass golem) | 水色 | 16 | 6 | 1 | 50 | 爪 2d8 ×2 | 酸耐性. |
+| 鉄のゴーレム (iron golem) | 水色 | 18 | 6 | 3 | 60 | 武器攻撃 4d10 · ブレス 4d6 毒 | no corpse. 火炎耐性, 冷気耐性, 電撃耐性. |
+
+:::
+
+#### 海の怪物 `;` (Sea monsters `;`)
+
+水中に生息する怪物です。巨大ウナギやクラーケンはプレイヤーの体に巻き付き、水中に引きずり込んで溺死させようとします。魔法の呼吸（Magical breathing）がなければ瞬時に命を落とします。
+
+すべての海の怪物は遊泳能力を持ち、水陸両用です。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| クラゲ (jellyfish) | 青色 | 3 | 3 | 6 | 0 | 毒針 3d3 エナジードレイン-Str | 死体に毒あり, 毒耐性. |
+| ピラニア (piranha) | 赤色 | 5 | 18 | 4 | 0 | 噛みつき 2d6 ×2 |  |
+| サメ (shark) | 灰色 | 7 | 12 | 2 | 0 | 噛みつき 5d6 |  |
+| 巨大ウナギ (giant eel) | 水色 | 5 | 9 | -1 | 0 | 噛みつき 3d6 · 接触 wrap |  |
+| 電気ウナギ (electric eel) | 明青 | 7 | 10 | -3 | 0 | 噛みつき 4d6 電撃 · 接触 wrap | 電撃耐性. |
+| クラーケン (kraken) | 赤色 | 20 | 3 | 6 | 0 | 爪 2d4 ×2 · 締め付け 2d6 wrap · 噛みつき 5d4 |  |
+
+:::
+
+#### トカゲ `:` (Lizards `:`)
+
+<!-- audit
+2026-05-19:
+- 8 lizard rows at monsters.h:3260-3324 (newt 3260, gecko, iguana, baby croc, lizard, chameleon, croc, salamander 3317).
+- Lizard corpse cures stoning (eat.c:827-830, fix_petrification) and never rots (eat.c:1483, 1510).
+- Newt corpse occasionally restores 1-3 Pw via eye_of_newt_buzz (eat.c:1102-1123).
+- Chameleon is M2_SHAPESHIFTER (monsters.h:3299, sets shifter via newcham).
+- Salamander has 4-attack chain at monsters.h:3317-3324: weapon 2d8, touch 1d6 fire, hug 2d6, hug 3d6 fire.
+- Salamander is G_HELL (Gehennom-only spawn flag).
+-->
+
+大半は無害です。**トカゲの死体は石化を治療し、決して腐敗しません**。コカトリス対策として必ず荷物に1つ入れておきましょう。ただし、メデューサの直接の凝視による石化は即死するため、トカゲの死体では救われません。
+
+::: dense-table
+
+| モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
+|---|---|---|---|---|---|---|---|
+| イモリ (newt) | 黄色 | 0 | 6 | 8 | 0 | 噛みつき 1d2 | 遊泳, 水陸両用. |
+| ヤモリ (gecko) | 緑色 | 1 | 6 | 8 | 0 | 噛みつき 1d3 |  |
+| イグアナ (iguana) | 茶色 | 2 | 6 | 7 | 0 | 噛みつき 1d4 |  |
+| ワニの子供 (baby crocodile) | 茶色 | 3 | 6 | 7 | 0 | 噛みつき 1d4 | 遊泳, 水陸両用. |
+| トカゲ (lizard) | 緑色 | 5 | 6 | 6 | 10 | 噛みつき 1d6 | 石化耐性. |
+| カメレオン (chameleon) | 茶色 | 6 | 5 | 6 | 10 | 噛みつき 4d2 | shapeshifter. |
+| ワニ (crocodile) | 茶色 | 6 | 9 | 5 | 0 | 噛みつき 4d2 · 爪 1d12 | 遊泳, 水陸両用. |
+| サラマンダー (salamander) | 橙色 | 8 | 12 | -1 | 0 | 武器攻撃 2d8 · 接触 1d6 火炎 · 締め付け 2d6 · 締め付け 3d6 火炎 | 死体に毒あり, follows stairs, 火炎耐性, 睡眠耐性. |
+
+:::
+
+### 固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Sleep res: dropped "dark one" (G_NOCORPSE). Shock res: dropped "shocking sphere" (G_NOCORPSE). Teleport: dropped "homunculus" (no M1_TPORT). All leave no corpse / don't convey.
+- Magic resistance: no role grants it intrinsically; removed "Wizard XL 17" (that's teleport control, attrib.c:86-88).
+- Teleport control: carrying the Amulet of Yendor BLOCKS controlled teleport (teleport.c:1185), it doesn't grant it.
+- Verified correct: all other role/race intrinsic gain levels, ring/amulet/dragon-scale grants.
+-->
+<!-- audit
+2026-06-01:
+- property list from include/prop.h:14-93 (68 enum entries; we cover the player-attainable subset and skip trouble states and INVULNERABLE)
+- role intrinsic gain levels from src/attrib.c:23-105 (innate structs per role: arc/bar/cav/hea/kni/mon/pri/ran/rog/sam/tou/val/wiz)
+- race intrinsic gain levels from src/attrib.c:91-103 (dwa_abil, elf_abil, gno_abil, orc_abil)
+- corpse intrinsic conferral logic at src/eat.c:903-951 (intrinsic_possible() — mconveys & MR_X check per resistance)
+- give-rate formula at src/eat.c:961-997 (chance=15 standard; chance=4 for killer-bee/scorpion poison; chance=1 telepathy; chance=10 teleport; chance=12 teleport control; chance=6 stone temp; chance=3 acid temp; (ptr->mlevel > rn2(chance)) gates the grant)
+- prayer-conferred intrinsics at src/pray.c:814,817,1321-1325 (HFire_resistance / HSleep_resistance / HFast / HStealth |= FROMOUTSIDE)
+- dragon scale base property at include/objects.h:497-553 (DRGN_ARMR macros — each color's primary granted property; gold has no power, shimmering is DEFERRED)
+- dragon scale special secondary effects at src/do_wear.c:798-884 (dragon_armor_handling switch: black=drain res, blue=fast, green=sick res, red=infravision, orange=free action, yellow=stone res, white=slow digestion, gold=affects hallucination state)
+- ring grants at include/objects.h:741-827 (RING macro 3rd arg = granted property)
+- amulet grants at include/objects.h:835-862 (AMULET macro 3rd arg = granted property)
+- helm of caution grants WARNING (objects.h:479-481)
+- helm of telepathy grants TELEPAT (objects.h:485-487)
+- cornuthaum grants CLAIRVOYANT to Wizard role only (objects.h:457-461)
+- alchemy smock grants POISON_RES (objects.h:630-632)
+- elven boots grant STEALTH (objects.h:715-717); elven cloak grants STEALTH (objects.h:615-617)
+- jumping boots grant JUMPING (objects.h:712-714)
+- water walking boots grant WWALKING (objects.h:709-711)
+- speed boots grant FAST (objects.h:707-709)
+- levitation boots grant LEVITATION (objects.h:725-727)
+- shield of reflection grants REFLECTING (objects.h:677-679)
+- shield of drain resistance NEW in 5.0 (objects.h:656-658)
+- shield of shock resistance NEW in 5.0 (objects.h:659-661)
+- cloak of protection grants PROTECTION + MC3 (objects.h:637-641)
+- cloak of magic resistance grants ANTIMAGIC + MC1 (objects.h:644-646)
+- cloak of invisibility grants INVIS (objects.h:641-643)
+- cloak of displacement grants DISPLACED (objects.h:648-650)
+- amulet of guarding grants PROTECTION + MC2 (objects.h:855-856)
+- amulet of magical breathing grants MAGICAL_BREATHING (objects.h:852-854)
+- amulet of life saving grants LIFESAVED (objects.h:838-839)
+- amulet of unchanging grants UNCHANGING (objects.h:848-849)
+- amulet of reflection grants REFLECTING (objects.h:850-851)
+- amulet of ESP grants TELEPAT (objects.h:835-836)
+- amulet of flying grants FLYING (objects.h:859-860)
+- amulet versus poison grants POISON_RES (objects.h:844-845)
+- Sunsword: extrinsic BLND_RES when wielded (artilist.h:209-212; youprop.h:160 EBlnd_resist comment)
+- Magicbane grants ANTIMAGIC + ESP + stun while wielded (artilist.h:145-147; src/artifact.c handlers)
+- Grayswandir grants HALLUC_RES via SPFX_HALRES (artilist.h:170; src/artifact.c:787)
+- Dragonbane grants REFLECTING via SPFX_REFLECT (artilist.h:157-160; artifact.c:867)
+- Eye of the Aethiopica grants ENERGY_REGENERATION + ESP carried (artilist.h:303-307; artifact.c:841)
+- Heart of Ahriman grants LEVITATION + STEALTH (artilist.h:225-230)
+- Sceptre of Might grants PROTECTION + CONFLICT (artilist.h:232-235)
+- Orb of Detection grants HALF_SPDAM + ESP + INVIS (artilist.h:219-223)
+- Master Key of Thievery grants TELEPORT_CONTROL + WARN + HALF_SPDAM + HALF_PHDAM (artilist.h:279-283)
+- Platinum Yendorian Express Card grants ESP + HALF_SPDAM (artilist.h:291-295)
+- Orb of Fate grants WARN + HALF_SPDAM + HALF_PHDAM (artilist.h:297-301)
+- Longbow of Diana grants ESP + REFLECTING (artilist.h:271-274)
+- Mitre of Holiness grants PROTECTION (artilist.h:265-269)
+- Tsurugi of Muramasa grants PROTECTION (artilist.h:285-289)
+- Trollsbane grants REGENERATION (artilist.h:182-184)
+- Staff of Aesculapius grants REGENERATION + drain res (artilist.h:248-253)
+- Orcrist warns of orcs via SPFX_WARN + M2_ORC (artilist.h:134-136)
+- Sting warns of orcs (artilist.h:138-140)
+- Grimtooth warns of elves via SPFX_WARN + M2_ELF (artilist.h:123-126)
+- ANTIMAGIC and HALLUC_RES are separate properties in prop.h (12 vs 24); magic resistance doesn't automatically block hallucination
+- BLND_RES intrinsic comes only from polyform into AD_BLND attack monsters per src/polyself.c:108; no corpse-grant path
+- HALLUC_RES intrinsic comes only from polyform into AD_HALU attack monsters per src/polyself.c:88; no corpse-grant path
+- SEE_INVIS not conveyed by any corpse per src/eat.c:1356 (intrinsic_possible returns false)
+- PASSES_WALLS, SWIMMING, DETECT_MONSTERS: polyform-only, no player-attainable persistent source
+-->
+
+NetHack はプレイヤーに対して 68 種類もの特性（プロパティ）を追跡・管理しています。そのうち冒険者が積極的に獲得を目指すべき有用な能力は、大きく 5 つの系統（ダメージ耐性、感覚と知覚、移動と空間挙動、戦闘と防御、特殊・実用機能）に分類されます。下記の表は各能力の効果、および信頼できるすべての獲得源を**内在能力（Intrinsic: 死体の摂食、レベル上昇、種族、祈りから獲得）**と**外在能力（Extrinsic: 装備、所持品から獲得）**に分けて網羅したものです。
+
+表を見るにあたり、4つの重要な基本ルールを把握しておきましょう：
+
+- **死体からの獲得確率は通常、モンスターのレベルに比例して高くなる。** さまよう目は確実にテレパシーを付与します。また、酸耐性や石化耐性は標準的な耐性判定よりも有利な確率が設定されています。これらの有用な例外は表中で個別に明記しています。
+- **内在能力と外在能力は重複（スタック）しない。** 同一の耐性を両方から得ていても、効果が2倍になるわけではありません。しかし両方を揃えておくことは**冗長性（バックアップ）**として極めて有用です。例えばクロークを脱いでも、内在能力があれば守られ続けます。
+- **修道士（Monk）は全職業中最も幅広い耐性獲得ラダーを持つ。** レベル 1 から 17 にかけて 11 種類もの内在能力を自力で習得します。
+- **ドラゴンの鱗鎧はあらゆるアイテムの中で最も多くの重要能力を網羅する。** 各色ごとに1つの基本耐性を備え、さらに複数の色が強力な*二次的効果*（黒は分解＋吸命耐性、青は電撃＋高速移動など）を併せ持ちます。完全な対応関係は表を参照してください。
+
+#### ダメージ耐性 (Damage resistances)
+
+最も範囲が広く、最も活用される能力群です。大半は序盤に死体を食べることで獲得できます。魔法防御（Magic resistance）は獲得手段が極めて限られているため、昇天用装備セットでは防具、武器、アーティファクトの枠を1つ確保して補うのが基本です。
+
+::: dense-table
+
+| 能力名 | 効果 | 内在能力の獲得源 | 外在能力の獲得源 |
+|---|---|---|---|
+| **火炎耐性** (Fire resistance) | 罠、ブレス、攻撃による火炎ダメージを無効化（溶岩への水没死は防げない）。 | 修道士 レベル11、僧侶 レベル20。赤ドラゴン、火蟻、火の巨人、ヘルハウンド、サラマンダー、赤色モールドの死体。溶岩からの祈り救済。 | 火炎耐性の指輪。赤ドラゴンの鱗 / 鱗鎧。 |
+| **冷気耐性** (Cold resistance) | ブレスや攻撃による冷気ダメージを無効化。 | ワルキューレ レベル1、修道士 レベル13。白ドラゴン、霜の巨人、冬狼、茶色モールド、青色ゼリーの死体。 | 冷気耐性の指輪。白ドラゴンの鱗 / 鱗鎧。 |
+| **睡眠耐性** (Sleep resistance) | 睡眠ガス、睡眠光線、モンスターの睡眠攻撃を完全無効化。 | 修道士 レベル1、エルフ レベル4。エルフ全般、ホムンクルスの死体。祈り救済。 | 橙色ドラゴンの鱗 / 鱗鎧。 |
+| **分解耐性** (Disintegration resistance) | 黒ドラゴンの分解ブレスを無害化。 | 黒ドラゴンの死体。 | 黒ドラゴンの鱗 / 鱗鎧。 |
+| **電撃耐性** (Shock resistance) | 電撃ブレスを含むすべての電撃ダメージを無効化。 | 修道士 レベル15。青ドラゴン、電気ウナギの死体。 | 電撃耐性の指輪。青ドラゴンの鱗 / 鱗鎧。電撃耐性の盾（5.0新要素）。 |
+| **毒耐性** (Poison resistance) | 毒針、毒のある死体、毒ブレス、筋力を奪う毒攻撃を完全防御。 | 野蛮人 レベル1、医師 レベル1、オーク レベル1、観光客 レベル20、修道士 レベル3。殺人蜂やサソリの死体（獲得確率が極めて高い）。緑ドラゴン、ナーガ、クアジット等の毒死体。 | 毒耐性の指輪。毒の魔除け。錬金術の仕事着（クローク）。緑ドラゴンの鱗 / 鱗鎧。 |
+| **酸耐性** (Acid resistance) | 酸ダメージを無効化。死体からの獲得は時間制限付きで、フロア移動でリセットされる。 | 酸のブロッブ、茶色プリン、黄ドラゴンの死体（高確率、時間制限あり）。 | 黄ドラゴンの鱗 / 鱗鎧（装備中恒久）。 |
+| **石化耐性** (Stoning resistance) | 肉体の石化に対する完全免疫。死体からの獲得は一時的。黄ドラゴンの鎧は装備中持続。 | 酸のブロッブ、トカゲの死体（高確率、時間制限あり）。 | 黄ドラゴンの鱗 / 鱗鎧。 |
+| **吸命耐性** (Drain resistance) | レイス、吸血鬼、生命力吸収武器（ストームブリンガー等）による経験値レベルドレインを遮断。 | 死体からは獲得不可。吸血鬼やリッチへの変身で獲得。 | 黒ドラゴンの鱗 / 鱗鎧。吸命耐性の盾（5.0新要素）。[エクスカリバー](#excalibur-artifact)、ストームブリンガー、[アスクレピオスの杖](#staff-of-aesculapius)の装備。 |
+| **病気耐性** (Sickness resistance) | 致命的な病気や食中毒を遮断。 | 死体からは獲得不可。 | 緑ドラゴンの鱗 / 鱗鎧。 |
+| **魔法防御** (Magic resistance) | 死の光線、マジックミサイル、変身ビーム、死の指の呪文を完全無効化。魔法の罠は防げない。[MC](#magic-cancellation)とは異なる。 | いかなる職業も内在習得不可。特定の変身形態で保有。 | 魔法を防ぐクローク。灰色ドラゴンの鱗 / 鱗鎧。[マジックベイン](#magicbane)の装備。 |
+| **幻覚耐性** (Hallucination resistance) | 黒い光や幻覚の薬による幻覚状態を遮断。 | 幻覚攻撃を持つモンスター（黒い光等）への変身のみ。 | 金色ドラゴンの鱗 / 鱗鎧。[グレイスワンディール](#grayswandir)の装備。 |
+| **盲目耐性** (Blindness resistance) | 黄色い光の閃光による盲目化を遮断。 | 盲目攻撃を持つモンスターへの変身のみ。 | [サンソード](#sunsword)の装備。 |
+
+:::
+
+#### 感覚と知覚 (Senses and perception)
+
+テレパシーと警告は、敵が接近する前にその存在と位置を正確に感知させてくれます。
+
+::: dense-table
+
+| 能力名 | 効果 | 内在能力の獲得源 | 外在能力の獲得源 |
+|---|---|---|---|
+| **テレパシー** (ESP) | 盲目時にフロア全体の精神を持つモンスターを探知（視覚があるときは限定半径内）。 | さまよう目（確実獲得）、マインドフレア、マスターマインドフレアの死体。 | ESPの魔除け。テレパシーの兜。[アイソピアの目](#eye-of-the-aethiopica)（所持）、[探知の宝珠](#orb-of-detection)（所持）、[ヤンドールのExpressカード](#platinum-yendorian-express-card)（所持）、[ディアナの長弓](#longbow-of-diana)（所持）、[マジックベイン](#magicbane)（装備）。 |
+| **不可視視認** (See invisible) | 透明な生物、および透明化した自分自身を視認できる。 | 修道士 レベル1、野伏 レベル15。死体からは獲得不可。 | 不可視視認の指輪。 |
+| **警告** (Warning) | 約10マス以内にいるレベル4以上の敵対モンスターを感知表示（数字はモンスターレベル÷4）。 | 洞窟人 レベル15、医師 レベル15、修道士 レベル7、僧侶 レベル15、魔法使い レベル15。祈り救済。 | 警告の指輪。警戒の兜。[盗賊の合鍵](#master-key-of-thievery)、[運命の宝珠](#orb-of-fate)、[オクリスト](#bane-weapons)、[スティング](#bane-weapons)、[グリムトゥース](#bane-weapons)（すべて所持）。 |
+| **特定種族への警告** | 特定の1種族に限定された警告表示。 | 内在能力としては存在しない。 | オクリスト / スティング（オーク警告）、グリムトゥース（エルフ警告）など。 |
+| **探索** (Searching) | 約85ターンに1回自動的に周囲を探索し、隠し扉や通路、罠を発見する。 | 考古学者 レベル1、修道士 レベル9、野伏 レベル1、盗賊 レベル10、観光客 レベル10。 | 探索の指輪。[エクスカリバー](#excalibur-artifact)の所持。 |
+| **透視** (Clairvoyance) | 周囲のダンジョン地形を周期的に魔法の眼で開拓視認。 | 内在能力としては存在しない。 | とんがり帽子（魔法使い専用）。 |
+| **赤外線視覚** (Infravision) | 暗闇の中で熱源（温血生物）を感知。 | ドワーフ、エルフ、ノーム、オークの各種族（レベル1）。 | 赤ドラゴンの鱗 / 鱗鎧。 |
+
+:::
+
+#### 移動と空間挙動 (Movement and spatial behavior)
+
+::: dense-table
+
+| 能力名 | 効果 | 内在能力の獲得源 | 外在能力の獲得源 |
+|---|---|---|---|
+| **高速移動** (Fast / intrinsic speed) | 各移動時に約1/3の確率で追加行動。実効速度が12から約16に向上。 | 修道士 レベル1、侍 レベル1、ワルキューレ レベル7、考古学者 レベル10、野蛮人 レベル7、洞窟人 レベル7、騎士 レベル7。祈り救済。 | 韋駄天の靴（**極めて高速 / Very Fast**、約2/3で追加行動、実効速度約20）。青ドラゴンの鱗 / 鱗鎧（極めて高速）。 |
+| **跳躍** (Jumping) | `#jump` コマンドにより近くの任意のマスへ跳躍移動。 | 騎士 レベル1。 | 跳躍の靴。跳躍の呪文。 |
+| **テレポート** (Teleportation / 不制御) | 数百ターンごとにランダムにテレポート。制御と組み合わせると極めて強力。 | テングの死体。 | テレポートの指輪。 |
+| **テレポート制御** (Teleport control) | テレポート時に目的地の座標を自由に選択可能。 | 修道士 レベル17、魔法使い レベル17。テングの死体。 | テレポート制御の指輪。[盗賊の合鍵](#master-key-of-thievery)の所持。（イェンダーの魔除けの所持中は制御テレポートが**阻害**される）。 |
+| **浮遊** (Levitation) | 常に宙に浮く。水面、溶岩、氷を渡れる。階段を降りられず、床の物を拾えない。 | なし。 | 浮遊の指輪。浮遊の靴（呪われていると脱げない）。[アリマンの心臓](#heart-of-ahriman)の所持。 |
+| **飛行** (Flying) | 浮遊と同様だが、階段の昇降、アイテムの回収、任意着地が可能。 | 飛行モンスターへの変身。 | 飛行の魔除け（5.0新要素）。 |
+| **水上歩行** (Water walking) | 水上や氷上を通常の床と同様に歩行可能。耐火加工された靴なら溶岩も渡れる。 | 特定モンスター（アンデッド等）への変身。 | 水上歩行の靴。 |
+| **魔法の呼吸** (Magical breathing) | ウナギやクラーケンに巻き込まれても溺死せず、悪臭の雲の中でも生存可能。 | 内在能力としては存在しない。 | 魔法の呼吸の魔除け。 |
+
+:::
+
+#### 戦闘と防御 (Combat and defense)
+
+昇天用装備セットを支える多層防御：AC、反射、自由行動、自動回復など。
+
+::: dense-table
+
+| 能力名 | 効果 | 内在能力の獲得源 | 外在能力の獲得源 |
+|---|---|---|---|
+| **防護** (Protection) | ACを改善（数値が低下）。また装備中の外在源1つにつき+1の[MC](#magic-cancellation)を付与（守護の魔除けは+2）。 | 平和的な僧侶への多額の寄付（必要金額はランダム）。 | 防護の指輪。守りのクローク（MC3併託）。守護の魔除け（MC2併託）。[力の笏](#sceptre-of-might)、[神聖なる司教帽](#mitre-of-holiness)、[村正の大刀](#tsurugi-of-muramasa)の所持。 |
+| **反射** (Reflection) | 遠距離魔法攻撃（光線、ブレス）を術者へ跳ね返す。 | 内在能力としては存在しない。 | 反射の魔除け。銀ドラゴンの鱗 / 鱗鎧。反射の盾。[ドラゴンベイン](#bane-weapons)または[ディアナの長弓](#longbow-of-diana)の装備。 |
+| **自動回復** (Regeneration) | 自然回復に加え、毎ターンHPが1回復する。 | トロール等の回復モンスターへの変身。 | 回復の指輪。[トロールベイン](#bane-weapons)または[アスクレピオスの杖](#staff-of-aesculapius)の装備。 |
+| **魔力自動回復** (Energy regeneration) | 呪文の魔力（Pw）が急速に回復する。 | 内在能力としては存在しない。 | [アイソピアの目](#eye-of-the-aethiopica)の所持。 |
+| **魔法半減** (Half spell damage) | モンスターが唱える呪文による被ダメージを半減。 | 内在能力としては存在しない。 | [探知の宝珠](#orb-of-detection)、[盗賊の合鍵](#master-key-of-thievery)、[ヤンドールのExpressカード](#platinum-yendorian-express-card)、[運命の宝珠](#orb-of-fate)の所持。 |
+| **物理ダメージ半減** (Half physical damage) | 近接攻撃および物理遠距離攻撃による被ダメージを半減。 | 内在能力としては存在しない。 | [盗賊の合鍵](#master-key-of-thievery)または[運命の宝珠](#orb-of-fate)の所持。 |
+| **自由行動** (Free action) | さまよう目、ゼラチンキューブ、グール、モンスターの呪文による麻痺を完全無効化。減速は防げない。 | 特定モンスターへの変身。 | 自由行動の指輪。橙ドラゴンの鱗 / 鱗鎧。 |
+| **忍び足** (Stealth) | 睡眠中のモンスターの近くを歩いても目覚めさせず、気付かれずに通過できる。 | 考古学者 レベル5、野蛮人 レベル15、修道士 レベル5、野伏 レベル7、盗賊 レベル1、侍 レベル15、ワルキューレ レベル3。祈り救済。 | 忍び足の指輪。エルフの靴。エルフのクローク。[アリマンの心臓](#heart-of-ahriman)の所持。 |
+| **不可視** (Invisibility) | 不可視視認を持たないモンスターはプレイヤーの正確なマスを見失うため命中率が激減。攻撃すると位置が露見する。 | ストーカーへの変身。不可視の薬（一時的）。 | 不可視の指輪。透明のクローク。[探知の宝珠](#orb-of-detection)の所持。 |
+| **幻影** (Displacement) | モンスターの目にはプレイヤーが隣接する別のマスにいるように映り、遠距離攻撃が外れやすくなる。 | 内在能力としては存在しない。 | 幻影のクローク。 |
+
+:::
+
+#### 特殊および実用能力 (Special and utility)
+
+満腹度、変身、生存、群衆制御に関わる特殊能力です。
+
+::: dense-table
+
+| 能力名 | 効果 | 内在能力の獲得源 | 外在能力の獲得源 |
+|---|---|---|---|
+| **消化遅延** (Slow digestion) | 通常の空腹進行を完全に停止。特殊な栄養吸収攻撃などによる飢餓は防げない。 | なし。 | 消化遅延の指輪。白ドラゴンの鱗 / 鱗鎧。 |
+| **変身制御** (Polymorph control) | 罠、指輪、薬、杖、呪文によって変身する際、変身後の姿を自由に選択できる。 | なし。 | 変身制御の指輪。 |
+| **不変** (Unchanging) | 現在の姿を固定する。あらゆる変身を防ぎ、*緑スライム化のカウントダウンも停止させる*。「スライムに触られた」際の標準的対処法。 | なし。 | 不変の魔除け。 |
+| **能力維持** (Sustain ability) | 6大基本能力値（Str, Dex, Con, Int, Wis, Cha）が消耗、鍛錬、薬、毒などの能力低下攻撃によって変動しなくなる。 | なし。 | 能力維持の指輪。 |
+| **変身生物除け** (Protection from shape changers) | 周囲のカメレオン、ドッペルゲンガー、サキュバス等の変身能力を封じる。 | なし。 | 変身生物除けの指輪。 |
+| **紛争** (Conflict) | 周囲のモンスター同士を同士討ちさせる。効果に巻き込まれた店主はプレイヤーに敵対する。 | なし。 | 紛争の指輪。[力の笏](#sceptre-of-might)の所持。 |
+| **命の救済** (Life saving) | 死亡時に魔除けが身代わりとなって破壊され、HPを `50 + 10 × (Con ÷ 2)`（最大HP上限）まで瞬時に全快復活させる。 | なし。 | 命の救済の魔除け。 |
+| **装飾** (Adornment) | 指輪の強化値が魅力（Charisma）に加算される。買い物や誘惑対策に有用。 | なし。 | 装飾の指輪。 |
+
+:::
+
+一部の能力は実質的に**変身時限定**です：*遊泳*および*壁通過*（ゾーン、土の精、ゴースト）。*怪物探知*は杖や巻物による一過性のパルス効果としてのみ利用可能です。
+
+### 前回からの変更点 (What Changed Since Last Time)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- No "minimum sacrifice value" gate; value only caps artifact quality (pray.c:1784, artifact.c:195). Reworded.
+- Sunsword #invoke costs 25 Pw (SPELL_LEV_PW(5)), not 5 (artifact.c:2095).
+- "DSM gives two resistances" overstates: only black/green/yellow give two resistances; others give one + a perk (do_wear.c:806-883). Reworded.
+- Crystal ball is a TOOL (objects.h:938); is_crackable needs ARMOR_CLASS (objclass.h:201), so it still shatters. Only crystal plate mail cracks.
+- Gold DSM light radius is 3 (uncursed), not 2 (light.c:899-907).
+- Verified correct: spell-level changes, touch-of-death rework, HP-regen formula, two-handed 3/2, Excalibur 1/30-vs-1/6, priest-donation randomization, unicorn-horn no-restore, BoH scatter, candle sqrt light, new monsters/conducts/shop mechanics.
+-->
+<!-- audit
+2026-05-19:
+- chain lightning is level 2 NODIR (objects.h:1409-1411 SPELL("chain lightning",..., P_ATTACK_SPELL, prob 25, delay 4, level 2, mgc 1, NODIR))
+- "mummy withering" was fabricated; no such mechanic in 5.0
+- Elbereth -5 alignment penalty is NOT a 5.0 change (engrave.c writeable_engrave, predates 5.0)
+- supply chests appear strictly above the Oracle (mklev.c:1037 `u.uz.dlevel < oracle_level.dlevel`), not "the first ten levels"
+- mind flayer: spell loss (uhitm.c:3266 losespells) and skill drain (uhitm.c:3270 drain_weapon_skill) persist; map/ID amnesia is gone (no forget_map call in eat_brains, eat.c:603)
+- sink dipping is for potions only: non-potions just take water_damage (fountain.c:716-733)
+- touch of death still has a binary success gate: without Antimagic, rn2(m_lev) > 12 applies the effect; Antimagic produces "Lucky for you, it didn't work!" (mcastu.c:391-407)
+- the 5.0 change is the unprotected result: 50+8d6 damage plus half that amount drained from max HP instead of the old instadeath (mcastu.c:315-347; fixes5-0-0.txt:538)
+- iron bars were added in 3.3.0, not 3.6 (fixes3-3-0.txt:349)
+- gold dragon scale mail grants only hallucination resistance + innate light, not two resistances (do_wear.c:846-851, objects.h:505 DRGN_ARMR slot 0)
+- bag-of-holding explosion scatters contents via scatter() rather than destroying them all; only 1/13 items vanish per is_boh_item_gone (pickup.c:2509-2532)
+- death drops delobj() any rolled FOOD_CLASS item unless the monster has M2_COLLECT — corpses are still left (mon.c:3597-3604)
+-->
+
+NetHack 5.0.0 は 2026 年 5 月 2 日にリリースされました。旧バージョン（3.6.x 以前）の経験者の方は、まず以下の最初のグループから確認してください。これらは古い習慣や反射的行動がそのまま命取りとなる変更点です。
+
+#### 改めるべき古い習慣 {#new-dangers}
+
+- **ユニコーンの角は低下した能力値を回復しなくなりました。** 能力値回復には能力回復の薬（または回復の魔法）を用意してください。
+- **自分自身に振った加速の杖は恒久的な加速を付与しなくなりました。** 恒久加速には加速の薬が必要です。
+- **希釈による錬金術は、1回の浸しで最大2服の薬しか変換できなくなりました。** 未希釈の薬同士の調合なら引き続きスタック一括変換が可能です。爆発確率は通常10%ですが、錬金術の仕事着を着ていれば約1/30に軽減されます。
+- **ゲヘナの灼熱の床に薬を置くと、高確率で粉砕します。** また、魔王や大悪魔がフロア内で生存している間は、同一フロア内のテレポートも封殺されます。
+- **モンスターが施錠されていない保管箱を漁り、適切な死体の山をアンデッドとして蘇生させるようになりました。** アイテムの保管庫を離れる際は、必ず箱に鍵をかけてください。
+- **呪われた杖を文字彫りテストすると爆発することがあります。** 貴重そうな杖をテストする前に、可能な限りBUC（祝福・呪い）を識別してください。
+- **低レベルモンスターの生贄では幸運値を稼げなくなりました。** 現在の幸運値が死体の難易度（モンスターレベル）を上回っている場合、生贄を捧げても幸運は上昇しません。幸運の維持には幸運の石を活用してください。
+- **ワルキューレの初期装備が長剣から通常の槍に変更されました。** 経験レベル5以上の騎士によるエクスカリバーの泉浸し（1/6の確率）は健在ですが、他の秩序職業の成功率は1/30です。
+- **死の指（Touch of death）の呪文は即死効果ではなくなりました。** 魔法防御がない場合、50+8d6 の大ダメージを受け、さらにその半分の値が最大HP上限から直接削り取られます（魔法防御があれば完全に防げます）。
+
+#### 新たな道具とチャンス (New Tools and Opportunities)
+
+- **ドラゴンの鱗鎧が強力な二次効果を持つようになりました。** 黒は吸命耐性、緑は病気耐性、青は高速移動、橙は自由行動、白は消化遅延、赤は赤外線視覚を追加付与し、金は幻覚耐性に加えて半径3マスの恒久光源となります。
+- **警戒の兜 (helm of caution)** が警告能力を付与します。**飛行の魔除け (amulet of flying)** は自身と騎乗ペットの両方に飛行を与え、**守護の魔除け (amulet of guarding)** は AC+2 および MC+2 を提供します。
+- **複数のアーティファクトに発動効果や新能力が追加されました。** スニッカースニーは毎ターン1回無料の長柄武器スタイル間合い攻撃を繰り出せます。サンソードは25 Pwを消費して対象を盲目にします。トロールベインは装備中に自動回復します。デーモンベインは僧侶が生贄で最初に確定入手する銀のメイスとなりました。
+- **新たな「願い」の入手源が登場しました。** ヴラドの玉座に座り続けることで最終的に願いを獲得でき、イェンダーの魔除けを最初に拾い上げた際にも願いが1回与えられます。またオルクスの町には魔法のランプまたは魔法のマーカーが確定生成されます。
+- **祝福された変身の薬は、その1回の変身において変身先を自由に制御（選択）できます。** 変身した吸血鬼は `#monster` コマンドで吸血鬼、こうもり、霧の雲を自在に切り替えられます。
+- **重石（ロードストーン）は呪われていても、接地している間は吹き飛ばし（ノックバック）を防ぎます。** 重量負担は依然として過酷ですが、使い道が生まれました。
+- **補給の宝箱 (supply chests)** が神託所より上の浅い階層の約2/3の確率で出現し、序盤の回復や強化アイテムを提供してくれます。
+- **ペットが死体を食べて耐性を獲得できるようになりました。** 死亡したペットも、その死体の上に乗って同属性の祭壇で祈ることで復活させることができます。
+- **流し台（シンク）に薬を浸すと、メッセージによって薬が識別されます。** 薬は失われますが、識別の巻物を節約できます。
+- **連鎖雷撃 (chain lightning)** が新たなレベル2の攻撃呪文として追加され、周囲の敵を次々と感電させます。通常フロアに新たな**テーマ別部屋**が生成されるようになり、4種の新モンスター（ディスプレイスビースト、遺伝子工学者、金ドラゴン、子金ドラゴン）が登場しました。
+
+#### その他の知っておくべき変更点 (Other Changes Worth Knowing)
+
+- *魅了 (charm monster)* はレベル5、*睡眠 (sleep)* はレベル3、*怪物混乱 (confuse monster)* はレベル1に変更されました。魔法書を使用（apply）することで、本の磨耗度を確認できます。
+- マインドフレアの触手攻撃は、マップの記憶や識別済みの記憶を消去しなくなりました。知力の低下、記憶していた呪文の忘却、武器スキルの経験値ドレインは依然として発生します。
+- 軽量化の鞄の爆発は、中身を全消滅させるのではなくフロア中に散乱（scatter）させるようになりました（約1/13のアイテムは消滅します）。
+- 僧侶への寄付金額がランダム化されました。防護を得るには、要求された金額の2倍以上3倍未満を寄付してください。それ以上寄付しても感謝されるだけで、過小な寄付は今後の要求額を引き上げます。
+- 特殊フロアのマップが左右反転（ミラーリング）して生成されることがあり、暗記したマップが反転している場合があります。新たなコンダクトとして赤貧（Pauper）、ペットなし、完全聾、倉庫番、ボーンズなし、初期キャラ固定が公式記録されます。
+- 両手持ち武器は筋力ダメージボーナスの 150%（1.5倍）を受けます。自然治癒によるHP回復は毎ターン `(XL + 耐久力)%` の確率判定となり、自動回復能力はそれに加えて毎ターン1 HPを回復します。
+- 財宝に執着するモンスター（Covetous）は、どちらの階段へも逃走するようになりました。城のフロア生成時にマスターリッチやアーチリッチが初期配置されることはなくなりました。
+- 水晶の鎧は段階的にひび割れ、耐ひび割れ加工が可能になりました。蝋燭による光源半径は線形ではなく平方根ルールで拡大します。
+- 耐性を付与する死体、缶詰、卵は店での販売価格が高くなりました。モンスター死亡時に無関係な食料品をランダムドロップすることはなくなりました。
+- 店主は店内の落とし穴や蜘蛛の巣を除去するようになり、平和的な店主に接触して歩き込むと自動的に借金を精算してから所持品確認プロンプトへ進みます。
+
+## 有用な知識の索引 (Index of Useful Knowledge)
+
+```{=latex}
+\begin{multicols}{2}
+\footnotesize\raggedright\setlength{\parskip}{0.15em plus 0.05em}
+\setlength{\parindent}{0pt}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+
+\par\smallskip{\normalsize\bfseries 0--9}\par\smallskip
+
+\hyperref[golems]{`'` golems, p.~\pageref*{golems}}\par
+\hyperref[use-testing-the-careful-way]{\$200 potions, the hidden traps, p.~\pageref*{use-testing-the-careful-way}}\par
+\hyperref[armor-prices]{\$30 boots, the warning, p.~\pageref*{armor-prices}}\par
+\hyperref[wand-prices]{\$500 wand, very good day, p.~\pageref*{wand-prices}}\par
+\hyperref[major-demons]{`\&` major demons, p.~\pageref*{major-demons}}\par
+5.0: \hyperref[what-changed-since-last-time]{new features, items, and mechanics, p.~\pageref*{what-changed-since-last-time}}; \hyperref[new-dangers]{habits to relearn, p.~\pageref*{new-dangers}}\par
+\hyperref[carrying-capacity]{52 inventory slots, the letter limit, p.~\pageref*{carrying-capacity}}\par
+\hyperref[lizards]{`:` lizards, p.~\pageref*{lizards}}\par
+\hyperref[sea-monsters]{`;` sea monsters, p.~\pageref*{sea-monsters}}\par
+\hyperref[humans-and-elves]{`@` humans and elves (monster class), p.~\pageref*{humans-and-elves}}\par
+\hyperref[a-note-on-mimics]{`]` strange object, always a mimic, p.~\pageref*{a-note-on-mimics}}\par
+\hyperref[special-symbols]{`\textasciitilde{}` long worm tail, p.~\pageref*{special-symbols}}\par
+
+\par\smallskip{\normalsize\bfseries A}\par\smallskip
+
+\hyperref[angelic-beings-a]{`A` angelic beings, p.~\pageref*{angelic-beings-a}}\par
+\hyperref[ants-and-insects-a]{`a` ants and insects, p.~\pageref*{ants-and-insects-a}}\par
+AC: \hyperref[ac-and-defense]{the AC ladder to -20, special attacks ignore, p.~\pageref*{ac-and-defense}}\par
+Acid: \hyperref[petrification-stoning]{blob corpse, timed stoning resistance, p.~\pageref*{petrification-stoning}}; \hyperref[vegetarian-safe-corpses]{blob corpse, stoning resistance (timed), p.~\pageref*{vegetarian-safe-corpses}}\par
+\hyperref[engravings]{Ad aerarium engraving, vault closet marker, p.~\pageref*{engravings}}\par
+\hyperref[carrying-capacity]{\#adjust, swap and merge letters, p.~\pageref*{carrying-capacity}}\par
+Air: \hyperref[vortices-v]{fire, ice, steam, energy, dust vortex, p.~\pageref*{vortices-v}}; \hyperref[elementals-e]{elemental, engulfs and suffocates, p.~\pageref*{elementals-e}}\par
+Alchemy: \hyperref[alchemy]{dip recipes, chain, healing → extra → full → gain ability, 10\% blast chance, about 1 in 30 in a smock, p.~\pageref*{alchemy}}; \hyperref[cloaks]{smock, poison resistance, p.~\pageref*{cloaks}}\par
+Alignment: \hyperref[alignment]{it's a number, p.~\pageref*{alignment}}; \hyperref[alignment-and-blasting]{and blasting, misaligned artifact damage, p.~\pageref*{alignment-and-blasting}}\par
+Altars: \hyperref[altars-_]{BUC testing, dropping the whole pile, p.~\pageref*{altars-_}}; \hyperref[altars-and-alignment]{conversion and the inversion trap, p.~\pageref*{altars-and-alignment}}\par
+\hyperref[seduction]{Amorous demon, expensive evening with, p.~\pageref*{seduction}}\par
+Amulet: \hyperref[choking]{of strangulation, timer death, p.~\pageref*{choking}}; \hyperref[delayed-deaths]{of unchanging, blocks slime, p.~\pageref*{delayed-deaths}}; \hyperref[amulet-prices]{prices, all \$150, p.~\pageref*{amulet-prices}}; \hyperref[amulets]{of life saving, when to wear, of life saving, revives once, of reflection, ray bouncing, of magical breathing, underwater, of ESP (telepathy), of unchanging, blocks polymorph, of flying, mount flies too (new in 5.0), of guarding, +2 AC +2 MC (new in 5.0), of strangulation, 90\% cursed, of restful sleep, the rebrand, p.~\pageref*{amulets}}; \hyperref[the-gauntlet]{blocks teleportation, climb by foot, p.~\pageref*{the-gauntlet}}\par
+Amulet of Yendor: \hyperref[molochs-sanctum]{the prize, p.~\pageref*{molochs-sanctum}}; \hyperref[the-ascension-run]{retrieving, pickup wish, on next turn, p.~\pageref*{the-ascension-run}}; \hyperref[the-elemental-planes]{the compass, p.~\pageref*{the-elemental-planes}}\par
+\hyperref[angelic-beings-a]{Angel, on the Astral Plane, p.~\pageref*{angelic-beings-a}}\par
+\hyperref[the-price-is-right]{Angry-shopkeeper +33\% surcharge, permanent, p.~\pageref*{the-price-is-right}}\par
+\hyperref[dungeon-overview-and-event-journal]{Annotate (`\#annotate`), labeling stash floors, p.~\pageref*{dungeon-overview-and-event-journal}}\par
+\hyperref[dangerous-traps]{Anti-magic field, hits harder with MR, p.~\pageref*{dangerous-traps}}\par
+\hyperref[common-combat-deaths]{Ants, pack travelers, p.~\pageref*{common-combat-deaths}}\par
+\hyperref[liches-l]{Arch-lich, touch of death, p.~\pageref*{liches-l}}\par
+Archeologist: \hyperref[the-roles]{touchstone advantage, pickaxe from turn one, p.~\pageref*{the-roles}}\par
+\hyperref[angelic-beings-a]{Archon, ultimate pet, p.~\pageref*{angelic-beings-a}}\par
+Armor: \hyperref[the-early-shopping-list]{improvements, even basic, p.~\pageref*{the-early-shopping-list}}; \hyperref[use-testing-the-careful-way]{randomized appearances, pools, helms cloaks gloves boots, p.~\pageref*{use-testing-the-careful-way}}; \hyperref[armor-prices]{prices, the danger zones, p.~\pageref*{armor-prices}}\par
+\hyperref[nuisance-traps]{Arrow trap, free ammunition farm, p.~\pageref*{nuisance-traps}}\par
+Ascension: \hyperref[the-ascension-run]{how to not die during, p.~\pageref*{the-ascension-run}}; \hyperref[what-killed-the-runners-up]{three avoidable near-ascension deaths, p.~\pageref*{what-killed-the-runners-up}}; \hyperref[strategy]{Run strategy, run don't fight, p.~\pageref*{strategy}}\par
+\hyperref[the-demon-prince-lairs]{Asmodeus, bribable cold caster, p.~\pageref*{the-demon-prince-lairs}}\par
+Astral: \hyperref[the-astral-plane]{Plane, three altars, choose wrong altar = game ends, farlook reveals altar only when adjacent, p.~\pageref*{the-astral-plane}}\par
+\hyperref[engravings]{Athame, the non-dulling stylus, p.~\pageref*{engravings}}\par
+Atheist: \hyperref[atheist]{conduct, ascension Amulet offering is exempt, p.~\pageref*{atheist}}\par
+\hyperref[the-seven-spell-schools]{Attack school, force bolt grind, p.~\pageref*{the-seven-spell-schools}}\par
+\hyperref[the-ascension-run]{Authentic Amulet, only from the High Priest, p.~\pageref*{the-ascension-run}}\par
+Auto-curse: \hyperref[blessed-uncursed-cursed-buc]{items, read as uncursed (trap), p.~\pageref*{blessed-uncursed-cursed-buc}}; \hyperref[the-ring-table]{rings (teleport, polymorph, aggravate, hunger), p.~\pageref*{the-ring-table}}\par
+\hyperref[options-worth-knowing-about]{Autopickup and pickup\_types, p.~\pageref*{options-worth-knowing-about}}\par
+
+\par\smallskip{\normalsize\bfseries B}\par\smallskip
+
+\hyperref[bats-and-birds-b]{`B` bats and birds, p.~\pageref*{bats-and-birds-b}}\par
+\hyperref[blobs-b]{`b` blobs, p.~\pageref*{blobs-b}}\par
+\hyperref[the-demon-prince-lairs]{Baalzebub, beetle-shaped lair, p.~\pageref*{the-demon-prince-lairs}}\par
+\hyperref[dragons-d]{Baby dragon, doesn't breathe, p.~\pageref*{dragons-d}}\par
+Bag of holding: \hyperref[containers]{the turning point, never insert wand of cancellation, p.~\pageref*{containers}}\par
+\hyperref[containers]{Bag of tricks, not actually a bag, p.~\pageref*{containers}}\par
+\hyperref[major-demons]{Balrog, slow but heavy, p.~\pageref*{major-demons}}\par
+\hyperref[wishable-random-artifacts]{Bane weapons, defensive riders, p.~\pageref*{wishable-random-artifacts}}\par
+Barbarian: \hyperref[the-roles]{just hit things harder, poison resistance gift, p.~\pageref*{the-roles}}\par
+\hyperref[room-types]{Barracks, organized armed soldiers, p.~\pageref*{room-types}}\par
+\hyperref[common-combat-deaths]{Bats and speedsters, doorway fighting, p.~\pageref*{common-combat-deaths}}\par
+\hyperref[weapons]{Battle-axe, two-handed good damage, p.~\pageref*{weapons}}\par
+\hyperref[dangerous-traps]{Bear trap, escape diagonally, p.~\pageref*{dangerous-traps}}\par
+\hyperref[room-types]{Beehive, royal jelly inside, p.~\pageref*{room-types}}\par
+Bell of Opening: \hyperref[the-quest]{looted from nemesis, p.~\pageref*{the-quest}}; \hyperref[other-notable-tools]{Invocation item, p.~\pageref*{other-notable-tools}}\par
+\hyperref[a-note-on-dragons]{Black dragon scale mail, disintegration + drain res, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[nagas-n]{Black naga corpse, three resistances, p.~\pageref*{nagas-n}}\par
+Black pudding: \hyperref[the-golden-rules-of-early-survival]{glob, resistances from a sink, p.~\pageref*{the-golden-rules-of-early-survival}}; \hyperref[a-note-on-puddings]{do not split with iron, p.~\pageref*{a-note-on-puddings}}\par
+Blessed: \hyperref[potion-polymorph]{potion of polymorph, controlled poly (new in 5.0), p.~\pageref*{potion-polymorph}}; \hyperref[scroll-genocide]{genocide, class L wipe, p.~\pageref*{scroll-genocide}}; \hyperref[learning-spells]{spellbook, auto-success, p.~\pageref*{learning-spells}}\par
+\hyperref[combining-conducts]{Blind / Zen conduct, p.~\pageref*{combining-conducts}}\par
+\hyperref[other-notable-tools]{Blindfold, voluntary blindness, p.~\pageref*{other-notable-tools}}\par
+\hyperref[a-note-on-dragons]{Blue dragon scale mail, shock + speed, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[jellies-j]{Blue jelly corpse, cold + poison resistance, p.~\pageref*{jellies-j}}\par
+\hyperref[containers]{Bag of holding, ascension carry, p.~\pageref*{containers}}\par
+\hyperref[deadly-mistakes]{Boiling and shattering potions, Gehennom hot ground, p.~\pageref*{deadly-mistakes}}\par
+Bones: \hyperref[things-that-will-kill-you]{level, 80\% cursed items, level, over-leveled monsters, p.~\pageref*{things-that-will-kill-you}}\par
+\hyperref[shopkeeper-behavior]{Bones-shop gotcha, items still belong, p.~\pageref*{shopkeeper-behavior}}\par
+\hyperref[the-wizards-tower]{Book of the Dead, at the Tower bottom, p.~\pageref*{the-wizards-tower}}\par
+\hyperref[brainlessness]{Brainlessness, mind flayer drain, p.~\pageref*{brainlessness}}\par
+Branch: \hyperref[the-map-symbols]{staircases, turn yellow, p.~\pageref*{the-map-symbols}}; \hyperref[branches-and-landmarks]{order, Sokoban or Mines first, p.~\pageref*{branches-and-landmarks}}\par
+\hyperref[gaining-and-losing-luck]{Breaking a mirror, –2 Luck, p.~\pageref*{gaining-and-losing-luck}}\par
+\hyperref[the-demon-prince-lairs]{Bribe demand, eligible princes and Lawful discount, p.~\pageref*{the-demon-prince-lairs}}\par
+\hyperref[fungi-and-molds-f]{Brown mold, passive cold, p.~\pageref*{fungi-and-molds-f}}\par
+\hyperref[a-note-on-puddings]{Brown pudding, vegetarian-safe glob, p.~\pageref*{a-note-on-puddings}}\par
+BUC: \hyperref[blessed-uncursed-cursed-buc]{avoiding curses by checking, the altar amber/black flash, pet step-around, p.~\pageref*{blessed-uncursed-cursed-buc}}\par
+\hyperref[feelings-and-sounds]{Bugle reveille, soldier woke neighbors, p.~\pageref*{feelings-and-sounds}}\par
+Burdened: \hyperref[the-early-shopping-list]{status, two hits per yours, p.~\pageref*{the-early-shopping-list}}; \hyperref[carrying-capacity]{Stressed, Strained, Overtaxed, Overloaded, p.~\pageref*{carrying-capacity}}\par
+\hyperref[room-types]{Buried treasure room, dig for it, p.~\pageref*{room-types}}\par
+
+\par\smallskip{\normalsize\bfseries C}\par\smallskip
+
+\hyperref[centaurs-c]{`C` centaurs, p.~\pageref*{centaurs-c}}\par
+\hyperref[cockatrices-c]{`c` cockatrices, p.~\pageref*{cockatrices-c}}\par
+\hyperref[other-notable-tools]{Can of grease, slip and waterproofing, p.~\pageref*{other-notable-tools}}\par
+Candelabrum of Invocation: \hyperref[light-sources]{requires seven candles, p.~\pageref*{light-sources}}; \hyperref[vlads-tower]{at top of Vlad's Tower, p.~\pageref*{vlads-tower}}\par
+\hyperref[dangerous-foods]{Cannibalism, –2 to –5 Luck plus aggravate, p.~\pageref*{dangerous-foods}}\par
+\hyperref[strategy]{Carrying Amulet, casts cost more (drop to cast), p.~\pageref*{strategy}}\par
+Castle: \hyperref[castle-overview]{gateway to Gehennom, p.~\pageref*{castle-overview}}; \hyperref[the-castle]{storming the, wand chest, sit on cursed scare monster, five trap doors in the hall, two reliable wishes, p.~\pageref*{the-castle}}\par
+Cave: \hyperref[the-roles]{Dweller, sling and flint, p.~\pageref*{the-roles}}; \hyperref[arachnids-and-centipedes-s]{spider, eat for poison resistance, p.~\pageref*{arachnids-and-centipedes-s}}\par
+\hyperref[key-spells]{Chain lightning, 5.0 room-clearer, p.~\pageref*{key-spells}}\par
+\hyperref[lizards]{Chameleon corpse, polymorphs you, p.~\pageref*{lizards}}\par
+\hyperref[alignment]{Chaotic, paired with Rogue for theme, p.~\pageref*{alignment}}\par
+Charging: \hyperref[scroll-charging]{explosion chance (n³/7³), a wand of wishing, exactly once, p.~\pageref*{scroll-charging}}\par
+\hyperref[the-price-is-right]{Charisma, buy-price bands, p.~\pageref*{the-price-is-right}}\par
+\hyperref[key-spells]{Charm monster, 3×3 tame, p.~\pageref*{key-spells}}\par
+\hyperref[the-price-is-right]{Chat to shopkeeper, polite price-ID, p.~\pageref*{the-price-is-right}}\par
+\hyperref[choking]{Choking, eating past Satiated, p.~\pageref*{choking}}\par
+\hyperref[dragons-d]{Chromatic Dragon, random breath weapons, p.~\pageref*{dragons-d}}\par
+\hyperref[dungeon-overview-and-event-journal]{Chronicle (`v` / \#chronicle), the journal, p.~\pageref*{dungeon-overview-and-event-journal}}\par
+\hyperref[feelings-and-sounds]{Chugging sound, monster drank a potion, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[donating-to-priests]{Clairvoyance, lower-tier priest gift, p.~\pageref*{donating-to-priests}}\par
+\hyperref[golems]{Clay golem, dissolves to cancellation, p.~\pageref*{golems}}\par
+\hyperref[wishable-random-artifacts]{Cleaver (Barbarian), three-monster swing, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[armor-and-ac]{Cloak of displacement, attackers swing at a phantom, p.~\pageref*{armor-and-ac}}\par
+Cloak of magic resistance: \hyperref[armor-and-ac]{MC1 in 5.0, p.~\pageref*{armor-and-ac}}; \hyperref[cloaks]{MC1, p.~\pageref*{cloaks}}\par
+Cloak of protection: \hyperref[armor-and-ac]{MC3 the only single source, p.~\pageref*{armor-and-ac}}; \hyperref[cloaks]{MC3, p.~\pageref*{cloaks}}\par
+\hyperref[shopkeeper-behavior]{Closed for inventory, locked shop door, p.~\pageref*{shopkeeper-behavior}}\par
+Cockatrice: \hyperref[dungeon-hazards-and-how-to-survive-them]{corpse on the stairs, the most literal instadeath, p.~\pageref*{dungeon-hazards-and-how-to-survive-them}}; \hyperref[cockatrices-c]{instant petrification on touch, p.~\pageref*{cockatrices-c}}; \hyperref[petrification-stoning]{corpse, wielding (with gloves!), corpse, the rubber chicken, new moon hiss (1 in 3), p.~\pageref*{petrification-stoning}}; \hyperref[the-astral-plane]{corpse, one-shot Rider, p.~\pageref*{the-astral-plane}}\par
+\hyperref[the-art-of-combat]{Combat, knowing when not to fight, p.~\pageref*{the-art-of-combat}}\par
+\hyperref[command-counts]{Command counts (10s, 20., etc.), p.~\pageref*{command-counts}}\par
+Conflict: \hyperref[fighting-smart]{sight required, Charisma scales reliability, p.~\pageref*{fighting-smart}}; \hyperref[the-astral-plane]{ring on Astral, Angels go hostile if your Angel dies, p.~\pageref*{the-astral-plane}}\par
+Confused: \hyperref[searching-and-detection]{gold detection, cheap trap reveal, p.~\pageref*{searching-and-detection}}; \hyperref[deadly-mistakes]{genocide, self-extinction, p.~\pageref*{deadly-mistakes}}; \hyperref[genocide]{genocide, kills you, p.~\pageref*{genocide}}; \hyperref[taming-new-creatures]{taming, 11×11 area, p.~\pageref*{taming-new-creatures}}; \hyperref[use-testing-the-careful-way]{reading, alternate effects, p.~\pageref*{use-testing-the-careful-way}}; \hyperref[confused-reading]{enchant weapon/armor, erodeproofs, remove curse, randomizes BUC, gold detection, traps revealed, charging, raises max Pw, p.~\pageref*{confused-reading}}\par
+\hyperref[fighting-smart]{Cornered scared monsters still fight, p.~\pageref*{fighting-smart}}\par
+\hyperref[helmets]{Cornuthaum, Wizard's clairvoyance, p.~\pageref*{helmets}}\par
+\hyperref[the-golden-rules-of-early-survival]{Corridor chokepoint, single-file enemies, p.~\pageref*{the-golden-rules-of-early-survival}}\par
+\hyperref[angelic-beings-a]{Couatl, feathered serpent, p.~\pageref*{angelic-beings-a}}\par
+\hyperref[the-gauntlet]{Covetous monsters, warp to you, p.~\pageref*{the-gauntlet}}\par
+\hyperref[feelings-and-sounds]{Crashing rock, a tunneler at work, p.~\pageref*{feelings-and-sounds}}\par
+Credit: \hyperref[unlocking-tools]{card, worst but works, p.~\pageref*{unlocking-tools}}; \hyperref[credit-and-debt]{two ways to accumulate, cloning, the gold-lure routine, p.~\pageref*{credit-and-debt}}\par
+\hyperref[humans-and-elves]{Croesus, vault guardian, p.~\pageref*{humans-and-elves}}\par
+Crowning: \hyperref[crowning]{alignment 20 and Luck 10, prayer-cooldown penalty, p.~\pageref*{crowning}}\par
+\hyperref[weapons]{Crysknife, fragile excellence, p.~\pageref*{weapons}}\par
+Crystal ball: \hyperref[searching-and-detection]{trap survey, p.~\pageref*{searching-and-detection}}; \hyperref[other-notable-tools]{the one-question oracle, p.~\pageref*{other-notable-tools}}\par
+\hyperref[repeat-last-command-ctrla]{Ctrl+A, repeat last command, p.~\pageref*{repeat-last-command-ctrla}}\par
+\hyperref[dungeon-overview-and-event-journal]{Ctrl+O / \#overview, the level list, p.~\pageref*{dungeon-overview-and-event-journal}}\par
+\hyperref[message-history-and-redraw]{Ctrl+P, message history, p.~\pageref*{message-history-and-redraw}}\par
+\hyperref[message-history-and-redraw]{Ctrl+R, redraw, p.~\pageref*{message-history-and-redraw}}\par
+\hyperref[removing-curses]{Curse, removing, p.~\pageref*{removing-curses}}\par
+Cursed: \hyperref[sokoban]{scare monster scroll, Sokoban-prize bait, p.~\pageref*{sokoban}}; \hyperref[blessed-uncursed-cursed-buc]{gain level, up through ceiling, p.~\pageref*{blessed-uncursed-cursed-buc}}; \hyperref[effects-of-cursed-items]{armor, won't come off, weapon, can't be unwielded, p.~\pageref*{effects-of-cursed-items}}; \hyperref[how-luck-works]{luckstone, locks negative, p.~\pageref*{how-luck-works}}\par
+\hyperref[effects-of-cursed-items]{Cursed bag of holding, doubles weight, p.~\pageref*{effects-of-cursed-items}}\par
+Cursed potion: \hyperref[alchemy]{dip, guaranteed explosion, p.~\pageref*{alchemy}}; \hyperref[the-ascension-run]{of gain level wish, free Gehennom skip, p.~\pageref*{the-ascension-run}}\par
+\hyperref[options-worth-knowing-about]{Curses windowtype, the paneled UI, p.~\pageref*{options-worth-knowing-about}}\par
+\hyperref[giant-humanoids-h]{Cyclops, Healer quest nemesis, p.~\pageref*{giant-humanoids-h}}\par
+
+\par\smallskip{\normalsize\bfseries D}\par\smallskip
+
+\hyperref[dogs-and-canines-d]{`d` dogs and canines, p.~\pageref*{dogs-and-canines-d}}\par
+\hyperref[a-note-on-dragons]{`D` dragons, color cheat-sheet, p.~\pageref*{a-note-on-dragons}}\par
+Damerell: \hyperref[acknowledgements]{Object Identification FAQ, p.~\pageref*{acknowledgements}}\par
+\hyperref[dangerous-foods]{Dangerous foods, list, p.~\pageref*{dangerous-foods}}\par
+\hyperref[deadly-poison]{Deadly poison, the 1-in-240 spike, p.~\pageref*{deadly-poison}}\par
+Death: \hyperref[things-that-will-kill-you]{causes of (see: everything), p.~\pageref*{things-that-will-kill-you}}; \hyperref[the-astral-plane]{the Rider, instakill chance, p.~\pageref*{the-astral-plane}}\par
+\hyperref[credit-and-debt]{Debt, using unpaid items in-shop, p.~\pageref*{credit-and-debt}}\par
+\hyperref[delayed-deaths]{Delayed deaths, the runners, p.~\pageref*{delayed-deaths}}\par
+\hyperref[major-demons]{Demogorgon, attacks on sight, no bribe, p.~\pageref*{major-demons}}\par
+\hyperref[whats-different-in-gehennom]{Demon lord bribery, gold in main inventory, p.~\pageref*{whats-different-in-gehennom}}\par
+\hyperref[wishable-random-artifacts]{Demonbane (Lawful silver mace), Priest first gift, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[common-combat-deaths]{Demons, summoning more demons, p.~\pageref*{common-combat-deaths}}\par
+\hyperref[to-hit-calculation]{Dexterity, +to-hit bonus, p.~\pageref*{to-hit-calculation}}\par
+\hyperref[use-testing-the-careful-way]{Dip ammo in sickness, poison arrows, p.~\pageref*{use-testing-the-careful-way}}\par
+\hyperref[use-testing-the-careful-way]{Dipping unicorn horn in potions, p.~\pageref*{use-testing-the-careful-way}}\par
+\hyperref[what-killed-the-runners-up]{Discipline, the difference, p.~\pageref*{what-killed-the-runners-up}}\par
+Disenchanter: \hyperref[enchantment-drain]{mourning your former +5, range-kill don't melee, p.~\pageref*{enchantment-drain}}; \hyperref[useful-corpse-effects]{corpse, never eat, p.~\pageref*{useful-corpse-effects}}\par
+\hyperref[disintegration]{Disintegration, only black dragon breath, p.~\pageref*{disintegration}}\par
+\hyperref[major-demons]{Dispater, bribable arch-devil, p.~\pageref*{major-demons}}\par
+\hyperref[felines-f]{Displacer beast, taming, p.~\pageref*{felines-f}}\par
+\hyperref[donating-to-priests]{Donating to priests, AC stacks, p.~\pageref*{donating-to-priests}}\par
+Doors: \hyperref[fighting-smart]{no diagonal entry, close for breathing room, p.~\pageref*{fighting-smart}}\par
+\hyperref[dragon-scale-mail]{Dragon scale mail, upgrade from scales, p.~\pageref*{dragon-scale-mail}}\par
+\hyperref[wishable-random-artifacts]{Dragonbane, reflection while wielded, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[a-note-on-dragons]{Dragons, a full briefing, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[the-castle]{Drawbridge, four ways to lower, p.~\pageref*{the-castle}}\par
+\hyperref[shopkeeper-behavior]{Shop bill, inspect with `I` then `u`, p.~\pageref*{shopkeeper-behavior}}\par
+\hyperref[drowning]{Drowning, preventable, p.~\pageref*{drowning}}\par
+\hyperref[musical-instruments]{Drum of earthquake, pits around you, p.~\pageref*{musical-instruments}}\par
+\hyperref[helmets]{Dunce cap, Int/Wis → 6, auto-curse, p.~\pageref*{helmets}}\par
+\hyperref[the-big-picture]{Dungeon layout, the branching tree, p.~\pageref*{the-big-picture}}\par
+\hyperref[the-big-picture]{Dungeons of Doom, upper trunk, p.~\pageref*{the-big-picture}}\par
+Dwarf: \hyperref[the-races]{Str and Con caps, p.~\pageref*{the-races}}; \hyperref[humanoids-h]{hit hard and armored, p.~\pageref*{humanoids-h}}\par
+
+\par\smallskip{\normalsize\bfseries E}\par\smallskip
+
+\hyperref[elementals-e]{`E` elementals, p.~\pageref*{elementals-e}}\par
+\hyperref[eyes-and-spheres-e]{`e` eyes and spheres, p.~\pageref*{eyes-and-spheres-e}}\par
+Early game: \hyperref[the-early-shopping-list]{shopping list, p.~\pageref*{the-early-shopping-list}}; \hyperref[things-that-will-kill-you]{the deadliest stretch, p.~\pageref*{things-that-will-kill-you}}\par
+\hyperref[elementals-e]{Earth elemental, phases through walls, p.~\pageref*{elementals-e}}\par
+\hyperref[deadly-mistakes]{Eating mistakes, old and poisonous corpses, p.~\pageref*{deadly-mistakes}}\par
+\hyperref[medusas-island]{Eels (giant, electric), at Medusa, p.~\pageref*{medusas-island}}\par
+Elbereth: \hyperref[elbereth]{writing frantically, where the word comes from, the ward (basic), p.~\pageref*{elbereth}}; \hyperref[rules-of-the-ward]{rules of the ward, who ignores it, dead in Gehennom, the defile rule (important), p.~\pageref*{rules-of-the-ward}}; \hyperref[practical-use]{practical use, p.~\pageref*{practical-use}}; \hyperref[strategy]{dead past Castle, p.~\pageref*{strategy}}\par
+\hyperref[sea-monsters]{Electric eel, six in one Medusa layout, p.~\pageref*{sea-monsters}}\par
+\hyperref[the-elemental-planes]{Elemental Planes, four obstacles, p.~\pageref*{the-elemental-planes}}\par
+\hyperref[the-races]{Elf, sleep resistance at XL 4, p.~\pageref*{the-races}}\par
+\hyperref[boots]{Elven boots, stealth and silent walk, p.~\pageref*{boots}}\par
+Enchant: \hyperref[scroll-enchant]{weapon, +5 ceiling safe, armor, +3 ceiling safe, p.~\pageref*{scroll-enchant}}\par
+Enchantment: \hyperref[enchantment-drain]{drain, the silent ascension-killer, p.~\pageref*{enchantment-drain}}; \hyperref[enchantment]{weapon ceiling +9, armor +3/+5, p.~\pageref*{enchantment}}\par
+Engrave: \hyperref[the-engrave-test-wands]{test, the procedure, test, pre-write a word in dust, p.~\pageref*{the-engrave-test-wands}}\par
+\hyperref[resolving-ambiguous-engrave-results]{Engraving vanishes, three candidates, p.~\pageref*{resolving-ambiguous-engrave-results}}\par
+\hyperref[engulfment]{Engulfment, two hidden monsters, p.~\pageref*{engulfment}}\par
+Excalibur: \hyperref[fountains]{fountain dip, p.~\pageref*{fountains}}; \hyperref[finding-secret-doors]{search bonus, p.~\pageref*{finding-secret-doors}}; \hyperref[level-drain]{drain resistance, p.~\pageref*{level-drain}}; \hyperref[the-roles]{Knight's fountain-dipping odds, p.~\pageref*{the-roles}}; \hyperref[wishable-random-artifacts]{(Lawful long sword), drain res + search, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[quest-artifacts]{Eye of the Aethiopica (Wizard), Vlad portal invoke, p.~\pageref*{quest-artifacts}}\par
+\hyperref[quest-artifacts]{Eyes of the Overworld (Monk), astral vision when worn, p.~\pageref*{quest-artifacts}}\par
+
+\par\smallskip{\normalsize\bfseries F}\par\smallskip
+
+\hyperref[felines-f]{`f` felines, p.~\pageref*{felines-f}}\par
+\hyperref[fungi-and-molds-f]{`F` fungi and molds, p.~\pageref*{fungi-and-molds-f}}\par
+Fake: \hyperref[the-gnomish-mines]{luckstone mimic, BUC-test first, p.~\pageref*{the-gnomish-mines}}; \hyperref[the-ascension-run]{amulet, from bones or wish, p.~\pageref*{the-ascension-run}}\par
+\hyperref[dungeon-hazards-and-how-to-survive-them]{Falling down stairs while burdened, p.~\pageref*{dungeon-hazards-and-how-to-survive-them}}\par
+Famine: \hyperref[starvation]{the second Rider, p.~\pageref*{starvation}}; \hyperref[the-astral-plane]{the Rider, hunger per hit, p.~\pageref*{the-astral-plane}}\par
+Feelings: \hyperref[feelings-and-sounds]{feverish, lycanthropy infection, deathly sick, Pestilence or rot, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[fighting-style-caps]{Fighting style caps (bare hands, two-weapon, riding, martial arts), p.~\pageref*{fighting-style-caps}}\par
+Finger: \hyperref[engravings]{in dust, fragile but instant, p.~\pageref*{engravings}}; \hyperref[key-spells]{of death, the argument-ender, p.~\pageref*{key-spells}}\par
+Fire: \hyperref[dangerous-traps]{trap, burns inventory, p.~\pageref*{dangerous-traps}}; \hyperref[useful-corpse-effects]{ant corpse, fire resistance, giant corpse, fire + Strength, p.~\pageref*{useful-corpse-effects}}; \hyperref[wishable-random-artifacts]{Brand, fire + firestorm invoke, p.~\pageref*{wishable-random-artifacts}}\par
+First descent: \hyperref[your-first-descent]{welcome to the dungeon, p.~\pageref*{your-first-descent}}; \hyperref[fighting-smart]{a missed swing wakes the room, p.~\pageref*{fighting-smart}}\par
+\hyperref[alignment]{First-game recommendation, p.~\pageref*{alignment}}\par
+\hyperref[gray-stones-four-stones-one-lucky]{Flint, sling ammunition, p.~\pageref*{gray-stones-four-stones-one-lucky}}\par
+Floating: \hyperref[dungeon-hazards-and-how-to-survive-them]{eye, do not hit, p.~\pageref*{dungeon-hazards-and-how-to-survive-them}}; \hyperref[eyes-and-spheres-e]{eye, never melee, eye corpse, telepathy, p.~\pageref*{eyes-and-spheres-e}}\par
+\hyperref[seduction]{Amorous demon, can strip cursed armor, p.~\pageref*{seduction}}\par
+Food: \hyperref[how-hunger-works]{running out of, p.~\pageref*{how-hunger-works}}; \hyperref[what-to-eat]{rations, weight 20, p.~\pageref*{what-to-eat}}; \hyperref[the-food-conducts]{conducts, the hierarchy, p.~\pageref*{the-food-conducts}}\par
+\hyperref[the-food-conducts]{Foodless conduct, p.~\pageref*{the-food-conducts}}\par
+\hyperref[key-spells]{Force bolt, level 1 attack, p.~\pageref*{key-spells}}\par
+\hyperref[forcing-locked-chests]{\#force, prying chests open, p.~\pageref*{forcing-locked-chests}}\par
+\hyperref[movement-prefixes]{Force-attack (F), p.~\pageref*{movement-prefixes}}\par
+\hyperref[centaurs-c]{Forest centaur, bow user, p.~\pageref*{centaurs-c}}\par
+Fort: \hyperref[fort-ludios]{Ludios, vault full of gold, Ludios, Croesus across the moat, p.~\pageref*{fort-ludios}}\par
+\hyperref[fountains]{Fountain dip, uncurses items, p.~\pageref*{fountains}}\par
+\hyperref[fountains]{Fountains, gentle bubbling doom, p.~\pageref*{fountains}}\par
+\hyperref[the-castle]{Four corner-tower alcoves, one with wishing wand, p.~\pageref*{the-castle}}\par
+\hyperref[how-luck-works]{Friday the 13th, –1 baseline Luck, p.~\pageref*{how-luck-works}}\par
+\hyperref[wishable-random-artifacts]{Frost Brand, cold + snowstorm invoke, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[how-luck-works]{Full moon, +1 baseline Luck, p.~\pageref*{how-luck-works}}\par
+\hyperref[boots]{Fumble boots, 9-in-10 cursed, p.~\pageref*{boots}}\par
+
+\par\smallskip{\normalsize\bfseries G}\par\smallskip
+
+\hyperref[gnomes-g]{`G` gnomes, p.~\pageref*{gnomes-g}}\par
+\hyperref[gremlins-g]{`g` gremlins and gargoyles, p.~\pageref*{gremlins-g}}\par
+\hyperref[gaining-and-losing-luck]{Gaining and losing Luck, the table, p.~\pageref*{gaining-and-losing-luck}}\par
+\hyperref[eyes-and-spheres-e]{Gas spore, walking explosion, p.~\pageref*{eyes-and-spheres-e}}\par
+Gauntlets: \hyperref[gloves]{of power, Str 25, of dexterity, +spe to Dex, of fumbling, 9-in-10 cursed, p.~\pageref*{gloves}}\par
+Gehennom: \hyperref[the-big-picture]{lower trunk, p.~\pageref*{the-big-picture}}; \hyperref[gehennom]{why is it so hot, no prayer, fire everywhere, hot ground shatters potions, p.~\pageref*{gehennom}}\par
+Gelatinous: \hyperref[blobs-b]{cube, paralysis-cube of resistances, p.~\pageref*{blobs-b}}; \hyperref[vegetarian-safe-corpses]{cube corpse, four resistances, p.~\pageref*{vegetarian-safe-corpses}}\par
+\hyperref[gem-identification-through-selling]{Gem identification through selling (not reliable), p.~\pageref*{gem-identification-through-selling}}\par
+\hyperref[quantum-mechanics-q]{Genetic engineer, polymorph-on-claw, p.~\pageref*{quantum-mechanics-q}}\par
+Genocide: \hyperref[scroll-genocide]{race trap (h, G, @, o), p.~\pageref*{scroll-genocide}}; \hyperref[plane-of-water]{class `;`, on Plane of Water, p.~\pageref*{plane-of-water}}\par
+\hyperref[major-demons]{Geryon, bribable arch-devil, p.~\pageref*{major-demons}}\par
+\hyperref[special-symbols]{Ghost, paints over the floor as a gap, p.~\pageref*{special-symbols}}\par
+Giant: \hyperref[bats-and-birds-b]{bat, speed 22 swarmer, p.~\pageref*{bats-and-birds-b}}; \hyperref[giant-humanoids-h]{corpse, +1 Strength, p.~\pageref*{giant-humanoids-h}}; \hyperref[sea-monsters]{eel, grab and drown, p.~\pageref*{sea-monsters}}\par
+\hyperref[giant-humanoids-h]{Giants throw boulders (storm, fire, frost), p.~\pageref*{giant-humanoids-h}}\par
+\hyperref[wishable-random-artifacts]{Giantslayer, double vs giants, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[a-note-on-puddings]{Glob, instead of corpse, p.~\pageref*{a-note-on-puddings}}\par
+\hyperref[gnomes-g]{Gnome lord, gnome king, p.~\pageref*{gnomes-g}}\par
+Gnomish: \hyperref[gnomes-g]{wizard, psi bolt and self-buffs, p.~\pageref*{gnomes-g}}; \hyperref[the-gnomish-mines]{Mines, entry around Dlvl 2-4, p.~\pageref*{the-gnomish-mines}}; \hyperref[common-combat-deaths]{Mines, a choice not a routine stop, p.~\pageref*{common-combat-deaths}}\par
+\hyperref[altars-and-alignment]{Gods, angering, p.~\pageref*{altars-and-alignment}}\par
+\hyperref[a-note-on-dragons]{Gold dragon scale mail, the body-slot lantern, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[golems]{Gold golem, walking treasure pile, p.~\pageref*{golems}}\par
+\hyperref[a-note-on-dragons]{Gray dragon scale mail, magic resistance, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[a-note-on-puddings]{Gray ooze, rusts armor, p.~\pageref*{a-note-on-puddings}}\par
+\hyperref[gray-stones-four-stones-one-lucky]{Gray stones, four stones one answer, p.~\pageref*{gray-stones-four-stones-one-lucky}}\par
+\hyperref[wishable-random-artifacts]{Grayswandir (Lawful silver saber), double physical damage dealt, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[erosion-and-proofing]{Grease, applied to armor, p.~\pageref*{erosion-and-proofing}}\par
+\hyperref[a-note-on-dragons]{Green dragon scale mail, poison + sickness resistance, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[delayed-deaths]{Green slime, ten-turn countdown and cures, p.~\pageref*{delayed-deaths}}\par
+Gremlin: \hyperref[gremlins-g]{strips intrinsic at night, multiplies in water, p.~\pageref*{gremlins-g}}\par
+Grid: \hyperref[xans-and-fantastic-insects-x]{bug, can't move diagonally, p.~\pageref*{xans-and-fantastic-insects-x}}; \hyperref[deadly-mistakes]{bug, last-hit kills, p.~\pageref*{deadly-mistakes}}; \hyperref[acknowledgements]{bug, name and Tron reference, p.~\pageref*{acknowledgements}}\par
+\hyperref[wishable-random-artifacts]{Grimtooth (Chaotic orcish dagger), warns of elves, p.~\pageref*{wishable-random-artifacts}}\par
+
+\par\smallskip{\normalsize\bfseries H}\par\smallskip
+
+\hyperref[giant-humanoids-h]{`H` giants and minotaurs, p.~\pageref*{giant-humanoids-h}}\par
+\hyperref[humanoids-h]{`h` humanoids, p.~\pageref*{humanoids-h}}\par
+\hyperref[acknowledgements]{Hack (1982), Jay Fenlason, p.~\pageref*{acknowledgements}}\par
+\hyperref[real-gem-prices]{Hard gems (Mohs 8+), survive throws, p.~\pageref*{real-gem-prices}}\par
+\hyperref[acknowledgements]{Hardfought, the variants server, p.~\pageref*{acknowledgements}}\par
+\hyperref[key-spells]{Haste self, alternative to speed boots, p.~\pageref*{key-spells}}\par
+Healer: \hyperref[the-roles]{sleep-wand surprise, sickness immunity, p.~\pageref*{the-roles}}\par
+Healing: \hyperref[potion-prices]{potion, \$20 alone, p.~\pageref*{potion-prices}}; \hyperref[potion-healing]{chain, blessed pumps maxHP, p.~\pageref*{potion-healing}}; \hyperref[key-spells]{spell, level 1, p.~\pageref*{key-spells}}\par
+\hyperref[feelings-and-sounds]{Health currently feels amplified, shock resistance, p.~\pageref*{feelings-and-sounds}}\par
+Heart: \hyperref[how-luck-works]{of Ahriman, counts as luckstone, p.~\pageref*{how-luck-works}}; \hyperref[quest-artifacts]{of Ahriman (Barbarian), p.~\pageref*{quest-artifacts}}\par
+\hyperref[the-heist]{Heist, the choreographed sequence, p.~\pageref*{the-heist}}\par
+\hyperref[helmets]{Helm of brilliance, +spe to Int and Wis, p.~\pageref*{helmets}}\par
+\hyperref[armor-and-ac]{Helm of caution, warning intrinsic (new in 5.0), p.~\pageref*{armor-and-ac}}\par
+Helm of opposite alignment: \hyperref[the-gauntlet]{Chaotic detour, p.~\pageref*{the-gauntlet}}; \hyperref[helmets]{alignment-flip tactical uses, p.~\pageref*{helmets}}\par
+\hyperref[helmets]{Helm of telepathy, when blind, p.~\pageref*{helmets}}\par
+\hyperref[molochs-sanctum]{High Priest of Moloch, carries the Amulet near the high altar, p.~\pageref*{molochs-sanctum}}\par
+\hyperref[movement-traps]{Hole, like a trapdoor with manners, p.~\pageref*{movement-traps}}\par
+Holy water: \hyperref[blessed-uncursed-cursed-buc]{blesses items, p.~\pageref*{blessed-uncursed-cursed-buc}}; \hyperref[potion-holy-water]{making at an altar, multiplying by dipping, p.~\pageref*{potion-holy-water}}\par
+\hyperref[the-races]{Human, no infravision, no special talents, p.~\pageref*{the-races}}\par
+\hyperref[defiling-the-name-of-elbereth-important]{Hypocrite, alignment hit when defiling, p.~\pageref*{defiling-the-name-of-elbereth-important}}\par
+
+\par\smallskip{\normalsize\bfseries I}\par\smallskip
+
+\hyperref[imps-and-minor-demons-i]{`i` imps and minor demons, p.~\pageref*{imps-and-minor-demons-i}}\par
+\hyperref[special-symbols]{`I` invisible monster marker, p.~\pageref*{special-symbols}}\par
+\hyperref[naming-what-youve-learned]{Identification by stacking, the merge clue, p.~\pageref*{naming-what-youve-learned}}\par
+\hyperref[gaining-and-losing-luck]{Identified gem to co-aligned unicorn, +5, p.~\pageref*{gaining-and-losing-luck}}\par
+Identify: \hyperref[scroll-prices]{scroll, \$20 alone, p.~\pageref*{scroll-prices}}; \hyperref[scroll-identify]{never enough scrolls of, p.~\pageref*{scroll-identify}}; \hyperref[key-spells]{spell, blessed multi-ID, p.~\pageref*{key-spells}}\par
+Illiterate: \hyperref[illiterate]{conduct, only x signature allowed, p.~\pageref*{illiterate}}\par
+\hyperref[delayed-deaths]{Illness (food poisoning), unicorn horn cure, p.~\pageref*{delayed-deaths}}\par
+\hyperref[imps-and-minor-demons-i]{Imp, stream of insults, p.~\pageref*{imps-and-minor-demons-i}}\par
+\hyperref[seduction]{Incubus, succubus, encounter table, p.~\pageref*{seduction}}\par
+\hyperref[ways-to-die-instantly]{Instadeaths, recognizing the setup, p.~\pageref*{ways-to-die-instantly}}\par
+\hyperref[alignment-and-blasting]{Intelligent artifacts, 4d10 blast, p.~\pageref*{alignment-and-blasting}}\par
+\hyperref[the-heist]{Invocation ritual, three items on the vibrating square, p.~\pageref*{the-heist}}\par
+Iron: \hyperref[golems]{golem, poison breath, p.~\pageref*{golems}}; \hyperref[iron-bars]{bars, light passes through, bars, dig around them, bars, potion of acid dissolves, p.~\pageref*{iron-bars}}; \hyperref[boots]{shoes, traps protection, p.~\pageref*{boots}}\par
+\hyperref[the-map-symbols]{Item symbols, the punctuation marks, p.~\pageref*{the-map-symbols}}\par
+\hyperref[dragons-d]{Ixoth, Quest dragon (Archeologist), p.~\pageref*{dragons-d}}\par
+\hyperref[acknowledgements]{Izchak Miller, the lighting shopkeeper, p.~\pageref*{acknowledgements}}\par
+\hyperref[the-gnomish-mines]{Izchak's lighting store, seven candles, p.~\pageref*{the-gnomish-mines}}\par
+
+\par\smallskip{\normalsize\bfseries J}\par\smallskip
+
+\hyperref[jabberwocks-j]{`J` jabberwock, four 2d10 attacks, p.~\pageref*{jabberwocks-j}}\par
+\hyperref[jellies-j]{`j` jellies, p.~\pageref*{jellies-j}}\par
+\hyperref[dogs-and-canines-d]{Jackal, leading cause of death, p.~\pageref*{dogs-and-canines-d}}\par
+\hyperref[the-demon-prince-lairs]{Juiblex, Faceless Lord, swamp, p.~\pageref*{the-demon-prince-lairs}}\par
+\hyperref[boots]{Jumping boots, leap-apply, p.~\pageref*{boots}}\par
+
+\par\smallskip{\normalsize\bfseries K}\par\smallskip
+
+\hyperref[keystone-kops-k]{`K` Keystone Kops, p.~\pageref*{keystone-kops-k}}\par
+\hyperref[kobolds-k]{`k` kobolds, p.~\pageref*{kobolds-k}}\par
+\hyperref[weapons]{Katana, best one-hander, p.~\pageref*{weapons}}\par
+\hyperref[key-spells]{Key spells, the short list, p.~\pageref*{key-spells}}\par
+\hyperref[angelic-beings-a]{Ki-rin, flying spellcaster, p.~\pageref*{angelic-beings-a}}\par
+\hyperref[deadly-mistakes]{Kicking sinks, the foocubus surprise, p.~\pageref*{deadly-mistakes}}\par
+Killer: \hyperref[ants-and-insects-a]{bee, swarm, p.~\pageref*{ants-and-insects-a}}; \hyperref[useful-corpse-effects]{bee corpse, poison resistance, p.~\pageref*{useful-corpse-effects}}\par
+Killing: \hyperref[gaining-and-losing-luck]{peaceful, –1 Luck (50\%), pet, –1 Luck plus –15 alignment, co-aligned unicorn, –5, p.~\pageref*{gaining-and-losing-luck}}\par
+\hyperref[felines-f]{Kitten, common starter pet, p.~\pageref*{felines-f}}\par
+Knight: \hyperref[the-roles]{pony of, Excalibur odds (1 in 6), jousting on lance, p.~\pageref*{the-roles}}\par
+\hyperref[kobolds-k]{Kobold corpse, poisonous, p.~\pageref*{kobolds-k}}\par
+\hyperref[keystone-kops-k]{Kops, summoned by shoplifting, p.~\pageref*{keystone-kops-k}}\par
+Kraken: \hyperref[sea-monsters]{Medusa's pool variant, p.~\pageref*{sea-monsters}}; \hyperref[medusas-island]{present in one of the four layouts, p.~\pageref*{medusas-island}}\par
+
+\par\smallskip{\normalsize\bfseries L}\par\smallskip
+
+\hyperref[leprechauns-l]{`l` leprechauns, p.~\pageref*{leprechauns-l}}\par
+\hyperref[liches-l]{`L` liches, p.~\pageref*{liches-l}}\par
+\hyperref[dangerous-traps]{Land mine, items destroyed, p.~\pageref*{dangerous-traps}}\par
+Large mimic: \hyperref[a-note-on-mimics]{sticky claw, p.~\pageref*{a-note-on-mimics}}\par
+Large containers: \hyperref[containers]{box, chest, ice box, p.~\pageref*{containers}}\par
+\hyperref[alignment]{Lawful, perks and pieties, p.~\pageref*{alignment}}\par
+\hyperref[learning-spells]{Learning spells, success formula, p.~\pageref*{learning-spells}}\par
+\hyperref[other-notable-tools]{Leash, pet follows through stairs, p.~\pageref*{other-notable-tools}}\par
+\hyperref[what-to-eat]{Lembas wafers, best nutrition by weight, p.~\pageref*{what-to-eat}}\par
+\hyperref[finding-secret-doors]{Lenses, +2 search (capped), p.~\pageref*{finding-secret-doors}}\par
+\hyperref[leprechauns-l]{Leprechaun, steals gold and flees, p.~\pageref*{leprechauns-l}}\par
+Level: \hyperref[movement-traps]{teleporter, separated from your pet, p.~\pageref*{movement-traps}}; \hyperref[level-drain]{drain, wraiths and friends, p.~\pageref*{level-drain}}\par
+\hyperref[your-first-descent]{Levels 1 through 5, where most die, p.~\pageref*{your-first-descent}}\par
+Levitation: \hyperref[drowning]{doesn't help vs eels, p.~\pageref*{drowning}}; \hyperref[alchemy]{+ Enlightenment dip = Gain level, p.~\pageref*{alchemy}}; \hyperref[boots]{boots, the cursed trap, p.~\pageref*{boots}}\par
+Lichen corpse, never rots, pp.~\hyperref[the-golden-rules-of-early-survival]{\pageref*{the-golden-rules-of-early-survival}}, \hyperref[fungi-and-molds-f]{\pageref*{fungi-and-molds-f}}\par
+Light: \hyperref[room-types]{source room, free lit lamp, p.~\pageref*{room-types}}; \hyperref[light-sources]{sources, candles and oil lamps, p.~\pageref*{light-sources}}\par
+Lizard: \hyperref[the-golden-rules-of-early-survival]{corpse, carry one, p.~\pageref*{the-golden-rules-of-early-survival}}; \hyperref[lizards]{corpse, cures stoning, p.~\pageref*{lizards}}\par
+Loadstone: \hyperref[gray-stones-four-stones-one-lucky]{cursed and refuses to drop, the kick test, p.~\pageref*{gray-stones-four-stones-one-lucky}}\par
+\hyperref[credit-and-debt]{Loan, lent gold from shopkeeper, p.~\pageref*{credit-and-debt}}\par
+\hyperref[unlocking-tools]{Lock pick, respectable, p.~\pageref*{unlocking-tools}}\par
+\hyperref[worms-w]{Long worm, tail segments, p.~\pageref*{worms-w}}\par
+\hyperref[quest-artifacts]{Longbow of Diana (Ranger), conjure arrows invoke, p.~\pageref*{quest-artifacts}}\par
+\hyperref[giant-humanoids-h]{Lord Surtur, Valkyrie quest nemesis, p.~\pageref*{giant-humanoids-h}}\par
+Luck: \hyperref[gaining-and-losing-luck]{secretly ruining yours, p.~\pageref*{gaining-and-losing-luck}}; \hyperref[how-luck-works]{the hidden number, timeout, 600 turns toward 0, p.~\pageref*{how-luck-works}}\par
+Luckstone: \hyperref[gray-stones-four-stones-one-lucky]{preserves luck, p.~\pageref*{gray-stones-four-stones-one-lucky}}; \hyperref[how-luck-works]{bless it, p.~\pageref*{how-luck-works}}\par
+Lurker: \hyperref[engulfment]{above, looking up too late, above, ceiling drop, p.~\pageref*{engulfment}}\par
+
+\par\smallskip{\normalsize\bfseries M}\par\smallskip
+
+\hyperref[movement-prefixes]{m prefix, no-attack and menu, p.~\pageref*{movement-prefixes}}\par
+\hyperref[mimics-m]{`m` mimics, p.~\pageref*{mimics-m}}\par
+\hyperref[mummies-m]{`M` mummies, undead turning deals 1d8 and makes them flee, p.~\pageref*{mummies-m}}\par
+Magic: \hyperref[fountains]{fountain, one in seven, p.~\pageref*{fountains}}; \hyperref[movement-traps]{portal, branch entrances, p.~\pageref*{movement-traps}}; \hyperref[quest-artifacts]{Mirror of Merlin (Knight), p.~\pageref*{quest-artifacts}}\par
+\hyperref[enchantment-drain]{Magic cancellation (MC), MC3 blocks 90\%, p.~\pageref*{enchantment-drain}}\par
+\hyperref[musical-instruments]{Magic flute, sleep, p.~\pageref*{musical-instruments}}\par
+\hyperref[musical-instruments]{Magic harp, charms monsters, p.~\pageref*{musical-instruments}}\par
+\hyperref[light-sources]{Magic lamp, the wish gamble, p.~\pageref*{light-sources}}\par
+Magic mapping: \hyperref[scroll-magic-mapping]{blessed shows secret doors, p.~\pageref*{scroll-magic-mapping}}; \hyperref[key-spells]{spell, level 5, p.~\pageref*{key-spells}}\par
+Magic marker: \hyperref[other-notable-tools]{scroll printer, ascension-kit writes, p.~\pageref*{other-notable-tools}}\par
+\hyperref[the-touch-of-death]{Magic missile, the answer to Riders, p.~\pageref*{the-touch-of-death}}\par
+Magic trap: \hyperref[dangerous-traps]{random outcomes, Charisma farming, p.~\pageref*{dangerous-traps}}\par
+\hyperref[what-pets-do-for-you]{Magic whistle, teleports tame creatures to you, p.~\pageref*{what-pets-do-for-you}}\par
+\hyperref[drowning]{Magical breathing, breaks the drowning hold, p.~\pageref*{drowning}}\par
+\hyperref[wishable-random-artifacts]{Magicbane (Neutral athame), wielded magic resistance, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[major-demons]{Mail daemon, do not attack, p.~\pageref*{major-demons}}\par
+\hyperref[mana-management]{Mana, 5 Pw per spell level, p.~\pageref*{mana-management}}\par
+\hyperref[the-map-symbols]{Map, learning to read, p.~\pageref*{the-map-symbols}}\par
+\hyperref[the-price-is-right]{Mark, the sucker conditions, p.~\pageref*{the-price-is-right}}\par
+\hyperref[room-types]{Massacre room, role corpses for sacrifice, p.~\pageref*{room-types}}\par
+\hyperref[quest-artifacts]{Master Key of Thievery (Rogue), untrap invoke, p.~\pageref*{quest-artifacts}}\par
+\hyperref[liches-l]{Master lich, magic resistance mandatory, p.~\pageref*{liches-l}}\par
+Master mind flayer, five tentacles, pp.~\hyperref[humanoids-h]{\pageref*{humanoids-h}}, \hyperref[brainlessness]{\pageref*{brainlessness}}\par
+\hyperref[room-types]{Mausoleum, mummy waiting, p.~\pageref*{room-types}}\par
+\hyperref[the-big-picture]{Mazes of Menace, the whole thing, p.~\pageref*{the-big-picture}}\par
+Medusa: \hyperref[humans-and-elves]{the Gorgon, p.~\pageref*{humans-and-elves}}; \hyperref[medusas-island]{surviving the gaze, p.~\pageref*{medusas-island}}\par
+\hyperref[medusas-island]{Medusa's Island, three layered challenges, p.~\pageref*{medusas-island}}\par
+Mind flayer: \hyperref[humanoids-h]{drains Int, p.~\pageref*{humanoids-h}}; \hyperref[brainlessness]{wear any helmet, greased helmet stacks, p.~\pageref*{brainlessness}}\par
+\hyperref[the-gnomish-mines]{Mine's End, guaranteed luckstone, p.~\pageref*{the-gnomish-mines}}\par
+\hyperref[the-gnomish-mines]{Mind flayer, surprise in the Mines, p.~\pageref*{the-gnomish-mines}}\par
+Minetown: \hyperref[the-gnomish-mines]{shops and temple, watch, don't attack peacefuls, p.~\pageref*{the-gnomish-mines}}\par
+\hyperref[giant-humanoids-h]{Minotaur, 42 average damage per full attack, p.~\pageref*{giant-humanoids-h}}\par
+\hyperref[quest-artifacts]{Mitre of Holiness (Priest), p.~\pageref*{quest-artifacts}}\par
+\hyperref[wishable-random-artifacts]{Mjollnir, Valkyrie throw-and-return war hammer, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[real-gem-prices]{Mohs hardness, gems for engraving, p.~\pageref*{real-gem-prices}}\par
+\hyperref[the-valley-of-the-dead]{Moloch shrine, do not pray, p.~\pageref*{the-valley-of-the-dead}}\par
+\hyperref[molochs-sanctum]{Moloch's Sanctum, sealed level, p.~\pageref*{molochs-sanctum}}\par
+Monk: \hyperref[the-roles]{no body armor, robe spellcasting bonus, p.~\pageref*{the-roles}}\par
+\hyperref[carrying-capacity]{Monsters loot unlocked containers (new in 5.0), p.~\pageref*{carrying-capacity}}\par
+\hyperref[deadly-mistakes]{Mount slip, riding accidents, p.~\pageref*{deadly-mistakes}}\par
+\hyperref[centaurs-c]{Mountain centaur, two kicks plus weapon, p.~\pageref*{centaurs-c}}\par
+\hyperref[movement-prefixes]{Movement prefixes (F force, G run, m no-attack), p.~\pageref*{movement-prefixes}}\par
+\hyperref[quadrupeds-q]{Mumak, 4d12 butt, p.~\pageref*{quadrupeds-q}}\par
+\hyperref[cloaks]{Mummy wrapping, blocks invisibility, p.~\pageref*{cloaks}}\par
+\hyperref[musical-instruments]{Musical instruments, the passtune, p.~\pageref*{musical-instruments}}\par
+Mysterious: \hyperref[the-gauntlet]{Force, downstairs reroll, Force, Chaotic discount, p.~\pageref*{the-gauntlet}}\par
+
+\par\smallskip{\normalsize\bfseries N}\par\smallskip
+
+\hyperref[nagas-n]{`N` nagas, p.~\pageref*{nagas-n}}\par
+\hyperref[nymphs-n]{`n` nymphs, p.~\pageref*{nymphs-n}}\par
+\hyperref[acknowledgements]{NAO (nethack.alt.org), the public server, p.~\pageref*{acknowledgements}}\par
+\hyperref[wraiths-w]{Nazgul, sleep breath, p.~\pageref*{wraiths-w}}\par
+\hyperref[why-luck-matters]{Negative Luck, prayer fails, p.~\pageref*{why-luck-matters}}\par
+NetHack: \hyperref[acknowledgements]{DevTeam, Wiki, the living changelog, p.~\pageref*{acknowledgements}}\par
+\hyperref[alignment]{Neutral, the most flexibility, p.~\pageref*{alignment}}\par
+Newt: \hyperref[the-golden-rules-of-early-survival]{corpse, free mana sometimes, p.~\pageref*{the-golden-rules-of-early-survival}}; \hyperref[lizards]{corpse, restores 1-3 Pw, p.~\pageref*{lizards}}\par
+No-genocide conduct: \hyperref[no-genocide]{type ``none'', p.~\pageref*{no-genocide}}\par
+No-wishing-artifacts conduct: \hyperref[wishing-restrictions]{restrictions, p.~\pageref*{wishing-restrictions}}\par
+\hyperref[combining-conducts]{Nudist conduct (since 3.6), p.~\pageref*{combining-conducts}}\par
+\hyperref[options-worth-knowing-about]{Number\_pad option, p.~\pageref*{options-worth-knowing-about}}\par
+\hyperref[a-note-on-nymphs]{Nymph, steals from your pack then teleports away, p.~\pageref*{a-note-on-nymphs}}\par
+Nymphs: \hyperref[a-note-on-nymphs]{the universal horror story, never engage carrying the Amulet, p.~\pageref*{a-note-on-nymphs}}\par
+
+\par\smallskip{\normalsize\bfseries O}\par\smallskip
+
+\hyperref[ogres-o]{`O` ogres, p.~\pageref*{ogres-o}}\par
+\hyperref[orcs-o]{`o` orcs, p.~\pageref*{orcs-o}}\par
+\hyperref[wishable-random-artifacts]{Ogresmasher, double vs ogres, p.~\pageref*{wishable-random-artifacts}}\par
+Oilskin: \hyperref[drowning]{cloak, eel-slip, p.~\pageref*{drowning}}; \hyperref[containers]{sack, protects from water, p.~\pageref*{containers}}\par
+\hyperref[a-note-on-trolls]{Olog-hai, the troll you fear, p.~\pageref*{a-note-on-trolls}}\par
+Oracle: \hyperref[humans-and-elves]{peaceful by design, p.~\pageref*{humans-and-elves}}; \hyperref[the-oracle]{mid-levels, minor consultation (50 zm), major consultation, p.~\pageref*{the-oracle}}\par
+\hyperref[a-note-on-dragons]{Orange dragon scale mail, sleep + free action, p.~\pageref*{a-note-on-dragons}}\par
+Orb: \hyperref[how-luck-works]{of Fate, counts as luckstone, p.~\pageref*{how-luck-works}}; \hyperref[quest-artifacts]{of Detection (Archeologist), of Fate (Valkyrie), p.~\pageref*{quest-artifacts}}\par
+\hyperref[the-races]{Orc, peaceful to other orcs, p.~\pageref*{the-races}}\par
+\hyperref[orcs-o]{Orc-captain, two attacks, p.~\pageref*{orcs-o}}\par
+\hyperref[the-gnomish-mines]{Orcish Town, 1-in-7 Minetown variant, p.~\pageref*{the-gnomish-mines}}\par
+\hyperref[wishable-random-artifacts]{Orcrist (Chaotic elven broadsword), warns of orcs, p.~\pageref*{wishable-random-artifacts}}\par
+Orcus: \hyperref[orcus-town]{Prince of Undead, Town, ghost shopping district, Town, guaranteed magic lamp or marker, p.~\pageref*{orcus-town}}\par
+
+\par\smallskip{\normalsize\bfseries P}\par\smallskip
+
+\hyperref[piercers-p]{`p` piercers, p.~\pageref*{piercers-p}}\par
+\hyperref[puddings-and-oozes-p]{`P` puddings and oozes, p.~\pageref*{puddings-and-oozes-p}}\par
+Pacifist: \hyperref[pacifist]{conduct, the figurine-of-Archon plan, p.~\pageref*{pacifist}}\par
+\hyperref[things-that-will-kill-you]{Pacing, XL near Dlvl, p.~\pageref*{things-that-will-kill-you}}\par
+Paperback: \hyperref[learning-spells]{the Discworld novel, +20 XP on first read, p.~\pageref*{learning-spells}}\par
+\hyperref[the-castle]{Passtune, the five-note Mastermind, p.~\pageref*{the-castle}}\par
+\hyperref[pauper-new-in-5.0]{Pauper conduct, no starting gear (new in 5.0), p.~\pageref*{pauper-new-in-5.0}}\par
+\hyperref[per-role-skill-caps]{Per-role skill caps, p.~\pageref*{per-role-skill-caps}}\par
+\hyperref[permadeaf-new-in-5.0]{Permadeaf conduct (new in 5.0), p.~\pageref*{permadeaf-new-in-5.0}}\par
+\hyperref[medusas-island]{Perseus statue, looting the legend, p.~\pageref*{medusas-island}}\par
+\hyperref[the-astral-plane]{Pestilence the Rider, the one to fear, p.~\pageref*{the-astral-plane}}\par
+\hyperref[delayed-deaths]{Pestilence's terminal illness, Constitution timer, p.~\pageref*{delayed-deaths}}\par
+Pet: \hyperref[deadly-mistakes]{kills (yours), via conflict ring, p.~\pageref*{deadly-mistakes}}; \hyperref[keeping-your-pet-alive]{accidentally killing your, revive at co-aligned altar, gains resistances from corpses, p.~\pageref*{keeping-your-pet-alive}}; \hyperref[starting-pets]{your best early asset, growth from feeding, curse detection, p.~\pageref*{starting-pets}}; \hyperref[what-pets-do-for-you]{shoplifting, store-without-paying, p.~\pageref*{what-pets-do-for-you}}\par
+\hyperref[petless-new-in-5.0]{Petless conduct (new in 5.0), p.~\pageref*{petless-new-in-5.0}}\par
+\hyperref[petrification-stoning]{Petrification (stoning), the five-turn ladder, p.~\pageref*{petrification-stoning}}\par
+\hyperref[other-notable-tools]{Pickaxe and mattock, dig anywhere, p.~\pageref*{other-notable-tools}}\par
+\hyperref[piercers-p]{Piercer, drop from ceiling, p.~\pageref*{piercers-p}}\par
+Pit: \hyperref[snakes-s]{viper, cobra, poison bites, p.~\pageref*{snakes-s}}; \hyperref[movement-traps]{climb out, p.~\pageref*{movement-traps}}\par
+Plane: \hyperref[the-elemental-planes]{portals, confused gold detection, of Earth, dig the portal, of Air, cloud bubbles drift, of Air, conflict tactic, p.~\pageref*{the-elemental-planes}}; \hyperref[plane-of-fire]{of Fire, fire resistance non-optional, p.~\pageref*{plane-of-fire}}; \hyperref[plane-of-water]{of Water, moving bubbles and magical breathing, p.~\pageref*{plane-of-water}}\par
+\hyperref[quest-artifacts]{Platinum Yendorian Express Card (Tourist), charge an item, p.~\pageref*{quest-artifacts}}\par
+Polymorph: \hyperref[dangerous-traps]{trap, free booth with control, p.~\pageref*{dangerous-traps}}; \hyperref[polymorph-as-a-tool]{control, the form-chooser, p.~\pageref*{polymorph-as-a-tool}}; \hyperref[polymorph-restrictions]{restrictions (poly self, poly objects), p.~\pageref*{polymorph-restrictions}}\par
+Polymorphing: \hyperref[what-pets-do-for-you]{your pet, titan first choice, p.~\pageref*{what-pets-do-for-you}}; \hyperref[shopkeeper-behavior]{the shopkeeper, the prep, p.~\pageref*{shopkeeper-behavior}}\par
+\hyperref[polymorph-as-a-tool]{Polypile, away from your bag, p.~\pageref*{polymorph-as-a-tool}}\par
+Potion: \hyperref[potion-prices]{prices, \$20 to \$300, p.~\pageref*{potion-prices}}; \hyperref[the-potion-table]{table, by price, p.~\pageref*{the-potion-table}}\par
+\hyperref[confused-reading]{Potion of confusion, the controlled confuser, p.~\pageref*{confused-reading}}\par
+\hyperref[potion-gain-ability]{Potion of gain ability, blessed boosts all stats, p.~\pageref*{potion-gain-ability}}\par
+\hyperref[potion-gain-level]{Potion of gain level, raises XL, p.~\pageref*{potion-gain-level}}\par
+\hyperref[potion-polymorph]{Potion of polymorph, dip-arrow test, p.~\pageref*{potion-polymorph}}\par
+\hyperref[potion-speed]{Potion of speed, permanent intrinsic, p.~\pageref*{potion-speed}}\par
+Prayer: \hyperref[the-golden-rules-of-early-survival]{emergency button cooldown, p.~\pageref*{the-golden-rules-of-early-survival}}; \hyperref[prayer]{when to, what it fixes, cooldown averaging about 450 turns, p.~\pageref*{prayer}}\par
+Priest: \hyperref[the-roles]{BUC sense for free, Demonbane first gift, p.~\pageref*{the-roles}}\par
+\hyperref[donating-to-priests]{Protection racket, donation AC ladder, p.~\pageref*{donating-to-priests}}\par
+\hyperref[worms-w]{Purple worm, swallows you whole, p.~\pageref*{worms-w}}\par
+\hyperref[cockatrices-c]{Pyrolisk, fire-gaze cousin, p.~\pageref*{cockatrices-c}}\par
+
+\par\smallskip{\normalsize\bfseries Q}\par\smallskip
+
+\hyperref[quadrupeds-q]{`q` quadrupeds, p.~\pageref*{quadrupeds-q}}\par
+\hyperref[quantum-mechanics-q]{`Q` quantum mechanics, teleport-on-claw, p.~\pageref*{quantum-mechanics-q}}\par
+\hyperref[fountains]{Quaffing a fountain, slot-machine table, p.~\pageref*{fountains}}\par
+\hyperref[quantum-mechanics-q]{Quantum mechanic corpse, toggles Fast, p.~\pageref*{quantum-mechanics-q}}\par
+\hyperref[imps-and-minor-demons-i]{Quasit, drains Dex, p.~\pageref*{imps-and-minor-demons-i}}\par
+\hyperref[ants-and-insects-a]{Queen bee, royal jelly source, p.~\pageref*{ants-and-insects-a}}\par
+Quest: \hyperref[the-quest]{portal, magenta `\textasciicircum{}`, XL 14 and alignment 20, leader, first floor, nemesis, kill twice (life-saving), artifact, on the nemesis's square, p.~\pageref*{the-quest}}; \hyperref[quest-artifacts]{artifacts, the per-role list, p.~\pageref*{quest-artifacts}}\par
+
+\par\smallskip{\normalsize\bfseries R}\par\smallskip
+
+\hyperref[rodents-r]{`r` rodents, p.~\pageref*{rodents-r}}\par
+\hyperref[rust-monsters-and-disenchanters-r]{`R` rust monster, disenchanter, p.~\pageref*{rust-monsters-and-disenchanters-r}}\par
+\hyperref[the-races]{Races, the five, p.~\pageref*{the-races}}\par
+Ranged: \hyperref[the-early-shopping-list]{attack, almost always safer, p.~\pageref*{the-early-shopping-list}}; \hyperref[fighting-smart]{attackers retreat, backing into corners, p.~\pageref*{fighting-smart}}\par
+Ranger: \hyperref[the-roles]{+2 cloak of displacement at start, dagger and arrow stack, p.~\pageref*{the-roles}}\par
+\hyperref[deadly-mistakes]{Reading unidentified scrolls in a shop, p.~\pageref*{deadly-mistakes}}\par
+\hyperref[real-gem-prices]{Real gem prices, the table, p.~\pageref*{real-gem-prices}}\par
+\hyperref[recharging]{Recharging, n³/343 explosion formula, p.~\pageref*{recharging}}\par
+\hyperref[a-note-on-dragons]{Red dragon scale mail, fire + infravision, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[disintegration]{Reflection, bounces back but they resist, p.~\pageref*{disintegration}}\par
+\hyperref[scroll-remove-curse]{Remove curse, the happy ending, p.~\pageref*{scroll-remove-curse}}\par
+\hyperref[brainlessness]{Restore ability, returning lost stats, p.~\pageref*{brainlessness}}\par
+\hyperref[scroll-reverse-genocide]{Reverse genocide, cursed scroll = spawn 4-6, p.~\pageref*{scroll-reverse-genocide}}\par
+\hyperref[acknowledgements]{RGRN (rec.games.roguelike.nethack), p.~\pageref*{acknowledgements}}\par
+\hyperref[the-astral-plane]{Rider corpse, instantly fatal to eat, p.~\pageref*{the-astral-plane}}\par
+\hyperref[training-a-skill]{Riding, 100 squares per tick, p.~\pageref*{training-a-skill}}\par
+Ring: \hyperref[ring-prices]{prices, \$100 to \$300, p.~\pageref*{ring-prices}}; \hyperref[the-ring-table]{of teleport control, on-demand transport, hunger, every ring costs nutrition, of sustain ability, prevents stat drain, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of aggravate monster, the niche use, p.~\pageref*{the-ring-table}}\par
+Ring of conflict: \hyperref[fighting-smart]{in combat, p.~\pageref*{fighting-smart}}; \hyperref[the-ring-table]{monsters fight each other, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of free action, anti-paralysis, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of polymorph control, less critical now, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of protection, chargeable, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of regeneration, hungry healer, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of searching, auto-search each turn, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of slow digestion, foodless option, p.~\pageref*{the-ring-table}}\par
+\hyperref[the-ring-table]{Ring of warning, threat-color overlay, p.~\pageref*{the-ring-table}}\par
+\hyperref[cloaks]{Robe, casting bonus, p.~\pageref*{cloaks}}\par
+\hyperref[rodents-r]{Rock mole, eats your metal, p.~\pageref*{rodents-r}}\par
+Rogue: \hyperref[the-roles]{multishot dagger throw, backstab bonus, p.~\pageref*{the-roles}}; \hyperref[the-rogue-level]{Level, older more primitive world, Level, all uppercase wildlife, p.~\pageref*{the-rogue-level}}; \hyperref[acknowledgements]{(1980), Toy and Wichman, p.~\pageref*{acknowledgements}}\par
+\hyperref[dangerous-traps]{Rolling boulder, fixed track, p.~\pageref*{dangerous-traps}}\par
+\hyperref[golems]{Rope golem, grappling hug, p.~\pageref*{golems}}\par
+\hyperref[quadrupeds-q]{Rothe, three attacks per turn, p.~\pageref*{quadrupeds-q}}\par
+\hyperref[dungeon-hazards-and-how-to-survive-them]{Rotted corpse, the 30-turn window, p.~\pageref*{dungeon-hazards-and-how-to-survive-them}}\par
+\hyperref[weapons]{Rubber hose, joke weapon, p.~\pageref*{weapons}}\par
+\hyperref[movement-prefixes]{Run direction (G), p.~\pageref*{movement-prefixes}}\par
+\hyperref[weapons]{Runesword, Stormbringer base, p.~\pageref*{weapons}}\par
+Rust: \hyperref[rust-monsters-and-disenchanters-r]{monster, strip iron first, p.~\pageref*{rust-monsters-and-disenchanters-r}}; \hyperref[nuisance-traps]{trap, splashes water, p.~\pageref*{nuisance-traps}}\par
+
+\par\smallskip{\normalsize\bfseries S}\par\smallskip
+
+\hyperref[arachnids-and-centipedes-s]{`s` arachnids and centipedes, p.~\pageref*{arachnids-and-centipedes-s}}\par
+\hyperref[snakes-s]{`S` snakes, p.~\pageref*{snakes-s}}\par
+\hyperref[containers]{Sack, basic storage, p.~\pageref*{containers}}\par
+Sacrifice: \hyperref[sacrifice]{fresh within 50 turns, role-biased first gift, minimum corpse value, p.~\pageref*{sacrifice}}; \hyperref[gaining-and-losing-luck]{luck ceiling, difficulty must exceed, p.~\pageref*{gaining-and-losing-luck}}\par
+\hyperref[feelings-and-sounds]{Sad feeling, your pet died offscreen, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[lizards]{Salamander, Gehennom-only, p.~\pageref*{lizards}}\par
+\hyperref[sacrifice]{Same-race sacrifice, forbidden, p.~\pageref*{sacrifice}}\par
+Samurai: \hyperref[the-roles]{katana opening, drop wakizashi for long sword off-hand, giri-breaking penalty, p.~\pageref*{the-roles}}\par
+\hyperref[apelike-creatures-y]{Sasquatch, fast, p.~\pageref*{apelike-creatures-y}}\par
+\hyperref[quest-artifacts]{Sceptre of Might (Caveman), conflict invoke, p.~\pageref*{quest-artifacts}}\par
+\hyperref[arachnids-and-centipedes-s]{Scorpius, named quest nemesis, p.~\pageref*{arachnids-and-centipedes-s}}\par
+\hyperref[scroll-charging]{Scroll of charging, save for wand of wishing, p.~\pageref*{scroll-charging}}\par
+\hyperref[deadly-mistakes]{Scroll of earth on yourself, buried alive, p.~\pageref*{deadly-mistakes}}\par
+\hyperref[scroll-genocide]{Scroll of genocide, the nuclear option, p.~\pageref*{scroll-genocide}}\par
+Scroll of identify: \hyperref[scroll-identify]{main-inventory only, blessed jackpot 1-in-5, p.~\pageref*{scroll-identify}}\par
+Scroll of scare monster: \hyperref[practical-use]{drop-and-stand, p.~\pageref*{practical-use}}; \hyperref[scroll-scare-monster]{drop don't read, p.~\pageref*{scroll-scare-monster}}\par
+\hyperref[taming-new-creatures]{Scroll of taming, 3×3 area, p.~\pageref*{taming-new-creatures}}\par
+\hyperref[scroll-teleportation]{Scroll of teleportation, escape hatch, p.~\pageref*{scroll-teleportation}}\par
+Searching: \hyperref[searching-and-detection]{(`s` command), repeat with luck, p.~\pageref*{searching-and-detection}}; \hyperref[the-sink-test-rings]{ring, kept on drop, p.~\pageref*{the-sink-test-rings}}\par
+\hyperref[finding-secret-doors]{Secret doors, the architects believed in them, p.~\pageref*{finding-secret-doors}}\par
+\hyperref[seduction]{Seduction (foocubus encounter), p.~\pageref*{seduction}}\par
+\hyperref[deadly-mistakes]{Self-zap wand, ray ricochet, p.~\pageref*{deadly-mistakes}}\par
+Shield: \hyperref[level-drain]{of drain resistance, new in 5.0, p.~\pageref*{level-drain}}; \hyperref[shields]{of reflection, saves the body slot, of drain resistance (new in 5.0), of shock resistance (new in 5.0), p.~\pageref*{shields}}\par
+\hyperref[shirts]{Shirts, Hawaiian and T-shirt, p.~\pageref*{shirts}}\par
+Shopkeeper: \hyperref[humans-and-elves]{tougher NPC than you, p.~\pageref*{humans-and-elves}}; \hyperref[shopping-and-shopkeeper-pricing]{angering, p.~\pageref*{shopping-and-shopkeeper-pricing}}\par
+\hyperref[fungi-and-molds-f]{Shrieker, summons neighbors, p.~\pageref*{fungi-and-molds-f}}\par
+Silver: \hyperref[weapons]{saber, demon damage, saber bonus, late-game weapon, p.~\pageref*{weapons}}\par
+\hyperref[a-note-on-dragons]{Silver dragon scale mail, reflection, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[room-types]{Single-monster-type room, almost always themed, p.~\pageref*{room-types}}\par
+Sink: \hyperref[sinks]{kicking for rings and trouble, dishwasher demon (sink foocubus), dipping potions for messages, quaffing the drain, dropping a ring down, p.~\pageref*{sinks}}; \hyperref[the-sink-test-rings]{test, the ring drop, p.~\pageref*{the-sink-test-rings}}\par
+\hyperref[delayed-deaths]{Sinking in lava, levitate or pray, p.~\pageref*{delayed-deaths}}\par
+\hyperref[sinks]{Sinks, kicking and dropping rings to ID, p.~\pageref*{sinks}}\par
+\hyperref[zombies-z]{Skeleton, only from a trap, p.~\pageref*{zombies-z}}\par
+Skill: \hyperref[the-skill-ladder]{slots, XL + 1, plus one if crowned, p.~\pageref*{the-skill-ladder}}; \hyperref[what-a-rank-buys-you]{rank effects, to-hit/damage, p.~\pageref*{what-a-rank-buys-you}}\par
+\hyperref[common-combat-deaths]{Sleep without resistance, near-instadeath, p.~\pageref*{common-combat-deaths}}\par
+\hyperref[dangerous-traps]{Sleeping gas trap, deadly in zoos, p.~\pageref*{dangerous-traps}}\par
+\hyperref[delayed-deaths]{Sliming, ten-turn countdown, p.~\pageref*{delayed-deaths}}\par
+\hyperref[the-sink-test-rings]{Slow digestion ring, kept on drop, p.~\pageref*{the-sink-test-rings}}\par
+\hyperref[feelings-and-sounds]{Slowing down, you're turning to stone, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[feelings-and-sounds]{Slurping sound, gelatinous cube ate items, p.~\pageref*{feelings-and-sounds}}\par
+Small: \hyperref[a-note-on-mimics]{mimic, top-ten killer, p.~\pageref*{a-note-on-mimics}}; \hyperref[shields]{shield, no spellcast penalty, p.~\pageref*{shields}}\par
+\hyperref[wishable-random-artifacts]{Snickersnee (Samurai katana), Shkinng! free polearm reach, p.~\pageref*{wishable-random-artifacts}}\par
+Sokoban: \hyperref[sokoban]{entry one level below Oracle, boulders into pits, no teleport here, cheating cost (–1 Luck each), prize, bag of holding or amulet of reflection, Strength training side effect, p.~\pageref*{sokoban}}; \hyperref[sokoban-solutions]{solving without cheating, mirrored variants (new in 5.0), scrolls of earth as fillers, p.~\pageref*{sokoban-solutions}}\par
+\hyperref[ants-and-insects-a]{Soldier ant, speed 18 packs, p.~\pageref*{ants-and-insects-a}}\par
+Speed: \hyperref[armor-and-ac]{boots, more turns equals more, p.~\pageref*{armor-and-ac}}; \hyperref[boots]{boots, an extra move on 2/3 of turns, p.~\pageref*{boots}}\par
+Spell: \hyperref[brainlessness]{amnesia, mind flayer side effect, p.~\pageref*{brainlessness}}; \hyperref[learning-spells]{memory, \textasciitilde{}20,000 turns, p.~\pageref*{learning-spells}}\par
+Spellbook: \hyperref[spellbook-prices]{prices, 100 × level, p.~\pageref*{spellbook-prices}}; \hyperref[learning-spells]{failure effects by level, 4 successful reads to fade, level 7 explosion rune, p.~\pageref*{learning-spells}}\par
+\hyperref[spellcasting]{Spellcasting, mana not sparkles, p.~\pageref*{spellcasting}}\par
+\hyperref[room-types]{Spider nest, scales with depth, p.~\pageref*{room-types}}\par
+\hyperref[movement-traps]{Spiked pit, possibly poisoned, p.~\pageref*{movement-traps}}\par
+\hyperref[acknowledgements]{Spoilers, Hugo and O'Donnell, p.~\pageref*{acknowledgements}}\par
+\hyperref[jellies-j]{Spotted jelly, passive acid, p.~\pageref*{jellies-j}}\par
+\hyperref[useful-corpse-effects]{Sprig of wolfsbane, cures lycanthropy, p.~\pageref*{useful-corpse-effects}}\par
+\hyperref[nuisance-traps]{Squeaky board, wakes the room, p.~\pageref*{nuisance-traps}}\par
+Staff: \hyperref[level-drain]{of Aesculapius, drain res, p.~\pageref*{level-drain}}; \hyperref[quest-artifacts]{of Aesculapius (Healer), drain-life on hit, p.~\pageref*{quest-artifacts}}\par
+\hyperref[the-map-symbols]{Stairs, up and down (`<`, `>`), p.~\pageref*{the-map-symbols}}\par
+Stalker: \hyperref[elementals-e]{see-invisible corpse, p.~\pageref*{elementals-e}}; \hyperref[useful-corpse-effects]{corpse, invisibility and see invisible, p.~\pageref*{useful-corpse-effects}}\par
+\hyperref[what-to-pack]{Starting kit, improving on, p.~\pageref*{what-to-pack}}\par
+\hyperref[starvation]{Starvation, faint then die, p.~\pageref*{starvation}}\par
+\hyperref[the-early-shopping-list]{Stashing, one level up, p.~\pageref*{the-early-shopping-list}}\par
+\hyperref[acknowledgements]{Steelypips, Kate Nepveu's archive, p.~\pageref*{acknowledgements}}\par
+\hyperref[tool-stethoscope]{Stethoscope, HP check and crowning meter, p.~\pageref*{tool-stethoscope}}\par
+\hyperref[wishable-random-artifacts]{Sting (Chaotic elven dagger), warns of orcs, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[scroll-stinking-cloud]{Stinking cloud, area attack, p.~\pageref*{scroll-stinking-cloud}}\par
+\hyperref[petrification-stoning]{Stoning, avoiding, p.~\pageref*{petrification-stoning}}\par
+Stormbringer: \hyperref[level-drain]{drain res while wielded (chaotic), p.~\pageref*{level-drain}}; \hyperref[wishable-random-artifacts]{(Chaotic runesword), drain life, p.~\pageref*{wishable-random-artifacts}}\par
+Strange: \hyperref[feelings-and-sounds]{wind, Oracle level, mental acuity, telepathy gained, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[delayed-deaths]{Strangulation, uncurse amulet first, p.~\pageref*{delayed-deaths}}\par
+\hyperref[damage]{Strength bonus, capped at +6, p.~\pageref*{damage}}\par
+\hyperref[wishable-random-artifacts]{Sunsword (Lawful), 5.0 blinding ray, p.~\pageref*{wishable-random-artifacts}}\par
+Supply: \hyperref[supply-containers]{containers, chests, locked treasure, p.~\pageref*{supply-containers}}\par
+
+\par\smallskip{\normalsize\bfseries T}\par\smallskip
+
+\hyperref[trappers-and-lurkers-t]{`t` trappers and lurkers, p.~\pageref*{trappers-and-lurkers-t}}\par
+\hyperref[a-note-on-trolls]{`T` trolls, do not stay dead, p.~\pageref*{a-note-on-trolls}}\par
+\hyperref[feeding-and-loyalty]{Tameness, the invisible score, p.~\pageref*{feeding-and-loyalty}}\par
+\hyperref[movement-traps]{Teleport trap, free transport with control, p.~\pageref*{movement-traps}}\par
+\hyperref[room-types]{Teleportation hub, fixed-destination, p.~\pageref*{room-types}}\par
+Temple: \hyperref[room-types]{altar plus priest, p.~\pageref*{room-types}}; \hyperref[detecting-curses]{donation, does NOT reveal BUC, p.~\pageref*{detecting-curses}}\par
+Tengu: \hyperref[imps-and-minor-demons-i]{teleport and teleport-control corpse, p.~\pageref*{imps-and-minor-demons-i}}; \hyperref[useful-corpse-effects]{corpse, teleportitis / teleport control, p.~\pageref*{useful-corpse-effects}}\par
+Price identification: \hyperref[the-price-is-right]{shopkeepers identify by price, p.~\pageref*{the-price-is-right}}\par
+Throne: \hyperref[room-types]{room, sit at your own risk, p.~\pageref*{room-types}}; \hyperref[thrones]{wish possible at non-negative Luck, kicking for gold and gems, p.~\pageref*{thrones}}; \hyperref[the-castle]{room in the Castle court, p.~\pageref*{the-castle}}\par
+\hyperref[use-testing-the-careful-way]{Throw potions at monsters (potion test), p.~\pageref*{use-testing-the-careful-way}}\par
+\hyperref[the-price-is-right]{Throw-into-shop trick, free quote, p.~\pageref*{the-price-is-right}}\par
+Tin: \hyperref[what-to-eat]{of spinach, +1 Str, p.~\pageref*{what-to-eat}}; \hyperref[other-notable-tools]{opener, blessed instant, p.~\pageref*{other-notable-tools}}\par
+\hyperref[other-notable-tools]{Tinning kit, intrinsic grinder bypass, p.~\pageref*{other-notable-tools}}\par
+\hyperref[what-to-eat]{Tins, the occupation trap, p.~\pageref*{what-to-eat}}\par
+\hyperref[giant-humanoids-h]{Titan, spell-casting pet target, p.~\pageref*{giant-humanoids-h}}\par
+\hyperref[to-hit-calculation]{To-hit roll, the d20 of fate, p.~\pageref*{to-hit-calculation}}\par
+\hyperref[things-that-will-kill-you]{Top ten killers, the list, p.~\pageref*{things-that-will-kill-you}}\par
+Touchstone: \hyperref[gray-stones-four-stones-one-lucky]{real gem on rub, p.~\pageref*{gray-stones-four-stones-one-lucky}}; \hyperref[gem-identification-through-selling]{blessed names gems on rub, p.~\pageref*{gem-identification-through-selling}}\par
+Tourist: \hyperref[the-roles]{hardest standard role, camera-flash plan, magic mapping scrolls at start, p.~\pageref*{the-roles}}\par
+\hyperref[other-notable-tools]{Towel, cream pie and blindfold, p.~\pageref*{other-notable-tools}}\par
+\hyperref[room-types]{Trap room, recognize and retreat, p.~\pageref*{room-types}}\par
+\hyperref[movement-traps]{Trapdoor, 25\% chance to keep falling, p.~\pageref*{movement-traps}}\par
+\hyperref[trappers-and-lurkers-t]{Trapper, floor in disguise, p.~\pageref*{trappers-and-lurkers-t}}\par
+\hyperref[travel]{Travel (`\_`), shortest path autopilot, p.~\pageref*{travel}}\par
+\hyperref[feeding-and-loyalty]{Tripe ration, dog food, p.~\pageref*{feeding-and-loyalty}}\par
+Trolls: \hyperref[a-note-on-trolls]{revive timer, gear-and-corpse loop, p.~\pageref*{a-note-on-trolls}}\par
+\hyperref[wishable-random-artifacts]{Trollsbane, regeneration while wielded, p.~\pageref*{wishable-random-artifacts}}\par
+Tsurugi: \hyperref[how-luck-works]{of Muramasa, counts as luckstone, p.~\pageref*{how-luck-works}}; \hyperref[quest-artifacts]{of Muramasa (Samurai), p.~\pageref*{quest-artifacts}}\par
+\hyperref[feelings-and-sounds]{Turning into slime, the 10-turn timer, p.~\pageref*{feelings-and-sounds}}\par
+\hyperref[damage]{Two-handed weapons, 3/2 Strength damage, p.~\pageref*{damage}}\par
+\hyperref[two-weapon-combat]{Two-weapon Expert, Rogue and Samurai only, p.~\pageref*{two-weapon-combat}}\par
+
+\par\smallskip{\normalsize\bfseries U}\par\smallskip
+
+\hyperref[unicorns-and-horses-u]{`u` horses and unicorns, p.~\pageref*{unicorns-and-horses-u}}\par
+\hyperref[umber-hulks-u]{`U` umber hulk, confusion gaze, p.~\pageref*{umber-hulks-u}}\par
+\hyperref[blessed-uncursed-cursed-buc]{Unholy water, the evil twin, p.~\pageref*{blessed-uncursed-cursed-buc}}\par
+Unicorn: \hyperref[unicorns-and-horses-u]{gem-throwing playbook, p.~\pageref*{unicorns-and-horses-u}}; \hyperref[altars-and-alignment]{(co-aligned), never sacrifice, p.~\pageref*{altars-and-alignment}}; \hyperref[gaining-and-losing-luck]{gem-throwing, +5 luck max, p.~\pageref*{gaining-and-losing-luck}}\par
+Unicorn horn: \hyperref[neutralizing-ailments]{ailment cures, dip table, no longer a cure-all, p.~\pageref*{neutralizing-ailments}}; \hyperref[other-notable-tools]{status-cure all, blessed seven ailments, p.~\pageref*{other-notable-tools}}\par
+\hyperref[unlocking-tools]{Unlocking tools, skeleton key best, p.~\pageref*{unlocking-tools}}\par
+
+\par\smallskip{\normalsize\bfseries V}\par\smallskip
+
+\hyperref[vampires-v]{`V` vampires, p.~\pageref*{vampires-v}}\par
+\hyperref[vortices-v]{`v` vortices, p.~\pageref*{vortices-v}}\par
+Valkyrie: \hyperref[the-roles]{easy-mode recommendation, Mjollnir waiting, Female only, p.~\pageref*{the-roles}}\par
+\hyperref[the-valley-of-the-dead]{Valley of the Dead, Gehennom entrance, p.~\pageref*{the-valley-of-the-dead}}\par
+Vampire: \hyperref[vampires-v]{level drain, p.~\pageref*{vampires-v}}; \hyperref[bats-and-birds-b]{bat, Str-draining bite, p.~\pageref*{bats-and-birds-b}}\par
+\hyperref[where-the-word-comes-from]{Varda Elentári, Star-Queen, p.~\pageref*{where-the-word-comes-from}}\par
+Vault: \hyperref[vaults]{guard, name yourself Croesus, guard, lying costs Lawful alignment, p.~\pageref*{vaults}}\par
+\hyperref[vaults]{Vaults, the 2×2 closet of gold, p.~\pageref*{vaults}}\par
+Vegan: \hyperref[what-to-eat]{no eggs either, p.~\pageref*{what-to-eat}}; \hyperref[the-food-conducts]{conduct, p.~\pageref*{the-food-conducts}}\par
+Vegetarian: \hyperref[what-to-eat]{allowed corpses, p.~\pageref*{what-to-eat}}; \hyperref[the-food-conducts]{conduct, p.~\pageref*{the-food-conducts}}\par
+\hyperref[options-worth-knowing-about]{Verbose option, message-log noise, p.~\pageref*{options-worth-knowing-about}}\par
+\hyperref[the-heist]{Vibrating square, search by walking, p.~\pageref*{the-heist}}\par
+\hyperref[fungi-and-molds-f]{Violet fungus, sticky paralysis, p.~\pageref*{fungi-and-molds-f}}\par
+Vlad: \hyperref[vampires-v]{the Impaler, top of his tower, p.~\pageref*{vampires-v}}; \hyperref[engravings]{was here, trap-door closet marker, p.~\pageref*{engravings}}\par
+Vlad's: \hyperref[vlads-tower]{Tower, branches upward; throne, about one wish chance in ten per sit, once, p.~\pageref*{vlads-tower}}\par
+\hyperref[wishable-random-artifacts]{Vorpal Blade, behead chance, p.~\pageref*{wishable-random-artifacts}}\par
+
+\par\smallskip{\normalsize\bfseries W}\par\smallskip
+
+\hyperref[worms-w]{`w` worms, p.~\pageref*{worms-w}}\par
+\hyperref[wraiths-w]{`W` wraiths, p.~\pageref*{wraiths-w}}\par
+\hyperref[credit-and-debt]{Walk-out hazard, unpaid items, p.~\pageref*{credit-and-debt}}\par
+Wand: \hyperref[wand-prices]{prices, \$100 to \$500, p.~\pageref*{wand-prices}}; \hyperref[the-engrave-test-wands]{identifying by engraving, p.~\pageref*{the-engrave-test-wands}}; \hyperref[orcus-town]{of Orcus, his fingertip death ray, p.~\pageref*{orcus-town}}\par
+Wand of cancellation: \hyperref[wand-cancellation]{never in a bag, on cursed bag of holding, p.~\pageref*{wand-cancellation}}\par
+\hyperref[wand-fire-cold-lightning]{Wand of cold, freezes water (ice path), p.~\pageref*{wand-fire-cold-lightning}}\par
+Wand of death: \hyperref[the-touch-of-death]{don't zap at Death, p.~\pageref*{the-touch-of-death}}; \hyperref[wand-death]{the closer, p.~\pageref*{wand-death}}; \hyperref[the-astral-plane]{on Death, heals him, p.~\pageref*{the-astral-plane}}\par
+Wand of digging: \hyperref[engulfment]{escape from inside, p.~\pageref*{engulfment}}; \hyperref[wand-digging]{digging beam and ascension use, p.~\pageref*{wand-digging}}\par
+Wand of fire: \hyperref[engravings]{burns Elbereth permanently, p.~\pageref*{engravings}}; \hyperref[wand-fire-cold-lightning]{cold, lightning (rays), p.~\pageref*{wand-fire-cold-lightning}}\par
+\hyperref[wand-make-invisible]{Wand of make invisible, 31-45 turns, p.~\pageref*{wand-make-invisible}}\par
+\hyperref[the-castle]{Wand of opening / spell of knock, opens drawbridge, p.~\pageref*{the-castle}}\par
+\hyperref[wand-polymorph]{Wand of polymorph, on a pile (polypile), p.~\pageref*{wand-polymorph}}\par
+\hyperref[key-wands]{Wand of probing, HP / status check, p.~\pageref*{key-wands}}\par
+Wand of secret door detection: \hyperref[searching-and-detection]{no aim, p.~\pageref*{searching-and-detection}}; \hyperref[wands]{area reveal, p.~\pageref*{wands}}\par
+\hyperref[wand-stasis]{Wand of stasis, new in 5.0, p.~\pageref*{wand-stasis}}\par
+\hyperref[the-castle]{Wand of striking, destroys drawbridge, p.~\pageref*{the-castle}}\par
+\hyperref[wand-teleportation]{Wand of teleportation, monster removal, p.~\pageref*{wand-teleportation}}\par
+Wand of wishing: \hyperref[wand-wishing]{found with one charge, recharge once and only once, p.~\pageref*{wand-wishing}}\par
+\hyperref[unicorns-and-horses-u]{Warhorse, ridden into mid-game, p.~\pageref*{unicorns-and-horses-u}}\par
+\hyperref[attack-wands]{Warning shot, monster's first wand zap, p.~\pageref*{attack-wands}}\par
+Water: \hyperref[snakes-s]{moccasin, from fountain, p.~\pageref*{snakes-s}}; \hyperref[major-demons]{demon, fountain summons, p.~\pageref*{major-demons}}; \hyperref[fountains]{demon wish, roughly 1 in 150 quaffs, p.~\pageref*{fountains}}; \hyperref[the-potion-table]{potion, always clear, p.~\pageref*{the-potion-table}}; \hyperref[boots]{walking boots, Castle drawbridge, p.~\pageref*{boots}}\par
+\hyperref[how-hunger-works]{Weak status, –1 Str, p.~\pageref*{how-hunger-works}}\par
+\hyperref[weaponless]{Weaponless conduct, p.~\pageref*{weaponless}}\par
+\hyperref[weapons]{Weapons, choice depends on role, p.~\pageref*{weapons}}\par
+\hyperref[wishable-random-artifacts]{Werebane, lycanthropy defense, p.~\pageref*{wishable-random-artifacts}}\par
+\hyperref[dogs-and-canines-d]{Werewolf, werejackal, lycanthropy, p.~\pageref*{dogs-and-canines-d}}\par
+\hyperref[what-to-wish-for]{What to wish for, p.~\pageref*{what-to-wish-for}}\par
+\hyperref[a-note-on-dragons]{White dragon scale mail, cold + slow digestion, p.~\pageref*{a-note-on-dragons}}\par
+\hyperref[whats-different-in-gehennom]{Wielding Excalibur or Demonbane, no bribery, p.~\pageref*{whats-different-in-gehennom}}\par
+Wish: \hyperref[sources-of-wishes]{seven kinds of source, p.~\pageref*{sources-of-wishes}}; \hyperref[wish-syntax]{syntax, blessed greased fixed +2, silent substitutions such as a fake amulet, p.~\pageref*{wish-syntax}}; \hyperref[wishing-restrictions]{for ``nothing'', the escape hatch, p.~\pageref*{wishing-restrictions}}\par
+\hyperref[what-to-wish-for]{Wishes, optimal use of, p.~\pageref*{what-to-wish-for}}\par
+\hyperref[quest-artifacts]{Quest artifacts, cannot be wished for; carry bonuses, p.~\pageref*{quest-artifacts}}\par
+\hyperref[wishing-restrictions]{Wishless conduct, refuse all, p.~\pageref*{wishing-restrictions}}\par
+Wizard: \hyperref[the-roles]{kitten that won't share lunch, cloak of magic resistance from turn one, force bolt shatters potions, p.~\pageref*{the-roles}}; \hyperref[humans-and-elves]{of Yendor, the most persistent ex, p.~\pageref*{humans-and-elves}}; \hyperref[spending-slots-wisely]{dagger Expert opening, p.~\pageref*{spending-slots-wisely}}; \hyperref[the-wizards-tower]{of Yendor, never stops, p.~\pageref*{the-wizards-tower}}; \hyperref[the-gauntlet]{of Yendor, the eternal nuisance, p.~\pageref*{the-gauntlet}}\par
+\hyperref[the-wizards-tower]{Wizard's Tower, three special levels, p.~\pageref*{the-wizards-tower}}\par
+\hyperref[real-gem-prices]{Worthless glass, unicorn-safe junk, p.~\pageref*{real-gem-prices}}\par
+Wraith: \hyperref[a-note-on-wraiths]{corpse, gain an experience level, p.~\pageref*{a-note-on-wraiths}}; \hyperref[scroll-reverse-genocide]{reverse genocide, banquet, p.~\pageref*{scroll-reverse-genocide}}\par
+\hyperref[deadly-mistakes]{Wrath of a god, prayer gone wrong, p.~\pageref*{deadly-mistakes}}\par
+\hyperref[wresting]{Wresting, 1/121 final charge, p.~\pageref*{wresting}}\par
+
+\par\smallskip{\normalsize\bfseries X}\par\smallskip
+
+\hyperref[xans-and-fantastic-insects-x]{`x` xans and fantastic insects, p.~\pageref*{xans-and-fantastic-insects-x}}\par
+\hyperref[xorns-x]{`X` xorn, phases through walls, p.~\pageref*{xorns-x}}\par
+\hyperref[xans-and-fantastic-insects-x]{Xan, sting cripples your legs, p.~\pageref*{xans-and-fantastic-insects-x}}\par
+
+\par\smallskip{\normalsize\bfseries Y}\par\smallskip
+
+\hyperref[apelike-creatures-y]{`Y` apelike creatures, p.~\pageref*{apelike-creatures-y}}\par
+\hyperref[lights-y]{`y` lights, p.~\pageref*{lights-y}}\par
+\hyperref[acknowledgements]{YAFAP (Yet Another First Ascension Post), p.~\pageref*{acknowledgements}}\par
+YASD: \hyperref[your-first-descent]{inevitability of, p.~\pageref*{your-first-descent}}; \hyperref[acknowledgements]{(Yet Another Stupid Death), p.~\pageref*{acknowledgements}}\par
+\hyperref[major-demons]{Yeenoghu, attacks on sight, p.~\pageref*{major-demons}}\par
+Yellow: \hyperref[light-bursts]{light, blinds 10d20 turns, p.~\pageref*{light-bursts}}; \hyperref[fungi-and-molds-f]{mold, stuns and poisons, p.~\pageref*{fungi-and-molds-f}}\par
+Yellow dragon: \hyperref[a-note-on-dragons]{scale mail, stoning resistance bonus, p.~\pageref*{a-note-on-dragons}}; \hyperref[petrification-stoning]{scale mail, permanent stoning resistance, p.~\pageref*{petrification-stoning}}\par
+Yeti: \hyperref[apelike-creatures-y]{cold resistance corpse, p.~\pageref*{apelike-creatures-y}}; \hyperref[useful-corpse-effects]{corpse, cold resistance, p.~\pageref*{useful-corpse-effects}}\par
+\hyperref[dungeon-hazards-and-how-to-survive-them]{Your own pet, swapping places, p.~\pageref*{dungeon-hazards-and-how-to-survive-them}}\par
+
+\par\smallskip{\normalsize\bfseries Z}\par\smallskip
+
+\hyperref[zombies-z]{`Z` zombies, p.~\pageref*{zombies-z}}\par
+\hyperref[zruties-z]{`z` zruty, three-attack brute, p.~\pageref*{zruties-z}}\par
+\hyperref[room-types]{Zoo, wake them one at a time, p.~\pageref*{room-types}}\par
+\hyperref[the-map-symbols]{Zorkmid, abbreviation zm, p.~\pageref*{the-map-symbols}}\par
+
+\end{multicols}
+```
+
+:::
+
+
+---
+
+*You descend the stairs...*
+
+---
+
+### 謝辞 (Acknowledgements)
+<!-- audit
+2026-05-19:
+- NetHack 1987, Fenlason -> Brouwer -> Stephenson lineage verified (Wikipedia, dat/history)
+- DevTeam founders, Izchak Miller died 1994, Hack 1982 origin all verified
+- WCST acronym is not expanded in the original Waterman file; Wheaton, IL distribution started 1991 (pdwaterman.com)
+- Kevin Hugo is on the official 5.0 core team list (dat/history:314)
+- nethackwiki.com returned 403, so wiki article counts and some spoiler-author attributions are unverified
+-->
+
+NetHack は 1987 年以来、世界中のプレイヤーによってプレイされ、罵倒され、愛され、そして詳細に記録され続けてきました。ゲーム本体は、現存する最長寿のオープンソースプロジェクトの一つを維持し続けてきた開発者の緩やかな集団である「NetHack DevTeam」の成果です。しかし、この迷宮で実際に生き延びるための攻略法や知恵、ドキュメントの数々は、プレイヤーたち自身の手によって築き上げられてきました。
+
+草創期、知識は Usenet のニュースグループ **RGRN**（rec.games.roguelike.nethack）を通じて共有されました。何千人ものプレイヤーが質問を投稿し、戦略について議論し、自ら進んで秘密を明かそうとしないゲームの知識を少しずつ共有財産として蓄積していったのです。それは Wiki も Reddit も Discord も存在しなかった時代の話です。コカトリスの死体を武器として振り回せるかどうかを知りたければ、RGRN の過去ログを検索し、自分より先に誰かが試していることを祈るしかありませんでした。そして大抵の場合、先人がすでに試していたのです。
+
+RGRN はコミュニティに多くの用語をもたらしました。**YASD**（*Yet Another Stupid Death* / またしてもくだらない死）は、「やってはならないと分かっていたはずのこと」で死亡した際に投稿される反省記事です。**YAFAP**（*Yet Another First Ascension Post* / またしても最初の昇天報告）は、ついにゲームをクリアした際の歓喜の報告です。どちらの伝統も、現在の Wiki、Reddit、Discord のコミュニティへと受け継がれています。
+
+それらの対話から、最初の「スポイラー（解析・攻略情報）ファイル」が生まれました。あらゆるアイテム、あらゆるモンスター、あらゆる相互作用を網羅したプレーンテキストの目録です。それらは手作業で書き起こされ、ゲームのソースコードと照合され、惜しみなく無償で共有されました。
+
+本ガイドは、彼らの偉大な先駆的成果の上に成り立っています。特に：
+
+**Kevin Hugo 氏**は NetHack 3.2.2 向けの最初の包括的なスポイラーセットを編纂し、あらゆるアイテム分類、モンスターのステータス、呪文の計算式、スコア計算を極めて几帳面にまとめ上げました。**Dylan O'Donnell 氏**はその全セットを 3.4.3 向けに改訂・拡張し、数年間にわたって維持しました。両氏によるスポイラー群は、薬、巻物、杖、指輪、魔除け、道具、武器、防具、アーティファクト、食料、モンスター、呪文などを網羅する全38ファイルからなる不動の決定版リファレンスとなりました。本ガイドの第4部および第5部に掲載されているデータ一覧表は、彼らの作業と照合・検証されています（BSD風ライセンスの下で公開）。
+
+**Paul Waterman 氏**は 1991 年にウィートン大学で「WCST NetHack Spoilers」を執筆しました。これはゲーム全体を軽妙で主観的な語り口で解説した長大な単一ドキュメントでした。Hugo 氏と O'Donnell 氏が参照マニュアルを著したのに対し、WCST はまるで「旅行ガイドブック」でした。単に事象を説明するだけでなく、それにどう対処すべきかを説いたのです。これは本ガイドのトーンと構成における原初の着想となりました（本文の直接の引用はありません）。
+
+**Kate Nepveu 氏**は steelypips.org を運営し、Hugo/O'Donnell スポイラー、RGRN の名作記事、そして自身の優れたガイド群（本ガイドの罠の章で引用したエルベレス FAQ など）をウェブ上で保存し続けました。Kate 氏の根気強いアーカイブ作業がなければ、Usenet の衰退とともに多くの貴重な知見が失われていたはずです。
+
+さらに、以下の **RGRN コミュニティの執筆者たち**が、本ガイドの各節に情報を提供してくれた記事、FAQ、ガイドを寄稿してくれました：
+
+アイテム識別 FAQ を著した **David Damerell 氏**。杖の識別ガイドを著した **Kieron Dunbar 氏**。即死スポイラーを編纂した **Trevor Powell 氏**。メデューサ対策ガイドを著した **Arien Malec 氏**。祈りガイドを著した **Matthew Lahut 氏**。[倉庫番](#sokoban)全8パターンの解答マップを作成した **Boudewijn Waijers 氏**。魔法書読解成功率を計算した **Steven Bush 氏**。店主の価格計算式を記録した **Gregory Bond 氏**。コンダクトを分類目録化した **Dion Nicolaas 氏**。風の精 FAQ を著した **David Goldfarb 氏**。経験値計算を記録した **Hojita Discordia 氏**。
+
+そして Ray Chason 氏、Pat Rankin 氏、Geoduck 氏、Topi Linkala 氏、Geoffrey Eadon 氏、Roger Broadbent 氏、Sebastian Haas 氏、Jukka Lahtinen 氏をはじめ、「誰かこれを試した人はいる？」と問いかけ、その結果を報告してくれたニュースグループの無数の名無しの冒険者たちに深く感謝します。
+
+**[NetHack Wiki](https://nethackwiki.com/)** は本ガイドにとって不可欠のリファレンスでした。2005 年に Sgeo 氏によって「WikiHack」として設立され、2010 年に独自ドメインへ移行した同サイトには、現在 5,000 件以上の記事が蓄積されています。制作者および管理者には Pasi Kallinen 氏、Drew Streib 氏、Alex Smith 氏、Shawn Moore 氏、George Koehler 氏、Tjr 氏、ZeroOne 氏、Ray Chason 氏らが名を連ねています。Wiki の [NetHack 5.0.0 ページ](https://nethackwiki.com/wiki/NetHack_5.0.0) はコミュニティの生きた更新履歴であり、本ガイドの 5.0 改訂における主たる情報源となりました。
+
+現在多くのプレイヤーが集う**公開サーバー**は、[nethack.alt.org](https://alt.org/nethack/)（NAO: M. Drew Streib 氏と Pasi Kallinen 氏が運営する最長寿サーバー）および [Hardfought](https://hardfought.org/)（K2 氏が運営し、主要バリアントもホスト）です。どちらも無料でプレイでき、すべての昇天記録を保存しています。本ガイドで引用されている死因統計や昇天記録は、これら公開サーバーのデータに基づいています（NAO の [主な死因一覧](https://alt.org/nethack/topdeaths.html) 参照）。
+
+Reddit の **[r/nethack](https://www.reddit.com/r/nethack/) コミュニティ** は、新世代のプレイヤーたちに向けて議論の場を提供し続けています。歴代のモデレーターたちは、ベテランと初心者が助言を交わし、昇天体験を共有し、最適な「願い」の選択について熱く議論できる温かいコミュニティを維持してきました。数千のスレッドを通じて受け継がれてきた集合知は、本ガイドの実戦的アドバイスに大きく反映されています。
+
+そして何よりも、このゲームそのものが存在したからこそ、本ガイドが生まれました。
+**[NetHack](https://www.nethack.org/)** は、Mike Stephenson 氏、Izchak Miller 氏、Janet Walz 氏によって設立された NetHack DevTeam により、1987 年から開発が続けられています。Izchak Miller 氏は 1994 年に惜しまれつつ世を去りました。[ノームの鉱山](#the-gnomish-mines) で彼の名を冠した店主（イズチャク）は、彼の遺した功績の大きさを今に伝えています。ソースコードは [github.com/NetHack](https://github.com/NetHack/NetHack) で公開されています。
+
+ゲーム自体はさらに初期のローグライクに遡ります。**Hack** は 1982 年、リンカーン・サドベリー地域高校の授業プロジェクトとして Jay Fenlason 氏によって書かれ（Toy 氏と Wichman 氏の『Rogue』(1980) を下敷きにしています）、1980 年代半ばにかけて Andries Brouwer 氏によって拡張されました。NetHack は 1987 年に Brouwer 氏の Hack からフォークしました。**グリッドバグ**（マス目の格子状に住み、「昆虫」と「プログラムのバグ」を掛け、1982 年の映画『トロン』への敬意を込めたとされる直角移動モンスター）をはじめとする NetHack 固有のモンスターの多くは、Fenlason 氏のオリジナル Hack から受け継がれたものです。このダンジョンは、NetHack というゲームよりもさらに古い歴史を持っています。
+
+開発の道のりは常に平坦だったわけではありません。2003 年 12 月のバージョン 3.4.3 の後、DevTeam は 12 年間もの長きにわたり沈黙を守りました。公には一切の発言を断ち、水面下で作業を続けていたのです。その間、コミュニティでは「*DevTeam は思考中である（The DevTeam is THINKING）*」というジョークが定着しました。ダンジョンは凍りつきました。新たなプレイヤーたちは 2003 年以来変わらない回廊へと降り立ち、変化のないゲームについて新たなスポイラーを書き、新たに記録された同じ死因で命を落としていきました。沈黙の 12年間に蓄積されたコミュニティの知恵は色褪せることなく役立ち続け、ゲームはたった1行の新しいコードが追加されることもなく、丸10年におよぶ新たな分析に耐えうるほどの奥深さを証明したのです。2015 年 12 月にバージョン 3.6 が登場し、それ以来活発な開発が続いています。
+
+現在のチーム（Michael Allison, Ken Arromdee, David Cohrs, Jessie Collet, Kevin Hugo, Pasi Kallinen, Ken Lorber, Dean Luick, Patric Mueller, Pat Rankin, Derek S. Ray, Alex Smith, Mike Stephenson, Janet Walz, Paul Winner, Bart House, Warwick Allison の各氏）は、40年近くにわたりこのゲームを維持し、拡張し続けてきました。本書のすべての記述は、彼らの献身的な仕事の恩恵によるものです。
+
+本ガイドのすべてのデータは、現在の NetHack 5.0.0 のソースコードと照合・検証されています。万一誤りがあれば、それはすべて編著者の責に帰するものです。
+
+---
+
+*『恐怖の迷宮への旅人の手引き (A Traveler's Companion to the Mazes of Menace)』 NetHack 5.0 ローンチ記念版*<br>
+*編纂: David Bau、事実照合・検証: Claude 4.8 Opus*<br>
+*日本語版翻訳・監修: Antigravity AI & NetHackJP Project*
+
+*本著作物は [クリエイティブ・コモンズ 表示 - 継承 4.0 国際 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.ja) ライセンスの下で許諾されています。*

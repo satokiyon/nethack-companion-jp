@@ -16168,6 +16168,6864 @@ cost)</strong>は常に「5×呪文レベル」です。<strong>種別
 </div>
 <p>光線系呪文（睡眠、マジックミサイル、死の指、および未熟練状態の冷気や火炎）の命中率も、スキルランクに応じて上昇します。</p>
 </section>
+<section id="モンスター図鑑一覧表-bestiary-tables" class="level3">
+<h3>モンスター図鑑一覧表 (Bestiary Tables)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 monsters.h: no corrections. ~100% of the numeric columns (Lvl/Spd/AC/MR), color, and full attack lists verified across all ~55 tables, including the tricky cases (floating eye 0d70, black dragon disint, AD_DRST-as-poison stings, deferred/#if0 monsters correctly excluded).
+-->
+<p>ダンジョンで遭遇しうるあらゆるモンスターをマップ記号ごとに分類した一覧です。<strong>レベル
+(Lvl)</strong>はモンスターの基本レベル、<strong>速度
+(Spd)</strong>は移動速度（プレイヤーの標準速度は
+12）、<strong>AC</strong>はアーマークラス（低いほど強固）、<strong>MR</strong>は魔法防御率（プレイヤーの呪文や魔法攻撃に抵抗する確率%）を表します。<strong>攻撃方法
+(Attacks)</strong>は各攻撃の種別、ダメージダイス、追加効果を記載しており、<code>·</code>
+で区切られた攻撃は1ターン内にすべて連続して繰り出されます。<strong>備考
+(Notes)</strong>には飛行能力、不可視視認、自動回復、死体に毒があるかなど、戦闘を一変させる重要な特性をまとめています。</p>
+<section id="蟻および昆虫-a-ants-and-insects-a" class="level4">
+<h4>蟻および昆虫 <code>a</code> (Ants and insects <code>a</code>)</h4>
+<!-- audit
+2026-05-19:
+- 6 rows (S_ANT) sourced from monsters.h:89-133.
+- giant ant L2/Spd18/AC3 bite 1d4 (monsters.h:89-95).
+- killer bee L1/Spd18/AC-1 sting 1d3 AD_DRST, G_LGROUP, MR_POISON (monsters.h:96-102).
+- soldier ant L3/Spd18/AC3 bite 2d4 + sting 3d4 AD_DRST, M1_POIS (monsters.h:103-110).
+- fire ant L3/Spd18/AC3 bite 2d4 phys + 2d4 fire, MR_FIRE (monsters.h:111-118).
+- giant beetle L5/Spd6/AC4 bite 3d6, M1_POIS, MR_POISON (monsters.h:119-125).
+- queen bee L9/Spd24/AC-4 sting 1d8 AD_DRST, G_NOGEN, M2_FEMALE|M2_PRINCE (monsters.h:126-133).
+- Killer/soldier/queen stings are AD_DRST (Str-drain, poison-family); shown as "poison" for beginner voice.
+- Killer bee is G_LGROUP; others are smaller groups.
+-->
+<p>昆虫類。多くは集団で群れをなして出現します。兵隊蟻の毒針攻撃は筋力を吸い取ります。殺人蜂は大群で襲いかかり、蜂の巣の部屋にいる女王蜂は単体でも手ごわい相手です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>巨大蟻 (giant ant)</td>
+<td>茶色</td>
+<td>2</td>
+<td>18</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>殺人蜂 (killer bee)</td>
+<td>黄色</td>
+<td>1</td>
+<td>18</td>
+<td>-1</td>
+<td>0</td>
+<td>毒針 1d3 毒</td>
+<td>飛行, 死体に毒あり, 毒耐性. 毒針攻撃。</td>
+</tr>
+<tr>
+<td>兵隊蟻 (soldier ant)</td>
+<td>青色</td>
+<td>3</td>
+<td>18</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 2d4 · 毒針 3d4 毒</td>
+<td>死体に毒あり, 毒耐性. 毒針攻撃。</td>
+</tr>
+<tr>
+<td>火蟻 (fire ant)</td>
+<td>赤色</td>
+<td>3</td>
+<td>18</td>
+<td>3</td>
+<td>10</td>
+<td>噛みつき 2d4 · 噛みつき 2d4 火炎</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>巨大カブト虫 (giant beetle)</td>
+<td>黒色</td>
+<td>5</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 3d6</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>女王蜂 (queen bee)</td>
+<td>赤紫</td>
+<td>9</td>
+<td>24</td>
+<td>-4</td>
+<td>0</td>
+<td>毒針 1d8 毒</td>
+<td>飛行, 死体に毒あり, 毒耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ブロッブ-b-blobs-b" class="level4">
+<h4>ブロッブ <code>b</code> (Blobs <code>b</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (S_BLOB) sourced from monsters.h:137-166.
+- Acid blob passive: 50% splash + 1/30 corrode armor, plus passive_obj 1/6 erode on uwep/uarmg (uhitm.c:5906-5933).
+- Gelatinous cube paralysis: 2/3 rate, free-action blocks (uhitm.c:6019-6064).
+- Gelatinous cube in 5.0 is AT_TUCH only, NOT AT_ENGL like older versions. (monsters.h:157-158 AT_TUCH AD_PLYS 2d4 + AT_NONE AD_PLYS 1d4)
+-->
+<p>動きが遅く、精神を持ちません。酸のブロッブを素手や大切な金属武器で近接攻撃してはいけません。相手の酸による反撃で武器や防具が腐食します。ゼラチンキューブは接触時にプレイヤーを麻痺させます。</p>
+<p>すべてのブロッブは精神を持たず（マインドレス）、睡眠耐性と毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>酸のブロッブ (acid blob)</td>
+<td>緑色</td>
+<td>1</td>
+<td>3</td>
+<td>8</td>
+<td>0</td>
+<td>反撃 1d8 酸</td>
+<td>不定形, 酸耐性, 石化耐性.
+酸の反撃ダメージ。素手で殴ると手袋が腐食する。</td>
+</tr>
+<tr>
+<td>震えるブロッブ (quivering blob)</td>
+<td>白色</td>
+<td>5</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+<td>接触 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>ゼラチンキューブ (gelatinous cube)</td>
+<td>水色</td>
+<td>6</td>
+<td>6</td>
+<td>8</td>
+<td>0</td>
+<td>接触 2d4 麻痺 · 反撃 1d4 麻痺</td>
+<td>火炎耐性, 冷気耐性, 電撃耐性, 酸耐性, 石化耐性.
+鈍足だが接触時に麻痺。自由行動なしでの近接戦は厳禁。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="コカトリス-c-cockatrices-c" class="level4">
+<h4>コカトリス <code>c</code> (Cockatrices <code>c</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (chickatrice/cockatrice/pyrolisk) sourced from monsters.h:167-195.
+- Chickatrice/cockatrice carry MR_POISON|MR_STONE; pyrolisk carries MR_POISON|MR_FIRE and does NOT stone. (monsters.h:174-175 chickatrice, 182-183 cockatrice both MR_POISON|MR_STONE; 191-192 pyrolisk MR_POISON|MR_FIRE; pyrolisk attacks are AT_GAZE AD_FIRE + AT_BITE AD_PHYS — no AD_STON)
+- Wielding cockatrice corpse bare-handed instapetrifies regardless of role (wield.c:146-152).
+-->
+<p>中世の動物寓話に登場する怪物。蛇の尾を持つ鶏の姿をしており、その接触は肉体を瞬時に石化させます。トカゲの死体を常時携帯し、必ず手袋を着用して戦ってください。どの職業も初期状態では石化耐性を持っておらず、コカトリスの死体を素手で装備すると即死します。<a
+href="#petrification-stoning">石化</a>の項目を参照してください。</p>
+<p>すべてのコカトリス類は毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>チカトリス (chickatrice)</td>
+<td>茶色</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>30</td>
+<td>噛みつき 1d2 · 接触 石化 · 反撃 石化</td>
+<td>石化耐性. 小型のコカトリス。同様の石化ルールが適用される。</td>
+</tr>
+<tr>
+<td>コカトリス (cockatrice)</td>
+<td>黄色</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+<td>30</td>
+<td>噛みつき 1d3 · 接触 石化 · 反撃 石化</td>
+<td>石化耐性. 触れると石化。常にトカゲの死体を携帯すること。</td>
+</tr>
+<tr>
+<td>ピロリスク (pyrolisk)</td>
+<td>赤色</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>30</td>
+<td>凝視 2d6 火炎 · 噛みつき 1d6</td>
+<td>火炎耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="犬およびイヌ科-d-dogs-and-canines-d" class="level4">
+<h4>犬およびイヌ科 <code>d</code> (Dogs and canines <code>d</code>)</h4>
+<p>野生のイヌ科生物は群れで狩りを行います。飼いならされたものは食料を与えることでペットにできます（<a
+href="#making-friends">仲間の増やし方</a>参照）。ジャッカル人間や狼人間はプレイヤーを獣化（ライカンスロープ）に感染させることがあります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ジャッカル (jackal)</td>
+<td>茶色</td>
+<td>0</td>
+<td>12</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d2</td>
+<td>冒険者を最初に葬り去った相手。</td>
+</tr>
+<tr>
+<td>狐 (fox)</td>
+<td>赤色</td>
+<td>0</td>
+<td>15</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d3</td>
+<td></td>
+</tr>
+<tr>
+<td>コヨーテ (coyote)</td>
+<td>茶色</td>
+<td>1</td>
+<td>12</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>ジャッカル人間 (werejackal)</td>
+<td>茶色</td>
+<td>2</td>
+<td>12</td>
+<td>7</td>
+<td>10</td>
+<td>噛みつき 1d4 獣化</td>
+<td>自動回復, 毒耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>仔犬 (little dog)</td>
+<td>白色</td>
+<td>2</td>
+<td>18</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td>手懐け可能. 洞窟人、野伏、侍の確定初期ペット。</td>
+</tr>
+<tr>
+<td>野犬 (dingo)</td>
+<td>黄色</td>
+<td>4</td>
+<td>16</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>犬 (dog)</td>
+<td>白色</td>
+<td>4</td>
+<td>16</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td>手懐け可能.</td>
+</tr>
+<tr>
+<td>大きな犬 (large dog)</td>
+<td>白色</td>
+<td>6</td>
+<td>15</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d4</td>
+<td>手懐け可能.</td>
+</tr>
+<tr>
+<td>狼 (wolf)</td>
+<td>灰色</td>
+<td>5</td>
+<td>12</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d4</td>
+<td></td>
+</tr>
+<tr>
+<td>狼人間 (werewolf)</td>
+<td>灰色</td>
+<td>5</td>
+<td>12</td>
+<td>4</td>
+<td>20</td>
+<td>噛みつき 2d6 獣化</td>
+<td>自動回復, 毒耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>冬狼の子 (winter wolf cub)</td>
+<td>水色</td>
+<td>5</td>
+<td>12</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 1d8 · ブレス 1d6 冷気</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>ワーグ (warg)</td>
+<td>黒色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>冬狼 (winter wolf)</td>
+<td>水色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>20</td>
+<td>噛みつき 2d6 · ブレス 2d6 冷気</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>ヘルハウンドの仔 (hell hound pup)</td>
+<td>赤色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>20</td>
+<td>噛みつき 2d6 · ブレス 2d6 火炎</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>ヘルハウンド (hell hound)</td>
+<td>赤色</td>
+<td>12</td>
+<td>14</td>
+<td>2</td>
+<td>20</td>
+<td>噛みつき 3d6 · ブレス 3d6 火炎</td>
+<td>火炎耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="目および球体-e-eyes-and-spheres-e" class="level4">
+<h4>目および球体 <code>e</code> (Eyes and spheres <code>e</code>)</h4>
+<!-- audit
+2026-05-19:
+- Roster sourced from monsters.h:325-366 (beholder omitted, `#if 0`).
+- Floating eye paralysis requires mutual sight (canseemon + mon->mcansee per uhitm.c:6022-6053), NOT "in daylight."
+- Floating eye corpse grants telepathy (eat.c:1071 TELEPAT case).
+- No close-eyes command exists in 5.0; to break sight you must be Blind (status or worn blindfold/towel).
+- Newbie-killer framing aligned with NetHackWiki: floating eye is "an infamous source of early game deaths" (https://nethackwiki.com/wiki/Floating_eye).
+-->
+<p>さまよう目の反撃麻痺凝視は、ダンジョン序盤において最も有名な死因の一つです。自由行動（Free
+action）、盲目状態、または遠距離攻撃の手段を持たずに近接攻撃を仕掛けてはなりません。倒した後は死体を食べてください。恒久的なテレパシー能力（内在能力）を獲得できます。</p>
+<p>すべての目および球体は飛行能力を持ちます。また、<em>さまよう目</em>を除きすべて精神を持ちません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>包子ガス (gas spore)</td>
+<td>灰色</td>
+<td>1</td>
+<td>3</td>
+<td>10</td>
+<td>0</td>
+<td>爆発(死亡時) 4d6</td>
+<td></td>
+</tr>
+<tr>
+<td>さまよう目 (floating eye)</td>
+<td>青色</td>
+<td>2</td>
+<td>1</td>
+<td>9</td>
+<td>10</td>
+<td>反撃 3d70 麻痺</td>
+<td>水陸両用.
+互いに視界が通っている状態で近接攻撃すると反撃麻痺。遠距離攻撃を行うか、目隠しやタオルで視覚を遮って対処。死体を食べると必ずテレパシーを獲得。</td>
+</tr>
+<tr>
+<td>氷の球体 (freezing sphere)</td>
+<td>白色</td>
+<td>6</td>
+<td>13</td>
+<td>4</td>
+<td>0</td>
+<td>自爆 4d6 冷気</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>炎の球体 (flaming sphere)</td>
+<td>赤色</td>
+<td>6</td>
+<td>13</td>
+<td>4</td>
+<td>0</td>
+<td>自爆 4d6 火炎</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>電撃の球体 (shocking sphere)</td>
+<td>明青</td>
+<td>6</td>
+<td>13</td>
+<td>4</td>
+<td>0</td>
+<td>自爆 4d6 電撃</td>
+<td>電撃耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ネコ科-f-felines-f" class="level4">
+<h4>ネコ科 <code>f</code> (Felines <code>f</code>)</h4>
+<!-- audit
+2026-05-19:
+- 8 rows (S_FELINE) sourced from monsters.h:381-444.
+- kitten L2/Spd18/AC6 bite 1d6 (monsters.h:381-388).
+- housecat L4/Spd16/AC5 bite 1d6 (monsters.h:389-396).
+- large cat L6/Spd15/AC4 bite 2d4 (monsters.h:421-428).
+- displacer beast L12/Spd12/AC-10 claw 4d4 + claw 4d4 + bite 2d10 (monsters.h:437-444).
+- Tigers are M2_HOSTILE, difficulty 8: tameable only via charm-monster/scroll-of-taming/magic-flute, NOT tripe. (monsters.h:429-436 tiger has M2_HOSTILE only — no M2_DOMESTIC; befriend_with_obj at mondata.h:255-261 requires is_domestic for FOOD_CLASS items)
+- Only Wizard guarantees a kitten (urole.petnum=PM_KITTEN per role.c:548); every role without a fixed pet rolls 50/50 kitten-or-dog (dog.c:90-101).
+-->
+<p>野生のネコ科生物は素早く敵対的です。虎やディスプレイスビーストは、何気ない通路での遭遇を命がけの戦いに変えてしまいます。魔法使いは必ず小猫を連れてスタートし、初期ペットが固定されていない職業は小猫か仔犬のいずれかを
+50% の確率で連れて開始します。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小猫 (kitten)</td>
+<td>白色</td>
+<td>2</td>
+<td>18</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td>手懐け可能. 一般的なペット。</td>
+</tr>
+<tr>
+<td>家猫 (housecat)</td>
+<td>白色</td>
+<td>4</td>
+<td>16</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td>手懐け可能.</td>
+</tr>
+<tr>
+<td>ジャガー (jaguar)</td>
+<td>茶色</td>
+<td>4</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d4 ×2 · 噛みつき 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>山猫 (lynx)</td>
+<td>水色</td>
+<td>5</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d4 ×2 · 噛みつき 1d10</td>
+<td></td>
+</tr>
+<tr>
+<td>パンサー (panther)</td>
+<td>黒色</td>
+<td>5</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d6 ×2 · 噛みつき 1d10</td>
+<td></td>
+</tr>
+<tr>
+<td>大きな猫 (large cat)</td>
+<td>白色</td>
+<td>6</td>
+<td>15</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d4</td>
+<td>手懐け可能.</td>
+</tr>
+<tr>
+<td>虎 (tiger)</td>
+<td>黄色</td>
+<td>6</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>爪 2d4 ×2 · 噛みつき 1d10</td>
+<td></td>
+</tr>
+<tr>
+<td>ディスプレイサービースト (displacer beast)</td>
+<td>青色</td>
+<td>12</td>
+<td>12</td>
+<td>-10</td>
+<td>0</td>
+<td>爪 4d4 ×2 · 噛みつき 2d10</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="グレムリン-g-gremlins-g" class="level4">
+<h4>グレムリン <code>g</code> (Gremlins <code>g</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (gremlin/gargoyle/winged gargoyle) sourced from monsters.h:448-473.
+- Gremlin water/fountain trigger SPLIT: clones themselves, 2/3 chance per step (mon.c:987-992); does NOT touch your intrinsics.
+- Gremlin night attack is AD_CURS: strips one random intrinsic, 1/10 per hit, night-only, blocked by cancellation (uhitm.c:3040-3057, sit.c:644+).
+- Gargoyles do NOT petrify by touch or corpse: touch_petrifies is cockatrice/chickatrice only (mondata.h:200-201).
+-->
+<p>夜間（または光源がない暗闇）に水に触れると分裂増殖する厄介な小型怪物です。暗闇の中でプレイヤーから内在能力を盗み取る攻撃を行います。明るい光源を持ち歩くか、明かりの巻物・呪文で部屋を照らすのが有効な対抗策です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>グレムリン (gremlin)</td>
+<td>緑色</td>
+<td>5</td>
+<td>12</td>
+<td>2</td>
+<td>25</td>
+<td>爪 1d6 ×2 · 噛みつき 1d4 · 爪 呪い</td>
+<td>遊泳, 死体に毒あり, follows stairs, 毒耐性.</td>
+</tr>
+<tr>
+<td>ガーゴイル (gargoyle)</td>
+<td>茶色</td>
+<td>6</td>
+<td>10</td>
+<td>-4</td>
+<td>0</td>
+<td>爪 2d6 ×2 · 噛みつき 2d4</td>
+<td>石化耐性.</td>
+</tr>
+<tr>
+<td>羽のあるガーゴイル (winged gargoyle)</td>
+<td>赤紫</td>
+<td>9</td>
+<td>15</td>
+<td>-2</td>
+<td>0</td>
+<td>爪 3d6 ×2 · 噛みつき 3d4</td>
+<td>飛行, 石化耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="人型生物-h-humanoids-h" class="level4">
+<h4>人型生物 <code>h</code> (Humanoids <code>h</code>)</h4>
+<!-- audit
+2026-05-19:
+- 7 rows (S_HUMANOID) sourced from monsters.h:477-542.
+- hobbit L1/Spd9/AC10 weapon 1d6 (monsters.h:477-484).
+- dwarf L2/Spd6/AC10 weapon 1d8, M1_TUNNEL (monsters.h:485-493).
+- dwarf lord L4/Spd6/AC10 weapon 2d4 ×2 (monsters.h:502-510).
+- dwarf king L6/Spd6/AC10 weapon 2d6 ×2, MR 20% (monsters.h:511-520).
+- mind flayer L9/Spd12/AC5 MR 90%, 3× tentacle AD_DRLI (monsters.h:521-530).
+- master mind flayer L13/Spd12/AC0 MR 90%, 5× tentacle (monsters.h:531-542).
+- helmet blocks mind-flayer tentacle 7/8 of the time (uhitm.c:3235, `uarmh && rn2(8)`).
+- Any helmet blocks the mind flayer attack, NOT only alignment-matching or telepathy/free-action helmets.
+- Bugbear is AT_WEAP only, no bite (monsters.h:494-501).
+- Dwarf race peacefulness for Dwarf PCs via race_peaceful() at makemon.c:2283.
+-->
+<p>小人族、ホビット、ドワーフ、巨人など多彩な人型生物が含まれます。ノームの鉱山ではドワーフが中立または友好的に出現することが多く、彼らの落とすミスリル服や鉄兜は序盤の貴重な防具供給源となります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ホビット (hobbit)</td>
+<td>緑色</td>
+<td>1</td>
+<td>9</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフ (dwarf)</td>
+<td>赤色</td>
+<td>2</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d8</td>
+<td>tunnels.</td>
+</tr>
+<tr>
+<td>バグベアー (bugbear)</td>
+<td>茶色</td>
+<td>3</td>
+<td>9</td>
+<td>5</td>
+<td>0</td>
+<td>武器攻撃 2d4</td>
+<td></td>
+</tr>
+<tr>
+<td>dwarf lord</td>
+<td>青色</td>
+<td>4</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4 ×2</td>
+<td>tunnels.</td>
+</tr>
+<tr>
+<td>dwarf king</td>
+<td>赤紫</td>
+<td>6</td>
+<td>6</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 2d6 ×2</td>
+<td>tunnels.</td>
+</tr>
+<tr>
+<td>マインドフレア (mind flayer)</td>
+<td>明紫</td>
+<td>9</td>
+<td>12</td>
+<td>5</td>
+<td>90</td>
+<td>武器攻撃 1d4 · tentacle 2d1 エナジードレイン-Int ×3</td>
+<td>飛行, sees-不可視. Tentacles drain Int; once it reaches 3, the next
+tentacle that lands kills you. Any helmet blocks 7/8 of tentacles.</td>
+</tr>
+<tr>
+<td>マスターマインドフレア (master mind flayer)</td>
+<td>明紫</td>
+<td>13</td>
+<td>12</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 1d8 · tentacle 2d1 エナジードレイン-Int ×5</td>
+<td>飛行, sees-不可視. Five tentacles per turn. Any helmet blocks 7/8 of
+tentacles.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="小悪魔および下級悪魔-i-imps-and-minor-demons-i"
+class="level4">
+<h4>小悪魔および下級悪魔 <code>i</code> (Imps and minor demons
+<code>i</code>)</h4>
+<p>インプ、ホムンクルス、テングなどの下級悪魔です。テングは頻繁にテレポートを行い、その死体を食べることでテレポート能力やテレポート制御能力を獲得できるチャンスがあります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>亡霊 (manes)</td>
+<td>赤色</td>
+<td>1</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>爪 1d3 ×2 · 噛みつき 1d4</td>
+<td>睡眠耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>ホムンクルス (homunculus)</td>
+<td>緑色</td>
+<td>2</td>
+<td>12</td>
+<td>6</td>
+<td>10</td>
+<td>噛みつき 1d3 sleep</td>
+<td>飛行, 死体に毒あり, 睡眠耐性.</td>
+</tr>
+<tr>
+<td>インプ (imp)</td>
+<td>赤色</td>
+<td>3</td>
+<td>12</td>
+<td>2</td>
+<td>20</td>
+<td>爪 1d4</td>
+<td>自動回復.</td>
+</tr>
+<tr>
+<td>レムレース (lemure)</td>
+<td>茶色</td>
+<td>3</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>爪 1d3</td>
+<td>Gehennom-only, 自動回復, 睡眠耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>クアシト (quasit)</td>
+<td>青色</td>
+<td>3</td>
+<td>15</td>
+<td>2</td>
+<td>20</td>
+<td>爪 1d2 エナジードレイン-Dx ×2 · 噛みつき 1d4</td>
+<td>自動回復.</td>
+</tr>
+<tr>
+<td>天狗 (tengu)</td>
+<td>水色</td>
+<td>6</td>
+<td>13</td>
+<td>5</td>
+<td>30</td>
+<td>噛みつき 1d7</td>
+<td>テレポート, teleport-control.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ゼリー-j-jellies-j" class="level4">
+<h4>ゼリー <code>j</code> (Jellies <code>j</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (blue/spotted/ochre jelly) sourced from monsters.h:591-620; all carry M1_AMORPHOUS|M1_MINDLESS.
+- Blue jelly corpse conveys cold + poison resistance permanently (eat.c:983-988 should_givit).
+- Spotted/ochre corpses convey acid + stone resistance TIMED (eat.c:991-997 temp_givit).
+- A passive attack written as 0dN in the monster definition rolls (monster level + 1)dN in combat; blue jelly is therefore 6d6 and spotted jelly 7d6 (uhitm.c:5885-5888).
+-->
+<p>壁際や床に張り付く不定形の怪物です。青色ゼリーは冷気、赤色ゼリーは火炎の反撃ダメージを与えます。金属武器を腐食させる斑点ゼリーにも注意が必要です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>青色ゼリー (blue jelly)</td>
+<td>青色</td>
+<td>4</td>
+<td>0</td>
+<td>8</td>
+<td>10</td>
+<td>反撃 5d6 冷気</td>
+<td>corpse: cold + poison resistance.</td>
+</tr>
+<tr>
+<td>まだらゼリー (spotted jelly)</td>
+<td>緑色</td>
+<td>5</td>
+<td>0</td>
+<td>8</td>
+<td>10</td>
+<td>反撃 6d6 酸</td>
+<td>corpse: temp acid + stone resistance.</td>
+</tr>
+<tr>
+<td>黄土色ゼリー (ochre jelly)</td>
+<td>茶色</td>
+<td>6</td>
+<td>3</td>
+<td>8</td>
+<td>20</td>
+<td>engulf 3d6 酸 · 反撃 3d6 酸</td>
+<td>corpse: temp acid + stone resistance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="コボルド-k-kobolds-k" class="level4">
+<h4>コボルド <code>k</code> (Kobolds <code>k</code>)</h4>
+<!-- audit
+2026-05-19:
+- 4 rows (kobold/large/lord/shaman) sourced from monsters.h:624-657.
+- kobold L0/Spd6/AC10 weapon 1d4 (monsters.h:624-631).
+- large kobold L1/Spd6/AC10 weapon 1d6 (monsters.h:632-639).
+- kobold lord L2/Spd6/AC10 weapon 2d4 (monsters.h:640-648).
+- kobold shaman L2/Spd6/AC6 MR 10% (monsters.h:649-657).
+- All four carry M1_POIS (poisonous corpse) and MR_POISON.
+- Kobold shaman has only one AT_MAGC/AD_SPEL attack (monsters.h:651); notation is "cast spell," not "cast spell."
+-->
+<p>序盤に群れで現れる小型の邪悪な生物。毒矢を放ってくることがあり、毒耐性がない最序盤では1発で致命傷になり得ます。死体にも毒が含まれているため、毒耐性を得るまでは食べてはいけません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コボルド (kobold)</td>
+<td>茶色</td>
+<td>0</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>大きなコボルド (large kobold)</td>
+<td>赤色</td>
+<td>1</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>kobold lord</td>
+<td>赤紫</td>
+<td>2</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 2d4</td>
+<td></td>
+</tr>
+<tr>
+<td>コボルドの呪術師 (kobold shaman)</td>
+<td>明青</td>
+<td>2</td>
+<td>6</td>
+<td>6</td>
+<td>10</td>
+<td>cast spell</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="レプラコーン-l-leprechauns-l" class="level4">
+<h4>レプラコーン <code>l</code> (Leprechauns <code>l</code>)</h4>
+<!-- audit
+2026-05-19:
+- Leprechaun (Lvl 5, Spd 15, AC 8, MR 20, green, claw 1d2 AD_SGLD), M1_TPORT, AT_CLAW (not bite): monsters.h:660-666, steal.c:58-115.
+- Stolen gold goes into mtmp->minvent and drops on death.
+- An unseen leprechaun off the shop floor can bury its gold 1-in-4 per turn (monmove.c:1152-1171 leppie_stash); killing later may not recover it.
+-->
+<p>金貨を盗んで即座にフロアの別の場所へテレポートする妖精です。攻撃力は高くありませんが、全財産を奪われて逃げられると回収に手間取ります。テレパシーで位置を特定して仕留めれば、大量の金貨を取り戻せます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>レプラコーン (leprechaun)</td>
+<td>緑色</td>
+<td>5</td>
+<td>15</td>
+<td>8</td>
+<td>20</td>
+<td>爪 1d2 盗み-gold</td>
+<td>テレポート. Steals gold and テレポート away. Carry no gold near
+them.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ミミック-m-mimics-m" class="level4">
+<h4>ミミック <code>m</code> (Mimics <code>m</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (small/large/giant mimic) sourced from monsters.h:670-698.
+- All carry M1_AMORPHOUS|M1_HIDE|MR_ACID; large/giant also have AD_STCK and M2_STRONG.
+- Disguise via set_mimic_sym (makemon.c:2393-2472), including STRANGE_OBJECT in shops at sufficient depth.
+- AD_STCK is MC-blocked (uhitm.c:3310/3324).
+-->
+<p>扉、階段、金貨、あるいは貴重なアイテムに擬態して獲物を待ち伏せます。触れると貼り付かれて移動不能になり、噛みつき攻撃を受けます。不自然な位置にある階段や扉、未識別の高価なアイテムには遠距離攻撃で確認を入れるのが賢明です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小さなミミック (small mimic)</td>
+<td>茶色</td>
+<td>7</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>爪 3d4</td>
+<td></td>
+</tr>
+<tr>
+<td>大きなミミック (large mimic)</td>
+<td>赤色</td>
+<td>8</td>
+<td>3</td>
+<td>7</td>
+<td>10</td>
+<td>爪 3d4 sticky</td>
+<td></td>
+</tr>
+<tr>
+<td>巨大なミミック (giant mimic)</td>
+<td>赤紫</td>
+<td>9</td>
+<td>3</td>
+<td>7</td>
+<td>20</td>
+<td>爪 3d6 sticky ×2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ニンフ-n-nymphs-n" class="level4">
+<h4>ニンフ <code>n</code> (Nymphs <code>n</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 nymphs (wood/water/mountain): LVL 3, Spd 12, AC 9, MR 20%, AT_CLAW AD_SITM + AT_CLAW AD_SEDU, M1_TPORT (monsters.h:702-723).
+- Water nymph has M1_SWIM (line 714); all three carry M1_TPORT|MR_POISON.
+- AD_SITM steal-and-teleport at uhitm.c:4724,4798; AD_SEDU at uhitm.c:4642.
+- Corpse grants intrinsic teleportitis at 10% per should_givit (eat.c:936-975).
+2026-05-31:
+- Post-theft teleport calls rloc(mon, RLOC_MSG) at mhitu.c:2303, which is the within-level relocation routine (teleport.c:1799). The nymph does NOT migrate to another level after stealing; she ends up at a random valid position on the SAME level.
+- The book's earlier claim that a nymph might "walk off the level with my bag of holding" was an overstatement of the rare incidental case where she later falls through a trapdoor or wanders onto a staircase.
+- The Amulet of Yendor has no return-to-Sanctum mechanic on theft. A nymph carrying the Amulet stays on the same level, so the Ascension Run warning was corrected to point at the turn-budget cost of searching the level while the Mysterious Force keeps pulling.
+-->
+<p>所持品からアイテムを1つ盗み取り、同じフロアのランダムな場所へテレポートします。遠距離から攻撃するか、ペットで進路を塞ぐか、エルベレスの文字を刻んで近寄らせないようにしてください。もしアイテムを盗まれた場合は、フロア全体を捜索して倒せば盗まれたアイテムをすべて回収できます。</p>
+<p>すべてのニンフはテレポート能力を持ちます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>森のニンフ (wood nymph)</td>
+<td>緑色</td>
+<td>3</td>
+<td>12</td>
+<td>9</td>
+<td>20</td>
+<td>爪 盗み-item · 爪 誘惑</td>
+<td></td>
+</tr>
+<tr>
+<td>水のニンフ (water nymph)</td>
+<td>青色</td>
+<td>3</td>
+<td>12</td>
+<td>9</td>
+<td>20</td>
+<td>爪 盗み-item · 爪 誘惑</td>
+<td>遊泳.</td>
+</tr>
+<tr>
+<td>山のニンフ (mountain nymph)</td>
+<td>茶色</td>
+<td>3</td>
+<td>12</td>
+<td>9</td>
+<td>20</td>
+<td>爪 盗み-item · 爪 誘惑</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="オーク-o-orcs-o" class="level4">
+<h4>オーク <code>o</code> (Orcs <code>o</code>)</h4>
+<!-- audit
+2026-05-19:
+- 8 rows (S_ORC) sourced from monsters.h:727-796.
+- goblin L0/Spd6/AC10 weapon 1d4 (monsters.h:727-733).
+- hobgoblin L1/Spd9/AC10 weapon 1d6 (monsters.h:734-742).
+- orc L1/Spd9/AC10 weapon 1d8, MR_POISON (monsters.h:743-751).
+- hill orc L2/Spd9/AC10 weapon 1d6 (monsters.h:752-760).
+- Mordor orc L3/Spd5/AC10 weapon 1d6 (monsters.h:761-769); Spd 5 is correct in 5.0.
+- Uruk-hai L3/Spd7/AC10 weapon 1d8 (monsters.h:770-778).
+- orc shaman L3/Spd9/AC5 single AT_MAGC/AD_SPEL (monsters.h:779-787); "spell," not "cast spell."
+- orc-captain L5/Spd5/AC10 weapon 2d4 ×2 (monsters.h:788-796).
+- Goblin is correctly placed in S_ORC (monsters.h:727).
+-->
+<p>集団で現れ、弓矢や毒矢、短剣を投げつけてきます。オークの弓や矢、盾、鎖かたびらなどを装備していることが多く、序盤の装備集めや飛び道具の補給に役立ちます。エルフのPCに対しては特に強い敵意を燃やします。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ゴブリン (goblin)</td>
+<td>灰色</td>
+<td>0</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>ホブゴブリン (hobgoblin)</td>
+<td>茶色</td>
+<td>1</td>
+<td>9</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>オーク (orc)</td>
+<td>赤色</td>
+<td>1</td>
+<td>9</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d8</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>丘のオーク (hill orc)</td>
+<td>黄色</td>
+<td>2</td>
+<td>9</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>モルドールのオーク (Mordor orc)</td>
+<td>青色</td>
+<td>3</td>
+<td>5</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>Uruk-hai</td>
+<td>黒色</td>
+<td>3</td>
+<td>7</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d8</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>オークの呪術師 (orc shaman)</td>
+<td>明青</td>
+<td>3</td>
+<td>9</td>
+<td>5</td>
+<td>10</td>
+<td>cast</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>orc-captain</td>
+<td>赤紫</td>
+<td>5</td>
+<td>5</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 2d4 ×2</td>
+<td>毒耐性. Hits hard. Drops decent loot.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ピアサー-p-piercers-p" class="level4">
+<h4>ピアサー <code>p</code> (Piercers <code>p</code>)</h4>
+<p>天井の鍾乳石に擬態し、直下を通った冒険者の頭上へ落下して大ダメージを与えます。天井を見上げるか、怪しい通路の天井を注意深く探索することで事前に察知できます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>岩喰い (rock piercer)</td>
+<td>灰色</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>鉄喰い (iron piercer)</td>
+<td>水色</td>
+<td>5</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>噛みつき 3d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ガラス喰い (glass piercer)</td>
+<td>白色</td>
+<td>7</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>噛みつき 4d6</td>
+<td>酸耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="四足獣-q-quadrupeds-q" class="level4">
+<h4>四足獣 <code>q</code> (Quadrupeds <code>q</code>)</h4>
+<!-- audit
+2026-05-19:
+- 7 rows (rothe through mastodon) sourced from monsters.h:831-885.
+- rothe L2/Spd9/AC7 claw 1d3 + bite 1d3 + bite 1d8 (monsters.h:831-837).
+- mumak L5/Spd9/AC0 butt 4d12 + bite 2d6 (monsters.h:838-845).
+- leocrotta L6/Spd18/AC4 (monsters.h:846-853).
+- wumpus L8/Spd3/AC2 bite 3d6, M1_CLING (monsters.h:854-861).
+- mastodon L20/Spd12/AC5 butt 4d8 ×2 (monsters.h:878-885).
+-->
+<p>ロテやマンティコア、マムモスなどの四足歩行獣です。ロテは死体を急速に腐敗させて食べ尽くす能力を持ち、マンティコアは遠距離から大量のトゲを撃ち込んできます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ロゼ (rothe)</td>
+<td>茶色</td>
+<td>2</td>
+<td>9</td>
+<td>7</td>
+<td>0</td>
+<td>爪 1d3 · 噛みつき 1d3 · 噛みつき 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>ムーマク (mumak)</td>
+<td>灰色</td>
+<td>5</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>頭突き 4d12 · 噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>レオクロッタ (leocrotta)</td>
+<td>赤色</td>
+<td>6</td>
+<td>18</td>
+<td>4</td>
+<td>10</td>
+<td>爪 2d6 · 噛みつき 2d6 · 爪 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ワンパス (wumpus)</td>
+<td>水色</td>
+<td>8</td>
+<td>3</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 3d6</td>
+<td>clings.</td>
+</tr>
+<tr>
+<td>チタノゼア (titanothere)</td>
+<td>灰色</td>
+<td>12</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>爪 2d8</td>
+<td></td>
+</tr>
+<tr>
+<td>バルキテリウム (baluchitherium)</td>
+<td>灰色</td>
+<td>14</td>
+<td>12</td>
+<td>5</td>
+<td>0</td>
+<td>爪 5d4 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>マストドン (mastodon)</td>
+<td>黒色</td>
+<td>20</td>
+<td>12</td>
+<td>5</td>
+<td>0</td>
+<td>頭突き 4d8 ×2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="齧歯類-r-rodents-r" class="level4">
+<h4>齧歯類 <code>r</code> (Rodents <code>r</code>)</h4>
+<!-- audit
+2026-05-19:
+- 6 rows (S_RODENT) sourced from monsters.h:889-936.
+- Woodchuck color is brown (CLR_BROWN at monsters.h:936).
+- Rock mole is M1_METALLIVORE: eats metal, including bag of gold and unattended weapons (mondata.c:561, hack.c:769-784).
+-->
+<p>ネズミや巨大ネズミの群れ。兇暴ネズミは狂犬病に感染させてくる危険があります。ねずみ人間は噛みつきによってプレイヤーを獣化（ネズミ人間）させます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ドブネズミ (sewer rat)</td>
+<td>茶色</td>
+<td>0</td>
+<td>12</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d3</td>
+<td></td>
+</tr>
+<tr>
+<td>巨大ネズミ (giant rat)</td>
+<td>茶色</td>
+<td>1</td>
+<td>10</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d3</td>
+<td></td>
+</tr>
+<tr>
+<td>兇暴ネズミ (rabid rat)</td>
+<td>茶色</td>
+<td>2</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 2d4 エナジードレイン-Co</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>ねずみ人間 (wererat)</td>
+<td>茶色</td>
+<td>2</td>
+<td>12</td>
+<td>6</td>
+<td>10</td>
+<td>噛みつき 1d4 獣化</td>
+<td>自動回復, 毒耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>岩もぐら (rock mole)</td>
+<td>灰色</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>20</td>
+<td>噛みつき 1d6</td>
+<td>tunnels, eats metal objects left on the floor.</td>
+</tr>
+<tr>
+<td>リス (woodchuck)</td>
+<td>茶色</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>20</td>
+<td>噛みつき 1d6</td>
+<td>遊泳, tunnels.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="蜘蛛および百足-s-arachnids-and-centipedes-s"
+class="level4">
+<h4>蜘蛛および百足 <code>s</code> (Arachnids and centipedes
+<code>s</code>)</h4>
+<!-- audit
+2026-05-19:
+- 5 rows (cave spider, centipede, giant spider, scorpion, Scorpius) sourced from monsters.h:940-972, 3713-3722.
+- Webmaker only on cave spider + giant spider (mondata.h:147-148); M1_CONCEAL on all except giant spider.
+- Cave spider/centipede corpses safe (no M1_POIS); giant spider/scorpion corpses poisonous (M1_POIS).
+- Scorpius MR_STONE confers stoning resistance via corpse.
+-->
+<p>巨大グモは足元に蜘蛛の巣を張って動きを封じ、毒を注入してきます。ムカデは器用さを吸い取る毒を持ちます。洞窟グモの巣はユニコーンの角や火炎の杖で焼き払うことができます。</p>
+<p>すべての蜘蛛および百足は毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>洞窟グモ (cave spider)</td>
+<td>灰色</td>
+<td>1</td>
+<td>12</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 1d2</td>
+<td>潜伏.</td>
+</tr>
+<tr>
+<td>ムカデ (centipede)</td>
+<td>黄色</td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 1d3 毒</td>
+<td>潜伏.</td>
+</tr>
+<tr>
+<td>巨大グモ (giant spider)</td>
+<td>赤紫</td>
+<td>5</td>
+<td>15</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d4 毒</td>
+<td>死体に毒あり.</td>
+</tr>
+<tr>
+<td>サソリ (scorpion)</td>
+<td>赤色</td>
+<td>5</td>
+<td>15</td>
+<td>3</td>
+<td>0</td>
+<td>爪 1d2 ×2 · 毒針 1d4 毒</td>
+<td>潜伏, 死体に毒あり.</td>
+</tr>
+<tr>
+<td>大蠍 (Scorpius)</td>
+<td>赤紫</td>
+<td>15</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>爪 2d6 · 爪 2d6 盗み-amulet · 毒針 1d4 disease</td>
+<td>死体に毒あり, follows stairs, 石化耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="トラッパーおよびラーカー-t-trappers-and-lurkers-t"
+class="level4">
+<h4>トラッパーおよびラーカー <code>t</code> (Trappers and lurkers
+<code>t</code>)</h4>
+<!-- audit
+2026-05-19:
+- Lurker above (gray L10 Spd3 AC3 MR0, engulf 1d6 + wrap 2d6) and trapper (green L12 Spd3 AC3 MR0, engulf 1d8 + wrap 2d8): monsters.h:981-998.
+- Both have M1_HIDE; lurker is M1_FLY (ceiling hider per mondata.h:43-45); trapper is floor hider.
+- Damage is AD_WRAP+AD_PHYS, NOT AD_DGST (monsters.h:973-980 retcon).
+- Both M2_STALK (follow stairs).
+-->
+<p>床や天井に擬態する固定型の包み込み捕食者です。遠見（Farlook）でも隠れたラーカーを見抜くことはできません。怪しいマスには乗る前に隣から探索（Search）を行って正体を暴いてください。</p>
+<p>トラッパーとラーカーはすべて潜伏能力を持ち、階段の上り下りにも追従してきます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ラーカー (lurker above)</td>
+<td>灰色</td>
+<td>10</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>engulf 1d6 wrap · engulf 2d6</td>
+<td>飛行.</td>
+</tr>
+<tr>
+<td>トラッパー (trapper)</td>
+<td>緑色</td>
+<td>12</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>engulf 1d8 wrap · engulf 2d8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ユニコーンおよび馬-u-unicorns-and-horses-u" class="level4">
+<h4>ユニコーンおよび馬 <code>u</code> (Unicorns and horses
+<code>u</code>)</h4>
+<p>馬（ポニー、馬、軍馬）は野生では敵対的に出現しますが、リンゴやニンジンを与えることで容易に手懐けられ、騎乗（Riding）スキルに活用できます。</p>
+<p>ユニコーン（白、灰、黒）はそれぞれ秩序、中立、混沌の属性を持ち、同属性のプレイヤーには友好的です。宝石を投げ与えると幸運値を高めてくれます。角（ユニコーンの角）は万能の治療道具となります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仔馬 (pony)</td>
+<td>茶色</td>
+<td>3</td>
+<td>16</td>
+<td>6</td>
+<td>0</td>
+<td>蹴り 1d6 · 噛みつき 1d2</td>
+<td>手懐け可能. Knight’s starting steed.</td>
+</tr>
+<tr>
+<td>白ユニコーン (white unicorn)</td>
+<td>白色</td>
+<td>4</td>
+<td>24</td>
+<td>2</td>
+<td>70</td>
+<td>頭突き 1d12 · 蹴り 1d6</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>灰色ユニコーン (gray unicorn)</td>
+<td>灰色</td>
+<td>4</td>
+<td>24</td>
+<td>2</td>
+<td>70</td>
+<td>頭突き 1d12 · 蹴り 1d6</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>黒ユニコーン (black unicorn)</td>
+<td>黒色</td>
+<td>4</td>
+<td>24</td>
+<td>2</td>
+<td>70</td>
+<td>頭突き 1d12 · 蹴り 1d6</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>馬 (horse)</td>
+<td>茶色</td>
+<td>5</td>
+<td>20</td>
+<td>5</td>
+<td>0</td>
+<td>蹴り 1d8 · 噛みつき 1d3</td>
+<td>手懐け可能.</td>
+</tr>
+<tr>
+<td>戦闘用の馬 (warhorse)</td>
+<td>茶色</td>
+<td>7</td>
+<td>24</td>
+<td>4</td>
+<td>0</td>
+<td>蹴り 1d10 · 噛みつき 1d4</td>
+<td>手懐け可能.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="渦-v-vortices-v" class="level4">
+<h4>渦 <code>v</code> (Vortices <code>v</code>)</h4>
+<!-- audit
+2026-05-19:
+- 6 rows (S_VORTEX) sourced from monsters.h:1053-1110.
+- Damage types are physical/blinding/cold/shock+drain/fire; NO vortex deals poison.
+- Speeds: fog cloud Lvl 3/Spd 1; dust/ice/energy Spd 20; steam/fire Spd 22. Only fog cloud is slow, NOT all stationary. (monsters.h:1052 fog cloud LVL(3,1,...); 1062 dust LVL(4,20,...); 1071 ice LVL(5,20,...); 1081 energy LVL(6,20,...); 1091 steam LVL(7,22,...); 1101 fire LVL(8,22,...))
+- Energy vortex: AT_NONE+AD_ELEC passive 0d4 + AD_DREN drain (monsters.h:1081-1090).
+- Fire vortex: AT_NONE+AD_FIRE passive 0d4 (monsters.h:1101-1110).
+- All carry M1_FLY|M1_MINDLESS|G_NOCORPSE.
+-->
+<p>プレイヤーを包み込んで元素ダメージを与える雲状の怪物です。色によって盲目砂嵐、冷気、電撃、火炎などの異なる属性ダメージを毎ターン与えてきます。包み込まれたら脱出の巻物や衝撃波、あるいは即座に倒す手段が必要です。</p>
+<p>すべての渦は飛行能力を持ち、精神を持たず、死体を残しません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>霧の雲 (fog cloud)</td>
+<td>灰色</td>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>engulf 1d6</td>
+<td>不定形.</td>
+</tr>
+<tr>
+<td>ほこりの渦 (dust vortex)</td>
+<td>茶色</td>
+<td>4</td>
+<td>20</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 2d8 盲目</td>
+<td></td>
+</tr>
+<tr>
+<td>氷の渦 (ice vortex)</td>
+<td>水色</td>
+<td>5</td>
+<td>20</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 1d6 冷気</td>
+<td></td>
+</tr>
+<tr>
+<td>エネルギーの渦 (energy vortex)</td>
+<td>明青</td>
+<td>6</td>
+<td>20</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 1d6 電撃 · engulf 2d6 エナジードレイン-Pw · 反撃 7d4
+電撃</td>
+<td></td>
+</tr>
+<tr>
+<td>蒸気の渦 (steam vortex)</td>
+<td>青色</td>
+<td>7</td>
+<td>22</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 1d8 火炎</td>
+<td></td>
+</tr>
+<tr>
+<td>炎の渦 (fire vortex)</td>
+<td>黄色</td>
+<td>8</td>
+<td>22</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 1d10 火炎 · 反撃 9d4 火炎</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ワーム-w-worms-w" class="level4">
+<h4>ワーム <code>w</code> (Worms <code>w</code>)</h4>
+<!-- audit
+2026-05-19:
+- 4 rows (S_WORM) sourced from monsters.h:1114-1145: baby long worm 1118, baby purple 1124, long worm 1130, purple worm 1138.
+- Long worm tail and segment mechanics in worm.c; purple worm AT_ENGL/AD_DGST swallow at monsters.h:1141.
+- Long worm drops worm tooth on death; fires only for PM_LONG_WORM, not baby (mon.c:618-620).
+- Long worm grown segments tracked via mtmp->wormno (mon.c:5451, get_wormno on polymorph to PM_LONG_WORM).
+-->
+<p>長いワームは攻撃を受けるたびに尾のセグメントへ分裂して増殖します。紫ワーム（Purple
+worm）はプレイヤーを一撃で丸呑み（胃袋へ収容）して消化死させる極めて危険な怪物です。消化死を防ぐ手段（不変の魔除けなど）や、胃袋の内側から脱出する手段を用意してください。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ロングワームの子供 (baby long worm)</td>
+<td>茶色</td>
+<td>5</td>
+<td>3</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>紫ワームの子供 (baby purple worm)</td>
+<td>赤紫</td>
+<td>8</td>
+<td>3</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ロングワーム (long worm)</td>
+<td>茶色</td>
+<td>9</td>
+<td>3</td>
+<td>5</td>
+<td>10</td>
+<td>噛みつき 2d4</td>
+<td>drops a worm tooth.</td>
+</tr>
+<tr>
+<td>紫ワーム (purple worm)</td>
+<td>赤紫</td>
+<td>15</td>
+<td>9</td>
+<td>6</td>
+<td>20</td>
+<td>噛みつき 2d8 · engulf 1d10 digest</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ザンおよび幻想昆虫-x-xans-and-fantastic-insects-x"
+class="level4">
+<h4>ザンおよび幻想昆虫 <code>x</code> (Xans and fantastic insects
+<code>x</code>)</h4>
+<!-- audit
+2026-05-19:
+- Grid bug row at monsters.h:1149-1156; xan row at monsters.h:1157-1164.
+- Grid bug AT_BITE/AD_ELEC 1d1; xan AT_STNG/AD_LEGS 1d4, M1_FLY plus M1_POIS (poisonous corpse).
+- Xan AD_LEGS / Wounded_legs reduces carry capacity (hack.c:4331-4336) and abuses Dex (attrib.c:472, 581); it does NOT slow movement.
+-->
+<p>グリッドバグは電気を帯びた単純な昆虫ですが、直角方向にしか移動できません。大型の近縁種であるザンは脚を刺して傷口を負わせ、最大所持重量（運搬能力）を急激に低下させます。</p>
+<p>すべてのザンおよび幻想昆虫は毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>グリッドバグ (grid bug)</td>
+<td>赤紫</td>
+<td>0</td>
+<td>12</td>
+<td>9</td>
+<td>0</td>
+<td>噛みつき 1d1 電撃</td>
+<td>電撃耐性.</td>
+</tr>
+<tr>
+<td>ザン (xan)</td>
+<td>赤色</td>
+<td>7</td>
+<td>18</td>
+<td>-4</td>
+<td>0</td>
+<td>毒針 1d4 leg-wound</td>
+<td>飛行, 死体に毒あり.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="光-y-lights-y" class="level4">
+<h4>光 <code>y</code> (Lights <code>y</code>)</h4>
+<!-- audit
+2026-05-19:
+- 2 rows (yellow light L3 yellow, black light L5 black) sourced from monsters.h:1168-1191.
+- Attacks AT_EXPL/AD_BLND 10d20 (yellow) and AT_EXPL/AD_HALU 10d12 (black).
+- M1_FLY|M1_AMORPHOUS|M1_MINDLESS on both; black light adds M1_SEE_INVIS.
+- 10d20 is blindness DURATION, NOT HP damage. (uhitm.c:2978-2985 mhitm_ad_blnd: `make_blinded(BlindedTimeout + (long) mhm->damage, FALSE); mhm->damage = 0;` — rolled value feeds timer, HP damage zeroed)
+- AT_EXPL means the monster dies on attack ("bursts on contact").
+-->
+<p>黄色い光は接触時に自爆閃光を放ち、10d20ターンの間プレイヤーを盲目にします。黒い光は自爆して幻覚状態を引き起こします。遠距離武器や魔法で接近される前に撃ち落とすのが鉄則です。</p>
+<p>すべての光は飛行能力を持ち、不定形で精神を持ちません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黄色い光 (yellow light)</td>
+<td>黄色</td>
+<td>3</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>自爆 10d20 盲目</td>
+<td></td>
+</tr>
+<tr>
+<td>黒い光 (black light)</td>
+<td>黒色</td>
+<td>5</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>自爆 10d12 hallu</td>
+<td>sees-不可視.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ズリティ-z-zruties-z" class="level4">
+<h4>ズリティ <code>z</code> (Zruties <code>z</code>)</h4>
+<p>中盤に出現する手強い野獣で、2本の爪と強力な噛みつき攻撃を繰り出してきます。激しい連撃に耐えきることができれば、まとまった経験値を獲得できます。名称はスラブ神話の毛深い野生人に由来しています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ズルティ (zruty)</td>
+<td>茶色</td>
+<td>9</td>
+<td>8</td>
+<td>3</td>
+<td>0</td>
+<td>爪 3d4 ×2 · 噛みつき 3d6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="天使神聖なる存在-a-angelic-beings-a" class="level4">
+<h4>天使・神聖なる存在 <code>A</code> (Angelic beings
+<code>A</code>)</h4>
+<!-- audit
+2026-05-19:
+- 5 rows at monsters.h:1206-1265 (couatl 1206, Aleax 1216, Angel 1225, ki-rin 1240, Archon 1252).
+- All Angels have G_NOCORPSE; couatl leaves no corpse (MR_POISON still matters for combat).
+- AD_MAGM ("magic") on Angel; AD_SPEL ("spell") on ki-rin/Archon.
+- Ki-rin HI_GOLD = yellow; Archon HI_LORD = magenta (color.h:38,46).
+- Archon has M1_REGEN, M1_SEE_INVIS, plus 5-attack chain (weapon, weapon, gaze, claw, spell).
+-->
+<p>武器を振るい、強力な魔法を操る終盤の強敵です。星界の面（Astral
+Plane）では各大祭司を護衛して立ち塞がります。<a
+href="#the-astral-plane">星界の面</a>の項目を参照してください。</p>
+<p>すべての天使・神聖なる存在は階段の上り下りに追従し、死体を残しません。<em>アレアクス
+(Aleax)</em> を除きすべて飛行し、<em>コアトル (couatl)</em>
+を除きすべて不可視を看破します。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コウアトル (couatl)</td>
+<td>緑色</td>
+<td>8</td>
+<td>10</td>
+<td>5</td>
+<td>30</td>
+<td>噛みつき 2d4 毒 · 噛みつき 1d3 · 締め付け 2d4 wrap</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>アレアックス (Aleax)</td>
+<td>黄色</td>
+<td>10</td>
+<td>8</td>
+<td>0</td>
+<td>30</td>
+<td>武器攻撃 1d6 ×2 · 蹴り 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>天使 (Angel)</td>
+<td>白色</td>
+<td>14</td>
+<td>10</td>
+<td>-4</td>
+<td>55</td>
+<td>武器攻撃 1d6 ×2 · 爪 1d4 · cast 2d6 魔法</td>
+<td></td>
+</tr>
+<tr>
+<td>ki-rin</td>
+<td>黄色</td>
+<td>16</td>
+<td>18</td>
+<td>-5</td>
+<td>90</td>
+<td>蹴り 2d4 ×2 · 頭突き 3d6 · cast 2d6 spell</td>
+<td></td>
+</tr>
+<tr>
+<td>アルコン (Archon)</td>
+<td>赤紫</td>
+<td>19</td>
+<td>16</td>
+<td>-6</td>
+<td>80</td>
+<td>武器攻撃 2d4 ×2 · 凝視 2d6 盲目 · 爪 1d8 · cast 4d6 spell</td>
+<td>自動回復.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="こうもりおよび鳥-b-bats-and-birds-b" class="level4">
+<h4>こうもりおよび鳥 <code>B</code> (Bats and birds <code>B</code>)</h4>
+<p>不規則に飛び回る飛行生物。吸血こうもりは毒のある噛みつきで筋力を吸い取ります（毒耐性があれば防げます）。オオガラスは目をつついて盲目にしようとします。</p>
+<p>すべてのこうもりおよび鳥は飛行能力を持ちます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>こうもり (bat)</td>
+<td>茶色</td>
+<td>0</td>
+<td>22</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>巨大こうもり (giant bat)</td>
+<td>赤色</td>
+<td>2</td>
+<td>22</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>オオガラス (raven)</td>
+<td>黒色</td>
+<td>4</td>
+<td>20</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d6 · 爪 1d6 盲目</td>
+<td></td>
+</tr>
+<tr>
+<td>吸血こうもり (vampire bat)</td>
+<td>黒色</td>
+<td>5</td>
+<td>20</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d6 · 噛みつき エナジードレイン-Str</td>
+<td>自動回復, 死体に毒あり, 睡眠耐性, 毒耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ケンタウロス-c-centaurs-c" class="level4">
+<h4>ケンタウロス <code>C</code> (Centaurs <code>C</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 rows (plains/forest/mountain) sourced from monsters.h:1301-1323; complete S_CENTAUR roster.
+- Centaurs are half-horse, NOT mounted on a horse. (https://nethackwiki.com/wiki/Centaur)
+- Forest centaurs spawn with BOW+arrows; plains and mountain centaurs spawn with CROSSBOW+bolts (50% armed rate per makemon.c:474-484).
+-->
+<p>強力な弓矢と近接攻撃を兼ね備えた半人半馬の射手です。森のケンタウロスは弓を放ち、平原や山のケンタウロスは複合弓を用いて強烈な矢の連射を浴びせてきます。離れた位置からの射撃戦は危険なため、角を曲がって誘い込むか接近戦に持ち込んでください。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>草原のケンタウロス (plains centaur)</td>
+<td>茶色</td>
+<td>4</td>
+<td>18</td>
+<td>4</td>
+<td>0</td>
+<td>武器攻撃 1d6 · 蹴り 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>森のケンタウロス (forest centaur)</td>
+<td>緑色</td>
+<td>5</td>
+<td>18</td>
+<td>3</td>
+<td>10</td>
+<td>武器攻撃 1d8 · 蹴り 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>山のケンタウロス (mountain centaur)</td>
+<td>水色</td>
+<td>6</td>
+<td>20</td>
+<td>2</td>
+<td>10</td>
+<td>武器攻撃 1d10 · 蹴り 1d6 ×2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ドラゴン-d-dragons-d" class="level4">
+<h4>ドラゴン <code>D</code> (Dragons <code>D</code>)</h4>
+<!-- audit
+2026-05-19:
+- 10 baby + 10 adult + Chromatic + Ixoth sourced from monsters.h:1325-1562; Ixoth at monsters.h:3642-3690.
+- Shimmering dragon is `#if 0 DEFERRED`, NOT in 5.0 (monsters.h:1365-1374 baby and 1466-1482 adult shimmering dragon blocks are inside `#if 0 /* DEFERRED */`).
+- Silver dragon color is CLR_BRIGHT_CYAN (color.h:54), NOT gray, for both baby and adult.
+- Baby blue dragon has only bite 2d6; NO breath weapon (monsters.h:1408-1415, no AT_BREA). Babies don't breathe.
+- Black dragon breath is AD_DISN 1d255 (instakill without reflection or disint-res), monsters.h:1494.
+- Chromatic random-breath AT_BREA/AD_RBRE selects breath type per zap (mhitu.c).
+-->
+<p>成体のドラゴンは各自の属性に応じた強烈なブレスを直線状に吐き出します。反射（Reflection）能力があれば、遠距離ブレスを跳ね返して逆に大ダメージを与えられます。<strong>幼体（子ドラゴン）はブレスを吐きません</strong>。</p>
+<p><em>多色ドラゴン (Chromatic Dragon)</em>
+を除き、すべてのドラゴンは飛行能力を持ちます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灰色ドラゴンの子供 (baby gray dragon)</td>
+<td>灰色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>金色ドラゴンの子供 (baby gold dragon)</td>
+<td>黄色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>銀色ドラゴンの幼体 (baby silver dragon)</td>
+<td>明水</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>赤色ドラゴンの子供 (baby red dragon)</td>
+<td>赤色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>白ドラゴンの子供 (baby white dragon)</td>
+<td>白色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>オレンジドラゴンの子供 (baby orange dragon)</td>
+<td>橙色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>黒ドラゴンの子供 (baby black dragon)</td>
+<td>黒色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>青ドラゴンの子供 (baby blue dragon)</td>
+<td>青色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>緑ドラゴンの子供 (baby green dragon)</td>
+<td>緑色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td>死体に毒あり.</td>
+</tr>
+<tr>
+<td>黄色ドラゴンの子供 (baby yellow dragon)</td>
+<td>黄色</td>
+<td>12</td>
+<td>9</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>灰色ドラゴン (gray dragon)</td>
+<td>灰色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 魔法 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Anti-magic breath. Magic resistance helps; reflection
+doesn’t.</td>
+</tr>
+<tr>
+<td>金色ドラゴン (gold dragon)</td>
+<td>黄色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 火炎 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Fire breath. Drops gold-colored scales (light
+source).</td>
+</tr>
+<tr>
+<td>銀色ドラゴン (silver dragon)</td>
+<td>明水</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 冷気 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Cold breath plus reflection scales: your reflection
+target.</td>
+</tr>
+<tr>
+<td>赤色ドラゴン (red dragon)</td>
+<td>赤色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 6d6 火炎 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Cone of fire. Get fire resistance before you meet
+one.</td>
+</tr>
+<tr>
+<td>白ドラゴン (white dragon)</td>
+<td>白色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 冷気 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Cone of cold. Cold resistance.</td>
+</tr>
+<tr>
+<td>オレンジドラゴン (orange dragon)</td>
+<td>橙色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d25 sleep · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Sleep ray. Sleep resistance trivialises.</td>
+</tr>
+<tr>
+<td>黒ドラゴン (black dragon)</td>
+<td>黒色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 1d255 分解 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Disintegration breath. Disint resistance OR
+reflection.</td>
+</tr>
+<tr>
+<td>青ドラゴン (blue dragon)</td>
+<td>青色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 電撃 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Cone of lightning. Shock resistance.</td>
+</tr>
+<tr>
+<td>緑ドラゴン (green dragon)</td>
+<td>緑色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 毒 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視, 死体に毒あり. Poison breath; poison resistance is
+enough.</td>
+</tr>
+<tr>
+<td>黄色ドラゴン (yellow dragon)</td>
+<td>黄色</td>
+<td>15</td>
+<td>9</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 4d6 酸 · 噛みつき 3d8 · 爪 1d4 ×2</td>
+<td>sees-不可視. Acid breath.</td>
+</tr>
+<tr>
+<td>クロマティック・ドラゴン (Chromatic Dragon)</td>
+<td>赤紫</td>
+<td>16</td>
+<td>12</td>
+<td>0</td>
+<td>30</td>
+<td>ブレス 6d6 rnd-ブレス · cast spell · 爪 2d8 盗み-amulet · 噛みつき
+4d8 ×2 · 毒針 1d6</td>
+<td>sees-不可視, 死体に毒あり, follows stairs.</td>
+</tr>
+<tr>
+<td>イクソス (Ixoth)</td>
+<td>赤色</td>
+<td>15</td>
+<td>12</td>
+<td>-1</td>
+<td>20</td>
+<td>ブレス 8d6 火炎 · 噛みつき 4d8 · cast spell · 爪 2d4 · 爪 2d4
+盗み-amulet</td>
+<td>sees-不可視, follows stairs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="精霊エレメンタル-e-elementals-e" class="level4">
+<h4>精霊・エレメンタル <code>E</code> (Elementals <code>E</code>)</h4>
+<!-- audit
+2026-05-19:
+- 5 rows (stalker/air/fire/earth/water elemental) sourced from monsters.h:1566-1610.
+- Stalker: sees-invis, M2_STALK; NOT mindless. (monsters.h:1566-1573 has M1_SEE_INVIS and M2_STALK; no M1_MINDLESS in flags1)
+- Air: AT_ENGL AD_PHYS 1d10. "Air suffocates" is engulf flavor for AD_PHYS, NOT a separate AD_DRST. (monsters.h:1576 air elemental single AT_ENGL AD_PHYS 1d10; no AD_DRST attack)
+- Fire: claw 3d6 AD_FIRE + passive 0d4 fire.
+- Earth: claw 4d6; MR_FIRE|MR_COLD|MR_POISON|MR_STONE.
+- Water: claw 5d6; M1_SWIM|M1_AMPHIBIOUS; MR_POISON|MR_STONE. Water elementals lack a drown attack, but spawn only on water tiles so encounters happen near drowning risk.
+-->
+<p>風の精はプレイヤーを包み込んで瓦礫の嵐で叩きのめします。火の精は周囲を灼熱で焼き焦がし、水の精は強打を繰り出し、土の精は動きは鈍いものの極めて強固です。</p>
+<p><em>ストーカー</em>を除き、すべてのエレメンタルは精神を持ちません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ストーカー (stalker)</td>
+<td>白色</td>
+<td>8</td>
+<td>12</td>
+<td>3</td>
+<td>0</td>
+<td>爪 4d4</td>
+<td>飛行, sees-不可視, follows stairs.</td>
+</tr>
+<tr>
+<td>風の精 (air elemental)</td>
+<td>水色</td>
+<td>8</td>
+<td>36</td>
+<td>2</td>
+<td>30</td>
+<td>engulf 1d10</td>
+<td>飛行.</td>
+</tr>
+<tr>
+<td>火の精 (fire elemental)</td>
+<td>黄色</td>
+<td>8</td>
+<td>12</td>
+<td>2</td>
+<td>30</td>
+<td>爪 3d6 火炎 · 反撃 9d4 火炎</td>
+<td>飛行.</td>
+</tr>
+<tr>
+<td>土の精 (earth elemental)</td>
+<td>茶色</td>
+<td>8</td>
+<td>6</td>
+<td>2</td>
+<td>30</td>
+<td>爪 4d6</td>
+<td>火炎耐性, 冷気耐性, 毒耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>水の精 (water elemental)</td>
+<td>青色</td>
+<td>8</td>
+<td>5</td>
+<td>2</td>
+<td>30</td>
+<td>爪 5d6</td>
+<td>遊泳, 水陸両用, 毒耐性, 石化耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="菌類およびモールド-f-fungi-and-molds-f" class="level4">
+<h4>菌類およびモールド <code>F</code> (Fungi and molds
+<code>F</code>)</h4>
+<!-- audit
+2026-05-19:
+- 7 rows sourced from monsters.h:1614-1676; elemental molds are brown/green/red, NOT violet/yellow.
+- Lichen corpse never rots (mkobj.c:1402, eat.c:59); also never out of season as iron rations.
+- Yellow mold has M1_POIS (poisonous corpse, monsters.h yellow-mold row).
+- Other molds have MR_POISON resistance but no M1_POIS, so their corpses are NOT poisonous.
+- Brown mold passive 0d6 cold (HP drain), green 0d4 acid, red 0d4 fire, yellow 0d4 stun (monsters.h:1614-1666).
+- Violet fungus AT_TUCH/AD_PHYS 1d4 plus AT_TUCH/AD_PLYS sticky (monsters.h:1668-1676).
+-->
+<p>移動しない固定型の生物です。苔の怪物（Lichen）の死体は決して腐敗しないため、非常用の携帯食糧として最適です。茶色、緑、赤のモールドはそれぞれ冷気、酸、火炎の反撃ダメージを放ちます。</p>
+<p>すべての菌類およびモールドは精神を持ちません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>苔の怪物 (lichen)</td>
+<td>明緑</td>
+<td>0</td>
+<td>1</td>
+<td>9</td>
+<td>0</td>
+<td>接触 sticky</td>
+<td></td>
+</tr>
+<tr>
+<td>茶色モールド (brown mold)</td>
+<td>茶色</td>
+<td>1</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>反撃 2d6 冷気</td>
+<td>冷気耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>黄色モールド (yellow mold)</td>
+<td>黄色</td>
+<td>1</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>反撃 2d4 stun</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>緑モールド (green mold)</td>
+<td>緑色</td>
+<td>1</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>反撃 2d4 酸</td>
+<td>酸耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>赤色モールド (red mold)</td>
+<td>赤色</td>
+<td>1</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>反撃 2d4 火炎</td>
+<td>火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>シュリーカー (shrieker)</td>
+<td>赤紫</td>
+<td>3</td>
+<td>1</td>
+<td>7</td>
+<td>0</td>
+<td>—</td>
+<td>毒耐性.</td>
+</tr>
+<tr>
+<td>紫キノコ (violet fungus)</td>
+<td>赤紫</td>
+<td>3</td>
+<td>1</td>
+<td>7</td>
+<td>0</td>
+<td>接触 1d4 · 接触 sticky</td>
+<td>毒耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ノーム-g-gnomes-g" class="level4">
+<h4>ノーム <code>G</code> (Gnomes <code>G</code>)</h4>
+<!-- audit
+2026-05-19:
+- All four S_GNOME entries match monsters.h:1681-1709.
+- Gnomish wizard has one AT_MAGC/AD_SPEL attack, "cast spell" (monsters.h:1697), NOT two spell attacks.
+- No "deep gnome" exists in 5.0 (correctly omitted).
+- Gnome PCs (Archeologist default) see most S_GNOME as peaceful via MH_GNOME lovemask (makemon.c:2283).
+-->
+<p>ノームのPCにとってはノームの鉱山の住人の大半が友好的です。ノームの君主は通常種よりも高い攻撃力を持ち、ノームの魔法使いは強力な魔法攻撃を放ってきます。どちらも侮ってはなりません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ノーム (gnome)</td>
+<td>茶色</td>
+<td>1</td>
+<td>6</td>
+<td>10</td>
+<td>4</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>gnome lord</td>
+<td>青色</td>
+<td>3</td>
+<td>8</td>
+<td>10</td>
+<td>4</td>
+<td>武器攻撃 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>ノームの魔法使い (gnomish wizard)</td>
+<td>明青</td>
+<td>3</td>
+<td>10</td>
+<td>4</td>
+<td>10</td>
+<td>cast spell</td>
+<td></td>
+</tr>
+<tr>
+<td>gnome king</td>
+<td>赤紫</td>
+<td>5</td>
+<td>10</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 2d6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="巨人-h-giant-humanoids-h" class="level4">
+<h4>巨人 <code>H</code> (Giant humanoids <code>H</code>)</h4>
+<!-- audit
+2026-05-19:
+- Frost giant and storm giant melee is AD_PHYS only; cold/shock resistance does NOT reduce damage (monsters.h frost/storm rows at 1748, 1772).
+- Fire giant melee is AD_PHYS only; fire resistance does NOT make them weak offensively (monsters.h:1738).
+- Cyclops is the Healer quest nemesis (Hea-goal.lua:74, monsters.h:1792-1800), NOT Caveman.
+- Surtur does NOT carry Mjollnir (Mjollnir is a Valkyrie quest artifact, artilist.h).
+- Ettin and minotaur are NOT M2_GIANT, so their corpses do not grant Str (eat.c:1345; monsters.h:1758, 1782).
+- Minotaur roams Gehennom mazes (mkmaze.c:1112, makemon at maze fill), NOT vaults.
+-->
+<p>巨岩を投げつけてくる怪力の人型生物です。火の巨人、霜の巨人、嵐の巨人はそれぞれの属性ダメージを扱い、その死体を食べることで火炎耐性、冷気耐性、電撃耐性や筋力上昇を獲得できるチャンスがあります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>巨人 (giant)</td>
+<td>赤色</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>武器攻撃 2d10</td>
+<td></td>
+</tr>
+<tr>
+<td>岩石巨人 (stone giant)</td>
+<td>灰色</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>武器攻撃 2d10</td>
+<td></td>
+</tr>
+<tr>
+<td>丘の巨人 (hill giant)</td>
+<td>水色</td>
+<td>8</td>
+<td>10</td>
+<td>6</td>
+<td>0</td>
+<td>武器攻撃 2d8</td>
+<td></td>
+</tr>
+<tr>
+<td>炎の巨人 (fire giant)</td>
+<td>黄色</td>
+<td>9</td>
+<td>12</td>
+<td>4</td>
+<td>5</td>
+<td>武器攻撃 2d10</td>
+<td>火炎耐性. Throws boulders.</td>
+</tr>
+<tr>
+<td>吹雪の巨人 (frost giant)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>3</td>
+<td>10</td>
+<td>武器攻撃 2d12</td>
+<td>冷気耐性. Throws boulders.</td>
+</tr>
+<tr>
+<td>エティン (ettin)</td>
+<td>茶色</td>
+<td>10</td>
+<td>12</td>
+<td>3</td>
+<td>0</td>
+<td>武器攻撃 2d8 · 武器攻撃 3d6</td>
+<td></td>
+</tr>
+<tr>
+<td>雷の巨人 (storm giant)</td>
+<td>青色</td>
+<td>16</td>
+<td>12</td>
+<td>3</td>
+<td>10</td>
+<td>武器攻撃 2d12</td>
+<td>電撃耐性. Throws boulders for big damage.</td>
+</tr>
+<tr>
+<td>タイタン (titan)</td>
+<td>赤紫</td>
+<td>16</td>
+<td>18</td>
+<td>-3</td>
+<td>70</td>
+<td>武器攻撃 2d8 · cast spell</td>
+<td>飛行. Tough humanoid with magic missiles. Casts spells.</td>
+</tr>
+<tr>
+<td>ミノタウロス (minotaur)</td>
+<td>茶色</td>
+<td>15</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 3d10 ×2 · 頭突き 2d8</td>
+<td>Two claws plus a butt. Heavy hitter; roams the Gehennom mazes.</td>
+</tr>
+<tr>
+<td>サイクロプス (Cyclops)</td>
+<td>灰色</td>
+<td>18</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>武器攻撃 4d8 ×2 · 爪 2d6 盗み-amulet</td>
+<td>follows stairs, 石化耐性. Healer quest nemesis. Throws
+boulders.</td>
+</tr>
+<tr>
+<td>支配者スルト (Lord Surtur)</td>
+<td>赤紫</td>
+<td>15</td>
+<td>12</td>
+<td>2</td>
+<td>50</td>
+<td>武器攻撃 2d10 ×2 · 爪 2d6 盗み-amulet</td>
+<td>follows stairs, 火炎耐性, 石化耐性. Valkyrie quest nemesis.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ジャバウォック-j-jabberwocks-j" class="level4">
+<h4>ジャバウォック <code>J</code> (Jabberwocks <code>J</code>)</h4>
+<!-- audit
+2026-05-19:
+- Jabberwock: L15 Spd12 AC-2 MR50, 4x 2d10 attacks, M1_FLY, G_GENO|1 (monsters.h:1806-1814).
+- Speed 12 is player baseline, NOT slow; most dragons are speed 9 (slower).
+- Vorpal Blade auto-beheads PM_JABBERWOCK, short-circuiting the dieroll==1 check (artifact.c:1595-1623).
+- Deferred "vorpal jabberwock" at monsters.h:1816-1824 is wrapped in `#if 0` and correctly excluded.
+-->
+<p>ルイス・キャロルの詩『ジャバウォックの詩』に登場する獰猛な怪物。プレイヤーと同等の速度で移動し、鋭い爪と噛みつきによる連続攻撃を繰り出してきます。十分なACと武器強化が整うまでは警戒が必要です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ジャバウォック (jabberwock)</td>
+<td>橙色</td>
+<td>15</td>
+<td>12</td>
+<td>-2</td>
+<td>50</td>
+<td>噛みつき 2d10 ×2 · 爪 2d10 ×2</td>
+<td>飛行. Four heavy attacks; baseline speed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="キーストンコップ-k-keystone-kops-k" class="level4">
+<h4>キーストン・コップ <code>K</code> (Keystone Kops
+<code>K</code>)</h4>
+<!-- audit
+2026-05-19:
+- All Kop stats match monsters.h:1829-1860.
+- Shopkeeper-anger triggers Kop summoning via makekops (shk.c:623, 680, 5113).
+- Dead Kops respawn per rnd(5) at mon.c:3147-3164: 1/5 near DOWN-stairs, 1/5 at random location, 3/5 stay dead.
+- Respawn lands near DOWN-stairs, NOT up-stairs (stairs.c:89-95, mklev.c:2193).
+- All four Kops carry G_GENO, so genocide permanently clears them.
+-->
+<p>店で泥棒を働くか、店主を傷つけた際に笛を鳴らして駆けつける警官隊です。個々の戦闘力は高くありませんが、群れをなして現れ、クリームパイを投げつけてプレイヤーの視界を塞ごうとします。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>警備員 (Keystone Kop)</td>
+<td>青色</td>
+<td>1</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>巡査 (Kop Sergeant)</td>
+<td>青色</td>
+<td>2</td>
+<td>8</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>巡査部長 (Kop Lieutenant)</td>
+<td>水色</td>
+<td>3</td>
+<td>10</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>警部補 (Kop Kaptain)</td>
+<td>赤紫</td>
+<td>4</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 2d6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="リッチ-l-liches-l" class="level4">
+<h4>リッチ <code>L</code> (Liches <code>L</code>)</h4>
+<!-- audit
+2026-05-19:
+- 4 lich rows at monsters.h:1864-1897 (lich 1864, demilich 1872, master lich 1880, arch-lich 1889).
+- All carry G_NOCORPSE, so no eatable corpse regardless of M1_POIS flavor.
+- Only the arch-lich (m_lev=25) reaches DEATH_TOUCH at spell-level 20; master lich m_lev=17 cannot (mcastu.c:111).
+- Double-trouble is Wizard-of-Yendor only, NOT a lich ability.
+- Arch-lich casts touch of death, NOT rays.
+2026-05-31:
+- Touch of death (mcastu.c:389-408): without Antimagic, `rn2(mtmp->m_lev) > 12` gates the effect. At m_lev 25 that succeeds 12/25 of the time; touch_of_death then deals 50+8d6 damage and drains half that amount from max HP. Magic resistance blocks the effect (mcastu.c:315-347).
+- Only the Wizard of Yendor literally has M3_COVETOUS in 5.0 (monsters.h:2857; single row). Arch-liches do NOT teleport-away-to-heal. Their threat profile is the touch-of-death spell, not the covetous return-at-full-HP behavior the Wizard has.
+-->
+<p>骸骨姿の強力な魔法使いアンデッド。マスターリッチやアーチリッチは死の指（Touch
+of
+death）を詠唱し、モンスターを大量召喚し、冷気光線を放ってきます。魔法防御（Magic
+resistance）がなければ即死する危険極まりない強敵です。</p>
+<p>すべてのリッチは自動回復し、死体を残さず、アンデッドであり、冷気耐性、睡眠耐性、毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>リッチ (lich)</td>
+<td>茶色</td>
+<td>11</td>
+<td>6</td>
+<td>0</td>
+<td>30</td>
+<td>接触 1d10 冷気 · cast spell</td>
+<td></td>
+</tr>
+<tr>
+<td>デミリッチ (demilich)</td>
+<td>赤色</td>
+<td>14</td>
+<td>9</td>
+<td>-2</td>
+<td>60</td>
+<td>接触 3d4 冷気 · cast spell</td>
+<td></td>
+</tr>
+<tr>
+<td>マスターリッチ (master lich)</td>
+<td>赤紫</td>
+<td>17</td>
+<td>9</td>
+<td>-4</td>
+<td>90</td>
+<td>接触 3d6 冷気 · cast spell</td>
+<td>火炎耐性. Casts wizard spells. Kill from afar.</td>
+</tr>
+<tr>
+<td>arch-lich</td>
+<td>赤紫</td>
+<td>25</td>
+<td>9</td>
+<td>-6</td>
+<td>90</td>
+<td>接触 5d6 冷気 · cast spell</td>
+<td>火炎耐性, 電撃耐性. Casts touch of death; magic resistance
+mandatory.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ミイラ-m-mummies-m" class="level4">
+<h4>ミイラ <code>M</code> (Mummies <code>M</code>)</h4>
+<!-- audit
+2026-05-19:
+- Every mummy attack is plain AD_PHYS (monsters.h:1901-1968); mummies do NOT curse worn items (only gremlins have AD_CURS, monattk.h:92).
+- All M-class rows carry G_NOCORPSE, which prevents random mummy corpses and tins. The death handler overrides it and creates an already-old corpse of the mummy's base race (mon.c:620-646).
+- Mummies are vulnerable to undead-turning.
+-->
+<p>精神を持たないアンデッド。アンデッド退散の杖や呪文を使うと 1d8
+のダメージを受けて逃走します。死亡時には元となった種族の古びた死体を残すため、病気耐性なしで食べると食中毒を起こす危険があります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コボルドのミイラ (kobold mummy)</td>
+<td>茶色</td>
+<td>3</td>
+<td>8</td>
+<td>6</td>
+<td>20</td>
+<td>爪 1d4</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old kobold corpse.</td>
+</tr>
+<tr>
+<td>ノームのミイラ (gnome mummy)</td>
+<td>赤色</td>
+<td>4</td>
+<td>10</td>
+<td>6</td>
+<td>20</td>
+<td>爪 1d6</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old gnome corpse.</td>
+</tr>
+<tr>
+<td>オークのミイラ (orc mummy)</td>
+<td>灰色</td>
+<td>5</td>
+<td>10</td>
+<td>5</td>
+<td>20</td>
+<td>爪 1d6</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old orc corpse.</td>
+</tr>
+<tr>
+<td>ドワーフのミイラ (dwarf mummy)</td>
+<td>赤色</td>
+<td>5</td>
+<td>10</td>
+<td>5</td>
+<td>20</td>
+<td>爪 1d6</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old dwarf corpse.</td>
+</tr>
+<tr>
+<td>エルフのミイラ (elf mummy)</td>
+<td>緑色</td>
+<td>6</td>
+<td>12</td>
+<td>4</td>
+<td>30</td>
+<td>爪 2d4</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old elf corpse.</td>
+</tr>
+<tr>
+<td>人間のミイラ (human mummy)</td>
+<td>灰色</td>
+<td>6</td>
+<td>12</td>
+<td>4</td>
+<td>30</td>
+<td>爪 2d4 ×2</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old 人間 corpse.</td>
+</tr>
+<tr>
+<td>エティンのミイラ (ettin mummy)</td>
+<td>青色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>30</td>
+<td>爪 2d6 ×2</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old ettin corpse.</td>
+</tr>
+<tr>
+<td>巨人のミイラ (giant mummy)</td>
+<td>水色</td>
+<td>8</td>
+<td>14</td>
+<td>3</td>
+<td>30</td>
+<td>爪 3d4 ×2</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. Drops an old 巨人 corpse.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ナーガ-n-nagas-n" class="level4">
+<h4>ナーガ <code>N</code> (Nagas <code>N</code>)</h4>
+<p>蛇の体を持つ人型生物で、遠距離から酸や毒のブレス・吐瀉攻撃を行ってきます。すべてのナーガは毒耐性を備えています。黒ナーガの死体を食べると恒久的な毒耐性を獲得できることがあり、酸耐性と石化耐性も一時的に得られます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>赤色ナーガの雛 (red naga hatchling)</td>
+<td>赤色</td>
+<td>3</td>
+<td>10</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>黒ナーガの雛 (black naga hatchling)</td>
+<td>黒色</td>
+<td>3</td>
+<td>10</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td>酸耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>金色ナーガの雛 (golden naga hatchling)</td>
+<td>黄色</td>
+<td>3</td>
+<td>10</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>番兵ナーガの雛 (guardian naga hatchling)</td>
+<td>緑色</td>
+<td>3</td>
+<td>10</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>赤色ナーガ (red naga)</td>
+<td>赤色</td>
+<td>6</td>
+<td>12</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d4 · ブレス 2d6 火炎</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>黒ナーガ (black naga)</td>
+<td>黒色</td>
+<td>8</td>
+<td>14</td>
+<td>2</td>
+<td>10</td>
+<td>噛みつき 2d6 · 吐瀉 酸</td>
+<td>酸耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>金色ナーガ (golden naga)</td>
+<td>黄色</td>
+<td>10</td>
+<td>14</td>
+<td>2</td>
+<td>70</td>
+<td>噛みつき 2d6 · cast spell 4d6</td>
+<td></td>
+</tr>
+<tr>
+<td>番兵ナーガ (guardian naga)</td>
+<td>緑色</td>
+<td>12</td>
+<td>16</td>
+<td>0</td>
+<td>50</td>
+<td>吐瀉 1d6 毒 · 噛みつき 1d6 麻痺 · 接触 · 締め付け 2d4 wrap</td>
+<td>死体に毒あり. Lawful PCs may find them peaceful.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="オーガ-o-ogres-o" class="level4">
+<h4>オーガ <code>O</code> (Ogres <code>O</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 ogre rows match monsters.h: ogre 2052, ogre lord 2060, ogre king 2068.
+- Ogres wield weapons (AT_WEAP); they do NOT throw boulders (no M2_ROCKTHROW — that's giants/Cyclops/ettins/titans).
+- All three carry M2_STRONG plus G_GENO|1 (genocidable, freq 1).
+-->
+<p>強大な筋力を持つ近接戦闘の巨人です。こん棒や戦斧を振り回して大ダメージを与えてきますが、防具を着けていないためACは低く、遠距離から削るのが有効です。</p>
+<div class="dense-table">
+<table>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>オーガ (ogre)</td>
+<td>茶色</td>
+<td>5</td>
+<td>10</td>
+<td>5</td>
+<td>0</td>
+<td>武器攻撃 2d5</td>
+<td></td>
+</tr>
+<tr>
+<td>ogre lord</td>
+<td>赤色</td>
+<td>7</td>
+<td>12</td>
+<td>3</td>
+<td>30</td>
+<td>武器攻撃 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ogre king</td>
+<td>赤紫</td>
+<td>9</td>
+<td>14</td>
+<td>4</td>
+<td>60</td>
+<td>武器攻撃 3d5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="プリンおよびウーズ-p-puddings-and-oozes-p" class="level4">
+<h4>プリンおよびウーズ <code>P</code> (Puddings and oozes
+<code>P</code>)</h4>
+<!-- audit
+2026-05-19:
+- Green slime: make_slimed sets a 10-turn countdown, NOT 9 (uhitm.c:3199, 3570; polyself.c:456; eat.c:854). The 5-turn case is engulf+digest only (uhitm.c:5099).
+- Brown puddings rot wood/leather/cloth/bone (AD_DCAY = ERODE_ROT, uhitm.c:2389). They do NOT corrode armor.
+- Black puddings corrode metal (AD_CORR, uhitm.c:2338-2356).
+- Gray ooze rusts armor (AD_RUST).
+- Splitting on iron/metal melee is gated to PM_BLACK_PUDDING || PM_BROWN_PUDDING (uhitm.c:1609-1621). Gray ooze and green slime do NOT split.
+-->
+<p><strong>茶色および黒色プリンは鉄製や金属製の刃物で攻撃すると分裂します</strong>。無傷の死体ではなく塊を残します。</p>
+<p><strong>緑スライム</strong>は<a
+href="#gehennom">ゲヘナ</a>にのみ現れる例外で、分裂はしませんが接触した相手を緑スライムへと徐々に変異させていきます（石化に似た即死タイマー）。</p>
+<p>すべてのプリンおよびウーズは不定形で、精神を持たず、冷気耐性、毒耐性、酸耐性、石化耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灰色ウーズ (gray ooze)</td>
+<td>灰色</td>
+<td>3</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき 2d8 錆び</td>
+<td>火炎耐性.</td>
+</tr>
+<tr>
+<td>茶色プリン (brown pudding)</td>
+<td>茶色</td>
+<td>5</td>
+<td>3</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき decay</td>
+<td></td>
+</tr>
+<tr>
+<td>緑スライム (green slime)</td>
+<td>緑色</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>接触 1d4 slime · 反撃 slime</td>
+<td>死体を残さない。</td>
+</tr>
+<tr>
+<td>黒プリン (black pudding)</td>
+<td>黒色</td>
+<td>10</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>噛みつき 3d8 corrode · 反撃 corrode</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="量子力学士-q-quantum-mechanics-q" class="level4">
+<h4>量子力学士 <code>Q</code> (Quantum mechanics <code>Q</code>)</h4>
+<!-- audit
+2026-05-19:
+- Quantum mechanic teleports you (AD_TLPT, monsters.h:2127); genetic engineer polymorphs you (AD_POLY, monsters.h:2136, new in 5.0 per fixes5-0-0.txt:2696). NOT both teleporting.
+- Both have speed 12 (NOT 24), poisonous corpses (M1_POIS), and self-teleport (M1_TPORT).
+- Quantum corpse toggles Fast (eat.c:1227); genetic engineer corpse triggers polyself (eat.c:1247).
+-->
+<p>特殊な爪攻撃を持つ2種類の生物です。<strong>量子力学士 (Quantum
+mechanic)</strong>は命中時にプレイヤーをランダムな場所へテレポートさせます。<strong>遺伝子工学者
+(Genetic
+engineer)</strong>はプレイヤーを変身（ポリモルフ）させます。不変（Unchanging）の魔除けや魔法防御がなければ、一撃で別の生物に変えられてしまいます。</p>
+<p>両種とも自らランダムにテレポートし、毒のある死体を残します。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>量子物理学者 (quantum mechanic)</td>
+<td>水色</td>
+<td>7</td>
+<td>12</td>
+<td>3</td>
+<td>10</td>
+<td>爪 1d4 teleport</td>
+<td>Self-テレポート. Corpse toggles intrinsic Fast.</td>
+</tr>
+<tr>
+<td>遺伝子工学者 (genetic engineer)</td>
+<td>緑色</td>
+<td>12</td>
+<td>12</td>
+<td>3</td>
+<td>10</td>
+<td>爪 1d4 polymorph</td>
+<td>Self-テレポート. Corpse triggers polyself.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section
+id="錆の怪物および魔法中和者-r-rust-monsters-and-disenchanters-r"
+class="level4">
+<h4>錆の怪物および魔法中和者 <code>R</code> (Rust monsters and
+disenchanters <code>R</code>)</h4>
+<!-- audit
+2026-05-19:
+- Rust monster active attack erodes worn iron armor (uhitm.c:2311); passive damages weapon when you hit it; greased weapons consume a charge instead. Silver/mithril/wood weapons immune (is_rustprone).
+- Disenchanter active claw drains armor first (uhitm.c:3611-3644, some_armor + rn2(5) for rings/amulet/blindfold); weapon drain is passive-only.
+- Active threat for both is armor, NOT weapons (e.g. long sword).
+-->
+<p>錆の怪物は接触時に鉄製の武器や防具を急速に錆びさせます。ディスエンチャンター（魔法中和者）は命中時に装備している防具や武器の強化値（+値）を吸い取って低下させます。油を塗った防具や、魔法防御、木製・銀製・革製の装備で対抗してください。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>錆の怪物 (rust monster)</td>
+<td>茶色</td>
+<td>5</td>
+<td>18</td>
+<td>2</td>
+<td>0</td>
+<td>接触 錆び ×2 · 反撃 錆び</td>
+<td>遊泳. Touch rusts iron. Strip armor before engaging or use
+silver.</td>
+</tr>
+<tr>
+<td>吸魔の怪物 (disenchanter)</td>
+<td>青色</td>
+<td>12</td>
+<td>12</td>
+<td>-10</td>
+<td>0</td>
+<td>爪 4d4 disenchant · 反撃 disenchant</td>
+<td>Gehennom-only. Active drains armor; passive drains weapon when you
+melee it.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ヘビ-s-snakes-s" class="level4">
+<h4>ヘビ <code>S</code> (Snakes <code>S</code>)</h4>
+<!-- audit
+2026-05-19:
+- 6 snake rows at monsters.h:2167-2221: garter 2167, snake 2174, water moccasin 2182, python 2190, pit viper 2204, cobra 2213.
+- "Pit viper" is the snake, NOT "pit fiend" (pit fiend is a `&` major demon at monsters.h:3104-3112).
+- M1_SWIM universal across the section; M1_CONCEAL on all except python.
+- Python has an AT_TUCH plus AT_HUGS pair (monsters.h:2193-2199), wrap and crush.
+- Cobra AT_SPIT/AD_BLND blind at monsters.h:2218 (blind spit out to 6 squares).
+-->
+<p>大半が猛毒を持っています。クサリヘビ（マムシ）やコブラは致命的な毒を持ち、ガータースネークなどは無害な獲物です。</p>
+<p>すべてのヘビは遊泳能力を持ち、<em>ニシキヘビ (python)</em>
+を除いて潜伏能力を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小さなヘビ (garter snake)</td>
+<td>緑色</td>
+<td>1</td>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき 1d2</td>
+<td></td>
+</tr>
+<tr>
+<td>ヘビ (snake)</td>
+<td>茶色</td>
+<td>4</td>
+<td>15</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 1d6 毒</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>水ヘビ (water moccasin)</td>
+<td>赤色</td>
+<td>4</td>
+<td>15</td>
+<td>3</td>
+<td>0</td>
+<td>噛みつき 1d6 毒</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>ニシキヘビ (python)</td>
+<td>赤紫</td>
+<td>6</td>
+<td>3</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 1d4 · 接触 · 締め付け 1d4 wrap · 締め付け 2d4</td>
+<td></td>
+</tr>
+<tr>
+<td>ハブ (pit viper)</td>
+<td>青色</td>
+<td>6</td>
+<td>15</td>
+<td>2</td>
+<td>0</td>
+<td>噛みつき 1d4 毒 ×2</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>コブラ (cobra)</td>
+<td>青色</td>
+<td>6</td>
+<td>18</td>
+<td>2</td>
+<td>0</td>
+<td>噛みつき 2d4 毒 · 吐瀉 盲目</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="トロール-t-trolls-t" class="level4">
+<h4>トロール <code>T</code> (Trolls <code>T</code>)</h4>
+<!-- audit
+2026-05-19:
+- All 5 troll rows (troll, ice, rock, water, Olog-hai) match monsters.h:2225-2266.
+- All carry M1_REGEN | M2_STALK; S_TROLL is is_reviver (mondata.h:170).
+- Fire/water/force-bolt do NOT destroy corpses; burn_floor_objects only burns scrolls/spellbooks/slime.
+- Trollsbane sets mkcorpstat_norevive (uhitm.c:1906, 4867; mhitm.c:1082).
+- Stoning leaves a statue (mon.c:671), so no corpse to revive from.
+-->
+<p>倒しても一定時間後に死体から自動復活します。確実にトロールの息の根を止めるには、<strong>復活する前に死体を食べる</strong>、缶詰作成キットで缶詰にする、あるいは火炎の杖や火炎の魔法で死体を焼き尽くす必要があります。</p>
+<p>すべてのトロールは自動回復能力を持ち、階段の上り下りにも追従してきます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>トロル (troll)</td>
+<td>茶色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>0</td>
+<td>武器攻撃 4d2 · 爪 4d2 · 噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>氷のトロル (ice troll)</td>
+<td>白色</td>
+<td>9</td>
+<td>10</td>
+<td>2</td>
+<td>20</td>
+<td>武器攻撃 2d6 · 爪 2d6 冷気 · 噛みつき 2d6</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>岩のトロル (rock troll)</td>
+<td>水色</td>
+<td>9</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>武器攻撃 3d6 · 爪 2d8 · 噛みつき 2d6</td>
+<td></td>
+</tr>
+<tr>
+<td>水のトロル (water troll)</td>
+<td>青色</td>
+<td>11</td>
+<td>14</td>
+<td>4</td>
+<td>40</td>
+<td>武器攻撃 2d8 · 爪 2d8 · 噛みつき 2d6</td>
+<td>遊泳.</td>
+</tr>
+<tr>
+<td>Olog-hai</td>
+<td>赤紫</td>
+<td>13</td>
+<td>12</td>
+<td>-4</td>
+<td>0</td>
+<td>武器攻撃 3d6 · 爪 2d8 · 噛みつき 2d6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="アンバーハルク-u-umber-hulks-u" class="level4">
+<h4>アンバーハルク <code>U</code> (Umber hulks <code>U</code>)</h4>
+<p>混乱の凝視。視線が合うだけでプレイヤーを激しく混乱させます。目隠しやタオルを巻いて盲目状態で戦うか、遠距離から仕留めるのが定石です。混乱耐性やテレパシーを活用してください。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アンバーハルク (umber hulk)</td>
+<td>茶色</td>
+<td>9</td>
+<td>6</td>
+<td>2</td>
+<td>25</td>
+<td>爪 3d4 ×2 · 噛みつき 2d5 · 凝視 confuse</td>
+<td>tunnels. Confusion gaze. Hard to navigate around. Hits hard
+too.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="吸血鬼-v-vampires-v" class="level4">
+<h4>吸血鬼 <code>V</code> (Vampires <code>V</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 vampire rows at monsters.h: vampire 2282, vampire lord 2292, Vlad 2306.
+- Vampire and vampire lord carry G_NOCORPSE, but the death handler substitutes an already-old human corpse. Vlad leaves none (mon.c:613-646).
+- All have M1_REGEN | M1_FLY plus M2_STALK (follows stairs) and shapeshift via M2_WERE-equivalent vamp branch (mon.c).
+- Vampire mage is #if 0 DEFERRED in 5.0 (correctly omitted).
+- Vlad inhabits Vlad's Tower; holds the Candelabrum of Invocation (mkobj.c spawn for PM_VLAD).
+-->
+<p>噛みつき攻撃によってプレイヤーの経験値レベルを吸い取ります（エナジードレイン）。こうもりや霧の雲に変身して逃亡・奇襲を行います。通常の吸血鬼や吸血鬼の貴族は古びた人間の死体を残しますが、ヴラドは死体を残しません。ヴラド公は<a
+href="#vlads-tower">ヴラドの塔</a>のボスです。</p>
+<p>すべての吸血鬼は飛行し、自動回復し、アンデッドであり、階段に追従し、変身能力を持ちます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>吸血鬼 (vampire)</td>
+<td>赤色</td>
+<td>10</td>
+<td>12</td>
+<td>1</td>
+<td>25</td>
+<td>爪 1d6 · 噛みつき 1d6 エナジードレイン-XL</td>
+<td>Drops an old 人間 corpse.</td>
+</tr>
+<tr>
+<td>vampire lord</td>
+<td>青色</td>
+<td>12</td>
+<td>14</td>
+<td>0</td>
+<td>50</td>
+<td>爪 1d8 · 噛みつき 1d8 エナジードレイン-XL</td>
+<td>Drops an old 人間 corpse.</td>
+</tr>
+<tr>
+<td>吸血鬼ヴラド (Vlad the Impaler)</td>
+<td>赤紫</td>
+<td>28</td>
+<td>26</td>
+<td>-6</td>
+<td>80</td>
+<td>武器攻撃 2d10 · 噛みつき 1d12 エナジードレイン-XL</td>
+<td>Vampire boss in Vlad’s Tower. Has the Candelabrum.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="レイス-w-wraiths-w" class="level4">
+<h4>レイス <code>W</code> (Wraiths <code>W</code>)</h4>
+<!-- audit
+2026-05-19:
+- 3 wraith rows at monsters.h: barrow wight 2326, wraith 2336, Nazgul 2343-2353.
+- Only plain wraith leaves an eatable corpse; barrow wight and Nazgul carry G_NOCORPSE.
+- Wraith corpse grants experience-level gain (eat.c:1141-1142, pluslvl).
+- Nazgul AT_BREA/AD_SLEE breath 2d25 sleep (monsters.h Nazgul row); sleep resistance trivializes.
+-->
+<p>接触によってプレイヤーの経験値レベルを1段階吸い取ります。しかし、倒した後に残る新鮮なレイスの死体を食べれば、逆に経験値レベルが1上昇するという大きな見返りがあります。アンデッド退散や銀の武器が有効です。</p>
+<p>すべてのレイスはアンデッドであり、階段の上り下りに追従してきます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>バロウ・ワイト (barrow wight)</td>
+<td>灰色</td>
+<td>3</td>
+<td>12</td>
+<td>5</td>
+<td>5</td>
+<td>武器攻撃 エナジードレイン-XL · cast spell · 爪 1d4 · 接触 1d4
+冷気</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>レイス (wraith)</td>
+<td>黒色</td>
+<td>6</td>
+<td>12</td>
+<td>4</td>
+<td>15</td>
+<td>接触 1d6 エナジードレイン-XL</td>
+<td>飛行.</td>
+</tr>
+<tr>
+<td>ナズグル (Nazgul)</td>
+<td>赤紫</td>
+<td>13</td>
+<td>12</td>
+<td>0</td>
+<td>25</td>
+<td>武器攻撃 1d4 エナジードレイン-XL · ブレス 2d25 sleep</td>
+<td>sees-不可視.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ゾーン-x-xorns-x" class="level4">
+<h4>ゾーン <code>X</code> (Xorns <code>X</code>)</h4>
+<!-- audit
+2026-05-19:
+- Xorn stats match monsters.h:2357-2366: speed 9 (NOT fast), 3-claw + bite, MR_FIRE|MR_COLD|MR_STONE.
+- Xorns phase through walls via M1_WALLWALK; they do NOT tunnel (no M1_TUNNEL, no rubble left behind).
+- Xorn attacks are AD_PHYS only; worn weapons/armor are NOT at risk. Metallivore behavior eats metal off the floor only (monmove.c:1664).
+- Xorn corpse grants temporary stone resistance.
+-->
+<p>D&amp;Dに由来する、土の元素界からやってきた3本腕・3つ目の異形の怪物です。彼らは<strong>固い岩壁をすり抜けて移動</strong>し、突然壁の中から奇襲を仕掛けてきます。金属や宝石を好んで食べます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ゾーン (xorn)</td>
+<td>茶色</td>
+<td>8</td>
+<td>9</td>
+<td>-2</td>
+<td>20</td>
+<td>爪 1d3 ×3 · 噛みつき 4d6</td>
+<td>火炎耐性, 冷気耐性, 石化耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="類人猿-y-apelike-creatures-y" class="level4">
+<h4>類人猿 <code>Y</code> (Apelike creatures <code>Y</code>)</h4>
+<!-- audit
+2026-05-19:
+- 6 ape/yeti rows at monsters.h:2372-2417 (monkey 2372, ape 2379, owlbear 2386, yeti 2393, carnivorous ape 2402, sasquatch 2409).
+- Monkey steals via AT_CLAW/AD_SITM (monsters.h:2376); yeti M1_POIS-free, M2_BRUTE plus MR_COLD intrinsic donor.
+- Sasquatch has M1_SEE_INVIS (monsters.h:2413); both yeti and sasquatch speed 15.
+-->
+<p>類人猿や大猿が中心です。サスクワッチ（雪男）は素早い動きで殴りかかってきます。肉食獣の死体は安全な食料となります。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>猿 (monkey)</td>
+<td>灰色</td>
+<td>2</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>爪 盗み-item · 噛みつき 1d3</td>
+<td></td>
+</tr>
+<tr>
+<td>類人猿 (ape)</td>
+<td>茶色</td>
+<td>4</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d3 ×2 · 噛みつき 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>アウルベア (owlbear)</td>
+<td>茶色</td>
+<td>5</td>
+<td>12</td>
+<td>5</td>
+<td>0</td>
+<td>爪 1d6 ×2 · 締め付け 2d8</td>
+<td></td>
+</tr>
+<tr>
+<td>イエティ (yeti)</td>
+<td>白色</td>
+<td>5</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d6 ×2 · 噛みつき 1d4</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>人喰い猿 (carnivorous ape)</td>
+<td>黒色</td>
+<td>6</td>
+<td>12</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d4 ×2 · 締め付け 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>サスカッチ (sasquatch)</td>
+<td>灰色</td>
+<td>7</td>
+<td>15</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d6 ×2 · 蹴り 1d8</td>
+<td>sees-不可視.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ゾンビ-z-zombies-z" class="level4">
+<h4>ゾンビ <code>Z</code> (Zombies <code>Z</code>)</h4>
+<!-- audit
+2026-05-19:
+- All Z-class stats/attacks match monsters.h:2421-2504.
+- Race-based zombies carry G_NOCORPSE, but the death handler substitutes an already-old corpse of their base race (mon.c:620-646). Ghouls and skeletons leave none.
+- Skeleton has G_NOGEN: never randomly generated, only from Orcus Town or a bone devil's summons.
+- M2_UNDEAD is the class flag (NOT "M3_UNDEAD"); M2_STALK is universal across this section.
+-->
+<p>動きの鈍いアンデッド。距離を取りながら戦えば容易に倒せます。種族ごとのゾンビは元となった種族の古びた死体を残すため、病気耐性なしで食べると食中毒の危険があります。アンデッド退散の杖や呪文を使うと逃走します。ガイコツ（スケルトン）は自然生成されず、オルクスの町やボーンデビルによって召喚されます。</p>
+<p>すべてのゾンビは精神を持たず、アンデッドです。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>コボルドのゾンビ (kobold zombie)</td>
+<td>茶色</td>
+<td>0</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>爪 1d4</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old kobold
+corpse.</td>
+</tr>
+<tr>
+<td>ノームのゾンビ (gnome zombie)</td>
+<td>茶色</td>
+<td>1</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>爪 1d5</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old gnome
+corpse.</td>
+</tr>
+<tr>
+<td>オークのゾンビ (orc zombie)</td>
+<td>灰色</td>
+<td>2</td>
+<td>6</td>
+<td>9</td>
+<td>0</td>
+<td>爪 1d6</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old orc
+corpse.</td>
+</tr>
+<tr>
+<td>ドワーフのゾンビ (dwarf zombie)</td>
+<td>赤色</td>
+<td>2</td>
+<td>6</td>
+<td>9</td>
+<td>0</td>
+<td>爪 1d6</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old dwarf
+corpse.</td>
+</tr>
+<tr>
+<td>エルフのゾンビ (elf zombie)</td>
+<td>緑色</td>
+<td>3</td>
+<td>6</td>
+<td>9</td>
+<td>0</td>
+<td>爪 1d7</td>
+<td>follows stairs. Drops an old elf corpse.</td>
+</tr>
+<tr>
+<td>人間のゾンビ (human zombie)</td>
+<td>白色</td>
+<td>4</td>
+<td>6</td>
+<td>8</td>
+<td>0</td>
+<td>爪 1d8</td>
+<td>follows stairs. Drops an old 人間 corpse.</td>
+</tr>
+<tr>
+<td>エティンのゾンビ (ettin zombie)</td>
+<td>青色</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d10 ×2</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old ettin
+corpse.</td>
+</tr>
+<tr>
+<td>グール (ghoul)</td>
+<td>黒色</td>
+<td>3</td>
+<td>6</td>
+<td>10</td>
+<td>0</td>
+<td>爪 1d2 麻痺 · 爪 1d3</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性. 死体を残さない。</td>
+</tr>
+<tr>
+<td>巨人のゾンビ (giant zombie)</td>
+<td>水色</td>
+<td>8</td>
+<td>8</td>
+<td>6</td>
+<td>0</td>
+<td>爪 2d8 ×2</td>
+<td>follows stairs, 冷気耐性, 睡眠耐性, 毒耐性. Drops an old 巨人
+corpse.</td>
+</tr>
+<tr>
+<td>骸骨 (skeleton)</td>
+<td>白色</td>
+<td>12</td>
+<td>8</td>
+<td>4</td>
+<td>0</td>
+<td>武器攻撃 2d6 · 接触 1d6 slow</td>
+<td>冷気耐性, 睡眠耐性, 毒耐性, 石化耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="人間およびエルフ-humans-and-elves" class="level4">
+<h4>人間およびエルフ <code>@</code> (Humans and elves
+<code>@</code>)</h4>
+<!-- audit
+2026-05-19:
+- 43 human rows match monsters.h.
+- Kops are class K, NOT @.
+- Wizard of Yendor row: bright-magenta, L30 Spd12 AC-8 MR100, claw 2d12 steal-amulet + spell, flies/regen/sees-invis/fire-res/poison-res, covetous (monsters.h:2847-2858).
+- Master of Thieves is the Rogue quest LEADER (Rog-strt.lua:106) AND the Tourist quest nemesis (Tou-goal.lua:117, monsters.h:3564), NOT the Rogue quest nemesis.
+- Master Assassin is the primary Rogue quest nemesis (Rog-goal.lua:72), NOT a backup.
+-->
+<p><code>@</code>
+のシンボルだけで相手を判断してはなりません。平和的な店主、僧侶、番兵、クエストリーダーであることもあれば、メデューサ、各職業のネメシス、富豪クロイソス、あるいはイェンダーの魔法使いである可能性もあります。動く前に対象の名前を必ず確認してください。このクラスには兵士、忍者、ドッペルゲンガー、獣人、冒険者、そしてプレイヤー自身も含まれます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人間 (human)</td>
+<td>白色</td>
+<td>0</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>ねずみ人間 (wererat)</td>
+<td>茶色</td>
+<td>2</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>自動回復. 死体を残さない。</td>
+</tr>
+<tr>
+<td>ジャッカル人間 (werejackal)</td>
+<td>赤色</td>
+<td>2</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>自動回復. 死体を残さない。</td>
+</tr>
+<tr>
+<td>狼人間 (werewolf)</td>
+<td>橙色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 2d4</td>
+<td>自動回復. 死体を残さない。</td>
+</tr>
+<tr>
+<td>エルフ (elf)</td>
+<td>白色</td>
+<td>0</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+<td>武器攻撃 1d8</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>Woodland-elf</td>
+<td>緑色</td>
+<td>4</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>Green-elf</td>
+<td>明緑</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>Grey-elf</td>
+<td>灰色</td>
+<td>6</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>elf-lord</td>
+<td>明青</td>
+<td>8</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 2d4 ×2</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>Elvenking</td>
+<td>赤紫</td>
+<td>9</td>
+<td>12</td>
+<td>10</td>
+<td>25</td>
+<td>武器攻撃 2d4 ×2</td>
+<td>sees-不可視.</td>
+</tr>
+<tr>
+<td>ドッペルゲンガー (doppelganger)</td>
+<td>白色</td>
+<td>9</td>
+<td>12</td>
+<td>5</td>
+<td>20</td>
+<td>武器攻撃 1d12</td>
+<td>shapeshifter.</td>
+</tr>
+<tr>
+<td>店主 (shopkeeper)</td>
+<td>白色</td>
+<td>12</td>
+<td>16</td>
+<td>0</td>
+<td>50</td>
+<td>武器攻撃 4d4 ×2</td>
+<td>starts peaceful. Don’t anger one.</td>
+</tr>
+<tr>
+<td>番兵 (guard)</td>
+<td>青色</td>
+<td>12</td>
+<td>12</td>
+<td>10</td>
+<td>40</td>
+<td>武器攻撃 4d10</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>囚人 (prisoner)</td>
+<td>白色</td>
+<td>12</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d6</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>賢者 (Oracle)</td>
+<td>明青</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>50</td>
+<td>反撃 13d4 魔法</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>priest</td>
+<td>白色</td>
+<td>12</td>
+<td>12</td>
+<td>10</td>
+<td>50</td>
+<td>武器攻撃 4d10 · 蹴り 1d4 · cast cleric</td>
+<td>starts peaceful. Temple defenders. Convert their altars or sacrifice
+on them.</td>
+</tr>
+<tr>
+<td>high priest</td>
+<td>白色</td>
+<td>25</td>
+<td>15</td>
+<td>7</td>
+<td>70</td>
+<td>武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2</td>
+<td>sees-不可視. Endgame altar guardian. Don’t fight one head-on.</td>
+</tr>
+<tr>
+<td>兵士 (soldier)</td>
+<td>灰色</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d8</td>
+<td>follows stairs.</td>
+</tr>
+<tr>
+<td>下士官 (sergeant)</td>
+<td>赤色</td>
+<td>8</td>
+<td>10</td>
+<td>10</td>
+<td>5</td>
+<td>武器攻撃 2d6</td>
+<td>follows stairs.</td>
+</tr>
+<tr>
+<td>看護婦 (nurse)</td>
+<td>白色</td>
+<td>11</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>爪 2d6 heal</td>
+<td></td>
+</tr>
+<tr>
+<td>副官 (lieutenant)</td>
+<td>緑色</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>15</td>
+<td>武器攻撃 3d4 ×2</td>
+<td>follows stairs.</td>
+</tr>
+<tr>
+<td>指揮官 (captain)</td>
+<td>青色</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>15</td>
+<td>武器攻撃 4d4 ×2</td>
+<td>follows stairs.</td>
+</tr>
+<tr>
+<td>見張り (watchman)</td>
+<td>灰色</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 1d8</td>
+<td>follows stairs, starts peaceful.</td>
+</tr>
+<tr>
+<td>見張りの隊長 (watch captain)</td>
+<td>緑色</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>15</td>
+<td>武器攻撃 3d4 ×2</td>
+<td>follows stairs, starts peaceful.</td>
+</tr>
+<tr>
+<td>メデューサ (Medusa)</td>
+<td>明緑</td>
+<td>20</td>
+<td>12</td>
+<td>2</td>
+<td>50</td>
+<td>武器攻撃 2d4 · 爪 1d8 · 凝視 石化 · 噛みつき 1d6 毒</td>
+<td>飛行, 遊泳, 水陸両用, 死体に毒あり.</td>
+</tr>
+<tr>
+<td>イェンダーの魔法使い (Wizard of Yendor)</td>
+<td>明紫</td>
+<td>30</td>
+<td>12</td>
+<td>-8</td>
+<td>100</td>
+<td>爪 2d12 盗み-amulet · cast spell</td>
+<td>飛行, 自動回復, sees-不可視, 火炎耐性, poison-res. Covetous:
+テレポート to you in late Gehennom and on the planes. The final
+boss.</td>
+</tr>
+<tr>
+<td>クロイソス (Croesus)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>40</td>
+<td>武器攻撃 4d10</td>
+<td>sees-不可視, follows stairs. Vault guardian on Fort Ludios. Wields a
+two-handed sword and hoards gold, gems, and magic items off the
+floor.</td>
+</tr>
+<tr>
+<td>考古学者 (archeologist)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6 ×2</td>
+<td>tunnels.</td>
+</tr>
+<tr>
+<td>野蛮人 (barbarian)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>caveman</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>武器攻撃 2d4</td>
+<td></td>
+</tr>
+<tr>
+<td>治療師 (healer)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6</td>
+<td></td>
+</tr>
+<tr>
+<td>騎士 (knight)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>武闘家 (monk)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+<td>爪 1d8 · 蹴り 1d8</td>
+<td></td>
+</tr>
+<tr>
+<td>priest</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+<td>武器攻撃 1d6 · cast cleric</td>
+<td>Temple defenders. Convert their altars or sacrifice on them.</td>
+</tr>
+<tr>
+<td>レンジャー (ranger)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+<td>武器攻撃 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>盗賊 (rogue)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>侍 (samurai)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d8 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>観光客 (tourist)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>ワルキューレ (valkyrie)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>1</td>
+<td>武器攻撃 1d8 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>魔法使い (wizard)</td>
+<td>白色</td>
+<td>10</td>
+<td>12</td>
+<td>10</td>
+<td>3</td>
+<td>武器攻撃 1d6 · cast spell</td>
+<td></td>
+</tr>
+<tr>
+<td>カーナボン卿 (Lord Carnarvon)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 · cast 4d8 spell</td>
+<td>tunnels, starts peaceful. Archeologist quest leader.</td>
+</tr>
+<tr>
+<td>ペリアス (Pelias)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 ×2</td>
+<td>starts peaceful. Barbarian quest leader.</td>
+</tr>
+<tr>
+<td>呪術師カルノフ (Shaman Karnov)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 · cast 2d8 cleric</td>
+<td>starts peaceful. Cave Dweller quest leader.</td>
+</tr>
+<tr>
+<td>ヒポクラテス (Hippocrates)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 1d6 · cast 3d8 cleric ×2</td>
+<td>starts peaceful. Healer quest leader.</td>
+</tr>
+<tr>
+<td>アーサー王 (King Arthur)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 ×2</td>
+<td>starts peaceful. Knight quest leader. Holds Excalibur if you didn’t
+get it.</td>
+</tr>
+<tr>
+<td>総師範 (Grand Master)</td>
+<td>黒色</td>
+<td>25</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>爪 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2</td>
+<td>sees-不可視, starts peaceful. Monk quest leader.</td>
+</tr>
+<tr>
+<td>主席司祭 (Arch Priest)</td>
+<td>白色</td>
+<td>25</td>
+<td>15</td>
+<td>7</td>
+<td>90</td>
+<td>武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2</td>
+<td>sees-不可視, starts peaceful. Priest quest leader.</td>
+</tr>
+<tr>
+<td>勇者オリオン (Orion)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 · cast 4d8 spell</td>
+<td>遊泳, 水陸両用, sees-不可視, starts peaceful. Ranger quest leader.
+Bow user.</td>
+</tr>
+<tr>
+<td>盗賊の頭領 (Master of Thieves)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 · 武器攻撃 2d6 · 爪 2d4 盗み-amulet</td>
+<td>starts peaceful. Rogue quest leader; also Tourist quest
+nemesis.</td>
+</tr>
+<tr>
+<td>大名佐藤 (Lord Sato)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 ×2</td>
+<td>starts peaceful. Samurai quest leader.</td>
+</tr>
+<tr>
+<td>ツーフラワー (Twoflower)</td>
+<td>白色</td>
+<td>20</td>
+<td>15</td>
+<td>10</td>
+<td>90</td>
+<td>武器攻撃 4d10</td>
+<td>starts peaceful. Tourist quest leader.</td>
+</tr>
+<tr>
+<td>ノルン (Norn)</td>
+<td>赤紫</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 ×2</td>
+<td>starts peaceful, 冷気耐性. Valkyrie quest leader.</td>
+</tr>
+<tr>
+<td>緑のネフェレト (Neferet the Green)</td>
+<td>緑色</td>
+<td>20</td>
+<td>15</td>
+<td>0</td>
+<td>90</td>
+<td>武器攻撃 4d10 · cast 2d8 spell ×2</td>
+<td>starts peaceful. Wizard quest leader.</td>
+</tr>
+<tr>
+<td>トート・アモン (Thoth Amon)</td>
+<td>赤紫</td>
+<td>16</td>
+<td>12</td>
+<td>0</td>
+<td>10</td>
+<td>武器攻撃 1d6 · cast spell ×2 · 爪 1d4 盗み-amulet</td>
+<td>follows stairs. Barbarian quest nemesis.</td>
+</tr>
+<tr>
+<td>カエン (Master Kaen)</td>
+<td>赤紫</td>
+<td>25</td>
+<td>12</td>
+<td>-10</td>
+<td>10</td>
+<td>爪 16d2 ×2 · cast cleric · 爪 1d4 盗み-amulet</td>
+<td>sees-不可視, follows stairs. Monk quest nemesis.</td>
+</tr>
+<tr>
+<td>暗殺者の頭領 (Master Assassin)</td>
+<td>赤紫</td>
+<td>15</td>
+<td>12</td>
+<td>0</td>
+<td>30</td>
+<td>武器攻撃 2d6 毒 · 武器攻撃 2d8 · 爪 2d6 盗み-amulet</td>
+<td>follows stairs. Rogue quest nemesis.</td>
+</tr>
+<tr>
+<td>足利尊氏 (Ashikaga Takauji)</td>
+<td>赤紫</td>
+<td>15</td>
+<td>12</td>
+<td>0</td>
+<td>40</td>
+<td>武器攻撃 2d6 ×2 · 爪 2d6 盗み-amulet</td>
+<td>follows stairs. Samurai quest nemesis.</td>
+</tr>
+<tr>
+<td>暗きもの (Dark One)</td>
+<td>黒色</td>
+<td>15</td>
+<td>12</td>
+<td>0</td>
+<td>80</td>
+<td>武器攻撃 1d6 ×2 · 爪 1d4 盗み-amulet · cast spell</td>
+<td>follows stairs. Wizard quest nemesis.</td>
+</tr>
+<tr>
+<td>学生 (student)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6</td>
+<td>tunnels, starts peaceful.</td>
+</tr>
+<tr>
+<td>首領 (chieftain)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>ネアンデルタール人 (neanderthal)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 2d4</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>随行員 (attendant)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>小姓 (page)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6 ×2</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>師範 (abbot)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>爪 8d2 · 蹴り 3d2 stun · cast cleric</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>侍者 (acolyte)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 1d6 · cast cleric</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>ハンター (hunter)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d4</td>
+<td>sees-不可視, starts peaceful.</td>
+</tr>
+<tr>
+<td>ちんぴら (thug)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d6 ×2</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>忍者 (ninja)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d8 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>浪士 (roshi)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d8 ×2</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>ガイド (guide)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>20</td>
+<td>武器攻撃 1d6 · cast spell</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>戦士 (warrior)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>10</td>
+<td>武器攻撃 1d8 ×2</td>
+<td>starts peaceful.</td>
+</tr>
+<tr>
+<td>実習生 (apprentice)</td>
+<td>白色</td>
+<td>5</td>
+<td>12</td>
+<td>10</td>
+<td>30</td>
+<td>武器攻撃 1d6 · cast spell</td>
+<td>starts peaceful.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="大悪魔-major-demons" class="level4">
+<h4>大悪魔 <code>&amp;</code> (Major demons <code>&amp;</code>)</h4>
+<!-- audit
+2026-05-19:
+- Bone devil, Orcus, Geryon "sting 2d4" and Baalzebub "bite 2d6" cells are AD_DRST drain-Str, NOT AD_POISON (monsters.h:2999, 3082, 3093, 3112).
+- Poison resistance protects against these Strength-draining attacks.
+-->
+<p>強力無比な大悪魔たちです。多くは同胞の悪魔を呼び出すゲート召喚能力を持ちます（1体の有刺デビルが瞬く間に5体に増えることもあります）。銀の武器やデーモンベインが特効の大ダメージを与えます。ゲリュオン、ディスパテル、ベルゼブブ、アスモデウスのみが賄賂（金貨）による停戦に応じますが、エクスカリバーやデーモンベインを構えているときは交渉に応じません。</p>
+<p>すべて階段の上り下りに追従してきます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>水の魔神 (water demon)</td>
+<td>青色</td>
+<td>8</td>
+<td>12</td>
+<td>-4</td>
+<td>30</td>
+<td>武器攻撃 1d3 · 爪 1d3 · 噛みつき 1d3</td>
+<td>遊泳, demonic.</td>
+</tr>
+<tr>
+<td><a href="#seduction">amorous demon</a></td>
+<td>灰色</td>
+<td>6</td>
+<td>12</td>
+<td>0</td>
+<td>70</td>
+<td>seduction (see Seduction)</td>
+<td>飛行, demonic. Displays as succubus or incubus by the 悪魔’s own
+randomly-assigned gender.</td>
+</tr>
+<tr>
+<td>角のある悪魔 (horned devil)</td>
+<td>茶色</td>
+<td>6</td>
+<td>9</td>
+<td>-5</td>
+<td>50</td>
+<td>武器攻撃 1d4 · 爪 1d4 · 噛みつき 2d3 · 毒針 1d3</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>イリニス (erinys)</td>
+<td>赤色</td>
+<td>7</td>
+<td>12</td>
+<td>2</td>
+<td>30</td>
+<td>武器攻撃 2d4 Str-エナジードレイン</td>
+<td>火炎耐性, 毒耐性. Grows stronger as your alignment record falls,
+gaining harder blows, flight, regeneration, and a second attack.</td>
+</tr>
+<tr>
+<td>棘の悪魔 (barbed devil)</td>
+<td>赤色</td>
+<td>8</td>
+<td>12</td>
+<td>0</td>
+<td>35</td>
+<td>爪 2d4 · 爪 2d4 sticky · 毒針 3d4</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>マリリス (marilith)</td>
+<td>赤色</td>
+<td>7</td>
+<td>12</td>
+<td>-6</td>
+<td>80</td>
+<td>武器攻撃 2d4 ×2 · 爪 2d4 ×4</td>
+<td>sees-不可視, demonic.</td>
+</tr>
+<tr>
+<td>ヴァロック (vrock)</td>
+<td>緑色</td>
+<td>8</td>
+<td>12</td>
+<td>0</td>
+<td>50</td>
+<td>爪 1d4 ×2 · 爪 1d8 ×2 · 噛みつき 1d6</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>ヘズロウ (hezrou)</td>
+<td>緑色</td>
+<td>9</td>
+<td>6</td>
+<td>-2</td>
+<td>55</td>
+<td>爪 1d3 ×2 · 噛みつき 4d4</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>骨の悪魔 (bone devil)</td>
+<td>灰色</td>
+<td>9</td>
+<td>15</td>
+<td>-1</td>
+<td>40</td>
+<td>武器攻撃 3d4 · 毒針 2d4 エナジードレイン-Str</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>氷の悪魔 (ice devil)</td>
+<td>白色</td>
+<td>11</td>
+<td>6</td>
+<td>-4</td>
+<td>55</td>
+<td>爪 1d4 ×2 · 噛みつき 2d4 · 毒針 3d4 冷気 · 接触 1d1 slow</td>
+<td>sees-不可視, demonic.</td>
+</tr>
+<tr>
+<td>ナルフェシニ (nalfeshnee)</td>
+<td>赤色</td>
+<td>11</td>
+<td>9</td>
+<td>-1</td>
+<td>65</td>
+<td>爪 1d4 ×2 · 噛みつき 2d4 · cast spell</td>
+<td>demonic.</td>
+</tr>
+<tr>
+<td>穴の悪霊 (pit fiend)</td>
+<td>赤色</td>
+<td>13</td>
+<td>6</td>
+<td>-3</td>
+<td>65</td>
+<td>武器攻撃 4d2 ×2 · 締め付け 2d4</td>
+<td>sees-不可視, demonic.</td>
+</tr>
+<tr>
+<td>サンデスティン (sandestin)</td>
+<td>灰色</td>
+<td>13</td>
+<td>12</td>
+<td>4</td>
+<td>60</td>
+<td>武器攻撃 2d6 ×2</td>
+<td>shapeshifter, 石化耐性.</td>
+</tr>
+<tr>
+<td>バルログ (balrog)</td>
+<td>赤色</td>
+<td>16</td>
+<td>5</td>
+<td>-2</td>
+<td>75</td>
+<td>武器攻撃 8d4 · 武器攻撃 4d6</td>
+<td>飛行, sees-不可視, demonic.</td>
+</tr>
+<tr>
+<td>ジョウビレックス (Juiblex)</td>
+<td>明緑</td>
+<td>50</td>
+<td>3</td>
+<td>-7</td>
+<td>65</td>
+<td>engulf 4d10 disease · 吐瀉 3d6 酸</td>
+<td>飛行, 水陸両用, 不定形, sees-不可視, demonic, 火炎耐性, 毒耐性,
+酸耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>イーノグ (Yeenoghu)</td>
+<td>赤紫</td>
+<td>56</td>
+<td>18</td>
+<td>-5</td>
+<td>80</td>
+<td>武器攻撃 3d6 · 武器攻撃 2d8 confuse · 爪 1d6 麻痺 · cast 2d6
+魔法</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>オーケス (Orcus)</td>
+<td>赤紫</td>
+<td>66</td>
+<td>9</td>
+<td>-6</td>
+<td>85</td>
+<td>武器攻撃 3d6 · 爪 3d4 ×2 · cast 8d6 spell · 毒針 2d4
+エナジードレイン-Str</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>ゲーリュオーン (Geryon)</td>
+<td>赤紫</td>
+<td>72</td>
+<td>3</td>
+<td>-3</td>
+<td>75</td>
+<td>爪 3d6 ×2 · 毒針 2d4 エナジードレイン-Str</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>ディスペータ (Dispater)</td>
+<td>赤紫</td>
+<td>78</td>
+<td>15</td>
+<td>-2</td>
+<td>80</td>
+<td>武器攻撃 4d6 · cast 6d6 spell</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>ベルゼブブ (Baalzebub)</td>
+<td>赤紫</td>
+<td>89</td>
+<td>9</td>
+<td>-5</td>
+<td>85</td>
+<td>噛みつき 2d6 エナジードレイン-Str · 凝視 2d6 stun</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>アスモデウス (Asmodeus)</td>
+<td>赤紫</td>
+<td>105</td>
+<td>12</td>
+<td>-7</td>
+<td>90</td>
+<td>爪 4d4 · cast 6d6 冷気</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 冷気耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>デモゴルゴン (Demogorgon)</td>
+<td>赤紫</td>
+<td>106</td>
+<td>15</td>
+<td>-8</td>
+<td>95</td>
+<td>cast 8d6 spell · 毒針 1d4 エナジードレイン-XL · 爪 1d6 disease
+×2</td>
+<td>飛行, sees-不可視, demonic, 火炎耐性, 毒耐性.</td>
+</tr>
+<tr>
+<td>デス (Death)</td>
+<td>明紫</td>
+<td>30</td>
+<td>12</td>
+<td>-5</td>
+<td>100</td>
+<td>接触 8d8 death ×2</td>
+<td>飛行, 自動回復, sees-不可視, teleport-control. Rider of the
+Apocalypse. Vanquish three to ascend.</td>
+</tr>
+<tr>
+<td>ペスティレンス (Pestilence)</td>
+<td>明紫</td>
+<td>30</td>
+<td>12</td>
+<td>-5</td>
+<td>100</td>
+<td>接触 8d8 pestilence ×2</td>
+<td>飛行, 自動回復, sees-不可視, teleport-control. Rider; spreads
+disease.</td>
+</tr>
+<tr>
+<td>フェミン (Famine)</td>
+<td>明紫</td>
+<td>30</td>
+<td>12</td>
+<td>-5</td>
+<td>100</td>
+<td>接触 8d8 famine ×2</td>
+<td>飛行, 自動回復, sees-不可視, teleport-control. Rider; drains
+nutrition to starvation.</td>
+</tr>
+<tr>
+<td>メイルデーモン (mail daemon)</td>
+<td>明青</td>
+<td>56</td>
+<td>24</td>
+<td>10</td>
+<td>127</td>
+<td>—</td>
+<td>飛行, 遊泳, sees-不可視, starts peaceful, 火炎耐性, 冷気耐性,
+睡眠耐性, 電撃耐性, 毒耐性, 石化耐性. Appears only to deliver in-game
+mail, then leaves.</td>
+</tr>
+<tr>
+<td>風のジン (djinni)</td>
+<td>黄色</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>30</td>
+<td>武器攻撃 2d8</td>
+<td>飛行, 毒耐性, 石化耐性.</td>
+</tr>
+<tr>
+<td>フヘトトルの使い (Minion of Huhetotl)</td>
+<td>橙色</td>
+<td>16</td>
+<td>12</td>
+<td>-2</td>
+<td>75</td>
+<td>武器攻撃 8d4 · 武器攻撃 4d6 · cast spell · 爪 2d6 盗み-amulet</td>
+<td>飛行, sees-不可視, demonic.</td>
+</tr>
+<tr>
+<td>ナルゾク (Nalzok)</td>
+<td>橙色</td>
+<td>16</td>
+<td>12</td>
+<td>-2</td>
+<td>85</td>
+<td>武器攻撃 8d4 · 武器攻撃 4d6 · cast spell · 爪 2d6 盗み-amulet</td>
+<td>飛行, sees-不可視, demonic.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ゴーレム-golems" class="level4">
+<h4>ゴーレム <code>'</code> (Golems <code>'</code>)</h4>
+<!-- audit
+2026-05-19:
+- 11 golem rows at monsters.h:2509-2594 (straw 2509, paper, rope, gold, leather, wood, flesh, clay, stone, glass, iron 2587).
+- Iron golem has G_NOCORPSE (monsters.h:2587); it leaves NO corpse, NOT a poisonous one.
+- poly_when_stoned (mondata.c:80-85) covers ALL golems except stone golem.
+- Iron golem AT_BREA/AD_DRST 4d6 poison breath at monsters.h:2592 — poison resistance critical.
+- Clay golem inscription "ATHEIST" wears off via shatter_floor message; clay golem corpse grants nothing on eat.
+-->
+<p>鉄、石、粘土のゴーレムは非常に強固で危険です。木や革のゴーレムは序盤の敵です。極めて稀に出現する黄金ゴーレムは、歩く財宝の山と言えます。</p>
+<p>すべてのゴーレムは精神を持たず、睡眠耐性と毒耐性を備えています。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>藁のゴーレム (straw golem)</td>
+<td>黄色</td>
+<td>3</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>爪 1d2 ×2</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>紙のゴーレム (paper golem)</td>
+<td>白色</td>
+<td>3</td>
+<td>12</td>
+<td>10</td>
+<td>0</td>
+<td>爪 1d3</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>紐のゴーレム (rope golem)</td>
+<td>茶色</td>
+<td>4</td>
+<td>9</td>
+<td>8</td>
+<td>0</td>
+<td>爪 1d4 ×2 · 締め付け 6d1</td>
+<td></td>
+</tr>
+<tr>
+<td>金のゴーレム (gold golem)</td>
+<td>黄色</td>
+<td>5</td>
+<td>9</td>
+<td>6</td>
+<td>0</td>
+<td>爪 2d3 ×2</td>
+<td>酸耐性.</td>
+</tr>
+<tr>
+<td>皮のゴーレム (leather golem)</td>
+<td>茶色</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>爪 1d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>木のゴーレム (wood golem)</td>
+<td>茶色</td>
+<td>7</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>爪 3d4</td>
+<td>冷気耐性.</td>
+</tr>
+<tr>
+<td>肉のゴーレム (flesh golem)</td>
+<td>赤色</td>
+<td>9</td>
+<td>8</td>
+<td>9</td>
+<td>30</td>
+<td>爪 2d8 ×2</td>
+<td>火炎耐性, 冷気耐性, 電撃耐性.</td>
+</tr>
+<tr>
+<td>土のゴーレム (clay golem)</td>
+<td>茶色</td>
+<td>11</td>
+<td>7</td>
+<td>7</td>
+<td>40</td>
+<td>爪 3d10</td>
+<td></td>
+</tr>
+<tr>
+<td>岩のゴーレム (stone golem)</td>
+<td>灰色</td>
+<td>14</td>
+<td>6</td>
+<td>5</td>
+<td>50</td>
+<td>爪 3d8</td>
+<td>石化耐性.</td>
+</tr>
+<tr>
+<td>ガラスのゴーレム (glass golem)</td>
+<td>水色</td>
+<td>16</td>
+<td>6</td>
+<td>1</td>
+<td>50</td>
+<td>爪 2d8 ×2</td>
+<td>酸耐性.</td>
+</tr>
+<tr>
+<td>鉄のゴーレム (iron golem)</td>
+<td>水色</td>
+<td>18</td>
+<td>6</td>
+<td>3</td>
+<td>60</td>
+<td>武器攻撃 4d10 · ブレス 4d6 毒</td>
+<td>no corpse. 火炎耐性, 冷気耐性, 電撃耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="海の怪物-sea-monsters" class="level4">
+<h4>海の怪物 <code>;</code> (Sea monsters <code>;</code>)</h4>
+<p>水中に生息する怪物です。巨大ウナギやクラーケンはプレイヤーの体に巻き付き、水中に引きずり込んで溺死させようとします。魔法の呼吸（Magical
+breathing）がなければ瞬時に命を落とします。</p>
+<p>すべての海の怪物は遊泳能力を持ち、水陸両用です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラゲ (jellyfish)</td>
+<td>青色</td>
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>0</td>
+<td>毒針 3d3 エナジードレイン-Str</td>
+<td>死体に毒あり, 毒耐性.</td>
+</tr>
+<tr>
+<td>ピラニア (piranha)</td>
+<td>赤色</td>
+<td>5</td>
+<td>18</td>
+<td>4</td>
+<td>0</td>
+<td>噛みつき 2d6 ×2</td>
+<td></td>
+</tr>
+<tr>
+<td>サメ (shark)</td>
+<td>灰色</td>
+<td>7</td>
+<td>12</td>
+<td>2</td>
+<td>0</td>
+<td>噛みつき 5d6</td>
+<td></td>
+</tr>
+<tr>
+<td>巨大ウナギ (giant eel)</td>
+<td>水色</td>
+<td>5</td>
+<td>9</td>
+<td>-1</td>
+<td>0</td>
+<td>噛みつき 3d6 · 接触 wrap</td>
+<td></td>
+</tr>
+<tr>
+<td>電気ウナギ (electric eel)</td>
+<td>明青</td>
+<td>7</td>
+<td>10</td>
+<td>-3</td>
+<td>0</td>
+<td>噛みつき 4d6 電撃 · 接触 wrap</td>
+<td>電撃耐性.</td>
+</tr>
+<tr>
+<td>クラーケン (kraken)</td>
+<td>赤色</td>
+<td>20</td>
+<td>3</td>
+<td>6</td>
+<td>0</td>
+<td>爪 2d4 ×2 · 締め付け 2d6 wrap · 噛みつき 5d4</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="トカゲ-lizards" class="level4">
+<h4>トカゲ <code>:</code> (Lizards <code>:</code>)</h4>
+<!-- audit
+2026-05-19:
+- 8 lizard rows at monsters.h:3260-3324 (newt 3260, gecko, iguana, baby croc, lizard, chameleon, croc, salamander 3317).
+- Lizard corpse cures stoning (eat.c:827-830, fix_petrification) and never rots (eat.c:1483, 1510).
+- Newt corpse occasionally restores 1-3 Pw via eye_of_newt_buzz (eat.c:1102-1123).
+- Chameleon is M2_SHAPESHIFTER (monsters.h:3299, sets shifter via newcham).
+- Salamander has 4-attack chain at monsters.h:3317-3324: weapon 2d8, touch 1d6 fire, hug 2d6, hug 3d6 fire.
+- Salamander is G_HELL (Gehennom-only spawn flag).
+-->
+<p>大半は無害です。<strong>トカゲの死体は石化を治療し、決して腐敗しません</strong>。コカトリス対策として必ず荷物に1つ入れておきましょう。ただし、メデューサの直接の凝視による石化は即死するため、トカゲの死体では救われません。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>モンスター名</th>
+<th>色</th>
+<th>レベル</th>
+<th>速度</th>
+<th>AC</th>
+<th>MR</th>
+<th>攻撃方法</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>イモリ (newt)</td>
+<td>黄色</td>
+<td>0</td>
+<td>6</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき 1d2</td>
+<td>遊泳, 水陸両用.</td>
+</tr>
+<tr>
+<td>ヤモリ (gecko)</td>
+<td>緑色</td>
+<td>1</td>
+<td>6</td>
+<td>8</td>
+<td>0</td>
+<td>噛みつき 1d3</td>
+<td></td>
+</tr>
+<tr>
+<td>イグアナ (iguana)</td>
+<td>茶色</td>
+<td>2</td>
+<td>6</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td></td>
+</tr>
+<tr>
+<td>ワニの子供 (baby crocodile)</td>
+<td>茶色</td>
+<td>3</td>
+<td>6</td>
+<td>7</td>
+<td>0</td>
+<td>噛みつき 1d4</td>
+<td>遊泳, 水陸両用.</td>
+</tr>
+<tr>
+<td>トカゲ (lizard)</td>
+<td>緑色</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+<td>10</td>
+<td>噛みつき 1d6</td>
+<td>石化耐性.</td>
+</tr>
+<tr>
+<td>カメレオン (chameleon)</td>
+<td>茶色</td>
+<td>6</td>
+<td>5</td>
+<td>6</td>
+<td>10</td>
+<td>噛みつき 4d2</td>
+<td>shapeshifter.</td>
+</tr>
+<tr>
+<td>ワニ (crocodile)</td>
+<td>茶色</td>
+<td>6</td>
+<td>9</td>
+<td>5</td>
+<td>0</td>
+<td>噛みつき 4d2 · 爪 1d12</td>
+<td>遊泳, 水陸両用.</td>
+</tr>
+<tr>
+<td>サラマンダー (salamander)</td>
+<td>橙色</td>
+<td>8</td>
+<td>12</td>
+<td>-1</td>
+<td>0</td>
+<td>武器攻撃 2d8 · 接触 1d6 火炎 · 締め付け 2d6 · 締め付け 3d6 火炎</td>
+<td>死体に毒あり, follows stairs, 火炎耐性, 睡眠耐性.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section
+id="固有能力および外在能力一覧表-intrinsic-and-extrinsic-tables"
+class="level3">
+<h3>固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Sleep res: dropped "dark one" (G_NOCORPSE). Shock res: dropped "shocking sphere" (G_NOCORPSE). Teleport: dropped "homunculus" (no M1_TPORT). All leave no corpse / don't convey.
+- Magic resistance: no role grants it intrinsically; removed "Wizard XL 17" (that's teleport control, attrib.c:86-88).
+- Teleport control: carrying the Amulet of Yendor BLOCKS controlled teleport (teleport.c:1185), it doesn't grant it.
+- Verified correct: all other role/race intrinsic gain levels, ring/amulet/dragon-scale grants.
+-->
+<!-- audit
+2026-06-01:
+- property list from include/prop.h:14-93 (68 enum entries; we cover the player-attainable subset and skip trouble states and INVULNERABLE)
+- role intrinsic gain levels from src/attrib.c:23-105 (innate structs per role: arc/bar/cav/hea/kni/mon/pri/ran/rog/sam/tou/val/wiz)
+- race intrinsic gain levels from src/attrib.c:91-103 (dwa_abil, elf_abil, gno_abil, orc_abil)
+- corpse intrinsic conferral logic at src/eat.c:903-951 (intrinsic_possible() — mconveys & MR_X check per resistance)
+- give-rate formula at src/eat.c:961-997 (chance=15 standard; chance=4 for killer-bee/scorpion poison; chance=1 telepathy; chance=10 teleport; chance=12 teleport control; chance=6 stone temp; chance=3 acid temp; (ptr->mlevel > rn2(chance)) gates the grant)
+- prayer-conferred intrinsics at src/pray.c:814,817,1321-1325 (HFire_resistance / HSleep_resistance / HFast / HStealth |= FROMOUTSIDE)
+- dragon scale base property at include/objects.h:497-553 (DRGN_ARMR macros — each color's primary granted property; gold has no power, shimmering is DEFERRED)
+- dragon scale special secondary effects at src/do_wear.c:798-884 (dragon_armor_handling switch: black=drain res, blue=fast, green=sick res, red=infravision, orange=free action, yellow=stone res, white=slow digestion, gold=affects hallucination state)
+- ring grants at include/objects.h:741-827 (RING macro 3rd arg = granted property)
+- amulet grants at include/objects.h:835-862 (AMULET macro 3rd arg = granted property)
+- helm of caution grants WARNING (objects.h:479-481)
+- helm of telepathy grants TELEPAT (objects.h:485-487)
+- cornuthaum grants CLAIRVOYANT to Wizard role only (objects.h:457-461)
+- alchemy smock grants POISON_RES (objects.h:630-632)
+- elven boots grant STEALTH (objects.h:715-717); elven cloak grants STEALTH (objects.h:615-617)
+- jumping boots grant JUMPING (objects.h:712-714)
+- water walking boots grant WWALKING (objects.h:709-711)
+- speed boots grant FAST (objects.h:707-709)
+- levitation boots grant LEVITATION (objects.h:725-727)
+- shield of reflection grants REFLECTING (objects.h:677-679)
+- shield of drain resistance NEW in 5.0 (objects.h:656-658)
+- shield of shock resistance NEW in 5.0 (objects.h:659-661)
+- cloak of protection grants PROTECTION + MC3 (objects.h:637-641)
+- cloak of magic resistance grants ANTIMAGIC + MC1 (objects.h:644-646)
+- cloak of invisibility grants INVIS (objects.h:641-643)
+- cloak of displacement grants DISPLACED (objects.h:648-650)
+- amulet of guarding grants PROTECTION + MC2 (objects.h:855-856)
+- amulet of magical breathing grants MAGICAL_BREATHING (objects.h:852-854)
+- amulet of life saving grants LIFESAVED (objects.h:838-839)
+- amulet of unchanging grants UNCHANGING (objects.h:848-849)
+- amulet of reflection grants REFLECTING (objects.h:850-851)
+- amulet of ESP grants TELEPAT (objects.h:835-836)
+- amulet of flying grants FLYING (objects.h:859-860)
+- amulet versus poison grants POISON_RES (objects.h:844-845)
+- Sunsword: extrinsic BLND_RES when wielded (artilist.h:209-212; youprop.h:160 EBlnd_resist comment)
+- Magicbane grants ANTIMAGIC + ESP + stun while wielded (artilist.h:145-147; src/artifact.c handlers)
+- Grayswandir grants HALLUC_RES via SPFX_HALRES (artilist.h:170; src/artifact.c:787)
+- Dragonbane grants REFLECTING via SPFX_REFLECT (artilist.h:157-160; artifact.c:867)
+- Eye of the Aethiopica grants ENERGY_REGENERATION + ESP carried (artilist.h:303-307; artifact.c:841)
+- Heart of Ahriman grants LEVITATION + STEALTH (artilist.h:225-230)
+- Sceptre of Might grants PROTECTION + CONFLICT (artilist.h:232-235)
+- Orb of Detection grants HALF_SPDAM + ESP + INVIS (artilist.h:219-223)
+- Master Key of Thievery grants TELEPORT_CONTROL + WARN + HALF_SPDAM + HALF_PHDAM (artilist.h:279-283)
+- Platinum Yendorian Express Card grants ESP + HALF_SPDAM (artilist.h:291-295)
+- Orb of Fate grants WARN + HALF_SPDAM + HALF_PHDAM (artilist.h:297-301)
+- Longbow of Diana grants ESP + REFLECTING (artilist.h:271-274)
+- Mitre of Holiness grants PROTECTION (artilist.h:265-269)
+- Tsurugi of Muramasa grants PROTECTION (artilist.h:285-289)
+- Trollsbane grants REGENERATION (artilist.h:182-184)
+- Staff of Aesculapius grants REGENERATION + drain res (artilist.h:248-253)
+- Orcrist warns of orcs via SPFX_WARN + M2_ORC (artilist.h:134-136)
+- Sting warns of orcs (artilist.h:138-140)
+- Grimtooth warns of elves via SPFX_WARN + M2_ELF (artilist.h:123-126)
+- ANTIMAGIC and HALLUC_RES are separate properties in prop.h (12 vs 24); magic resistance doesn't automatically block hallucination
+- BLND_RES intrinsic comes only from polyform into AD_BLND attack monsters per src/polyself.c:108; no corpse-grant path
+- HALLUC_RES intrinsic comes only from polyform into AD_HALU attack monsters per src/polyself.c:88; no corpse-grant path
+- SEE_INVIS not conveyed by any corpse per src/eat.c:1356 (intrinsic_possible returns false)
+- PASSES_WALLS, SWIMMING, DETECT_MONSTERS: polyform-only, no player-attainable persistent source
+-->
+<p>NetHack はプレイヤーに対して 68
+種類もの特性（プロパティ）を追跡・管理しています。そのうち冒険者が積極的に獲得を目指すべき有用な能力は、大きく
+5
+つの系統（ダメージ耐性、感覚と知覚、移動と空間挙動、戦闘と防御、特殊・実用機能）に分類されます。下記の表は各能力の効果、および信頼できるすべての獲得源を<strong>内在能力（Intrinsic:
+死体の摂食、レベル上昇、種族、祈りから獲得）</strong>と<strong>外在能力（Extrinsic:
+装備、所持品から獲得）</strong>に分けて網羅したものです。</p>
+<p>表を見るにあたり、4つの重要な基本ルールを把握しておきましょう：</p>
+<ul>
+<li><strong>死体からの獲得確率は通常、モンスターのレベルに比例して高くなる。</strong>
+さまよう目は確実にテレパシーを付与します。また、酸耐性や石化耐性は標準的な耐性判定よりも有利な確率が設定されています。これらの有用な例外は表中で個別に明記しています。</li>
+<li><strong>内在能力と外在能力は重複（スタック）しない。</strong>
+同一の耐性を両方から得ていても、効果が2倍になるわけではありません。しかし両方を揃えておくことは<strong>冗長性（バックアップ）</strong>として極めて有用です。例えばクロークを脱いでも、内在能力があれば守られ続けます。</li>
+<li><strong>修道士（Monk）は全職業中最も幅広い耐性獲得ラダーを持つ。</strong>
+レベル 1 から 17 にかけて 11 種類もの内在能力を自力で習得します。</li>
+<li><strong>ドラゴンの鱗鎧はあらゆるアイテムの中で最も多くの重要能力を網羅する。</strong>
+各色ごとに1つの基本耐性を備え、さらに複数の色が強力な<em>二次的効果</em>（黒は分解＋吸命耐性、青は電撃＋高速移動など）を併せ持ちます。完全な対応関係は表を参照してください。</li>
+</ul>
+<section id="ダメージ耐性-damage-resistances" class="level4">
+<h4>ダメージ耐性 (Damage resistances)</h4>
+<p>最も範囲が広く、最も活用される能力群です。大半は序盤に死体を食べることで獲得できます。魔法防御（Magic
+resistance）は獲得手段が極めて限られているため、昇天用装備セットでは防具、武器、アーティファクトの枠を1つ確保して補うのが基本です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力名</th>
+<th>効果</th>
+<th>内在能力の獲得源</th>
+<th>外在能力の獲得源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>火炎耐性</strong> (Fire resistance)</td>
+<td>罠、ブレス、攻撃による火炎ダメージを無効化（溶岩への水没死は防げない）。</td>
+<td>修道士 レベル11、僧侶
+レベル20。赤ドラゴン、火蟻、火の巨人、ヘルハウンド、サラマンダー、赤色モールドの死体。溶岩からの祈り救済。</td>
+<td>火炎耐性の指輪。赤ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>冷気耐性</strong> (Cold resistance)</td>
+<td>ブレスや攻撃による冷気ダメージを無効化。</td>
+<td>ワルキューレ レベル1、修道士
+レベル13。白ドラゴン、霜の巨人、冬狼、茶色モールド、青色ゼリーの死体。</td>
+<td>冷気耐性の指輪。白ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>睡眠耐性</strong> (Sleep resistance)</td>
+<td>睡眠ガス、睡眠光線、モンスターの睡眠攻撃を完全無効化。</td>
+<td>修道士 レベル1、エルフ
+レベル4。エルフ全般、ホムンクルスの死体。祈り救済。</td>
+<td>橙色ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>分解耐性</strong> (Disintegration resistance)</td>
+<td>黒ドラゴンの分解ブレスを無害化。</td>
+<td>黒ドラゴンの死体。</td>
+<td>黒ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>電撃耐性</strong> (Shock resistance)</td>
+<td>電撃ブレスを含むすべての電撃ダメージを無効化。</td>
+<td>修道士 レベル15。青ドラゴン、電気ウナギの死体。</td>
+<td>電撃耐性の指輪。青ドラゴンの鱗 /
+鱗鎧。電撃耐性の盾（5.0新要素）。</td>
+</tr>
+<tr>
+<td><strong>毒耐性</strong> (Poison resistance)</td>
+<td>毒針、毒のある死体、毒ブレス、筋力を奪う毒攻撃を完全防御。</td>
+<td>野蛮人 レベル1、医師 レベル1、オーク レベル1、観光客
+レベル20、修道士
+レベル3。殺人蜂やサソリの死体（獲得確率が極めて高い）。緑ドラゴン、ナーガ、クアジット等の毒死体。</td>
+<td>毒耐性の指輪。毒の魔除け。錬金術の仕事着（クローク）。緑ドラゴンの鱗
+/ 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>酸耐性</strong> (Acid resistance)</td>
+<td>酸ダメージを無効化。死体からの獲得は時間制限付きで、フロア移動でリセットされる。</td>
+<td>酸のブロッブ、茶色プリン、黄ドラゴンの死体（高確率、時間制限あり）。</td>
+<td>黄ドラゴンの鱗 / 鱗鎧（装備中恒久）。</td>
+</tr>
+<tr>
+<td><strong>石化耐性</strong> (Stoning resistance)</td>
+<td>肉体の石化に対する完全免疫。死体からの獲得は一時的。黄ドラゴンの鎧は装備中持続。</td>
+<td>酸のブロッブ、トカゲの死体（高確率、時間制限あり）。</td>
+<td>黄ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>吸命耐性</strong> (Drain resistance)</td>
+<td>レイス、吸血鬼、生命力吸収武器（ストームブリンガー等）による経験値レベルドレインを遮断。</td>
+<td>死体からは獲得不可。吸血鬼やリッチへの変身で獲得。</td>
+<td>黒ドラゴンの鱗 / 鱗鎧。吸命耐性の盾（5.0新要素）。<a
+href="#excalibur-artifact">エクスカリバー</a>、ストームブリンガー、<a
+href="#staff-of-aesculapius">アスクレピオスの杖</a>の装備。</td>
+</tr>
+<tr>
+<td><strong>病気耐性</strong> (Sickness resistance)</td>
+<td>致命的な病気や食中毒を遮断。</td>
+<td>死体からは獲得不可。</td>
+<td>緑ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>魔法防御</strong> (Magic resistance)</td>
+<td>死の光線、マジックミサイル、変身ビーム、死の指の呪文を完全無効化。魔法の罠は防げない。<a
+href="#magic-cancellation">MC</a>とは異なる。</td>
+<td>いかなる職業も内在習得不可。特定の変身形態で保有。</td>
+<td>魔法を防ぐクローク。灰色ドラゴンの鱗 / 鱗鎧。<a
+href="#magicbane">マジックベイン</a>の装備。</td>
+</tr>
+<tr>
+<td><strong>幻覚耐性</strong> (Hallucination resistance)</td>
+<td>黒い光や幻覚の薬による幻覚状態を遮断。</td>
+<td>幻覚攻撃を持つモンスター（黒い光等）への変身のみ。</td>
+<td>金色ドラゴンの鱗 / 鱗鎧。<a
+href="#grayswandir">グレイスワンディール</a>の装備。</td>
+</tr>
+<tr>
+<td><strong>盲目耐性</strong> (Blindness resistance)</td>
+<td>黄色い光の閃光による盲目化を遮断。</td>
+<td>盲目攻撃を持つモンスターへの変身のみ。</td>
+<td><a href="#sunsword">サンソード</a>の装備。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="感覚と知覚-senses-and-perception" class="level4">
+<h4>感覚と知覚 (Senses and perception)</h4>
+<p>テレパシーと警告は、敵が接近する前にその存在と位置を正確に感知させてくれます。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力名</th>
+<th>効果</th>
+<th>内在能力の獲得源</th>
+<th>外在能力の獲得源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>テレパシー</strong> (ESP)</td>
+<td>盲目時にフロア全体の精神を持つモンスターを探知（視覚があるときは限定半径内）。</td>
+<td>さまよう目（確実獲得）、マインドフレア、マスターマインドフレアの死体。</td>
+<td>ESPの魔除け。テレパシーの兜。<a
+href="#eye-of-the-aethiopica">アイソピアの目</a>（所持）、<a
+href="#orb-of-detection">探知の宝珠</a>（所持）、<a
+href="#platinum-yendorian-express-card">ヤンドールのExpressカード</a>（所持）、<a
+href="#longbow-of-diana">ディアナの長弓</a>（所持）、<a
+href="#magicbane">マジックベイン</a>（装備）。</td>
+</tr>
+<tr>
+<td><strong>不可視視認</strong> (See invisible)</td>
+<td>透明な生物、および透明化した自分自身を視認できる。</td>
+<td>修道士 レベル1、野伏 レベル15。死体からは獲得不可。</td>
+<td>不可視視認の指輪。</td>
+</tr>
+<tr>
+<td><strong>警告</strong> (Warning)</td>
+<td>約10マス以内にいるレベル4以上の敵対モンスターを感知表示（数字はモンスターレベル÷4）。</td>
+<td>洞窟人 レベル15、医師 レベル15、修道士 レベル7、僧侶
+レベル15、魔法使い レベル15。祈り救済。</td>
+<td>警告の指輪。警戒の兜。<a
+href="#master-key-of-thievery">盗賊の合鍵</a>、<a
+href="#orb-of-fate">運命の宝珠</a>、<a
+href="#bane-weapons">オクリスト</a>、<a
+href="#bane-weapons">スティング</a>、<a
+href="#bane-weapons">グリムトゥース</a>（すべて所持）。</td>
+</tr>
+<tr>
+<td><strong>特定種族への警告</strong></td>
+<td>特定の1種族に限定された警告表示。</td>
+<td>内在能力としては存在しない。</td>
+<td>オクリスト /
+スティング（オーク警告）、グリムトゥース（エルフ警告）など。</td>
+</tr>
+<tr>
+<td><strong>探索</strong> (Searching)</td>
+<td>約85ターンに1回自動的に周囲を探索し、隠し扉や通路、罠を発見する。</td>
+<td>考古学者 レベル1、修道士 レベル9、野伏 レベル1、盗賊
+レベル10、観光客 レベル10。</td>
+<td>探索の指輪。<a
+href="#excalibur-artifact">エクスカリバー</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>透視</strong> (Clairvoyance)</td>
+<td>周囲のダンジョン地形を周期的に魔法の眼で開拓視認。</td>
+<td>内在能力としては存在しない。</td>
+<td>とんがり帽子（魔法使い専用）。</td>
+</tr>
+<tr>
+<td><strong>赤外線視覚</strong> (Infravision)</td>
+<td>暗闇の中で熱源（温血生物）を感知。</td>
+<td>ドワーフ、エルフ、ノーム、オークの各種族（レベル1）。</td>
+<td>赤ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="移動と空間挙動-movement-and-spatial-behavior"
+class="level4">
+<h4>移動と空間挙動 (Movement and spatial behavior)</h4>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力名</th>
+<th>効果</th>
+<th>内在能力の獲得源</th>
+<th>外在能力の獲得源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>高速移動</strong> (Fast / intrinsic speed)</td>
+<td>各移動時に約1/3の確率で追加行動。実効速度が12から約16に向上。</td>
+<td>修道士 レベル1、侍 レベル1、ワルキューレ レベル7、考古学者
+レベル10、野蛮人 レベル7、洞窟人 レベル7、騎士 レベル7。祈り救済。</td>
+<td>韋駄天の靴（<strong>極めて高速 / Very
+Fast</strong>、約2/3で追加行動、実効速度約20）。青ドラゴンの鱗 /
+鱗鎧（極めて高速）。</td>
+</tr>
+<tr>
+<td><strong>跳躍</strong> (Jumping)</td>
+<td><code>#jump</code> コマンドにより近くの任意のマスへ跳躍移動。</td>
+<td>騎士 レベル1。</td>
+<td>跳躍の靴。跳躍の呪文。</td>
+</tr>
+<tr>
+<td><strong>テレポート</strong> (Teleportation / 不制御)</td>
+<td>数百ターンごとにランダムにテレポート。制御と組み合わせると極めて強力。</td>
+<td>テングの死体。</td>
+<td>テレポートの指輪。</td>
+</tr>
+<tr>
+<td><strong>テレポート制御</strong> (Teleport control)</td>
+<td>テレポート時に目的地の座標を自由に選択可能。</td>
+<td>修道士 レベル17、魔法使い レベル17。テングの死体。</td>
+<td>テレポート制御の指輪。<a
+href="#master-key-of-thievery">盗賊の合鍵</a>の所持。（イェンダーの魔除けの所持中は制御テレポートが<strong>阻害</strong>される）。</td>
+</tr>
+<tr>
+<td><strong>浮遊</strong> (Levitation)</td>
+<td>常に宙に浮く。水面、溶岩、氷を渡れる。階段を降りられず、床の物を拾えない。</td>
+<td>なし。</td>
+<td>浮遊の指輪。浮遊の靴（呪われていると脱げない）。<a
+href="#heart-of-ahriman">アリマンの心臓</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>飛行</strong> (Flying)</td>
+<td>浮遊と同様だが、階段の昇降、アイテムの回収、任意着地が可能。</td>
+<td>飛行モンスターへの変身。</td>
+<td>飛行の魔除け（5.0新要素）。</td>
+</tr>
+<tr>
+<td><strong>水上歩行</strong> (Water walking)</td>
+<td>水上や氷上を通常の床と同様に歩行可能。耐火加工された靴なら溶岩も渡れる。</td>
+<td>特定モンスター（アンデッド等）への変身。</td>
+<td>水上歩行の靴。</td>
+</tr>
+<tr>
+<td><strong>魔法の呼吸</strong> (Magical breathing)</td>
+<td>ウナギやクラーケンに巻き込まれても溺死せず、悪臭の雲の中でも生存可能。</td>
+<td>内在能力としては存在しない。</td>
+<td>魔法の呼吸の魔除け。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="戦闘と防御-combat-and-defense" class="level4">
+<h4>戦闘と防御 (Combat and defense)</h4>
+<p>昇天用装備セットを支える多層防御：AC、反射、自由行動、自動回復など。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力名</th>
+<th>効果</th>
+<th>内在能力の獲得源</th>
+<th>外在能力の獲得源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>防護</strong> (Protection)</td>
+<td>ACを改善（数値が低下）。また装備中の外在源1つにつき+1の<a
+href="#magic-cancellation">MC</a>を付与（守護の魔除けは+2）。</td>
+<td>平和的な僧侶への多額の寄付（必要金額はランダム）。</td>
+<td>防護の指輪。守りのクローク（MC3併託）。守護の魔除け（MC2併託）。<a
+href="#sceptre-of-might">力の笏</a>、<a
+href="#mitre-of-holiness">神聖なる司教帽</a>、<a
+href="#tsurugi-of-muramasa">村正の大刀</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>反射</strong> (Reflection)</td>
+<td>遠距離魔法攻撃（光線、ブレス）を術者へ跳ね返す。</td>
+<td>内在能力としては存在しない。</td>
+<td>反射の魔除け。銀ドラゴンの鱗 / 鱗鎧。反射の盾。<a
+href="#bane-weapons">ドラゴンベイン</a>または<a
+href="#longbow-of-diana">ディアナの長弓</a>の装備。</td>
+</tr>
+<tr>
+<td><strong>自動回復</strong> (Regeneration)</td>
+<td>自然回復に加え、毎ターンHPが1回復する。</td>
+<td>トロール等の回復モンスターへの変身。</td>
+<td>回復の指輪。<a href="#bane-weapons">トロールベイン</a>または<a
+href="#staff-of-aesculapius">アスクレピオスの杖</a>の装備。</td>
+</tr>
+<tr>
+<td><strong>魔力自動回復</strong> (Energy regeneration)</td>
+<td>呪文の魔力（Pw）が急速に回復する。</td>
+<td>内在能力としては存在しない。</td>
+<td><a href="#eye-of-the-aethiopica">アイソピアの目</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>魔法半減</strong> (Half spell damage)</td>
+<td>モンスターが唱える呪文による被ダメージを半減。</td>
+<td>内在能力としては存在しない。</td>
+<td><a href="#orb-of-detection">探知の宝珠</a>、<a
+href="#master-key-of-thievery">盗賊の合鍵</a>、<a
+href="#platinum-yendorian-express-card">ヤンドールのExpressカード</a>、<a
+href="#orb-of-fate">運命の宝珠</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>物理ダメージ半減</strong> (Half physical damage)</td>
+<td>近接攻撃および物理遠距離攻撃による被ダメージを半減。</td>
+<td>内在能力としては存在しない。</td>
+<td><a href="#master-key-of-thievery">盗賊の合鍵</a>または<a
+href="#orb-of-fate">運命の宝珠</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>自由行動</strong> (Free action)</td>
+<td>さまよう目、ゼラチンキューブ、グール、モンスターの呪文による麻痺を完全無効化。減速は防げない。</td>
+<td>特定モンスターへの変身。</td>
+<td>自由行動の指輪。橙ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>忍び足</strong> (Stealth)</td>
+<td>睡眠中のモンスターの近くを歩いても目覚めさせず、気付かれずに通過できる。</td>
+<td>考古学者 レベル5、野蛮人 レベル15、修道士 レベル5、野伏
+レベル7、盗賊 レベル1、侍 レベル15、ワルキューレ
+レベル3。祈り救済。</td>
+<td>忍び足の指輪。エルフの靴。エルフのクローク。<a
+href="#heart-of-ahriman">アリマンの心臓</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>不可視</strong> (Invisibility)</td>
+<td>不可視視認を持たないモンスターはプレイヤーの正確なマスを見失うため命中率が激減。攻撃すると位置が露見する。</td>
+<td>ストーカーへの変身。不可視の薬（一時的）。</td>
+<td>不可視の指輪。透明のクローク。<a
+href="#orb-of-detection">探知の宝珠</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>幻影</strong> (Displacement)</td>
+<td>モンスターの目にはプレイヤーが隣接する別のマスにいるように映り、遠距離攻撃が外れやすくなる。</td>
+<td>内在能力としては存在しない。</td>
+<td>幻影のクローク。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="特殊および実用能力-special-and-utility" class="level4">
+<h4>特殊および実用能力 (Special and utility)</h4>
+<p>満腹度、変身、生存、群衆制御に関わる特殊能力です。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力名</th>
+<th>効果</th>
+<th>内在能力の獲得源</th>
+<th>外在能力の獲得源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>消化遅延</strong> (Slow digestion)</td>
+<td>通常の空腹進行を完全に停止。特殊な栄養吸収攻撃などによる飢餓は防げない。</td>
+<td>なし。</td>
+<td>消化遅延の指輪。白ドラゴンの鱗 / 鱗鎧。</td>
+</tr>
+<tr>
+<td><strong>変身制御</strong> (Polymorph control)</td>
+<td>罠、指輪、薬、杖、呪文によって変身する際、変身後の姿を自由に選択できる。</td>
+<td>なし。</td>
+<td>変身制御の指輪。</td>
+</tr>
+<tr>
+<td><strong>不変</strong> (Unchanging)</td>
+<td>現在の姿を固定する。あらゆる変身を防ぎ、<em>緑スライム化のカウントダウンも停止させる</em>。「スライムに触られた」際の標準的対処法。</td>
+<td>なし。</td>
+<td>不変の魔除け。</td>
+</tr>
+<tr>
+<td><strong>能力維持</strong> (Sustain ability)</td>
+<td>6大基本能力値（Str, Dex, Con, Int, Wis,
+Cha）が消耗、鍛錬、薬、毒などの能力低下攻撃によって変動しなくなる。</td>
+<td>なし。</td>
+<td>能力維持の指輪。</td>
+</tr>
+<tr>
+<td><strong>変身生物除け</strong> (Protection from shape changers)</td>
+<td>周囲のカメレオン、ドッペルゲンガー、サキュバス等の変身能力を封じる。</td>
+<td>なし。</td>
+<td>変身生物除けの指輪。</td>
+</tr>
+<tr>
+<td><strong>紛争</strong> (Conflict)</td>
+<td>周囲のモンスター同士を同士討ちさせる。効果に巻き込まれた店主はプレイヤーに敵対する。</td>
+<td>なし。</td>
+<td>紛争の指輪。<a href="#sceptre-of-might">力の笏</a>の所持。</td>
+</tr>
+<tr>
+<td><strong>命の救済</strong> (Life saving)</td>
+<td>死亡時に魔除けが身代わりとなって破壊され、HPを
+<code>50 + 10 × (Con ÷ 2)</code>（最大HP上限）まで瞬時に全快復活させる。</td>
+<td>なし。</td>
+<td>命の救済の魔除け。</td>
+</tr>
+<tr>
+<td><strong>装飾</strong> (Adornment)</td>
+<td>指輪の強化値が魅力（Charisma）に加算される。買い物や誘惑対策に有用。</td>
+<td>なし。</td>
+<td>装飾の指輪。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>一部の能力は実質的に<strong>変身時限定</strong>です：<em>遊泳</em>および<em>壁通過</em>（ゾーン、土の精、ゴースト）。<em>怪物探知</em>は杖や巻物による一過性のパルス効果としてのみ利用可能です。</p>
+</section>
+</section>
+<section id="前回からの変更点-what-changed-since-last-time"
+class="level3">
+<h3>前回からの変更点 (What Changed Since Last Time)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- No "minimum sacrifice value" gate; value only caps artifact quality (pray.c:1784, artifact.c:195). Reworded.
+- Sunsword #invoke costs 25 Pw (SPELL_LEV_PW(5)), not 5 (artifact.c:2095).
+- "DSM gives two resistances" overstates: only black/green/yellow give two resistances; others give one + a perk (do_wear.c:806-883). Reworded.
+- Crystal ball is a TOOL (objects.h:938); is_crackable needs ARMOR_CLASS (objclass.h:201), so it still shatters. Only crystal plate mail cracks.
+- Gold DSM light radius is 3 (uncursed), not 2 (light.c:899-907).
+- Verified correct: spell-level changes, touch-of-death rework, HP-regen formula, two-handed 3/2, Excalibur 1/30-vs-1/6, priest-donation randomization, unicorn-horn no-restore, BoH scatter, candle sqrt light, new monsters/conducts/shop mechanics.
+-->
+<!-- audit
+2026-05-19:
+- chain lightning is level 2 NODIR (objects.h:1409-1411 SPELL("chain lightning",..., P_ATTACK_SPELL, prob 25, delay 4, level 2, mgc 1, NODIR))
+- "mummy withering" was fabricated; no such mechanic in 5.0
+- Elbereth -5 alignment penalty is NOT a 5.0 change (engrave.c writeable_engrave, predates 5.0)
+- supply chests appear strictly above the Oracle (mklev.c:1037 `u.uz.dlevel < oracle_level.dlevel`), not "the first ten levels"
+- mind flayer: spell loss (uhitm.c:3266 losespells) and skill drain (uhitm.c:3270 drain_weapon_skill) persist; map/ID amnesia is gone (no forget_map call in eat_brains, eat.c:603)
+- sink dipping is for potions only: non-potions just take water_damage (fountain.c:716-733)
+- touch of death still has a binary success gate: without Antimagic, rn2(m_lev) > 12 applies the effect; Antimagic produces "Lucky for you, it didn't work!" (mcastu.c:391-407)
+- the 5.0 change is the unprotected result: 50+8d6 damage plus half that amount drained from max HP instead of the old instadeath (mcastu.c:315-347; fixes5-0-0.txt:538)
+- iron bars were added in 3.3.0, not 3.6 (fixes3-3-0.txt:349)
+- gold dragon scale mail grants only hallucination resistance + innate light, not two resistances (do_wear.c:846-851, objects.h:505 DRGN_ARMR slot 0)
+- bag-of-holding explosion scatters contents via scatter() rather than destroying them all; only 1/13 items vanish per is_boh_item_gone (pickup.c:2509-2532)
+- death drops delobj() any rolled FOOD_CLASS item unless the monster has M2_COLLECT — corpses are still left (mon.c:3597-3604)
+-->
+<p>NetHack 5.0.0 は 2026 年 5 月 2
+日にリリースされました。旧バージョン（3.6.x
+以前）の経験者の方は、まず以下の最初のグループから確認してください。これらは古い習慣や反射的行動がそのまま命取りとなる変更点です。</p>
+<section id="new-dangers" class="level4">
+<h4>改めるべき古い習慣</h4>
+<ul>
+<li><strong>ユニコーンの角は低下した能力値を回復しなくなりました。</strong>
+能力値回復には能力回復の薬（または回復の魔法）を用意してください。</li>
+<li><strong>自分自身に振った加速の杖は恒久的な加速を付与しなくなりました。</strong>
+恒久加速には加速の薬が必要です。</li>
+<li><strong>希釈による錬金術は、1回の浸しで最大2服の薬しか変換できなくなりました。</strong>
+未希釈の薬同士の調合なら引き続きスタック一括変換が可能です。爆発確率は通常10%ですが、錬金術の仕事着を着ていれば約1/30に軽減されます。</li>
+<li><strong>ゲヘナの灼熱の床に薬を置くと、高確率で粉砕します。</strong>
+また、魔王や大悪魔がフロア内で生存している間は、同一フロア内のテレポートも封殺されます。</li>
+<li><strong>モンスターが施錠されていない保管箱を漁り、適切な死体の山をアンデッドとして蘇生させるようになりました。</strong>
+アイテムの保管庫を離れる際は、必ず箱に鍵をかけてください。</li>
+<li><strong>呪われた杖を文字彫りテストすると爆発することがあります。</strong>
+貴重そうな杖をテストする前に、可能な限りBUC（祝福・呪い）を識別してください。</li>
+<li><strong>低レベルモンスターの生贄では幸運値を稼げなくなりました。</strong>
+現在の幸運値が死体の難易度（モンスターレベル）を上回っている場合、生贄を捧げても幸運は上昇しません。幸運の維持には幸運の石を活用してください。</li>
+<li><strong>ワルキューレの初期装備が長剣から通常の槍に変更されました。</strong>
+経験レベル5以上の騎士によるエクスカリバーの泉浸し（1/6の確率）は健在ですが、他の秩序職業の成功率は1/30です。</li>
+<li><strong>死の指（Touch of
+death）の呪文は即死効果ではなくなりました。</strong>
+魔法防御がない場合、50+8d6
+の大ダメージを受け、さらにその半分の値が最大HP上限から直接削り取られます（魔法防御があれば完全に防げます）。</li>
+</ul>
+</section>
+<section id="新たな道具とチャンス-new-tools-and-opportunities"
+class="level4">
+<h4>新たな道具とチャンス (New Tools and Opportunities)</h4>
+<ul>
+<li><strong>ドラゴンの鱗鎧が強力な二次効果を持つようになりました。</strong>
+黒は吸命耐性、緑は病気耐性、青は高速移動、橙は自由行動、白は消化遅延、赤は赤外線視覚を追加付与し、金は幻覚耐性に加えて半径3マスの恒久光源となります。</li>
+<li><strong>警戒の兜 (helm of caution)</strong>
+が警告能力を付与します。<strong>飛行の魔除け (amulet of flying)</strong>
+は自身と騎乗ペットの両方に飛行を与え、<strong>守護の魔除け (amulet of
+guarding)</strong> は AC+2 および MC+2 を提供します。</li>
+<li><strong>複数のアーティファクトに発動効果や新能力が追加されました。</strong>
+スニッカースニーは毎ターン1回無料の長柄武器スタイル間合い攻撃を繰り出せます。サンソードは25
+Pwを消費して対象を盲目にします。トロールベインは装備中に自動回復します。デーモンベインは僧侶が生贄で最初に確定入手する銀のメイスとなりました。</li>
+<li><strong>新たな「願い」の入手源が登場しました。</strong>
+ヴラドの玉座に座り続けることで最終的に願いを獲得でき、イェンダーの魔除けを最初に拾い上げた際にも願いが1回与えられます。またオルクスの町には魔法のランプまたは魔法のマーカーが確定生成されます。</li>
+<li><strong>祝福された変身の薬は、その1回の変身において変身先を自由に制御（選択）できます。</strong>
+変身した吸血鬼は <code>#monster</code>
+コマンドで吸血鬼、こうもり、霧の雲を自在に切り替えられます。</li>
+<li><strong>重石（ロードストーン）は呪われていても、接地している間は吹き飛ばし（ノックバック）を防ぎます。</strong>
+重量負担は依然として過酷ですが、使い道が生まれました。</li>
+<li><strong>補給の宝箱 (supply chests)</strong>
+が神託所より上の浅い階層の約2/3の確率で出現し、序盤の回復や強化アイテムを提供してくれます。</li>
+<li><strong>ペットが死体を食べて耐性を獲得できるようになりました。</strong>
+死亡したペットも、その死体の上に乗って同属性の祭壇で祈ることで復活させることができます。</li>
+<li><strong>流し台（シンク）に薬を浸すと、メッセージによって薬が識別されます。</strong>
+薬は失われますが、識別の巻物を節約できます。</li>
+<li><strong>連鎖雷撃 (chain lightning)</strong>
+が新たなレベル2の攻撃呪文として追加され、周囲の敵を次々と感電させます。通常フロアに新たな<strong>テーマ別部屋</strong>が生成されるようになり、4種の新モンスター（ディスプレイスビースト、遺伝子工学者、金ドラゴン、子金ドラゴン）が登場しました。</li>
+</ul>
+</section>
+<section id="その他の知っておくべき変更点-other-changes-worth-knowing"
+class="level4">
+<h4>その他の知っておくべき変更点 (Other Changes Worth Knowing)</h4>
+<ul>
+<li><em>魅了 (charm monster)</em> はレベル5、<em>睡眠 (sleep)</em>
+はレベル3、<em>怪物混乱 (confuse monster)</em>
+はレベル1に変更されました。魔法書を使用（apply）することで、本の磨耗度を確認できます。</li>
+<li>マインドフレアの触手攻撃は、マップの記憶や識別済みの記憶を消去しなくなりました。知力の低下、記憶していた呪文の忘却、武器スキルの経験値ドレインは依然として発生します。</li>
+<li>軽量化の鞄の爆発は、中身を全消滅させるのではなくフロア中に散乱（scatter）させるようになりました（約1/13のアイテムは消滅します）。</li>
+<li>僧侶への寄付金額がランダム化されました。防護を得るには、要求された金額の2倍以上3倍未満を寄付してください。それ以上寄付しても感謝されるだけで、過小な寄付は今後の要求額を引き上げます。</li>
+<li>特殊フロアのマップが左右反転（ミラーリング）して生成されることがあり、暗記したマップが反転している場合があります。新たなコンダクトとして赤貧（Pauper）、ペットなし、完全聾、倉庫番、ボーンズなし、初期キャラ固定が公式記録されます。</li>
+<li>両手持ち武器は筋力ダメージボーナスの
+150%（1.5倍）を受けます。自然治癒によるHP回復は毎ターン
+<code>(XL + 耐久力)%</code>
+の確率判定となり、自動回復能力はそれに加えて毎ターン1
+HPを回復します。</li>
+<li>財宝に執着するモンスター（Covetous）は、どちらの階段へも逃走するようになりました。城のフロア生成時にマスターリッチやアーチリッチが初期配置されることはなくなりました。</li>
+<li>水晶の鎧は段階的にひび割れ、耐ひび割れ加工が可能になりました。蝋燭による光源半径は線形ではなく平方根ルールで拡大します。</li>
+<li>耐性を付与する死体、缶詰、卵は店での販売価格が高くなりました。モンスター死亡時に無関係な食料品をランダムドロップすることはなくなりました。</li>
+<li>店主は店内の落とし穴や蜘蛛の巣を除去するようになり、平和的な店主に接触して歩き込むと自動的に借金を精算してから所持品確認プロンプトへ進みます。</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="有用な知識の索引-index-of-useful-knowledge" class="level2">
+<h2>有用な知識の索引 (Index of Useful Knowledge)</h2>
+<p>:::</p>
+<hr />
+<p><em>You descend the stairs…</em></p>
+<hr />
+<section id="謝辞-acknowledgements" class="level3">
+<h3>謝辞 (Acknowledgements)</h3>
+<!-- audit
+2026-05-19:
+- NetHack 1987, Fenlason -> Brouwer -> Stephenson lineage verified (Wikipedia, dat/history)
+- DevTeam founders, Izchak Miller died 1994, Hack 1982 origin all verified
+- WCST acronym is not expanded in the original Waterman file; Wheaton, IL distribution started 1991 (pdwaterman.com)
+- Kevin Hugo is on the official 5.0 core team list (dat/history:314)
+- nethackwiki.com returned 403, so wiki article counts and some spoiler-author attributions are unverified
+-->
+<p>NetHack は 1987
+年以来、世界中のプレイヤーによってプレイされ、罵倒され、愛され、そして詳細に記録され続けてきました。ゲーム本体は、現存する最長寿のオープンソースプロジェクトの一つを維持し続けてきた開発者の緩やかな集団である「NetHack
+DevTeam」の成果です。しかし、この迷宮で実際に生き延びるための攻略法や知恵、ドキュメントの数々は、プレイヤーたち自身の手によって築き上げられてきました。</p>
+<p>草創期、知識は Usenet のニュースグループ
+<strong>RGRN</strong>（rec.games.roguelike.nethack）を通じて共有されました。何千人ものプレイヤーが質問を投稿し、戦略について議論し、自ら進んで秘密を明かそうとしないゲームの知識を少しずつ共有財産として蓄積していったのです。それは
+Wiki も Reddit も Discord
+も存在しなかった時代の話です。コカトリスの死体を武器として振り回せるかどうかを知りたければ、RGRN
+の過去ログを検索し、自分より先に誰かが試していることを祈るしかありませんでした。そして大抵の場合、先人がすでに試していたのです。</p>
+<p>RGRN
+はコミュニティに多くの用語をもたらしました。<strong>YASD</strong>（<em>Yet
+Another Stupid Death</em> /
+またしてもくだらない死）は、「やってはならないと分かっていたはずのこと」で死亡した際に投稿される反省記事です。<strong>YAFAP</strong>（<em>Yet
+Another First Ascension Post</em> /
+またしても最初の昇天報告）は、ついにゲームをクリアした際の歓喜の報告です。どちらの伝統も、現在の
+Wiki、Reddit、Discord のコミュニティへと受け継がれています。</p>
+<p>それらの対話から、最初の「スポイラー（解析・攻略情報）ファイル」が生まれました。あらゆるアイテム、あらゆるモンスター、あらゆる相互作用を網羅したプレーンテキストの目録です。それらは手作業で書き起こされ、ゲームのソースコードと照合され、惜しみなく無償で共有されました。</p>
+<p>本ガイドは、彼らの偉大な先駆的成果の上に成り立っています。特に：</p>
+<p><strong>Kevin Hugo 氏</strong>は NetHack 3.2.2
+向けの最初の包括的なスポイラーセットを編纂し、あらゆるアイテム分類、モンスターのステータス、呪文の計算式、スコア計算を極めて几帳面にまとめ上げました。<strong>Dylan
+O’Donnell 氏</strong>はその全セットを 3.4.3
+向けに改訂・拡張し、数年間にわたって維持しました。両氏によるスポイラー群は、薬、巻物、杖、指輪、魔除け、道具、武器、防具、アーティファクト、食料、モンスター、呪文などを網羅する全38ファイルからなる不動の決定版リファレンスとなりました。本ガイドの第4部および第5部に掲載されているデータ一覧表は、彼らの作業と照合・検証されています（BSD風ライセンスの下で公開）。</p>
+<p><strong>Paul Waterman 氏</strong>は 1991 年にウィートン大学で「WCST
+NetHack
+Spoilers」を執筆しました。これはゲーム全体を軽妙で主観的な語り口で解説した長大な単一ドキュメントでした。Hugo
+氏と O’Donnell 氏が参照マニュアルを著したのに対し、WCST
+はまるで「旅行ガイドブック」でした。単に事象を説明するだけでなく、それにどう対処すべきかを説いたのです。これは本ガイドのトーンと構成における原初の着想となりました（本文の直接の引用はありません）。</p>
+<p><strong>Kate Nepveu 氏</strong>は steelypips.org
+を運営し、Hugo/O’Donnell スポイラー、RGRN
+の名作記事、そして自身の優れたガイド群（本ガイドの罠の章で引用したエルベレス
+FAQ など）をウェブ上で保存し続けました。Kate
+氏の根気強いアーカイブ作業がなければ、Usenet
+の衰退とともに多くの貴重な知見が失われていたはずです。</p>
+<p>さらに、以下の <strong>RGRN
+コミュニティの執筆者たち</strong>が、本ガイドの各節に情報を提供してくれた記事、FAQ、ガイドを寄稿してくれました：</p>
+<p>アイテム識別 FAQ を著した <strong>David Damerell
+氏</strong>。杖の識別ガイドを著した <strong>Kieron Dunbar
+氏</strong>。即死スポイラーを編纂した <strong>Trevor Powell
+氏</strong>。メデューサ対策ガイドを著した <strong>Arien Malec
+氏</strong>。祈りガイドを著した <strong>Matthew Lahut 氏</strong>。<a
+href="#sokoban">倉庫番</a>全8パターンの解答マップを作成した
+<strong>Boudewijn Waijers 氏</strong>。魔法書読解成功率を計算した
+<strong>Steven Bush 氏</strong>。店主の価格計算式を記録した
+<strong>Gregory Bond 氏</strong>。コンダクトを分類目録化した
+<strong>Dion Nicolaas 氏</strong>。風の精 FAQ を著した <strong>David
+Goldfarb 氏</strong>。経験値計算を記録した <strong>Hojita Discordia
+氏</strong>。</p>
+<p>そして Ray Chason 氏、Pat Rankin 氏、Geoduck 氏、Topi Linkala
+氏、Geoffrey Eadon 氏、Roger Broadbent 氏、Sebastian Haas 氏、Jukka
+Lahtinen
+氏をはじめ、「誰かこれを試した人はいる？」と問いかけ、その結果を報告してくれたニュースグループの無数の名無しの冒険者たちに深く感謝します。</p>
+<p><strong><a href="https://nethackwiki.com/">NetHack Wiki</a></strong>
+は本ガイドにとって不可欠のリファレンスでした。2005 年に Sgeo
+氏によって「WikiHack」として設立され、2010
+年に独自ドメインへ移行した同サイトには、現在 5,000
+件以上の記事が蓄積されています。制作者および管理者には Pasi Kallinen
+氏、Drew Streib 氏、Alex Smith 氏、Shawn Moore 氏、George Koehler
+氏、Tjr 氏、ZeroOne 氏、Ray Chason 氏らが名を連ねています。Wiki の <a
+href="https://nethackwiki.com/wiki/NetHack_5.0.0">NetHack 5.0.0
+ページ</a> はコミュニティの生きた更新履歴であり、本ガイドの 5.0
+改訂における主たる情報源となりました。</p>
+<p>現在多くのプレイヤーが集う<strong>公開サーバー</strong>は、<a
+href="https://alt.org/nethack/">nethack.alt.org</a>（NAO: M. Drew Streib
+氏と Pasi Kallinen 氏が運営する最長寿サーバー）および <a
+href="https://hardfought.org/">Hardfought</a>（K2
+氏が運営し、主要バリアントもホスト）です。どちらも無料でプレイでき、すべての昇天記録を保存しています。本ガイドで引用されている死因統計や昇天記録は、これら公開サーバーのデータに基づいています（NAO
+の <a href="https://alt.org/nethack/topdeaths.html">主な死因一覧</a>
+参照）。</p>
+<p>Reddit の <strong><a
+href="https://www.reddit.com/r/nethack/">r/nethack</a>
+コミュニティ</strong>
+は、新世代のプレイヤーたちに向けて議論の場を提供し続けています。歴代のモデレーターたちは、ベテランと初心者が助言を交わし、昇天体験を共有し、最適な「願い」の選択について熱く議論できる温かいコミュニティを維持してきました。数千のスレッドを通じて受け継がれてきた集合知は、本ガイドの実戦的アドバイスに大きく反映されています。</p>
+<p>そして何よりも、このゲームそのものが存在したからこそ、本ガイドが生まれました。
+<strong><a href="https://www.nethack.org/">NetHack</a></strong> は、Mike
+Stephenson 氏、Izchak Miller 氏、Janet Walz 氏によって設立された NetHack
+DevTeam により、1987 年から開発が続けられています。Izchak Miller 氏は
+1994 年に惜しまれつつ世を去りました。<a
+href="#the-gnomish-mines">ノームの鉱山</a>
+で彼の名を冠した店主（イズチャク）は、彼の遺した功績の大きさを今に伝えています。ソースコードは
+<a href="https://github.com/NetHack/NetHack">github.com/NetHack</a>
+で公開されています。</p>
+<p>ゲーム自体はさらに初期のローグライクに遡ります。<strong>Hack</strong>
+は 1982 年、リンカーン・サドベリー地域高校の授業プロジェクトとして Jay
+Fenlason 氏によって書かれ（Toy 氏と Wichman 氏の『Rogue』(1980)
+を下敷きにしています）、1980 年代半ばにかけて Andries Brouwer
+氏によって拡張されました。NetHack は 1987 年に Brouwer 氏の Hack
+からフォークしました。<strong>グリッドバグ</strong>（マス目の格子状に住み、「昆虫」と「プログラムのバグ」を掛け、1982
+年の映画『トロン』への敬意を込めたとされる直角移動モンスター）をはじめとする
+NetHack 固有のモンスターの多くは、Fenlason 氏のオリジナル Hack
+から受け継がれたものです。このダンジョンは、NetHack
+というゲームよりもさらに古い歴史を持っています。</p>
+<p>開発の道のりは常に平坦だったわけではありません。2003 年 12
+月のバージョン 3.4.3 の後、DevTeam は 12
+年間もの長きにわたり沈黙を守りました。公には一切の発言を断ち、水面下で作業を続けていたのです。その間、コミュニティでは「<em>DevTeam
+は思考中である（The DevTeam is
+THINKING）</em>」というジョークが定着しました。ダンジョンは凍りつきました。新たなプレイヤーたちは
+2003
+年以来変わらない回廊へと降り立ち、変化のないゲームについて新たなスポイラーを書き、新たに記録された同じ死因で命を落としていきました。沈黙の
+12年間に蓄積されたコミュニティの知恵は色褪せることなく役立ち続け、ゲームはたった1行の新しいコードが追加されることもなく、丸10年におよぶ新たな分析に耐えうるほどの奥深さを証明したのです。2015
+年 12 月にバージョン 3.6
+が登場し、それ以来活発な開発が続いています。</p>
+<p>現在のチーム（Michael Allison, Ken Arromdee, David Cohrs, Jessie
+Collet, Kevin Hugo, Pasi Kallinen, Ken Lorber, Dean Luick, Patric
+Mueller, Pat Rankin, Derek S. Ray, Alex Smith, Mike Stephenson, Janet
+Walz, Paul Winner, Bart House, Warwick Allison
+の各氏）は、40年近くにわたりこのゲームを維持し、拡張し続けてきました。本書のすべての記述は、彼らの献身的な仕事の恩恵によるものです。</p>
+<p>本ガイドのすべてのデータは、現在の NetHack 5.0.0
+のソースコードと照合・検証されています。万一誤りがあれば、それはすべて編著者の責に帰するものです。</p>
+<hr />
+<p><em>『恐怖の迷宮への旅人の手引き (A Traveler’s Companion to the Mazes
+of Menace)』 NetHack 5.0 ローンチ記念版</em><br> <em>編纂: David
+Bau、事実照合・検証: Claude 4.8 Opus</em><br> <em>日本語版翻訳・監修:
+Antigravity AI &amp; NetHackJP Project</em></p>
+<p><em>本著作物は <a
+href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja">クリエイティブ・コモンズ
+表示 - 継承 4.0 国際 (CC BY-SA 4.0)</a>
+ライセンスの下で許諾されています。</em></p>
+</section>
 </section>
 </section>
 </main>
