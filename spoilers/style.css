@@ -11,8 +11,8 @@
 /* --- Fonts & Variables -------------------------------------- */
 
 :root {
-  --font-body: 'EB Garamond', 'Garamond', 'Georgia', serif;
-  --font-mono: "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", monospace;
+  --font-body: 'EB Garamond', 'Noto Serif JP', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'MS Mincho', serif;
+  --font-mono: 'Source Code Pro', 'DejaVu Sans Mono', 'Consolas', 'Meiryo', monospace;
   --color-text: #1a1a1a;
   --color-bg: #fffff8;
   --color-accent: #6b2c2c;

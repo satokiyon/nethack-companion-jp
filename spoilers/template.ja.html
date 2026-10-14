@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetHack スポイラー: 脅威の迷宮への旅人の手引き (5.0対応版)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="sidebar-toc" aria-label="Table of contents">
+  <div class="sidebar-title">目次</div>
+  <ul id="sidebar-toc-list"></ul>
+</nav>
+<aside id="sidebar-search" aria-label="Search">
+  <div class="sidebar-title">検索</div>
+  <div class="search-wrapper">
+    <input type="text" id="search-input" placeholder="ガイド内を検索...">
+    <button type="button" id="search-clear" aria-label="Clear search" hidden>×</button>
+  </div>
+  <div id="search-results"></div>
+  <div id="search-index"></div>
+</aside>
+<main id="guide-content">
+<a class="page-fold" href="#what-changed-since-last-time"
+   aria-label="New: updated for NetHack 5.0">
+  <span class="page-fold-text">5.0対応<br>完全改訂</span>
+</a>
+$body$
+</main>
+<script>
+(function() {
+  // --- Icons for sections that include a figure or are a useful reference ---
+  // The light-brown background matches the inline-code background used
+  // throughout the body text, making the TOC glyph read as a code-span.
+  var glyph = function(s) {
+    return '<span style="flex:none;margin-left:0.4em;font-family:var(--font-mono);font-size:0.85em;font-weight:600;color:#5a5a5a;background:#f5f0e8;padding:0.1em 0.35em;border-radius:3px;letter-spacing:-0.05em;">' + s + '</span>';
+  };
+  var sectionIcons = {
+    'the-lay-of-the-land': '<span style="flex:none;margin-left:0.4em;background:#f5f0e8;color:#5a5a5a;padding:0.1em 0.3em;border-radius:3px;display:inline-flex;align-items:center;vertical-align:-2px;"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><path d="M1 3 L5 2 L9 3.5 L13 2 L13 11 L9 12.5 L5 11 L1 12 Z"/><line x1="5" y1="2" x2="5" y2="11"/><line x1="9" y1="3.5" x2="9" y2="12.5"/></svg></span>',
+    'a-practical-identification-strategy': '<span style="flex:none;margin-left:0.4em;background:#f5f0e8;color:#5a5a5a;padding:0.1em 0.3em;border-radius:3px;display:inline-flex;align-items:center;vertical-align:-2px;"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="2" y="1" width="10" height="3"/><rect x="2" y="5" width="10" height="3"/><rect x="2" y="9" width="10" height="3"/><line x1="7" y1="4" x2="7" y2="5"/><line x1="7" y1="8" x2="7" y2="9"/></svg></span>',
+    'provisions-and-dining': glyph('%'),
+    'the-apothecary':     glyph('!'),
+    'the-scroll-rack':    glyph('?'),
+    'wands-and-staves':   glyph('/'),
+    'rings-and-amulets':  glyph('= &quot;'),
+    'tools-of-the-trade': glyph('('),
+    'weapons-tables':     glyph(')'),
+    'armor-tables':       glyph('['),
+    'spell-tables':       glyph('+')
+  };
+
+  // --- Build TOC from headings ---
+  var tocList = document.getElementById('sidebar-toc-list');
+  var headings = document.querySelectorAll('main h2, main h3');
+  var tocItems = [];
+
+  headings.forEach(function(h) {
+    // Print-only sections (Index of Useful Knowledge, etc.) are
+    // hidden by CSS but still in the DOM. Skip their headings so
+    // they don't show up in the web sidebar TOC.
+    if (h.closest('.print-only')) return;
+    var section = h.closest('section') || h.parentElement;
+    var id = section.id || h.id;
+    if (!id) return;
+
+    var li = document.createElement('li');
+    li.className = h.tagName === 'H2' ? 'toc-part' : 'toc-chapter';
+    var a = document.createElement('a');
+    a.href = '#' + id;
+    var icon = sectionIcons[id];
+    if (icon) {
+      a.innerHTML = '<span>' + h.textContent.replace(/[<>&"]/g, function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];}) + '</span>' + icon;
+    } else {
+      a.textContent = h.textContent;
+    }
+    a.setAttribute('data-target', id);
+    li.appendChild(a);
+    tocList.appendChild(li);
+    tocItems.push({ el: li, id: id, heading: h });
+  });
+
+  // --- Scroll tracking ---
+  // Highlight the last section whose top is above 200px from viewport top.
+  // This correctly picks subsections (h3) over their parent (h2) once
+  // the subsection heading has scrolled into the upper portion of the page.
+  var currentActive = null;
+  var sections = [];
+  tocItems.forEach(function(item) {
+    var target = document.getElementById(item.id);
+    if (target) sections.push({ id: item.id, el: target, tocItem: item.el });
+  });
+
+  var scrollTicking = false;
+  function updateActiveSection() {
+    scrollTicking = false;
+    var scrollLine = 100;
+    var best = null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.getBoundingClientRect().top <= scrollLine) {
+        best = sections[i];
+      }
+    }
+    if (!best || best.tocItem === currentActive) return;
+
+    if (currentActive) currentActive.classList.remove('active');
+    best.tocItem.classList.add('active');
+    currentActive = best.tocItem;
+
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + best.id);
+    }
+
+    var tocContainer = document.getElementById('sidebar-toc');
+    var itemTop = best.tocItem.offsetTop;
+    var containerHeight = tocContainer.clientHeight;
+    var scrollTop = tocContainer.scrollTop;
+    if (itemTop < scrollTop + 60 || itemTop > scrollTop + containerHeight - 40) {
+      tocContainer.scrollTop = itemTop - containerHeight / 3;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!scrollTicking) {
+      requestAnimationFrame(updateActiveSection);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+  updateActiveSection();
+
+  // --- Search ---
+  var searchInput = document.getElementById('search-input');
+  var searchResults = document.getElementById('search-results');
+  var searchIndex = document.getElementById('search-index');
+
+  // --- Stopwords skipped when normalizing hit position within a sentence ---
+  var STOPWORDS = { 'the':1, 'a':1, 'an':1, 'of':1, 'to':1, 'and':1, 'or':1,
+                    'in':1, 'on':1, 'at':1, 'for':1, 'is':1, 'are':1, 'as':1, 'by':1 };
+
+  // Walk an element and produce its concatenated text together with
+  // the character offset ranges of any bold (strong/b) spans within.
+  function elTextAndBold(el) {
+    var text = '';
+    var ranges = [];
+    function walk(node, inBold) {
+      if (node.nodeType === 3) { text += node.nodeValue; return; }
+      if (node.nodeType !== 1) return;
+      var nowBold = inBold || node.tagName === 'STRONG' || node.tagName === 'B';
+      if (nowBold && !inBold) {
+        var start = text.length;
+        for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], true);
+        ranges.push([start, text.length]);
+      } else {
+        for (var j = 0; j < node.childNodes.length; j++) walk(node.childNodes[j], nowBold);
+      }
+    }
+    walk(el, false);
+    return { text: text, boldRanges: ranges };
+  }
+
+  // Build searchable data from headings and paragraphs. Each section gets
+  // a list of typed segments so the scorer can weight heading/bold/plain
+  // differently. The flat `text` field is kept for snippet generation.
+  var searchData = [];
+  var contentSections = document.querySelectorAll('main section[id]');
+  contentSections.forEach(function(section) {
+    var heading = section.querySelector('h1, h2, h3, h4, h5, h6');
+    if (!heading) return;
+    var level = parseInt(heading.tagName.substring(1), 10);
+    var segments = [{ kind: 'heading', level: level,
+                      text: heading.textContent, boldRanges: [] }];
+    // `flat` holds body-only text for snippet generation. The title is
+    // already shown in the search result heading, so excluding it here
+    // keeps the snippet from repeating it back.
+    var flat = '';
+    // Each segment is one "container unit": a paragraph, a list item, a
+    // code block, a blockquote paragraph, or one whole table.  Body
+    // scoring caps at one hit per segment (best occurrence wins), which
+    // matters most for tables — a Bestiary table with twelve cells
+    // saying "quest leader" / "quest nemesis" is one signal, not twelve.
+    var textEls = section.querySelectorAll(':scope > p, :scope > ul > li, :scope > ol > li, :scope > pre, :scope > table, :scope > blockquote p, :scope > div.dense-table table, :scope > div > table');
+    textEls.forEach(function(el) {
+      var info = elTextAndBold(el);
+      var kind;
+      if (el.tagName === 'TABLE') kind = 'table';
+      else kind = 'plain';
+      segments.push({ kind: kind, text: info.text, boldRanges: info.boldRanges });
+      flat += info.text + ' ';
+    });
+    searchData.push({
+      id: section.id,
+      title: heading.textContent,
+      level: level,
+      // `text` is used (a) for the allMatch gate before scoring and
+      // (b) for snippet generation. Truncating it caused a long
+      // section's trailing content to be silently unsearchable — e.g.
+      // "Discworld" at char 4387 of Learning Spells was invisible
+      // when the limit was 4000. Keep the whole body; per-section
+      // body text is small in absolute terms (a few KB at most).
+      text: flat,
+      segments: segments
+    });
+  });
+
+  // --- Scoring helpers ---
+  function isInBold(pos, ranges) {
+    for (var i = 0; i < ranges.length; i++) {
+      if (pos >= ranges[i][0] && pos < ranges[i][1]) return true;
+    }
+    return false;
+  }
+  // Scan backward; a hit is inside parentheses if we find an unmatched '('.
+  function isInParens(text, pos) {
+    var depth = 0;
+    for (var j = pos - 1; j >= 0; j--) {
+      var c = text.charCodeAt(j);
+      if (c === 41) depth++;          // ')'
+      else if (c === 40) {            // '('
+        if (depth === 0) return true;
+        depth--;
+      }
+    }
+    return false;
+  }
+  // Find the [start, end) bounds of the sentence containing `pos`.
+  function sentenceContaining(text, pos) {
+    var start = 0;
+    for (var j = pos; j > 0; j--) {
+      var c = text.charCodeAt(j - 1);
+      if (c === 46 || c === 33 || c === 63) {  // .!?
+        start = j;
+        while (start < text.length && /\s/.test(text[start])) start++;
+        break;
+      }
+    }
+    var end = text.length;
+    for (var k = pos + 1; k < text.length; k++) {
+      var cc = text.charCodeAt(k);
+      if (cc === 46 || cc === 33 || cc === 63) { end = k; break; }
+    }
+    return { start: start, end: end };
+  }
+  // Skip a leading run of stopwords from the sentence (returns char count).
+  function stopwordSkip(text, start, end) {
+    var i = start;
+    while (i < end) {
+      while (i < end && !/[a-z]/i.test(text[i])) i++;
+      if (i >= end) break;
+      var wstart = i;
+      while (i < end && /[a-z]/i.test(text[i])) i++;
+      if (!STOPWORDS[text.substring(wstart, i).toLowerCase()]) return wstart - start;
+    }
+    return i - start;
+  }
+
+  // Per-occurrence weight of a heading match, by heading level. Higher
+  // headings weigh a touch more (they head broader sections), but the
+  // falloff is deliberately shallow: a hit in a deep, specifically-named
+  // subsection (an h4 like "The Wand Table") is essentially as strong a
+  // signal as one in a shallow structural heading ("Table of Contents",
+  // an h2), and must not be dwarfed by it. Ratio 1.1x per level anchored
+  // at h2 = 90 — nearly flat, vs the old 2x-per-level halving that made
+  // an h4 a quarter the weight of an h2 and let generic top-level
+  // headings outrank the section a query actually names.
+  function headingWeight(level) {
+    return 90 / Math.pow(1.1, level - 2);
+  }
+
+  // Score consecutive-bigram bonus for a multi-word query.
+  // For every adjacent pair of query words, find occurrences of the
+  // pair as a contiguous substring in any segment (treating runs of
+  // whitespace as a single space) and award a per-occurrence bonus
+  // proportional to the segment's kind weight. Skips pairs where both
+  // words are stopwords so phrases like "in the" don't drown out real
+  // content matches.
+  function scoreBigramsInSection(item, words) {
+    if (words.length < 2) return 0;
+    var total = 0;
+    for (var n = 0; n < words.length - 1; n++) {
+      var w1 = words[n], w2 = words[n + 1];
+      if (STOPWORDS[w1] && STOPWORDS[w2]) continue;
+      var bigram = w1 + ' ' + w2;
+      for (var s = 0; s < item.segments.length; s++) {
+        var seg = item.segments[s];
+        var normalized = seg.text.toLowerCase().replace(/\s+/g, ' ');
+        var weight = seg.kind === 'heading' ? headingWeight(seg.level) : 2;
+        var i = 0;
+        while ((i = normalized.indexOf(bigram, i)) !== -1) {
+          total += weight;
+          i += bigram.length;
+        }
+      }
+    }
+    return total;
+  }
+
+  // Score one section against a single (lowercase) query word.
+  //
+  // Heading hits contribute their full per-occurrence weight.  Body
+  // segments (paragraphs, list items, code blocks, whole tables, etc.)
+  // each contribute *at most one hit* — the best occurrence within that
+  // segment.  Multiple mentions inside the same paragraph (or the same
+  // table) are evidence of the same point, not independent signals.
+  function scoreWordInSection(item, word) {
+    var total = 0;
+    for (var s = 0; s < item.segments.length; s++) {
+      var seg = item.segments[s];
+      var t = seg.text;
+      var lt = t.toLowerCase();
+      var i = 0;
+      var segBest = 0;
+      while ((i = lt.indexOf(word, i)) !== -1) {
+        var weight;
+        if (seg.kind === 'heading') {
+          weight = headingWeight(seg.level);
+        } else if (seg.kind === 'table') {
+          weight = 4;
+        } else {
+          weight = isInBold(i, seg.boldRanges) ? 6 : 1;
+        }
+        if (seg.kind !== 'heading' && isInParens(t, i)) weight *= 0.6;
+        // Position bonus: 1.0 at sentence start (after stopwords), 0 at end.
+        var sent = sentenceContaining(t, i);
+        var skip = stopwordSkip(t, sent.start, sent.end);
+        var effPos = Math.max(0, (i - sent.start) - skip);
+        var effLen = Math.max(1, (sent.end - sent.start) - skip);
+        var posBonus = Math.max(0, 1 - effPos / effLen);
+        var per = weight * (0.5 + posBonus);
+        if (seg.kind === 'heading') {
+          // Heading: every (rare) hit counts in full.
+          total += per;
+        } else {
+          // Body segment: only the best hit within this segment counts.
+          if (per > segBest) segBest = per;
+        }
+        i += word.length;
+      }
+      if (seg.kind !== 'heading') total += segBest;
+    }
+    return total;
+  }
+
+  var searchClear = document.getElementById('search-clear');
+  function updateClearButton() {
+    searchClear.hidden = searchInput.value.length === 0;
+  }
+  var searchTimeout = null;
+  searchInput.addEventListener('input', function() {
+    updateClearButton();
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(doSearch, 200);
+  });
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    updateClearButton();
+    searchInput.focus();
+    doSearch();
+  });
+
+  // Title-match bonus: if the query covers the content-bearing words of
+  // the section's title, that section is almost certainly the intended
+  // hit. Without this, a section title-matching the query can lose to a
+  // distant section that mentions the query many times in passing (e.g.
+  // a search for "Quest" lost to the Bestiary section listing every
+  // role's "quest leader" / "quest nemesis").
+  function titleMatchBonus(title, word) {
+    var contentWords = title.toLowerCase().split(/\s+/).map(function(w) {
+      return w.replace(/[^a-z0-9]/g, '');
+    }).filter(function(w) { return w && !STOPWORDS[w]; });
+    if (contentWords.length === 0) return 0;
+    // Exact match counts 1.0; prefix-match (e.g. "amulet" vs "amulets")
+    // counts 0.7 as long as the query covers ≥ 70% of the title word.
+    var coverage = 0;
+    for (var i = 0; i < contentWords.length; i++) {
+      var tw = contentWords[i];
+      if (tw === word) {
+        coverage += 1.0;
+      } else if (tw.indexOf(word) === 0 && word.length / tw.length >= 0.7) {
+        coverage += 0.7;
+      }
+    }
+    if (coverage === 0) return 0;
+    // Scale 0–50 by title coverage. 1.0 coverage (a single-word title
+    // that equals the query) is worth ~50 plain-text mentions.
+    return 50 * coverage / contentWords.length;
+  }
+
+  function doSearch() {
+    var query = searchInput.value.trim().toLowerCase();
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      searchResults.style.display = 'none';
+      searchIndex.style.display = '';
+      return;
+    }
+    searchIndex.style.display = 'none';
+    searchResults.style.display = '';
+
+    var words = query.split(/\s+/);
+    var matches = [];
+    searchData.forEach(function(item) {
+      var haystack = (item.title + ' ' + item.text).toLowerCase();
+      var score = 0;
+      var allMatch = true;
+      for (var w = 0; w < words.length; w++) {
+        if (haystack.indexOf(words[w]) === -1) { allMatch = false; break; }
+        score += scoreWordInSection(item, words[w]);
+        score += titleMatchBonus(item.title, words[w]);
+      }
+      if (allMatch) score += scoreBigramsInSection(item, words);
+      if (allMatch && score > 0) matches.push({ item: item, score: score });
+    });
+
+    matches.sort(function(a, b) { return b.score - a.score; });
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div class="search-empty">No results found.<br><span class="search-hint">The dungeon keeps its secrets.</span></div>';
+      return;
+    }
+
+    var html = '';
+    var shown = Math.min(matches.length, 15);
+    for (var i = 0; i < shown; i++) {
+      var m = matches[i].item;
+      // Find a snippet containing the longest n-gram of the query
+      var snippet = getSnippet(m.text, words);
+      html += '<a class="search-result" href="#' + m.id + '">';
+      html += '<span class="search-result-title">' + highlightMatches(m.title, words) + '</span>';
+      if (snippet) html += '<span class="search-result-snippet">' + highlightMatches(snippet, words) + '</span>';
+      html += '</a>';
+    }
+    if (matches.length > shown) {
+      html += '<div class="search-more">' + (matches.length - shown) + ' more results...</div>';
+    }
+    searchResults.innerHTML = html;
+
+    // Add click handlers to highlight search terms in the target section
+    var resultLinks = searchResults.querySelectorAll('.search-result');
+    resultLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').substring(1);
+        highlightSearchTermInSection(targetId, words);
+      });
+    });
+  }
+
+  function highlightSearchTermInSection(sectionId, words) {
+    // Clear any previous highlights
+    document.querySelectorAll('.search-highlight').forEach(function(el) {
+      var text = el.textContent;
+      el.replaceWith(document.createTextNode(text));
+    });
+
+    // Find the target section
+    var section = document.getElementById(sectionId);
+    if (!section) return;
+
+    // Navigate to the section first
+    window.location.hash = sectionId;
+
+    // Find the first occurrence of any search word in the section's text
+    var walker = document.createTreeWalker(
+      section,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          // Skip script tags, style tags, and sidebar elements
+          var parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          var tag = parent.tagName.toLowerCase();
+          if (tag === 'script' || tag === 'style') return NodeFilter.FILTER_REJECT;
+          if (parent.closest('#sidebar-toc') || parent.closest('#sidebar-search')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    // Collect all eligible text nodes once, then look for the longest
+    // matching n-gram of the query across them. Falling back to single
+    // words only if no multi-word phrase appears keeps the scroll-anchor
+    // on the full phrase a user typed — e.g. a search for "cloak of magic
+    // resistance" jumps to that phrase rather than the first stray "of".
+    var allNodes = [];
+    while (walker.nextNode()) allNodes.push(walker.currentNode);
+
+    var firstMatch = null;
+    var matchedPhrase = null;
+    var matchedIndex = -1;
+    for (var len = words.length; len >= 1 && !firstMatch; len--) {
+      for (var n = 0; n < allNodes.length && !firstMatch; n++) {
+        var nodeLower = allNodes[n].textContent.toLowerCase();
+        var bestIdxInNode = -1;
+        var bestPhraseInNode = null;
+        for (var start = 0; start + len <= words.length; start++) {
+          var phrase = words.slice(start, start + len).join(' ').toLowerCase();
+          var pIdx = nodeLower.indexOf(phrase);
+          if (pIdx === -1) continue;
+          if (bestIdxInNode === -1 || pIdx < bestIdxInNode) {
+            bestIdxInNode = pIdx;
+            bestPhraseInNode = phrase;
+          }
+        }
+        if (bestPhraseInNode !== null) {
+          firstMatch = allNodes[n];
+          matchedPhrase = bestPhraseInNode;
+          matchedIndex = bestIdxInNode;
+        }
+      }
+    }
+
+    if (firstMatch && matchedPhrase) {
+      var text = firstMatch.textContent;
+      var idx = matchedIndex;
+
+      if (idx !== -1) {
+        var before = text.substring(0, idx);
+        var match = text.substring(idx, idx + matchedPhrase.length);
+        var after = text.substring(idx + matchedPhrase.length);
+
+        var beforeNode = document.createTextNode(before);
+        var highlightSpan = document.createElement('span');
+        highlightSpan.className = 'search-highlight';
+        highlightSpan.textContent = match;
+        var afterNode = document.createTextNode(after);
+
+        var parent = firstMatch.parentNode;
+        parent.insertBefore(beforeNode, firstMatch);
+        parent.insertBefore(highlightSpan, firstMatch);
+        parent.insertBefore(afterNode, firstMatch);
+        parent.removeChild(firstMatch);
+
+        // Scroll to highlight only if it's in the lower portion of viewport
+        // (don't scroll up - keep section header at top)
+        setTimeout(function() {
+          var rect = highlightSpan.getBoundingClientRect();
+          var viewportHeight = window.innerHeight;
+          var scrollThreshold = viewportHeight * 0.6; // 60% down the page
+
+          // Only scroll if the highlight is below the comfortable reading area
+          if (rect.top > scrollThreshold) {
+            highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          // If highlight is in top 60% or above, don't scroll - it's visible
+        }, 100);
+      }
+    }
+  }
+
+  // Find the earliest occurrence of the longest matching n-gram from
+  // `words` inside `text`. Tries the full query first, then progressively
+  // shorter contiguous slices, then individual words. Within a given
+  // length, the n-gram that appears earliest in the text wins. Returns
+  // { phrase, index } or null.
+  function findLongestPhrase(text, words) {
+    var lower = text.toLowerCase();
+    for (var len = words.length; len >= 1; len--) {
+      var bestIdx = -1;
+      var bestPhrase = null;
+      for (var start = 0; start + len <= words.length; start++) {
+        var phrase = words.slice(start, start + len).join(' ');
+        var idx = lower.indexOf(phrase);
+        if (idx === -1) continue;
+        if (bestIdx === -1 || idx < bestIdx) {
+          bestIdx = idx;
+          bestPhrase = phrase;
+        }
+      }
+      if (bestPhrase !== null) return { phrase: bestPhrase, index: bestIdx };
+    }
+    return null;
+  }
+
+  function getSnippet(text, words) {
+    var hit = findLongestPhrase(text, words);
+    if (!hit) return '';
+    var start = Math.max(0, hit.index - 40);
+    var end = Math.min(text.length, hit.index + hit.phrase.length + 60);
+    var s = text.substring(start, end).replace(/\s+/g, ' ').trim();
+    if (start > 0) s = '\u2026' + s;
+    if (end < text.length) s = s + '\u2026';
+    return s;
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function highlightMatches(text, words) {
+    var safe = escHtml(text);
+    var reChars = /[.*+?^$${}()|[\]\\]/g;
+    function esc(w) { return escHtml(w).replace(reChars, '\\$$&'); }
+    // Build an alternation that prefers longer phrases. JavaScript regex
+    // alternation tries each branch in order at each position, so listing
+    // the full query first, then progressively shorter contiguous slices,
+    // then individual words, means a search for "cloak of magic resistance"
+    // bolds the full phrase as one match rather than four separate words.
+    var alts = [];
+    for (var len = words.length; len >= 2; len--) {
+      for (var start = 0; start + len <= words.length; start++) {
+        alts.push(words.slice(start, start + len).map(esc).join('\\s+'));
+      }
+    }
+    var sortedSingles = words.slice().sort(function(a, b) { return b.length - a.length; });
+    sortedSingles.forEach(function(w) { alts.push(esc(w)); });
+    var re = new RegExp('(' + alts.join('|') + ')', 'gi');
+    return safe.replace(re, '<b>$$1</b>');
+  }
+
+  // --- Humorous index (shown when search is empty) ---
+  var indexEntries = [
+    ['Amorous demon, expensive evening with', 'seduction'],
+    ['Amulet of Yendor, retrieving', 'the-ascension-run'],
+    ['Ascension, how to not die during', 'the-ascension-run'],
+    ['Boulders, pushing (see: Sokoban)', 'sokoban-solutions'],
+    ['BUC, avoiding curses by checking', 'blessed-uncursed-cursed-buc'],
+    ['Castle, storming the', 'the-castle'],
+    ['Cockatrice corpse, wielding', 'petrification-stoning'],
+    ['Death, causes of (see: everything)', 'things-that-will-kill-you'],
+    ['Disenchanter, mourning your former +5', 'enchantment-drain'],
+    ['Displacer beast, taming', 'the-displacer-beast'],
+    ['Drowning, preventable', 'drowning'],
+    ['Elbereth, writing frantically', 'engravings'],
+    ['Floating eye, do not hit', 'eyes-and-spheres-e'],
+    ['Food, running out of', 'how-hunger-works'],
+    ['Gehennom, why is it so hot', 'gehennom'],
+    ['Gods, angering', 'altars-and-alignment'],
+    ['Identify, never enough scrolls of', 'the-scroll-rack'],
+    ['Luck, secretly ruining yours', 'gaining-and-losing-luck'],
+    ['Lurker above, looking up too late', 'engulfment'],
+    ['Mines, gnomish', 'the-gnomish-mines'],
+    ['Pet, accidentally killing your', 'keeping-your-pet-alive'],
+    ['Prayer, when to', 'prayer'],
+    ['Shopkeeper, angering', 'shopping-and-shopkeeper-pricing'],
+    ['Sokoban, solving without cheating', 'sokoban-solutions'],
+    ['Stoning, avoiding', 'petrification-stoning'],
+    ['Tourists, playing as', 'choosing-your-expedition'],
+    ['Unicorn horn, no longer a cure-all', 'what-changed-since-last-time'],
+    ['Vlad&rsquo;s throne, fourth sit&rsquo;s the charm', 'vlads-tower'],
+    ['Wand, identifying by engraving', 'identification-by-engraving'],
+    ['Wand of wishing, found with one charge', 'the-castle'],
+    ['Wishes, optimal use of', 'what-to-wish-for'],
+    ['YASD, inevitability of', 'your-first-descent'],
+  ];
+
+  var indexHtml = '<div class="humorous-index"><div class="index-title">Index of Useful Knowledge</div>';
+  indexEntries.forEach(function(entry) {
+    indexHtml += '<a class="index-entry" href="#' + entry[1] + '">' + entry[0] + '</a>';
+  });
+  indexHtml += '</div>';
+  searchIndex.innerHTML = indexHtml;
+})();
+
+// ============================================================================
+// Sokoban flip controls. Each Sokoban level section (marked
+// .sokoban-level by the markdown attribute) carries data-width / data-height
+// attributes. Two toggle buttons under each level's heading apply a global
+// H/V flip across all Sokoban maps simultaneously, mirroring the wall
+// drawings, the arrows, the boulder positions, and (in the solution
+// prose) the direction words and coordinate tuples.
+// ============================================================================
+(function sokobanFlip() {
+  var sokobanRoot = document.getElementById('sokoban-solutions');
+  if (!sokobanRoot) return;
+  var levels = sokobanRoot.querySelectorAll('section.sokoban-level');
+  if (!levels.length) return;
+
+  // Wall and arrow character mappings.
+  var H_CHAR = {'┌':'┐','┐':'┌','└':'┘','┘':'└','├':'┤','┤':'├',
+                '←':'→','→':'←'};
+  var V_CHAR = {'┌':'└','└':'┌','┐':'┘','┘':'┐','┬':'┴','┴':'┬',
+                '↑':'↓','↓':'↑'};
+  // Direction-word mappings used for solution prose.
+  var H_WORD = {'left':'right','right':'left'};
+  var V_WORD = {'up':'down','down':'up'};
+
+  // Fixed offset where column 1 of the playable area begins inside each
+  // body row. The column header is "   123..." with 3 leading spaces, so
+  // body rows have a 2-character row label followed by 1 separator space,
+  // and the wall content starts at index 3.
+  var LABEL_END = 3;
+
+  // Global flip state shared across every level on the page.
+  var state = { h: false, v: false };
+
+  function parsePre(raw) {
+    var lines = raw.split('\n');
+    while (lines.length && !lines[lines.length-1].trim()) lines.pop();
+    var bodyStart = 0;
+    for (var i = 0; i < lines.length; i++) {
+      var s = lines[i];
+      // A leading line is part of the column header if it is empty or
+      // contains only digits and whitespace.
+      if (s.trim() === '' || /^[\d\s]+$$/.test(s)) {
+        bodyStart = i + 1;
+      } else {
+        break;
+      }
+    }
+    return {
+      header: lines.slice(0, bodyStart),
+      body: lines.slice(bodyStart)
+    };
+  }
+
+  function padTo(s, n) {
+    while (s.length < n) s += ' ';
+    return s;
+  }
+
+  function transformChar(c) {
+    if (state.h && H_CHAR[c]) c = H_CHAR[c];
+    if (state.v && V_CHAR[c]) c = V_CHAR[c];
+    return c;
+  }
+
+  function renderPre(parsed, width) {
+    var body = parsed.body;
+    var n = body.length;
+    var rows = body.map(function(origRow, i) {
+      // Label stays bound to the visual row position; content is taken
+      // from the V-flipped source row when V-flip is on.
+      var srcRow = state.v ? body[n - 1 - i] : origRow;
+      var label = origRow.substring(0, LABEL_END);
+      var playable = srcRow.substring(LABEL_END);
+      // For H-flip, pad to the full playable width so the reverse is
+      // symmetric across the grid (irregular row lengths would otherwise
+      // collapse to the wrong column position).
+      if (state.h) {
+        playable = padTo(playable, width).split('').reverse().join('');
+      }
+      // Character substitutions for walls and arrows.
+      var transformed = '';
+      for (var k = 0; k < playable.length; k++) {
+        transformed += transformChar(playable.charAt(k));
+      }
+      // Drop the trailing pad that the H-flip introduced.
+      return label + transformed.replace(/\s+$$/, '');
+    });
+    return parsed.header.concat(rows).join('\n');
+  }
+
+  // --- Hover decoration -------------------------------------------------
+  // Rebuild each rendered map as a grid of per-character spans so a square
+  // and its row/column numbers can light up together. Coordinates are read
+  // straight from the displayed glyphs: a content character at string index
+  // idx is grid column idx - 2, the i-th body row is grid row i + 1, and the
+  // number gutters stay fixed while a flip mirrors only the content — so the
+  // mapping is identical whether or not a flip is active.
+  function escapeHtml(c) {
+    return c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : c;
+  }
+
+  function buildPreHtml(rendered, headerCount) {
+    var lines = rendered.split('\n');
+    var out = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i], s = '', idx, ch;
+      if (i < headerCount) {
+        // Column-number gutter: tag each digit with its column.
+        for (idx = 0; idx < line.length; idx++) {
+          ch = line.charAt(idx);
+          if (idx >= LABEL_END && ch >= '0' && ch <= '9') {
+            s += '<span class="soko-colhead" data-col="' + (idx - 2) + '">'
+               + ch + '</span>';
+          } else {
+            s += escapeHtml(ch);
+          }
+        }
+      } else {
+        var y = i - headerCount + 1;
+        // Row-label gutter (first LABEL_END characters).
+        for (idx = 0; idx < LABEL_END && idx < line.length; idx++) {
+          ch = line.charAt(idx);
+          s += (ch >= '0' && ch <= '9')
+            ? '<span class="soko-rowhead" data-row="' + y + '">' + ch + '</span>'
+            : escapeHtml(ch);
+        }
+        // Playable squares.
+        for (idx = LABEL_END; idx < line.length; idx++) {
+          s += '<span class="soko-cell" data-x="' + (idx - 2) + '" data-y="'
+             + y + '">' + escapeHtml(line.charAt(idx)) + '</span>';
+        }
+      }
+      out.push(s);
+    }
+    return out.join('\n');
+  }
+
+  // Wrap coordinate tuples in solution prose so they cross-highlight the map.
+  function wrapCoords(html) {
+    return html.replace(/\((\d+),\s*(\d+)\)/g, function(m, xs, ys) {
+      return '<span class="soko-coord" data-x="' + xs + '" data-y="' + ys
+        + '">' + m + '</span>';
+    });
+  }
+
+  function transformProse(html, width, height) {
+    if (state.h) {
+      html = html.replace(/\b(left|right)\b/g, function(w) {
+        return H_WORD[w];
+      });
+    }
+    if (state.v) {
+      html = html.replace(/\b(up|down)\b/g, function(w) {
+        return V_WORD[w];
+      });
+    }
+    // Coordinate tuples (X,Y) and (X, Y). The grid is 1-indexed, so the
+    // flip formula is x' = (W+1) - x and y' = (H+1) - y.
+    html = html.replace(/\((\d+),\s*(\d+)\)/g, function(_, xs, ys) {
+      var x = +xs, y = +ys;
+      if (state.h) x = (width + 1) - x;
+      if (state.v) y = (height + 1) - y;
+      return '(' + x + ',' + y + ')';
+    });
+    return html;
+  }
+
+  // Capture originals and inject a button bar for each level.
+  levels.forEach(function(level) {
+    var w = parseInt(level.dataset.width, 10);
+    var h = parseInt(level.dataset.height, 10);
+    if (!w || !h) return;
+    level.querySelectorAll('pre').forEach(function(pre) {
+      pre.dataset.origText = pre.textContent;
+    });
+    level.querySelectorAll('li, p').forEach(function(el) {
+      el.dataset.origHtml = el.innerHTML;
+    });
+    var bar = document.createElement('div');
+    bar.className = 'sokoban-flipbar';
+    bar.innerHTML =
+      '<button type="button" data-flip="h" title="Mirror left-right">' +
+      'Flip ↔</button>' +
+      '<button type="button" data-flip="v" title="Mirror top-bottom">' +
+      'Flip ↕</button>';
+    var heading = level.querySelector('h4');
+    if (heading && heading.nextSibling) {
+      heading.parentNode.insertBefore(bar, heading.nextSibling);
+    } else if (heading) {
+      heading.parentNode.appendChild(bar);
+    } else {
+      level.insertBefore(bar, level.firstChild);
+    }
+  });
+
+  function applyState() {
+    levels.forEach(function(level) {
+      var w = parseInt(level.dataset.width, 10);
+      var h = parseInt(level.dataset.height, 10);
+      if (!w || !h) return;
+      level.querySelectorAll('pre').forEach(function(pre) {
+        var parsed = parsePre(pre.dataset.origText);
+        pre.innerHTML = buildPreHtml(renderPre(parsed, w), parsed.header.length);
+      });
+      level.querySelectorAll('li, p').forEach(function(el) {
+        if (el.dataset.origHtml === undefined) return;
+        el.innerHTML = wrapCoords(transformProse(el.dataset.origHtml, w, h));
+      });
+    });
+    document.querySelectorAll('.sokoban-flipbar button').forEach(function(btn) {
+      btn.classList.toggle('active', !!state[btn.dataset.flip]);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.sokoban-flipbar button');
+    if (!btn) return;
+    var dir = btn.dataset.flip;
+    state[dir] = !state[dir];
+    applyState();
+  });
+
+  // Cross-highlighting: hovering a square lights its row/column numbers, and
+  // hovering a coordinate in the prose lights the matching square. Delegated
+  // from the root so it survives the innerHTML rebuilds that flipping does.
+  function clearHighlights() {
+    sokobanRoot.querySelectorAll('.soko-hl, .soko-axis-hl, .soko-coord-active')
+      .forEach(function(el) {
+        el.classList.remove('soko-hl', 'soko-axis-hl', 'soko-coord-active');
+      });
+  }
+  // A level can show several map states; a prose coordinate refers to the
+  // map it follows in the text. Fall back to the section's first map.
+  function nearestMap(coord) {
+    var section = coord.closest('.sokoban-level');
+    if (!section) return null;
+    var pres = section.querySelectorAll('pre'), best = pres[0] || null;
+    for (var i = 0; i < pres.length; i++) {
+      if (pres[i].compareDocumentPosition(coord)
+          & Node.DOCUMENT_POSITION_FOLLOWING) {
+        best = pres[i];
+      }
+    }
+    return best;
+  }
+  function lightSquare(pre, x, y) {
+    if (!pre) return;
+    var cell = pre.querySelector(
+      '.soko-cell[data-x="' + x + '"][data-y="' + y + '"]');
+    if (cell) cell.classList.add('soko-hl');
+    pre.querySelectorAll('.soko-colhead[data-col="' + x + '"]')
+      .forEach(function(e) { e.classList.add('soko-axis-hl'); });
+    pre.querySelectorAll('.soko-rowhead[data-row="' + y + '"]')
+      .forEach(function(e) { e.classList.add('soko-axis-hl'); });
+  }
+  sokobanRoot.addEventListener('mouseover', function(e) {
+    var cell = e.target.closest('.soko-cell');
+    if (cell) {
+      clearHighlights();
+      lightSquare(cell.closest('pre'), cell.dataset.x, cell.dataset.y);
+      return;
+    }
+    var coord = e.target.closest('.soko-coord');
+    if (coord) {
+      clearHighlights();
+      coord.classList.add('soko-coord-active');
+      lightSquare(nearestMap(coord), coord.dataset.x, coord.dataset.y);
+    }
+  });
+  sokobanRoot.addEventListener('mouseout', function(e) {
+    if (e.target.closest('.soko-cell') || e.target.closest('.soko-coord')) {
+      clearHighlights();
+    }
+  });
+
+  applyState(); // initial decoration (no flip active)
+})();
+</script>
+</body>
+</html>

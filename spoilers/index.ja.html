@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetHack スポイラー: 脅威の迷宮への旅人の手引き (5.0対応版)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="sidebar-toc" aria-label="Table of contents">
+  <div class="sidebar-title">目次</div>
+  <ul id="sidebar-toc-list"></ul>
+</nav>
+<aside id="sidebar-search" aria-label="Search">
+  <div class="sidebar-title">検索</div>
+  <div class="search-wrapper">
+    <input type="text" id="search-input" placeholder="ガイド内を検索...">
+    <button type="button" id="search-clear" aria-label="Clear search" hidden>×</button>
+  </div>
+  <div id="search-results"></div>
+  <div id="search-index"></div>
+</aside>
+<main id="guide-content">
+<a class="page-fold" href="#what-changed-since-last-time"
+   aria-label="New: updated for NetHack 5.0">
+  <span class="page-fold-text">5.0対応<br>完全改訂</span>
+</a>
+<section id="nethack-スポイラー" class="level1">
+<h1>NetHack スポイラー</h1>
+<p style="text-align: center; font-size: 1.25em; margin: 0.2em 0 1.4em;">脅威の迷宮への旅人の手引き (A Traveler's Companion to the <span class="nobr">Mazes of Menace</span>)</p>
+<p style="text-align: center; font-style: italic; margin: 1.5em 0;">誰かがあなたを助けてくれているような気がする。(You feel like someone is helping you.)</p>
+<p>NetHack
+は、現在も活発に開発・保守が続けられている最古のコンピュータゲームの一つであり、そのコードは40年以上にわたって継続的に開発されています。そのルーツは、Michael
+Toy と Glenn Wichman
+が『ダンジョンズ＆ドラゴンズ』に着想を得て1980年に開発したゲーム『Rogue』にまで遡ります。『Rogue』では、ダンジョンはランダムに生成され、通常のテキスト文字で描かれていました。プレイヤーの主人公は
+<code>@</code>、モンスターはアルファベットの文字で表され、死は絶対（パーマデス）でした。Ken
+Arnold が開発した curses ライブラリ上に構築され、バークレーの BSD Unix
+に同梱されて世界中に広まった『Rogue』は、当時の大学キャンパスで最も人気のあるゲームとなり、「ローグライク
+(roguelike)」と呼ばれる一連の同系ゲームジャンルを生み出すきっかけとなりました。</p>
+<p>NetHack
+の歴史が始まったのは、マサチューセッツ州リンカーン・サドベリー地域高校の3年生だった
+Jay Fenlason
+が、自分専用のカスタム版『Rogue』を作りたいと考えたことでした。『Rogue』のソースコードは不正行為を防ぐために厳重に保護されていたため、彼はゼロから開発を始めなければなりませんでした。彼の学校では生徒たち自身の手によって維持されていた
+Unix ミニコンピュータが稼働しており、そこで彼はクラスメイトの Kenny
+Woodland、Mike Thome、Jon Payne
+とともに『Hack』を作り上げました。これは固有の名前を持つモンスターが登場し、杖から光線が放たれ、プレイヤーが通り過ぎた各階層の状態が記憶されるゲームでした。彼の恩師である
+Brian Harvey が1982年にこれを USENIX テープに収録して配布した際、Jay は
+README
+に「僕の最初の学期プログラミング課題」と記し、自宅の電話番号を書き添えていました。</p>
+<p>『Hack』の歩みはそこで終わっていたかもしれませんが、オープンソースであったため、プログラマからプログラマへと自由に受け継がれていきました。1984年、オランダの数学者
+Andries Brouwer
+がこれを大幅に書き直し、誰でも自由に利用できるように『Hack 1.0』として
+Usenet
+に投稿しました。彼はプレイヤーの役職（ロール）、階段を降りる際についてくるペット、そして店主を追加しました。こうして初期のインターネット全体に、どの作者も把握しきれないほどの速度で複製や派生版が広がっていきました。</p>
+<p>1987年、Mike Stephenson
+はそれら散在していたバージョンを再び集め、Izchak Miller、Janet
+Walz、そして広がりつつあったボランティアの仲間たちとともに、ひとつのゲームへと統合しました。彼らはその共同作業を可能にしたネットワークにちなんでゲームを「NetHack」と名付け、自らを「DevTeam」と称しました。彼らは今もなお活動を続けています。<strong>2026年5月、バージョン5.0がリリースされました。</strong>
+40年以上の歳月をかけて、DevTeam は NetHack
+を最も容赦なく入り組んだ、ローグライクを象徴する金字塔へと育て上げ、ゲームそのものの枠を超えた活気ある楽しいコミュニティ文化を育んできました。その文化の多くは、1990年代の
+rec.games.roguelike.nethack ニュースグループで形作られ、今日では NetHack
+Wiki、r/nethack フォーラム、Discord や IRC チャンネル、そして
+nethack.alt.org や hardfought.org
+などのパブリックサーバーで息づいています。本書は、彼らの長年にわたる貢献の上に成り立っています。</p>
+<p>NetHack
+の素晴らしいところの一つは、あまりにも奥深く、あまりにも緻密であるため、スポイラー（ネタバレ情報）を知ったとしてもゲームの面白さが決して損なわれないことです。その秘密を知れば知るほど、このゲームはさらに奥深く、魅力的なものになります。そうした精神のもと、この新しい
+5.0 スポイラー集が、新世代のプレイヤーたちに NetHack
+の楽しさを届ける助けとなることを願っています。</p>
+<p>NetHack の世界へようこそ！</p>
+<hr />
+<section id="読み進める前に" class="level2">
+<h2>読み進める前に</h2>
+<p><strong>警告。</strong>
+本書を読むことで、あなたが「脅威の迷宮」で得るゲーム体験は大きく変わることになります。浮遊する目
+(floating eye)
+を見つめるだけで麻痺してしまうという事実をひとたび知ってしまえば、それを「知らなかった頃」に戻ることは二度とできません。周到な準備の安心感よりも、自らの手で発見するスリルを好む冒険者もいます。もしあなたがそうであるなら、今すぐ本書を閉じ、痛い目を見ながら自力で学んでいくべきです。それもまた、このゲームの真の醍醐味なのですから。</p>
+<p><strong>公式マニュアルをお探しですか？</strong>
+ネタバレなしの操作コマンド一覧、アイテムリスト、基礎的なゲームシステムを知りたい場合は、ゲームに付属している公式ガイド<strong><a
+href="../guidebook/">脅威の迷宮案内記 (Guide to the Mazes of
+Menace)</a></strong>を参照してください。あなたが今読んでいる本書は「戦略ガイド」です。すでに基本的な操作方法を理解しており、いかにして「生き残るか」を知りたい冒険者を対象としています。</p>
+<p>度重なる水の精 (water nymph)
+に所持品を根こそぎ奪われたことがある方、<a
+href="#the-gnomish-mines">ノームの鉱山</a>をどうしても突破できない方、あるいはダンジョン地下4階で食料が尽き、神に見捨てられて餓死することにうんざりしている方は、ぜひこの先をお読みください。あなたが生き延びられるよう、全力を尽くして手引きします。</p>
+<section id="本書の使い方" class="level3">
+<h3>本書の使い方</h3>
+<p>初めて潜る際は、まず<a href="#what-to-pack">持ち物の準備</a>、<a
+href="#the-golden-rules-of-early-survival">序盤の黄金律</a>、そして<a
+href="#delayed-deaths">差し迫った死から身を守る方法</a>をお読みください。各種データ表や終盤の攻略章は、ダンジョン内で必要に迫られるまでは後回しで構いません。</p>
+<p>プレイ中は、目次や索引をフィールドマニュアル（実用手引書）として活用してください。目の前に現れたモンスター、画面に表示された見慣れないメッセージ、これから使おうとしているアイテムなどをその都度引くとよいでしょう。アイテムの各章では、実戦でよく遭遇する有用なケースを優先して解説しています。正確な売買価格や詳細な数値が必要になったときは、巻末の各種データ表を参照してください。</p>
+<p><strong>表記規則。</strong> <code>@</code> や <code>#pray</code>
+などの等幅フォントテキストは、ゲーム画面に表示される文字や、プレイヤーがキーボードで入力するコマンドを表します。<strong>太字</strong>は覚えておくべき重要な鉄則・指針です。<em>Dlvl</em>
+はダンジョンの深度（地下階数）を、<em>XL</em>
+はキャラクターの経験レベルを表します。通貨単位はゾークミッド（<em>zm</em>）です。<strong>5.0の新要素</strong>と記された項目は、NetHack
+3.6以前のバージョンで学んだプレイヤーにとって特に重要です。久しぶりにプレイする復帰冒険者は、まず<a
+href="#what-changed-since-last-time">前回からの変更点</a>から読み始めるのもおすすめです。</p>
+<section id="ダンジョン緊急時チェックリスト" class="level4">
+<h4>ダンジョン緊急時チェックリスト</h4>
+<p>状況が一変して絶体絶命の危機に陥ったときは、<strong>キーボードを叩くのを直ちに止め、画面上部に表示されたメッセージをもう一度よく読み直してください。</strong></p>
+<ol type="1">
+<li><strong>ステータス確認</strong>:
+現在のHP、空腹度、荷物の重量負荷、そして画面下に表示されているすべての状態異常（盲目、混乱、気絶、毒など）を確認する。</li>
+<li><strong>即時退路の確保</strong>:
+上り階段、閉められるドア、または1ターンで逃げ込める安全地帯がないか周囲を見回す。インベントリからアイテムを探すのは、目に見える退路を確認した後です。</li>
+<li><strong>Elberethの活用</strong>:
+歩いて逃げられないときは、敵が隣接する前に床の埃に指で
+<code>Elbereth</code>
+と刻む（engrave）。時間に余裕があるなら、アサメなどの刃物で恒久的に刻む。</li>
+<li><strong>神への祈り</strong>: 属性信仰値と幸運 (Luck)
+が正常であり、前回の祈りから十分なターン数が経過していれば、神への祈り
+(<code>#pray</code>) で致命的な危機から救済される。ただしゲヘナ
+(Gehennom) では神の加護はほとんど期待できない。</li>
+<li><strong>即死カウントダウンの対処法</strong>:
+<ul>
+<li><strong>石化 (stoning)</strong>: 直ちにトカゲの死骸 (lizard corpse)
+を食べる。</li>
+<li><strong>スライム化 (sliming)</strong>:
+火の杖や火の巻物など、火（炎）を使って身を焼く。</li>
+<li><strong>病気 (illness)</strong>: 祝福された回復の薬 (blessed potion
+of healing)、または無呪の超回復の薬 (extra healing)
+を飲む。ユニコーンの角を使う。</li>
+<li><strong>窒息・首吊り (strangulation)</strong>:
+直ちに首飾り（絞殺の魔除け）を外すか、神に祈る。</li>
+</ul></li>
+<li><strong>死の記録</strong>:
+持ち物のすべてを尽くしても助からないときは、その死の経緯をメモに残しておく。NetHack
+は、プレイヤーが二度と同じ過ちを繰り返さないよう痛烈な教訓を刻み込むのが実に得意なゲームです。</li>
+</ol>
+<div class="web-only">
+<aside class="download-box">
+<strong>オフラインで読みたい場合:</strong>
+日本語版の印刷・閲覧用PDF（<a href="companion.ja.pdf">companion.ja.pdf</a>）をご利用いただけます。
+</aside>
+</div>
+<hr />
+</section>
+</section>
+</section>
+<section id="目次" class="level2">
+<h2>目次</h2>
+<p><strong>第1部: 旅立ちの前に (Part One: Before You Set
+Out)</strong></p>
+<ol type="1">
+<li><a href="#choosing-your-expedition">遠征の選択</a> —
+役職、種族、そして属性</li>
+<li><a href="#what-to-pack">持ち物の準備</a> —
+初期装備と序盤の優先事項</li>
+<li><a href="#your-first-descent">最初の潜行</a> —
+ダンジョン序盤の生存戦略</li>
+</ol>
+<p><strong>第2部: ダンジョンの光景 (Part Two: Dungeon
+Sights)</strong></p>
+<ol start="4" type="1">
+<li><a href="#the-lay-of-the-land">迷宮の地形と構造</a> —
+部屋、通路、ダンジョンの特徴（マップ付き）</li>
+<li><a
+href="#field-guide-to-dungeon-fauna">ダンジョン生態系フィールドガイド</a>
+— モンスター系統の一覧</li>
+<li><a href="#points-of-interest">注目の名所・設備</a> —
+噴水、祭壇、玉座、流し台</li>
+<li><a href="#branches-and-landmarks">分岐とランドマーク</a> —
+鉱山、倉庫番、そしてその先へ</li>
+<li><a href="#traps-and-hazards">罠と危険</a> —
+ダンジョンが仕掛ける数々の罠</li>
+<li><a href="#feelings-and-sounds">感覚と物音</a> —
+何が起きたかを伝える謎めいたメッセージ</li>
+</ol>
+<p><strong>第3部: 生存の知恵 (Part Three: Survival)</strong></p>
+<ol start="10" type="1">
+<li><a href="#delayed-deaths">差し迫った死から身を守る方法</a> —
+警告メッセージと即座に取るべき対処法</li>
+<li><a href="#engravings">刻み文字とエルベレス</a> —
+床に文字を刻んで結界を作る</li>
+<li><a href="#the-art-of-combat">戦闘の技術</a> —
+命中率、ダメージ計算、そして戦術</li>
+<li><a href="#things-that-will-kill-you">冒険者を殺すもの</a> —
+死因ワースト10、典型的な死、ミミック、ドラゴン</li>
+<li><a href="#saving-and-bones">セーブと亡霊（ボーンズファイル）</a> —
+冒険の中断・再開と、倒れた先人たちが遺すもの</li>
+<li><a href="#ways-to-die-instantly">即死の数々</a> —
+即死トラップのパターンと見分け方</li>
+<li><a href="#divine-relations">神々との関係</a> —
+祈り、生贄、そして祭壇</li>
+<li><a href="#making-friends">友を作る</a> —
+ペット、手懐け、そして平和的共存</li>
+</ol>
+<p><strong>第4部: 装備と糧食 (Part Four: Gear and
+Provisions)</strong></p>
+<ol start="18" type="1">
+<li><a
+href="#a-practical-identification-strategy">実践的なアイテム識別戦略</a>
+— 未知のアイテムを見分ける方法（フローチャート付き）</li>
+<li><a href="#provisions-and-dining">食糧と食事</a> —
+食べ物、栄養価、そして死骸の摂食</li>
+<li><a href="#the-apothecary">薬師の手引き</a> —
+薬（ポーション）とその多彩な効能</li>
+<li><a href="#the-scroll-rack">巻物棚</a> —
+巻物の効果と、混乱状態での読書</li>
+<li><a href="#wands">杖</a> — 魔法の杖（ワンド）</li>
+<li><a href="#rings-and-amulets">指輪と魔除け</a> —
+運命を左右する装飾品</li>
+<li><a href="#tools-of-the-trade">冒険の七つ道具</a> —
+つるはしから魔法のランプまで</li>
+<li><a href="#the-armory">武器庫と防具庫</a> —
+武器、防具、そして攻撃のメカニズム</li>
+<li><a href="#curses-and-how-to-break-them">呪いとその解法</a> —
+呪いの見抜き方、解呪、そして対処法</li>
+</ol>
+<p><strong>第5部: 熟達と終局 (Part Five: Mastery and
+Endgame)</strong></p>
+<ol start="27" type="1">
+<li><a href="#spellcasting">呪文の詠唱</a> —
+学びを重んじる冒険者のための魔法</li>
+<li><a href="#luck-and-fortune">幸運と運命</a> —
+冒険者の運命を形作る隠された数値</li>
+<li><a href="#exercising-your-stats">能力値の鍛錬</a> —
+腕力・器用度・体質・賢さを育てる日常の行動</li>
+<li><a href="#enhancing-skills">スキルの熟達</a> —
+戦闘スタイルと魔法技能の強化</li>
+<li><a href="#wishes-and-wishing">願いと祈願</a> —
+望むものを手に入れる究極の力</li>
+<li><a href="#artifacts">アーティファクト</a> —
+伝説の武具とその入手方法</li>
+<li><a href="#into-gehennom">ゲヘナへの突入</a> —
+城の関所と深淵の世界</li>
+<li><a href="#the-ascension">昇天（アセンション）</a> —
+最終装備を整え、地上へと脱出する</li>
+</ol>
+<p><strong>付録 (Appendices)</strong></p>
+<ol start="35" type="1">
+<li><a href="#advanced-controls">上級操作コマンド</a> —
+繰り返し回数指定、プレフィックス、効率化テクニック</li>
+<li><a href="#options-worth-knowing-about">設定カスタマイズ</a> —
+知っておくべき重要オプション設定 (.nethackrc)</li>
+<li><a href="#sokoban-solutions">倉庫番の完全解法</a> —
+全8パターンの完全攻略法</li>
+<li><a href="#voluntary-challenges">自発的挑戦（コンダクト）</a> —
+厳しい誓いと自己制限プレイ</li>
+<li><a href="#shopping-and-shopkeeper-pricing">商店:
+クレジット、借金、そしてトラブル</a> —
+ダンジョン内の商取引と店主価格</li>
+<li><a href="#weapons-tables">武器データ表</a></li>
+<li><a href="#armor-tables">防具データ表</a></li>
+<li><a href="#spell-tables">呪文データ表</a></li>
+<li><a href="#bestiary-tables">モンスター図鑑データ表</a></li>
+<li><a href="#intrinsic-and-extrinsic-tables">内在・外在能力データ表</a>
+— 獲得できる能力とその付与源</li>
+<li><a href="#what-changed-since-last-time">前回からの変更点</a> — 3.6.x
+と 5.0 の違いと対策</li>
+<li><a href="#acknowledgements">謝辞</a> — 巨人の肩の上に立って</li>
+</ol>
+</section>
+<section id="第1部-旅立ちの前に-part-one-before-you-set-out"
+class="level2">
+<h2>第1部: 旅立ちの前に (Part One: Before You Set Out)</h2>
+<!-- audit
+2026-05-22 community-strategy additions citation index:
+- 本監査パスでは、コミュニティで培われた攻略戦略を精選して本書に統合しました。各追加項目は、計画文書 `strategy-audit.md` 内で出典URLと相互参照されています。主な情報源は NetHackWiki (https://nethackwiki.com/wiki/)、そのFandomミラー (https://nethack.fandom.com/wiki/)、David Damerell による識別および祈りスポイラー (chiark.greenend.org.uk)、Kate Nepveu による Steelypips RGRN アーカイブ (https://www.steelypips.org/nethack/) です。
+- 個々の引用エントリについては strategy-audit.md を参照してください。
+-->
+<section id="遠征の選択" class="level3">
+<h3>遠征の選択</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Rogue backstab is melee-only; removed "counts even at range" (uhitm.c:960 gates on hmd->hand_to_hand: "multi-shot throwing is too powerful here").
+- Healer has no Sick_resistance (hea_abil = poison-res@1, warning@15; attrib.c:41-43); tainted food still sickens (eat.c:1904,1939). Narrowed "cannot be made sick" to the potion of sickness, which is Healer-cased (potion.c:969,977).
+- Verified correct: all 13 roles' intrinsic-gain XLs (attrib.c:26-89), alignment/race availability (role.c), race stat caps (role.c:597-678), starting kits (u_init.c:42-178), Archeologist scroll-decipher on pickup (invent.c:1036), Barbarian HP-advance 10 (role.c:102), Excalibur gates (fountain.c:404-410).
+-->
+<!-- audit
+2026-05-21:
+- Archeologist starts with touchstone (u_init.c:50) and knows_object(TOUCHSTONE) so the tool itself is identified (u_init.c:660-662); does NOT have knows_class(GEM_CLASS) — gems are NOT pre-identified; touchstone identifies gems by rubbing per apply.c:2678-2707 (Ken Arnold)
+- Healer starts with wand of sleep, 4 potions of healing, 4 potions of extra healing, and 3 blessed spellbooks (healing, extra healing, stone-to-flesh) (u_init.c:81-90); the spellbooks are always blessed so reading them always succeeds
+- Tourist starts with 4 scrolls of magic mapping, 2 potions of extra healing, 21-40 +2 darts, Hawaiian shirt, expensive camera, credit card, and 10 random food items (u_init.c:150-159)
+2026-05-18:
+- Knight starts with +1 long sword and +1 lance (u_init.c:91-92)
+- Cave Dweller gains Fast at XL 7 (attrib.c:37)
+- Knight gains Fast at XL 7 (attrib.c:45)
+- Healer starts with poison resistance at XL 1 (attrib.c:41)
+- Ranger gains Searching XL 1, Stealth XL 7, See Invisible XL 15 (attrib.c:63-66)
+- Elf gains sleep resistance at XL 4 (attrib.c:95)
+- Cave Dweller starts with sling + flint stones (u_init.c:68-71)
+- Ranger starts with +2 cloak of displacement (u_init.c:128)
+- Wizard starts with cloak of MR + wand + rings + potions + scrolls + books + marker (u_init.c:167-176)
+- Knight has intrinsic jumping from XL 1 (u_init.c:691)
+- amethyst converts booze (not sickness) to fruit juice (potion.c:2161-2163)
+- unicorn horn converts sickness to fruit juice (potion.c:2151-2154)
+- Mjollnir is the Valkyrie sacrifice gift; needs a co-aligned altar (artilist.h:109)
+- Knight code penalizes attacks on fleeing or helpless monsters (uhitm.c:336-339); peaceful kill is Samurai's giri
+- all 13 role alignment/race availabilities (role.c)
+- race stat caps (Str/Int/Wis/Dex/Con/Cha): Human {STR18(100),18,18,18,18,18} (role.c:597-598); Elf {18,20,20,18,16,18} (role.c:617-618); Dwarf {STR18(100),16,16,20,20,16} (role.c:637-638); Gnome {STR18(50),19,18,18,18,18} (role.c:657-658); Orc {STR18(50),16,16,18,18,16} (role.c:677-678)
+- race stat FLOORS are uniformly {3,3,3,3,3,3} for every race (role.c:597, 617, 637, 657, 677)
+- race intrinsic tables (attrib.c:91-105): hum_abil=none; dwa_abil=Infravision@XL1; elf_abil=Infravision@XL1+Sleep_resistance@XL4; gno_abil=Infravision@XL1; orc_abil=Infravision+Poison_resistance both@XL1
+- initial roll distributes 75 points starting from role attrbase, clipped by race ATTRMAX, floor ATTRMIN=3 (attrib.c:723-737, init_attr_role_redist at 699-718); initial values typically land well below the race cap
+- strategy aligned with NetHackWiki Valkyrie, Excalibur: Valkyrie is widely cited as the easiest beginner role; Knight 1-in-6 Excalibur dip at XL 5+ confirmed (https://nethackwiki.com/wiki/Valkyrie, https://nethackwiki.com/wiki/Excalibur)
+-->
+<p>迷宮へ足を踏み入れる前に、まずは<strong>役職
+(role)</strong>、<strong>種族 (race)</strong>、そして<strong>属性
+(alignment)</strong>
+を選択します。この3つの組み合わせによって、初期装備、固有能力、信仰する神々、そして安全に扱えるアーティファクトが決まります。</p>
+<p>初めての冒険なら、<strong>「秩序」の「人間」または「ドワーフ」の「ワルキューレ」</strong>を選ぶのがおすすめです。初期能力値と装備が強力で、最初から冷気耐性を持ち、序盤から強力な武器を入手する確実なルートが存在します。もちろん、他に興味を惹かれる役職があれば、迷わずそちらを選んでください。最初の数回の死は、キャラクター選択画面の解説文の何倍もの教訓を与えてくれるはずです。</p>
+<section id="役職-the-roles" class="level4">
+<h4>役職 (The Roles)</h4>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>役職 (Role)</th>
+<th>属性 (Alignments)</th>
+<th>種族 (Races)</th>
+<th>序盤の強み (Early edge)</th>
+<th>主な難点 (Main difficulty)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>考古学者 (Archeologist)</td>
+<td>秩序、中立</td>
+<td>人間、ドワーフ、ノーム</td>
+<td>採掘道具およびアイテム識別手段</td>
+<td>近接白兵戦が脆弱</td>
+</tr>
+<tr>
+<td>バーバリアン (Barbarian)</td>
+<td>中立、混沌</td>
+<td>人間、オーク</td>
+<td>圧倒的な高HPと毒耐性</td>
+<td>有用な魔法が極めて少ない</td>
+</tr>
+<tr>
+<td>洞窟人 (Cave Dweller)</td>
+<td>秩序、中立</td>
+<td>人間、ドワーフ、ノーム</td>
+<td>頑強でシンプル、強力な射撃武器スタート</td>
+<td>初期耐性が皆無</td>
+</tr>
+<tr>
+<td>治療者 (Healer)</td>
+<td>中立</td>
+<td>人間、ノーム</td>
+<td>回復魔法、睡眠の杖、毒耐性</td>
+<td>貧弱な武器と防具</td>
+</tr>
+<tr>
+<td>騎士 (Knight)</td>
+<td>秩序</td>
+<td>人間</td>
+<td>優れた鎧、子馬、ランス、長剣</td>
+<td>騎乗操作や騎士道戒律の違反リスク</td>
+</tr>
+<tr>
+<td>修道士 (Monk)</td>
+<td>すべて</td>
+<td>人間</td>
+<td>移動速度、各種耐性、素手格闘術</td>
+<td>重鎧の禁止と菜食（食事制限）</td>
+</tr>
+<tr>
+<td>僧侶 (Priest)</td>
+<td>すべて</td>
+<td>人間、エルフ</td>
+<td>一目でアイテムの呪詛状態 (BUC) が判明</td>
+<td>序盤の攻撃力が中途半端</td>
+</tr>
+<tr>
+<td>レンジャー (Ranger)</td>
+<td>中立、混沌</td>
+<td>人間、エルフ、ノーム、オーク</td>
+<td>弓、矢、変位のクローク</td>
+<td>戦うには敵との距離が必要</td>
+</tr>
+<tr>
+<td>盗賊 (Rogue)</td>
+<td>混沌</td>
+<td>人間、オーク</td>
+<td>複数の短剣、隠密性、鍵開け道具</td>
+<td>防具が軽装</td>
+</tr>
+<tr>
+<td>侍 (Samurai)</td>
+<td>秩序</td>
+<td>人間</td>
+<td>高速行動、充実した武具、優れた弓</td>
+<td>義理や武士道戒律によるペナルティ</td>
+</tr>
+<tr>
+<td>観光客 (Tourist)</td>
+<td>中立</td>
+<td>人間</td>
+<td>投げ矢、カメラ、魔法の地図の巻物</td>
+<td>序盤が極めて脆弱</td>
+</tr>
+<tr>
+<td>ワルキューレ (Valkyrie)</td>
+<td>秩序、中立</td>
+<td>人間、ドワーフ</td>
+<td>優れた盾と最初からの冷気耐性</td>
+<td>後半に魔法防御を自力確保する必要あり</td>
+</tr>
+<tr>
+<td>魔法使い (Wizard)</td>
+<td>中立、混沌</td>
+<td>人間、エルフ、ノーム、オーク</td>
+<td>魔法防御と充実した初期アイテム群</td>
+<td>低HPかつ初期食料なし</td>
+</tr>
+</tbody>
+</table>
+<p>各役職と種族のレベルごとの詳細な獲得能力については、<a
+href="#intrinsic-and-extrinsic-tables">内在・外在能力データ表</a>を参照してください。</p>
+<p>選んだ役職によって、初期インベントリ、成長時に獲得する内在能力、スキルの上限、そして固有のクエストが決定されます。これらの違いが、同じダンジョンを攻略する際のアプローチを根本から変えることになります。ワルキューレなら序盤から真っ向から殴り合い、魔法使いなら遠距離から仕留め、考古学者なら壁を掘り進んで戦闘を回避することができるのです。</p>
+<p><strong>考古学者 (Archeologist)</strong>
+<em>（秩序または中立）</em>。脅威の迷宮におけるインディ・ジョーンズ。つるはし、革鞭、食料を保存するための缶詰作成キット、宝石を識別するための砥石
+(touchstone)、そして幸運のフェドーラ帽を身につけて出発します。戦士ではなく探検家の装備です。つるはしは武器としても道具としても使える特別なアイテムです。戦闘で振り回すだけでなく、迷宮そのものを掘り進むためにも使えます。新たな通路を切り開き、金貨が眠る閉ざされた隠し宝物庫の壁を破り、あるいは真下の階層へと一直線に竪穴を掘り抜くこともできます。砥石で擦るだけで本物の宝石とガラス玉を一瞬で見分けられ、その専門知識ゆえに巻物を拾い上げた瞬間にその銘を解読して自動識別できます。最初は打たれ弱いため、序盤の階層では正面から殴り合うよりも忍耐と隠密性が報われます。しかし頭脳明晰で、生まれつき天性の魔法使いに匹敵する知力と賢さを持っています。初期状態では魔法を使えませんが、呪文の書を入手するにつれて魔法の才能を開花させていきます。やがてつるはしやサーベルの達人となり、フロア全体の構造を一瞬で暴く「魔法の地図
+(magic
+mapping)」をはじめとする予言系の呪文を自在に操れるようになります。考古学者が心に刻むべき鉄則が一つあります。それは<strong>「歴史的彫像を決して破壊してはならない」</strong>ということです。どの石像が歴史的価値を持つかを見抜けるのは考古学者だけですが、過去の遺産を破壊することは神の怒りを買い、属性信仰値を大きく損なうことになります。</p>
+<p><strong>バーバリアン (Barbarian)</strong>
+<em>（中立または混沌）</em>。純粋な筋肉の塊であり、全役職中最大のヒットポイントを誇ります。その戦法は、力任せに敵を叩き潰し、相手の反撃よりも長く耐え抜くことです。序盤の迷宮における大半の脅威は、重武器の一撃を数回叩き込むだけで粉砕できます。最初から<strong><a
+href="#damage-resistances">毒への完全耐性</a></strong>を備えており、序盤の死因のかなりの割合を占める毒死を完全に無力化できます。巨大な両手持ち武器（両手剣または戦斧）、予備の片手武器、リングメイルの鎧、そして食料を携えて始まります。ゲーム序盤は、ただ敵の群れに突進して武器を振り回すだけで軽快に進めるでしょう。問題が生じるのは、中盤に差しかかり、筋肉を一切意に介さない魔法攻撃を操るモンスターと遭遇し始めてからです。早い段階から魔法防御（最も確実なのは灰色ドラゴン鱗鎧）の確保を目指しましょう。なお毒が一切効かないため、普通の冒険者なら命を落とすような怪しい薬や危険な死骸の「味見テスト」ができる点も大きな強みです。</p>
+<p><strong>洞窟人 (Cave Dweller / Caveman)</strong>
+<em>（秩序または中立）</em>。本作で最もシンプルで、余計な複雑さに悩まされることなくダンジョンのイロハを学ぶのに最適な役職です。原始的ですが極めて頑丈です。こん棒、投げつけるための火打石の山とスリング、革鎧、そして成長とともに気前よく伸びていく豊富なHPを持っています。学ぶべき呪文の書も、初期の呪文も一切ありません。洞窟人を際立たせているのは「持っていないもの」です。初期耐性が一切ありません。他の役職が最初から火、冷気、あるいは毒に対する保護を与えられているのに対し、洞窟人は適切なモンスターの死骸を喰らうことで、その一つひとつを自力で勝ち取っていかなければなりません。火蟻
+(fire ant) を食べれば火耐性が、殺人蜂 (killer bee)
+を食べれば毒耐性が得られます。戦闘面ではこん棒、メイス、クオータースタッフ、槍、スリングの達人になれるほか、バーバリアンと同様に素手格闘の達人にもなれるため、武器を失っても強烈な打撃を繰り出せます。初期の知力が低く呪文スキルも限定的なため、魔法書よりも巻物に頼るのが賢明です。最前線での重厚な白兵戦を楽しみたいなら、種族には人間またはドワーフを選ぶとよいでしょう。</p>
+<p><strong>治療者 (Healer)</strong>
+<em>（中立）</em>。迷宮の医師。戦争ではなく医療のための装備を身につけて到着します。聴診器、小さな外科手術用メス、大量の回復の薬、そして読んだ瞬間に爆発しないよう最初から祝福された3冊の回復魔法の書、そして何より<strong>睡眠の杖
+(wand of sleep)</strong>
+です。この杖こそが序盤最大の防御手段です。第1〜第5階層に現れるモンスターの大半は睡眠への耐性を持っておらず、危険な強敵であっても一筋の光線でその場に昏倒させることができます。他の安全な手段で倒せない強敵のために杖の充填回数（チャージ）を温存しておきましょう。聴診器は1ターン目から大活躍します。モンスターに当てれば残りHPが正確に把握でき、自分自身に当てれば隠れた状態異常や病気を察知できます。生まれつき2つの恩恵を持っています。毒に対する完全耐性と、病気の薬
+(potion of sickness)
+の効果を受けない耐性です。未知の謎の薬を飲んでも、毒死したり病気にかかったりすることはありません（ただし麻痺や睡眠は防げません）。殴り合いの乱闘向きではないため、序盤は睡眠の杖に頼り、中盤以降は自らの治癒魔法を駆使して戦います。短剣、クオータースタッフ、投げ矢、そしてユニコーンの角の扱いに熟達し、中盤以降は「回復の薬を飲む冒険者」から「回復魔法を唱えて戦う術者」へと劇的に進化します。</p>
+<!-- audit
+2026-08-01: lance-on-foot corrected. is_pole() includes P_LANCE (obj.h:228),
+so a wielded lance reaches distance 2 via #apply like any polearm (apply.c
+use_pole gates on is_pole(uwep)). Only the joust is mounted-only (joust()
+needs a steed, uhitm.c). Prior "dead weight on foot" was wrong; it keeps reach.
+Riding a strong steed (pony/horse/warhorse all M2_STRONG, monsters.h) forces
+carrcap=MAX_CARR_CAP (hack.c weight_cap), so riding raises carrying capacity.
+-->
+<p><strong>騎士 (Knight)</strong>
+<em>（秩序）</em>。馬上の騎士道精神。騎士道の名誉ある戒律と、頼もしい相棒を連れて戦場へ赴きます。1ターン目から<strong>鞍を置いた子馬
+(saddled pony)</strong> が傍らに寄り添い、長剣、<strong>ランス
+(lance)</strong>、そして全身を包む鎧、兜、盾、手袋を装備しています。徒歩の状態でもランスは2マス離れた敵を突く間合い武器（長柄武器）として活用できますが、馬に乗った状態で敵へ突進する「馬上槍試合（ジャウスト
+/
+joust）」を繰り出せば、他のどの役職も真似できない圧倒的な壊滅的ダメージを叩き出せます。これほどランスを巧みに扱える役職は他にいません。愛馬に騎乗している間は所持重量の上限も大幅に増加します。ただし、馬の背に飛び乗る行為は見た目以上に危険を伴います。乗馬に失敗して落馬すると10〜14ポイントもの大ダメージを受け、序盤の騎士ならそれだけで瀕死に陥りかねません。序盤は落馬確率が5割近くに達するため、無理に乗馬を急ぐのは禁物です。まずは子馬にリンゴを与えて大きく育て、馬、そして軍馬へと成長させ、成功率が十分に上がってから鞍に跨がりましょう。騎士団には2つの重要な掟と特権があります。秩序の騎士が長剣を手にして噴水に入ると、ゲーム内で最も高い確率で伝説の聖剣<strong><a
+href="#excalibur-artifact">エクスカリバー (Excalibur)</a></strong>
+を引き当てることができます。一方で、騎士道の戒律により、逃走中、睡眠中、または無力な状態の敵を攻撃することは固く禁じられており、違反すると神の信認を失います。子馬にはリンゴを与え、ニンジンは自らの盲目を治すために温存し、常に名誉ある戦いを選びましょう。</p>
+<p><strong>修道士 (Monk)</strong>
+<em>（全属性）</em>。素手で戦い始め、他の役職が到達できない究極の素手格闘術を極めることができます。やがてその拳は名だたる名剣をも凌駕する破壊力を帯びるようになります。冒険の最初から<a
+href="#senses-and-perception">不可視の視認</a>能力を持ち、睡眠攻撃を寄せ付けず、並外れた高速移動が可能です。さらに他のどの役職よりも早いペースで新たな内在能力を習得していきます。この強力な格闘ボーナスを維持するには、常に身軽で荷物負荷のない状態を保たなければなりません。胴鎧を着ると命中率に20ポイントもの大ペナルティを受け、盾を構えると格闘ボーナスが消失し、頭・手・足に金属製防具をつけると魔法詠唱が阻害されます。そのため、初期装備である<strong>ローブ
+(robe)</strong>
+以外はほとんど何も身につけずに戦うのが最も効果的です（ローブは魔法詠唱を鈍らせるどころか鋭敏にしてくれます）。ローブを大切に扱い、菜食主義（ベジタリアン）の食事制限を守り抜いて誓約（コンダクト）を維持しましょう。</p>
+<p><strong>僧侶 (Priest)</strong>
+<em>（全属性、神の属性と一致）</em>。その信仰心により、あらゆるアイテムの呪詛状態（祝福されているか、呪われているか、無呪であるか
+/
+BUC）を一目で看破できます。床に落ちているクロークが呪われていないか不安に怯える必要は二度とありません。メス、ローブ、盾、そして4本の<strong>聖水
+(holy water)</strong>
+を携えて旅立ちます。さらに聖水はいつでも自作可能です。自分の宗派の祭壇に普通の水の薬を置き、神に祈る
+(<code>#pray</code>)
+だけで、その山のすべての水が一瞬で聖水へと浄化されます。あなたの神は、祭壇での生贄に対しても特別な恩恵を与えてくれます。生贄によって最初に下賜されるアーティファクトは、悪魔を粉砕するために鍛えられた祝福された銀のメイス<strong>「デーモンベイン
+(Demonbane)」</strong>であることが保証されています。価値ある生贄を捧げるたびに、6分の1の確率でこの至宝が授けられます。僧侶は堅実な戦士であると同時に、やがて強力無比な聖職者魔法の術者へと成長し、あらゆる打撃武器や治癒・予言・僧侶系魔法の達人となります。1点だけ注意すべきは、自身の幸運
+(Luck)
+を損なわないことです。生贄を重ねて神の寵愛を確固たるものにするまでは、平和的なモンスターを殺したり鏡を割ったりしてはなりません。さもないと、絶体絶命の祈りに対する神の返答は、期待とは正反対の惨劇となるでしょう。</p>
+<p><strong>レンジャー (Ranger)</strong>
+<em>（中立または混沌）</em>。遠距離からの狙撃を得意とする天性の狩人。弓と矢筒いっぱいの矢、そして<strong>+2
+変位のクローク (cloak of displacement)</strong>
+を身につけて始まります。このクロークは敵の攻撃を実際の位置から1マスずれた幻影へと逸らすため、本作屈指の安全な開幕手札を誇ります。その真価は圧倒的な射撃手数にあります。弓のスキルを高めると、わずか1ターンの間に2本から3本もの矢を同時に連射できるようになり、並のモンスターなら近づくことすら叶わず射抜かれます。さらに卓越した観察眼を持ち、歩いているだけで立ち止まって探すことなく隠し通路や罠を発見できます。2つの実践知識を覚えておきましょう。最も優れた矢である初期の<strong>+2</strong>矢は普通の矢よりも格段に折れにくいため、本気の強敵との戦いまで温存し、第1階層のイモリのような無害な雑魚には安物の矢を使いましょう。そしてレンジャーの定位置は常に遠距離です。一歩下がり、壁を背にして、前線で殴り合うのではなく矢の雨に敵を仕留めさせましょう。</p>
+<p><strong>盗賊 (Rogue)</strong>
+<em>（混沌）</em>。暗闇に潜む泥棒。刃物の扱いが素早く、足音は誰よりも静かです。身軽な装備で旅立ちます。小剣、一握りの投擲用短剣、革鎧、最初からあらゆる扉や宝箱を開け放つ<strong>鍵開け道具
+(lock
+pick)</strong>、そして戦利品を詰め込む麻袋です。気配を完全に殺して移動し、眠っているモンスターの脇を気付かれずにすり抜けることができます。そして逃走中や不意を突かれた敵に一撃を加えるとき、その<strong>不意打ち（バックスタブ
+/
+backstab）</strong>は正面から切り込むよりも遥かに甚大な致命傷を叩き込みます。所持している短剣は突くためではなく投げるためのものであり、1ターンに複数本を同時に投擲できます。後には、初期所持している毒薬を使って、拾った投げ矢や矢、ボルト、手裏剣に毒を塗ることができます（短剣には毒を塗れません）。常に物陰に潜み、ドアを蹴破ったり敵の群れに突っ込んだりするような、居場所を暴露する乱暴で不器用な振る舞いは避けましょう。</p>
+<p><strong>侍 (Samurai)</strong>
+<em>（秩序）</em>。古き伝統を受け継ぐ規律正しき戦士。刀の腕前は神速にして必殺です。迷宮で最も優れた片手剣の一つである<strong>刀
+(katana)</strong>、小刀である<strong>脇差
+(wakizashi)</strong>、矢筒を備えた<strong>和弓
+(yumi)</strong>、そして短冊鎧を身につけ、他の戦士が苦労して手に入れる俊敏な移動速度を最初から備えています。刀はゲーム序盤を鮮やかに切り開いてくれるでしょう。ただし、相棒の脇差は二刀流のパートナーとしては適していません。小柄な脇差は刀の刀術スキルを共有しないため、普通の長剣
+(long sword)
+を見つけたら脇差と持ち替えましょう。両手に剣を構えれば、双方の刃を最高の熟練度で同時に振り回すことができます。背中の和弓も忘れてはなりません。修練を積めば、和弓はレンジャーに匹敵する遠距離脅威となり、近接戦で恐るべき戦士が1ターンに2〜3本の矢を放ちながら接近を拒むという無敵の強さを誇るようになります。</p>
+<p><strong>観光客 (Tourist)</strong>
+<em>（中立）</em>。バカンス気分で迷宮に到着します。派手なアロハシャツ、クレジットカード、<strong>高価なカメラ
+(expensive camera)</strong>、山のような<strong>+2 投げ矢
+(dart)</strong>、少々の回復の薬、そして4枚の魔法の地図の巻物です。防具は皆無に等しく、HPも低く、まともな近接武器もないため、序盤はあらゆる敵が命取りになります。生き延びる鍵は筋肉ではなく知恵です。カメラこそが切り札です。フラッシュを焚くことで迫り来るモンスターの目を眩ませ（盲目状態にし）、盲目になった敵を安全な距離から投げ矢で痛めつけ、ペットにトドメを刺させることができます。魔法の地図の巻物は最も危険な難関フロアのために温存しておきましょう。店主たちは観光客の足元を見てきます。経験を積んで一人前になるまでは、店主は法外に高く売りつけ、こちらの売却額を極端に安く買い叩いてきます。本格的な買い物は冒険の後半まで待ちましょう。この過酷な序盤を生き延びれば、観光客は大化けします。クエスト報酬である「白金のエンドール急行カード
+(Platinum Yendorian Express
+Card)」は、魔法耐性を授けるだけでなく道具の充填回数を回復（リチャージ）する効果を持ちます。知力を高めれば、終盤の観光客は強力な魔法の使い手にもなります。全役職中最も難関であり、観光客での昇天（クリア）はすべての冒険者にとって最高の栄誉となります。</p>
+<p><strong>ワルキューレ (Valkyrie)</strong>
+<em>（秩序または中立、女性専用）</em>。最初の昇天（クリア）を目指すすべてのプレイヤーに推奨される王道の役職であり、それには十分な理由があります。開幕から圧倒的に強く、死ににくく、プレイングが極めてシンプルです。北方の戦乙女であるワルキューレは、槍、短剣、頑丈な<strong>+3
+小さな盾</strong>を装備し、最初から<strong>冷気耐性</strong>を備え、序盤のダンジョンに真っ向から立ち向かえる優れた戦闘能力値を誇ります。神々もまた、終盤の勝利を手厚く約束してくれています。属性を問わず、生贄によって最初に確実に授けられる神の恩寵品は、雷鳴轟く伝説の戦槌<strong><a
+href="#mjollnir">ミョルニル (Mjollnir)</a></strong>
+です。腕力を25まで高めたワルキューレなら、ミョルニルを敵へ投擲し、ブーメランのように手元へと自動回収することができます。ほぼすべての武器を高い熟練度で扱えるようになります。唯一警戒すべきは油断です。自慢の筋肉は中盤まで大いに助けになりますが、ゲヘナ
+(Gehennom)
+の悪魔たちが放つ魔法は鎧もHPも一切無視して襲いかかります。ゲヘナへ足を踏み入れる前に、必ず魔法耐性と反射能力を揃えておきましょう。</p>
+<p><strong>魔法使い (Wizard)</strong>
+<em>（中立または混沌）</em>。大半の冒険者がゲーム全体を通じて血眼になって探し求める至宝を、最初から羽織って旅立ちます。すなわち<strong>魔法耐性のクローク
+(cloak of magic resistance)</strong>
+です。1ターン目から凶悪な即死魔法の数々を完全に無力化できます。さらにクオータースタッフ、杖、2つの指輪、一握りの薬と巻物、魔法のマーカー、そして接近するあらゆる敵を吹き飛ばす<strong>力づくのボルト
+(force bolt)</strong>
+の呪文を携えています。最も脆いのは序盤です。肉体は打たれ弱く、魔法エネルギー
+(PW)
+も乏しいため、拳で殴り合うのではなく、杖と力づくのボルトを駆使して慎重に戦わなければなりません。魔法の各系統を学ぶにつれ、呪文の書を一目で識別できるようになります。充実した魔法の書庫を手に入れた中盤の魔法使いは、あらゆる戦闘に対して完璧な解答を持っています。呪文を唱えるときはクオータースタッフを手に持っておきましょう（呪文詠唱の成功率を安定させてくれます）。そして2つの注意点があります。初期食料を持たず、分け前を譲ってくれない子猫を連れていること、そして力づくのボルトは床に落ちている薬を粉砕してしまうことです（詳細は<a
+href="#spellcasting">呪文の詠唱</a>を参照）。</p>
+</section>
+<section id="種族-the-races" class="level4">
+<h4>種族 (The Races)</h4>
+<p>種族は、キャラクターの初期能力値、能力値の最大上限、そして最初から持っている内在能力に影響を与えます。いかなる能力値も
+3
+未満には下がりません。以下の表は、各種族が到達できる各能力値の最大上限値を示しています。</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>種族 (Race)</th>
+<th>腕力 (Str)</th>
+<th>知力 (Int)</th>
+<th>賢さ (Wis)</th>
+<th>器用度 (Dex)</th>
+<th>体質 (Con)</th>
+<th>魅力 (Cha)</th>
+<th>内在能力 (Intrinsics)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人間 (Human)</td>
+<td>18/100</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+<td>なし</td>
+</tr>
+<tr>
+<td>エルフ (Elf)</td>
+<td>18</td>
+<td>20</td>
+<td>20</td>
+<td>18</td>
+<td>16</td>
+<td>18</td>
+<td>赤外線視覚、XL 4で睡眠耐性</td>
+</tr>
+<tr>
+<td>ドワーフ (Dwarf)</td>
+<td>18/100</td>
+<td>16</td>
+<td>16</td>
+<td>20</td>
+<td>20</td>
+<td>16</td>
+<td>赤外線視覚</td>
+</tr>
+<tr>
+<td>ノーム (Gnome)</td>
+<td>18/50</td>
+<td>19</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+<td>赤外線視覚</td>
+</tr>
+<tr>
+<td>オーク (Orc)</td>
+<td>18/50</td>
+<td>16</td>
+<td>16</td>
+<td>18</td>
+<td>18</td>
+<td>16</td>
+<td>赤外線視覚、毒耐性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>人間 (Human)</strong>。<a
+href="#senses-and-perception">赤外線視覚</a>も毒耐性も特殊な天賦の才も持ちません。しかし、すべての役職を選択できる唯一の種族です。ノームやオークは依然として敵対的であり、人間だからといって鉱山が友好的になることはありません。</p>
+<p><strong>ドワーフ
+(Dwarf)</strong>。屈強な戦士であり、器用度と体質の上限値は全種族中最高を誇り、腕力の上限も人間に匹敵します。レベル1から赤外線視覚を持ち、レベルアップ時のHP上昇量は全種族中最高です。さらにつるはしによる採掘速度が通常の2倍になり、足元に埋まっている財宝を直感で感知できます。何よりノームの鉱山の住人たちの多くが平和的（中立）に接してくれます。選択可能役職:
+考古学者、洞窟人、ワルキューレ。</p>
+<p><strong>エルフ (Elf)</strong>。赤外線視覚に加え、経験レベル4 (XL 4)
+で<a
+href="#damage-resistances">睡眠耐性</a>を獲得します。HPは低めですが、知力と賢さの上限値が最高であり、レベルごとの魔法エネルギー
+(PW)
+成長率も全種族トップです。さらに生まれつきの弓ボーナス（あらゆる弓で命中+1、エルフの弓なら命中+2）を持ち、普段弓を使わない役職でもこの恩恵を受けられます。エルフの僧侶と魔法使いは初期装備として楽器が付属します。選択可能役職:
+僧侶、レンジャー、魔法使い。</p>
+<p><strong>ノーム
+(Gnome)</strong>。レベル1から赤外線視覚を持ち、知力の上限が人間よりわずかに高めです。ノームの鉱山に棲むノームやドワーフの大半が最初から平和的（非敵対）であり、序盤の難所である鉱山が肉挽き器から安全な買い物ツアーへと一変します。さらに砥石
+(touchstone)
+が祝福されていなくても擦るだけで宝石を識別できます。ノームのレンジャーは腕力16でクロスボウの連射が可能になります（通常は腕力18が必要）。選択可能役職:
+考古学者、洞窟人、治療者、レンジャー、魔法使い。</p>
+<p><strong>オーク
+(Orc)</strong>。レベル1からの毒耐性が極めて有用で、毒を持つコボルドの死骸を安全に平らげることができます（序盤の貴重な無料の栄養源になります）。また、同族食い（共食い）のペナルティを受けることなく、倒した他のオークの死骸を食べることができます。全体的な能力値上限は低めで、人間・エルフ・ドワーフからは種族的に敵視されがちです。ただし、普段から平和的な店主、僧侶、監視員などは敵対化しません（他のオークも自動的に仲間になるわけではありません）。選択可能役職:
+バーバリアン、レンジャー、盗賊、魔法使い。</p>
+</section>
+<section id="属性-alignment" class="level4">
+<h4>属性 (Alignment)</h4>
+<p>秩序 (Lawful)、中立 (Neutral)、混沌 (Chaotic)
+という3つの属性を、一般的な「善・中庸・悪」と捉えてしまいがちですが、NetHack
+はそうした道徳的な善悪でプレイヤーを裁くわけではありません。本作における属性とは、<strong>「自分が信仰する神の教義や戒律をどれほど忠実に守り抜いているか」を測る客観的な数値（属性信仰値）</strong>なのです。</p>
+<p>敵対的なモンスターを討ち倒せば、通常はこの数値が上昇します。逆に、平和的な（友好的・中立的な）モンスターを殺害すると、どの属性であっても属性値が即座に5ポイント削られ、理不尽な虐殺は幸運
+(Luck)
+の喪失という重い罰を招きます。一部の役職にはさらに固有の厳しい戒律が存在します。騎士が無力な敵を攻撃すると騎士道違反として評価を失い、侍が平和的な者に斬りかかれば武士の義理を欠いたとして手痛いペナルティを受けます。傷ついた属性値は、通常の敵対モンスターを討伐することや、祭壇に新鮮な<a
+href="#sacrifice">生贄</a>を捧げることで回復できます。</p>
+<p>属性はまた、信仰する神、挑むべき固有のクエスト、そして触れても安全なアーティファクトを決定づけます。秩序のキャラクターは経験レベル5
+(XL 5)
+以上で噴水からエクスカリバーを引き抜く資格を得ます。盗賊は常に混沌であり、ドワーフは常に秩序です。祭壇に関する詳細なルールについては、<a
+href="#altars-and-alignment">祭壇と属性</a>を参照してください。</p>
+<hr />
+<!-- audit
+2026-05-18:
+- tripe rations are dog food for typical PCs (eat.c:2138-2145)
+- orcs and carnivores enjoy tripe (eat.c:2132-2136)
+- altar BUC flash is amber/black and sets bknown (do.c:363-389)
+- pets avoid cursed items (dogmove.c:535-536, 1065-1067)
+- touchstone identifies gems (apply.c:2658-2696)
+- floating-eye paralysis fires on melee against the eye (uhitm.c:5853, 6022)
+- Burdened status label (botl.c:12)
+- food ration weight and nutrition (objects.h:1110)
+- strategy aligned with NetHackWiki Curse-testing, Altar: altar amber/black flash and pet step-avoidance are confirmed canonical curse-testing techniques (https://nethackwiki.com/wiki/Curse-testing, https://nethackwiki.com/wiki/Altar)
+-->
+</section>
+</section>
+</section>
+</section>
+</main>
+<script>
+(function() {
+  // --- Icons for sections that include a figure or are a useful reference ---
+  // The light-brown background matches the inline-code background used
+  // throughout the body text, making the TOC glyph read as a code-span.
+  var glyph = function(s) {
+    return '<span style="flex:none;margin-left:0.4em;font-family:var(--font-mono);font-size:0.85em;font-weight:600;color:#5a5a5a;background:#f5f0e8;padding:0.1em 0.35em;border-radius:3px;letter-spacing:-0.05em;">' + s + '</span>';
+  };
+  var sectionIcons = {
+    'the-lay-of-the-land': '<span style="flex:none;margin-left:0.4em;background:#f5f0e8;color:#5a5a5a;padding:0.1em 0.3em;border-radius:3px;display:inline-flex;align-items:center;vertical-align:-2px;"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><path d="M1 3 L5 2 L9 3.5 L13 2 L13 11 L9 12.5 L5 11 L1 12 Z"/><line x1="5" y1="2" x2="5" y2="11"/><line x1="9" y1="3.5" x2="9" y2="12.5"/></svg></span>',
+    'a-practical-identification-strategy': '<span style="flex:none;margin-left:0.4em;background:#f5f0e8;color:#5a5a5a;padding:0.1em 0.3em;border-radius:3px;display:inline-flex;align-items:center;vertical-align:-2px;"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="2" y="1" width="10" height="3"/><rect x="2" y="5" width="10" height="3"/><rect x="2" y="9" width="10" height="3"/><line x1="7" y1="4" x2="7" y2="5"/><line x1="7" y1="8" x2="7" y2="9"/></svg></span>',
+    'provisions-and-dining': glyph('%'),
+    'the-apothecary':     glyph('!'),
+    'the-scroll-rack':    glyph('?'),
+    'wands-and-staves':   glyph('/'),
+    'rings-and-amulets':  glyph('= &quot;'),
+    'tools-of-the-trade': glyph('('),
+    'weapons-tables':     glyph(')'),
+    'armor-tables':       glyph('['),
+    'spell-tables':       glyph('+')
+  };
+
+  // --- Build TOC from headings ---
+  var tocList = document.getElementById('sidebar-toc-list');
+  var headings = document.querySelectorAll('main h2, main h3');
+  var tocItems = [];
+
+  headings.forEach(function(h) {
+    // Print-only sections (Index of Useful Knowledge, etc.) are
+    // hidden by CSS but still in the DOM. Skip their headings so
+    // they don't show up in the web sidebar TOC.
+    if (h.closest('.print-only')) return;
+    var section = h.closest('section') || h.parentElement;
+    var id = section.id || h.id;
+    if (!id) return;
+
+    var li = document.createElement('li');
+    li.className = h.tagName === 'H2' ? 'toc-part' : 'toc-chapter';
+    var a = document.createElement('a');
+    a.href = '#' + id;
+    var icon = sectionIcons[id];
+    if (icon) {
+      a.innerHTML = '<span>' + h.textContent.replace(/[<>&"]/g, function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];}) + '</span>' + icon;
+    } else {
+      a.textContent = h.textContent;
+    }
+    a.setAttribute('data-target', id);
+    li.appendChild(a);
+    tocList.appendChild(li);
+    tocItems.push({ el: li, id: id, heading: h });
+  });
+
+  // --- Scroll tracking ---
+  // Highlight the last section whose top is above 200px from viewport top.
+  // This correctly picks subsections (h3) over their parent (h2) once
+  // the subsection heading has scrolled into the upper portion of the page.
+  var currentActive = null;
+  var sections = [];
+  tocItems.forEach(function(item) {
+    var target = document.getElementById(item.id);
+    if (target) sections.push({ id: item.id, el: target, tocItem: item.el });
+  });
+
+  var scrollTicking = false;
+  function updateActiveSection() {
+    scrollTicking = false;
+    var scrollLine = 100;
+    var best = null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.getBoundingClientRect().top <= scrollLine) {
+        best = sections[i];
+      }
+    }
+    if (!best || best.tocItem === currentActive) return;
+
+    if (currentActive) currentActive.classList.remove('active');
+    best.tocItem.classList.add('active');
+    currentActive = best.tocItem;
+
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + best.id);
+    }
+
+    var tocContainer = document.getElementById('sidebar-toc');
+    var itemTop = best.tocItem.offsetTop;
+    var containerHeight = tocContainer.clientHeight;
+    var scrollTop = tocContainer.scrollTop;
+    if (itemTop < scrollTop + 60 || itemTop > scrollTop + containerHeight - 40) {
+      tocContainer.scrollTop = itemTop - containerHeight / 3;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!scrollTicking) {
+      requestAnimationFrame(updateActiveSection);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+  updateActiveSection();
+
+  // --- Search ---
+  var searchInput = document.getElementById('search-input');
+  var searchResults = document.getElementById('search-results');
+  var searchIndex = document.getElementById('search-index');
+
+  // --- Stopwords skipped when normalizing hit position within a sentence ---
+  var STOPWORDS = { 'the':1, 'a':1, 'an':1, 'of':1, 'to':1, 'and':1, 'or':1,
+                    'in':1, 'on':1, 'at':1, 'for':1, 'is':1, 'are':1, 'as':1, 'by':1 };
+
+  // Walk an element and produce its concatenated text together with
+  // the character offset ranges of any bold (strong/b) spans within.
+  function elTextAndBold(el) {
+    var text = '';
+    var ranges = [];
+    function walk(node, inBold) {
+      if (node.nodeType === 3) { text += node.nodeValue; return; }
+      if (node.nodeType !== 1) return;
+      var nowBold = inBold || node.tagName === 'STRONG' || node.tagName === 'B';
+      if (nowBold && !inBold) {
+        var start = text.length;
+        for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], true);
+        ranges.push([start, text.length]);
+      } else {
+        for (var j = 0; j < node.childNodes.length; j++) walk(node.childNodes[j], nowBold);
+      }
+    }
+    walk(el, false);
+    return { text: text, boldRanges: ranges };
+  }
+
+  // Build searchable data from headings and paragraphs. Each section gets
+  // a list of typed segments so the scorer can weight heading/bold/plain
+  // differently. The flat `text` field is kept for snippet generation.
+  var searchData = [];
+  var contentSections = document.querySelectorAll('main section[id]');
+  contentSections.forEach(function(section) {
+    var heading = section.querySelector('h1, h2, h3, h4, h5, h6');
+    if (!heading) return;
+    var level = parseInt(heading.tagName.substring(1), 10);
+    var segments = [{ kind: 'heading', level: level,
+                      text: heading.textContent, boldRanges: [] }];
+    // `flat` holds body-only text for snippet generation. The title is
+    // already shown in the search result heading, so excluding it here
+    // keeps the snippet from repeating it back.
+    var flat = '';
+    // Each segment is one "container unit": a paragraph, a list item, a
+    // code block, a blockquote paragraph, or one whole table.  Body
+    // scoring caps at one hit per segment (best occurrence wins), which
+    // matters most for tables — a Bestiary table with twelve cells
+    // saying "quest leader" / "quest nemesis" is one signal, not twelve.
+    var textEls = section.querySelectorAll(':scope > p, :scope > ul > li, :scope > ol > li, :scope > pre, :scope > table, :scope > blockquote p, :scope > div.dense-table table, :scope > div > table');
+    textEls.forEach(function(el) {
+      var info = elTextAndBold(el);
+      var kind;
+      if (el.tagName === 'TABLE') kind = 'table';
+      else kind = 'plain';
+      segments.push({ kind: kind, text: info.text, boldRanges: info.boldRanges });
+      flat += info.text + ' ';
+    });
+    searchData.push({
+      id: section.id,
+      title: heading.textContent,
+      level: level,
+      // `text` is used (a) for the allMatch gate before scoring and
+      // (b) for snippet generation. Truncating it caused a long
+      // section's trailing content to be silently unsearchable — e.g.
+      // "Discworld" at char 4387 of Learning Spells was invisible
+      // when the limit was 4000. Keep the whole body; per-section
+      // body text is small in absolute terms (a few KB at most).
+      text: flat,
+      segments: segments
+    });
+  });
+
+  // --- Scoring helpers ---
+  function isInBold(pos, ranges) {
+    for (var i = 0; i < ranges.length; i++) {
+      if (pos >= ranges[i][0] && pos < ranges[i][1]) return true;
+    }
+    return false;
+  }
+  // Scan backward; a hit is inside parentheses if we find an unmatched '('.
+  function isInParens(text, pos) {
+    var depth = 0;
+    for (var j = pos - 1; j >= 0; j--) {
+      var c = text.charCodeAt(j);
+      if (c === 41) depth++;          // ')'
+      else if (c === 40) {            // '('
+        if (depth === 0) return true;
+        depth--;
+      }
+    }
+    return false;
+  }
+  // Find the [start, end) bounds of the sentence containing `pos`.
+  function sentenceContaining(text, pos) {
+    var start = 0;
+    for (var j = pos; j > 0; j--) {
+      var c = text.charCodeAt(j - 1);
+      if (c === 46 || c === 33 || c === 63) {  // .!?
+        start = j;
+        while (start < text.length && /\s/.test(text[start])) start++;
+        break;
+      }
+    }
+    var end = text.length;
+    for (var k = pos + 1; k < text.length; k++) {
+      var cc = text.charCodeAt(k);
+      if (cc === 46 || cc === 33 || cc === 63) { end = k; break; }
+    }
+    return { start: start, end: end };
+  }
+  // Skip a leading run of stopwords from the sentence (returns char count).
+  function stopwordSkip(text, start, end) {
+    var i = start;
+    while (i < end) {
+      while (i < end && !/[a-z]/i.test(text[i])) i++;
+      if (i >= end) break;
+      var wstart = i;
+      while (i < end && /[a-z]/i.test(text[i])) i++;
+      if (!STOPWORDS[text.substring(wstart, i).toLowerCase()]) return wstart - start;
+    }
+    return i - start;
+  }
+
+  // Per-occurrence weight of a heading match, by heading level. Higher
+  // headings weigh a touch more (they head broader sections), but the
+  // falloff is deliberately shallow: a hit in a deep, specifically-named
+  // subsection (an h4 like "The Wand Table") is essentially as strong a
+  // signal as one in a shallow structural heading ("Table of Contents",
+  // an h2), and must not be dwarfed by it. Ratio 1.1x per level anchored
+  // at h2 = 90 — nearly flat, vs the old 2x-per-level halving that made
+  // an h4 a quarter the weight of an h2 and let generic top-level
+  // headings outrank the section a query actually names.
+  function headingWeight(level) {
+    return 90 / Math.pow(1.1, level - 2);
+  }
+
+  // Score consecutive-bigram bonus for a multi-word query.
+  // For every adjacent pair of query words, find occurrences of the
+  // pair as a contiguous substring in any segment (treating runs of
+  // whitespace as a single space) and award a per-occurrence bonus
+  // proportional to the segment's kind weight. Skips pairs where both
+  // words are stopwords so phrases like "in the" don't drown out real
+  // content matches.
+  function scoreBigramsInSection(item, words) {
+    if (words.length < 2) return 0;
+    var total = 0;
+    for (var n = 0; n < words.length - 1; n++) {
+      var w1 = words[n], w2 = words[n + 1];
+      if (STOPWORDS[w1] && STOPWORDS[w2]) continue;
+      var bigram = w1 + ' ' + w2;
+      for (var s = 0; s < item.segments.length; s++) {
+        var seg = item.segments[s];
+        var normalized = seg.text.toLowerCase().replace(/\s+/g, ' ');
+        var weight = seg.kind === 'heading' ? headingWeight(seg.level) : 2;
+        var i = 0;
+        while ((i = normalized.indexOf(bigram, i)) !== -1) {
+          total += weight;
+          i += bigram.length;
+        }
+      }
+    }
+    return total;
+  }
+
+  // Score one section against a single (lowercase) query word.
+  //
+  // Heading hits contribute their full per-occurrence weight.  Body
+  // segments (paragraphs, list items, code blocks, whole tables, etc.)
+  // each contribute *at most one hit* — the best occurrence within that
+  // segment.  Multiple mentions inside the same paragraph (or the same
+  // table) are evidence of the same point, not independent signals.
+  function scoreWordInSection(item, word) {
+    var total = 0;
+    for (var s = 0; s < item.segments.length; s++) {
+      var seg = item.segments[s];
+      var t = seg.text;
+      var lt = t.toLowerCase();
+      var i = 0;
+      var segBest = 0;
+      while ((i = lt.indexOf(word, i)) !== -1) {
+        var weight;
+        if (seg.kind === 'heading') {
+          weight = headingWeight(seg.level);
+        } else if (seg.kind === 'table') {
+          weight = 4;
+        } else {
+          weight = isInBold(i, seg.boldRanges) ? 6 : 1;
+        }
+        if (seg.kind !== 'heading' && isInParens(t, i)) weight *= 0.6;
+        // Position bonus: 1.0 at sentence start (after stopwords), 0 at end.
+        var sent = sentenceContaining(t, i);
+        var skip = stopwordSkip(t, sent.start, sent.end);
+        var effPos = Math.max(0, (i - sent.start) - skip);
+        var effLen = Math.max(1, (sent.end - sent.start) - skip);
+        var posBonus = Math.max(0, 1 - effPos / effLen);
+        var per = weight * (0.5 + posBonus);
+        if (seg.kind === 'heading') {
+          // Heading: every (rare) hit counts in full.
+          total += per;
+        } else {
+          // Body segment: only the best hit within this segment counts.
+          if (per > segBest) segBest = per;
+        }
+        i += word.length;
+      }
+      if (seg.kind !== 'heading') total += segBest;
+    }
+    return total;
+  }
+
+  var searchClear = document.getElementById('search-clear');
+  function updateClearButton() {
+    searchClear.hidden = searchInput.value.length === 0;
+  }
+  var searchTimeout = null;
+  searchInput.addEventListener('input', function() {
+    updateClearButton();
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(doSearch, 200);
+  });
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    updateClearButton();
+    searchInput.focus();
+    doSearch();
+  });
+
+  // Title-match bonus: if the query covers the content-bearing words of
+  // the section's title, that section is almost certainly the intended
+  // hit. Without this, a section title-matching the query can lose to a
+  // distant section that mentions the query many times in passing (e.g.
+  // a search for "Quest" lost to the Bestiary section listing every
+  // role's "quest leader" / "quest nemesis").
+  function titleMatchBonus(title, word) {
+    var contentWords = title.toLowerCase().split(/\s+/).map(function(w) {
+      return w.replace(/[^a-z0-9]/g, '');
+    }).filter(function(w) { return w && !STOPWORDS[w]; });
+    if (contentWords.length === 0) return 0;
+    // Exact match counts 1.0; prefix-match (e.g. "amulet" vs "amulets")
+    // counts 0.7 as long as the query covers ≥ 70% of the title word.
+    var coverage = 0;
+    for (var i = 0; i < contentWords.length; i++) {
+      var tw = contentWords[i];
+      if (tw === word) {
+        coverage += 1.0;
+      } else if (tw.indexOf(word) === 0 && word.length / tw.length >= 0.7) {
+        coverage += 0.7;
+      }
+    }
+    if (coverage === 0) return 0;
+    // Scale 0–50 by title coverage. 1.0 coverage (a single-word title
+    // that equals the query) is worth ~50 plain-text mentions.
+    return 50 * coverage / contentWords.length;
+  }
+
+  function doSearch() {
+    var query = searchInput.value.trim().toLowerCase();
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      searchResults.style.display = 'none';
+      searchIndex.style.display = '';
+      return;
+    }
+    searchIndex.style.display = 'none';
+    searchResults.style.display = '';
+
+    var words = query.split(/\s+/);
+    var matches = [];
+    searchData.forEach(function(item) {
+      var haystack = (item.title + ' ' + item.text).toLowerCase();
+      var score = 0;
+      var allMatch = true;
+      for (var w = 0; w < words.length; w++) {
+        if (haystack.indexOf(words[w]) === -1) { allMatch = false; break; }
+        score += scoreWordInSection(item, words[w]);
+        score += titleMatchBonus(item.title, words[w]);
+      }
+      if (allMatch) score += scoreBigramsInSection(item, words);
+      if (allMatch && score > 0) matches.push({ item: item, score: score });
+    });
+
+    matches.sort(function(a, b) { return b.score - a.score; });
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div class="search-empty">No results found.<br><span class="search-hint">The dungeon keeps its secrets.</span></div>';
+      return;
+    }
+
+    var html = '';
+    var shown = Math.min(matches.length, 15);
+    for (var i = 0; i < shown; i++) {
+      var m = matches[i].item;
+      // Find a snippet containing the longest n-gram of the query
+      var snippet = getSnippet(m.text, words);
+      html += '<a class="search-result" href="#' + m.id + '">';
+      html += '<span class="search-result-title">' + highlightMatches(m.title, words) + '</span>';
+      if (snippet) html += '<span class="search-result-snippet">' + highlightMatches(snippet, words) + '</span>';
+      html += '</a>';
+    }
+    if (matches.length > shown) {
+      html += '<div class="search-more">' + (matches.length - shown) + ' more results...</div>';
+    }
+    searchResults.innerHTML = html;
+
+    // Add click handlers to highlight search terms in the target section
+    var resultLinks = searchResults.querySelectorAll('.search-result');
+    resultLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').substring(1);
+        highlightSearchTermInSection(targetId, words);
+      });
+    });
+  }
+
+  function highlightSearchTermInSection(sectionId, words) {
+    // Clear any previous highlights
+    document.querySelectorAll('.search-highlight').forEach(function(el) {
+      var text = el.textContent;
+      el.replaceWith(document.createTextNode(text));
+    });
+
+    // Find the target section
+    var section = document.getElementById(sectionId);
+    if (!section) return;
+
+    // Navigate to the section first
+    window.location.hash = sectionId;
+
+    // Find the first occurrence of any search word in the section's text
+    var walker = document.createTreeWalker(
+      section,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          // Skip script tags, style tags, and sidebar elements
+          var parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          var tag = parent.tagName.toLowerCase();
+          if (tag === 'script' || tag === 'style') return NodeFilter.FILTER_REJECT;
+          if (parent.closest('#sidebar-toc') || parent.closest('#sidebar-search')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    // Collect all eligible text nodes once, then look for the longest
+    // matching n-gram of the query across them. Falling back to single
+    // words only if no multi-word phrase appears keeps the scroll-anchor
+    // on the full phrase a user typed — e.g. a search for "cloak of magic
+    // resistance" jumps to that phrase rather than the first stray "of".
+    var allNodes = [];
+    while (walker.nextNode()) allNodes.push(walker.currentNode);
+
+    var firstMatch = null;
+    var matchedPhrase = null;
+    var matchedIndex = -1;
+    for (var len = words.length; len >= 1 && !firstMatch; len--) {
+      for (var n = 0; n < allNodes.length && !firstMatch; n++) {
+        var nodeLower = allNodes[n].textContent.toLowerCase();
+        var bestIdxInNode = -1;
+        var bestPhraseInNode = null;
+        for (var start = 0; start + len <= words.length; start++) {
+          var phrase = words.slice(start, start + len).join(' ').toLowerCase();
+          var pIdx = nodeLower.indexOf(phrase);
+          if (pIdx === -1) continue;
+          if (bestIdxInNode === -1 || pIdx < bestIdxInNode) {
+            bestIdxInNode = pIdx;
+            bestPhraseInNode = phrase;
+          }
+        }
+        if (bestPhraseInNode !== null) {
+          firstMatch = allNodes[n];
+          matchedPhrase = bestPhraseInNode;
+          matchedIndex = bestIdxInNode;
+        }
+      }
+    }
+
+    if (firstMatch && matchedPhrase) {
+      var text = firstMatch.textContent;
+      var idx = matchedIndex;
+
+      if (idx !== -1) {
+        var before = text.substring(0, idx);
+        var match = text.substring(idx, idx + matchedPhrase.length);
+        var after = text.substring(idx + matchedPhrase.length);
+
+        var beforeNode = document.createTextNode(before);
+        var highlightSpan = document.createElement('span');
+        highlightSpan.className = 'search-highlight';
+        highlightSpan.textContent = match;
+        var afterNode = document.createTextNode(after);
+
+        var parent = firstMatch.parentNode;
+        parent.insertBefore(beforeNode, firstMatch);
+        parent.insertBefore(highlightSpan, firstMatch);
+        parent.insertBefore(afterNode, firstMatch);
+        parent.removeChild(firstMatch);
+
+        // Scroll to highlight only if it's in the lower portion of viewport
+        // (don't scroll up - keep section header at top)
+        setTimeout(function() {
+          var rect = highlightSpan.getBoundingClientRect();
+          var viewportHeight = window.innerHeight;
+          var scrollThreshold = viewportHeight * 0.6; // 60% down the page
+
+          // Only scroll if the highlight is below the comfortable reading area
+          if (rect.top > scrollThreshold) {
+            highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          // If highlight is in top 60% or above, don't scroll - it's visible
+        }, 100);
+      }
+    }
+  }
+
+  // Find the earliest occurrence of the longest matching n-gram from
+  // `words` inside `text`. Tries the full query first, then progressively
+  // shorter contiguous slices, then individual words. Within a given
+  // length, the n-gram that appears earliest in the text wins. Returns
+  // { phrase, index } or null.
+  function findLongestPhrase(text, words) {
+    var lower = text.toLowerCase();
+    for (var len = words.length; len >= 1; len--) {
+      var bestIdx = -1;
+      var bestPhrase = null;
+      for (var start = 0; start + len <= words.length; start++) {
+        var phrase = words.slice(start, start + len).join(' ');
+        var idx = lower.indexOf(phrase);
+        if (idx === -1) continue;
+        if (bestIdx === -1 || idx < bestIdx) {
+          bestIdx = idx;
+          bestPhrase = phrase;
+        }
+      }
+      if (bestPhrase !== null) return { phrase: bestPhrase, index: bestIdx };
+    }
+    return null;
+  }
+
+  function getSnippet(text, words) {
+    var hit = findLongestPhrase(text, words);
+    if (!hit) return '';
+    var start = Math.max(0, hit.index - 40);
+    var end = Math.min(text.length, hit.index + hit.phrase.length + 60);
+    var s = text.substring(start, end).replace(/\s+/g, ' ').trim();
+    if (start > 0) s = '\u2026' + s;
+    if (end < text.length) s = s + '\u2026';
+    return s;
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function highlightMatches(text, words) {
+    var safe = escHtml(text);
+    var reChars = /[.*+?^${}()|[\]\\]/g;
+    function esc(w) { return escHtml(w).replace(reChars, '\\$&'); }
+    // Build an alternation that prefers longer phrases. JavaScript regex
+    // alternation tries each branch in order at each position, so listing
+    // the full query first, then progressively shorter contiguous slices,
+    // then individual words, means a search for "cloak of magic resistance"
+    // bolds the full phrase as one match rather than four separate words.
+    var alts = [];
+    for (var len = words.length; len >= 2; len--) {
+      for (var start = 0; start + len <= words.length; start++) {
+        alts.push(words.slice(start, start + len).map(esc).join('\\s+'));
+      }
+    }
+    var sortedSingles = words.slice().sort(function(a, b) { return b.length - a.length; });
+    sortedSingles.forEach(function(w) { alts.push(esc(w)); });
+    var re = new RegExp('(' + alts.join('|') + ')', 'gi');
+    return safe.replace(re, '<b>$1</b>');
+  }
+
+  // --- Humorous index (shown when search is empty) ---
+  var indexEntries = [
+    ['Amorous demon, expensive evening with', 'seduction'],
+    ['Amulet of Yendor, retrieving', 'the-ascension-run'],
+    ['Ascension, how to not die during', 'the-ascension-run'],
+    ['Boulders, pushing (see: Sokoban)', 'sokoban-solutions'],
+    ['BUC, avoiding curses by checking', 'blessed-uncursed-cursed-buc'],
+    ['Castle, storming the', 'the-castle'],
+    ['Cockatrice corpse, wielding', 'petrification-stoning'],
+    ['Death, causes of (see: everything)', 'things-that-will-kill-you'],
+    ['Disenchanter, mourning your former +5', 'enchantment-drain'],
+    ['Displacer beast, taming', 'the-displacer-beast'],
+    ['Drowning, preventable', 'drowning'],
+    ['Elbereth, writing frantically', 'engravings'],
+    ['Floating eye, do not hit', 'eyes-and-spheres-e'],
+    ['Food, running out of', 'how-hunger-works'],
+    ['Gehennom, why is it so hot', 'gehennom'],
+    ['Gods, angering', 'altars-and-alignment'],
+    ['Identify, never enough scrolls of', 'the-scroll-rack'],
+    ['Luck, secretly ruining yours', 'gaining-and-losing-luck'],
+    ['Lurker above, looking up too late', 'engulfment'],
+    ['Mines, gnomish', 'the-gnomish-mines'],
+    ['Pet, accidentally killing your', 'keeping-your-pet-alive'],
+    ['Prayer, when to', 'prayer'],
+    ['Shopkeeper, angering', 'shopping-and-shopkeeper-pricing'],
+    ['Sokoban, solving without cheating', 'sokoban-solutions'],
+    ['Stoning, avoiding', 'petrification-stoning'],
+    ['Tourists, playing as', 'choosing-your-expedition'],
+    ['Unicorn horn, no longer a cure-all', 'what-changed-since-last-time'],
+    ['Vlad&rsquo;s throne, fourth sit&rsquo;s the charm', 'vlads-tower'],
+    ['Wand, identifying by engraving', 'identification-by-engraving'],
+    ['Wand of wishing, found with one charge', 'the-castle'],
+    ['Wishes, optimal use of', 'what-to-wish-for'],
+    ['YASD, inevitability of', 'your-first-descent'],
+  ];
+
+  var indexHtml = '<div class="humorous-index"><div class="index-title">Index of Useful Knowledge</div>';
+  indexEntries.forEach(function(entry) {
+    indexHtml += '<a class="index-entry" href="#' + entry[1] + '">' + entry[0] + '</a>';
+  });
+  indexHtml += '</div>';
+  searchIndex.innerHTML = indexHtml;
+})();
+
+// ============================================================================
+// Sokoban flip controls. Each Sokoban level section (marked
+// .sokoban-level by the markdown attribute) carries data-width / data-height
+// attributes. Two toggle buttons under each level's heading apply a global
+// H/V flip across all Sokoban maps simultaneously, mirroring the wall
+// drawings, the arrows, the boulder positions, and (in the solution
+// prose) the direction words and coordinate tuples.
+// ============================================================================
+(function sokobanFlip() {
+  var sokobanRoot = document.getElementById('sokoban-solutions');
+  if (!sokobanRoot) return;
+  var levels = sokobanRoot.querySelectorAll('section.sokoban-level');
+  if (!levels.length) return;
+
+  // Wall and arrow character mappings.
+  var H_CHAR = {'┌':'┐','┐':'┌','└':'┘','┘':'└','├':'┤','┤':'├',
+                '←':'→','→':'←'};
+  var V_CHAR = {'┌':'└','└':'┌','┐':'┘','┘':'┐','┬':'┴','┴':'┬',
+                '↑':'↓','↓':'↑'};
+  // Direction-word mappings used for solution prose.
+  var H_WORD = {'left':'right','right':'left'};
+  var V_WORD = {'up':'down','down':'up'};
+
+  // Fixed offset where column 1 of the playable area begins inside each
+  // body row. The column header is "   123..." with 3 leading spaces, so
+  // body rows have a 2-character row label followed by 1 separator space,
+  // and the wall content starts at index 3.
+  var LABEL_END = 3;
+
+  // Global flip state shared across every level on the page.
+  var state = { h: false, v: false };
+
+  function parsePre(raw) {
+    var lines = raw.split('\n');
+    while (lines.length && !lines[lines.length-1].trim()) lines.pop();
+    var bodyStart = 0;
+    for (var i = 0; i < lines.length; i++) {
+      var s = lines[i];
+      // A leading line is part of the column header if it is empty or
+      // contains only digits and whitespace.
+      if (s.trim() === '' || /^[\d\s]+$/.test(s)) {
+        bodyStart = i + 1;
+      } else {
+        break;
+      }
+    }
+    return {
+      header: lines.slice(0, bodyStart),
+      body: lines.slice(bodyStart)
+    };
+  }
+
+  function padTo(s, n) {
+    while (s.length < n) s += ' ';
+    return s;
+  }
+
+  function transformChar(c) {
+    if (state.h && H_CHAR[c]) c = H_CHAR[c];
+    if (state.v && V_CHAR[c]) c = V_CHAR[c];
+    return c;
+  }
+
+  function renderPre(parsed, width) {
+    var body = parsed.body;
+    var n = body.length;
+    var rows = body.map(function(origRow, i) {
+      // Label stays bound to the visual row position; content is taken
+      // from the V-flipped source row when V-flip is on.
+      var srcRow = state.v ? body[n - 1 - i] : origRow;
+      var label = origRow.substring(0, LABEL_END);
+      var playable = srcRow.substring(LABEL_END);
+      // For H-flip, pad to the full playable width so the reverse is
+      // symmetric across the grid (irregular row lengths would otherwise
+      // collapse to the wrong column position).
+      if (state.h) {
+        playable = padTo(playable, width).split('').reverse().join('');
+      }
+      // Character substitutions for walls and arrows.
+      var transformed = '';
+      for (var k = 0; k < playable.length; k++) {
+        transformed += transformChar(playable.charAt(k));
+      }
+      // Drop the trailing pad that the H-flip introduced.
+      return label + transformed.replace(/\s+$/, '');
+    });
+    return parsed.header.concat(rows).join('\n');
+  }
+
+  // --- Hover decoration -------------------------------------------------
+  // Rebuild each rendered map as a grid of per-character spans so a square
+  // and its row/column numbers can light up together. Coordinates are read
+  // straight from the displayed glyphs: a content character at string index
+  // idx is grid column idx - 2, the i-th body row is grid row i + 1, and the
+  // number gutters stay fixed while a flip mirrors only the content — so the
+  // mapping is identical whether or not a flip is active.
+  function escapeHtml(c) {
+    return c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : c;
+  }
+
+  function buildPreHtml(rendered, headerCount) {
+    var lines = rendered.split('\n');
+    var out = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i], s = '', idx, ch;
+      if (i < headerCount) {
+        // Column-number gutter: tag each digit with its column.
+        for (idx = 0; idx < line.length; idx++) {
+          ch = line.charAt(idx);
+          if (idx >= LABEL_END && ch >= '0' && ch <= '9') {
+            s += '<span class="soko-colhead" data-col="' + (idx - 2) + '">'
+               + ch + '</span>';
+          } else {
+            s += escapeHtml(ch);
+          }
+        }
+      } else {
+        var y = i - headerCount + 1;
+        // Row-label gutter (first LABEL_END characters).
+        for (idx = 0; idx < LABEL_END && idx < line.length; idx++) {
+          ch = line.charAt(idx);
+          s += (ch >= '0' && ch <= '9')
+            ? '<span class="soko-rowhead" data-row="' + y + '">' + ch + '</span>'
+            : escapeHtml(ch);
+        }
+        // Playable squares.
+        for (idx = LABEL_END; idx < line.length; idx++) {
+          s += '<span class="soko-cell" data-x="' + (idx - 2) + '" data-y="'
+             + y + '">' + escapeHtml(line.charAt(idx)) + '</span>';
+        }
+      }
+      out.push(s);
+    }
+    return out.join('\n');
+  }
+
+  // Wrap coordinate tuples in solution prose so they cross-highlight the map.
+  function wrapCoords(html) {
+    return html.replace(/\((\d+),\s*(\d+)\)/g, function(m, xs, ys) {
+      return '<span class="soko-coord" data-x="' + xs + '" data-y="' + ys
+        + '">' + m + '</span>';
+    });
+  }
+
+  function transformProse(html, width, height) {
+    if (state.h) {
+      html = html.replace(/\b(left|right)\b/g, function(w) {
+        return H_WORD[w];
+      });
+    }
+    if (state.v) {
+      html = html.replace(/\b(up|down)\b/g, function(w) {
+        return V_WORD[w];
+      });
+    }
+    // Coordinate tuples (X,Y) and (X, Y). The grid is 1-indexed, so the
+    // flip formula is x' = (W+1) - x and y' = (H+1) - y.
+    html = html.replace(/\((\d+),\s*(\d+)\)/g, function(_, xs, ys) {
+      var x = +xs, y = +ys;
+      if (state.h) x = (width + 1) - x;
+      if (state.v) y = (height + 1) - y;
+      return '(' + x + ',' + y + ')';
+    });
+    return html;
+  }
+
+  // Capture originals and inject a button bar for each level.
+  levels.forEach(function(level) {
+    var w = parseInt(level.dataset.width, 10);
+    var h = parseInt(level.dataset.height, 10);
+    if (!w || !h) return;
+    level.querySelectorAll('pre').forEach(function(pre) {
+      pre.dataset.origText = pre.textContent;
+    });
+    level.querySelectorAll('li, p').forEach(function(el) {
+      el.dataset.origHtml = el.innerHTML;
+    });
+    var bar = document.createElement('div');
+    bar.className = 'sokoban-flipbar';
+    bar.innerHTML =
+      '<button type="button" data-flip="h" title="Mirror left-right">' +
+      'Flip ↔</button>' +
+      '<button type="button" data-flip="v" title="Mirror top-bottom">' +
+      'Flip ↕</button>';
+    var heading = level.querySelector('h4');
+    if (heading && heading.nextSibling) {
+      heading.parentNode.insertBefore(bar, heading.nextSibling);
+    } else if (heading) {
+      heading.parentNode.appendChild(bar);
+    } else {
+      level.insertBefore(bar, level.firstChild);
+    }
+  });
+
+  function applyState() {
+    levels.forEach(function(level) {
+      var w = parseInt(level.dataset.width, 10);
+      var h = parseInt(level.dataset.height, 10);
+      if (!w || !h) return;
+      level.querySelectorAll('pre').forEach(function(pre) {
+        var parsed = parsePre(pre.dataset.origText);
+        pre.innerHTML = buildPreHtml(renderPre(parsed, w), parsed.header.length);
+      });
+      level.querySelectorAll('li, p').forEach(function(el) {
+        if (el.dataset.origHtml === undefined) return;
+        el.innerHTML = wrapCoords(transformProse(el.dataset.origHtml, w, h));
+      });
+    });
+    document.querySelectorAll('.sokoban-flipbar button').forEach(function(btn) {
+      btn.classList.toggle('active', !!state[btn.dataset.flip]);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.sokoban-flipbar button');
+    if (!btn) return;
+    var dir = btn.dataset.flip;
+    state[dir] = !state[dir];
+    applyState();
+  });
+
+  // Cross-highlighting: hovering a square lights its row/column numbers, and
+  // hovering a coordinate in the prose lights the matching square. Delegated
+  // from the root so it survives the innerHTML rebuilds that flipping does.
+  function clearHighlights() {
+    sokobanRoot.querySelectorAll('.soko-hl, .soko-axis-hl, .soko-coord-active')
+      .forEach(function(el) {
+        el.classList.remove('soko-hl', 'soko-axis-hl', 'soko-coord-active');
+      });
+  }
+  // A level can show several map states; a prose coordinate refers to the
+  // map it follows in the text. Fall back to the section's first map.
+  function nearestMap(coord) {
+    var section = coord.closest('.sokoban-level');
+    if (!section) return null;
+    var pres = section.querySelectorAll('pre'), best = pres[0] || null;
+    for (var i = 0; i < pres.length; i++) {
+      if (pres[i].compareDocumentPosition(coord)
+          & Node.DOCUMENT_POSITION_FOLLOWING) {
+        best = pres[i];
+      }
+    }
+    return best;
+  }
+  function lightSquare(pre, x, y) {
+    if (!pre) return;
+    var cell = pre.querySelector(
+      '.soko-cell[data-x="' + x + '"][data-y="' + y + '"]');
+    if (cell) cell.classList.add('soko-hl');
+    pre.querySelectorAll('.soko-colhead[data-col="' + x + '"]')
+      .forEach(function(e) { e.classList.add('soko-axis-hl'); });
+    pre.querySelectorAll('.soko-rowhead[data-row="' + y + '"]')
+      .forEach(function(e) { e.classList.add('soko-axis-hl'); });
+  }
+  sokobanRoot.addEventListener('mouseover', function(e) {
+    var cell = e.target.closest('.soko-cell');
+    if (cell) {
+      clearHighlights();
+      lightSquare(cell.closest('pre'), cell.dataset.x, cell.dataset.y);
+      return;
+    }
+    var coord = e.target.closest('.soko-coord');
+    if (coord) {
+      clearHighlights();
+      coord.classList.add('soko-coord-active');
+      lightSquare(nearestMap(coord), coord.dataset.x, coord.dataset.y);
+    }
+  });
+  sokobanRoot.addEventListener('mouseout', function(e) {
+    if (e.target.closest('.soko-cell') || e.target.closest('.soko-coord')) {
+      clearHighlights();
+    }
+  });
+
+  applyState(); // initial decoration (no flip active)
+})();
+</script>
+</body>
+</html>

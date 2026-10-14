@@ -1,0 +1,91 @@
+# NetHack Japanese Custom Glossary (Extracted from NetHackJP & Standard JNetHack)
+
+## Roles (役職)
+Archeologist: 考古学者
+Barbarian: バーバリアン
+Caveman: 洞窟人
+Cavewoman: 洞窟人
+Healer: 僧侶(治療者/Healer)
+Knight: 騎士
+Monk: 修道士
+Priest: 僧侶
+Priestess: 女僧侶
+Ranger: レンジャー
+Rogue: 盗賊
+Samurai: 侍
+Tourist: 観光客
+Valkyrie: ワルキューレ
+Wizard: 魔法使い
+
+## Races (種族)
+Human: 人間
+Elf: エルフ
+Dwarf: ドワーフ
+Gnome: ノーム
+Orc: オーク
+
+## Alignments (属性)
+Lawful: 秩序
+Neutral: 中立
+Chaotic: 混沌
+Unaligned: 無属性
+
+## Dungeon Branches & Special Levels (ダンジョン階層・特殊面)
+Dungeons of Doom: 運命の迷宮
+Gnomish Mines: ノームの鉱山
+Mine's End: 鉱山最下層
+Sokoban: 倉庫番
+Fort Ludios: フォートルディオス
+Quest: クエスト
+Rogue Level: ローグ階層
+Medusa's Island: メデューサの島
+Castle: 城
+Gehennom: ゲヘナ
+Vlad's Tower: ヴラドの塔
+Wizard's Tower: 魔法使いの塔
+Fake Wizard's Tower: 偽の魔法使いの塔
+Vibrating Square: 振動する正方形
+Sanctum: 最奥部(サンクトゥム)
+Moloch's Sanctum: モロクの至聖所
+Elemental Planes: 精霊界
+Plane of Earth: 土の界
+Plane of Air: 風の界
+Plane of Fire: 火の界
+Plane of Water: 水の界
+Astral Plane: 幽体界
+
+## Attributes & Stats (能力値・ステータス)
+Strength: 腕力
+Dexterity: 器用度
+Constitution: 体質
+Intelligence: 知力
+Wisdom: 賢さ
+Charisma: 魅力
+Hit Points: ヒットポイント(HP)
+Magic Energy: 魔法エネルギー(PW)
+Armor Class: アーマークラス(AC)
+Alignment: 属性
+
+## Status Conditions (状態異常・負荷・空腹度)
+burdened: 負担
+stressed: 重荷
+strained: 過重
+overtaxed: 限界
+overloaded: 過積載
+hungry: 空腹
+weak: 衰弱
+fainting: 気絶寸前
+fainted: 気絶
+starved: 餓死
+blind: 盲目
+confused: 混乱
+stunned: 朦朧
+hallucinating: 幻覚
+hallucination: 幻覚
+paralyzed: 麻痺
+poisoned: 毒
+
+## BUC Status (呪詛状態)
+blessed: 祝福された
+uncursed: 無呪の
+cursed: 呪われた

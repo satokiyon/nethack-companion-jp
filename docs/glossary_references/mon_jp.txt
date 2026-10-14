@@ -1,0 +1,395 @@
+# NetHack Monster Japanese-English Glossary
+Giant ant: 巨大蟻
+Killer bee: 殺人蜂
+Soldier ant: 兵隊蟻
+Fire ant: 火蟻
+Giant beetle: 巨大カブト虫
+Queen bee: 女王蜂
+Acid blob: 酸のブロッブ
+Quivering blob: 震えるブロッブ
+Gelatinous cube: ゼラチンキューブ
+Chickatrice: チカトリス
+Cockatrice: コカトリス
+Pyrolisk: ピロリスク
+Jackal: ジャッカル
+Fox: 狐
+Coyote: コヨーテ
+Little dog: 仔犬
+Dog: 犬
+Large dog: 大きな犬
+Wolf: 狼
+Winter wolf: 冬狼
+Dingo: 野犬
+Werejackal: ジャッカル人間
+Wererat: ねずみ人間
+Werewolf: 狼人間
+Winter wolf cub: 冬狼の子
+Warg: ワーグ
+Hell hound pup: ヘルハウンドの仔
+Hell hound: ヘルハウンド
+Bat: こうもり
+Giant bat: 巨大こうもり
+Raven: オオガラス
+Vampire bat: 吸血こうもり
+Sewer rat: ドブネズミ
+Giant rat: 巨大ネズミ
+Rabid rat: 兇暴ネズミ
+Cave spider: 洞窟グモ
+Giant spider: 巨大グモ
+Gas spore: 包子ガス
+Floating eye: さまよう目
+Freezing sphere: 氷の球体
+Flaming sphere: 炎の球体
+Shocking sphere: 電撃の球体
+Stalker: ストーカー
+Air elemental: 風の精
+Fire elemental: 火の精
+Earth elemental: 土の精
+Water elemental: 水の精
+Lichen: 苔の怪物
+Brown mold: 茶色モールド
+Yellow mold: 黄色モールド
+Green mold: 緑モールド
+Red mold: 赤色モールド
+Shrieker: シュリーカー
+Violet fungus: 紫キノコ
+Kitten: 小猫
+Housecat: 家猫
+Jaguar: ジャガー
+Lynx: 山猫
+Panther: パンサー
+Large cat: 大きな猫
+Tiger: 虎
+Plains centaur: 草原のケンタウロス
+Forest centaur: 森のケンタウロス
+Mountain centaur: 山のケンタウロス
+Rock mole: 岩もぐら
+Woodchuck: リス
+Centipede: ムカデ
+Scorpion: サソリ
+Lurker above: ラーカー
+Trapper: トラッパー
+Pony: 仔馬
+Horse: 馬
+Warhorse: 戦闘用の馬
+Fog cloud: 霧の雲
+Dust vortex: ほこりの渦
+Ice vortex: 氷の渦
+Energy vortex: エネルギーの渦
+Steam vortex: 蒸気の渦
+Fire vortex: 炎の渦
+Baby long worm: ロングワームの子供
+Baby purple worm: 紫ワームの子供
+Purple worm: 紫ワーム
+Grid bug: グリッドバグ
+Xan: ザン
+Yellow light: 黄色い光
+Black light: 黒い光
+Zruty: ズルティ
+Couatl: コウアトル
+Aleax: アレアックス
+Angel: 天使
+Ki rin: 麒麟
+Archon: アルコン
+Goblin: ゴブリン
+Hobgoblin: ホブゴブリン
+Kobold: コボルド
+Large kobold: 大きなコボルド
+Kobold leader: コボルドの首領
+Kobold shaman: コボルドの呪術師
+Dwarf: ドワーフ
+Gnome leader: ノームの首領
+Gnomish wizard: ノームの魔法使い
+Gnome ruler: ノームの支配者
+Dwarf leader: ドワーフの首領
+Dwarf ruler: ドワーフの支配者
+Dwarf mummy: ドワーフのミイラ
+Dwarf zombie: ドワーフのゾンビ
+Gnome: ノーム
+Gnome mummy: ノームのミイラ
+Gnome zombie: ノームのゾンビ
+Orc: オーク
+Hill orc: 丘のオーク
+Mordor orc: モルドールのオーク
+Uruk hai: ウルク＝ハイ
+Orc captain: オークの隊長
+Orc shaman: オークの呪術師
+Orc zombie: オークのゾンビ
+Orc mummy: オークのミイラ
+Elf: エルフ
+Woodland elf: 森のエルフ
+Green elf: 緑エルフ
+Grey elf: 灰色エルフ
+Elf noble: エルフの貴族
+Elven monarch: エルフの君主
+Elf mummy: エルフのミイラ
+Elf zombie: エルフのゾンビ
+Human: 人間
+Human wererat: ねずみ人間
+Human werejackal: ジャッカル人間
+Human werewolf: 狼人間
+Archeologist: 考古学者
+Barbarian: 野蛮人
+Cave dweller: 洞窟人
+Healer: 治療師
+Knight: 騎士
+Monk: 武闘家
+Cleric: 司祭
+Ranger: レンジャー
+Rogue: 盗賊
+Samurai: 侍
+Tourist: 観光客
+Valkyrie: ワルキューレ
+Wizard: 魔法使い
+Student: 学生
+Chieftain: 首領
+Neanderthal: ネアンデルタール人
+Attendant: 随行員
+Page: 小姓
+Abbot: 師範
+Acolyte: 侍者
+Hunter: ハンター
+Thug: ちんぴら
+Ninja: 忍者
+Roshi: 浪士
+Guide: ガイド
+Warrior: 戦士
+Apprentice: 実習生
+Human mummy: 人間のミイラ
+Human zombie: 人間のゾンビ
+Giant: 巨人
+Stone giant: 岩石巨人
+Hill giant: 丘の巨人
+Fire giant: 炎の巨人
+Frost giant: 吹雪の巨人
+Storm giant: 雷の巨人
+Titan: タイタン
+Minotaur: ミノタウロス
+Jabberwock: ジャバウォック
+Giant mummy: 巨人のミイラ
+Giant zombie: 巨人のゾンビ
+Ettin: エティン
+Ettin mummy: エティンのミイラ
+Ettin zombie: エティンのゾンビ
+Troll: トロル
+Ice troll: 氷のトロル
+Rock troll: 岩のトロル
+Water troll: 水のトロル
+Olog hai: オログ＝ハイ
+Umber hulk: アンバーハルク
+Ogre: オーガ
+Ogre leader: オーガの首領
+Ogre tyrant: オーガの暴君
+Displacer beast: ディスプレイサービースト
+Ghost: 幽霊
+Medusa: メデューサ
+Wizard of yendor: イェンダーの魔法使い
+Croesus: クロイソス
+Doppelganger: ドッペルゲンガー
+Shopkeeper: 店主
+Guard: 番兵
+Prisoner: 囚人
+Oracle: 賢者
+Aligned cleric: 神官
+High cleric: 高位神官
+Soldier: 兵士
+Sergeant: 下士官
+Nurse: 看護婦
+Lieutenant: 副官
+Captain: 指揮官
+Watchman: 見張り
+Watch captain: 見張りの隊長
+Shade: 影
+Water demon: 水の魔神
+Amorous demon: 愛の悪魔
+Horned devil: 角のある悪魔
+Erinys: イリニス
+Barbed devil: 棘の悪魔
+Marilith: マリリス
+Vrock: ヴァロック
+Hezrou: ヘズロウ
+Bone devil: 骨の悪魔
+Ice devil: 氷の悪魔
+Nalfeshnee: ナルフェシニ
+Pit fiend: 穴の悪霊
+Sandestin: サンデスティン
+Balrog: バルログ
+Juiblex: ジョウビレックス
+Yeenoghu: イーノグ
+Orcus: オーケス
+Geryon: ゲーリュオーン
+Dispater: ディスペータ
+Baalzebub: ベルゼブブ
+Asmodeus: アスモデウス
+Demogorgon: デモゴルゴン
+Death: デス
+Pestilence: ペスティレンス
+Famine: フェミン
+Mail daemon: メイルデーモン
+Djinni: 風のジン
+Vlad the impaler: 吸血鬼ヴラド
+Gargoyle: ガーゴイル
+Winged gargoyle: 羽のあるガーゴイル
+Keystone kop: 警備員
+Kop sergeant: 巡査
+Kop lieutenant: 巡査部長
+Kop kaptain: 警部補
+Lich: リッチ
+Demilich: デミリッチ
+Master lich: マスターリッチ
+Arch lich: アーチリッチ
+Hobbit: ホビット
+Bugbear: バグベアー
+Ghoul: グール
+Gremlin: グレムリン
+Leprechaun: レプラコーン
+Small mimic: 小さなミミック
+Large mimic: 大きなミミック
+Giant mimic: 巨大なミミック
+Wood nymph: 木のニンフ
+Water nymph: 水のニンフ
+Mountain nymph: 山のニンフ
+Garter snake: 小さなヘビ
+Snake: ヘビ
+Water moccasin: 水ヘビ
+Python: ニシキヘビ
+Pit viper: ハブ
+Cobra: コブラ
+Red naga hatchling: 赤色ナーガの雛
+Black naga hatchling: 黒ナーガの雛
+Golden naga hatchling: 金色ナーガの雛
+Guardian naga hatchling: 番兵ナーガの雛
+Red naga: 赤色ナーガ
+Black naga: 黒ナーガ
+Golden naga: 金色ナーガ
+Guardian naga: 番兵ナーガ
+Quantum mechanic: 量子物理学者
+Genetic engineer: 遺伝子工学者
+Rust monster: 錆の怪物
+Disenchanter: 吸魔の怪物
+Mind flayer: マインドフレア
+Master mind flayer: マスターマインドフレア
+Manes: 亡霊
+Homunculus: ホムンクルス
+Imp: インプ
+Lemure: レムレース
+Quasit: クアシト
+Tengu: 天狗
+Blue jelly: 青色ゼリー
+Spotted jelly: まだらゼリー
+Ochre jelly: 黄土色ゼリー
+Gray ooze: 灰色ウーズ
+Brown pudding: 茶色プリン
+Green slime: 緑スライム
+Black pudding: 黒プリン
+Barrow wight: バロウ・ワイト
+Nazgul: ナズグル
+Xorn: ゾーン
+Monkey: 猿
+Ape: 類人猿
+Owlbear: アウルベア
+Yeti: イエティ
+Carnivorous ape: 人喰い猿
+Sasquatch: サスカッチ
+Skeleton: 骸骨
+Wraith: レイス
+Vampire leader: ヴァンパイアの長
+Vampire: 吸血鬼
+Baby gray dragon: 灰色ドラゴンの子供
+Baby gold dragon: 金色ドラゴンの子供
+Baby silver dragon: 銀色ドラゴンの幼体
+Baby red dragon: 赤色ドラゴンの子供
+Baby white dragon: 白ドラゴンの子供
+Baby orange dragon: オレンジドラゴンの子供
+Baby black dragon: 黒ドラゴンの子供
+Baby blue dragon: 青ドラゴンの子供
+Baby green dragon: 緑ドラゴンの子供
+Baby yellow dragon: 黄色ドラゴンの子供
+Gray dragon: 灰色ドラゴン
+Gold dragon: 金色ドラゴン
+Silver dragon: 銀色ドラゴン
+Red dragon: 赤色ドラゴン
+Orange dragon: オレンジドラゴン
+White dragon: 白ドラゴン
+Black dragon: 黒ドラゴン
+Blue dragon: 青ドラゴン
+Green dragon: 緑ドラゴン
+Yellow dragon: 黄色ドラゴン
+White unicorn: 白ユニコーン
+Gray unicorn: 灰色ユニコーン
+Black unicorn: 黒ユニコーン
+Long worm: ロングワーム
+Jellyfish: クラゲ
+Piranha: ピラニア
+Shark: サメ
+Giant eel: 巨大ウナギ
+Electric eel: 電気ウナギ
+Kraken: クラーケン
+Newt: イモリ
+Gecko: ヤモリ
+Iguana: イグアナ
+Baby crocodile: ワニの子供
+Lizard: トカゲ
+Chameleon: カメレオン
+Crocodile: ワニ
+Salamander: サラマンダー
+Long worm tail: ロングワームの尻尾
+Straw golem: 藁のゴーレム
+Flesh golem: 肉のゴーレム
+Clay golem: 土のゴーレム
+Stone golem: 岩のゴーレム
+Wood golem: 木のゴーレム
+Iron golem: 鉄のゴーレム
+Glass golem: ガラスのゴーレム
+Rope golem: 紐のゴーレム
+Leather golem: 皮のゴーレム
+Gold golem: 金のゴーレム
+Paper golem: 紙のゴーレム
+Lord carnarvon: カーナボン卿
+Pelias: ペリアス
+Shaman karnov: 呪術師カルノフ
+Hippocrates: ヒポクラテス
+King arthur: アーサー王
+Grand master: 総師範
+Arch priest: 主席司祭
+Orion: 勇者オリオン
+Master of thieves: 盗賊の頭領
+Lord sato: 大名佐藤
+Twoflower: ツーフラワー
+Norn: ノルン
+Neferet the green: 緑のネフェレト
+Minion of huhetotl: フヘトトルの使い
+Thoth amon: トート・アモン
+Chromatic dragon: クロマティック・ドラゴン
+Cyclops: サイクロプス
+Ixoth: イクソス
+Master kaen: カエン
+Nalzok: ナルゾク
+Scorpius: 大蠍
+Master assassin: 暗殺者の頭領
+Ashikaga takauji: 足利尊氏
+Lord surtur: 支配者スルト
+Dark one: 暗きもの
+Rock piercer: 岩喰い
+Iron piercer: 鉄喰い
+Glass piercer: ガラス喰い
+Rothe: ロゼ
+Mumak: ムーマク
+Leocrotta: レオクロッタ
+Wumpus: ワンパス
+Titanothere: チタノゼア
+Baluchitherium: バルキテリウム
+Mastodon: マストドン
+Kobold mummy: コボルドのミイラ
+Kobold zombie: コボルドのゾンビ
+Cerberus: ケルベロス
+Beholder: ビホルダー
+Baby shimmering dragon: 揺らめくドラゴンの子供
+Shimmering dragon: 揺らめくドラゴン
+Vorpal jabberwock: ヴォーパル・ジャバウォック
+Vampire mage: 吸血鬼の魔術師
+Charon: カロン
+Earendil: エアレンディル
+Elwing: エルウィング
+Goblin king: ゴブリンの王
+High elf: ハイエルフ

@@ -56,7 +56,7 @@ def check_block(text: str, first_line: int, block_number: int) -> list[str]:
 
 
 def main(path: str) -> int:
-    source = Path(path).read_text()
+    source = Path(path).read_text(encoding="utf-8")
     errors: list[str] = []
     for number, match in enumerate(FENCE.finditer(source), 1):
         first_line = source.count("\n", 0, match.start()) + 2
