@@ -80,6 +80,18 @@ def load_master_glossary():
                     elif art_key == 'demonbane':
                         glossary['demonbane'] = ('Demonbane', m.group(2), 'アーティファクト')
 
+    # 5. docs/glossary_custom.txt
+    custom_file = 'docs/glossary_custom.txt'
+    if os.path.exists(custom_file):
+        with open(custom_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and ':' in line:
+                    en, ja = line.split(':', 1)
+                    en = en.strip()
+                    ja = ja.strip()
+                    glossary[en.lower()] = (en, ja, 'カスタム辞書')
+
     return glossary
 
 def audit_segments():

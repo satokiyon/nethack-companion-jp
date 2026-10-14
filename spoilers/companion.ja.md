@@ -277,3 +277,1242 @@ carrcap=MAX_CARR_CAP (hack.c weight_cap), so riding raises carrying capacity.
 - food ration weight and nutrition (objects.h:1110)
 - strategy aligned with NetHackWiki Curse-testing, Altar: altar amber/black flash and pet step-avoidance are confirmed canonical curse-testing techniques (https://nethackwiki.com/wiki/Curse-testing, https://nethackwiki.com/wiki/Altar)
 -->
+
+### 持ち物の準備 (What to Pack)
+
+初期装備（スターティングキット）は役職ごとにあらかじめ決まっており、それぞれの強みに適したものが揃っていますが、すぐに強化していく必要があります。ゲーム序盤に階層を下りていく際は、以下に挙げるアイテムに常に目を光らせておきましょう。大半の役職の弱点を劇的に補ってくれます。
+
+#### 序盤の買い物・調達リスト (The Early Shopping List)
+
+**食料の確保。** 冒険者は必ず空腹になります。それは想像以上の早さで訪れます。しかし、主な食料源は持ち物袋の中に入っているレーションではありません。菜食主義の役職をプレイしているのでない限り、**序盤のダンジョンにおける主食は、自分が倒した敵の死骸です。** 倒したばかりの新鮮な死骸をその場で食べながら進めば（`e` を押して足元の死骸を選択）、食料レーションは主食ではなく非常用の備蓄食料となります。見かけた食料（food ration）はもちろんすべて拾うべきですが、持ち歩くのは2〜3個で十分です。溜め込む必要はありません。トライペの食料 (tripe ration) はペットのためのものであり、あなたが食べるものではありません。
+
+**アイテムの識別手段。** ゲーム序盤における主な識別手段は、祭壇（アイテムを置いて祝福/呪いの光を確認する）、ペット（呪われたアイテムに乗るのを嫌がる）、そして試行錯誤です。**識別の巻物 (scroll of identify)** は貴重ですが、しばらく手に入らないこともあります。**試金石 (touchstone)**（宝石を識別する灰色の石）も役に立ちます。商店では、価格によって一部のアイテムを見分けることができます。最も安い巻物は識別の巻物であり、最も安い薬は回復の薬 (potion of healing) です。詳細な識別テクニックは、[実践的なアイテム識別戦略](#a-practical-identification-strategy)を参照してください。
+<!-- price-ID verification (objects.h): scroll of identify base
+cost 20 (objects.h:1213, SCROLL cost field = 5th arg per macro at
+1182) is the cheapest scroll; potion of healing base cost 20
+(objects.h:1145, POTION cost = 6th arg per macro at 1121) is the
+cheapest potion. Each is the unique 20-zm item in its class; the
+next cheapest are scroll of light (50) and potions of booze / fruit
+juice / see invisible / sickness (50). -->
+
+**防具の強化。** AC（アーマークラス）が 6 以上（悪い状態）で、アイテムを鑑定するための祭壇もペットもいない場合は、見つけた普通の胴鎧、兜、盾、クロークを身につけましょう。それらに呪いがかかっていたとしても、無防備の丸腰で歩き回る危険に比べれば大抵はマシです。ただし、靴と手袋だけは事前にテストしてください。呪われた浮遊の靴、不器用の靴、または呪われた手袋を身につけてしまうと、逃走すらできなくなる危険があります。
+
+**武器の選定。** 大半の役職は、最初から持っている初期武器を使い続けるべきです。それはあなたの最も得意なスキルと一致しており、使い続けることで[`#enhance`](#enhancing-skills) コマンドを通じてスキルを高めることができます。また、武器を持ち替えると、初期装備に付与されていたかもしれないプラスの強化値（エンチャント）を捨てることになります。武器の持ち替えを検討すべきなのは、貧弱な初期武器しか持たない観光客、洞窟人、治療師である場合、自分の得意スキルに合致する強力な武器を見つけた場合、あるいは**銀製 (silver)** の武器である場合です（銀は獣人、吸血鬼、悪魔、影、小悪魔に対して強烈な追加ダメージを与えます。なお通常のゾンビやミイラには効果がありません）。盾を構える選択肢を残したいなら、片手武器を優先しましょう。
+
+**投擲武器の準備。** 短剣、投げ矢、槍、あるいは弓矢を、袋の奥底に仕舞い込まずいつでも投げられるよう手元に準備しておきましょう。**さまよう目 (floating eye)** を相手に近接攻撃を挑んでは決してなりません。ロゼ (rothe)、ホムンクルス (homunculus)、殺人蜂 (killer bee)、兵隊蟻 (soldier ant) なども、敵が隣接する前に遠距離から削っておくほうが遥かに安全です。
+
+**自制心（荷物の整理）。** 初心者の冒険者は見つけたものを何でも拾い集めます。歴戦の熟練者は必要なものだけを拾います。その差は約40ポンドの重量差となり、ノームの領主 (gnome lord) から逃げ切れるかどうかの生死の境目となります。ステータス行に**「重荷 (Burdened)」**と表示されているなら、使い切れないほどの荷物を抱え込んでいます。移動速度が落ち、モンスターによってはあなたが1回行動する間に2回殴りかかってくるようになります。荷物が重くなりすぎたら、必須でないものは潔く捨てましょう。ただし、置き去りにするアイテムには注意してください。モンスターは落ちているアイテムを拾い、箱を漁る知能を持っています。不要な荷物は1つ上の階層に置いてくるとよいでしょう。モンスターが階層を越えて荷物を運ぶことはありません。
+
+---
+
+### 最初の潜行 (Your First Descent)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Jackal packs are 2-4, not "four to seven" (G_SGROUP -> m_initgrp n=3; makemon.c:29,105; monsters.h:199).
+- Foxes (G_GENO|1) and dwarves (G_GENO|3) are solitary; removed from the group-spawn list. Killer bees (LGROUP), soldier ants & gnomes (SGROUP) do swarm.
+- Verified correct: stair-fall rnd(3) HP (do.c:1797), corpse-rot thresholds (eat.c:1887-1939), supply-chest details (mklev.c:1026-1127), cheapest-price scroll/potion (objects.h).
+-->
+<!-- audit
+2026-05-21:
+- poison-resistance corpse list for Rule 6, all with MR_POISON in both mresists and mconveys: killer bee (monsters.h:100), cave spider (monsters.h:944), yellow mold (monsters.h:1636); black pudding glob also conveys MR_POISON via mconveys (monsters.h:2118)
+- puddings carry G_NOCORPSE (monsters.h:2114) so there is no CORPSE object, but on death they drop a GLOB_OF_BLACK_PUDDING / GLOB_OF_BROWN_PUDDING / etc. food item (mon.c:715-734 mksobj_at)
+- eating a glob takes the same intrinsic path as eating a corpse: `piece->otyp == CORPSE || piece->globby` both trigger cpostfx(corpsenm) which calls givit() for each conveyed property (eat.c:562, 2040, 2984)
+- kicking a sink can summon a black pudding: 4/5 outcomes are klunk, otherwise 1/3 chance of black pudding (dokick.c:1201-1238) — the canonical beginner trick to roll cold+shock+poison resistance globs
+- magic resistance and reflection have no intrinsic source for players in 5.0; both come only from extrinsics: GDSM (do_wear.c:806-883), amulet of reflection, cloak of MR, silver shield, silver/gray DSM
+2026-05-18:
+- stair-falling damage is 1-3 HP via rnd(3) (do.c:1780-1795)
+- floating-eye paralysis (mhitu.c:2536-2557)
+- pets step around their owner (dogmove.c:535)
+- lizard and lichen corpses never rot (eat.c:58-61)
+- killer bees: speed 18, G_LGROUP, M1_POIS sting AT_STNG/AD_DRST 1d3 (monsters.h:96-102)
+- supply chests appear above Oracle: at most one per level (placed in a random fillable room); 2/3 chance per level; 2/3 chest vs 1/3 large box; 5/6 locked (mklev.c:1010-1119)
+- prayer cooldown uses rnz(350), averaging about 450 turns but with a long tail (pray.c:1356)
+- corpse safe within 30 turns; tainted past ~175 turns (eat.c:1887, 1939)
+- strategy aligned with NetHackWiki Stoning, Prayer, Magic resistance: lizard corpse as petrification cure, prayer-when-in-Trouble cooldown, and MR/reflection/poison-resistance "big three" are canonical advice (https://nethackwiki.com/wiki/Stoning, https://nethackwiki.com/wiki/Prayer, https://nethackwiki.com/wiki/Magic_resistance)
+-->
+
+階段を降りる。空気は冷たく湿っている。目の前には通路が伸び、暗闇の中へと分岐している。傍らにはペットが足音を立ててついてくる。
+
+ダンジョンへようこそ。
+
+最初の数フロアは手加減してくれますが、それはあくまで相対的な話です。モンスターも弱いですが、あなたもまた、最低限の装備、低いHP、そして中盤以降の生存に不可欠な耐性を何ひとつ持たない最も脆弱な状態です。他のどの階層よりも地下1階から5階で命を落とす冒険者が圧倒的に多いのは、敵が強大だからではなく、こちらに対抗手段がほとんどないからです。
+
+#### 序盤生存の黄金律 (The Golden Rules of Early Survival)
+
+**鉄則 1: 勝てない相手とは戦うな。** 最初の交戦（1発殴り合った直後）で撤退するかどうかを決断してください。残りHPが数ポイントに削られてからでは手遅れです。可能なら上り階段へ逃げ込みましょう。それが無理なら、閉められる扉、そして一本道の通路へと退避します。どうしても退路がない場合は、モンスターが隣接する前に、`E` を押して `-`（指）を選択し、床の埃に `Elbereth` と刻みましょう。
+
+```
+  危険: 開けた部屋での乱戦         有効: 通路での隘路（1対1）
+
+  ┌─────·──────┐                  ┌─────·──────┐
+  │·o··Z·······│                  │·o···Z······│
+  │··k·@·G·Z···│                  │··k··G······│
+  │····o·······│                  │·o··········+##@
+  │··G·········│                  │··G·········│
+  └────────────┘                  └────────────┘
+
+  四方を包囲されて即死。          1体ずつおびき寄せて各個撃破。
+```
+
+**鉄則 2: よく分からないものは食べるな。** モンスターの死骸は強力な内在能力を授けてくれることもありますが、毒に冒されたり、食中毒を起こしたり、あるいはそれ以上の惨劇をもたらすこともあります。その死骸の効果を熟知するまでは、床に放置しておくのが無難です（例えばコボルド `k` の肉は猛毒であり、何の能力も得られません）。例外として、食料 (food ration)、レンバス (lembas wafer)、クラムの食料 (cram ration)、そして果物は常に安全に食べられます。**苔の怪物 (lichen)** の死骸は安全で、絶対に腐敗しません。**トカゲ (lizard)** の死骸も安全で腐らず、さらに石化を治療してくれます。トカゲの死骸は袋に入れず、手元のインベントリに持っておきましょう。コカトリス (cockatrice) に触られたとき、噛んで飲み込むまでに残された猶予はわずか2ターンです。**イモリ (newt)** の死骸も安全で、時に魔法エネルギー (PW) を1〜3ポイント回復してくれます。これは駆け出しの術者にとって序盤で最初に手に入る持続可能なマナ回復源となります。
+
+**鉄則 3: ペットは最高の友である。** 初期ペットはあなたの傍らで戦ってくれるだけでなく、アイテムを拾い上げてくれます（ペットは呪われたアイテムを踏むのを嫌がるため、安全確認のテストとして極めて有用です）。さらに訓練次第で商店から泥棒させることすら可能です。トライペの食料 (tripe ration) や死骸を足元に落として、こまめにエサを与えておきましょう。
+
+**鉄則 4: 神への祈りを学べ。** 死の危機（HPの危険な激減、食料がない極度の衰弱、石化の進行）に直面したときは、神に祈る (`#pray`) ことができます。序盤において、十分な属性信仰値とマイナスでない幸運 (Luck) があれば、祈りはほぼ確実にあなたを救ってくれます。ただし、最初の300ターン以内には決して祈ってはなりません。一度祈ったら、安全のために約1000ターンは間隔を空けましょう（実際の回復は平均約500ターンですが、大きくブレることがあります）。不適切なタイミング（神が怒っているとき、[ゲヘナ](#gehennom)にいるとき、あるいは前回の祈りから時間が経っていないとき）に祈ると、事態はさらに致命的に悪化します。軽微なトラブルで祈りを浪費してはなりません（詳細なシステムは[神々との関係](#divine-relations)を参照）。属性信仰値を失ってしまった場合は、敵対的なモンスターを討伐しましょう。中立のキャラクターであっても、コボルドやオークを倒すことは有効な信仰値回復になります。
+
+**鉄則 5: 徹底的に探索し、目的を持って移動せよ。** あらゆる行動ターンは栄養を消費します。何百ターンも無駄に足踏みしていれば餓死してしまいますが、かといって部屋を素通りして駆け抜ければ必要な物資を見落とします。各フロアを隅々まで探索し（部屋を調べ、扉を開け、`s` または `10s` で隠し通路を探す）、そのフロアが提供するものを回収したら先へ進みましょう。下り階段の場所が分かったら、壁を叩くのに何百ターンも費やしてはなりません。もし「空腹 (Hungry)」状態でフロアに食料が残っていないなら、迷わず階段を降りましょう。
+
+**鉄則 6: 防御を固めよ。** ゲーム前半における最大の目標は、財宝集めではなく、終盤を生き抜くための耐性を揃えることです。最も重要な3大防御は、**[魔法耐性](#damage-resistances)**、**反射**、そして**[毒耐性](#damage-resistances)** です。毒耐性は適切な死骸を喰らうことで内在能力として得られます。殺人蜂 (killer bee)、巨大グモ (giant spider)、黄色モールド (yellow mold)、あるいは流し台 (sink) を蹴って出現する[黒いプリン](#a-note-on-puddings)などです。魔法耐性と反射は装備品から得られます。ドラゴン鱗鎧（魔法耐性なら灰色ドラゴンの鱗鎧、反射なら銀色ドラゴンの鱗鎧）、魔法を防ぐクローク、反射の魔除け、銀の盾、あるいは神からの下賜品、[クエスト](#the-quest)、願いによって手に入れます。
+
+**鉄則 7: キー入力は慎重に、キーリピートは厳禁。** キーを1回押すごとに1ターンが消費されます。移動キーを押しっぱなしにしてオートリピートさせると、キャラクターは盲目的に前進し、予期せぬ強敵との遭遇、現れたばかりの罠、あるいは誤って泉 (fountain) の水を飲むなどして命を落とします。キーは1回ずつ押し、状況を確認してください。1マスずつキーを叩かずに長い通路を移動するには、**Shift＋方向キー**のショートカットを活用しましょう。大文字の `H J K L Y U B N` はアイテムや扉を通り過ぎて走り、前方にモンスターが現れるか攻撃を受けたときに自動停止します。さらに慎重に進むなら `G`＋方向キーを使いましょう。モンスター、アイテム、扉の隣で確実に停止します。オートリピートにはそうした安全機能は一切ありません。
+
+#### ダンジョンの危険と生き残り術 (Dungeon Hazards and How to Survive Them)
+
+序盤に多発する典型的な死因と、その防止策を以下にまとめます。
+
+**飢餓 (Starvation)。** 「衰弱 (Weak)」や「失神寸前 (Fainting)」に追い込まれてからではなく、ステータスに「空腹 (Hungry)」が表示された時点で食事をとってください。食料がない状態で「空腹」になったら、ためらわずに下の階層へ降りましょう。探索済みのフロアに新しい食料が生えてくることはありません。「衰弱」はすでに神への祈りの緊急事態（祈りの対象）とみなされます。「失神寸前」になったら、直ちに何かを食べるか祈らなければ命はありません。
+
+**さまよう目 (Floating eye)。** マップ上では青い `e` で表示されます。小さく、一見無害に見えます。しかし**絶対に近接攻撃で殴ってはなりません**。直接殴ると強烈な麻痺を受け、その場に氷のように固まったあなたの肉体へ、周囲のあらゆるモンスターが一方的に無料の連続攻撃を叩き込んできます。遠距離攻撃で倒すか、無視して迂回しましょう。さまよう目の移動速度は極めて鈍重です。
+
+**腐敗した死骸 (Rotted corpses)。** 床に長く放置された死骸を食べると、治療しなければ死に至る食中毒を起こします。死骸は倒した直後の新鮮なうちに食べましょう。確実に安全なのは討伐後約30ターン以内です。それを超えると腐敗の判定がランダムになり、約175ターンを過ぎた無呪の死骸は確実に腐っています。万一食中毒にかかった場合は、祝福された回復の薬 (blessed potion of healing)、無呪の超回復の薬 (potion of extra healing)、完全回復の薬 (potion of full healing)、ユニコーンの角 (unicorn horn)、あるいはユーカリの葉 (eucalyptus leaf) を使用してください。祈る場合は、[神々との関係](#prayer)にある祈りの条件を満たしていることを必ず確認してください。
+
+**荷物の持ちすぎによる階段転落。** 過剰な荷物を抱えた状態で階段を使うと、足を踏み外して転落し、1〜3 HP のダメージを受けます。手持ちの荷物袋に入っているコカトリス (cockatrice) の死骸は安全ですが、もし手に武器として装備していた場合、転落した拍子に死骸に触れて自ら石化死してしまいます。
+
+**開けた部屋での群れによる包囲。** ジャッカル (jackal) の噛みつきダメージは1体あたり 1d2 に過ぎませんが、上層階では2〜4頭の小群れで出現し、開けた部屋の中で四方から冒険者を包囲します。殺人蜂 (killer bee)、兵隊蟻 (soldier ant)、ノーム (gnome) も同様に群れをなして押し寄せてきます。2体以上の敵に狙われた兆候が見えたら、即座に出入口の扉や一本道の通路へと退却してください。敵がまだ距離を取っているなら、その場で待ち構えて敵に接近のターンを消費させましょう。群れに向かってこちらから前進するのは、敵に余計な攻撃ターンをプレゼントするようなものです。
+
+**[ノームの鉱山](#the-gnomish-mines)への無謀な早急突入。** 鉱山町 (Minetown) より深い鉱山フロアには、重厚な防具をまとったドワーフやノームの領主 (gnome lord) がひしめいています。強固な防具を持つ敵の集団と白兵戦を繰り広げる準備が整っていないなら、深入りせずに運命の迷宮のメインルートへと引き返し、装備が充実してから再挑戦しましょう。
+
+#### 補給用の箱 (Supply Containers)
+
+**NetHack 5.0の新要素:** 誰かがダンジョン内に親切な救援物資（ケアパッケージ）を配置してくれています。
+
+[賢者 (Oracle) の神託所](#the-oracle)より上のすべての階層には、3分の2の確率で「補給用の宝箱（サプライチェスト）」が出現します。通常は宝箱 (chest)（たまに大きな箱 / large box）で、大抵は鍵がかかっており、冒険者の生存を助けるアイテムが少なくとも1つ必ず入っています。中身の抽選プールは以下の通りです。
+
+- **回復の薬 (potion of healing)**（各チェストごとに約50%の確率、2本入っていることもあります）
+- **超回復の薬 (potion of extra healing)**、**加速の薬 (potion of speed)**、**魔力の薬 (potion of gain energy)**
+- **武器に魔法をかける巻物 (scroll of enchant weapon)**、**鎧に魔法をかける巻物 (scroll of enchant armor)**、**怪物を混乱させる巻物 (scroll of confuse monster)**、**怪物を怯えさせる巻物 (scroll of scare monster)**
+- **穴掘りの杖 (wand of digging)**
+- **回復の魔法書 (spellbook of healing)**
+
+さらに3分の2の確率で、低レベルの魔法書を中心とした追加のランダムアイテムが1個含まれます。なお、ノームの鉱山の入口がある階層では中身が異なり、食料 (food ration)、クラムの食料 (cram ration)、またはレンバス (lembas wafer) が確定で手に入ります。
+
+外見は普通の宝箱や箱と全く同じで、特別な目印はありません。神託所より上のフロアでは、見かけたすべての宝箱や大きな箱を必ず調べましょう。施錠されている箱は、クレジットカード、鍵、開錠の杖 (wand of opening)、あるいは `#force` コマンドでこじ開けることができます。こじ開ける際は可能な限り短剣 (dagger) などの刃物を使いましょう。刃物は折れる心配が極めて少なく、逆に鈍器で無理やり叩き割ると、箱そのものと中に入っていた貴重な回復の薬を粉々に破壊してしまいます。
+
+---
+
+## 第2部: ダンジョンの光景 (Part Two: Dungeon Sights)
+
+マップはさまざまな記号で埋め尽くされていますが、本当に立ち止まって警戒すべき記号はごく一部です。ダンジョン内の施設や設備を見つけたときは[注目の名所・設備](#points-of-interest)を、見慣れない階段を降りる前には[分岐とランドマーク](#branches-and-landmarks)を参照してください。生態系フィールドガイドは辞書のように引くためのものです。アルファベットを見つけたら、短い警告だけでは不十分な場合にリンク先を追ってください。
+
+```{=latex}
+\vspace*{0.6in}
+```
+
+```{=latex}
+% The map follows immediately after this opening page. Lower the
+% chapter opener so TeX has less room to stretch the short paragraphs.
+\vspace*{0.4in}
+```
+
+### 迷宮の地形と構造 (The Lay of the Land)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified DoD depths, all branch placements, Gehennom & Elemental Planes ordering (dungeon.lua), Sokoban/Orcus prizes, Big Room 40%, map symbols.
+-->
+<!-- audit
+2026-05-21:
+- branch staircases render with the S_brupstair / S_brdnstair symbols in CLR_YELLOW (defsym.h:124-125)
+- the brupstair / brdnstair glyph is only selected after known_branch_stairs is true: the stair leads to a different dungeon AND the hero has traversed it (stairs.c:180-183, display.c:2347-2354)
+2026-05-18:
+- DoD is 25-29 levels (rn1(5,25) = rn2(5)+25) (dungeon.lua:10-11, hack.h:1535)
+- Gnomish Mines branch DL 2-4 (dungeon.lua:15-19)
+- Oracle DL 5-9 (dungeon.lua:60-66)
+- Sokoban entry is one level above the Oracle, going up (dungeon.lua:20-25)
+- 4 Sokoban levels with 2 fixed variants each (dat/soko*.lua)
+- Big Room 40% chance, DL 10-12 (dungeon.lua:66-73)
+- Quest portal DL 11-16 (dungeon.lua:26-31; chainlevel oracle base=6 range=2)
+- Rogue Level DL 15-18 (dungeon.lua:52-58)
+- Fort Ludios portal placed at any DL 11 up to just above Medusa, 1/3 per qualifying level (mklev.c:2647-2651)
+- Medusa DL ~21-25 (dungeon.lua:74-80)
+- Castle at bottom of DoD, DL ~27 (dungeon.lua:81-83)
+- Mine's End: 3 variants, all guarantee a not-cursed luckstone (minend-1.lua:77, minend-2.lua:116, minend-3.lua:67)
+- 7 Minetown variants; 1-in-7 is Orcish Town (minetn-1.lua, dungeon.lua:179-184)
+- 5.0 sink glyph is white `{`, shared with bright-blue fountain (defsym.h:133, fixes5-0-0.txt:827)
+- Travel/farlook matches on displayed symbol; `#` no longer cycles to sinks (getpos.c:1046-1062)
+- Trap room places 1 randomly chosen trap type from 8 (themerms.lua:101-114)
+- Teleportation hub places 2-4 fixed-destination teleporters (themerms.lua:264-279)
+- Fake Delphi is a geometric joke: empty room within an Oracle-shaped room, no monsters (themerms.lua:291-305)
+- Light source room places exactly one lit oil lamp (themerms.lua:204-210)
+- Massacre places 5-25 role corpses only — no wraith (themerms.lua:172-189)
+- Mausoleum places one waiting M/V/L/Z monster or one @ corpse (themerms.lua:419-443)
+-->
+
+脅威の迷宮の構造はゲームごとに毎回新しく生成されますが、各分岐ダンジョン、特殊フロア、そして大まかな階層の深さは常に一定です。その全体の骨格を把握していれば、次に何が待ち受けているかを常に予測することができます。
+
+#### 全体像 (The Big Picture)
+
+ダンジョンは、主幹となる本流といくつかの支流（分岐ダンジョン）を持つ樹形図のような構造になっています。正確な深度はゲームごとに多少変動しますが、以下の図が典型的な全貌を示しています。
+
+**運命の迷宮 (Dungeons of Doom)** は上半分を占め、おおよそ地下1階から27階まで広がっています。途中の分岐からは、**[ノームの鉱山 (Gnomish Mines)](#the-gnomish-mines)**（*[幸せの石 (luckstone)](#luck-and-fortune)* や *[店 (shops)](#shopping-and-shopkeeper-pricing)* があります）、**[倉庫番 (Sokoban)](#sokoban)**（最上階にご褒美がある *[パズル](#sokoban)*）、あなたの **[クエスト (Quest)](#the-quest)** ダンジョン（自分の役職のリーダーから貴重なアーティファクトを取り戻す任務を課されます）、そして時には **ルディオスの要塞 (Fort Ludios)**（ゴールドが詰まった宝物庫）へと通じています。主幹の終点は **城 (The Castle)** であり、ここは [ゲヘナ (Gehennom)](#gehennom) への玄関口となっています。
+
+**ゲヘナ (Gehennom)** は下半分です。溶岩に満ちた迷路階層と悪魔の君主たちが待ち受け、最深部の [モロクの聖域 (Moloch's Sanctum)](#molochs-sanctum) に **イェンダーの魔除け (Amulet of Yendor)** が安置されています。魔除けを手に入れたら、今度は **属性の諸平面 (Elemental Planes)** を登って **霊界 (Astral Plane)** を目指します。そこではあなたの神が捧げ物を待っています。
+
+<!-- DMAP-BEGIN -->
+<div><figure style="margin: 1.5em 0; text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 611" role="img" aria-label="Dungeons of Doom map" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><line x1="380" y1="55" x2="380" y2="611" stroke="#B5651D" stroke-width="2.5" fill="none"/><rect x="40" y="0" width="680" height="39" rx="4" fill="#B5651D"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">DUNGEONS OF DOOM</text><line x1="150" y1="140" x2="150" y2="246" stroke="#5B8E3A" stroke-width="2" fill="none"/><line x1="630" y1="166" x2="630" y2="194" stroke="#B58A1A" stroke-width="2" fill="none"/><line x1="630" y1="305" x2="630" y2="343" stroke="#3B6FA0" stroke-width="2" fill="none"/><rect x="290" y="55" width="180" height="40" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="72" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">The Dungeon Entrance</text><text x="380" y="89" font-size="12" font-style="italic" fill="#555" text-anchor="middle">up-stair to exit</text><rect x="60" y="108" width="180" height="32" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="129" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Gnomish Mines</text><rect x="60" y="168" width="180" height="40" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="185" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Minetown</text><text x="150" y="202" font-size="12" font-style="italic" fill="#555" text-anchor="middle">shops, temple</text><rect x="60" y="246" width="180" height="40" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="263" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Mine's End</text><text x="150" y="280" font-size="12" font-style="italic" fill="#555" text-anchor="middle">luckstone</text><rect x="290" y="163" width="180" height="40" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="180" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">The Oracle</text><text x="380" y="197" font-size="12" font-style="italic" fill="#555" text-anchor="middle">paid hints</text><rect x="540" y="126" width="180" height="40" rx="6" fill="#FFF4CC" stroke="#B58A1A" stroke-width="1.5"/><text x="630" y="143" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Sokoban prize</text><text x="630" y="160" font-size="12" font-style="italic" fill="#555" text-anchor="middle">bag of holding/amulet of reflection</text><rect x="540" y="194" width="180" height="32" rx="6" fill="#FFF4CC" stroke="#B58A1A" stroke-width="1.5"/><text x="630" y="215" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Sokoban entry</text><rect x="290" y="269" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="290" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest portal</text><rect x="540" y="265" width="180" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="630" y="282" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest entry</text><text x="630" y="299" font-size="12" font-style="italic" fill="#555" text-anchor="middle">your role's dungeon</text><rect x="540" y="343" width="180" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="630" y="360" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest goal</text><text x="630" y="377" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Bell of Opening, role artifact</text><rect x="290" y="329" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="350" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Big Room (40%)</text><rect x="290" y="389" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="410" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Rogue Level</text><rect x="60" y="420" width="180" height="40" rx="6" fill="#FFD966" stroke="#B5891A" stroke-width="1.5"/><text x="150" y="437" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Fort Ludios</text><text x="150" y="454" font-size="12" font-style="italic" fill="#555" text-anchor="middle">vault of gold</text><rect x="290" y="479" width="180" height="32" rx="6" fill="#B8D4F0" stroke="#2E5C8E" stroke-width="1.5"/><text x="380" y="500" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Medusa's Island</text><rect x="230" y="539" width="300" height="58" rx="8" fill="#FFFFFF" stroke="#B5891A" stroke-width="2.5"/><text x="380" y="565" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">THE CASTLE</text><text x="380" y="582" font-size="14" font-style="italic" fill="#7A5A0A" text-anchor="middle">wand of wishing</text><line x1="380" y1="124" x2="240" y2="124" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="380" y1="210" x2="540" y2="210" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="470" y1="285" x2="540" y2="285" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="380" y1="440" x2="240" y2="440" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><text x="275" y="120" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">down</text><text x="500" y="206" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">up</text><text x="505" y="281" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portal</text><text x="275" y="436" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portal</text><circle cx="380" cy="124" r="4" fill="#B5651D"/><circle cx="380" cy="210" r="4" fill="#B5651D"/><circle cx="380" cy="440" r="4" fill="#B5651D"/><circle cx="380" cy="104.0" r="4" fill="#B5651D"/><circle cx="380" cy="114.0" r="4" fill="#B5651D"/><circle cx="150" cy="149.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="159.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="217.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="227.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="237.0" r="4" fill="#5B8E3A"/><circle cx="380" cy="134.0" r="4" fill="#B5651D"/><circle cx="380" cy="144.0" r="4" fill="#B5651D"/><circle cx="380" cy="154.0" r="4" fill="#B5651D"/><circle cx="630" cy="175.0" r="4" fill="#B58A1A"/><circle cx="630" cy="185.0" r="4" fill="#B58A1A"/><circle cx="380" cy="220.0" r="4" fill="#B5651D"/><circle cx="380" cy="230.0" r="4" fill="#B5651D"/><circle cx="380" cy="240.0" r="4" fill="#B5651D"/><circle cx="380" cy="250.0" r="4" fill="#B5651D"/><circle cx="380" cy="260.0" r="4" fill="#B5651D"/><circle cx="630" cy="314.0" r="4" fill="#3B6FA0"/><circle cx="630" cy="324.0" r="4" fill="#3B6FA0"/><circle cx="630" cy="334.0" r="4" fill="#3B6FA0"/><circle cx="380" cy="310.0" r="4" fill="#B5651D"/><circle cx="380" cy="320.0" r="4" fill="#B5651D"/><circle cx="380" cy="370.0" r="4" fill="#B5651D"/><circle cx="380" cy="380.0" r="4" fill="#B5651D"/><circle cx="380" cy="430.0" r="4" fill="#B5651D"/><circle cx="380" cy="450.0" r="4" fill="#B5651D"/><circle cx="380" cy="460.0" r="4" fill="#B5651D"/><circle cx="380" cy="470.0" r="4" fill="#B5651D"/><circle cx="380" cy="520.0" r="4" fill="#B5651D"/><circle cx="380" cy="530.0" r="4" fill="#B5651D"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 681" role="img" aria-label="Gehennom map" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><line x1="380" y1="0" x2="380" y2="39" stroke="#B5651D" stroke-width="2.5" fill="none"/><line x1="380" y1="0" x2="380" y2="625" stroke="#A14A3F" stroke-width="2.5" fill="none"/><rect x="40" y="0" width="680" height="39" rx="4" fill="#A14A3F"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">GEHENNOM</text><line x1="150" y1="288" x2="150" y2="306" stroke="#6B4E96" stroke-width="2" fill="none"/><rect x="290" y="53" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="70" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Valley of the Dead</text><text x="380" y="87" font-size="12" font-style="italic" fill="#555" text-anchor="middle">Gehennom's entrance</text><rect x="290" y="141" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="162" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Asmodeus's Lair</text><rect x="290" y="191" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="212" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Juiblex's Swamp</text><rect x="290" y="251" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="272" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Baalzebub's Lair</text><rect x="60" y="248" width="180" height="40" rx="6" fill="#E3D8F0" stroke="#6B4E96" stroke-width="1.5"/><text x="150" y="265" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Vlad the Impaler</text><text x="150" y="282" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Candelabrum</text><rect x="60" y="306" width="180" height="32" rx="6" fill="#E3D8F0" stroke="#6B4E96" stroke-width="1.5"/><text x="150" y="327" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Vlad's Tower</text><rect x="290" y="351" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="368" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Orcus Town</text><text x="380" y="385" font-size="12" font-style="italic" fill="#555" text-anchor="middle">Wand of Orcus · magic lamp/marker</text><rect x="290" y="419" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="440" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Wizard's Tower</text><rect x="290" y="469" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="486" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Wizard of Yendor</text><text x="380" y="503" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Book of the Dead</text><rect x="230" y="567" width="300" height="58" rx="8" fill="#2D2D2D" stroke="#FFC857" stroke-width="2.5"/><text x="380" y="593" font-size="17" font-weight="600" fill="#FFC857" text-anchor="middle">Moloch's Sanctum</text><text x="380" y="610" font-size="14" font-style="italic" fill="#FFE680" text-anchor="middle">the Amulet of Yendor</text><line x1="380" y1="322" x2="240" y2="322" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><text x="275" y="318" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">up</text><circle cx="380" cy="322" r="4" fill="#A14A3F"/><circle cx="380" cy="102.0" r="4" fill="#A14A3F"/><circle cx="380" cy="112.0" r="4" fill="#A14A3F"/><circle cx="380" cy="122.0" r="4" fill="#A14A3F"/><circle cx="380" cy="132.0" r="4" fill="#A14A3F"/><circle cx="380" cy="182.0" r="4" fill="#A14A3F"/><circle cx="380" cy="232.0" r="4" fill="#A14A3F"/><circle cx="380" cy="242.0" r="4" fill="#A14A3F"/><circle cx="380" cy="292.0" r="4" fill="#A14A3F"/><circle cx="380" cy="302.0" r="4" fill="#A14A3F"/><circle cx="380" cy="312.0" r="4" fill="#A14A3F"/><circle cx="150" cy="297.0" r="4" fill="#6B4E96"/><circle cx="380" cy="332.0" r="4" fill="#A14A3F"/><circle cx="380" cy="342.0" r="4" fill="#A14A3F"/><circle cx="380" cy="400.0" r="4" fill="#A14A3F"/><circle cx="380" cy="410.0" r="4" fill="#A14A3F"/><circle cx="380" cy="460.0" r="4" fill="#A14A3F"/><circle cx="380" cy="518.0" r="4" fill="#A14A3F"/><circle cx="380" cy="528.0" r="4" fill="#A14A3F"/><circle cx="380" cy="538.0" r="4" fill="#A14A3F"/><circle cx="380" cy="548.0" r="4" fill="#A14A3F"/><circle cx="380" cy="558.0" r="4" fill="#A14A3F"/><line x1="380" y1="631" x2="380" y2="681" stroke="#5B8E3A" stroke-width="2.5" stroke-dasharray="7,5" fill="none"/><text x="400" y="661" font-size="15" font-weight="600" font-style="italic" fill="#5B8E3A">now go <tspan style="font-weight:800;font-size:17px">ALL</tspan> the way back up...</text></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 299" role="img" aria-label="Elemental Planes and Ascension" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><rect x="40" y="0" width="680" height="39" rx="4" fill="#5D3C8E"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">THE ELEMENTAL PLANES</text><rect x="68" y="89" width="120" height="40" rx="6" fill="#E8DDC8" stroke="#8B6F47" stroke-width="1.5"/><text x="128" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Earth</text><rect x="236" y="89" width="120" height="40" rx="6" fill="#E0F4FA" stroke="#3B9FA8" stroke-width="1.5"/><text x="296" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Air</text><rect x="404" y="89" width="120" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="464" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Fire</text><rect x="572" y="89" width="120" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="632" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Water</text><rect x="260" y="179" width="240" height="42" rx="6" fill="#D8C6F0" stroke="#5D3C8E" stroke-width="1.5"/><text x="380" y="197" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Astral Plane</text><text x="380" y="213" font-size="12" font-style="italic" fill="#555" text-anchor="middle">three altars · pick yours</text><rect x="230" y="239" width="300" height="50" rx="10" fill="#FFE680" stroke="#B5891A" stroke-width="2.5"/><text x="380" y="262" font-size="18" font-weight="700" fill="#7A5A0A" text-anchor="middle" letter-spacing="0.1em">ASCENSION</text><text x="380" y="281" font-size="11" font-style="italic" fill="#7A5A0A" text-anchor="middle">offer the Amulet at your altar</text><path d="M 380 39 C 380 53 128 53 128 67 L 128 89" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="188" y1="109" x2="236" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><text x="212" y="105" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portals</text><line x1="356" y1="109" x2="404" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="524" y1="109" x2="572" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><path d="M 632 129 C 632 143 380 143 380 157 L 380 179" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="380" y1="221" x2="380" y2="239" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/></svg><figcaption style="font-style: italic; color: #5a5a5a; font-size: 0.9em; margin-top: 0.5em;">支流は主幹の左右へと延びています。丸印（小さな色付きの点）はおおよそのフロア数を示します。★ はモロクの聖域に入り、魔除けを手に入れるために必要な3つの開扉のアイテム（開放の鐘、燭台、死者の書）を示しています。</figcaption></figure></div>
+<!-- DMAP-END -->
+
+#### マップの記号 (The Map Symbols)
+
+ダンジョン内のすべてのものは、画面上では記号で表現されます。
+一目で判別できるように覚えておきましょう：
+
+| 記号     | 意味                          |
+| -------- | ----------------------------- |
+| `.`      | 床（部屋）                    |
+| `#`      | 通路、木、または雲            |
+| `-`  `│` | 壁（水平、垂直）              |
+| `+`      | 閉まった扉（または魔法書）    |
+| `<`      | 上り階段                      |
+| `>`      | 下り階段                      |
+| `{`      | 泉（明るい青）または流し台（白） |
+| `_`      | 祭壇                          |
+| `\`      | 玉座                          |
+| `^`      | 罠（発見後）                  |
+| `@`      | あなた（または人間系モンスター） |
+| `` ` ``  | 巨石                          |
+| `}`      | 水または溶岩                  |
+
+アルファベット文字はモンスターを表します。犬なら `d`、ドラゴンなら `D`、ゾンビなら `Z` です。色はその分類内の個別の種類を識別するのに役立ちます。例えば赤い `D` は赤ドラゴン（レッドドラゴン）であり、灰色の `D` は灰色ドラゴン（グレイドラゴン）です（[ダンジョン生態系ガイド (Field Guide to Dungeon Fauna)](#field-guide-to-dungeon-fauna) を参照）。
+
+**色のメモ：分岐の階段は黄色に変わる。** 支流（ノームの鉱山や倉庫番）へと通じる階段は、一度通ると黄色で表示されるようになります。通常の主幹フロアの階段はデフォルト色のままなので、複数の階段が存在するフロアでも、黄色い階段を目印にすれば支流へと迷わず戻ることができます。
+
+アイテムの記号は句読点や記号類です：
+
+| 記号 | アイテム分類       |
+| ---- | ------------------ |
+| `)`  | 武器               |
+| `[`  | 防具               |
+| `%`  | 食料               |
+| `!`  | 薬                 |
+| `?`  | 巻物               |
+| `/`  | 杖                 |
+| `=`  | 指輪               |
+| `"`  | 魔除け             |
+| `(`  | 道具               |
+| `+`  | 魔法書             |
+| `*`  | 宝石および石       |
+| `$`  | ゴールド（ゾークミッド、略称 **zm**） |
+
+#### 部屋の種類 (Room Types)
+
+ダンジョンのほとんどの部屋はありふれた通常の部屋で、何もないか、いくつかのアイテムやモンスターが点在している程度です。しかし、中には特殊な部屋もあります：
+
+```
+   A shop:                 A zoo:                 A throne room:
+   ┌───────┐               ┌────────┐             ┌────────┐
+   │[?!=/("│               │Z··Z$Z··│             │··Z·Z·Z·│
+   │)%*[?!(│               │$Z···$Z·│             │·Z·\··Z·│
+   │··@····│               │·Z$Z··Z$│             │··Z·Z···│
+   └──+────┘               └───+────┘             └───+────┘
+      #                        #                      #
+   @ = shopkeeper          Z = sleeping           \ = throne
+   Items for sale.         $ = gold piles         Monsters guard.
+```
+
+**店 (Shops)。** 内部にいる店主（通常は扉の近く）によって識別されます。店は特定の種類のアイテムを販売しています：雑貨屋、防具屋、武器屋、巻物屋、薬屋などがあります。店内の床にあるアイテムは店主の所有物です。拾い上げると価格が提示されます。手持ちのアイテムを売ることもできます。店主は戦闘において極めて強力なため、周到な計画がない限り盗みを働いてはいけません。
+
+**寺院 (Temples)。** 祭壇があり、司祭または女司祭が管理している部屋です。祭壇の属性が重要となります：自分の属性と一致していれば、ここで捧げ物（犠牲）を捧げることで恩恵を得られます。一致していない場合、常駐の司祭はあなたの試みに対して友好的には応じてくれません。また、司祭にゴールドを寄付することで、透視能力や永続的なACボーナスを得ることもできます。[司祭への寄付 (Donating to Priests)](#donating-to-priests) を参照してください。
+
+**玉座の部屋 (Throne rooms)。** [*玉座* (`\`)](#thrones) があり、玉座には眠れる統治者が座り、周囲には護衛のモンスター群がひしめいている部屋です。玉座に座るとランダムな効果が生じ、時には素晴らしい幸運をもたらし、時には悲惨な結果を招きます。
+
+**動物園 (Zoos)。** 眠っているモンスターとゴールドで埋め尽くされた部屋です。10マス以内からあなたを視界に捉えられる睡眠中のモンスターは、毎ターン1/7の確率で目を覚まします。「忍び足（ステルス）」があれば覚醒を防げます。部屋の中に踏み込まず、扉口から戦うことで、一度に相手にするモンスターを1〜2体に絞りましょう。
+
+**兵舎 (Barracks)。** 兵士たちで満たされた部屋です。彼らは統率が取れており武装していますが、同時に優れた装備を所持しています。戦いに耐えられる実力があるなら、掃討する価値は大いにあります。
+
+**蜂の巣 (Beehives)。** 殺人蜂とローヤルゼリーでいっぱいの部屋です。蜂は群れをなすと非常に危険ですが、ローヤルゼリーは極めて優れた食料です。
+
+**テーマのある部屋 (Themed rooms)。** ダンジョンには、形状（柱の林立、二重構造の部屋）や配置された内容が一風変わった部屋が何十種類も存在します。注意すべき主な部屋は以下の通りです：
+
+- **光源の部屋 (Light source rooms)。** 高い確率で火のついたオイルランプが落ちています。タダで手に入る光源です。
+- **埋もれた財宝 (Buried treasure)。** 床のどこかに *"Dig 3 east 2 south"*（東に3、南に2掘れ、などの指示）と焼かれた刻み文字があり、埋められた宝箱と3〜12個のランダムなアイテムの場所を示しています。ここでは「つるはし」がその重さ以上の価値を発揮します。
+- **大虐殺 (Massacre)。** 人間の冒険者の死体が床一面に散乱しています。これらを食べても内在能力（耐性等）は得られません。人間が食べると共喰い（カニバリズム）のペナルティを受け、混沌以外のキャラクターが祭壇に捧げると重大な罪となります。
+- **霊廟 (Mausoleum)。** 内部の小さな玄室に、1体の待ち構えるモンスター（ミイラ、吸血鬼、リッチ、ゾンビ）または人間の死体が配置されています。扉は慎重に開けましょう。
+- **蜘蛛の巣、埋もれたゾンビ、罠部屋、テレポートのハブ (Spider nest, buried zombies, trap room, teleportation hub)。** これらは危険な罠として扱ってください。蜘蛛の巣や埋もれたゾンビは階層の深さに応じて強化されるため、一度退却して適切な対策を用意してから戻りましょう。罠部屋には、矢の罠から反魔法フィールド、地雷まで様々な罠が仕掛けられています。
+- **柱のある部屋・分割された部屋 (Pillared and divided rooms)。** 柱が立ち並ぶ部屋、奥の小部屋、あるいは中央が遮蔽された部屋です。これらの角（コーナー）を利用して [エルベレス (Elbereth)](#elbereth) の文字を安全に保護したり、長柄武器（ポールアーム）の間合いを保って戦うことができます。
+
+テーマのある部屋は通常の部屋の中に混ざって生成されます。1つのフロアに複数存在することもあります。
+
+---
+
+### ダンジョン生態系ガイド (Field Guide to Dungeon Fauna)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Displacer beast has no melee place-swap; removed the fabricated "50% chance to swap places." M3_DISPLACES only barges past other monsters when moving (mm_displacement, mon.c, monster-vs-monster). Corpse still grants temporary Displacement (eat.c:1265-1268).
+- Verified correct: soldier ant/bat/centaur/jabberwock/mumak/xorn/gargoyle/naga stats, mind-flayer helmet block 7/8 (uhitm.c:3235), gremlin night-only intrinsic strip (uhitm.c:3040) & water split (mon.c:987).
+-->
+<!-- audit
+2026-05-18:
+- xan: AT_STNG AD_LEGS (sting cripples legs); xan is class `x`, not the engulfer `t` (S_TRAPPER) (monsters.h:1157-1159)
+- leprechaun attack is AT_CLAW AD_SGLD (gold-steal claw), not a bite (monsters.h:660)
+- long worms grow tail segments on a movement-driven wgrowtime timer, not per hit (worm.c:218-237)
+- pudding split admits IRON|METAL weapons only (uhitm.c:1616-1618)
+- there are no dragonhide weapons in 5.0; DRAGON_HIDE material is body-armor-only
+- silver and wooden weapons are the actual pudding non-splitters (uhitm.c:1616-1620 admits IRON|METAL only)
+- all other class-symbol mappings (defsym.h) and per-monster stats verified clean
+- rothe ('q'-class fame): three attacks per turn (claw + two bites), the only Q-class monster lacking M2_STRONG, and the canonical early-q threat per NetHackWiki (https://nethackwiki.com/wiki/Rothe, https://nethackwiki.com/wiki/Quadruped)
+2026-05-31 audit:
+- homunculus (S_IMP class `i`) AT_BITE AD_SLEE 1d3, Level 2, speed 12, flies, sleep-resistant itself (monsters.h:551-558). The sleep effect on bite is a real early-game threat — sleep status + adjacent enemies is often lethal. Both the Field Guide summary at companion.md:905 and the bestiary intro at companion.md:10976 had previously described the `i` class as "annoying but not dangerous" / "none individually scary"; corrected to flag the homunculus specifically.
+- water moccasin (M1_POIS, AD_DRST bite drains Str): poisonous corpse but also confers poison resistance (MR_POISON in both mresists and mconveys columns at monsters.h WATER_MOCCASIN row). Eating risks 1d4 Str + 1d15 HP on the 1-in-5 poison roll without resistance (eat.c:1928-1936); ~1-in-15 conferred-resistance grant per successful eat.
+-->
+
+
+迷宮には何百種ものモンスターが生息しており、アルファベットの文字で表される分類（クラス）に体系化されています。小文字は一般に小型または危険度の低いモンスターを示し、大文字はより大型または危険なモンスターを示します。さらに文字の色によって、同一分類内の個別の種が区別されます。
+
+ここでは、各文字が何を意味するのか、おおむね序盤に出現する順に沿って手短に解説します。全モンスターの詳細なレベル、速度、AC、攻撃能力のデータについては、巻末の [モンスター図鑑 (Bestiary Tables)](#bestiary-tables) を参照してください。
+
+#### 序盤によく遭遇するモンスター (Common Early Encounters)
+
+| 記号   | 分類                   | 備考                                                                       |
+| ------ | ---------------------- | -------------------------------------------------------------------------- |
+| [`a`](#ants-and-insects-a)    | [蟻と昆虫類 (Ants)](#ants-and-insects-a)      | 兵隊蟻は序盤の頻出キラーです：速度18、1ターンに2回攻撃（噛みつき＋筋力を低下させる毒針）を行い、群れで移動します。殺人蜂、巨大蟻、火蟻も同様に警戒すべき脅威です。 |
+| [`b`](#blobs-b)    | [ブロブ (Blobs)](#blobs-b)     | 酸性またはゼラチン状の軟体生物です。酸のブロブはこちらから能動的に攻撃してくることはありません。*こちらが* 攻撃を *当てた* ときにのみ、1d8の酸の飛沫を浴びせ、武器を腐食させる恐れがあります。遠距離から倒しましょう。死体を食べれば [耐性](#useful-corpse-effects) が得られます。 |
+| [`B`](#bats-and-birds-b)    | [コウモリと鳥類 (Bats)](#bats-and-birds-b)      | その俊敏さが最大の脅威です。コウモリや巨大コウモリは基本速度12のプレイヤーに対して速度22で動くため、プレイヤーが1回攻撃を振る間にほぼ2回噛みついてきます。巨大コウモリの1d6の噛みつきは駆け出しのキャラクターをあっという間に消耗させます。吸血コウモリは筋力を低下させる噛みつきも併せ持ちます。 |
+| [`d`](#dogs-and-canines-d)    | [犬とイヌ科動物 (Dogs and other canines)](#dogs-and-canines-d) | ジャッカルの噛みつきダメージは1d2に過ぎませんが、地下数階層においてはその群れが他のどの脅威よりも多くの冒険者を葬っています。狐の噛みつきは1d3でより素早いですが、単独で出現します。飼い慣らした犬や猫は他のあらゆる敵との戦いで頼もしい助けになります。 |
+| [`e`](#eyes-and-spheres-e)    | [目と球体 (Eyes)](#eyes-and-spheres-e)      | **さまよう目** を近接攻撃で殴ると麻痺してしまいます。飛び道具を使うか、戦わずに迂回しましょう。包子ガスは倒すと爆発して4d6のダメージを与えるため、必ず2マス以上離れて撃ちましょう。炎の球体、氷の球体、電撃の球体も近距離で爆発します。 |
+| [`f`](#felines-f)    | [ネコ科動物 (Cats)](#felines-f)      | 犬と同様に、初期のペットとしてよく選ばれます。家猫は腐肉（トリップミート）で飼い慣らすことができますが、野生のネコ科動物を従わせるには魔法が必要です。 |
+| [`G`](#gnomes-g)    | [ノーム (Gnomes)](#gnomes-g)    | 鉱山に無数に出現します。ノームやドワーフのプレイヤーに対してはほとんどが友好的です。領主や王はより強力ですが、特別な対処法は必要ありません。 |
+| [`h`](#humanoids-h)    | [人型生物 (Humanoids)](#humanoids-h) | ドワーフ、バグベア、マインドフレイヤなどです。つるはし（mattock）を持ったドワーフは1d8＋1d12の一撃を繰り出し、レベル1のキャラクターなら2振りで撲殺されます。遠距離から対処しましょう。 |
+| [`i`](#imps-and-minor-demons-i)    | [インプと小悪魔 (Imps)](#imps-and-minor-demons-i)      | ほとんどは軽微な厄介者に過ぎませんが、ホムンクルスの噛みつきはプレイヤーを眠らせてしまいます。睡眠耐性がない場合は、遠距離から倒してください。 |
+| [`j`](#jellies-j)    | [ゼリー (Jellies)](#jellies-j)   | 移動しません。横を通り抜けて迂回しましょう。近接攻撃を仕掛けると受動的な酸ダメージを受けることがあります。 |
+| [`k`](#kobolds-k)    | [コボルド (Kobolds)](#kobolds-k)   | 非力ですが、すべてのコボルドの死体には毒があります。ごく稀に毒矢を持っている個体がいます。 |
+| [`o`](#orcs-o)    | [オーク (Orcs)](#orcs-o)      | 数が多く、1対1なら手頃な強さですが、集団になると危険です。迷宮上層では丘オークとモルドールオークが代表的な変種です。 |
+| [`r`](#rodents-r)    | [げっ歯類 (Rodents)](#rodents-r)   | ネズミや岩モグラです。岩モグラは金属製のアイテムを食べるため、装備を守りましょう。 |
+| [`s`](#arachnids-and-centipedes-s)    | [蜘蛛とムカデ (Spiders)](#arachnids-and-centipedes-s)   | 洞窟グモは弱いです（毒耐性を得るために食べましょう）。巨大グモは毒を持ちます。 |
+| [`x`](#xans-and-fantastic-insects-x)    | [グリッドバグと幻虫 (Grid bugs)](#xans-and-fantastic-insects-x) | ゲーム中で最弱のモンスターです。斜め移動すらできません。死体は残りません。また `x` 分類には、ずっと深い階層に現れる **ザン** も含まれ、その針で刺されると足を不自由にされます（治癒するまで移動速度が大幅に低下します）。 |
+| [`:`](#lizards)    | [トカゲ類 (Lizards)](#lizards)   | イモリ、ヤモリ、イグアナは単体では非力です。この分類の重要性は主にその死体にあります。**トカゲの死体は [石化 (petrification)](#petrification-stoning) を治療します**（コカトリス保険として常に1つ携帯しましょう）。また、イモリの死体はMP（魔力）を1〜3回復させることがあります。 |
+
+#### 中層の脅威 (Mid-Dungeon Threats)
+
+| 記号   | 分類              | 備考                                                                                                 |
+| ------ | ----------------- | ---------------------------------------------------------------------------------------------------- |
+| [`A`](#angelic-beings-a)    | [天使系 (Angels)](#angelic-beings-a)            | 強力で、通常は属性を持ちます。自分の信仰神と同じ属性の天使とは戦ってはいけません。 |
+| [`C`](#centaurs-c)    | [ケンタウロス (Centaurs)](#centaurs-c)          | 高速（速度18〜20）です。半数が弓またはクロスボウを持って生成されますが、近接戦に持ち込んでも武器攻撃と蹴りを繰り出してきます。山のケンタウロスの打撃が最も強烈で、1ターンに1d10の武器攻撃に加えて *2回* の1d6蹴りを放ちます。 |
+| [`E`](#elementals-e)    | [エレメンタル (Elementals)](#elementals-e)        | 倒すのが困難です。風のエレメンタルは [丸呑み](#engulfment) し、土のエレメンタルは壁をすり抜けて移動します。 |
+| [`f`](#felines-f)    | [ディスプレイサービースト (Displacer beast)](#felines-f)   | 猫（ネコ科）分類ですが極めて狂暴です：AC −10を誇り、痛烈な3回連続近接攻撃を仕掛けてきます。死体を食べると一時的に内在能力「幻影（変位）」が得られます。 |
+| [`F`](#fungi-and-molds-f)    | [菌類とモールド (Fungi)](#fungi-and-molds-f)             | モールドは移動しないため、迂回して通り過ぎましょう。シュリーカーは他のモンスターを呼び寄せます。 |
+| [`g`](#gremlins-g)    | [グレムリンとガーゴイル (Gremlins / gargoyles)](#gremlins-g)   | 重い鉤爪に加えて特殊能力を持ちます。グレムリンは **夜間に攻撃が当たるとランダムに内在能力を1つ奪い**、**水に濡れると分裂・増殖します**（絶対に泉の中へ蹴り飛ばしてはいけません）。ガーゴイルは鈍足ですが重装甲（AC −4）で3連撃を繰り出します。翼のあるガーゴイルは飛行します。 |
+| [`'`](#golems)    | [ゴーレム (Golems)](#golems)            | 人造の怪物です。鉄のゴーレムは強打を放ち、ほぼすべての攻撃に耐性を持ちます。粘土、石、木のゴーレムはそれよりも柔らかいです。ガラスのゴーレムは倒すと宝石をドロップします。 |
+| [`H`](#giant-humanoids-h)    | [巨人 (Giants)](#giant-humanoids-h)            | 強烈な近接打撃を放ち、巨石を投げ、宝石を所持しています。死体を食べると筋力を上昇させることがあります。 |
+| [`J`](#jabberwocks-j)    | [ジャバウォック (Jabberwock)](#jabberwocks-j)        | 1ターンに4回の2d10攻撃を行い、全段命中すると約44もの大ダメージを受けます。 |
+| [`K`](#keystone-kops-k)    | [キーストン・コップ (Keystone Kops)](#keystone-kops-k)     | 店主が呼び出す警官隊です。万引き、代金未払い、あるいは店主を怒らせたときに出現します。1体1体は非力ですが大群で押し寄せ、あなたをあざ笑います。 |
+| [`l`](#leprechauns-l)    | [レプラコーン (Leprechauns)](#leprechauns-l)       | ゴールドを盗んでテレポートで逃走します。たった1回の鉤爪攻撃で所持金の *全額* を奪われることもあります。ゴールドを袋の中に隠すか、別の場所に置いておくか、遠距離から倒しましょう。 |
+| [`L`](#liches-l)    | [リッチ (Liches)](#liches-l)            | 呪文の使い手です。アーチリッチは死の指（即死の接触呪文）を唱えてくるため、ゲーム中で最も危険なモンスターの1つです。 |
+| [`m`](#mimics-m)    | [ミミック (Mimics)](#mimics-m)            | アイテム、壁、扉、泉、祭壇、あるいは巨石に擬態しています。[ミミックに関する注意点 (A note on mimics)](#a-note-on-mimics) を参照してください。 |
+| [`M`](#mummies-m)    | [ミイラ (Mummies)](#mummies-m)           | 物理的な鉤爪攻撃を繰り出す好戦的なアンデッドです。元の種族の腐った死体を残しますが、老化効果はありません。クロークとして身につけた「ミイラの包帯」は透明状態を遮断するため、店主が接客を拒否してきた際に役立ちます。 |
+| [`n`](#nymphs-n)    | [ニンフ (Nymphs)](#nymphs-n)            | [インベントリからアイテムを盗み、テレポートで逃走します](#a-note-on-nymphs)。遠距離から戦いましょう。 |
+| [`N`](#nagas-n)    | [ナガ (Nagas)](#nagas-n)             | 大型の蛇の体を持つ怪物です。赤ナガは火炎の息を吐き、黒ナガは酸を吐き、金ナガは呪文を唱え、番人ナガは筋力を低下させる毒を吐き、麻痺させる噛みつきを行います。タフで速度は12〜16です。 |
+| [`O`](#ogres-o)    | [オーガ (Ogres)](#ogres-o)             | 迷宮上層における強打者であり、集団で移動します。オーガの君主やオーガの王はさらに強力な打撃を与えてきます。包囲されないように注意してください。 |
+| [`p`](#piercers-p)    | [ピアサー (Piercers)](#piercers-p)          | 鍾乳石に擬態し、天井から落下して2d6ダメージ（鉄のピアサーは3d6、ガラスのピアサーは4d6）を与えてきます。硬い兜をかぶっていれば一撃を防げます。ACが優れていれば回避できることもあります。 |
+| [`P`](#puddings-and-oozes-p)    | [プリンとウーズ (Puddings)](#puddings-and-oozes-p)          | [黒プリンや茶色プリンは、鉄製または金属製の武器で近接攻撃を受けると分裂します](#a-note-on-puddings)（メスやツルギも金属製に含まれます）。死体を食べて [内在能力](#useful-corpse-effects) を得るのに適しています。 |
+| [`q`](#quadrupeds-q)    | [四足獣 (Quadrupeds)](#quadrupeds-q)        | 中盤に現れる連続攻撃の巨獣たちです。**ロゼ** は特に有名で（鈍足の速度9ですが1ターンに3回攻撃を行い、群れをなすと極めて危険です）、ムーマクは単独で強烈な2段攻撃を繰り出す巨獣です（4d12の突き刺し＋2d6の噛みつき）。 |
+| [`R`](#rust-monsters-and-disenchanters-r)    | [錆の怪物 (Rust monster)](#rust-monsters-and-disenchanters-r) | 錆の怪物の攻撃を受けると装備中の鉄の鎧が腐食し、こちらが攻撃を当てると手に持った鉄の武器が腐食します。ミスリル製、銀製、木製の武具を使うか、戦う前に鉄製装備を脱ぎましょう。吸魔の怪物はゲヘナにのみ出現します。[強化値ドレイン (Enchantment Drain)](#enchantment-drain) を参照してください。 |
+| [`S`](#snakes-s)    | [ヘビ (Snakes)](#snakes-s)            | コブラやクサリヘビは毒を持ちます。水ヘビは泉から飛び出してきます。 |
+| [`t`](#trappers-and-lurkers-t)    | [トラッパーとラーカー (Trappers / lurkers above)](#trappers-and-lurkers-t) | 床や天井に完全に同化して潜み、その上を踏むか下を歩いたときに [丸呑み](#engulfment) してきます。 |
+| [`T`](#trolls-t)    | [トロール (Trolls)](#trolls-t)            | [急速再生能力を持ちます。死体を食べるか缶詰にしない限り、死から復活します](#a-note-on-trolls)。 |
+| [`u`](#unicorns-and-horses-u)    | [馬とユニコーン (Horses / unicorns)](#unicorns-and-horses-u) | 野生の馬は敵対して出現しますが、飼い慣らして乗馬することができます。ユニコーンの色は属性を表します：自分と同じ属性の個体は友好的に生成されます。敵対的なユニコーンには宝石を投げましょう。[幸運と運命 (Luck and Fortune)](#luck-and-fortune) を参照してください。 |
+| [`U`](#umber-hulks-u)    | [アンバーハルク (Umber hulk)](#umber-hulks-u)        | 視界に捉えるだけで、その凝視により混乱させられます。目隠しをすれば凝視を無効化できます。 |
+| [`v`](#vortices-v)    | [渦 (Vortices)](#vortices-v)          | 高速で [丸呑み](#engulfment) してくる雲のような怪物です（足の遅い霧の雲を除く）。ほこりの渦は盲目を引き起こし、氷の渦は凍結させ、エネルギーの渦は電撃を与えて魔力を吸い取り、蒸気の渦と炎の渦は火傷を負わせます。遠距離から倒しましょう。 |
+| [`w`](#worms-w)    | [ワーム (Worms)](#worms-w)             | 長いワームは移動するにつれて尾の節が伸びていき、それ自体が通路を塞ぐ一本の障害物になります。 |
+| [`W`](#wraiths-w)    | [レイス (Wraiths)](#wraiths-w)           | [攻撃を受けるとレベルを吸い取られます（レベルドレイン）](#level-drain)。しかし [その死体を食べるとレベルが上がります](#a-note-on-wraiths)。腐敗する前に新鮮なうちに食べましょう。 |
+| [`y`](#lights-y)    | [黄色い光と黒い光 (Yellow/black lights)](#lights-y) | 隣接すると自爆します。黄色い光は盲目を引き起こし、黒い光は幻覚をもたらします。黒い光は「不可視の視覚」がないと目に見えません。遠距離から撃破しましょう。 |
+| [`Y`](#apelike-creatures-y)    | [イエティ (Yetis)](#apelike-creatures-y)             | 白くて巨大な野獣です。イエティの死体を食べると、約1/3の確率で冷気耐性が得られます。 |
+| [`z`](#zruties-z)    | [ズルティ (Zruty)](#zruties-z)             | 動きは遅いですが、毎ターン2回の3d4鉤爪攻撃と3d6の噛みつきを繰り出してきます。 |
+| [`Z`](#zombies-z)    | [ゾンビ (Zombies)](#zombies-z)           | 鈍足で数が多いです。死者退散（アンデッドの退散）の杖や呪文を使うと1d8ダメージを与えて逃走させることができます。種族ベースのゾンビは、その基礎種族のすでに腐敗した死体をドロップします。 |
+
+#### 極めて危険なモンスター (Very Dangerous Monsters)
+
+| 記号   | 分類             | 備考                                                                                                     |
+| ------ | ---------------- | -------------------------------------------------------------------------------------------------------- |
+| [`c`](#cockatrices-c)    | [コカトリス (Cockatrices)](#cockatrices-c)      | **接触＝[即座に石化 (instant petrification)](#petrification-stoning)。** 素手で殴ることは絶対に避けてください。手袋をはめた状態でその死体を持てば、凶悪な武器として振るうことができます。 |
+| [`D`](#dragons-d)    | [ドラゴン (Dragons)](#dragons-d)          | [色ごとに固有のブレス攻撃、耐性、および鱗鎧の特性を持ちます](#a-note-on-dragons)。下記の注記を参照してください。 |
+| [`h`](#humanoids-h)    | [マインドフレイヤ (Mind flayers)](#humanoids-h)     | [攻撃が命中するたびに知力を吸い取られます（知能喪失）](#brainlessness)。**知力が3の状態で次の触手攻撃を受けると即死します。** 兜をかぶっていれば触手攻撃の7/8を防ぐことができます。必ず遠距離から倒しましょう。 |
+| [`V`](#vampires-v)    | [吸血鬼 (Vampires)](#vampires-v)         | [レベルを吸い取ってきます（レベルドレイン）](#level-drain)。吸血鬼の貴族（吸血鬼の領主）は飛行し、高速で動きます。 |
+| [`w`](#worms-w)    | [紫ワーム (Purple worms)](#worms-w)     | 超巨大なワームです：[命中すると丸呑みされ、体内で消化されます](#engulfment)。内側から刃物で切り裂いて脱出しましょう。 |
+| [`X`](#xorns-x)    | [ゾーン (Xorn)](#xorns-x)             | 壁をすり抜けて移動します。毎ターン3回の鉤爪攻撃と1回の噛みつきを放ち、待ち伏せも逃亡も困難です。 |
+| [`;`](#sea-monsters)    | [海の怪物 (Sea monsters)](#sea-monsters)     | [溺死は即死です](#drowning)。確実な対策（計画）がないまま水中で戦ってはいけません。 |
+| [`&`](#major-demons)    | [悪魔 (Demons)](#major-demons)           | 上位の悪魔（オルクス、デモゴルゴン、アスモデウスなど）はボス級の脅威です。 |
+| [`@`](#humans-and-elves)    | [人間（敵対的） (Humans (hostile))](#humans-and-elves) | ゲーム中最も執拗で厄介な敵である「イェンダーの魔法使い」が含まれます。 |
+| [`Q`](#quantum-mechanics-q)    | [量子物理学者と遺伝子工学者 (Quantum mechanics / genetic engineers)](#quantum-mechanics-q) | 量子物理学者は攻撃が命中した対象をテレポートさせ、遺伝子工学者（5.0で新登場）は対象を変身（ポリモーフ）させます。 |
+
+#### 特殊な記号 (Special Symbols)
+
+マップ上の表示の中には、一般的な意味でのモンスターではないものの、画面上に出現しその意味を把握しておくべき記号がいくつか存在します。
+
+| 記号   | 対象                     | 備考                                                                                                 |
+| ------ | ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `I`    | 不可視モンスターの目印   | 目に見えない何かを最後に感知した位置をゲームが記憶しています。あなたがぶつかるかそのマスを踏むまで `I` は表示され続けますが、通常そのモンスターはすでに別の場所へ移動しています。 |
+| `~`    | 長いワームの尾の節       | 長いワームの体の一部です。尾を攻撃するとワーム本体にダメージが入り、尾の連なりが短くなります。頭部（`w`）を攻撃すると通常の近接戦闘になります。 |
+| `]`    | 奇妙な物体               | **常に [ミミック](#a-note-on-mimics) です。** 通常のアイテムが `]` と表示されることは決してありません（防具の `[` の鏡像です）。 |
+| `⎕`<br>`\newline`{=latex}(スペース) | 亡霊                     | 骨ファイル（過去の冒険者の亡骸）から生成された亡霊です。この記号は文字通りの半角スペースであり、下の床を上書きして塗りつぶします：部屋の中では、本来 `.` があるべき床に1マス分の *空白（隙間）* として現れます。その空白マスに踏み込むことで正体を確認できます。 |
+
+---
+
+### 注目の施設・地形 (Points of Interest)
+
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Throne positive-Luck kick gives 300-500 gold, not 201-500: rn1(201,300)=rn2(201)+300 (dokick.c:1036; rn1 macro hack.h:1543).
+- Verified correct: magic fountain 1/7 restore-all+1, water demon 1/30 & wish-gate, Excalibur dip, altar BUC flashes, all throne effects, the full 28-ring sink table & 19/20 loss, sink kick/quaff/dip tables, vault-guard timer.
+-->
+<!-- audit
+2026-05-22 fountains fact-check:
+- magic-fountain placement: mklev.c:2297 mkfountain() rolls !rn2(7) — 1/7 of *randomly placed* fountains; predefined fountains via lua des.feature("fountain",x,y) call lspo_feature (sp_lev.c:4904) which sets FOUNTAIN typ + looted/warned only, never blessedftn — so Minetown, Mine's End, Oracle, Big Room (bigrm-4), Castle, Juiblex's swamp are never magic
+- magic-fountain gate: mgkftn && u.uluck >= 0 && fate >= 10 (fountain.c:254); fires on 21/30 quaffs at Luck ≥ 0; "Wow! This makes you feel great!" at fountain.c:257; AMAX restore loop fountain.c:259-263; +1 attr 264-272; flag consumed at fountain.c:275
+- sink-kicked fountain blessedftn=0 explicit (do.c:421)
+- dipfountain has no blessedftn check; dryup() at fountain.c:232 clears it — dipping a magic fountain can waste the charge if the fountain dries
+- curse-some-items (case 24, "This water's no good!"): iterates gi.invent only (fountain.c:312-320), so container contents (bag interior) are safe
+- poisonous water (case 21, "The water is contaminated!"): poison_strdmg if no Poison_resistance else losehp(rnd(4),"unrefrigerated sip of juice") (fountain.c:300-307)
+- scare-monsters (case 29, "bad breath"): iterates fmon entire-level, monflee each (fountain.c:367-381)
+- water demon 1 in 30 (case 23); wish gate rnd(100) > 80 + level_difficulty() (fountain.c:78); level_difficulty in DoD == depth(&u.uz) (dungeon.c:2027); at DL ≥ 20, threshold 100, rnd(100) never > 100, so 0% wish
+- Elbereth scares water demons in DoD: onscary excludes only Rodney/lawful-minions/Angels/Riders (monmove.c:243-271); Elbereth disabled in Gehennom/Planes (Inhell || In_endgame, monmove.c:295-302); musical instruments use the auditory_scare=(x=0,y=0) path which BYPASSES the Inhell/In_endgame check (works in Gehennom)
+- Wizard random starting items: u_init.c:167-178 has 3 random scrolls (may roll SCR_TAMING) and 1 random spellbook (may roll SPE_CHARM_MONSTER); Wizards do NOT roll random tools so cannot start with magic harp / tooled horn / leather drum
+- strategy refs:
+  + https://nethackwiki.com/wiki/Fountain — general mechanics; never-magic-fountain list
+  + https://nethackwiki.com/wiki/Talk:Water_demon — "double-Elbereth" survival strategy (~97.95% survivable per wiki claim)
+  + https://nethackwiki.com/wiki/Fountain_quaffing — early-game wish-fishing strategy, risk discussion
+  + http://www.chiark.greenend.org.uk/~damerell/games/magicfountain.txt — Damerell statistical defense; drop items on the fountain tile to avoid make-pool curse; sack interior protected
+  + https://www.steelypips.org/nethack/331/foun-331.html — Steelypips fountain spoiler
+
+2026-05-18:
+- Fountain quaff: 7 case branches in rnd(30) (fountain.c:286-387)
+- Water demon spawn rate: 1 in 30 quaffs (fountain.c:247, 314)
+- Shallow wish odds: water demon × rnd(100) > 80 + level_difficulty() ≈ 1/150 (fountain.c:78, 247)
+- Wish odds drop to zero past DL 20 (fountain.c:78 level_difficulty term)
+- Excalibur dip: lawful + XL ≥ 5 + long sword + quan=1, 1/6 Knight or 1/30 other (fountain.c:404-405)
+- Non-lawful Excalibur dip curses the sword and consumes the fountain (fountain.c:411-424)
+- Fountain dip cases 17-20 UNCURSE the dipped item (NOT bless) (fountain.c:464-475)
+- Altar BUC flash: amber=blessed, black=cursed, no flash=uncursed (do.c:379-389)
+- Altar conversion via cross-race sacrifice can flip the altar (pray.c:1717-1736)
+- Throne trigger: rnd(6) > 4 = 1 in 3 chance of any effect (sit.c:45)
+- Throne effect chosen from rnd(13) outcomes (sit.c:46, 68-209)
+- Throne wish (case 6) requires u.uluck + rn2(5) ≥ 0, i.e. non-negative Luck (sit.c:106-110)
+- Throne ID: identify_pack(rn2(5)) — 4/5 chance of 1-4 items, 1/5 chance of entire pack (sit.c:198, invent.c:2721)
+- Throne can vanish "in a puff of logic" on rn2(3), even when nothing happens (sit.c:224-233)
+- Vlad's throne: cases 1-4 grant wish + destroy throne; 5-13 are negatives (sit.c:241-353)
+- Kicking sink: 4/5 klunk, else 1/3 black pudding, 1/3 amorous demon, 1/3 ring backup (dokick.c:1201-1238)
+- Each kick outcome gated by S_LPUDDING / S_LDWASHER / S_LRING (once per sink) (dokick.c:1209-1232)
+- Dip potion of polymorph: sink → fountain/throne/altar/grave (do.c:404-454)
+- Grave case may fail and print "The sink vanishes." (engrave.c:1691-1693)
+- Dip POT_OBJECT_DETECTION: "You sense a ring lost down the drain" while S_LRING unset (fountain.c:771-776)
+- Dip POT_LEVITATION: drops a ring once per sink (fountain.c:767-770, 804-826)
+- Dip POT_ACID: "The drain seems less clogged" (fountain.c:755-766)
+- Drop ring in sink: searching + slow-digestion are returned to inventory; all others consumed (do.c:507-516)
+- Ring of hunger vanishes ALL items on the sink square (do.c:556-570)
+- Ring of teleportation moves the sink to a fresh ROOM tile (do.c:575-580)
+- Rotten food in fountains is slime molds, not fruit (objnam.c:414-427)
+- VAULT_GUARD_TIME = 30 turns (hack.h:69) before the guard appears; "Croesus", "Kroisos", "Creosote" all dismiss the guard if Croesus is still alive (vault.c:513-543); lying with a Lawful character loses one alignment (vault.c:507-511)
+2026-05-31:
+- Real-name answer: guard demands "Please drop that gold and follow me." then opens a temporary corridor in the wall (the fake-corridor system in vault.c), leads the player out, and re-seals the wall behind. Player loses all carried gold (vault.c:551-585).
+- Croesus answer (with Croesus alive): guard says "Oh, yes, of course. Sorry to have disturbed you." and `mongone(guard)` removes him (vault.c:513-543). No corridor opens. Player keeps gold but stays sealed inside.
+- Croesus answer with Croesus dead: guard goes hostile and attacks (vault.c:525-540).
+- Implication: lying keeps the gold but requires the player to have an independent way out (wand of digging, scroll of teleportation, level teleport, etc.). Truth-telling guarantees escape at the cost of the gold.
+
+地下深くへと潜っていく中で、特別なランドマーク（固定施設）に立ち寄る時間を作りましょう。フロアの随所に散らばるこれらの建造物は、好奇心旺盛な探索者に多大な報酬を与え、時には手痛い罰を下します。
+
+#### 泉 (Fountains) `{`
+
+ああ、泉。その穏やかなせせらぎの音は、冷たく心地よい喉の潤いを約束しながら、どんな罠よりも多くの冒険者を破滅へと誘惑してきました。
+
+ランダムに配置された泉のうち、幸運（Luck）の値にかかわらず約1/7の確率で **魔法の泉 (magic fountain)** が存在します。飲むまで普通の泉と見分けはつきません。幸運が0以上（非負）の状態で魔法の水を飲むと、*「おお！ 素晴らしい気分だ！ (Wow! This makes you feel great!)」* と表示され、すべての能力値が最大値まで回復した上で、全能力値が1ずつ上昇します。これにより泉の魔法の力は消費されます。（鉱山街や [賢者 (Oracle)](#the-oracle) のあるフロアにあらかじめ配置されている固定の泉や、他の地形から生成された泉が魔法の泉になることは決してありません。また、浸す行為では魔法の泉の恩恵は得られませんが、魔法の力を消費してしまう可能性があります。）
+
+**普通の泉から水を飲むこと (Quaffing)** は、以下のような数十種類ものランダム効果を秘めた危険なスロットマシンのようなものです：
+
+| 結果              | 効果                                                  |
+| ----------------- | ----------------------------------------------------- |
+| 水の魔神          | 水の魔神が出現し、敵対します                          |
+| 水のニンフ        | **水のニンフ** が出現し、アイテムを盗もうとします     |
+| 水ヘビ            | ヘビの大群（水ヘビ）が出現します                      |
+| アイテムの呪い    | 「この水はまずい！ (This water's no good!)」（メインインベントリ内のアイテムが呪われることがあります。袋の中に入れたアイテムは安全です） |
+| 毒の水            | 「水が汚染されている！ (The water is contaminated!)」 筋力ダメージを受けます（毒耐性があれば最悪の事態を防げます） |
+| 不可視の視覚      | 目に見えない生物を視認する能力（透明視）を得ます      |
+| モンスター感知    | フロア内の全モンスターが一瞬だけ表示されます          |
+| 自己知識          | 自身の現在の状態（内在能力等）が手短に表示されます    |
+| モンスター恐怖    | ひどい口臭を放ち、フロア内の全モンスターがパニックになって逃走します |
+| 何も起きない      | 「冷たい水に喉の渇きがいやされた。(The cool draught refreshes you.)」または「このぬるま湯には味がない。(This tepid water is tasteless.)」 |
+
+ほとんどの場合は何も起きません。魔神が出現する確率は約1/30です。浅い階層では攻撃してくる代わりに願いを叶えてくれることがあり、これは水を飲む試行約150回につき1回の願いに相当しますが、地下20階を過ぎると願いの確率はゼロになります。このリスクを冒すなら：アイテムを袋の中に退避させ（呪い対策）、[エルベレス (Elbereth)](#elbereth) を地面に刻み（魔神が間合いを取ります）、魔神が現れた場合に備えてモンスター魅了や恐怖の効果を用意しておきましょう。
+
+**泉にアイテムを浸すこと (Dipping)** は、秩序（Lawful）のキャラクターが名剣エクスカリバーを入手するための手段です。経験レベル（XL）が5以上であれば、長剣を泉に浸すことでダンジョン屈指の名剣 [エクスカリバー (Excalibur)](#excalibur-artifact) へと変化する可能性があります。騎士なら1回の浸漬につき1/6という破格の高確率で成功し、他の役職では1/30の低確率となります。それ以外の場合、浸すことで装備が錆びたり、敵対的な水棲生物を呼び出したり、あるいは稀に浸したアイテムの呪いが解けたり（解呪）します。
+
+レベル5に達した秩序の騎士が長剣を持っているなら、エクスカリバーが出るまであらゆる泉に浸すべきです。1回浸すごとに約1/3の確率で泉が干上がってしまうため、1つの泉だけで成功することは稀です。その過程で長剣が錆びても心配いりません。剣がエクスカリバーへと変貌した瞬間、それまでの錆は完全に消え去り、刀身は永久に錆耐性（防錆）を得ます。注意点が2つあります：鉱山街の泉には手を出さないでください。町の泉を干上がらせると警備員隊に襲われます。また、秩序以外の属性のキャラクターは絶対に浸してはいけません。湖の乙女は剣を呪うだけです。他の秩序の役職でも試す価値はありますが、確率1/30ですので相当の忍耐力が必要です。
+
+#### 祭壇 (Altars) `_`
+
+祭壇は清められた石造りの聖壇で、マップ上では `_` と表示され、3つの神のいずれかの属性に属しています。手に入れた装備品を祭壇の上に置くことで、祝福されているか呪われているかを一目で判別でき、新鮮な死体を捧げることで信仰する神の寵愛を得ることができます。
+
+**祭壇にアイテムを置く（ドロップする）こと**（1個なら `d`、複数を一度に置くなら `D`）で、アイテムのBUC状態（祝福・非呪・呪縛）が瞬時に判明します。**琥珀色の閃光** → 祝福。**閃光なし** → 非呪（呪われていない）。**黒い閃光** → 呪縛（呪われている）。
+
+これには何のコストもかからず、回数制限もありません。そのため、身元不明の装備品を手に入れたら、実際に装備する前に最初に見つけた祭壇まで運んで確認しましょう。（山のようにまとめて一度にドロップすれば、アイテム1個につき1回ずつ閃光が表示されます。）
+
+**祭壇でモンスターの死体を捧げること（生贄）**（祭壇の上に立ち `#offer`）は、あなたの神の寵愛を得る手段です。古びて傷んだ死体は何の効果も生みません。新鮮で強力なモンスターの死体ほど高い価値を持ちます。十分な生贄を捧げると、神はあなたの主義・属性に合致したアーティファクト武器をご褒美として授けてくれることがあります。初期ペットを生贄にしてはいけません。属性値の大幅な低下を招き、モンスターを怒らせて引き寄せる不吉な内在能力がゲーム終了まで消えずに残ってしまいます。神学に関する全容は [神との関係 (Divine Relations)](#divine-relations) を参照してください。
+
+**祭壇の改宗（属性変換）** は極めてリスクが高いため、仕組みを正しく把握しておく必要があります。属性値が0以上（非負）であれば、異属性の死体を捧げることで祭壇の属性を反転（改宗）させるか、幸運が1低下します。どちらの結果でも敵対的な神の使いが召喚されることがあります。属性値がマイナスの場合、祭壇は逆に *あなた自身* の属性を強制的に変えてしまいます。試みる前に [祭壇と属性 (Altars and Alignment)](#altars-and-alignment) を熟読してください。
+
+#### 玉座 (Thrones) `\`
+
+玉座は華麗な王の座席で、記号 `\` で表され、専用の部屋に時折現れます。玉座に座る（`#sit`）ことは、迷宮における最も純粋なギャンブルです。起こりうる結果の一覧は、まるで願いのリストと暗殺命令書を混ぜ合わせたような内容です：
+
+- 願い（幸運が0以上であれば確実に叶います）
+- 1種類のモンスターの虐殺（ジェノサイド）
+- 手持ちのアイテム1〜4個（1/5の確率で全インベントリ）の無料識別
+- 能力値の上昇、または能力値の低下
+- 感電（電撃ショック）
+- 全回復
+- あなたを楽しませるために召喚された、敵対的モンスターの群れ
+- 混乱
+- 最大6個の所持アイテムへの呪い（幸運がプラスの場合は、代わりに長時間の盲目と幸運の低下）
+- そのフロアの地図化（マジックマッピング）
+- [不可視の視覚 (See invisible)](#senses-and-perception)
+- 所持ゴールドの全消失
+- テレポート（幸運が悪いと、代わりにフロア中の全モンスターが覚醒）
+
+約1/3の確率で何かが起こりますが、帳簿のどちら側の欄が適用されるかは事前にはわかりません。この表の最悪の行に直面しても生き延びられる実力がついてから座るようにしましょう。幸運が-1でも願いが出る可能性はありますが、非負（0以上）であれば願いの目が引かれた際に確実に好ましい結果が得られます。たとえ何も起きなくても、玉座は理屈の煙（a puff of logic）とともに消滅してしまうことがあるため、何度も試せることもあれば一度きりで消えることもあります。（ヴラドの塔にあるヴラドの玉座は特別で、最初に願いを叶えるまでは決して消滅しません。）玉座を蹴る（キックする）のはまた別の賭けです。玉座1つにつき1回限り、1/3の確率で300〜500ゴールドと最大6個の宝石が転がり出ます。失敗したキックのうち1/4は、落とし扉から下の階へ落とされます。
+<!-- Throne mechanics: src/sit.c throne_sit_effect(), rnd(6)>4 for 1/3
+     activation, rnd(13) for effect, !rn2(3) for vanishing.
+     Vlad's throne: special_throne_effect(), cases 1-4 grant wish and
+     destroy throne, cases 5-13 are negative but throne survives. -->
+
+#### 流し台 (Sinks) `{`
+
+ことわざに「流し台（キッチンのシンク）以外は何でも揃っている」と言いますが、恐怖の迷宮（Mazes of Menace）にはキッチンの流し台まで存在します。マップ上では白い `{` で表示され、便利な設備というよりは多彩な危険物と言えます。蹴る、飲む、物を投げ入れるといったアクションが可能で、いくつかの小技は実を結びますが、大半は無駄に終わり、中には命に関わる被害をもたらすものもあります。
+
+**流し台を蹴ること（キック）** は、通常は無害な *ゴツン！ (Klunk!)* という音を立てるだけです。5回のうち4回は何も起きません。成功すると指輪が転がり落ちてくるか、[黒プリン (black pudding)](#a-note-on-puddings)（危険ですが、その肉片は [3重の耐性を得られる軽食](#useful-corpse-effects) になります）が這い出してくるか、「皿洗い」を装った *情熱的な悪魔*（[誘惑遭遇](#seduction) と同じインキュバス／サキュバス）が呼び出されるか、あるいは単に足の指をぶつけて痛めるだけです。足の指をぶつける以外の結果は、1つの流し台につき最大1回しか発生しません。這い出してきたものを何であれ返り討ちにできる自信がある場合に限り、序盤に試す価値があります。
+
+**流し台に指輪を落とすこと** は、指輪の種類に応じた固有のメッセージを表示します。全28種類の指輪それぞれに専用のメッセージが割り当てられており、下記の表で解読できます。「探索の指輪」と「消化不良の指輪」は落としても即座に手元に戻ってきます。その他の指輪は、1/20の確率で手元に戻り、戻らなかったもののうち1/5は流し台の下の床に埋まり（つるはしで掘り出せます）、残りは完全に下水へ消え去ります。この方法は、余分なスペアの指輪がある場合や、餓死寸前で未知の指輪が「消化不良の指輪」であることに賭けたい場合に最も役立ちます。それ以外の用途であれば、価格識別、祭壇でのBUC判定、識別の巻物を使った方が指輪を失わずに確実に判明させられます。
+
+| メッセージ                                           | 該当する指輪 (Ring)   | 指輪は残るか？ |
+|------------------------------------------------------|-----------------------|----------------|
+| *"You thought your ring got lost in the sink, but there it is!"*<br>（指輪を流し台に落としたと思ったが、そこにあった！） | 探索の指輪 (searching) | **残る**       |
+| *"The ring is regurgitated!"*<br>（指輪が逆流して吐き出された！） | 消化不良の指輪 (slow digestion) | **残る**       |
+| *"The sink quivers upward for a moment."*<br>（流し台が一瞬上に向かって震えた。） | 浮遊の指輪 (levitation) | 失われる       |
+| *"You smell rotten slime molds."* (または設定した果物)<br>（腐ったスライムモールドの臭いがする。） | 耐毒の指輪 (poison resistance) | 失われる       |
+| *"Several flies buzz angrily around the sink."*<br>（何匹かのハエが流し台の周りを怒ったように飛び回っている。） | 反感の指輪 (aggravate monster) | 失われる       |
+| *"Static electricity surrounds the sink."*<br>（静電気が流し台を取り囲んでいる。） | 耐電の指輪 (shock resistance) | 失われる       |
+| *"You hear loud noises coming from the drain."*<br>（排水口から大きな物音が聞こえる。） | 争いの指輪 (conflict) | 失われる       |
+| *"The water flow seems fixed."*<br>（水の流れが一定になったようだ。） | 能力維持の指輪 (sustain ability) | 失われる       |
+| *"The water flow seems stronger/weaker now."*<br>（水の勢いが強くなった／弱くなったようだ。） | 強さの指輪 (gain strength) | 失われる       |
+| *"The water flow seems greater/lesser now."*<br>（水量が豊富になった／少なくなったようだ。） | 体力の指輪 (gain constitution) | 失われる       |
+| *"The water flow hits/misses the drain."*<br>（水流が排水口に命中している／外れている。） | 命中の指輪 (increase accuracy) | 失われる       |
+| *"The water's force seems greater/smaller now."*<br>（水の圧力が強くなった／小さくなったようだ。） | 攻撃の指輪 (increase damage) | 失われる       |
+| *"Suddenly, [items] vanish from the sink!"*<br>（突然、アイテムが流し台から消え去った！ ※流し台のマスにある他のアイテムもすべて消滅） | 飢餓の指輪 (hunger) | 失われる |
+| *"The sink vanishes."*<br>（流し台が消滅した。 ※流し台が別の部屋へ移動する） | 瞬間移動の指輪 (teleportation) | 失われる |
+| *"The sink transforms into a fountain/throne/altar/grave!"*<br>（流し台が泉／玉座／祭壇／墓に変形した！ ※墓の生成に失敗すると稀に「流し台が消滅した」となる） | へんげの指輪 (polymorph) | 失われる |
+| *"The faucets flash brightly for a moment."*<br>（蛇口が一瞬眩しく輝いた。） | 飾りの指輪 (adornment) | 失われる |
+| *"The sink looks as good as new."*<br>（流し台が新品同様に見える。） | 回復の指輪 (regeneration) | 失われる |
+| *"The sink glows silver (or black) for a moment."*<br>（流し台が一瞬銀色（または黒）に光った。） | 守りの指輪 (protection) | 失われる |
+| *"The sink glows white for a moment."*<br>（流し台が一瞬白く光った。） | 警告の指輪 (warning) | 失われる |
+| *"The sink seems to blend into the floor for a moment."*<br>（流し台が一瞬床と同化したように見えた。） | 忍びの指輪 (stealth) | 失われる |
+| *"You don't see anything happen to the sink."*<br>（流し台には何の変化も見られない。） | 透明の指輪 (invisibility) | 失われる |
+| *"You see some air in the sink."*<br>（流し台の中に空気が見える。） | 可視の指輪 (see invisible) | 失われる |
+| *"You see the ring slide right down the drain!"*<br>（指輪が排水口へまっすぐ滑り落ちていくのが見えた！） | 自由行動の指輪 (free action) | 失われる |
+| *"The hot water faucet flashes brightly for a moment."*<br>（お湯の蛇口が一瞬明るく輝いた。） | 耐炎の指輪 (fire resistance) | 失われる |
+| *"The cold water faucet flashes brightly for a moment."*<br>（水の蛇口が一瞬明るく輝いた。） | 耐冷の指輪 (cold resistance) | 失われる |
+| *"The sink looks like it is being beamed aboard somewhere."*<br>（流し台がどこかへ転送されているように見える。） | 瞬間移動制御の指輪 (teleport control) | 失われる |
+| *"The sink momentarily looks like a regularly erupting geyser."*<br>（流し台が一瞬定期的に噴出する間欠泉のように見えた。） | へんげ制御の指輪 (polymorph control) | 失われる |
+| *"The sink looks nothing like a fountain."*<br>（流し台は泉とは似ても似つかないように見える。） | 耐へんげの指輪 (protection from shape changers) | 失われる |
+
+**流し台から水を飲むこと (Quaffing)** は、20種類あるランダム効果のいずれかを抽選しますが、大半は何の効果もありません。良い効果はごく僅かです：約1/20の確率で足元に指輪が出現する（流し台1つにつき1回限り）、同じく1/20前後の確率でランダムな薬が喉に流し込まれる（薬自体の効果もギャンブルです）程度です。悪い効果ははるかに悲惨です：1/20の確率で制御不能な変身（へんげ）を強制され、別の1/20で水のエレメンタルが解き放たれ（序盤では致命的な戦闘になります）、その他にも熱湯を浴びせられたり、ガスを吸い込んだり、病気に冒されたりします。全体として見れば恩恵よりも危険の方がはるかに大きく、それをスリルとして楽しむのでない限り頼るべきではありません。万一飲む場合は、十分なHPと脱出手段を必ず確保しておきましょう。
+
+**流し台に薬を注ぎ入れること（浸す／ディップ）** は、独特の現象を引き起こし、実際に飲むリスクを冒すことなく薬の種類を絞り込むための賢い手段となります。以下の5つの薬は、流し台専用の固有メッセージを表示します：
+
+| 流し台のメッセージ                                           | 該当する薬         |
+| ------------------------------------------------------------ | ------------------ |
+| *"The sink transforms into a fountain/throne/altar/grave!"* (または *"The sink vanishes."*) | へんげの薬 (polymorph) |
+| *"Muddy waste pops up from the drain..."*（流し台1つにつき初回のみ指輪も出現） | 浮遊の薬 (levitation) |
+| *"It leaves an oily film on the basin."*                     | 油の薬 (oil)       |
+| *"The drain seems less clogged."*（盲目時: *"a sucking sound"*）| 酸の薬 (acid)      |
+| *"You sense a ring lost down the drain."*（流し台1つにつき1回限り） | 物体を探す薬 (object detection) |
+
+他の大半の薬を注ぐと、流し台は代わりに *"A wisp of vapor rises up..."*（一筋の蒸気が立ち上った…）と表示し、薬の瓶が割れて蒸気を吸い込んだ時と同じ効果をもたらします：この副作用によって薬を識別できます。睡眠や麻痺は1〜5ターンの間無防備になり、幻覚は一瞬の幻視をもたらします。水、果汁、レベルアップの薬、エナジーの薬、怪物を探す薬を注ぐのは無駄になります。これらはすべて単に *"nothing seems to happen."*（何も起きないようだ）と表示されるだけです。
+
+#### 宝物庫 (Vaults)
+
+宝物庫は、フロアの他の場所と一切接続されていない2×2マスの壁で遮断された小部屋です。どの宝物庫にもゴールドの山が眠っています。通常、岩を掘り進めるか、テレポートで偶然飛び込むことで発見されます。フロアに *"ad aerarium"* という刻み文字があれば、近くに宝物庫が存在する目印です（[刻み文字 (Engravings)](#engravings) を参照）。金貨を探す巻物（または物体を探す薬）を使えば壁越しに金貨の山を特定でき、地図化の魔法を使えばその隠し部屋の輪郭が直接明らかになります。
+
+扉はなく、一見したところ脱出路もありません。内部でおよそ30ターン過ごすと、番兵（宝物庫の衛兵）が現れて *「お前は誰だ？ (Who are you?)」* と尋ねてきます。現実的な回答は2通りあります。
+
+**真実（本名）を答える。** 番兵は所持しているゴールドをすべて落とすよう命じ、仮設の通路を開いてあなたを外へと案内し、背後の壁を再び密閉します。硬貨は1枚残らず失いますが、無事に脱出できます。
+
+***Croesus*（クロイソス）と答える**（*Kroisos* や *Creosote* でも可）。番兵は宝物庫の主の名前と信じ込み、礼儀正しく立ち去ります。嘘をついたペナルティとして、秩序のキャラクターは属性値を1失います。ゴールドは手元に残りますが、財宝とともに部屋の中に一人きりで閉じ込められたままになります。
+
+自力で壁を掘り進めるかテレポートで脱出する手段がない限り、餓死を避けるためには番兵に従ってゴールドを手放すのが賢明です。（ルディオスの要塞ですでにクロイソスを倒している場合、*Croesus* と答えると番兵が激怒して襲いかかってきます。その際は本名を名乗るルートを選んでください。）
+
+#### 石像 (Statues)
+
+石像はモンスターを模した石の彫刻であり、時折その場で石化させられた本物の生物であることもあります。ほとんどの石像は（つるはし、強打の杖、あるいは「衝撃」の呪文によって）破壊して内部のアイテムを取り出すことができますが、中には殴ったり上に乗ったりすると彫刻されたモンスターが生命を得て動き出す「石像の罠」もあります。
+考古学者にとって、歴史的価値のある重要な石像にはその名前に *historic（歴史的な）* という単語が付きます。これを破壊すると属性値を1ポイント失います。
+
+---
+
+### 支流とランドマーク (Branches and Landmarks)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Mine's End luckstone-decoy variant (minend-1.lua) has FOUR mimics (appear_as luckstone/loadstone/flint/touchstone, lines 59-71) plus one real cursed loadstone (74) near the real luckstone (77); corrected "a mimic".
+- Verified correct: Mines/Oracle/Sokoban/Quest depths, Fort Ludios contents & treasury, Castle wand-of-wishing chest, Medusa loot & layouts, Sokoban 75/25 prize weighting.
+-->
+
+ダンジョンの主幹はまっすぐ地下深奥へと続いていますが、大きな報酬の大半は、主幹から枝分かれした支流ダンジョンや、以下に順を追って解説する名高きランドマークで待ち構えています。
+
+#### 進行ルートの目安 (The Route)
+
+祭壇などの呪いを判別する確実な手段が見つかるまでは、運命の迷宮の上層を探索しましょう。ノームの鉱山の入り口は地下2〜4階に出現しますが、場所を記憶にとどめておき、準備が整うまでは先へ進むのが賢明です。挑戦の目安としては、経験レベル（XL）5程度、AC 5以下、HP満タン、投擲武器の束、そして脱出用アイテムが揃っている状態です。賢者（オラクル）のいるフロアの近くでは、上り階段の分岐から倉庫番へと向かい、軽量化の鞄または反射の魔除けを手に入れましょう。その後で鉱山街を訪れ、敵の集団を捌ける強さがついたら鉱山の最深部を攻略します。そしてレベル14になったらメインダンジョンへ戻ってクエストを達成し、メデューサの島を突破して城を目指しましょう。
+
+**[倉庫番 (Sokoban)](#sokoban) と鉱山のどちらを先に行くべきか？** 通常は鉱山の入り口に先に出遭いますが（地下2〜4階）、初心者に対する *戦略的な推奨* は「倉庫番を先に攻略する」ことです。倉庫番は管理されたパズル主体のフロア群であり、出現するモンスターも大半は手頃です。そして最上階で手に入るご褒美（反射の魔除け、または軽量化の鞄）は、その後の [ノームの鉱山 (the Gnomish Mines)](#the-gnomish-mines) 攻略に直結して役立ちます。倉庫番を先にクリアしてご褒美を手に入れ、経験レベルを少し上げてから鉱山に挑む方が、遥かに安全で対等な戦いができます。
+
+#### ノームの鉱山 (The Gnomish Mines)
+<!-- audit
+2026-05-18:
+- Mines branch DL 2-4 (dungeon.lua:15-19; base=2 range=3)
+- 7 Minetown variants (dungeon.lua:179-184); 1/7 picks Orcish Town (minetn-1.lua)
+- gnomish PC lovemask MH_DWARF|MH_GNOME → gnomes and dwarves peaceful (role.c:654)
+- Orcish Town: unaligned altar, no shops, no priest, iron-bar terrain (minetn-1.lua:18, 52, 79-88)
+- Orcish Town scatters 7+ candles since Izchak's shop is absent (minetn-1.lua:98-105)
+- candle shop present in minetn-2..7 (Izchak); absent only in minetn-1 (minetn-{2..7}.lua)
+- all 3 Mine's End layouts place a not-cursed luckstone (minend-1.lua:77, minend-2.lua:116, minend-3.lua:67)
+- minend-1 hides the luckstone among FOUR mimics (appear_as luckstone/loadstone/flint/touchstone, lines 59-71) plus a real cursed loadstone (74); search (`s`) exposes the mimics, price-ID sorts the two real stones — full mechanics in the Gray Stones section audit
+- Minetown watchmen are peaceful=1 in non-orcish variants (minetn-2.lua:149)
+- strategy aligned with NetHackWiki Gnomish Mines, Minetown, Mines' End, Standard strategy: Minetown described as the prime price-ID/BUC-test/priest-donation stop; guaranteed luckstone at Mine's End is canonical; Standard strategy recommends Sokoban-before-Mines as the default branch ordering for the reflection/BoH prize before tackling the Mines pack fights (https://nethackwiki.com/wiki/Gnomish_Mines, https://nethackwiki.com/wiki/Minetown, https://nethackwiki.com/wiki/Mines%27_End, https://nethackwiki.com/wiki/Standard_strategy)
+-->
+
+鉱山への入り口は、ダンジョンの地下2階から4階のどこかに下り階段として現れます。以下のマップ図のように、壁が荒削りの岩肌になり、通路がいびつに入り組んでいるため、鉱山に入ったことはすぐに分かります。
+
+```
+               ··└       ·······?└┘·└─┐
+                ··└      ·G···········│
+                ···      ┐·····*······└
+                 ··└┐    │··`········
+            ┌──┐ ┐··│┌─┐┌┘········
+          ┌─┘··└┐│··└┘·└┘······┌
+         ┌┘·····│┌─·`·······<·┌
+         │······└┘·····)······└┐
+     └───┘····┌┐····)··········└─┘  └┐
+┐·············││·`········@··········│
+└─┐······─┐·──┴┼─┐···················└
+  └──┐·   │····└─┘···┌┐h··············└
+     └┐   └──┐·······│└─┐···┌┐·········│
+             └──┐····└  └───┘ ─┐·│····┌┘
+```
+
+鉱山には主にノームとドワーフが生息しており、深く潜るにつれて手強い上位種（ノームの領主、ドワーフの領主、そしてノームの王やドワーフの王）が現れます。プレイヤーがノームまたはドワーフの種族を選んでいる場合、彼らの大半は友好的であるため、鉱山は比較的快適な寄り道となります。それ以外の種族の場合は、敵対するノームやドワーフの絶え間ない猛攻を切り抜けていく必要があります。
+
+また、鉱山には悪名高いサプライズゲストが存在します：鉱山街を除く任意のランダムな鉱山階層（鉱山最深部を含む）で、マインドフレイヤが生成される可能性があります。未探索の鉱山フロアで *"You sense a faint wave of psychic energy"*（精神エネルギーのかすかな波を感じる）という警告メッセージが出たら要注意です。マインドフレイヤは触手攻撃が命中するたびに知力を吸い取ってきます。序盤では兜による防護や安全に戦うための遠距離火力が不足していることが多いため、一度退却して準備を整えるか、この支流を後回しにするのが賢明です。
+
+**鉱山街 (Minetown)** は、鉱山を数階層潜ったところに現れます。通常は店と寺院が並ぶ小さな居住地です。鉱山の敵集団を安定して撃退できるようになってから訪れるか、最初の挑戦で苦戦したなら倉庫番をクリアした後に再訪しましょう。店では不要なアイテムをゴールドに変えたり、役立つ装備を購入したりできます。寺院には祭壇（属性を確認してください）と常駐の司祭がいます。祭壇が自分の属性と一致していれば、アイテムをドロップして鑑定できる安全な拠点となります。また、鉱山街の司祭はACを永続的に強化してくれます。条件を満たした最初の寄付では、単なる1ポイントではなく2〜4ポイントの内在的防御値（プロテクション）が授けられます。金額と上限の基準は読み違えやすいため、[司祭への寄付 (Donating to Priests)](#donating-to-priests) の完全な表を参照してください。
+
+ろうそくはゲーム進行中に十分な数が手に入ることが多いですが、後半で祈りの燭台（Candelabrum of Invocation）に立てるために7本確保する必要があります。鉱山街にある **イズチャックの照明店 (Izchak's lighting store)** が最も確実な調達先です。ここで7本まとめて買いましょう。店が生成されなかった場合（オークの町のマップ構成）、そのフロアのあちこちに7本以上のろうそくが散乱しています。蜜蝋のろうそくの方が獣脂のろうそくよりも長持ちしますが、どちらでも機能し、混ぜて使っても問題ありません。
+
+ただし、7回に1回の確率で、鉱山街は **オークの町 (Orcish Town)** として生成されます。店も司祭も存在せず、入り口が鉄格子で塞がれた、オークたちに占拠された廃墟です。無属性の祭壇は残っていますが、買い物は一切できません。
+
+また、鉱山街の警備員（町の警備隊）には十分注意してください。盗みを働く、友好的な生物を攻撃する、扉を破壊する、あるいは町の中で地面を掘削しない限り、警備員たちは友好的です。しかし1人でも怒らせると、警備隊全員が一斉に敵に回ります。
+
+**鉱山最深部 (Mine's End)** はノームの鉱山の最深層です。3種類ある鉱山最深部のレイアウトのいずれにも、確定で（呪われていない）**幸せの石 (luckstone)** が1つ配置されているため、どのバリエーションに到達しても確実に手に入ります。幸せの石は幸運値を+3し、良い幸運が時間経過で自然減衰するのを防ぎます。聖水で祝福してゲームクリアまで常に持ち歩きましょう（[幸運の仕組み (How Luck Works)](#how-luck-works) を参照）。
+
+幸せの石を見つけ出すには慎重な探索が必要です。ほとんどのレイアウトでは隠し部屋の中に配置されているため、迷路が行き止まりになり宝が見当たらない場合は、掘削耐性のある壁を無理に掘るのではなく、壁を捜索（`s`、`10s`）して隠し扉を探してください。隠し部屋が複数存在することもあるため、最初の1つで見つからなくても諦めてはいけません。（バリエーションの1つでは、灰色の石に擬態した4体の [**ミミック**](#a-note-on-mimics) と、見た目が全く同じで手持ちの荷物に呪い張り付く本物の **呪われた重し (loadstone)** の中に幸せの石が紛れ込まされています。怪しい石の隣で捜索（`s`）を行えば、ミミックはその場で正体を現します。本物の石は何の反応も示しません。これで幸せの石と重しの2択に絞られるため、あとは店に持ち込んで価格で識別します（幸せの石は60zm、重しは1zm）。ここでは石を蹴って判定する方法に頼ってはいけません。壁の隙間に挟まっていると、本物の幸せの石であっても重しのように鈍い音を立てて足の指を痛めることがあります。）
+
+#### 倉庫番 (Sokoban)
+
+最上階で手に入るご褒美は、通常は **軽量化の鞄 (bag of holding)**、さもなくば **反射の魔除け (amulet of reflection)** です。どちらも鉱山の戦いが本格的に厳しくなる前に、装備に関する重大な課題を解決してくれます。
+
+倉庫番への入り口となる階段は、ダンジョンの地下6階から10階のどこか（[賢者 (Oracle)](#the-oracle) のフロアの1階層下）に現れ、上り階段となっています。倉庫番は全4階層からなるパズルフロアで構成されており、巨石（ボルダー）を押して落とし穴を埋めたり所定の位置に収めたりして道を開いていきます。ここではテレポートは機能せず、入り口のフロアから下に向かって地面を掘り進むこともできません（床が補強されているためです）。
+
+各階層のパズルは固定されています（各フロアにつき2種類のバリエーションがあり、ランダムにどちらかが選ばれます）。
+<!-- audit
+2026-05-19:
+- in Sokoban, pit traps suck you in regardless of flying/levitation (trap.c:1850 gates on !Sokoban; trap.c:3014-3023 "Air currents pull you down")
+- Sokoban walls are W_NONDIGGABLE on every soko level (non_diggable in each soko*.lua); dig_check fails (dig.c:228-230)
+2026-05-18:
+- entrance DL 6-10: Oracle base 5 range 5 + Sokoban one level up (dungeon.lua:21-24, 60-66)
+- 4 levels × 2 fixed variants (dat/soko*.lua)
+- noteleport on every Sokoban level (soko1-1.lua:7 and matching line in each soko*.lua)
+- hardfloor only on the entrance; blocks dig-down off entrance (soko4-1.lua:38, soko4-2.lua:7)
+- sokoban_guilt = change_luck(-1) + u.uconduct.sokocheat++ (trap.c:7039-7054)
+- guilt triggers: squeeze past boulder (hack.c:299, 307, 398, 403)
+- guilt triggers: dismount onto boulder (steed.c:767)
+- guilt triggers: polymorph boulder (zap.c:1710-1711), fracture by striking (zap.c:5555-5556)
+- guilt triggers: scroll of earth (read.c:1951)
+- bare-hand force-fight on boulder is harmless (hack.c:2287, 2318-2321)
+- pick-axe/mattock force-fight digs the boulder (hack.c:2269-2275)
+- levitation also blocks pushing boulders: "not enough leverage" (hack.c:415-425)
+- prize: 75/25 weighted bag of holding vs amulet of reflection (soko1-1.lua:103-107, soko1-2.lua:105-109)
+- cursed scroll of scare monster placed under the prize as bait (soko1-1.lua:111, soko1-2.lua:113)
+- conduct only reported once the branch is entered (insight.c:2215-2228)
+- strategy aligned with NetHackWiki Sokoban, Amulet of reflection: prize/cheat-luck-penalty mechanics and the "solve honestly for the prize" advice match (https://nethackwiki.com/wiki/Sokoban, https://nethackwiki.com/wiki/Amulet_of_reflection)
+- pushing a boulder exercises Strength via exercise(A_STR, TRUE) (hack.c boulder push handler); Stressed encumbrance exercises Str too but applies HP cost via near_capacity checks (attrib.c, eat.c:3197+)
+-->
+
+各階層には厳密に1つだけの正しい解答手順が存在します。もし巨石を角に押し込んで進行不能にしてしまった場合、やり直す（リセットする）手段はありません。その場合、役立つかどうかは別として、不正（チート）を行う選択肢がいくつか残されています：巨石の横を **すり抜ける**（荷物を床に置いて体を細くする）、つるはし（pick-axe / mattock）を装備して **巨石を掘り崩す**、あるいは「衝撃 (force bolt)」の呪文や強打の杖で **巨石を粉砕する**（大地の巻物や変身の杖なども同様に判定されます）。これらの不正を行うと、1回につき幸運値が1低下し、倉庫番のオピニオン（不心得行為の記録）が残ります。なお、倉庫番の全フロアにおいて壁は掘削不能（non-diggable）であり、落とし穴を迂回することはできません。飛行や浮遊の状態であっても、下降気流に引きずり込まれるため開いた穴の上を飛び越えることは不可能です。穴に落ちた後は自力で這い上がることができます。
+
+最上階のご褒美は **軽量化の鞄** または **反射の魔除け** のいずれかで、どちらも極めて貴重なアイテムです。各バリエーションにおける75/25の出現比率は巻末の [倉庫番の解法 (Sokoban Solutions)](#sokoban-solutions) に記載されています。なお、ご褒美の真下には罠のエサとして呪われた「怪物を怯えさせる巻物」が敷かれています。軽量化の鞄は、中に入れたアイテムの重量を軽減して持ち運べる荷物の上限を大幅に増やしてくれます。反射の魔除けは、浴びせられた光線攻撃を相手にそのまま反射して跳ね返します。
+
+不正を働いてペナルティを受けた後であっても、ご褒美自体は問題なく受け取ることができます。失われた幸運は階層をクリアしても自動的には回復しません。未祝福の幸せの石を所持していない限り、600ターンごとに1ポイントずつゼロに向かって自然回復していきます。
+
+**巨石の向こうのモンスター。** 巨石の背後に閉じ込められたモンスターはあなたに接近できませんが、こちらから攻撃することは可能です：**投げた短剣やダーツは巨石の頭上をまっすぐ飛び越えて命中します**。また、大半の攻撃呪文（マジックミサイル、冷気の円錐など）も巨石の上を通過します。ただし、巨石を邪魔だからといって **「衝撃」の呪文や強打の杖で排除してはいけません**。巨石が粉砕されて幸運を失うだけでなく、パズルの解答に必要な石を失ってしまいます。
+
+正攻法で巨石を1マス押すごとに、筋力が鍛えられます（筋力エクササイズ）。重荷（Stressed）の状態で無理に歩き回るリスクを冒さずとも、このパズルを解くだけで十分な筋力トレーニングができます。
+
+全8種類のフロアバリエーションの完全な解法手順については、巻末付録の [倉庫番の解法 (Sokoban Solutions)](#sokoban-solutions) を参照してください。
+
+<!-- audit
+2026-05-18:
+- Oracle DL 5-9 (dungeon.lua:60-66, dungeon.c:405-411)
+- 4 fountains in the delphi sub-room (oracle.lua:19-22)
+- 8 centaur statues flank the Oracle (oracle.lua:9-16)
+- minor consultation costs 50 zm (rumors.c:699)
+- major consultation costs 500 + 50 × u.ulevel (rumors.c:699)
+- minor consults ALWAYS pull from the true-rumor pool (rumors.c:747, 151-156)
+- Sokoban branch goes up from the Oracle level (dungeon.lua:20-25)
+- Oracle is M2_PEACEFUL with AT_NONE; she never attacks (monsters.h:2738-2745)
+- strategy aligned with NetHackWiki Oracle (level), List of major consultations: paying for a major consultation is a recognized wisdom-and-intel investment (https://nethackwiki.com/wiki/Oracle_(level), https://nethackwiki.com/wiki/List_of_major_consultations)
+-->
+
+#### 賢者 (The Oracle)
+
+運命の迷宮の中層（地下5階から9階のあたり）のどこかに、デルフィの賢者（神託所）が佇む特別な部屋が存在します。周囲はケンタウロスの石像（中は空っぽです）と4つの泉に囲まれています。古代以来のあらゆる神託の例に漏れず、彼女は謎めいた言葉を語り、先払いで代金を要求してきます。
+
+彼女が提供するサービスは2種類あります：
+
+- **些細な相談（Minor consultation）** は安価（50ゾークミッド）で、フォーチュンクッキーに似たメッセージを授けてくれます。これらは「真実の噂」のリストから選ばれるため、多くは雰囲気作りの言葉ですが、時折非常に有用な助言を含んでいます。
+- **重要な相談（Major consultation）** は高価（500 + 50 × 経験レベル）ですが、支払ったゴールドに見合うだけの価値ある情報をもたらしてくれます：モンスター、アイテム、特殊なゲームルールに関する貴重なヒントです。
+
+賢者は友好的であり、決して自ら攻撃してくることはありません。部屋の中は一息つくのに安全な休息場所となりますが、4つの泉には通常の泉と同じリスクが伴う点には注意してください。
+
+それぞれの相談は、初回利用時に限り経験値（XP）を与えてくれます。もし生涯で最初の相談として「重要な相談」を選んだ場合、50〜100 XP（プレイヤーのレベルに応じて増加）が手に入ります。最初に「些細な相談」を受けるとわずか5 XPしか得られず、その後に受ける重要な相談の獲得XPも減少してしまいます。2回目以降の相談では経験値は得られません。
+
+#### クエスト (The Quest)
+<!-- audit
+2026-05-18:
+- quest portal Dlvl 11-16: Oracle DL 5-9 + base=6 range=2 chained off Oracle (dungeon.lua:62-64, 27-31)
+- XL 14 required to descend (quest.h:45 MIN_QUEST_LEVEL, quest.c:149)
+- friendly word with leader on first quest level (quest.c:97 Is_qstart → on_start)
+- alignment-record refusal at MIN_QUEST_ALIGN below threshold (quest.c:164)
+- 3 artifacts grant carried MR via CARY(AD_MAGM): Orb of Detection, Magic Mirror, PYEC (artilist.h:221, 257, 293)
+- 3 artifacts grant wielded/worn MR via DFNS(AD_MAGM): Sceptre of Might, Eyes of Overworld, Eye of Aethiopica (artilist.h:234, 262, 305)
+- nemesis gets Bell of Opening as starting inventory; drops on kill (makemon.c:1378-1379)
+- quest artifact is placed under nemesis at level generation, NOT carried (Val-goal.lua:49,76; Wiz-goal.lua:73,96; etc.)
+- return portal lives on Is_qstart (first quest level) only (quest.c:97, 191-204)
+- "nemesis carries an amulet of life saving" is wiki-belief, not source-guaranteed; M2_COLLECT means they may pick one up (https://nethackwiki.com/wiki/Nemesis)
+- strategy aligned with NetHackWiki Quest, Bell of Opening, Quest artifact: XL 14 + 20 alignment record gate, nemesis guards both artifact and Bell, return-portal only on the first quest level (https://nethackwiki.com/wiki/Quest, https://nethackwiki.com/wiki/Bell_of_Opening, https://nethackwiki.com/wiki/Quest_artifact)
+2026-08-13:
+- wraith corpse on graveyard levels: NOT "never" — LEVEL_SPECIFIC_NOCORPSE (mon.c:44-47) suppresses an undead's corpse only when (graveyard && is_undead && rn2(3)), i.e. 2/3 of the time, so ~1/3 still drop. off a graveyard a wraith always corpses (PM_WRAITH is in the unconditional-corpse case, mon.c:835). softened prose from "don't drop on graveyard levels" to "only about a third as often." lead-the-wraith-out advice still good (1/3 -> guaranteed).
+- verified: MIN_QUEST_LEVEL 14 (quest.h:45); eating a wraith corpse => pluslvl(FALSE) guaranteed level gain (eat.c:1141).
+-->
+
+遅かれ早かれ、あなた自身の同胞から呼び出しがかかります。「クエスト」は、あなたの役職のためだけに用意された特別なダンジョン支流です。宿敵（ネメシス）があなたの役職に伝わる伝説のアーティファクトを強奪しており、リーダーはあなたを呼び出して力を証明させ、宿敵を打ち倒して至宝を取り戻す使命を与えます。ダンジョンの地下11階から16階のあたりで、魔法のポータルがその入り口へと導いてくれます。
+
+適切なフロアに到達したかどうかはすぐに分かります。そのフロアに初めて足を踏み入れた瞬間、クエストリーダーからの微弱なテレパシーの呼びかけが頭の中に響き渡ります：
+
+> *微弱なテレパシーによるメッセージを受信した .... 至急助けが必要だ .... ...ックな転送機を探せ。最後のメッセージはよく聞き取れなかった。*
+
+これで探すべきものが「魔法のポータル」であることが分かります。発見するとマップ上に鮮やかな赤紫色の `^` として表示されます。他の罠と同様に、そのマスを踏む（同時に作動します）か、周囲を捜索するまで姿を隠しています。
+
+クエストに本格的に乗り出すには、**経験レベル14** に到達し、かつ最上階（最初の階層）にいるクエストリーダーと友好的に会話を交わして階下への許可を得る必要があります。準備が整い、資格があると認められれば、リーダーは宿敵からクエストアーティファクトを取り戻す旅へと送り出してくれます。
+
+中盤の経験値稼ぎは時間がかかるため、レベル14に到達する道のりとしては、いくつかの [レイスの死体](#a-note-on-wraiths) を食べる（1体につき経験レベルが1上昇します）か、祝福された「レベルアップの薬」を飲むのが定石です。（「死の谷」のような墓場フロアでは、アンデッドが死体を残す確率は通常の約1/3に低下するため、レベルアップを狙うならレイスを墓場の外へと誘導してから倒すのが賢明です。）
+
+各役職には、固有のマップ、固有の宿敵、そして固有のアーティファクト報酬が用意されています。ワルキューレは [運命のオーブ (Orb of Fate)](#orb-of-fate) を求めてスルト卿（Lord Surtur）を狩ります。侍の道は [村正の剣 (Tsurugi of Muramasa)](#tsurugi-of-muramasa) を巡る足利尊氏との決闘で締めくくられます。魔法使いは [エチオピカの目 (Eye of the Aethiopica)](#eye-of-the-aethiopica) を取り戻すため闇の王の要塞へと潜入します。役職ごとの完全な一覧は [アーティファクト (Artifacts)](#artifacts) の章を参照してください。
+
+大半のクエストアーティファクトは、ゲームクリアまで常に持ち歩くに値する至宝です。魔法防御、テレパシー、警告、反射、忍び足、幸運などの強力な能力を複合的にもたらしてくれます。その保護効果が「所持しているだけ」で発動するのか、それとも「手に持つ／身につける」必要があるのかを確認しておきましょう。
+
+**宿敵の足元には、もう1つの極めて重要な至宝が待っています。** **開放の鐘 (Bell of Opening)** は宿敵の荷物の中にあり、倒した瞬間に床にドロップします。これは「開扉の3つのアイテム（Invocation items）」の1つであり、これなしにゲームをクリアすることは不可能です：[ゲヘナ (Gehennom)](#gehennom) の最深部、[モロクの聖域 (Moloch's Sanctum)](#molochs-sanctum) の直上にある「振動するマス」の上で、開放の鐘を鳴らし、祈りの燭台を灯し、死者の書を読み上げることで、イェンダーの魔除けが眠る聖域への扉が開かれます（儀式の完全な手順は [奪還作戦 (The Heist)](#the-heist) を参照）。一方、あなたのクエストアーティファクトは、フロア生成時に宿敵の足元に直接配置されています。立ち去る前に両方のアイテムを確実に回収してください。どちらもクエストダンジョン以外では手に入りません。
+
+宿敵は道中で「命の魔除け」を拾って身につけていることがあるため、致命の一撃を与えても耐えられ、2回倒さなければならなくなっても動揺してはいけません。なお、メインダンジョンへ戻る脱出ポータルは **クエストの最初の階層にしか存在しません**。準備不足のまま深く潜り、途中で引き返す羽目になった場合、長い道のりを自力で登り直すことになります。
+
+クエスト全体は、リーダーの認可にかかっています。経験レベルが14未満であるか、あるいは属性値（信仰実績）が不足している場合、自動的に追い出されます（問題を解決した後に再訪すれば受け入れてもらえます）。もしキャラクターの属性自体が変わってしまっていた場合、リーダーから永久に追放されてしまいます。クエストに挑む前に「逆属性の兜」を面白半分で試してはいけません。
+
+#### ローグ階層 (The Rogue Level)
+<!-- audit
+2026-05-18:
+- Rogue Level appears DL 15-18 per base=15 range=4 (dungeon.lua:54-58)
+- welcome message "older, more primitive world" (do.c:1913)
+- uppercase-only monsters via Is_rogue_level (makemon.c:1672)
+- symbol swaps: armor `]`, amulet `,`, food `:`, gold same as gems (drawing.c:73-79)
+- doors forced D_NODOOR — no closed doors (mklev.c:647-648)
+- no fountains/sinks/altars/shops/graves via skip_nonrogue (mklev.c:988-989)
+- rogueprobs item pool: weapon/armor/food/potion/scroll/wand/ring only — no spellbooks/tools/amulets/gems/coins (mkobj.c:58-64)
+- tile mode disabled in Qt, X11, win32, curses ports (win/X11/winmap.c:1009, win/Qt/qt_map.cpp:145, 228)
+- engraving has no rogue-level guard — Elbereth works as usual (engrave.c)
+-->
+
+ダンジョン中層のどこかで、1フロア限りの歴史保存地区に迷い込むことになります。
+*「あなたはより古く、より原始的な世界に入り込んだようだ。(You enter what seems to be an older, more primitive world.)」*
+このエリアは、ダンジョン探索ゲームといえば誰もが **『Rogue』** のことしか知らなかった古き良き時代の姿のまま残されており、いくつかの特徴がその時代を物語っています：
+
+- 出現する生物（モンスター）の記号はすべて英大文字です：小文字の種族はまだ発明されていませんでした。
+- 防具は `]`、食料は `:`、魔除けは `,` で表示され、ゴールドは宝石と同じ記号を共有します（当時のRogueでは同じ扱いでした）。
+- 扉は閉まりません。蝶番の概念は後から導入されたものです。
+- タイル表示モードは自動的に無効化され、飾り気のないプレーンなASCII文字表示へと切り替わります。
+- 泉、流し台、祭壇、店主、司祭は一切存在せず、フロアに自然生成されるアイテムからも魔法書、道具、魔除けが排除されています。これらはすべてRogue以降に考案された要素だからです。
+
+ただし、プレイヤー側の現代的な技術は依然として機能します。ハック（Hack）時代に追加された [エルベレス (Elbereth)](#elbereth) の文字をここに刻むことも可能です。ささやかな時代錯誤（アナクロニズム）と言えるでしょう。
+
+#### ルディオスの要塞 (Fort Ludios)
+<!-- audit
+2026-05-19:
+- portal placed Dlvl 11 up to just above Medusa, 1/3 chance per qualifying level (mklev.c:2647-2651)
+- portal always inside a sealed vault (mklev.c:1322-1331 calls mk_knox_portal from add_room VAULT)
+2026-05-18:
+- level is non-diggable: des.non_diggable over full level (knox.lua:35)
+- noteleport flag blocks intra-level teleport AND scroll of plain teleport — only LEVEL teleport escapes (teleport.c:854, 1502, knox.lua:9)
+- garrison: 16 soldiers + 1 lieutenant (knox.lua:126-142)
+- 4 D-class dragons in storerooms (knox.lua:146-149); 4 giant eels in moat (knox.lua:151-154); 1 stone giant (knox.lua:144)
+- 4 corner-tower gem caches: diamond, emerald, ruby, amethyst (knox.lua:156-167)
+- treasury is 15×4=60 tiles; each holds 600+rnd(0,300) gold and 1/3 of them are trapped (knox.lua:57-69)
+- treasury gold totals 36k-54k (60 × 600 = min, 60 × 900 = max)
+- Croesus is L20 / 4d10 weapon / MS_GUARD (monsters.h:2861-2863)
+- Croesus is NOT M3_COVETOUS — his only mflags3 is M3_INFRAVISIBLE (monsters.h:2865-2868)
+- only Wizard of Yendor has M3_COVETOUS; Vlad has M3_WANTSCAND; Riders use their own logic
+- alarm sounds on arrival and every revisit until Croesus dies (do.c:1893-1904)
+- alarm wakes existing soldiers; it doesn't spawn new ones
+- soldiers carry K_RATION / C_RATION (makemon.c:694-700)
+- strategy aligned with NetHackWiki Fort Ludios, Croesus: bag-of-holding-for-gold and shoot-Croesus-across-the-moat are canonical (https://nethackwiki.com/wiki/Fort_Ludios, https://nethackwiki.com/wiki/Croesus)
+-->
+
+ルディオスの要塞はクロイソス（Croesus）の本拠地です。攻略は任意（オプショナル）であり、見落としやすい隠しダンジョンです：ポータルは地下11階からメデューサの島の直前までの階層に生成され、常に閉鎖された宝物庫の内部に配置されるため、壁を掘るか扉を突破して見つけ出す必要があります。突入と同時に警報が鳴り響き、駐屯する16人の兵士と1人の中尉が目を覚まします。4体のドラゴンが貯蔵庫を守り、1体の岩巨人と4体の巨大ウナギが堀を警備しています。クロイソスは玉座で待ち構えており、その近接攻撃は非常に痛烈であるため、堀越しに矢弾を撃ち込むか杖の光線を浴びせて倒すのが賢明です。
+
+このフロアは全域が掘削不能（non-diggable）であり、同一フロア内での通常のテレポートも封じられています。脱出するには入ってきたポータルを使うか、階層テレポート（レベルテレポート）を用います。宝物庫には60マスにわたって36,000〜54,000 zmもの莫大なゴールドが敷き詰められていますが、その約1/3のマスには地雷やトゲの落とし穴が潜んでいます。四隅の角塔にはダイヤモンド、エメラルド、ルビー、アメジストが保管されており、兵士たちは携帯食糧（レーション）と十分な武器を所持しています。クリアに必須のアイテムは何一つありません。ここを訪れる最大の理由は純粋にゴールドであり、それは司祭への寄付を通じてAC（防御力）の大幅な恒久強化へと化けます。
+
+#### メデューサの島 (Medusa's Island)
+<!-- audit
+2026-05-19:
+- Perseus loot is per-layout — not uniform: shield 75% in medusa-1/3/4 but 25% in medusa-2 (medusa-2.lua:58-63)
+- boots are 25% in medusa-1/3/4 but 75% in medusa-2 — swapped with the shield
+2026-05-18:
+- Medusa DL 20-29: base=-5 range=4 from DoD bottom 25-29 (dungeon.lua:75-81)
+- four layouts (medusa-1.lua through medusa-4.lua); all use des.stair("down") — no ladder
+- scimitar blessed +2 at 50% and sack at 50% are constant across all four layouts (medusa-1.lua:70, 73)
+- shield is cursed in every layout (medusa-1.lua:64 and matching lines in others)
+- gaze reflection stones Medusa via ureflects → killed(mtmp) (mhitu.c:1721-1745)
+- stone resistance also blocks the gaze (mhitu.c:1747-1748) — rarely attainable pre-Medusa
+- eel grab drown uses eel's tile, not yours: is_pool(magr->mx, magr->my) (uhitm.c:3389-3401)
+- levitation/water-walking on adjacent dry land does NOT save you once grabbed
+- medusa-2 has six electric eels (not giant eels), AD_ELEC bite (medusa-2.lua:99-104, monsters.h:3239-3247)
+- kraken only on medusa-4 (medusa-4.lua:122)
+- strategy aligned with NetHackWiki Medusa, Reflection, Perseus: reflection/blindfold against the gaze, levitation/water-walking to cross, Perseus statue as a backup reflection source (https://nethackwiki.com/wiki/Medusa, https://nethackwiki.com/wiki/Reflection, https://nethackwiki.com/wiki/Perseus)
+-->
+
+メデューサのフロアは運命の迷宮の最深部に近い地下25階前後に位置しています。広大な水域とあちこちに散乱する石像（かつて冒険者だった者たち）を見れば、そこがメデューサの島であることは一目瞭然です。
+
+> *2000年代初頭、Arien Malec氏がPat Rankin氏、Geoduck氏、Topi Linkala氏らの助言を得て、RGRNの投稿者たちから渡河戦術を収集・整理しました。以下はそのガイドの要約版です。*
+
+このフロアには1つの島に3つの試練が集約されています：島を取り囲む **水域の横断**、その水中に潜む **巨大ウナギ**（1つのマップ構成では電気ウナギ）、そして視線が合った者を石に変える **メデューサ自身** です。それぞれについて以下で個別に解説します。もし倉庫番から「反射の魔除け」を持ち帰っているなら、3つ目の問題はすでに解決しています。
+
+島の中央には、[城 (The Castle)](#the-castle) へと続く下り階段が存在します。この階層には4種類のマップレイアウトが存在するため、1つの地図を暗記することに頼ってはいけません。
+
+**ペルセウスの石像。** 島にある石像の1つには **ペルセウス (Perseus)** という名が刻まれています。鏡の盾を使ってメデューサを討ち取った神話の英雄です。「衝撃」の呪文、強打の杖、またはつるはしでこの石像を破壊すると、（呪われた）**反射の盾 (shield of reflection)**（4つのレイアウトのうち3つで75%、残りの1つで25%の確率）、祝福された+2の **シミター**（50%）、**浮遊の靴 (levitation boots)**（3つのレイアウトで25%、盾の確率が低いレイアウトでは75%）、そしてこれらを収納する **袋**（50%）が手に入ります。反射の盾は呪われているため、装備する前に解呪の手段を用意しておきましょう。なお、このフロアにある他の石像の中身はすべて空っぽです。
+
+**メデューサの視線を生き延びる方法。** 彼女の階層に降りる前に、以下のいずれかの対策を必ず用意してください：
+
+- **反射 (Reflection)**（魔除け、盾、または銀色ドラゴンの鱗鎧）。メデューサの視線が反射して跳ね返り、彼女自身を石化させます。これが最も安全かつ確実な解決策であり、大半のプレイヤーが採用する方法です。
+- **目隠し、またはタオル。** 彼女の視界に入る前に装着します。盲目状態で移動・索敵するために [テレパシー](#senses-and-perception) や怪物を探す手段が必要になります。視線対策としては完璧に機能しますが、フロアの探索は格段に難しくなります。
+- **鏡。** 目を覚ましているメデューサに対し、遮るもののない直線上の任意の位置から鏡を「適用（`a`）」します。どのマップ構成でも彼女は初期状態で眠っているため、まずは安全な距離から起こす必要があります。
+- **一撃必殺。** 死の杖や「死の指」の呪文なら、相手に行動のターンを与えることなく即死させられます。なお、メデューサ自身は石化耐性を持つため、コカトリスの死体は効きません。
+  どのような方法で倒したとしても、**彼女の死体を絶対に食べてはいけません**。彼女はゴルゴンであり、その死肉を口にした者は即座に全身が石化してゲームオーバーになります。
+
+**水域の横断。** 島は深い水で囲まれています。安全な順から絶望的な順に並べた選択肢は以下の通りです：
+
+- **浮遊 (Levitation)**（指輪、靴、薬、または呪文）。最も安全かつ容易な渡河手段です。ただし、隣接する水マスからウナギに引きずり込まれる危険は残ります（[即死の危険](#ways-to-die-instantly) の [溺死](#drowning) を参照）。
+- **水上歩行の靴 (Water walking boots)**。水面の上を歩いて渡れます。こちらも隣接する水中にいるウナギの巻きつき攻撃は防げません。
+- **冷気の杖 (Wand of cold)**。水面に向かって杖を振り、氷の道を凍らせて作ります。1マス進むごとに足を滑らせて2ターン行動不能になるリスクがあり、火炎によって氷が再び溶けてしまうこともありますが、渡り切ることは可能です。
+- **大地の巻物 (Scroll of earth)**。頭上から落下した巨石が水没し、飛び石の橋が完成します。時間はかかりますが、他に手段がない場合には有効です。
+- 飛行または遊泳能力を持つ生物への **変身（へんげ）**。[変身制御](#special-and-utility) の能力がない場合は極めて危険です。
+- **飛び跳ねる靴 (Jumping boots)、または騎士の跳躍能力**。幅の狭い水路を跳び越えることができますが、慎重な位置取りが求められます。
+
+**ウナギの脅威を切り抜ける。** 水中には巨大ウナギ（4種類あるマップ構成のうち1つではクラーケン）が潜んでおり、巻きついて水中に引きずり込み溺死させてきます。以下の重要ルールを徹底してください：
+
+- **防水クローク (oilskin cloak)** を羽織るか、防具に **油（グリース）を塗っておく** と、ウナギが巻きついてきた際に滑り落とすことができます。グリースは時間経過で剥がれるため完全な信頼は置けませんが、防水クロークの効果は永続します。
+- **[呼吸の魔除け (amulet of magical breathing)](#movement-and-spatial-behavior)**（または変身による水中呼吸）があれば、巻きつかれて水中に引きずり込まれても溺死を防ぐことができます。
+- ウナギは可能な限り **遠距離から撃破してください**。杖、呪文、投擲武器のいずれも有効です。水中にいるウナギに不用意に近接戦闘を挑んではいけません。
+- 浮遊や水上歩行の状態であっても、隣接する水マスにいるウナギからの巻きつき攻撃は **防げません**。溺死判定はプレイヤーの足元ではなく *ウナギのいるマス* を基準に行われるためです。防水クローク／グリース、呼吸の魔除け、あるいは接近される前に遠距離から倒すことだけが確実な防御策です。
+
+#### 城の概要 (The Castle) {#castle-overview}
+<!-- audit
+2026-05-18:
+- Castle is the last DoD level: base=-1 (dungeon.lua:7-12, 82-85)
+- fortified structure surrounded by a moat with a drawbridge (castle.lua:25-41)
+- defenders: soldiers in barracks, dragons in storerooms, court of high-letter monsters in throne room (castle.lua:54, 60, 180, 185, 195-221)
+- wand of wishing in a locked chest in one of the four corner towers (castle.lua:48-52, 142-149)
+- Gehennom branches off the Castle; the stairs do not return (dungeon.lua:39-43)
+-->
+
+城（The Castle）は、光ある通常ダンジョンの壮大なフィナーレであり、その下に広がるさらなる深淵への玄関口です。周囲を堀で囲まれた石造りの要塞であり、唯一の侵入口は跳ね橋となっています。内部には強大な守備隊が待ち構えています：兵舎の兵士たち、貯蔵庫を警備するドラゴンたち、そして玉座の間にひしめく大文字の強敵モンスターたちの一団です。この危険な攻城戦を挑むに値する最大の報酬は、四隅の角塔のいずれかにある鍵のかかった宝箱の中に眠っています。ゲーム中最も貴重なアイテムである **願いの杖 (wand of wishing)** です。
+
+また城は、[ゲヘナ (Gehennom)](#gehennom) への進入口としての役割も果たします。跳ね橋を降ろして侵入する方法や、城内での立ち回りについての詳細は、第5部の [城 (The Castle)](#the-castle) を参照してください。
+
+---
+
+### 罠と危険 (Traps and Hazards)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source (domagictrap trap.c:4319-4453):
+- Rewrote the magic-trap effects paragraph. It is fate=rnd(20): <10 blind+summon 1d4; 10 nothing; 11 toggle invis; 12 fire; 13-18 flavor; 19 tame+CHA+1; 20 UNCURSE inventory. Old text's "curse an item" was backwards; sleep/stun/vomiting/earthquake/HP/mana/mapping/lighting don't exist; CHA is +1 on ~1/20 (~+0.05/zap), not +1.4.
+- Confused gold detection reveals ALL traps (trap_detect, read.c:2042), not just magical.
+- "A rumbling stop abruptly" is a boulder hitting a teleport trap only (trap.c:3477); pits route through flooreffects.
+- Verified correct: pit/spiked-pit damage, trapdoor cascade, bear-trap diagonal escape, anti-magic/cancellation blasts, iron-footwear protections.
+-->
+<!-- audit
+2026-05-31:
+- mktrap() places traps in rooms only (somexyspace(croom)) on standard dungeon levels; the MAZEFLAG path that allows corridor traps is set on maze levels (Gehennom mazes, etc.). Standard corridors do not generate traps (mklev.c:2032-2099, somexyspace usage at line 2093).
+- display priority: monster > object > trap > floor. A corpse object on a trap square draws as `%` and hides the `^` glyph (display.c symbol layering).
+- #untrap requires the trap to be visible (known) and the player to be adjacent (or on the trap). It then attempts to disarm based on trap type (trap.c untrap_object).
+-->
+
+たった1つの落とし扉によって、愛するペット、保管しておいた貴重な物資、そして利用するはずだった階段から一瞬にして分断されてしまうことがあります。罠は、自分で踏み抜くか、`s` キーで探知するか、あるいは他の手段で暴くまで目に見えません。発見されると、マップ上には `^` として表示されます。隣接するマスを1回捜索するごとに罠を発見できる独立した抽選が行われますが、その成功率は決して100%ではないため、怪しい場所では繰り返し粘り強く捜索を行う必要があります。ペットはあなたがすでに発見済みの罠しか避けてくれないため、ペットの挙動を眺めていても未発見の罠を察知することはできません。
+
+覚えておくべき典型的な状況があります：部屋の床の上に理由もなく死体がポツンと転がっている場合、それはその冒険者を仕留めた罠の上に覆い被さっていることが多々あります。死体の記号 `%` は `^` の上に優先して描画されるため、本来なら視認できているはずの罠が隠されたままになります。その死体の下には持ち主が落とした装備品が重なっていることもあり、調べる価値は大いにあります。隣接するマスから周囲を捜索して罠を暴き、不用意に足を踏み入れる代わりに `#untrap` コマンドを使って罠の解除を試みましょう。
+
+以下はダンジョンで遭遇する罠の一覧であり、踏み抜いたときの痛恨度（後悔の度合い）によって大まかに分類されています：
+
+#### 軽微な罠 (Nuisance Traps)
+<!-- audit
+2026-05-18:
+- arrow trap empty-click is 1/15 once `trap->once && trap->tseen` (trap.c:1199, 1228)
+- dart trap 1/6 chance the dart is poisoned (trap.c:1273)
+- squeaky board skipped by Levitation OR Flying unless forcetrap (trap.c:1419)
+- squeaky board wakes monsters: wake_nearby for player, wake_nearto range 40 for monster (trap.c:1436, 1473)
+- rust trap default branch (40% via cases 3,4 of rn2(5)) douses lamplit items then cloak else suit else shirt (trap.c:1610, 1632-1643)
+- rust trap cases 0/1/2 hit helm, then left-arm chain (shield→weapon→gloves), then right-arm (weapon→gloves) (trap.c:1611-1627)
+- missed arrows and darts land via place_object + stackobj — can be farmed (trap.c:1217-1220, 1288-1291)
+- mounted player: steed absorbs the hit 50% of the time (trap.c:1211, 1276)
+-->
+
+| 罠の種類        | 効果                                                |
+| --------------- | --------------------------------------------------- |
+| 矢の罠 (Arrow trap)      | あなたに向けて矢を撃ち出す（軽微なダメージ）        |
+| ダーツの罠 (Dart trap)   | ダーツを撃ち出す（毒が塗られている場合あり）        |
+| 軋む床 (Squeaky board)   | 大きな軋み音を立て、周囲のモンスターを目覚めさせる  |
+| 錆の罠 (Rust trap)       | 水を浴びせかける：装備中の鉄製防具を錆びさせ、クローク／鎧／シャツを濡らし、火のついたランプを消火する |
+
+厄介ではありますが、致命傷になることは稀です。不幸中の幸いとして、矢の罠やダーツの罠はタダで投擲・射撃用の弾薬を供給してくれるため、あえて安全に踏み抜いて弾薬をストックするテクニックもあります。
+
+#### 移動系の罠 (Movement Traps)
+<!-- audit
+2026-05-18:
+- trapdoor cascade: dlevel++ per loop iteration, `if (rn2(4)) break` = 25%/level chance to keep falling (trap.c:442-453)
+- holes use the same hole_destination cascade as trapdoors (trap.c:519-522, 442-453)
+- pit base damage 1d6 (trap.c:1950, rnd(adj_pit ? 3 : 6))
+- spiked pit base damage 1d10 with 1/6 chance of poison (trap.c:1925, 1938-1945)
+- Levitation OR Flying skip pit/hole/trapdoor, gated `!Sokoban && ...` (trap.c:633-639, 1850)
+- in Sokoban the skip is disabled — pits suck you in regardless
+-->
+
+| 罠の種類         | 効果                                                       |
+| ---------------- | ---------------------------------------------------------- |
+| 落とし穴 (Pit)   | 中に落下し、軽微なダメージを受けます。自力で這い上がれます |
+| トゲの落とし穴 (Spiked pit) | 落とし穴と同様ですが、底に杭が敷かれています（より大きなダメージ、毒の危険あり） |
+| 落とし扉 (Trapdoor) | ダンジョンの竪穴から下の階層へ落とされます。通常は1階層ですが、階ごとに25%の確率で落下が連鎖し、数階層下まで一気に落ちることがあります |
+| テレポートの罠 (Teleport trap) | フロア内のランダムなマスへとテレポートさせられます |
+| 階層テレポートの罠 (Level teleporter) | ランダムなダンジョン階層へとテレポートさせられます |
+| 穴 (Hole)        | 落とし扉と似ていますが、最初から穴として目に見えています |
+| 魔法のポータル (Magic portal) | 別の支流ダンジョンへと転送されます（各支流の入り口） |
+
+落とし扉と階層テレポートの罠は、探索のリズムを最も狂わせる厄介な罠です：たった一歩の踏み外しで、ペット、保管しておいた貴重な物資、そして念入りに探索したフロア地図から強制的に分断されてしまいます。しかし、アイテムや内在能力によって [瞬間移動制御 (teleport control)](#movement-and-spatial-behavior) を得ていれば、テレポートの罠はタダで利用できる便利な長距離移動手段へと変わります。また、**浮遊や飛行** の状態であれば、落とし穴、穴、落とし扉のすべてを完全に無効化して上空を通過できます。ただし、パズルの厳格なルールにより無効化が無効化され、下降気流で問答無用に吸い込まれる [倉庫番 (Sokoban)](#sokoban) だけは例外です。
+
+#### 危険な罠 (Dangerous Traps)
+<!-- audit
+2026-05-20:
+- random polymorph timer is rn1(500, 500) = 500-999 turns (polyself.c:813); decremented each turn until 0
+- nohands or verysmall form on polymorph triggers break_armor() which dropx() drops worn gear to the floor (polyself.c:1248-1351)
+2026-05-18:
+- anti-magic implosion damage QUARTERED (not halved) for pass-walls: `dmgval2 = (dmgval2 + 3) / 4` (trap.c:2371-2372)
+- max 4d4 raw damage caps at 4 after quartering (16+3)/4 = 4
+- anti-magic damage composition: base 1d4 + 1d4 per half_physical/half_spell + 1d4 for wielding Magicbane + 1d4 for carrying first non-quest AD_MAGM artifact (trap.c:2351-2369; loop breaks on first match)
+- cancellation on any magical trap detonates `20 + d(3,6)` at the square then removes trap (zap.c:3611-3621)
+- ANTI_MAGIC counts as is_magical_trap (trap.h:121)
+- polymorph trap is blocked entirely by Antimagic OR Unchanging (trap.c:2486-2489) — PolyControl only directs the change
+- sleep gas: Sleep_resistance skips the fall_asleep branch in trapeffect_slp_gas_trap (trap.c:1570)
+- iron footwear: blocks bear-trap leg damage (trap.c:1517-1518), blocks spiked-pit spikes (trap.c:1901-1903), blocks polymorph trap (trap.c:2478-2483)
+- iron footwear absorbs an anti-magic drain by losing 1 enchantment, but only if spe>0 (trap.c:2328-2343)
+- strategy aligned with NetHackWiki Fire trap, Anti-magic field, Polymorph trap: fire trap destroys scrolls/potions/spellbooks, MR makes anti-magic trap deal extra damage, MR/Unchanging block polymorph traps (https://nethackwiki.com/wiki/Fire_trap, https://nethackwiki.com/wiki/Anti-magic_field, https://nethackwiki.com/wiki/Polymorph_trap)
+-->
+
+| 罠の種類              | 効果                                        | 防御・軽減手段         |
+| --------------------- | ------------------------------------------- | ---------------------- |
+| 地雷 (Land mine)      | 爆発とアイテムの破損                        | 浮遊、または飛行       |
+| 熊の罠 (Bear trap)    | その場に拘束される                          | 鉄製の履物で脚の怪我を防止 |
+| 催眠ガスの罠 (Sleeping gas trap) | 数ターンの間無防備な睡眠状態になる   | 睡眠耐性               |
+| 火炎の罠 (Fire trap)  | 炎でダメージを受け、露出した所持品が焼失する | 火炎耐性。巻物や薬は袋に入れる |
+| 魔法の罠 (Magic trap) | ランダムな魔法効果（盲目とモンスター召喚等） | 汎用的な防御手段なし   |
+| 反魔法フィールド (Anti-magic field) | 魔力を吸い取られる。ダメージを受けることもある | プラスに強化された鉄製の履物で吸収可能 |
+| 変身の罠 (Polymorph trap) | ランダムな生物へと強制変身させられる    | 魔法防御、不変能力、または鉄製の履物 |
+| 転がる巨石 (Rolling boulder) | 定められた軌道に沿って巨石が転がってくる | 軌道上から退避する     |
+
+火炎の罠は、HPだけでなく手持ちの荷物全体を脅かします。炎そのもののダメージも痛いですが、最大の脅威はインベントリに起こる惨劇です：巻物は燃え尽き、薬の瓶は砕け散り、大事に溜め込んでいた20枚の「識別の巻物」の束が一瞬で灰と化します。[火炎耐性](#damage-resistances) は自身の肉体を守ってくれますが、**所持品までは守ってくれません**。普通の袋や防水袋の中に入れたアイテムは罠の火災から無事に生き残ります（袋自体が炎を吸収します）。[ゲヘナ (Gehennom)](#gehennom) は火炎の罠だらけの危険地帯ですので、消耗品は常に袋の中に退避させておきましょう。
+
+[へんげ制御 (polymorph control)](#special-and-utility) を持っていれば、変身の罠を踏んでも変身後の姿を自分で選択できます。持っていない場合、罠が勝手に姿を決定し、装備品を何一つ身につけられないイモリに変えられてしまう恐れがあります。**[魔法防御 (Magic resistance)](#damage-resistances) および [不変 (Unchanging)](#special-and-utility) の内在能力は、どちらもこの強制変身を完全に遮断します。**
+
+万が一、手のない生物へと強制変身させられてしまった場合、装備していた武具一式はその場（足元の床）にすべてドロップします。パニックにならず、むやみに動き回ってはいけません。ランダムな変身効果は数百ターンで自然に解けますし、大事な装備品は自分が立っているマスにまとまっています。可能であればそのマスを死守し、モンスターに追い詰められたら祈りを捧げ、元の姿に戻った瞬間にすべてを拾い直しましょう。（手持ちに変身の杖があるか呪文を習得していれば、自分自身に振りかけることで再抽選できますが、現在の形態が杖を使えるか呪文を唱えられる場合に限られます。）
+
+催眠ガスは、モンスターの密集地帯では文字通り命取りになります。戦うことも、逃げることも、自発的に目を覚ますことすらできません。モンスターたちにとっては食べ放題のバイキングのように無抵抗なあなたに群がってきます。エルフの血統、オレンジドラゴンの鎧、あるいは適切な死体を食べて得る [睡眠耐性](#damage-resistances) によって完全に無力化できます。
+
+魔法の罠は、20種類あるランダム効果のいずれかを引き起こします。半数弱の確率で危険な効果が発生します：閃光が放たれて一時的に盲目にされ、数体の敵対的モンスターが周囲に召喚されます。また、火炎に包まれる目もあります。それ以外の結果は無害か、むしろ有益です：単なる演出メッセージもあれば、透明状態のオン／オフを切り替えるもの、装備中の呪われたアイテムを解呪するもの、そして周囲のモンスターをペット化して魅了（カリスマ）を1上昇させるものもあります。この最後の効果を狙って、既知の魔法の罠を何度も踏んで魅了値と店の割引率を稼ぐプレイヤーもいますが、発生確率は約1/20に過ぎず、火災やモンスター召喚のリスクを考えると待機は危険を伴います。
+
+熊の罠にかかると数ターンの間足止めされます。脱出を試みる際は、そのマスから **斜め方向** へ踏み出すようにしてください。直交方向よりも斜め移動の方が約5倍早く抜け出せます。開錠の杖やノック（解錠）の呪文を使えば、その場で瞬時に罠が外れます。
+
+魔法防御はテレポートの罠を遮断します。もし罠を利用してテレポートしたい場合は、発見済みの罠の上に立った状態で `Ctrl+T` を押してください（他のマスから押しても何も起きません）。
+
+**反魔法フィールドは、魔法防御を持っている冒険者にこそ手痛い打撃を与えます。** この罠は魔力（スペルエネルギー）を枯渇させるだけでなく、*魔法防御* を所持していると「反魔法の爆縮」を引き起こしてHPにダメージを与えてきます。ダメージは基本1d4に加え、物理半減または魔法半減の能力で+1d4、[マジックベイン (Magicbane)](#magicbane) を装備していると+1d4、そして魔法耐性アーティファクトを所持しているとさらに+1d4が加算されます（1つだけが対象となり、最初の合致で判定を終了します）。最悪の場合、4d4のダメージを受けますが、壁抜け能力があればダメージは1/4（切り上げ）に抑えられます。最大の防御策は、捜索によって事前に罠を発見し、迂回して通り過ぎることです。無力化の杖を魔法の罠に向かって振ると罠を消滅させることができますが、その際に罠のマスで20 + 3d6の大爆発を引き起こすため、静かな解除法とは言えません。
+
+鉄製の履物（鉄の靴、または蹴り挙げ靴）は、5.0において驚くほど多くの罠ダメージを肩代わりしてくれます：熊の罠による脚のダメージを無効化し、トゲの落とし穴の杭を防ぎ、変身の罠による肉体の変異を遮断し（代わりに履いていた靴が変身します）、プラスに強化されていれば強化値を1失うことで反魔法フィールドの魔力ドレインを身代わりに吸収してくれます。まだ他に優れた靴を見つけていない段階では、身につけておく価値の非常に高い防護装備です。
+
+#### 捜索と探知 (Searching and Detection)
+<!-- audit
+2026-05-18:
+- dosearch0 search mechanics at detect.c:2016-2093
+- rnl applies a Luck bias (good Luck → 0, bad Luck → x-1) (rnd.c:112-128)
+- SDOOR/SCORR roll is rnl(7 - fund); fund capped at +5 (detect.c:2026-2032, 2042-2054)
+- trap-detection roll is rnl(8) with NO fund bonus (detect.c:2079) — Excalibur+lenses don't speed trap-finding
+- Excalibur is the only SPFX_SEARCH artifact (artilist.h:85-86)
+- wand of secret door detection is NODIR; findit reveals SDOOR/SCORR/traps/trapped chests/trapped doors/hidden mimics/hiders (detect.c:1639-1718, zap.c:2552-2558)
+- wand area is a circle of radius BOLT_LIM=8 (vision.c:27-45 circle_data, hack.h:49) gated by couldsee() line of sight (vision.c:2144)
+- Flying/Levitation skip most floor traps but NOT magic/teleport/anti-magic (trap.c:1061-1082 floor_trigger list omits MAGIC_TRAP/TELEP_TRAP/ANTI_MAGIC; trap.c:3026 check_in_air bypass gated by floor_trigger)
+-->
+
+罠に対する最大の防御は、罠に踏み込む前に自ら発見することです：
+
+- **捜索（`s`）を繰り返す。** 1回捜索するごとに、隣接するマスにある未発見の罠を暴く独立した確率があり、幸運（Luck）が高いほど発見率が向上します。（アーティファクトや目玉レンズによる探索ボーナスは、隠し扉や隠し通路の発見速度を高めるだけであり、罠の発見率には影響しません。）
+- **扉探索の杖 (wand of secret door detection)。** 自分を中心とする半径約8マスの円形エリア（視線が通る範囲）に存在するすべての隠蔽物を一網打尽に暴き出します：隠し扉、隠し通路、罠、罠付きの宝箱、そして姿を隠したモンスターを一度に露わにします。方向指定は不要です。
+- **水晶玉 (Crystal ball)。** フロア全体のすべての罠を一度に探知することができます。
+- **飛行と浮遊。** 大半の床面トラップを完全に無力化できます（ただし、クモの巣、魔法の罠、テレポートの罠、階層テレポートの罠、変身の罠、反魔法フィールドは空中でも作動します）。
+- **混乱状態で「金貨を探す巻物」を読む。** 通常の金貨探知が *罠探知* へと変化します：そのフロアに存在するすべての罠が一瞬でマップ上に点灯して判明します。混乱状態での金貨探知は、ゲヘナ突入前にフロア全体の罠を安全に把握するための最も経済的な手段です。
+
+捜索を行うべき絶好のタイミングは、ダンジョンがすでに「何かがおかしい」という違和感のヒントを発しているときです：他に何もない部屋の中央に転がる不審な死体、床に散乱した矢やダーツ、あるいは隠された危険がギミックとなっているテーマのある部屋に遭遇したときがそれに当たります。
+
+#### 隠し扉の発見 (Finding Secret Doors)
+<!-- audit
+2026-05-19:
+- ring of searching auto-calls dosearch0(1) each turn unless level is noautosearch (allmain.c:342-344)
+- Excalibur enchantment feeds `fund = uwep->spe` only if SPFX_SEARCH (detect.c:2026-2027, artilist.h:85-86)
+- lenses add +2 to fund if worn and not Blind (detect.c:2029-2030)
+- fund is capped at +5 — a +5 Excalibur alone hits the cap; lenses only help if enchantment is <+3 (detect.c:2031-2032)
+- per-square reveal roll is rnl(7 - fund) for SDOOR/SCORR (detect.c:2042-2054)
+- blessed scroll of magic mapping converts every SDOOR to a visible door (read.c:2121-2130)
+- +0 Excalibur contributes nothing because fund = spe = 0
+-->
+
+運命の迷宮の設計者たちは、「すべての部屋には、壁を10分間叩き続けなければ見つからない非常口を1つ設けるべきだ」と信じていた節があります。隠し扉や隠し通路は、「お前の探索はまだ *徹底的* ではない」とゲームが突きつけてくる無言のメッセージです。
+
+**隠し要素を捜索すべきタイミング：**
+
+- **不自然に行き止まりになっている通路。** 通路が唐突に途切れ、目的のものが見当たらない場合、周囲の壁のどこかに扉が隠されている可能性が極めて高いです。
+- **出口が1つもない不審な空き部屋。** 出口は必ず存在します。巧妙に壁に見せかけて偽装されているだけです。
+- **目に見える選択肢をすべて調べ尽くした後。** 到達可能な場所をすべて踏破したにもかかわらず下り階段が見つからないなら、うろつき回るのをやめて壁を叩き始める潮時です。
+
+**体系的な捜索手順：**
+
+その場で `20s` と入力して20回連続で捜索します。平均的な幸運値を持つ駆け出しのキャラクターの場合、隠し扉を確実に暴き出すには15〜22回の捜索が必要です。1回だけ捜索して通り過ぎるのは、「迷子のままで構わない」と宣言しているようなものです。
+
+壁に沿って3マス移動し、再び20回捜索します。1回の捜索は全方位1マスに届くため、3歩刻みで進めば隙間を作らず、かつ無駄な重複捜索を避けて壁一面を完全にカバーできます。紙の上では退屈な作業に見えますし、*実際* に退屈ですが、地下1階に永久に閉じ込められることに比べれば退屈さなど安いコストです。
+
+レンジャーや考古学者のキャラクターなら、この苦労の大半から解放されます：どちらも最初から自動捜索（オートサーチ）の能力を持っており（エクスカリバーを手に持っているキャラクターも同様です）、1歩進むごとに隣接する全マスを自動で調べるため、壁沿いを歩くだけで隠し要素を次々と暴き出します。ただし頑固な扉に対しては、足を止めて数回捜索する必要があるかもしれません。
+
+**役立つアイテム：**
+
+- **探索の指輪 (Ring of searching)**：身につけている間、毎ターン自動的に捜索を行います。
+- **[エクスカリバー (Excalibur)](#excalibur-artifact)**（または探索オーラを持つアーティファクト）：手に装備すると、その強化値が探索ボーナスに加算されます（泉から拾い上げたばかりの+0ではボーナスは付きません）。
+- **目玉レンズ (Lenses)**：装着中（盲目でない限り）、探索ボーナスに+2されます。
+- **扉探索の杖 (Wand of secret door detection)**：周囲の一定半径内にある隠し要素を瞬時にすべて暴き出します。
+- **祝福された地図の巻物 (Blessed scroll of magic mapping)**：フロア内のすべての隠し扉を通常扉へと変えて可視化します（祝福された巻物限定の効果です）。
+
+すでに下り階段が見つかっているなら、迷わず階段を降りましょう。壁叩きは出口や特殊な部屋が見つからないフロアでのみ行うべき手段であり、すべての階層で義務的に行う儀式ではありません。
+
+#### 鉄格子 (Iron Bars)
+<!-- audit
+2026-05-18:
+- passes_bars uses verysmall() = msize < MZ_SMALL = TINY only (mondata.c:552-563)
+- grid bug / bat / sewer rat are MZ_TINY (monsters.h:889, 1149, 1269); kitten and little dog are MZ_SMALL and stay out
+- acid (ray/breath/spit) corrodes bars unconditionally (zap.c:5347-5369)
+- lightning shares the acid branch but is gated `rn2(10) break` — melts on roughly 1 zap in 10 (zap.c:5349)
+- striking and force bolt have NO IRONBARS handler — they pass through harmlessly
+- rock moles eat bars via the metallivorous arm (hack.c:769-784)
+- xorns and earth elementals pass walls and so pass bars
+- bars sit on a room-wall tile (mklev.c:783); niche payload one square further into stone
+- scroll of teleportation placed in niche only when `!noteleport` on the level (mklev.c:790-792)
+-->
+
+鉄格子は一見すると侵入を阻む頑丈な防壁に見えますが、完全な固体ではありません：光は通り抜け、ごく小型の生物（グリッドバグ、コウモリ、ネズミなど）は格子の隙間をすり抜けることができます（ただし小猫以上の大きさの生物は遮られます）。つるはしは弾かれ、採掘の杖は不発に終わり、強打の杖や「衝撃」の呪文は格子を素通りして無害に通過します。鉄格子を破壊できるのは「酸」です：黄色ドラゴンのブレスや、格子に叩きつけて割った「酸の薬」が有効です。特に酸の薬は手軽で重宝します。手に装備して格子に向かって強制戦闘（`F`）を仕掛ければ、酸の飛沫が鉄格子を跡形もなく溶かして消し去ってくれます。また、もし重い鉄球に鎖で繋がれているなら、その鉄球を手に持って格子を力任せに殴打して破壊することも可能ですが、およそ25回もの打撃が必要です。
+
+最も一般的な対処法は、格子の周囲の壁を掘ることです。鉄格子は部屋の壁をくり抜いた壁龕（ニッチ）に設置されているため、斜めの壁を掘るか背後の壁を回り込んで掘削すれば、格子に触れることなく奥の部屋へ到達できます。格子の奥に隠されているアイテムは、たいてい「瞬間移動の巻物」です。
+
+---
+
+### 感覚と物音 (Feelings and Sounds)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- "monsters are aware of your presence" comes only from a monster casting MCAST_AGGRAVATION -> aggravate() (mcastu.c:826-828); removed the "cursed ring of aggravate monster" cause (worn rings give no message, do_wear.c:1266).
+- "presence of evil" is only the fountain water demon while blind (fountain.c:74); removed "or other major demon".
+- Verified correct: hypocrite/Elbereth alignment hit, stealth messages, pet-kill thunder -15, curse-items cast, summoning messages, resistance-absorb messages.
+-->
+<!-- audit
+2026-05-18:
+- vault sounds: "counting gold" means vault with gold; "searching" means empty vault (sounds.c:253-262)
+- "Wow! ...great!" needs blessed restore-ability with zero unfixable troubles (potion.c:658-661)
+- same string also fires from a blessed magic fountain (fountain.c:257)
+- non-boot stealth gear gives "move very quietly"; boots give "walk very quietly" (do_wear.c:123-129)
+- lycanthropy cure is quaffing holy water, not dipping (potion.c:728-737)
+- quantum corpse toggles HFast on or off: "seem faster" or "seem slower" by current state (eat.c:1227-1235)
+- dosounds() is silenced by Deaf, !flags.acoustics, u.uswallow, or Underwater (sounds.c:208-209)
+- bugle reveille at muse.c:843-846 is gated only by !Deaf (not by dosounds)
+- sad-feeling at mon.c:3100-3101 is NOT gated by Deaf — it's a feeling, not a sound
+- oracle "strange wind" (sounds.c:190); shop "cursing shoplifters" (sounds.c:322)
+- fountain "bubbling water" or "water falling on coins" (sounds.c:214-218)
+-->
+
+迷宮の何気ない環境描写（メッセージ）の中には、極めて重要な警告が隠されています。まずは最も重要な4つの緊急メッセージを覚え、より珍しいメッセージが表示されたら後述の表でその意味を確認できるようにしましょう。
+
+（注意：**耳が聞こえない（聾・Deaf）**、モンスターに **丸呑みされている**、あるいは **水中** にいる間は、環境音に関するメッセージが一切届かなくなります。特に永久聾の縛りプレイでは、フロアの雰囲気から得られるあらゆる手掛かりを失うことになります。ただし、死体を食べたときに得られる感覚のメッセージはそのまま表示されます。）
+
+#### 緊急事態 (Emergencies)
+
+| メッセージ | 意味と対処法 |
+|------------|--------------|
+| *"You feel feverish."*<br>（熱っぽく感じる。） | 獣人（ウェアモンスター）からの獣化症（ライカンスロープ）感染です。聖水を *飲む*、トリカブトを食べる、または祈り（`#pray`）を捧げましょう。 |
+| *"You are slowing down."*<br>（体の動きが鈍くなってきた。） | 肉体が石へと変化しています（石化進行中）。即座にトカゲの死体を食べる、酸の薬を飲む、または祈り（`#pray`）を捧げてください。 |
+| *"You are turning into a green slime."*<br>（体が緑色のスライムに変化しつつある。） | 緑のスライムによるスライム化感染です。火で焼き払う（火の巻物を読む、自身に火球の呪文を唱える、あるいは火の杖を自分に振る）、または祈り（`#pray`）を捧げてください。 |
+| *"You feel deathly sick."*<br>（死ぬほど気分が悪い。） | 致死性の病気（ペスティレンスやデモゴルゴン等による攻撃）です。超回復の薬を飲む、ユーカリの葉を食べる、病気治療の呪文を唱える、または祈り（`#pray`）を捧げてください。 |
+
+#### フロアの環境音 (Level Ambience)
+
+| メッセージ                                       | 意味                                                                     |
+|--------------------------------------------------|--------------------------------------------------------------------------|
+| *"You have a sad feeling for a moment, then it passes."*<br>（一瞬悲しい気分になり、やがて消え去った。） | 視界外でペットが命を落としました。                                       |
+| *"You hear bubbling water."*<br>*"You hear water falling on coins."*<br>（水の泡立つ音が聞こえる／硬貨の上に水が落ちる音が聞こえる） | このフロアに泉が存在します。                                             |
+| *"You hear someone cursing shoplifters."*<br>*"You hear the chime of a cash register."*<br>（万引き犯を罵倒する声が聞こえる／レジのチャイムが聞こえる） | このフロアに店が存在します。                                             |
+| *"You hear someone counting gold coins."*<br>*"You hear the footsteps of a guard on patrol."*<br>*"You hear someone searching."*<br>（金貨を数える音が聞こえる／見回りの足音が聞こえる／何かを探す音が聞こえる） | このフロアに宝物庫が存在します。「数えている」は中にゴールドが残っている証拠であり、「探している」は宝物庫がすでに空であることを示します。 |
+| *"You hear a wolf howling at the moon."* (またはジャッカル)<br>（月に吠える狼の遠吠えが聞こえる） | このフロアのどこかに獣人（ウェアクリーチャー）が生息しています。         |
+| *"You hear crashing rock."*<br>（岩が崩れ落ちる音が聞こえる。） | 穴掘り生物（ドワーフ、岩モグラ、アンバーハルク）が岩壁を掘削しました。   |
+| *"You hear rumbling nearby."* (または *in the distance*)<br>（近くで／遠くでゴロゴロと鳴る音が聞こえる） | 視界外で転がる巨石の罠が作動しました。*"You hear a rumbling stop abruptly."*（ゴロゴロという音が唐突に止まった）は、巨石がテレポートの罠に吸い込まれたことを意味します。 |
+| *"You hear a chugging sound."*<br>（ゴクゴクと音を立てて飲む音が聞こえる。） | モンスターが薬を飲みました（通常は自らの傷の回復）。                     |
+| *"You hear a nearby zap."*<br>（近くでバチッという発射音が聞こえる。） | モンスターが視界外の何かに向けて杖を振りました。                         |
+| *"You hear a strange wind."*<br>（奇妙な風の音が聞こえる。） | このフロアに賢者（オラクル）がいます。                                   |
+| *"You hear a slurping sound."*<br>（ジュルジュルという吸い込む音が聞こえる。） | ゼラチンキューブがフロアの床に落ちているアイテムを捕食しました。         |
+| *"You hear a crunching sound."*<br>（バリバリと噛み砕く音が聞こえる。） | 錆の怪物、岩モグラ、またはその他の金属食生物が金属アイテムを食べました。 |
+| *"You hear a bugle playing reveille!"*<br>（ラッパが起床ラッパを奏でるのが聞こえる！） | 兵士がラッパを吹いて周囲の兵士たちを起こしました。戦闘を警戒してください。 |
+
+#### 内在能力と死体効果 (Intrinsics and Corpse Effects)
+
+| メッセージ | 意味 |
+|------------|------|
+| *"You feel healthy."*<br>（健康になった気がする。） | 死体を食べて「毒耐性」の内在能力を獲得しました。 |
+| *"You feel a momentary chill."*<br>（一瞬寒気を感じた。） | 死体を食べて「火炎耐性」の内在能力を獲得しました。 |
+| *"You feel full of hot air."*<br>（熱気配に満たされた気がする。） | 死体を食べて「冷気耐性」の内在能力を獲得しました。 |
+| *"Your health currently feels amplified!"*<br>（健康が増幅されたように感じる！） | 死体を食べて「電撃耐性」の内在能力を獲得しました。 |
+| *"You feel wide awake."*<br>（目がパッチリと冴えた気がする。） | 死体を食べて「睡眠耐性」の内在能力を獲得しました。 |
+| *"You feel very firm."*<br>（体が非常に引き締まった気がする。） | 死体を食べて「分解耐性」の内在能力を獲得しました。 |
+| *"You feel a strange mental acuity."*<br>（奇妙な精神の冴えを感じる。） | 死体を食べて「テレパシー」の内在能力を獲得しました。 |
+| *"You seem faster."*<br>（足が速くなったようだ。） | 量子物理学者の死体を食べて「高速（スピード）」の内在能力を獲得しました。（すでにスピードを持っていた場合は代わりに *"seem slower"*（足が遅くなったようだ）となり、量子物理学者の死体はオン／オフを切り替えます。） |
+| *"You feel a mild buzz."*<br>（かすかな刺激を感じる。） | イモリの死体を食べてMP（魔力）が1〜3回復しました。 |
+| *"You see an image of someone stalking you. But it disappears."*<br>（盲目時: *"You feel very self-conscious. Then it passes."*） | 泉の水を飲んで永続的な「不可視の視覚（透明視）」を獲得しました。幸運な一口でした。 |
+
+#### 識別と状態変化 (Identification and Status Changes)
+
+| メッセージ | 意味 |
+|------------|------|
+| *"A feeling of loss comes over you."*<br>（喪失感に襲われた。） | 泉にアイテムを浸して解呪の結果を引きましたが、そのアイテムは呪われていませんでした。何も起きておらず、文面とは裏腹に何かを失ったわけではありません。 |
+| *"You have a feeling of loss."*<br>（喪失感を覚えた。） | 「充填の巻物」を読みましたが、充填できないアイテムを選択してしまいました（杖、指輪、および一部の道具のみが充填可能です）。巻物は無駄に消費されました。 |
+| *"You sense a lack of food nearby."*<br>（近くに食料が存在しない気配を感じる。） | 「食料を探す巻物」を読みましたが、フロア内に食料が存在しません。 |
+| *"You feel materially poor."*<br>（物質的に貧しくなった気がする。） | 「金貨を探す巻物」を読みましたが、フロア内にゴールドが存在しません。 |
+| *"You feel like someone is helping you."*<br>（誰かが助けてくれているような気がする。） | 「解呪の巻物」を読みました。装備中の呪われたアイテムの呪いが解けました。 |
+| *"Your hands begin to glow red."*<br>（両手が赤く輝き始めた。） | 「モンスター混乱」の巻物を読んだか呪文を唱えました。次の近接攻撃が命中すると相手を混乱させます。（すでに混乱している状態で読むと紫色に光ります。） |
+| *"You feel guilty."*<br>（罪悪感を覚えた。） | 祝福された、または混乱状態で「罰の巻物」を読みました。鉄球と鎖は取り付けられませんでしたが、巻物は識別されました。 |
+| *"Who was that Maud person anyway?"*<br>*"As your mind turns inward…"* | 「健忘の巻物」を読みました。記憶していた呪文の一部を忘れてしまいました（祝福された巻物なら忘れずに済みます）。 |
+| *"You have an uneasy feeling…"*<br>（不安な気分になった…） | 呪われた「啓蒙の薬」を飲んだか、上昇できない場所で呪われた「レベルアップの薬」を飲みました。薬は識別され、それ以外の悪影響はありません（啓蒙の薬の場合は知恵のエクササイズ値が少し下がります）。 |
+| *"You feel like a hypocrite."*<br>（偽善者になったような気分だ。） | エルベレス（Elbereth）の上に立った状態でモンスターを攻撃しました。刻み文字は消滅し、属性値にペナルティを受けました（実績値が十分に高ければ一律−5、低ければ−1〜−5）。 |
+| *"You feel that monsters are aware of your presence."*<br>（モンスターたちがあなたの存在に気づいた気配がする。） | モンスターがモンスター怒号（反感）の呪文を唱え、フロア中のモンスターを目覚めさせてあなたに向かわせました。 |
+| *"You feel that monsters have difficulty pinpointing your location."*<br>（モンスターたちがあなたの位置を正確に捉えにくくなった気がする。） | 「幻影のクローク」の効果が発動しました。*「…no longer have difficulty…」* は効果が切れたことを意味します。 |
+| *"You hear the rumble of distant thunder…"*<br>（遠くで雷鳴が轟くのが聞こえる…） | 自分のペット（または飼い慣らした生物）を殺害しました：属性値−15、幸運値−1。属性値がプラスに戻るまで祈りは失敗します。 |
+| *"You feel as if you need some help."*<br>（誰かの助けが必要な気がする。） | 近くのモンスターがアイテム呪詛の呪文を唱えました：インベントリ内のいずれかのアイテムがランダムに呪われました。使用する前に祭壇などでBUCを確認してください。 |
+| *"You feel the presence of evil."*<br>（悪の気配を感じる。） | 泉から敵対的な「水の魔神」が召喚されましたが、まだ視界に入っていません。接近してきています。 |
+| *"You hear someone summoning something, and…"* (および *"…summoning <something>"*) | 司祭系モンスターが視界外で昆虫やヘビを召喚しました。魔法使い系モンスターの召喚では *"Monsters appear from nowhere!"*（どこからともなくモンスターが現れた！）と表示されます。 |
+| *"You feel mildly hot."* / *"You feel mildly chilly."* | 火炎（または冷気）攻撃を受けましたが、自身が持つ内在耐性がそれを吸収しました。自分が思っている通りの耐性を実際に持っていることを確認できる貴重な手がかりです。 |
+| *"You feel rather itchy under your mummy wrapping."* | 透明の巻物、杖、または呪文を使用しましたが、装備中の「ミイラの包帯」が透明化を遮断しました。透明にはなっていませんが、その巻物／杖が透明化であることを確認できました。 |
+| *"You feel less paranoid."*<br>（被害妄想が薄らいだ気がする。） | 扉探索の効果によって、マップ上の古い不可視マーカー `I` が消去されました。モンスターがどこへ移動したかまでは分かりません。 |
+| *"You feel agile! You must have been working on your reflexes!"* (および力／知恵／体力の各種) | 隠されたエクササイズ（鍛錬）システムによって能力値が上昇しました。何が鍛錬に当たるかは [能力値のエクササイズ (Exercising Your Stats)](#exercising-your-stats) を参照してください。逆に *"You haven't been working on reflexes lately"* は不摂生（アビュース）が続いたときに表示されます。 |
+| *"You move very quietly."*<br>（非常に静かに移動できる。） | 「忍びの指輪」またはエルフのクロークを装備しました。（エルフの靴の場合は *"You walk very quietly"* となります。） |
+| *"Wow! This makes you feel good!"*<br>（おお！ 気分が良くなった！） | 呪われていない「能力回復の薬」を飲み、低下していた能力値が1つ回復しました。 |
+| *"Wow! This makes you feel great!"*<br>（おお！ 素晴らしい気分だ！） | 祝福された「能力回復の薬」を飲んですべての能力値が回復したか、あるいは魔法の泉の水を飲みました。 |
+
+---
+
+## 第3部：生存戦略 (Part Three: Survival)
+
+危険なターンでゲームが一時停止したときは、まず [迫り来る死から生還する方法 (Saving Yourself from Imminent Death)](#delayed-deaths) を確認してください。通常の戦闘における鉄則は極めてシンプルです：常にHP満タンで交戦に入り、初撃の攻防を交わした段階で自分が勝てそうかどうかを冷静に判断し、勝てそうにない場合に逃げ込むべき階段や扉の場所を常に把握しておくことです。[エルベレス (Elbereth)](#elbereth) は、神への祈りや回復の薬と同じように、思考のツールキットとして常に手元に用意しておくべき奥の手です。モンスターに隣接される前に刻みましょう。
+
+### 迫り来る死から生還する方法 (Saving Yourself from Imminent Death) {#delayed-deaths}
+<!-- audit
+2026-05-19:
+- sliming timer is 10, not 9: make_slimed(10L,...) (uhitm.c:3199, eat.c:854, polyself.c:456, uhitm.c:3570)
+- the "9-turn" impression came from the t/2 message cadence (timeout.c:391)
+- cancellation prevents new infections (uhitm.c:3556-3560) but does NOT clear a running Slimed timer
+- polymorph cure requires flaming() or PM_GREEN_SLIME (polyself.c:842)
+- vomiting cures only SICK_VOMITABLE; Pestilence's SICK_NONVOMITABLE is unaffected (eat.c:3745-3746)
+- rotted-corpse food poisoning is gated by Sick_resistance, NOT poison resistance (eat.c:1904-1914)
+- Fire_resistance survives lava damage but still gets trapped: lava_effects sets utrap TT_LAVA on the fire-res branch (trap.c:6964-6968)
+-->
+
+すべての致命的な脅威が即死をもたらすわけではありません。警告メッセージを見れば、あと何ターンの猶予が残されており、どのアイテムに手を伸ばすべきかが分かります。
+
+| 脅威 | 警告メッセージ | 猶予ターン数 | 確実な対処法 |
+|---|---|---:|---|
+| 石化 (Stoning) | *You are slowing down*<br>（体の動きが鈍くなってきた） | 5ターン（3ターン後に行動不能） | トカゲまたは酸性生物の死体を食べる、酸の薬を飲む、祈る（`#pray`） |
+| スライム化 (Sliming) | *You are turning into a green slime*<br>（体が緑色のスライムに変化しつつある） | 約10ターン | 火で焼く、病気治療の呪文、適切な姿への変身、祈る（ゲヘナ外のみ） |
+| 食中毒 (Food poisoning) | *You feel deathly sick*<br>（死ぬほど気分が悪い） | 10〜19ターン | 呪われていない超回復の薬／完全回復の薬、祝福された回復の薬、ユーカリの葉、ユニコーンの角、祈る |
+| 溶岩（火炎耐性なし） | 溶岩の中に落ちた | 0ターン（即死） | 浮遊や飛行で事前に予防する |
+| 溶岩（火炎耐性あり） | 溶岩の中に沈んでいく | 約12ターン | 浮遊する、テレポートする、歩いて脱出する、祈る |
+| ウナギ／クラーケンの巻きつき | モンスターがあなたに巻きついてきた | 次の巻きつき攻撃が命中すると溺死 | 呼吸の魔除け、モンスターを倒すかテレポートさせる |
+| 絞殺 (Strangulation) | *It constricts your throat!*<br>（喉を締めつけられる！） | 6ターン | 魔除けを外すか解呪する、祈る |
+
+**スライム化。** 緑のスライムの攻撃を受けるか、その肉片を食べると、約10ターンのスライム化カウントダウンが始まります。**治療法：** 火でスライムを焼き払う（火の杖を自分に振る、火の巻物を自分に向かって読む、火炎の罠を踏む、赤ドラゴンの火炎ブレスを浴びる）、炎の肉体を持つモンスターやスライム耐性のある生物に変身する、あるいは「病気治療」の呪文を唱えます。**耐へんげの魔除け (amulet of unchanging)** はスライム化の感染を完全に遮断し、すでに進行中の変身をも即座に中止させます。緑のスライムを無力化（キャンセル）すると新たな感染は防げますが、すでにカウントダウンが始まっているタイマーを止めることはできません。祈りでも治療できますが、緑のスライムは祈りが神に届かないゲヘナに生息しているため、祈りを当てにしてはいけません。
+
+**病気（食中毒）。** 腐敗した死体や古くなった死体を食べると食中毒を発症し、10〜19ターンで死に至ります（*"You feel deathly sick."*）。**治療法：** 呪われていない超回復の薬または完全回復の薬、祝福された回復の薬を飲む、ユニコーンの角を使用する（`#apply`）、祈る、あるいはユーカリの葉を食べます。毒耐性があっても食中毒は防げません。食中毒を防ぐのは「病気耐性（Sick resistance）」という独立した内在能力です。
+
+**ペスティレンスの致死性の病気。** 食中毒よりもさらに手強い病気です：吐き戻し（嘔吐）では治癒せず、猶予ターン数は体力（Con）の値に依存します（約20＋Conターン）。**有効な治療法：** ユニコーンの角、祈り、ユーカリの葉のいずれかです。
+
+**溶岩への沈没。** 火炎耐性がない場合、溶岩に触れた瞬間に即死し、手持ちの荷物が真っ先に燃え尽きます。火炎耐性がある場合、即死は免れますが徐々に沈んでいき、脱出までに約12ターンの猶予があります。浮遊する、テレポートする、歩いて岸へ上がる、あるいは祈りを捧げましょう。火炎耐性は火傷を防ぐだけであり、沈没そのものを止めるわけではありません。
+
+**溺死（巻きつき拘束）。** 水中でウナギやクラーケンに巻きつかれた場合、次の巻きつき攻撃が命中すると水底に引きずり込まれて溺死します。溺死判定はウナギのマスを基準に行われるため、一度捕まってしまうと浮遊や水上歩行、荷物の重さなどは無関係になります。**生還策：** 呼吸の魔除け（または変身による水中呼吸）、水中に引きずり込まれる前にウナギを倒すかテレポートで吹き飛ばす、あるいはそもそも水域に一切近寄らないことです。詳細は前述の [溺死 (Drowning)](#drowning) を参照してください。
+
+**絞殺。** 絞殺の魔除けを首にかけると、わずか6ターンで窒息死します。呪われていなければ即座に外してください。呪われている場合は、解呪の巻物や聖水で呪いを解くか、神に祈りを捧げましょう。
+
+### 刻み文字とエルベレス (Engravings and Elbereth) {#engravings}
+
+刻むコマンド（`E`）を使うことで、ダンジョンの床に文字を書き記すことができます。刻み文字にはいくつかの実践的な目的があります：**エルベレス (Elbereth)** を刻んで身を守る（次節で解説）、未識別の杖を床に試し書きして識別する（杖の章で解説）、あるいは自分の骨ファイルを見つける未来の冒険者に向けて遺言を残すことです。ここで解説する仕組みは、エルベレスに限らず *あらゆる* 刻み文字に共通して適用されます。
+
+**筆記手段・速度・耐久性。** 何を使って文字を書くかによって、書き終えるまでの所要時間、刻み文字の消えにくさ（耐久度）、そして筆記具の摩耗の有無が決まります。
+
+| 筆記手段                  | 所要時間      | 耐久度         | 備考                              |
+| ------------------------- | ------------- | -------------- | --------------------------------- |
+| 指（埃に書く）           | 即座 (Instant)| 脆弱 (Fragile) | モンスターが踏むと文字がかすれる  |
+| 呪われていないアサメ      | 即座 (Instant)| 半恒久         | 刀身が鈍らない（呪われたアサメは鈍る） |
+| その他の刃物武器          | 数ターン      | 半恒久         | 中断される恐れあり。強化値が−3まで低下する。+0の刃物では「Elberet」で止まり、+1以上なら最後まで書き終えられる |
+| 硬い宝石、またはダイヤモンド | 数ターン   | 半恒久         | 中断される恐れあり                |
+| 採掘の杖                  | 即座 (Instant)| 半恒久         | 扱いやすくバランスが良い          |
+| 火の杖、または雷の杖      | 即座 (Instant)| 恒久 (Permanent)| 床に文字を焼き付ける              |
+
+3段階の耐久度は、通常の摩耗に対して文字がどれだけ耐えられるかに対応しています：
+
+- **脆弱（埃・砂塵）。** モンスターがそのマスを踏むたびに、文字が1文字ずつかすれて消えていきます。埃に書いたエルベレスは、そのマスにモンスターが踏み込まない限り持続します。
+- **半恒久（床に削り刻んだ文字）。** モンスターが踏むごとに1/26の確率で文字が欠けます。埃よりもはるかに長持ちしますが、永久ではありません。
+- **恒久（焼き付けた文字）。** 通常の状況下では決して自然摩耗しません。氷のマスや魔法攻撃によってのみ損傷を受けます。
+
+**手作業での彫刻は中断されるリスクがある。** 複数ターンを要する手作業の筆記手段（アサメ以外の刃物、宝石など）は、1文字書くごとに1ターンを消費します。もし文字の途中で何か（敵の攻撃、モンスターの視界への侵入、地震の発生など）によって作業が中断された場合、中途半端に残された未完成の文字列は何の効果も発揮しません。即座に完了する手段（各種の杖、埃への指書き、呪われていないアサメ）であれば、たった1回のアクションで安全に書き終えることができます。
+
+**状態異常と書き損じ。** 盲目、混乱、気絶、または幻覚の状態にあるときは、文字ごとにスペルミス（誤字）を起こす確率が生じます。この文字の乱れは、火の杖による焼き付けを含む *あらゆる* 筆記手段に適用されます。（硬い筆記具で免除されるのは、埃や血の表面かすれ判定だけです。）綴りを間違えた刻み文字には何の魔力も宿りません。これはエルベレスを刻む際に最も致命的な問題となります。
+
+**上書きと追記。** すでに存在する刻み文字に文章を追記することは可能ですが、エルベレスのような特定の聖句の魔力を発揮させるには、床の文字列が *厳密に* その単語のみでなければなりません。そのため、文字を追記すると結界としての効果は失われてしまいます。効果を更新したい場合は、そのマスを上書きするか、別の新しいマスを選んで刻んでください。
+
+**覚えておくべき2つの特別な刻み文字。** ダンジョン内で見つかる刻み文字の大半は、ランダムな雰囲気描写（落書き、過去の冒険者が残した「elbereth」など）です。しかし、以下の2つの特定のメッセージは、ダンジョン生成時に配置された **罠の目印 (trap markers)** です。*"Ad aerarium"*（ラテン語で「宝物庫へ」の意）は、**宝物庫テレポート** または **階層テレポート** の罠が潜む隠し小部屋の目印です。宝物庫テレポートは、同一フロアにあるクロイソスの2×2マスのゴールド部屋へと転送してくれる使い切りの罠です。金貨を回収し、番兵が現れる前に脱出しましょう。階層テレポートはランダムな深さの階層へ飛ばされるため、瞬間移動制御がないと危険です。*"Vlad was here"*（ヴラド参上）は、**落とし扉** が仕掛けられた隠し小部屋の目印です。どちらのメッセージもメッセージログで見落としやすいため、見かけたら慎重に調査し、罠の向こう側で待ち受ける事態に備えましょう。

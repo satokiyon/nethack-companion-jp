@@ -52,6 +52,7 @@ Bullwhip: 鞭
 Fedora: フィドーラ
 Tinning kit: 缶詰作成道具
 Lock pick: 鍵開け器具
+Luckstone: 幸せの石
 Cloak of displacement: 幻影のクローク
 Cloak of magic resistance: 魔法を防ぐクローク
 Ring mail: 鉄環の鎧
@@ -90,11 +91,15 @@ extra healing: 超回復
 cure sickness: 病気治療
 remove curse: 解呪
 
-## Artifacts (アーティファクト) - from obj_jp.c
+## Artifacts & Special Items (アーティファクト・特別アイテム) - from obj_jp.c
 Excalibur: エクスカリバー
 Mjollnir: ミョルニル
 Demonbane: デーモンベイン
 Platinum Yendorian Express Card: 白金のエンドール急行カード
+Bell of Opening: 開放の鐘
+Candelabrum of Invocation: 祈りの燭台
+Book of the Dead: 死者の書
+Amulet of Yendor: イェンダーの魔除け
 
 ## Dungeon Features & Terrain (施設・地形) - from NetHackJP C sources
 fountain: 泉
