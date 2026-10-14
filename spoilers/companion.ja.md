@@ -2116,3 +2116,307 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 一部のモンスター（クサリヘビ、殺人蜂、コブラ、一部の蜘蛛など）は、通常の打撃ダメージに加えて 10〜30 もの追加HPダメージを与える猛毒攻撃の判定を持っています。最大HPが高い状態であれば耐えられることが多いですが、低レベルや手負いの状態では一撃で命を落とします。この「追加致死ダメージ」の抽選は、該当する毒攻撃が命中するごとにおよそ240分の1の確率で発生します。また、黙示録の四騎士（死、ペスト、飢餓）の死体を食べた場合、残りHPに関係なくその場で即死します。
 
 **防御策：** [毒耐性](#damage-resistances) を持っていれば完全免疫となります。大半のキャラクターは、序盤に毒持ちモンスターの死体を適切に食べることで毒耐性を獲得できます。これはゲーム開始直後に真っ先に確保すべき最重要の内在能力のひとつです。
+
+#### 脳みそ吸引・脳死 (Brainlessness)
+<!-- audit
+2026-05-18:
+- mind flayer 3 tentacles, master 5 tentacles; AD_DRIN + AT_WEAP 1d8 (monsters.h:523-535)
+- INT loss rnd(2) per hit; up to 10 lost per turn from a master (uhitm.c:3263)
+- brainlessness death; lifesaving still dies (eat.c:698-715)
+- 1-in-5 chance of losespells per hit (uhitm.c:3264)
+- losespells zeroes rn2(n+1) random spells; re-study restores them (spell.c:1759-1827)
+- 5.0 AD_DRIN no longer wipes maps or item IDs — only spells (uhitm.c:3263-3271: only adjattrib INT, losespells, drain_weapon_skill — no forget_map/forget_objects calls)
+- polymorphed into a mindflayer, brain-eating restores Int (eat.c:679-688)
+- any helmet blocks 7/8 tentacle drains via `uarmh && rn2(8)` (uhitm.c:3235)
+- greasing adds an extra slip-roll on top of the helmet check (uhitm.c:3232 → u_slip_free at mhitu.c:1047-1064)
+- blessed potion of restore ability restores all lost attributes (potion.c:646-691)
+- blessed potion of full healing does NOT restore stats (potion.c:1144-1162)
+- prayer fixes drained attributes via TROUBLE_POISONED (pray.c:270-272, 547-552)
+- unicorn horn no longer restores attributes in 5.0 (apply.c:2306-2327)
+- strategy aligned with NetHackWiki Mind flayer, Helm: any helmet blocks 7/8 tentacles, greasing stacks slip-roll, range-kill is safest (https://nethackwiki.com/wiki/Mind_flayer, https://nethackwiki.com/wiki/Helm)
+-->
+
+マインドフレアは、その触手攻撃によってプレイヤーの「知力（Intelligence）」を直接吸い取ってきます。知力が種族の最低値（人間なら3）まで低下すると、次の吸引によって即死します（死因：脳死／brainlessness）。通常のマインドフレアは1ターンに3回の触手攻撃を行い、**マスターマインドフレア** は *5回* の触手攻撃に加えて強力な武器攻撃を繰り出してきます。無防備な状態でマスターマインドフレアと隣接すれば、たった1ターンで知力を最大10ポイント削り取られて死に至ることがあります。
+
+**防御策：** どんなものであれ **兜（ヘルメット）を着用していれば、触手による知力ドレインを8分の7（約87.5%）の確率で弾き返します**。兜に防水用の油（grease）を塗っておけば、さらに滑って回避できる確率が上乗せされます。マインドフレアの生息域に足を踏み入れる際は、油を塗った兜の着用が標準的なエチケットです。さらに言えば、そもそも隣接されないよう遠距離攻撃（杖や呪文）で仕留めるのが最善です。
+もうひとつの重要な詳細として、マインドフレアの「精神波（mind blast）」はテレパシーで感知されている状態では百発百中で飛んできますが、テレパシーを遮断していれば発動率は10分の1に激減します。ESPの魔除けを外すことで危険を大幅に減らせます（完全にゼロにはなりませんが）。
+ドレインされた知力を回復するには、**能力回復の薬 (potion of restore ability)**（無呪は1つの能力値、祝福は全能力値を回復）、能力回復の呪文、または神との関係が良好な状態での祈りが必要です。なお、**NetHack 5.0 においてユニコーンの角は低下した能力値を回復しなくなった** ため、ユニコーンの角に頼ってはいけません。マインドフレアの巣窟に突入する前に、必ず能力回復の薬を少なくとも1本はストックしておきましょう。
+
+#### 飲み込み・包み込み (Engulfment)
+
+姿を隠して獲物を待ち伏せし、踏み込んできた者を一瞬で包み込むモンスターが2種類存在します。**ラーカー (lurker above)**（`t`、灰色、レベル10）は天井に張り付き、下を通りかかった者に覆い被さってきます。**トラッパー (trapper)**（`t`、緑色、レベル12）は床に擬態し、その上を踏んだ者を丸呑みにして包み込みます。どちらも発動するまでは通常の地形と見分けがつきません。これらの包み込み攻撃は、胃袋で消化するのではなく、圧迫によって締め潰す攻撃です。
+
+待ち伏せ型ではない他の丸呑みモンスターも存在します。紫ワーム (purple worm) は獲物を消化液で溶かして即死させようとします。渦（ヴォルテックス）や霧の雲はプレイヤーを包み込んで打撃を与えますが、消化することはありません。なお、ドラゴンがプレイヤーを丸呑みにすることはありません。
+
+**防御策：** 捜索（`s`）を行うことで隠れているモンスターの正体を暴けます。「テレパシー」は擬態を見破ってその存在を表示します。「警告の指輪」や「警戒の兜」を装備していれば、足を踏み入れる前に察知できます。
+
+**脱出方法。** 呑み込まれてしまったら、体内からホストを繰り返し攻撃してください。体内であっても武器による攻撃は正常に機能します。もし **掘削の杖 (wand of digging)** を持っていれば、それを振ってください（方向の指定は不要です）。ほぼ確実に即座に体外へと吐き出され、包み込んでいたモンスターのHPは1にまで削られます。**開錠の杖 (wand of opening)** や施錠開錠の呪文（ノック）を使えば、相手を殺すことなくその場で安全に吐き出させることができます（争いの効果などで *飼いならした* 紫ワームに誤って呑み込まれてしまった場合に極めて有用です）。遠距離呪文や光線系の杖を体内で放つことでも、内部から大ダメージを与えて破壊できます。
+
+#### 溺死 (Drowning)
+<!-- audit
+2026-05-18:
+- drown check uses monster's tile (uhitm.c:3389-3390)
+- Swimming, Amphibious, or Breathless all defeat the drown (youprop.h:264-277)
+- pool-entry check at hack.c:3272; Flying also skips entry, Levitation is the canonical defense
+- emergency_disrobe is gated on Stressed+ (trap.c:4897-4941)
+- krakens placed only on medusa-4 in the Dungeon (medusa-4.lua:122); other placements are Quest/fakewiz/wizard1
+- "swamp rooms" comment refers to eels, not krakens (mkroom.c:557-565)
+- encumbrance does NOT gate the grab-drown path: being Burdened won't save you once grabbed
+- strategy aligned with NetHackWiki Drowning, Giant eel, Amulet of magical breathing: range-kill sea monsters, magical breathing/Swimming/Amphibious as the only true grab-drown defenses (https://nethackwiki.com/wiki/Drowning, https://nethackwiki.com/wiki/Giant_eel, https://nethackwiki.com/wiki/Amulet_of_magical_breathing)
+-->
+
+オオウナギ、電気ウナギ、そしてクラーケンは、巻きつき攻撃によってプレイヤーを拘束してきます。捕まってしまうと、そのモンスターのターンが回ってくるたびに溺死の判定が発生します。この溺死チェックは **モンスターがいるマス**（ウナギやクラーケンにとっては常に水マス）を基準に判定されるため、プレイヤー自身が隣接する乾いた陸地に立っていても水中に引きずり込まれて溺死します。「水泳（Swimming）」、「[呼吸の魔除け（無呼吸）](#movement-and-spatial-behavior)」、あるいは「両生形態」だけがこの引きずり込み溺死を完全に防ぐことができます。ここでは所持品の負荷重量は関係ありません（負荷が問題になるのは水に *落下* して自力で這い上がろうとする時であり、「圧迫（Stressed）」以上の負荷では緊急脱衣を強いられます）。ウナギやクラーケンとは、メデューサの階層、城を取り囲む堀、沼地の部屋、そして水の大系で遭遇することになります。
+
+**防御策：** **呼吸の魔除け (amulet of magical breathing)**（または同名の呪文）を身につければ「無呼吸」となり、引きずり込みによる溺死の脅威を完全に無力化できます。「浮遊」は水たまりや堀の上を歩いて侵入するのを防いでくれますが、**ウナギに巻きつかれた場合の溺死は防げない** 点に注意してください。海洋モンスターとは可能な限り遠距離から交戦して撃破してください。奴らの巻きつき攻撃は隣接しなければ発動しません。
+
+#### 石化 (Petrification (Stoning))
+<!-- audit
+2026-05-18:
+- stoning timer starts at 5 (uhitm.c:3937)
+- ticks 5→1 with five distinct messages (timeout.c:128-148)
+- at counter 3 "limbs have turned to stone" sets nomul(-3) paralysis (timeout.c:163-165)
+- two more messages fire after paralysis before done(STONING) at counter 0
+- acid-blob corpse grants TIMED HStone_resistance += d(3,6), not permanent (eat.c:932-934, 1089-1094)
+- Unchanging does not interrupt stoning: only blocks poly (polyself.c:1381-1384)
+- poly_when_stoned auto-cure requires already being a non-stone golem (mondata.c:80-85)
+- plain wand of polymorph cannot target the poly_when_stoned outcome
+- stepping on a cockatrice corpse without Fumbling is safe
+- Fumbling can trip the hero onto the corpse for instapetrify (timeout.c:1256-1261)
+- strategy aligned with NetHackWiki Stoning, Cockatrice, Lizard: gloves around cockatrice corpses, lizard/acid corpse to interrupt the countdown, weaponized corpse for offense (https://nethackwiki.com/wiki/Stoning, https://nethackwiki.com/wiki/Cockatrice, https://nethackwiki.com/wiki/Lizard)
+- eating any acidic corpse cures in-progress stoning (eat.c:860-861, fix_petrification at eat.c:867-877)
+2026-05-23:
+- cockatrice hiss (AD_STON) fires on 1/3 of landed melee hits (uhitm.c:4215)
+- stoning roll within is `!rn2(10) || flags.moonphase == NEW_MOON` (uhitm.c:4245)
+- 5.0 explicitly removed the lizard-corpse new-moon override (uhitm.c:4231-4243 source comment)
+- net per-hit stoning rate: ~1/30 baseline, ~1/3 on new moon
+- citation: source comment names the design change; NetHackWiki Cockatrice page still documents pre-5.0 lizard mitigation (https://nethackwiki.com/wiki/Cockatrice)
+-->
+
+石化こそ、プレイヤーがつねに「トカゲの死体」を持ち歩く最大の理由です。小手（手袋）を着けずにコカトリスに素手で触れたり食べたりすること、裸足で死体を蹴ること、あるいはメデューサの視線を直接受けることは、その場での即死を意味します。この場合、トカゲの死体は何の役にも立ちません。なお、死体のあるマスを踏んで通過すること自体は安全ですが、不器用（Fumbling）で足をもつれさせて死体の上に転倒すると即座に石化死します。
+
+一方、コカトリスの威嚇の鳴き声（シューという音）を受けたり、投げられた卵が命中した場合は、5ターンのカウントダウンが始まります。以下の順序で警告メッセージが表示されます：
+1. 「足取りが重くなってきた（You are slowing down）」
+2. 「手足がこわばってきた（Your limbs are stiffening）」
+3. 「手足が石化してしまった（Your limbs have turned to stone）」（この時点で **麻痺状態** に陥り、一切の行動が不可能になります）
+4. 「完全に石化してしまった（You have turned to stone）」
+5. 「あなたは石像になってしまった（You are a statue）」（死亡）
+
+**事前の防御策：** コカトリスの死体を取り扱う際は必ず小手を着用すること、メデューサに対しては「反射」の盾や魔除けを使用すること、そして酸のブロッブの死体を食べて *時限式* の石化耐性を蓄積しておくこと（1体につき3〜18ターン持続）です。永続的な耐性を得るには、黄色ドラゴンの鱗鎧を着用してください。
+
+**新月の夜の猛威。** コカトリスの近接攻撃が命中した際、石化のカウントダウンが始まる確率は通常時は低確率（約30分の1）です。しかし、現実世界が **新月の夜** である場合、この発動率は **約3分の1** へと跳ね上がります。新月の夜にコカトリスの巣に挑むのは避けるのが賢明です。
+
+**石化が進行している最中の緊急治療：** **トカゲの死体を食べる**（これこそが携帯している目的です）、酸性の死体を食べる、酸の薬を飲む、神に祈る、あるいは自分自身に「石を肉に（stone to flesh）」の呪文を唱えてください。トカゲの死体は鞄の中ではなく、**メインの所持品（インベントリ）** に入れて携帯してください。鞄から取り出すだけで1ターンを消費してしまい、手遅れになります。必ず「手足が石化してしまった」のメッセージが出る *前* に対処してください。麻痺してしまえば3ターンの間何もできなくなり、そのまま石像になって絶命します。なお、「[耐へんげの魔除け](#special-and-utility)」は石化を **食い止めることはできません**。もし非石ゴーレムに変身している最中であれば、カウントダウン中に耐へんげの魔除けを着けていると、本来死亡時に石ゴーレムへと自動変身して生還できるはずの救済措置をブロックしてしまうため、かえって有害です。
+
+トカゲを切らしてしまった場合でも、あらゆる酸性の死体が代用できます：酸のブロッブ、ゼリー類、黄色ドラゴン、黒ナガ、そして緑スライム（ただし緑スライムを食べると今度は *スライム化* のカウントダウンが始まります。最後の命綱としてのみ使用してください）。酸の薬を飲むことでも同様の治癒効果が得られます。
+
+**コインの裏返し（凶悪な兵器）：** 小手をはめた手でコカトリスの死体を武器として構える（wield）と、ゲーム内で最も凶悪な一撃必殺の武器になります。[石化耐性](#damage-resistances) を持たないあらゆるモンスターは、叩かれた瞬間に石像へと変わります。熟練プレイヤーの間で「ゴムのチキン（rubber chicken）」として親しまれるこの古典的戦術は、多くの魔神（デーモン・ロード）すら瞬殺します（メデューサと四騎士は石化耐性を持っています）。この戦術を使う際に最も注意すべき致命的ミスは、死体を構えたまま落とし穴、穴、または落とし戸に落ちること、そして小手が脱げてしまうことです。投げられたコカトリスの卵も同様の即死効果を持ち、モンスターが投げてきた場合も同様の脅威となります。
+
+#### 瞬間分解 (Disintegration)
+<!-- audit
+2026-05-18:
+- only player-facing AD_DISN is black dragon breath (monsters.h:1520, ZT_BREATH(ZT_DEATH) at zap.c:4464-4493)
+- beholder is the only other AD_DISN monster and is #if 0-gated (monsters.h:367-371)
+- black dragons have MR_DISINT in attack and defense slots (monsters.h:1523)
+- reflected beam does 0 damage to them via resists_disint (zap.c:4318)
+- worn-armor priority on disint hit: shield first (zap.c:4476-4479), then body armor + cloak (zap.c:4480-4486)
+- amulet of life saving rescues you (end.c catches DIED) but breath still destroys cloak/shirt (zap.c:4487-4492)
+- an ordinary shield eats one breath; shields of reflection don't have a failure mode (zap.c:4476-4479)
+- Antimagic check is on the death-ray branch only; the AD_DISN breath branch checks Disint_resistance only (zap.c:4464-4497)
+-->
+
+黒ドラゴンのブレスは、プレイヤーを一瞬で消滅（瞬間分解）させる唯一のモンスター攻撃です（このほか、激怒した神が雷撃の追撃として放つ広角の瞬間分解光線もあります。神の光線は反射できません。瞬間分解耐性だけが有効です。神の不興を買わないようにしてください）。
+
+**防御策：** 瞬間分解耐性（黒ドラゴンの死体を食べるか、黒ドラゴンの鱗鎧を着用する）があれば完全免疫となります。**反射** はブレスを跳ね返してプレイヤーの身を守りますが、黒ドラゴン自身も瞬間分解耐性を持っているため、反射したブレスで黒ドラゴンを倒すことはできません。なお、「耐魔（魔法防御）」はこのブレスに対して **一切効果がありません**。
+
+**瞬間分解耐性がない場合、** 身につけている防具が身代わりとなってブレスを受け止めます：盾を持っていればまず **盾** が破壊され、次に **鎧とクローク** が同時に破壊されます。防具を何も身につけていない場合にのみ、プレイヤー自身が直撃を受けて即死します（その過程でクロークやシャツも破壊されます）。したがって、普通の盾であっても失われる前に少なくとも1発のブレスを肩代わりしてくれます。命の魔除けは致死の直撃から救ってくれますが、破壊された防具は失われます。
+
+#### 経験値レベル低下・ドレイン (Level Drain)
+<!-- audit
+2026-05-18:
+- drain-life attacks (AD_DRLI) reduce u.ulevel by 1 and max HP by mlev gain (exper.c:232-260)
+- drained levels do NOT recover over time
+- drain resistance prevents the drop entirely (attrib.c:380-384)
+- sources: Excalibur, Stormbringer, Staff of Aesculapius; in 5.0, black dragon scale mail or shield of drain resistance
+- wraith corpses give 1 level on eat (eat.c:980-985)
+- blessed potion of restore ability restores ALL lost levels (potion.c:687-691)
+- uncursed/plain restore ability returns one level per quaff
+- strategy aligned with NetHackWiki Drain resistance, Wraith, Excalibur: Excalibur/Stormbringer/Staff of Aesculapius for drain resistance, eat wraith corpse to regain a level (https://nethackwiki.com/wiki/Drain_resistance, https://nethackwiki.com/wiki/Wraith, https://nethackwiki.com/wiki/Excalibur)
+-->
+
+一部のモンスターは、攻撃が命中した際にプレイヤーの経験値レベルを低下させ、そのレベルの上昇によって得ていた最大HPや魔力を奪い去ります。レイス、塚人、ナズグル、吸血鬼、吸血鬼の首領、そしてヴラド自身がすべてレベルドレイン攻撃を持っています。敵の手にある[ストームブリンガー](#stormbringer) も同様の効果をもたらします。失われたレベルは時間経過では自然回復しません。モンスターを倒して経験値を稼ぎ直すか、能力回復の薬を飲むか（祝福されたものは失われた全レベルを一度に復元します）、あるいはレイスの死体を食べることで取り戻す必要があります。
+
+（なお、生命力ドレインと *筋力（Strength）* ドレインを混同しないでください。コウモリの毒噛みつきは筋力を低下させるものであり、レベルを奪うものではありません。能力値ドレインは別の問題であり、後述の[エンチャント吸魔](#enchantment-drain) はその親類です。）
+
+**防御策：** *ドレイン耐性* を持っていれば完全免疫となります。伝統的な入手先は、[エクスカリバー](#excalibur-artifact)（秩序）、ストームブリンガー（混沌）、あるいは[アスクレピオスの杖](#staff-of-aesculapius)（治療師のクエスト・アーティファクト）の装備です。NetHack 5.0 での新要素として、**黒ドラゴンの鱗鎧**（瞬間分解耐性とドレイン耐性の両方を1スロットで付与）や **ドレイン耐性の盾**（店でランダムに見つかる盾）の着用が挙げられます。
+
+レイスの死体は重量がなく、缶詰にすることもできません（栄養価ゼロ）。戦闘が終わったら新鮮なうちに即座に食べてレベルを回復・上昇させましょう。
+
+#### エンチャント吸魔 (Enchantment Drain)
+<!-- audit
+2026-05-18:
+- disenchanter generates only in Gehennom (G_HELL: monsters.h:2156, makemon.c:1935, 1998)
+- active claw targets armor via some_armor (do_wear.c:2629, uhitm.c:3619)
+- target order: cloak → body armor → shirt → 1/4 chance for helm/gloves/boots/shield (do_wear.c:2634-2652)
+- if naked, rn2(5) picks ring/amulet/blindfold; never targets a wielded weapon (uhitm.c:3621-3640 mhitm_ad_ench cases 0-4 enumerate uright/uleft/uamul/ublindf only)
+- active hit prints "Your X seems less effective" (uhitm.c:3641)
+- weapon drain is passive-only: fires when you melee the disenchanter (mhitu.c:2508-2515)
+- passive drain is silent
+- obj_resists: 10% chance for ordinary, 90% for artifact (zap.c:1392-1394)
+- Invocation items and Rider corpses always resist (zap.c:1462-1467)
+- MC negates the active attack (uhitm.c:3613) but NOT the passive counter
+- eating a disenchanter corpse strips a random intrinsic (eat.c:1270-1275)
+- strategy aligned with NetHackWiki Disenchanter, Magic cancellation: MC armor blocks the active claw but not the passive counter; range-kill is the cleanest plan, and the corpse is not safe to eat (https://nethackwiki.com/wiki/Disenchanter, https://nethackwiki.com/wiki/Magic_cancellation)
+-->
+
+**吸魔の怪物 (Disenchanters)**（`R`、青色）は、[ゲヘナ](#gehennom) にのみ出現します。その爪は着用している装備の魔法強化を吸い取り、近接攻撃で殴りかかると手持ちの武器のエンチャントを削り取ってきます。
+
+モンスターからの **能動的** な爪攻撃は、着用している防具のいずれか1つ（クロークが最優先、次いで鎧、シャツ、そして兜・小手・靴・盾が等確率）を選び、その強化値を1下げます。防具を一切着ていない場合は、指輪、魔除け、目隠しのいずれかを侵食します。**能動的な攻撃が手持ちの武器を標的にすることはありません**。攻撃が命中するたびに「あなたの〜の効果が薄れたようだ（Your ... seems less effective）」とメッセージが出るため、発生したことは分かります。
+
+一方、プレイヤーの武器がエンチャント低下を被るのは、近接攻撃で吸魔の怪物を殴った際の **受動的** な反撃ダメージによるものだけです。3〜4回近接攻撃を当てるだけで、丹精込めて鍛えた+7の剣があっという間に+3にまで劣化します。しかもこの受動的ドレインはメッセージが出ず無音で進行します。遠距離攻撃で仕留めれば、両方の吸魔攻撃を完全に回避できます。
+
+**防御策。** **魔法防御力（MC3）の防具** は、防具に対する能動的ドレインをほぼ遮断しますが、武器を劣化させる近接反撃を止めることはできません。争いの指輪やペットを使って他の標的へ誘導するのが有効です。アーティファクトは10回中9回の確率で吸魔に抵抗しますが、通常のアイテムは10回中1回しか抵抗できません。**死体は絶対に食べてはいけません**。ランダムに持っている内在能力を1つ奪い取られます。
+
+#### 死の接触 (The Touch of Death)
+<!-- audit
+2026-05-18:
+- self-zap WAN_DEATH or SPE_FINGER_OF_DEATH skips the Antimagic check (zap.c:2885-2902)
+- only the ray-bolt path checks Antimagic (zap.c:4497-4502)
+- self-zap escape requires being nonliving (undead/manes/golems/S_VORTEX) or is_demon (mondata.h:219-220)
+- Rider Death rn2(20): 17-19 = full touch (15%), 5-16 = permdrain=1 (60%), 0-4 = miss (25%) (uhitm.c:3858-3882)
+- 8d6 + 50 + half-damage permdrain only on rolls 17-19
+- MR on the 17-19 branch falls through to the smaller permdrain rather than being harmless
+- the smaller permdrain on rolls 5-16 is NOT reduced by MR (mcastu.c:326-337)
+- strategy aligned with NetHackWiki Touch of death, Wand of death, Death resistance: MR blocks incoming death rays but not self-zap; nonliving/demon polyform is the self-zap fallback (https://nethackwiki.com/wiki/Touch_of_death, https://nethackwiki.com/wiki/Wand_of_death, https://nethackwiki.com/wiki/Death_resistance)
+-->
+
+一部のモンスター、とりわけアストラル大系に君臨する黙示録の四騎士の一角「死（Death）」は、たった一撃の接触であなたを絶命させることができます。「死の指（Finger of Death）」の呪文や死の杖も同様の働きをします。**騎士「死」に対して死の杖や死の指の呪文を放ってはなりません**。「死」はその攻撃エネルギーを吸収し、最大HPを増加させてしまいます。四騎士の全員に対して推奨される決定打は「マジックミサイル」です。
+
+**騎士「死」の接触攻撃** は、15%の確率で **8d6 + 50** の全力打撃を繰り出し、そのダメージの半分に相当する数値を最大HPから永久ドレインしてきます。「耐魔（魔法防御）」を持っていれば、この全力打撃をより小さなドレインへと軽減してくれます（無害化はできません）。接触の60%はこの小さなドレインを直接もたらし、残りの25%はミスとなります。HPが極めて高い高レベルキャラクターであればこの大打撃にも耐えられますが、最大HPの永久喪失は深刻な痛手となります。
+
+**死の杖および死の指の呪文** は、死の光線が *外部から飛んできた場合* に限り耐魔によって完全に防ぐことができます。しかし、操作ミスなどで自分自身に向けて誤射してしまった場合、耐魔はあなたを守ってくれません。この誤射から生き残る唯一の方法は、あらかじめ吸血鬼、リッチ、スケルトンなどの **非生命体（アンデッド）** や悪魔の肉体へと変身（ポリモーフ）していることです。この非生命体／悪魔の特性は、外部から飛んできた死の光線に対しても完全耐性として機能します。
+
+なお、接触や死の杖の直撃によって即死した場合でも、命の魔除け（amulet of life saving）を身につけていれば1度だけその場で蘇生することができます。
+
+#### 虐殺 (Genocide)
+<!-- audit
+2026-05-18:
+- confused-uncursed scroll of genocide self-genocides your role's species (read.c:1737)
+- PLAYER+REALLY branch in do_genocide kills you with killer = "genocidal confusion" (read.c:2838-2972)
+- mndx = u.umonster = gu.urole.mnum (read.c:2839, u_init.c:991) — role species (PM_VALKYRIE etc.), not race
+-->
+
+混乱（Confused）した状態で呪われていない「虐殺の巻物」を読むと、自分自身の役職の種族を虐殺してしまい、即座にゲームオーバーとなります。巻物を読む前に、必ず自分の状態異常ステータスを確認してください。
+
+### 神との関係 (Divine Relations)
+
+<!-- audit
+2026-05-31 audit:
+- corpse 50-turn freshness rule verified at pray.c:1843-1849. EXCEPT: an acid blob corpse (PM_ACID_BLOB) is the one exception and never spoils for sacrifice purposes (pray.c:1843).
+- sacrifice value formula: mons[corpsenm].difficulty + 1 (pray.c:1845). Bigger/tougher monsters yield higher value.
+- artifact gift chance per qualifying sacrifice: !rn2(6 + (2 * u.ugifts * nartifacts)) (pray.c:1792). First gift is 1 in 6; subsequent gifts drop by a multiplicative factor (gift count × total artifacts in world), NOT additive +2·n as previously stated.
+- prerequisites: u.ulevel > 2 (XL>=3) AND u.uluck >= 0 (pray.c:1784).
+- first-gift bias is alignment + skill compatibility, not role-name lookup (artifact.c:230 `a->alignment != A_NONE || u.ugifts > 0 || !rn2(3)`).
+- pre-existing book claim "1 in (10 + 2·n)" (giving 1/10 first, 1/14 second) was incorrect; rewrote to match the source.
+-->
+
+機嫌の良い神はあなたの祈りに応え、過ちを赦し、時には強力なアーティファクトを授けてくれます。一方、怒れる神は天罰を下してあなたを打ち倒します。
+
+#### 祈り (Prayer)
+
+神に祈る（`#pray`）ことで、守護神に救いを求めることができます。適切な状況であれば、祈りは石化、飢餓、あるいは瀕死の危機からあなたを救い出してくれます。しかし条件が満たされていない場合、祈りそのものがあなたの命を奪うことになります。
+
+> *以下の解説は、長年にわたりRGRNの祈りシステムのリファレンスとして親しまれてきたMatthew Lahut氏の『祈りスポイラー (Praying Spoiler)』に着想を得ています。*
+
+**祈りが治療するトラブル（優先順位順）。** 神は最も緊急性の高い危険から優先的に解決してくれます：
+
+1. 進行中の石化（Petrification）
+2. 進行中のスライム化（Sliming）
+3. 絞殺（Strangulation）
+4. 溶岩への沈没（Sinking in lava）
+5. 病気（食中毒、疫病）
+6. 深刻な飢餓（「衰弱」または「失神寸前」）
+7. 悪臭の雲（stinking cloud）の中への立ち往生
+8. 致命的な低HP（残りHPが5以下、または経験値レベルに応じて変動する一定の割合以下：XL 1〜5で1/5以下、XL 6〜13で1/6以下、XL 14〜21で1/7以下、XL 22〜29で1/8以下、XL 30以上で1/9以下）
+9. 獣化症（Lycanthropy）
+10. 壁への埋没、過重による倒壊、呪われた浮遊の靴、両手が塞がって使えない状態（呪われた小手＋呪われた手持ち武器）、呪われた目隠し
+
+上記の重大な危機を解決した後、神はさらに追加の祝福を与えてくれる場合があります。軽微な異常（通常の空腹、盲目、混乱、朦朧、幻覚、鉄球と鎖による通常の処罰）を治療したり、属性値を改善したり、あるいは[テレパシー](#senses-and-perception) や速度といった内在能力を授けてくれることすらあります。
+
+**安全に祈るための必須条件。** 以下のすべてを満たしていなければなりません：
+
+- **属性値（alignment）** が非負（0以上）であること。友好的なNPCの殺害、万引き、その他数々の非行は属性値を低下させます。生贄の奉納や美徳にかなった行動は属性値を上昇させます。
+- **幸運値（luck）** が非負（0以上）であること。幸運値は様々な要因で変動します（[幸運と運命](#luck-and-fortune) を参照）。
+- 神が **怒っていない** こと。神の怒りは属性値とは別枠で管理されており、特定の重大な違反（神の戒律破り、祭壇の冒涜など）によって蓄積されます。
+- **祈りのクールダウン** が完了していること。祈りが成功した後、再び祈れるようになるまで一定ターン待たなければなりません。このクールダウン時間は平均約450ターンですが、それより遥かに長引くこともあります。真の緊急事態（致命的低HP、飢餓など）においては、クールダウンの終了が近づいていれば多少の情状酌量があります。
+- 混沌の神を信仰しているのでない限り、悪魔やアンデッドに **変身（ポリモーフ）していない** こと。
+- **[ゲヘナ](#gehennom)** にいないこと（標準的な役職で信仰することのないモロクを信仰している場合を除く）。ゲヘナでは神に祈りの声が届きません。これこそがゲヘナをあれほど危険な地にしている要因のひとつです。
+- 祭壇の上に立っている場合、その祭壇が **同属性** であること。異属性の祭壇の上で祈ると、敵対する神に祈りを捧げることになってしまいます。
+
+**手短な鉄則：** 属性値と幸運値が0以上であり、神が怒っておらず、異属性の祭壇の上におらず、ゲヘナの外にいる場合にのみ、上記のトラブル解決のために祈ってください。ゲーム開始から一度も祈っていない場合は、ターン数が300を超えてから祈るようにしてください。一度祈った後は、可能な限り次の祈りまで約1000ターン空けるようにしてください（平均回復時間は約500ターンですが、確率の偏りで長引くことがあります）。
+
+**祈りが失敗したとき。** 条件が満たされていない場合、神は助ける代わりに罰を下します：属性値や幸運値の喪失、クールダウンの延長、装備品の呪詛化、敵対的な神の召喚獣の出現などです。重大な違反を犯している場合は、落雷や瞬間分解光線が撃ち込まれ、即死します。
+
+**実践的な指針。** 本当に死に直面し、他に一切の手段がない場合（飢餓、石化、病気、瀕死の低HP）にのみ祈ってください。祈る前に、まず上記のチェックリスト（属性値がプラスか、クールダウンは空けているか、異属性祭壇の上ではないか）を確認してください。1つでも「いいえ」があるなら、祈り以外の解決策を探してください。
+
+#### アンデッド退散 (Turning Undead)
+
+**騎士** と **僧侶** は、`#turn` コマンドを使って神の御威光を呼び求め、アンデッドを退散させることができます。視界内の広範囲にいるすべてのアンデッドと吸血鬼（経験値レベル15以降は悪魔も含む）が対象となります。相手が強敵であるほど、単に恐怖させて追い払うだけでなく完全に *消滅* させるためには高い経験値レベルが必要です。ゾンビなら経験値レベル6で消滅させられますが、**亡霊（ゴースト）はレベル14**、リッチはレベル16に達するまで消滅させることはできません。必要なレベルに満たない場合、退散は敵を逃走させるだけに留まり、ゴーストのような耐魔を持つアンデッドは約半分の確率で退散自体に抵抗します。秩序および中立の英雄は退散させた敵を消滅させ、混沌の英雄は敵を平和化（非敵対化）させます。
+
+祈りとは異なり、アンデッド退散を行っても神との関係におけるコストは一切かかりません。クールダウンも神の恩恵の消費もないため、祈祷中に数ターン麻痺して無防備になる点さえ気をつければ、何度でも自由に使用できます。ただし祈りと同様に、**[ゲヘナ](#gehennom) では完全に失敗します**。そのため「死者の谷」では役に立ちません。なお、「アンデッド退散」の呪文（魔法書から学ぶもの）は別物であり、こちらは指定した一方向に放たれ、単体の標的を恐怖させる効果を持ち、ゲヘナ内でも問題なく機能します。
+
+#### 生贄 (Sacrifice)
+
+生贄（いけにえ）は、新鮮なモンスターの死体を捧げることで神の恩恵を獲得する行為です。自分と同属性の祭壇の上で `#offer` を行うと、まず怒れる神を宥め、次に属性値を回復し、祈りのクールダウンを短縮します。これらが万全の状態になると、幸運値を上昇させたり、強力なアーティファクトを授けてくれたりします。なお、聖水の生成や戴冠（crowning）は、生贄そのものではなく祭壇の上で「祈る」ことによって発生します。
+
+基本ルール：
+
+- 死体は新鮮でなければならず、殺害されてから **50ターン以内** のものでなければなりません。50ターン以上経過した死体は生贄としての価値がゼロになります（神は単に無視します）。酸のブロッブの死体はこのルールの唯一の例外であり、生贄の用途において決して腐敗しません。
+- 強力で巨大なモンスターほど、価値の高い生贄となります。「あなたの心に物足りなさが残った（You have a feeling of inadequacy）」というメッセージが出た場合、神が怒っており、捧げた死体が小さすぎて怒りを鎮めるのに不十分であったことを意味します（この要求値は経験値レベルには依存しません）。
+- 祭壇は自分の属性と一致している必要があります。さもなくば、他人の神に祈りを捧げることになり、固有のペナルティを招きます。
+- **自分と同種族の死体を生贄に捧げる行為** は、秩序および中立の英雄にとっては重罪として処罰されます（そして同属性だった祭壇が混沌の祭壇へと反転します）。しかし、**混沌** の英雄が混沌の祭壇で同種族の死体を捧げた場合は例外であり、ご褒美として友好的な悪魔が出現し、幸運値と属性値の両方が大幅に上昇します。
+- アーティファクトの賜物（ギフト）が発生するためには、**経験値レベルが3以上** であり、かつ **幸運値がマイナスでないこと** が必須条件です。
+
+十分な生贄の功績を積み重ねると、神はあなたにアーティファクト武器を賜物として授けてくれます。条件を満たす生贄1回あたりのギフト発生確率は、1つ目のアーティファクトについては **およそ6分の1** ですが、2つ目以降のギフトについては確率が劇的に低下します。この低下率は、「これまでに獲得したギフトの数」と「ゲーム内にすでに存在する全アーティファクトの総数（プレイヤー所持、自然生成、引き継いだボーンズファイル内を含む）」の相乗効果によって決定されます。最初のギフトしか存在しない場合、2つ目の確率は約8分の1から始まりますが、ギフト数や既存アーティファクト数が増えるにつれて確率は極めて低くなります。1つ目のアーティファクトを手に入れた後、何千ターンもの間何ももらえなくなったとしても驚くには当たりません。
+
+特定の役職にとって、1つ目のギフトは単なるランダム抽選ではありません。ワルキューレ、魔法使い、野蛮人、侍、あるいは僧侶の場合、1つ目のギフトは必ずその役職の代表的なアーティファクトとなり、主人公自身の属性に適合した形で授与されます。また、捧げた死体の種類によって出現可能なアーティファクトに上限がかかります。「スティング」、「オーガスマッシャー」、「トロルズベイン」は価値1の生贄でも出現しますが、「ボーパルブレード」や「ファイアブランド」には価値5、「フロストブランド」には価値9、「グレイズワンディル」には価値10の生贄が必要です。最強のギフトを狙って生贄を捧げる際は、トロールクラスの死体を温存しておきましょう。
+
+#### 僧侶への寄付 (Donating to Priests)
+
+自分自身の神殿の中にいる平和的な僧侶は、寄付を受け付けてくれます。僧侶に向かって `#chat` で話しかけるとプロンプトが表示されます：*「いくら寄付しますか？ (推奨額: X または Y)」*。この2つの数字は、2段階の報酬ティアに対応する僧侶からの推奨金額です。
+
+**得られる恩恵：**
+
+- **遠視（Clairvoyance）：** 推奨金額を支払うごとに、500〜999ターンの間、一定ターンごとに周囲のマップを自動的に透視できる能力が一時的に付与されます。低い方の推奨額を寄付した場合に授与されます。
+- **守り（Protection）：** 何度でも **累積する内在的なACボーナス** が得られます。高い方の推奨額を寄付した場合に授与されます。**初回** の寄付では 2〜4 ポイントのAC改善が得られ、それ以降の寄付では上限の9ポイントまで1回につき1ポイントずつ加算されます。9ポイントを超えると、追加のACボーナスが得られる確率は 1/N へと激減します。遠視とは異なり、この守りのボーナスは死ぬまで永続します。
+
+**必要な金額。** 十分な金額を支払えば、確実に恩恵を受けられます。僧侶のプロンプトには常に正確な要求額が表示されます。この金額は、主人公の「経験値レベル」と「所持金」に応じて変動します：
+
+- **遠視：** 基本要求額は、ランダムな 150〜250 ゾークミッド × 経験値レベル
+- **守り：** その2倍、300〜500 ゾークミッド × 経験値レベル
+
+もし基準額を遥かに上回る大金を持ち歩いている場合、僧侶は懐具合に合わせて要求額を吊り上げます。プロンプトに表示される2つの数字が目安です。遠視なら1つ目の金額以上、守りのACボーナスなら2つ目の大きい方の金額以上を支払ってください。
+
+**ケチ（Cheapskate）ペナルティ。** 十分な支払い能力があるにもかかわらず、要求額を著しく下回る端した金を寄付した場合、僧侶はあなたを「けちん坊（Cheapskate）」と罵り、深く根に持ちます。次回その僧侶と話した際、要求金額が大幅に引き上げられます。このペナルティはケチな寄付を繰り返すたびに累積し、その冒険が終わるまで一生消えません（他の神殿の別の僧侶には影響しません）。また、寄付を完全に拒否した場合も守護神への属性値が低下します。
+
+**実践的な指針：**
+
+- **早期に寄付し、こまめに寄付する。** 守りのACボーナスは累積するため、XL 1 の時点での 500 zm は、XL 30 での 15,000 zm とまったく同じ AC 低下効果をもたらします。[地下鉱山](#the-gnomish-mines) から戻るたびに炭鉱の街の神殿に立ち寄って寄付を重ねるのは、熟練者の伝統的な儀式です。
+- **話しかける前に所持金を調整する。** 僧侶の要求判定は手持ちの所持金に非常に敏感です。神殿の外の床に余分な金貨を置いてから話し、寄付が終わった後に回収しましょう。
+- **異属性の僧侶であっても寄付は受け付けてくれる。** 異属性の僧侶であってもACボーナスや遠視は問題なく授与されます（属性値の上昇は得られず、その祭壇で生贄を捧げることはできませんが、ACボーナスの強化は正常に機能します）。
+- **支払う気がないなら話しかけない。** 0ゴールドの寄付は「拒否」とみなされ、属性値を失い、端した金を寄付したのと同様にケチの烙印を押されます。
+
+<!-- Donation mechanics: src/priest.c priest_talk(), 5.0 line 638:
+     rn1(101, 150 + cheapskate * 40) × u.ulevelpeak. Tier thresholds
+     at suggested × quan, 2 × suggested × quan, 3 × suggested × quan,
+     where quan = max(1, money / (3 × suggested × XL)). -->
+
+#### 祭壇と属性 (Altars and Alignment)
+
+異属性の祭壇を自分の属性へと改宗させるには、その祭壇の上で通常の新鮮な死体を生贄に捧げます。試行するたびに、祭壇が自分の守護神の属性へと反転するか（成功）、幸運値を失うか（失敗）、あるいは現在の属性値がマイナスである場合は **主人公自身が祭壇の属性へと強制改宗** させられます。高い経験値レベルであるほど成功率は向上します。生贄によるギフト、聖水の作成、あるいはBUC（祝福・無呪・呪い）判定のために同属性の祭壇が必要な場合、リスクを冒す価値は十分にあります。
+
+経験値レベル9以上になると、成否にかかわらず、追い出された神の敵対的な召喚獣が出現することがあります。生贄を捧げる前に、必ず逃げ道を確保しておいてください。
+
+以下の2つは、どの祭壇であっても決して生贄に捧げてはなりません：
+
+- **自分と同種族の死体**（人間、エルフ、ノーム、ドワーフ、オークのうち自分の種族に該当するもの）。すべての祭壇で厳罰に処されます —— *ただし* あなたが混沌であり、祭壇も混沌である場合を除きます（その場合はご褒美として友好的な悪魔が出現し、幸運値と属性値が上昇します）。
+- **祭壇の属性と一致する属性のユニコーンの死体**。その神に対する重大な侮辱とみなされます。
