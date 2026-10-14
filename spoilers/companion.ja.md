@@ -6302,3 +6302,842 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - **どうしても宝石を捨てなければならない場合**（鉱山最深部でアイテム枠が溢れたり、拠点を整理する際）、*安価な色の重複した個体から優先して捨ててください*。試金石による識別作業がすでに完了しているため、各色の識別済み宝石は最低1個ずつ手元に残しておきましょう。
 - **最上位グループ**（2500 zm 以上：ダイリチウム、ダイヤモンド、ルビー、風信子石、サファイア、ブラックオパール、エメラルド）は、個別売却する価値があります。基本レートでの買取価格は基本価格の半分（ダイヤモンドなら 2,000 zm）から始まり、宝石を扱わない店は買い取ってくれません。
 - **無価値なガラス玉が幸運を減らすことは絶対にない。** ガラス玉をユニコーンに投げた場合、拒絶される（「そんなゴミには興味がない」）か、好意的に受け取られるかのどちらかです。幸運が変動するリスクがあるのは、**異なる属性** のユニコーンに *本物の宝石* を投げた場合（−3 から +3 のランダム変動）だけです。メッセージの言い回しに注目してください：幸運を高めてくれた本物の宝石を受け取ったユニコーンは *「感謝して（gratefully）」* 受け取り、何も起きなかったガラス玉を受け取ったユニコーンは *「愛想よく（graciously）」* 受け取ります。
+
+### 武器一覧表 (Weapons Tables)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h + weapon.c: no corrections. Every weapon row (base/bonus dice, weight, cost, to-hit, material, two-handed/launcher/skill notes) verified, including composite-damage entries vs dmgval().
+-->
+
+ダメージは**小型に対するダメージ / 大型に対するダメージ (vs small / vs large)**として表記されており、強化値（強化・呪い）が加算される前、かつ銀や材質による追加ボーナスを除いた基本ダイス値です。**重量 (Wt)**はユニット重量、**価格 (Cost)**は店における未強化時の基本価格（Zm: ゾークミッド）、**命中 (Hit)**は武器自体に組み込まれている命中補正ボーナス（大半は 0）を表します。盾の装備や二刀流（二刀流戦闘）を阻害する両手持ち武器には、備考欄にフラグが付けられています。武器はスキルごとに分類されています。スキル枠（スロット）を投資する前に、[職業別のスキル上限一覧](#per-role-skill-caps)を確認してください。一部の武器に見られる括弧内の名称は、侍（Samurai）がプレイした際に画面上に表示される別名です（ゲーム内部では同一のアイテムとして処理されます）。
+
+#### 短剣 (Dagger)
+<!-- audit
+2026-05-19:
+- Expert Rogue dagger multishot caps at rnd(4) = 1-4: 1 base + 1 Expert + 1 Skilled + 1 class (dothrow.c:177-190, 63-67)
+- athame engraving Elbereth does NOT dull the weapon, so no enchantment is consumed (engrave.c:1306-1307, 1361). Duration is unchanged
+- silver weapons hurt demons, vampires, lycanthropes, shades, and imps (except tengu) per mon_hates_silver (mondata.c:524-528)
+- silver does NOT hurt liches, zombies, mummies, wraiths, ghouls, or ghosts (none of those classes appear in hates_silver, mondata.c:524-528)
+- silver damage bonus is rolled in mhitm/hmon, +1d20 vs hates_silver targets for silver weapons (uhitm.c:1376-1377)
+-->
+
+投擲および刺突。短剣はスタック（束ねて所持）可能で壊れにくく、盗賊（Rogue）は投擲時にマルチショット（連続投擲）ボーナスを得られます（エキスパート時には1ターンに最大4本投擲）。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 短剣 (dagger) | 1d4 / 1d3 | 10 | 4 | +2 | 鉄 | スタック可能。スキルがエキスパートの盗賊は1回の投擲で最大4本までマルチショット可能。 |
+| エルフの短剣 (elven dagger) | 1d5 / 1d3 | 10 | 4 | +2 | 木 | スタック可能。アーティファクト形態はスティング (Sting)。 |
+| オークの短剣 (orcish dagger) | 1d3 / 1d3 | 10 | 4 | +2 | 鉄 | スタック可能。 |
+| 銀の短剣 (silver dagger) | 1d4 / 1d3 | 12 | 40 | +2 | 銀 | スタック可能。悪魔、吸血鬼、獣人、影、小悪魔（インプ）に対して銀特効ダメージ。盗賊や野伏（Ranger）の一般的な利き手以外の武器。 |
+| アサメ (athame) | 1d4 / 1d3 | 10 | 4 | +2 | 鉄 | スタック可能。アサメで文字を刻んでも**刃先が鈍ることはない**（強化値が減少しない）。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- 5 knife rows verified: P_KNIFE skill, scalpel METAL, knife/stiletto IRON, worm tooth/crysknife BONE (objects.h:215-233)
+- scalpel is Healer's starter (u_init.c:77)
+- crysknife reverts to worm tooth on drop via type-id swap, NOT poly (do.c:903-918)
+- fixed (erodeproof) crysknife only reverts ~10% of drops (do.c:911)
+-->
+#### ナイフ (Knife)
+
+主に近接戦闘用。ナイフはスタック可能で投擲もできますが、投擲ナイフによるマルチショットボーナスを得られる職業はありません。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| メス (scalpel) | 1d3 / 1d3 | 5 | 6 | +2 | 金属 | 医師（Healer）の初期装備。 |
+| ナイフ (knife / shito: 刺刀) | 1d3 / 1d2 | 5 | 4 | — | 鉄 |  |
+| スティレット (stiletto) | 1d3 / 1d2 | 5 | 4 | — | 鉄 |  |
+| ワームの歯 (worm tooth) | 1d2 / 1d2 | 20 | 2 | — | 骨 |  |
+| クリスナイフ (crysknife) | 1d10 / 1d10 | 20 | 100 | +3 | 骨 | 床に落としたり投げたりするとワームの歯に戻ってしまう。耐腐食（erodeproof）加工されたものは戻る確率が約10%に軽減される。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- 4 short sword rows verified: short 1d6/1d8, elven 1d8/1d8, orcish 1d5/1d8, dwarvish 1d7/1d8 (objects.h:244-255)
+- all share P_SHORT_SWORD; scimitar uses P_SABER and is correctly excluded
+- Rogue starter (u_init.c:134); Samurai "wakizashi" is a short sword aliased in objnam.c:106 (u_init.c:144)
+- no artifact uses SHORT_SWORD as base type
+-->
+#### 小剣 (Short sword)
+
+片手持ち近接武器。脇差（wakizashi）と小剣（short sword）は職業による表示名が異なるだけで、同一の武器です。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 小剣 (short sword / wakizashi: 脇差) | 1d6 / 1d8 | 30 | 10 | — | 鉄 | 盗賊（Rogue）の初期装備。 |
+| エルフの小剣 (elven short sword) | 1d8 / 1d8 | 30 | 10 | — | 木 |  |
+| オークの小剣 (orcish short sword) | 1d5 / 1d8 | 30 | 10 | — | 鉄 |  |
+| ドワーフの小剣 (dwarvish short sword) | 1d7 / 1d8 | 30 | 10 | — | 鉄 |  |
+
+:::
+
+#### サーベル (Saber)
+<!-- audit
+2026-05-19:
+- 10 saber cells verified clean (objects.h)
+- Grayswandir is a SILVER_SABER artifact, PHYS(5,0): +1d5 to-hit and double damage (artilist.h:170, artifact.c:1083-1086, 1106-1107)
+- Werebane is also a silver saber artifact (artilist.h:166); +d5 vs lycanthropes via SPFX_DFLAG2 M2_WERE
+- inline effects deferred to Artifacts chapter rather than duplicated
+-->
+
+片手持ち近接武器。銀のサーベルを母体とするアーティファクト形態（グレイスワンディール、獣の災い）は、ゲーム内屈指の強力な片手武器です。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| シミター (scimitar) | 1d8 / 1d8 | 40 | 15 | — | 鉄 |  |
+| 銀のサーベル (silver saber) | 1d8 / 1d8 | 40 | 75 | — | 銀 | 銀特効により悪魔、獣人、吸血鬼、小悪魔に追加ダメージ。アーティファクト形態：**グレイスワンディール (Grayswandir)** および **獣の災い (Werebane)**（[アーティファクト一覧](#artifacts)参照）。 |
+
+:::
+
+#### 幅広の剣 (Broadsword)
+<!-- audit
+2026-05-19:
+- Stormbringer's base item is RUNESWORD, NOT broadsword (artilist.h:93)
+- runesword and broadsword share P_BROAD_SWORD skill and 1d4+1d4 / 1d6+1 dice, hence the confusion
+- artifact details kept in the Artifacts chapter, not duplicated here
+-->
+
+片手持ち近接武器。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 幅広の剣 (broadsword / ninja-to: 忍者刀) | 1d4+1d4 / 1d6+1 | 70 | 10 | — | 鉄 |  |
+| エルフの幅広の剣 (elven broadsword) | 1d6+1d4 / 1d6+1 | 70 | 10 | — | 木 |  |
+| ルーンの剣 (runesword) | 1d4+1d4 / 1d6+1 | 40 | 300 | — | 鉄 | ストームブリンガー (Stormbringer) は混沌のアーティファクト形態。 |
+
+:::
+
+#### 長剣 (Long sword)
+<!-- audit
+2026-05-19:
+- long sword stats verified (objects.h:270-280)
+- Excalibur dipping requires LONG_SWORD, XL >= 5, quan == 1, not already artifact, no extant Excalibur (fountain.c:404-408)
+- dip roll: !rn2(6) for Knights, !rn2(30) otherwise (fountain.c:405)
+- non-Lawfuls get the sword cursed, spe possibly decremented, oerodeproof cleared (fountain.c:411-421)
+- LONG_SWORD artifacts: Excalibur, Frost Brand, Fire Brand, Giantslayer, Vorpal Blade, Sunsword (artilist.h:85, 149, 153, 174, 191, 209)
+- Vorpal Blade is a LONG_SWORD artifact, NOT a two-handed sword (artilist.h:191)
+- two-handed sword has no dedicated artifact (no TWO_HANDED_SWORD entries in artilist.h)
+-->
+
+片手持ち近接武器。秩序属性の長剣は、序盤で単一武器として最も大きな見返りを得られる「泉への浸しによるエクスカリバー入手」の対象となります。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 長剣 (long sword) | 1d8 / 1d12 | 40 | 15 | — | 鉄 | 経験レベル5以上で泉に浸すと、1/30の確率（騎士は1/6）で判定が行われる。成功時、秩序属性のキャラクターは**エクスカリバー (Excalibur)** を獲得する。それ以外の属性では剣が呪われる。アーティファクト形態：エクスカリバー、フロストブランド、ファイヤーブランド、巨人殺し、ヴォーパルブレード、サンソード。 |
+| 刀 (katana) | 1d10 / 1d12 | 40 | 80 | +1 | 鉄 | 武器自体に+1の命中補正が組み込まれている。スニッカースニー (Snickersnee) がアーティファクト形態。 |
+
+:::
+
+#### 両手剣 (Two-handed sword)
+<!-- audit
+2026-05-19:
+- two-handed sword stats verified (objects.h:273-285)
+- 5.0 bimanual weapons get 3/2 Str damage bonus, melee only (uhitm.c:1467-1468; gated on bimanual(uwep) + HMON_MELEE)
+- bonus also applies to battle-axe, dwarvish mattock, bardiche
+- Tsurugi is the two-handed sword artifact (artilist.h:285-289); Vorpal Blade is a LONG_SWORD (artilist.h:191), NOT the artifact form here
+-->
+
+両手持ち武器は 5.0 において**筋力ダメージに 1.5 倍（3/2）のボーナス**を受けます。筋力によるダメージ補正値が 1.5 倍されます。下記の高い基本ダイス値と合わさることで、盾の装備枠を放棄しなければならないにもかかわらず、両手剣が片手武器＋盾の構成に匹敵する大きな理由となっています。
+このボーナスは戦斧、ドワーフのつるはし、バーディックなど、あらゆる両手持ち武器に適用されます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 両手剣 (two-handed sword) | 1d12 / 1d6+2d6 | 150 | 50 | — | 鉄 | 両手持ち（盾および利き手以外の武器の併用不可）。 |
+| 大刀 (tsurugi) | 1d16 / 1d8+2d6 | 60 | 500 | +2 | 金属 | 両手持ち。村正の大刀 (The Tsurugi of Muramasa) がアーティファクト形態。 |
+
+:::
+
+#### 斧 (Axe)
+<!-- audit
+2026-05-19:
+- axe 1d6/1d4, battle-axe 1d8+1d4 small / 1d6+2d4 large with bonus dice (objects.h:236-241, weapon.c:251-289)
+- both use P_AXE skill; battle-axe is bimanual and gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
+- Cleaver is the BATTLE_AXE artifact (artilist.h:114-116)
+-->
+
+近接武器。通常の斧は片手持ちです。戦斧（battle-axe）は両手持ち（筋力ダメージ 1.5 倍ボーナス適用）となります。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 斧 (axe) | 1d6 / 1d4 | 60 | 8 | — | 鉄 |  |
+| 戦斧 (battle-axe) | 1d8+1d4 / 1d6+2d4 | 120 | 40 | — | 鉄 | 両手持ち（5.0の筋力ダメージ 1.5 倍ボーナス適用）。小型に+1d4、大型に+2d4。野蛮人（Barbarian）のクエストアーティファクトである**なた (Cleaver)** は戦斧が母体。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- pick-axe: WEPTOOL, wt 100, cost 50, 1d6/1d3, iron (objects.h:1007-1009)
+- mattock stats verified (objects.h:345-347)
+- both share P_PICK_AXE skill and route through use_pick_axe (apply.c:4290-4292)
+- mattock is bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
+- dig-down creates a pit, then a hole (dig.c:432-433, 372-374)
+-->
+#### つるはし (Pick-axe)
+
+近接武器かつ掘削道具。`a` (apply) キーで使用することで、任意の方向の壁や床を掘り進めることができます。ドワーフのつるはしも同様の機能を持ち、こちらは両手持ちです。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| つるはし (pick-axe) | 1d6 / 1d3 | 100 | 50 | — | 鉄 | 武器道具（Weapon-tool）。使用（apply）することで壁を掘り崩したり、床を掘り抜く（落とし穴、続いて穴を作成）ことができる。ドワーフのつるはしと同じ `pick-axe` スキル。 |
+| ドワーフのつるはし (dwarvish mattock) | 1d12 / 1d8+2d6 | 120 | 50 | −1 | 鉄 | 両手持ち（筋力ダメージ 1.5 倍ボーナス適用）。つるはし同様に壁を掘り崩せる。わずかな命中ペナルティ（−1）。 |
+
+:::
+
+#### こん棒 (Club)
+<!-- audit
+2026-05-19:
+- club and aklys stats verified (objects.h:371-373, 381-383)
+- starting inventory uses blessorcurse(otmp, 10): roughly 10% chance any starter item is cursed (mkobj.c:876-885)
+- club is a Caveman starter
+- aklys returns when thrown only if wielded (W_WEP), with ~1% misfire (dothrow.c:30-34, 1710-1759)
+-->
+
+打撃系の片手近接武器。アキリスは革紐で繋がれており、主武器として手に持った状態で投擲すると手元に戻ってきます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| こん棒 (club) | 1d6 / 1d3 | 30 | 3 | — | 木 | 洞窟人（Caveman）の初期装備。 |
+| アキリス (aklys) | 1d6 / 1d3 | 15 | 4 | — | 鉄 | 主武器として装備中に投げると手元に戻ってくる（紐付き）。ごく稀に投げ損ない（不発）が発生する。 |
+
+:::
+
+#### メイス (Mace)
+<!-- audit
+2026-05-19:
+- mace stats verified (objects.h:355-361)
+- Demonbane PHYS(5,0): +1d5 to-hit and double damage vs demons (artifact.c:1083-1085 spec_abon, 1106-1107 spec_dbon); also has banish invoke
+- silver mace: +1d20 vs mon_hates_silver targets (uhitm.c:1376-1377)
+- silver hates list: demons, weres, vampires, shades, most imps (mondata.c:524-528)
+- silver does NOT hit "undead" or "shape-changers" generally (mummies, zombies, ghosts, chameleons excluded)
+- Mjollnir is a war hammer, NOT a mace (artilist.h:109 `A("Mjollnir", WAR_HAMMER, ...)`)
+-->
+
+片手持ちの打撃系近接武器。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| メス (mace) | 1d6+1 / 1d6 | 30 | 5 | — | 鉄 | 僧侶（Priest）が生贄の捧げ物で最初に確定入手するアーティファクト「デーモンベイン (Demonbane)」の母体：悪魔に対して命中+1d5かつダメージ2倍の銀のメイス、さらに追放効果の発動（invoke）付き。 |
+| 銀のメイス (silver mace) | 1d6+1 / 1d6 | 36 | 60 | — | 銀 | 悪魔、獣人、吸血鬼、影、大半の小悪魔に対して+1d20の追加ダメージ。 |
+
+:::
+
+#### モーニングスター (Morning star)
+<!-- audit
+2026-05-19:
+- morning star: 1d4+1d4 / 1d6+1, wt 120, cost 10, hit 0, iron (objects.h:363-365, weapon.c:225-289)
+- P_MORNING_STAR is its own skill, distinct from P_MACE (skills.h:35)
+- Trollsbane IS a MORNING_STAR artifact: regenerates while wielded, +d5 vs trolls (artilist.h:182-184)
+-->
+
+片手持ちの打撃系近接武器。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| モーニングスター (morning star) | 1d4+1d4 / 1d6+1 | 120 | 10 | — | 鉄 | 小型に+1d4、大型に+1。片手武器として堅実なダメージ力を誇る。 |
+
+:::
+
+#### フレイル (Flail)
+<!-- audit
+2026-05-19:
+- flail: base 1d6/1d4, +1 small (weapon.c:272-275), +1d4 large (weapon.c:239-243); objects.h:384-386
+- grappling hook: 1d2/1d6, WEPTOOL that trains P_FLAIL (objects.h:1010-1012)
+- grappling hook #apply pulls target toward you; range 4 (P_NONE/Basic), 5 (Skilled), 8 (Expert+) (apply.c:3686-3698)
+- no flail artifact
+-->
+
+片手持ちの打撃系近接武器。同じスキルを修練できる実用的な道具として鍵縄（grappling hook）も含まれます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| フレイル (flail / nunchaku: ヌンチャク) | 1d6+1 / 1d4+1d4 | 15 | 4 | — | 鉄 | 小型に+1、大型に+1d4。片手持ち。 |
+| 鍵縄 (grappling hook) | 1d2 / 1d6 | 30 | 50 | — | 鉄 | フレイルスキルを修練可能。使用（apply）すると2マス先のアイテムを引き寄せたり、超小型モンスターを引き寄せたり、自分自身を1歩引き寄せることができる。 |
+
+:::
+
+#### ハンマー (Hammer)
+<!-- audit
+2026-05-19:
+- war hammer stats verified (objects.h:367-369, weapon.c); +1 small bonus matches sdam/ldam fields
+- Mjollnir can be gifted to ANY Valkyrie, not just Neutral: hack_artifacts fixes alignment to player's initalign (artifact.c:92-95)
+- aklys uses P_CLUB and is correctly placed elsewhere
+-->
+
+片手持ちの打撃系近接武器。ワルキューレ（Valkyrie）のアーティファクトであるウォーハンマー「ミョルニル (Mjollnir)」は、投擲すると手元に戻ってきます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| ウォーハンマー (war hammer) | 1d4+1 / 1d4 | 50 | 5 | — | 鉄 | ミョルニル (Mjollnir) がアーティファクト形態（ワルキューレへの生贄の賜物。属性はプレイヤーの初期属性に一致する）。 |
+
+:::
+
+#### 六尺棒 (Quarterstaff)
+<!-- audit
+2026-05-19:
+- quarterstaff: bimanual, 1d6/1d6, wt 40, cost 5, WOOD, P_QUARTERSTAFF (objects.h:377-379).
+- Wizard starter weapon (u_init.c:168).
+- bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467).
+- Expert caps: Wizard, Priest, Healer, Caveman (u_init.c:314,334,396,555 P_QUARTERSTAFF=P_EXPERT).
+- No Knight or Rogue entry: P_QUARTERSTAFF absent from Skill_K and Skill_R (u_init.c:346-413).
+-->
+
+両手持ち近接武器。控えめな基本ダイス値にもかかわらず、筋力ダメージ 1.5 倍（3/2）ボーナスが適用されます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 六尺棒 (quarterstaff) | 1d6 / 1d6 | 40 | 5 | — | 木 | 両手持ちだが軽量。魔法使い（Wizard）の初期装備。 |
+
+:::
+
+#### 長柄武器 (Polearms)
+<!-- audit
+2026-05-19:
+- 12 polearm rows verified: all two-handed, all P_POLEARMS, all iron (objects.h:294-341).
+- per-row dice/weight/cost from objects.h:294-341 WEAPON() macros; +d4/+d6 vs-large bonuses applied in weapon.c dmgval.
+- polearm reach is skill-dependent, NOT a fixed 2 squares (apply.c:3355-3382).
+- use_pole has NO "empty intervening square" check (apply.c:3355-3382).
+- polearms CAN bash an adjacent monster (uhitm.c:1467-1484).
+- adjacent polearm bash: damage clamps to 1d2 base, no weapon-skill bonus, Strength still applies (uhitm.c:1075-1086, 1447-1469).
+-->
+
+すべての長柄武器は両手持ちです。離れた敵を攻撃するには、武器を手に持って通常攻撃するのではなく、`#apply`（使用）コマンドを使います。ベーシック（入門）スキルでは直線2マス先の敵を攻撃でき、熟練（エキスパート）になるとさらに攻撃可能な位置が広がります。長柄武器を持った状態で隣接するモンスターを通常攻撃することも可能ですが、強打（打撃）扱いとなり、ボーナス加算前の基本ダメージが 1d2 に制限され、武器スキルによるダメージボーナスも乗りません（筋力補正は適用されます）。この「間合い（リーチ）」こそが、長柄武器を持ち歩く最大の意義です。各武器の追加ダメージの詳細は下記の備考を参照してください。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| パルチザン (partisan) | 1d6 / 1d6+1 | 80 | 10 | — | 鉄 | リーチ攻撃可能。 |
+| ランサー (ranseur) | 1d4+1d4 / 1d4+1d4 | 50 | 6 | — | 鉄 | 小型に+1d4、大型に+1d4。 |
+| スペタム (spetum) | 1d6+1 / 1d6+1d6 | 50 | 5 | — | 鉄 | 小型に+1、大型に+1d6。 |
+| グレイブ (glaive / naginata: 薙刀) | 1d6 / 1d10 | 75 | 6 | — | 鉄 | リーチ攻撃可能。 |
+| ハルバード (halberd) | 1d10 / 1d6+1d6 | 150 | 10 | — | 鉄 | 大型に+1d6。 |
+| バーディック (bardiche) | 1d4+1d4 / 1d4+2d4 | 120 | 7 | — | 鉄 | 小型に+1d4、大型に+2d4。 |
+| ヴォウジェ (voulge) | 1d4+1d4 / 1d4+1d4 | 125 | 5 | — | 鉄 | 小型に+1d4、大型に+1d4。 |
+| フォシャール (fauchard) | 1d6 / 1d8 | 60 | 5 | — | 鉄 | リーチ攻撃可能。 |
+| ギザルム (guisarme) | 1d4+1d4 / 1d8 | 80 | 5 | — | 鉄 | 小型に+1d4。 |
+| ビル・ギザルム (bill-guisarme) | 1d4+1d4 / 1d10 | 120 | 7 | — | 鉄 | 小型に+1d4。 |
+| ルッツェルンハンマー (lucern hammer) | 1d4+1d4 / 1d6 | 150 | 7 | — | 鉄 | 小型に+1d4。 |
+| ベック・ド・コルバン (bec de corbin) | 1d8 / 1d6 | 100 | 8 | — | 鉄 | リーチ攻撃可能。 |
+
+:::
+
+#### 槍 (Spear)
+<!-- audit
+2026-05-19:
+- 6 spear rows (spear/elven/orcish/dwarvish/silver/javelin) verified P_SPEAR (objects.h:174-191).
+- silver spear: SILVER material, cost 40, +d20 vs silver-haters (objects.h:186-188; artifact.c spec_dbon).
+- Valkyrie starts with a plain spear and trains to Expert (u_init.c:160-161, 537).
+- spear kebab bonus: +2 to-hit vs xorns, dragons, jabberwocks, nagas, giants (weapon.c:71-73, 167-168, is_spear).
+- trident uses P_TRIDENT, a separate skill from spears (objects.h:195 P_TRIDENT).
+- +1 thrown-spear multishot belongs to Caveman (PM_CAVE_DWELLER), NOT Valkyrie (dothrow.c:47-52).
+- Valkyrie has no class-specific spear multishot, only the generic Expert ceiling (dothrow.c).
+-->
+
+槍類はすべて同じスキルを共有します。トライデントは別のスキルを使用します（後述）。ワルキューレ（Valkyrie）は通常の槍を持ってスタートし、エキスパートまで鍛えることができます。槍の投擲マルチショットの真のスペシャリストは**洞窟人（Caveman）**です。洞窟人は投げた槍（通常の槍、銀の槍、ジャベリンのいずれでも）に対してマルチショット+1のボーナスを得るため、束ねたジャベリンは彼らにとって強力な遠距離攻撃手段となります。
+
+槍は大型モンスター（ゾーン、ドラゴン、ジャバウォック、ナーガ、巨人）に対して**命中+2のボーナス**（串刺しボーナス / kebab bonus）を得られます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 槍 (spear) | 1d6 / 1d8 | 30 | 3 | — | 鉄 | 投擲可能。ワルキューレの初期装備。 |
+| エルフの槍 (elven spear) | 1d7 / 1d8 | 30 | 3 | — | 木 |  |
+| オークの槍 (orcish spear) | 1d5 / 1d8 | 30 | 3 | — | 鉄 |  |
+| ドワーフの槍 (dwarvish spear) | 1d8 / 1d8 | 35 | 3 | — | 鉄 |  |
+| 銀の槍 (silver spear) | 1d6 / 1d8 | 36 | 40 | — | 銀 | 悪魔や獣人に対して銀特効ダメージ。 |
+| ジャベリン (javelin) | 1d6 / 1d6 | 20 | 3 | — | 鉄 | スタック可能な投擲武器。洞窟人は遠距離から連射できる。 |
+
+:::
+
+#### トライデント (Trident)
+<!-- audit
+2026-05-19:
+- trident stats verified (objects.h:195)
+- the +1/+2d4 large-creature bonus is the universal land bonus, NOT trident-specific (weapon.c:251-276)
+- trident's signature bonus: +4 to-hit vs swimmers in water, +2 vs eels and snakes (weapon.c:170-176 hitval, not dmgval)
+-->
+
+片手持ち近接武器で、槍とは異なる独立したスキルを使用します。水中で戦う際にその真価を発揮する特徴的なボーナスを備えています。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| トライデント (trident) | 1d6+1 / 1d4+2d4 | 25 | 5 | — | 鉄 | 片手持ち。**水中の遊泳モンスターに対して命中+4、ウナギやヘビに対して命中+2**：トライデント固有の特徴的なボーナス。水辺以外では標準的なサイドアームとして機能する。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- lance: P_LANCE, one-handed, IRON, 1d6/1d8 (objects.h:349)
+- on foot lance still hits and damages normally, just NO joust bonus
+- mounted joust bonus: +2d10 primary, +2d2 off-hand (objects.h:351-352, uhitm.c:1546)
+- shatter chance 1/250 per successful joust (uhitm.c:2123-2125, 1559)
+-->
+#### ランス (Lance)
+
+騎乗戦闘に特化して作られた近接武器。馬などの騎乗中に命中させると、馬上槍試合（Joust）による強大な追加ダメージを与えるチャンスがあります。徒歩でも有用な間合い攻撃（リーチ）武器として機能し、2マス離れた敵に使用（apply）して攻撃できます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| ランス (lance) | 1d6 / 1d8 | 180 | 10 | — | 鉄 | 片手持ち。騎乗攻撃が命中すると馬上槍試合（Joust）判定が発生し、主武器なら+2d10、利き手以外の武器なら+2d2の追加ダメージを与える。成功した馬上攻撃の約1/250の確率でランスが砕け散る。徒歩でも長柄武器のような間合い攻撃は維持されるが、馬上ボーナスは得られない。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- rubber hose and bullwhip stats verified; P_WHIP skill (objects.h:374-376, 390-392, skills.h:49)
+- bullwhip #apply can disarm (apply.c:3127-3174) and yank from a pit (apply.c:3069-3125)
+- rubber hose does NOT damage shades: it's PLASTIC, shade_glare needs SILVER (artifact.c:555-562, weapon.c:307-308)
+- rubber hose prob=0: never randomly spawns (objects.h:374-376 WEAPON row, probability field is 0)
+- Archeologist starts with bullwhip +1 at Basic (apply.c:2992-2993)
+- no whip artifacts
+-->
+#### 鞭 (Whip)
+
+軽量な片手近接武器であり、実用的な道具でもあります。鞭を `#apply`（使用）することで、隣接するモンスターの武器を叩き落としたり（武装解除）、落とし穴から自分自身を引き上げたりできます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| ゴムホース (rubber hose) | 1d4 / 1d3 | 20 | 3 | — | プラスチック | ジョーク武器。自然生成されることはない。キーストン・コップ（お巡りさん）が所持していることがある。 |
+| 鞭 (bullwhip) | 1d2 / 1 | 20 | 4 | — | 革 | 考古学者（Archeologist）の初期装備。使用（apply）することで隣接モンスターの武器を叩き落としたり（相手が武器を装備している場合のみ）、落とし穴から脱出するために自身を引き上げることができる（近くの岩、家具、大型モンスターに巻き付ける）。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- 5 PROJECTILE arrow rows (objects.h:141-154); 4 BOW launcher rows (objects.h:395-402).
+- arrows: 1d6/1d6 (1d7/1d6 elven, 1d5/1d6 orcish, 1d6/1d6 silver) wt 1, cost 2 (objects.h:141-152).
+- ya: 1d7/1d7, +1 hit, METAL, cost 4 (objects.h:153-154).
+- yumi prob=0: Samurai-only, never randomly spawns (objects.h:401-402).
+-->
+#### 弓 (Bow)
+
+片手持ちの発射具（ランチャー）。弓を手（主武器）に装備し、矢筒に矢を入れて `f` キーで発射します。エキスパートの射手はマルチショット（一斉射撃）が可能で、野伏（Ranger）と侍（Samurai）がそのスペシャリストです。弓は二刀流戦闘を阻害しますが、盾を装備することは可能です。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 矢 (arrow) | 1d6 / 1d6 | 1 | 2 | — | 鉄 | すべての弓で使用可能。 |
+| エルフの矢 (elven arrow) | 1d7 / 1d6 | 1 | 2 | — | 木 | エルフの弓から放つと最適（エルフの一斉射撃ボーナス）。 |
+| オークの矢 (orcish arrow) | 1d5 / 1d6 | 1 | 2 | — | 鉄 | オークの弓から放つと最適（オークの一斉射撃ボーナス）。 |
+| 銀の矢 (silver arrow) | 1d6 / 1d6 | 1 | 5 | — | 銀 | すべての弓で使用可能。悪魔や獣人に対して銀特効ダメージ。 |
+| 竹矢 (ya) | 1d7 / 1d7 | 1 | 4 | +1 | 金属 | 和弓から放つと最適（侍の一斉射撃ボーナス）。 |
+| 弓 (bow) | — | 30 | 60 | — | 木 | あらゆる矢を発射可能。 |
+| エルフの弓 (elven bow) | — | 30 | 60 | — | 木 | エルフの矢と組み合わせると真価を発揮。 |
+| オークの弓 (orcish bow) | — | 30 | 60 | — | 木 | オークの矢と組み合わせると真価を発揮。 |
+| 和弓 (yumi) | — | 30 | 60 | — | 木 | 侍専用の弓。竹矢と組み合わせると最適。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- crossbow bolt: 1d4 / 1d6, NO +1 bonus (objects.h:155-156 PROJECTILE)
+- crossbows CAN multishot: requires Str 18 (Str 16 for gnomes), with +1 baseline gnome bonus (dothrow.c:225-231, 205-209)
+- skill caps: Rogue Expert, Ranger Expert, Knight Skilled (u_init.c)
+- Valkyries cap at Unskilled, NOT Skilled: Skill_V has no P_CROSSBOW entry (u_init.c:525-547)
+-->
+#### クロスボゥ (Crossbow)
+
+片手持ちの発射具。弓よりも1発あたりの威力が高くなっていますが、リロードが遅く、完全なマルチショットを行うには筋力 18（ノームは筋力 16）が必要です。弓と同様、二刀流は阻害しますが盾の装備は可能です。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| クロスボゥボルト (crossbow bolt) | 1d4+1 / 1d6+1 | 1 | 2 | — | 鉄 | スタック可能。 |
+| クロスボゥ (crossbow) | — | 50 | 40 | — | 木 | ボルトは敵を貫通する。**筋力 18**（ノームは 16）以上でマルチショットが通常通りのダイス判定となる。それ未満の場合、ゲームは2回ロールして小さい方の連射数を採用する。またノームはマルチショット数に+1される。盗賊と野伏はエキスパート、騎士は熟練まで習得可能。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- sling stats verified (objects.h:403)
+- sling skill trains from hits while wielding a sling, NOT from picking up rocks (weapon.c:1750)
+- sling launches rocks, flint stones, and gems
+- Caveman starts with one sling
+-->
+#### スリング (Sling)
+
+片手持ちの発射具。弾薬は床に落ちている（または持ち運んでいる）石や宝石なら何でも使えるため、弾薬費は実質的にゼロです。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| スリング (sling) | — | 3 | 20 | — | 革 | 石、火打石、宝石を発射可能。洞窟人（Caveman）の初期装備。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- dart stats verified (objects.h:161)
+- darts are poisonable (is_poisonable)
+- Tourist starts with 21-40 darts via trquan() = 21+rn2(20), NOT ~25-60 (u_init.c:150-151)
+-->
+#### 投げ矢 (Dart)
+
+投擲専用。大量にスタックでき、重量がほとんどなく、病気の薬から毒を塗布することができます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 投げ矢 (dart) | 1d3 / 1d2 | 1 | 2 | — | 鉄 | 毒を塗布可能。観光客（Tourist）は+2に強化された束（約21〜40本）を持ってスタートする。 |
+
+:::
+
+<!-- audit
+2026-05-19:
+- shuriken: 1d8/1d6, wt 1, cost 5, +2 hit, iron, PIERCE missile, P_SHURIKEN (objects.h:163)
+- is_poisonable (obj.h:264-268)
+- Samurai trains to Expert (u_init.c:481)
+-->
+#### 手裏剣 (Shuriken)
+
+投擲専用。修道士（Monk）は手裏剣投擲時にマルチショット+1のボーナスを得られます。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| 手裏剣 (shuriken) | 1d8 / 1d6 | 1 | 5 | +2 | 鉄 |  |
+
+:::
+
+<!-- audit
+2026-05-19:
+- boomerang stats verified (objects.h:166-168)
+- boomerang does NOT always return: 10-step curved path that stops on monster, wall, door, or sink hits (zap.c:4148-4220 boomhit; loop ct<10, breaks on isok, monster, ZAP_POS or closed_door)
+- catching the return requires a Dex check, auto-fails if Fumbling; a missed catch hits the thrower
+- enchanted boomerang hits (spe+1) times
+- useless underwater
+-->
+#### ブーメラン (Boomerang)
+
+投擲専用。放物線を描いて飛行し、途中の軌道が遮られていなければ投げた本人の手元へ戻ってきます。戻ってきたブーメランをキャッチするには器用さ（Dex）の判定が必要です。
+
+::: dense-table
+
+| 武器名 | ダメージ (小/大) | 重量 | 価格 | 命中 | 材質 | 備考 |
+|--------------------|--------------|----|------|-----|--------------|----------------------------------------------------------------|
+| ブーメラン (boomerang) | 1d9 / 1d9 | 5 | 20 | — | 木 | 障害物のない経路なら弧を描いて手元に戻る。モンスター、壁、扉、流し台（シンク）に当たると止まる。器用さが低いか、あるいは「お手玉（Fumbling）」状態のときは顔面に直撃してダメージを受ける。 |
+
+:::
+
+### 防具一覧表 (Armor Tables)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. Every armor row (AC=10-macro-arg, MC, weight, material, slot) verified across ARMOR/HELM/CLOAK/SHIELD/GLOVES/BOOTS macros.
+-->
+<!-- audit
+2026-05-19:
+- body armor: AC/Wt/Cost via ARMOR() macros (objects.h:556-600); plate mail AC+7 wt450 cost600 (line 556-558).
+- mithril coats: AC+6/+5, wt 150, cost 240, MITHRIL material (objects.h:571-576).
+- shirts wt 5 (Hawaiian/T-shirt, objects.h:603-608); cloaks at objects.h:611-650.
+- helmets at objects.h:445-487; gloves at objects.h:686-697; boots at objects.h:700-727.
+- shields at objects.h:653-679; cloak of protection MC 3 (objects.h:637-640).
+- helm of brilliance: adds spe to Int and Wis (literal enchantment), NO dice (do_wear.c:3328-3334 adj_abon).
+- gauntlets of dexterity: adds spe to Dex, NO dice (do_wear.c adj_abon).
+- dunce cap is NOT pre-cursed at generation: follows standard mkobj; auto-curses when worn (do_wear.c:475-491).
+- 9/10-cursed-on-generation items: FUMBLE_BOOTS, LEVITATION_BOOTS, HELM_OF_OPPOSITE_ALIGNMENT, GAUNTLETS_OF_FUMBLING (mkobj.c:1086-1090).
+- mithril DOES suffer casting penalty: MITHRIL is in is_metallic range, spelarmr applies (objclass.h:194-196, spell.c:2191-2193).
+- blue dragon scale mail and scales give extrinsic Very_fast tier matching speed boots, NOT intrinsic Fast (do_wear.c:817-828 EFast).
+- speed boots mechanic: free action on 2/3 of turns, NOT "+1 speed". (allmain.c:125-128 `if (Very_fast) { if (rn2(3) != 0) moveamt += NORMAL_SPEED; }`)
+- levitation boots: Boots_off handles in-air removal (do_wear.c:300-310); the trap is the 9/10 curse.
+- robe casting bonus cancels most of the metal-armor penalty (spell.c:2192-2195 spelarmr subtraction).
+- chain mail: all iron mails are Mines drops (the "Dwarves drop these" framing is misleading).
+- follow-ups: build_armor_appendix.py may be stale; "yellow dragon scale mail | Rare." not verified against 5.0 generation rules.
+-->
+
+**AC**はその防具が提供するアーマークラス補正値です（数値が大きいほど防御力が高く、画面上のAC表示からこの数値が減算されます）。**MC**は魔法防御能力レベル（1〜3）を表し、数値が高いほど敵の魔法攻撃を防ぐ確率が高まります。**重量 (Wt)**はユニット重量、**価格 (Cost)**は店での基本価格です。**備考**列には、装備中に付与される固有能力（耐性や特性）および戦術上の注意点をまとめています。防具は装備部位ごとに分類されています。ドラゴンの鱗鎧は終盤における圧倒的重要性から、個別の項目として取り上げています。一部の防具にある括弧内の名称は、侍（Samurai）プレイ時に表示される別名です（ゲーム内部では同一アイテム）。
+
+#### 胴鎧 (Body armor / suits)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| 鋼鉄の鎧 (plate mail / tanko: 短甲) | +7 | 2 | 450 | 600 | 鉄 | 魔法詠唱ペナルティあり。 |
+| 水晶の鎧 (crystal plate mail) | +7 | 2 | 415 | 820 | ガラス | 決して錆びない。魔法詠唱ペナルティあり。 |
+| 青銅の鎧 (bronze plate mail) | +6 | 1 | 450 | 400 | 銅 |  |
+| 鉄片の鎧 (splint mail) | +6 | 1 | 400 | 80 | 鉄 |  |
+| 帯金の鎧 (banded mail) | +6 | 1 | 350 | 90 | 鉄 |  |
+| ドワーフのミスリル服 (dwarvish mithril-coat) | +6 | 2 | 150 | 240 | ミスリル | 軽量だが金属製：魔法詠唱へのペナルティは鋼鉄の鎧と同等。 |
+| エルフのミスリル服 (elven mithril-coat) | +5 | 2 | 150 | 240 | ミスリル | 軽量だが金属製：魔法詠唱へのペナルティは鋼鉄の鎧と同等。 |
+| 鎖かたびら (chain mail) | +5 | 1 | 300 | 75 | 鉄 |  |
+| オークの鎖かたびら (orcish chain mail) | +4 | 1 | 300 | 75 | 鉄 |  |
+| 鱗の鎧 (scale mail) | +4 | 1 | 250 | 45 | 鉄 |  |
+| 鋲付き革鎧 (studded leather armor) | +3 | 1 | 200 | 15 | 革 | 魔法詠唱ペナルティなし。 |
+| 鉄環の鎧 (ring mail) | +3 | 1 | 250 | 100 | 鉄 |  |
+| オークの鉄環の鎧 (orcish ring mail) | +2 | 1 | 250 | 80 | 鉄 |  |
+| 革鎧 (leather armor) | +2 | 1 | 150 | 5 | 革 |  |
+| 革の服 (leather jacket) | +1 | — | 30 | 10 | 革 |  |
+| 灰色ドラゴンの鱗鎧 (gray dragon scale mail) | +9 | — | 40 | 1200 | ドラゴンの皮 | 魔法防御（Magic resistance）。終盤における最終目標の胴鎧。 |
+| 銀色ドラゴンの鱗鎧 (silver dragon scale mail) | +9 | — | 40 | 1200 | ドラゴンの皮 | 反射（Reflection）。 |
+| 黒色ドラゴンの鱗鎧 (black dragon scale mail) | +9 | — | 40 | 1200 | ドラゴンの皮 | 分解耐性（Disintegration resistance）＋吸命耐性（Drain resistance）。 |
+| 黄色ドラゴンの鱗鎧 (yellow dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 酸耐性（Acid resistance）＋石化耐性（Stoning resistance）。 |
+| 橙色ドラゴンの鱗鎧 (orange dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 睡眠耐性（Sleep resistance）＋自由行動（Free action）。 |
+| 白色ドラゴンの鱗鎧 (white dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 冷気耐性（Cold resistance）＋消化遅延（Slow digestion）。 |
+| 赤色ドラゴンの鱗鎧 (red dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 火炎耐性（Fire resistance）＋赤外線視覚（Infravision）。 |
+| 緑色ドラゴンの鱗鎧 (green dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 毒耐性（Poison resistance）＋病気耐性（Sickness resistance）。 |
+| 青色ドラゴンの鱗鎧 (blue dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 電撃耐性（Shock resistance）＋高速移動（韋駄天の靴と同等）。 |
+| 金色ドラゴンの鱗鎧 (gold dragon scale mail) | +9 | — | 40 | 900 | ドラゴンの皮 | 幻覚耐性（Hallucination resistance）＋恒久光源（胴部位唯一の光源）。 |
+
+:::
+
+#### ドラゴンの鱗 (Dragon scales)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| 灰色ドラゴンの鱗 (gray dragon scales) | +3 | — | 40 | 700 | ドラゴンの皮 | 魔法防御。鎧作成の巻物で鱗鎧へアップグレード可能。 |
+| 銀色ドラゴンの鱗 (silver dragon scales) | +3 | — | 40 | 700 | ドラゴンの皮 | 反射。 |
+| 黒色ドラゴンの鱗 (black dragon scales) | +3 | — | 40 | 700 | ドラゴンの皮 | 分解耐性＋吸命耐性。 |
+| 黄色ドラゴンの鱗 (yellow dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 酸耐性＋石化耐性。 |
+| 橙色ドラゴンの鱗 (orange dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 睡眠耐性＋自由行動。 |
+| 白色ドラゴンの鱗 (white dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 冷気耐性＋消化遅延。 |
+| 赤色ドラゴンの鱗 (red dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 火炎耐性＋赤外線視覚。 |
+| 緑色ドラゴンの鱗 (green dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 毒耐性＋病気耐性。 |
+| 青色ドラゴンの鱗 (blue dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 電撃耐性＋高速移動（韋駄天の靴と同等）。 |
+| 金色ドラゴンの鱗 (gold dragon scales) | +3 | — | 40 | 500 | ドラゴンの皮 | 幻覚耐性＋恒久光源。 |
+
+:::
+
+#### シャツ (Shirts)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| アロハシャツ (Hawaiian shirt) | +0 | — | 5 | 3 | 布 | 観光客（Tourist）の初期装備。胴鎧の下に着用可能。 |
+| Ｔシャツ (T-shirt) | +0 | — | 5 | 2 | 布 | 胴鎧の下に着用可能。 |
+
+:::
+
+#### クローク (Cloaks)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| ミイラの包帯 (mummy wrapping) | +0 | 1 | 3 | 2 | 布 | 着用中は透明化（Invisibility）の効果を無効化する。 |
+| エルフのクローク (elven cloak) | +1 | 1 | 10 | 60 | 布 | 忍び足（Stealth）。 |
+| オークのクローク (orcish cloak) | +0 | 1 | 10 | 40 | 布 |  |
+| ドワーフのクローク (dwarvish cloak) | +0 | 1 | 10 | 50 | 布 |  |
+| 防水クローク (oilskin cloak) | +1 | 2 | 10 | 50 | 布 | 掴み攻撃や水濡れを防ぐ。 |
+| ローブ (robe) | +2 | 2 | 15 | 50 | 布 | 魔法詠唱ボーナス。金属鎧による詠唱ペナルティの大半を相殺する。 |
+| 錬金術の仕事着 (alchemy smock) | +1 | 1 | 10 | 50 | 布 | 毒耐性（Poison resistance）。 |
+| 革のクローク (leather cloak) | +1 | 1 | 15 | 40 | 革 |  |
+| 守りのクローク (cloak of protection) | +3 | 3 | 10 | 50 | 布 | クロークの中で最高の魔法防御能力（MC 3）を誇る。 |
+| 透明のクローク (cloak of invisibility) | +1 | 1 | 10 | 60 | 布 | 透明化（Invisibility）。 |
+| 魔法を防ぐクローク (cloak of magic resistance) | +1 | 1 | 10 | 60 | 布 | 魔法防御（Magic resistance）。最も軽量な魔法防御の供給源。 |
+| 幻影のクローク (cloak of displacement) | +1 | 1 | 10 | 50 | 布 | 幻影（Displacement）。 |
+
+:::
+
+#### 兜・帽子 (Helmets)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| エルフの革帽子 (elven leather helm) | +1 | — | 3 | 8 | 革 |  |
+| オークの兜 (orcish helm) | +1 | — | 30 | 10 | 鉄 |  |
+| ドワーフの鉄兜 (dwarvish iron helm) | +2 | — | 40 | 20 | 鉄 |  |
+| フィドーラ (fedora) | +0 | — | 3 | 1 | 布 | 考古学者（Archeologist）の初期装備。同職業に幸運+1を付与。 |
+| とんがり帽子 (cornuthaum) | +0 | 1 | 4 | 80 | 布 | 透視（Clairvoyance）。魔法使いのみ有効。魔法使い以外が被ると他の透視能力を阻害する。 |
+| 道化の帽子 (dunce cap) | +0 | — | 4 | 1 | 布 | 知力と知恵が強制的に 6 に低下する。被ると自動的に呪われる。外すには呪い解除が必要。 |
+| くぼんだ鍋 (dented pot) | +1 | — | 10 | 8 | 鉄 |  |
+| 知性の兜 (helm of brilliance) | +1 | — | 40 | 50 | ガラス | 着用中、強化値が知力と知恵の両方に加算される（+3の兜なら知力+3、知恵+3）。 |
+| 兜 (helmet / kabuto: 兜) | +1 | — | 30 | 10 | 鉄 |  |
+| 警戒の兜 (helm of caution) | +1 | — | 50 | 50 | 鉄 | 警告（Warning）。 |
+| 逆属性の兜 (helm of opposite alignment) | +1 | — | 50 | 50 | 鉄 | 着用中、属性が反転する。生成時に90%の確率で呪われている。 |
+| テレパシーの兜 (helm of telepathy) | +1 | — | 50 | 50 | 鉄 | 目が見えているときは周囲8マス、盲目時はフロア全体のテレパシーを得る。 |
+
+:::
+
+逆属性の兜は基本的には罠アイテムですが、属性反転を意図的に利用できる局面もあります。異属性の祭壇で生贄を捧げる、反対属性のクエストアーティファクトを所持する、あるいは星界の面（Astral Plane）で魔除けを受け入れる祭壇の属性を変更する際などに活用されます。
+
+#### 小手・手袋 (Glovers)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| 革の手袋 (leather gloves / yugake: ゆがけ) \* | +1 | — | 10 | 8 | 革 |  |
+| お手玉の小手 (gauntlets of fumbling) \* | +1 | — | 10 | 50 | 革 | 頻繁に足をもつれさせる（お手玉状態）。生成時に90%の確率で呪われている。回避推奨。 |
+| 力の小手 (gauntlets of power) \* | +1 | — | 30 | 50 | 鉄 | 筋力を強制的に 25 に設定する。 |
+| 器用さの小手 (gauntlets of dexterity) \* | +1 | — | 10 | 50 | 革 | 着用中、強化値が器用さに加算される（+3の小手なら器用さ+3）。 |
+
+:::
+
+\* 印の付いたアイテムは、識別されるまで4種類の実見外見名（*古い手袋*、*パッド入り手袋*、*乗馬用手袋*、*フェンシング手袋*）のいずれかとして出現します（通常の革の手袋も含みます）。
+
+#### 靴 (Boots)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| かかとの低い靴 (low boots) | +1 | — | 10 | 8 | 革 |  |
+| 鉄の靴 (iron shoes) | +2 | — | 50 | 16 | 鉄 |  |
+| かかとの高い靴 (high boots) | +2 | — | 20 | 12 | 革 |  |
+| 韋駄天の靴 (speed boots) \* | +1 | — | 20 | 50 | 革 | 高速移動（Very fast）。3ターンのうち2ターンで無料の追加行動を得られる。 |
+| 水上歩行の靴 (water walking boots) \* | +1 | — | 15 | 50 | 革 | 水上や氷上を歩行可能。耐火加工された靴と火炎耐性があれば溶岩も渡れる。 |
+| 跳躍の靴 (jumping boots) \* | +1 | — | 20 | 50 | 革 | `#jump` コマンドで近くの任意のマスへ跳躍できる。 |
+| エルフの靴 (elven boots) \* | +1 | — | 15 | 8 | 革 | 忍び足（Stealth）。 |
+| 蹴りの靴 (kicking boots) \* | +1 | — | 50 | 8 | 鉄 |  |
+| お手玉の靴 (fumble boots) \* | +1 | — | 20 | 30 | 革 | 頻繁に足をもつれさせる。生成時に90%の確率で呪われている。回避推奨。 |
+| 浮遊の靴 (levitation boots) \* | +1 | — | 15 | 30 | 革 | 浮遊（Levitation）。生成時に90%の確率で呪われている。呪われた靴は脱ぐことができないため致命的な罠となる。 |
+
+:::
+
+\* 印の付いたアイテムは、識別されるまで7種類の実見外見名（*戦闘用ブーツ*、*ジャングルブーツ*、*ハイキングブーツ*、*泥靴*、*バックル付きブーツ*、*乗馬用ブーツ*、*スノーブーツ*）のいずれかとして出現します。
+
+#### 盾 (Shields)
+
+::: dense-table
+
+| 防具名 | AC | MC | 重量 | 価格 | 材質 | 備考 |
+|--------------------------|----|----|----|------|----------|--------------------------------------------------------------------|
+| 小さな盾 (small shield) | +1 | — | 30 | 3 | 木 |  |
+| 吸命耐性の盾 (shield of drain resistance) | +1 | — | 30 | 50 | 木 | 吸命耐性（Drain resistance）。 |
+| 電撃耐性の盾 (shield of shock resistance) | +1 | — | 30 | 50 | 木 | 電撃耐性（Shock resistance）。 |
+| エルフの盾 (elven shield) | +2 | — | 40 | 7 | 木 |  |
+| ウルク＝ハイの盾 (Uruk-hai shield) | +1 | — | 50 | 7 | 鉄 |  |
+| オークの盾 (orcish shield) | +1 | — | 50 | 7 | 鉄 |  |
+| 大きな盾 (large shield) | +2 | — | 100 | 10 | 鉄 | 他のすべての盾と同様、両手持ち武器および二刀流戦闘を阻害する。 |
+| ドワーフの丸盾 (dwarvish roundshield) | +2 | — | 100 | 10 | 鉄 |  |
+| 反射の盾 (shield of reflection) | +2 | — | 50 | 50 | 銀 | 反射（Reflection）。胴鎧の装備枠を自由に選べるようになる。 |
+
+:::
+
+### 呪文一覧表 (Spell Tables)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. All 41 spell rows' level/school/type verified (incl. chain lightning lvl 2). Spell damage figures live in spell.c/zap.c, outside this table's source.
+-->
+<!-- audit
+2026-05-19:
+- 41 spells, sourced from objects.h SPELL() macros (P_ATTACK..P_MATTER); SPELL macro signature at objects.h:1277-1281, oc_level=oc_oc2.
+- attack spells at objects.h:1297-1330 (force bolt/magic missile/drain life/cone of cold/fireball/finger of death/chain lightning).
+- healing spells at objects.h:1313-1408 (healing/cure blindness/cure sickness/extra healing/stone to flesh/restore ability).
+- divination spells at objects.h:1308-1384 (light/detect monsters/detect food/clairvoyance/detect unseen/identify/detect treasure/magic mapping).
+- enchantment spells at objects.h:1305-1354 (confuse monster/slow monster/cause fear/sleep/charm monster).
+- cleric spells at objects.h:1337-1400 (protection/create monster/remove curse/create familiar/turn undead).
+- escape spells at objects.h:1355-1404 (jumping/haste self/invisibility/levitation/teleport away).
+- matter spells at objects.h:1293-1407 (knock/wizard lock/dig/polymorph/cancellation/stone to flesh).
+- Flame sphere and freeze sphere are `#if 0 DEFERRED` (objects.h:1413-1422), NOT shipped in 5.0.
+- Chain lightning is level 2 per macro (objects.h:1409-1411); body table at line 4986 and What's New at 8585 still say L4: follow-up fix.
+- Magic missile IS Antimagic-blocked (zap.c:4410-4419, "missiles bounce off!"), NOT unresistable.
+- Finger of death: monster MR resists, but player gets no Antimagic check on death-ray instakill (zap.c:2885-2902).
+- Clairvoyance gets a P_SKILLED upgrade detecting nearby monsters per pulse (spell.c:1572-1576).
+- Fireball/cone of cold become aimed explosions at P_SKILLED (spell.c spelleffects).
+- Remove curse/confuse monster/detect food/cause fear/identify/charm monster get blessed-scroll behavior at P_SKILLED.
+- Haste self/detect treasure/detect monsters/levitation/restore ability get blessed-potion behavior at P_SKILLED.
+- Protection doubles uspmtime at P_EXPERT (spell.c:1169); jumping distance scales with role_skill.
+- Charm monster is untargeted (read.c:1679-1708 seffect_taming is area-centered-on-caster, no direction prompt).
+- Charm monster area: 3×3 normal, 11×11 confused (`bd = confused ? 5 : 1`, -bd..bd inclusive), NOT 5×5. (read.c:1689 seffect_taming)
+- Charm monster P_SKILLED upgrade is blessed-scroll reliability, NOT a radius bump. (spell.c:1524-1525 sets pseudo->blessed when role_skill >= P_SKILLED; read.c:1689 radius `bd` depends only on `confused`, not on blessed)
+- Cause fear blessed and uncursed are identical (read.c:1454-1486); loop hits every visible monster on the level, not just nearby.
+- Remove curse blessed branch uncurses every non-coin inventory item (read.c:1514-1577), NOT just worn/wielded.
+-->
+
+魔法書の完全カタログです。系統順、続いてレベル順に並んでいます。**レベル (Lvl)**は呪文レベル、**消費魔力 (Pw cost)**は常に「5×呪文レベル」です。**種別 (Type)**は呪文の目標指定方法を区分しています：
+
+- **方向指定 (aimed):** 方向を指定し、その直線の1マスに命中します。
+- **光線 (ray):** 術者から直線状に伸び、遮られるまで進むビームです。
+- **目標不要 (untargeted):** 方向指定は不要で、自身、フロア全体、または固定範囲に効果が発現します。
+
+**上位効果 (Upgrade)**はその系統のスキルが**熟練 (Skilled)**以上になった際の挙動変化です（防護の呪文のみエキスパートで発動し、跳躍の距離はランクに応じて連続的に拡大します）。
+
+::: dense-table
+
+| 呪文名 | 系統 | レベル | 種別 | 効果 | 上位効果 (Skilled以上) |
+|-----------------|-------------|-----|------------|-------------------------------------|-------------------------------|
+| 衝撃 (force bolt) | 攻撃 | 1 | 方向指定 | 2d12の魔法打撃ダメージ | — |
+| 連鎖雷撃 (chain lightning) | 攻撃 | 2 | 目標不要 | 周囲のモンスターに電撃ダメージ | — |
+| 生命力吸収 (drain life) | 攻撃 | 2 | 方向指定 | 対象から経験値レベルを1吸収 | — |
+| マジックミサイル (magic missile) | 攻撃 | 2 | 光線 | (XL÷2 + 1)d6の衝撃ビーム（端数切捨て）。魔法防御で防がれる | — |
+| 冷気 (cone of cold) | 攻撃 | 4 | 光線 | (XL÷2 + 1)d6の冷気ビーム（端数切捨て） | 目標指定の爆発 |
+| 火炎 (fireball) | 攻撃 | 4 | 光線 | (XL÷2 + 1)d6の火炎ビーム（端数切捨て） | 目標指定の爆発 |
+| 死の指 (finger of death) | 攻撃 | 7 | 光線 | 死の光線。敵の魔法防御で防がれるが、自身に反射・誤射した際は防御チェックを迂回して即死する | — |
+| 回復 (healing) | 回復 | 1 | 方向指定 | HPを回復 | 盲目も治療 |
+| 盲目治療 (cure blindness) | 回復 | 2 | 目標不要 | 盲目状態を回復 | — |
+| 病気治療 (cure sickness) | 回復 | 3 | 目標不要 | 食中毒および病気を治療 | — |
+| 完全回復 (extra healing) | 回復 | 3 | 方向指定 | より多くのHPを回復 | — |
+| 石から肉へ (stone to flesh) | 回復 | 3 | 方向指定 | 石像を生きたモンスターに変える。石化を治療 | — |
+| 能力回復 (restore ability) | 回復 | 4 | 目標不要 | 低下した能力値を1つ全快 | 低下したすべての能力値を全快 |
+| 怪物探知 (detect monsters) | 予見 | 1 | 目標不要 | フロア上のモンスターを表示 | 効果時間が延長 |
+| 明かり (light) | 予見 | 1 | 目標不要 | 現在の部屋を照らす | — |
+| 食料探知 (detect food) | 予見 | 2 | 目標不要 | フロア上の食料を表示 | 有害な食事の前に警告 |
+| 透視 (clairvoyance) | 予見 | 3 | 目標不要 | 周囲のマップを周期的に開拓視認 | 熟練：周期ごとに周囲のモンスターも探知 |
+| 不可視探知 (detect unseen) | 予見 | 3 | 目標不要 | 不可視のモンスターや罠を表示 | — |
+| 識別 (identify) | 予見 | 3 | 目標不要 | 所持品を1つ識別 | 複数の所持品を一括識別 |
+| 宝探知 (detect treasure) | 予見 | 4 | 目標不要 | フロア上のすべてのアイテムを表示 | 探知したアイテムの種別を識別 |
+| 地図化 (magic mapping) | 予見 | 5 | 目標不要 | フロア全体の地形を開拓表示 | — |
+| 怪物混乱 (confuse monster) | 付与 | 1 | 目標不要 | 次の近接攻撃で対象を混乱させる | 複数回の攻撃分チャージされる |
+| 怪物減速 (slow monster) | 付与 | 2 | 方向指定 | 対象モンスターの移動速度を低下 | — |
+| 恐怖 (cause fear) | 付与 | 3 | 目標不要 | 視界内のモンスターを逃走させる | — |
+| 睡眠 (sleep) | 付与 | 3 | 光線 | 射線上のモンスターを眠らせる | — |
+| 魅了 (charm monster) | 付与 | 5 | 目標不要 | 周囲 3×3 エリアのモンスターを手懐ける | — |
+| 防護 (protection) | 僧侶 | 1 | 目標不要 | 魔力を消費して一時的なACボーナスを得る | **エキスパート**: 効果時間が2倍 |
+| 怪物作成 (create monster) | 僧侶 | 2 | 目標不要 | 近くにランダムなモンスターを召喚 | — |
+| 呪い解除 (remove curse) | 僧侶 | 3 | 目標不要 | 装備中のアイテムの呪いを解く | 所持している全アイテムの呪いを解く |
+| ペット作成 (create familiar) | 僧侶 | 6 | 目標不要 | 手懐けられたペットを召喚する | — |
+| アンデッド退散 (turn undead) | 僧侶 | 6 | 方向指定 | アンデッドや悪魔にダメージを与えて逃走させる | — |
+| 跳躍 (jumping) | 緊急脱出 | 1 | 目標不要 | 近くの指定したマスへ跳躍する | スキルランクに応じて跳躍距離が拡大 |
+| 加速 (haste self) | 緊急脱出 | 3 | 目標不要 | 一時的な高速移動状態になる | 効果時間が延長 |
+| 不可視 (invisibility) | 緊急脱出 | 4 | 目標不要 | 透明状態になる | — |
+| 浮遊 (levitation) | 緊急脱出 | 4 | 目標不要 | 落とし穴や水面の上に浮かび上がる | `>` キーで任意に着地可能 |
+| テレポート (teleport away) | 緊急脱出 | 6 | 方向指定 | 対象をフロアの別の場所へテレポートさせる | — |
+| 開錠 (knock) | 物質操作 | 1 | 方向指定 | 扉を開け、錠前を解除する | — |
+| 施錠 (wizard lock) | 物質操作 | 2 | 方向指定 | 扉を閉じて鍵をかける | — |
+| 穴掘り (dig) | 物質操作 | 5 | 光線 | 壁、岩、床を掘り抜く | — |
+| 変身 (polymorph) | 物質操作 | 6 | 方向指定 | 対象を変身させる | — |
+| 変化消失 (cancellation) | 物質操作 | 7 | 方向指定 | 対象の魔法特性を打ち消す | — |
+
+:::
+
+光線系呪文（睡眠、マジックミサイル、死の指、および未熟練状態の冷気や火炎）の命中率も、スキルランクに応じて上昇します。

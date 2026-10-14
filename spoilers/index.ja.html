@@ -13069,6 +13069,3105 @@ zm）で売却できるようになり、ガラス玉は二値同然となりま
 </section>
 </section>
 </section>
+<section id="武器一覧表-weapons-tables" class="level3">
+<h3>武器一覧表 (Weapons Tables)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h + weapon.c: no corrections. Every weapon row (base/bonus dice, weight, cost, to-hit, material, two-handed/launcher/skill notes) verified, including composite-damage entries vs dmgval().
+-->
+<p>ダメージは<strong>小型に対するダメージ / 大型に対するダメージ (vs
+small / vs
+large)</strong>として表記されており、強化値（強化・呪い）が加算される前、かつ銀や材質による追加ボーナスを除いた基本ダイス値です。<strong>重量
+(Wt)</strong>はユニット重量、<strong>価格
+(Cost)</strong>は店における未強化時の基本価格（Zm:
+ゾークミッド）、<strong>命中
+(Hit)</strong>は武器自体に組み込まれている命中補正ボーナス（大半は
+0）を表します。盾の装備や二刀流（二刀流戦闘）を阻害する両手持ち武器には、備考欄にフラグが付けられています。武器はスキルごとに分類されています。スキル枠（スロット）を投資する前に、<a
+href="#per-role-skill-caps">職業別のスキル上限一覧</a>を確認してください。一部の武器に見られる括弧内の名称は、侍（Samurai）がプレイした際に画面上に表示される別名です（ゲーム内部では同一のアイテムとして処理されます）。</p>
+<section id="短剣-dagger" class="level4">
+<h4>短剣 (Dagger)</h4>
+<!-- audit
+2026-05-19:
+- Expert Rogue dagger multishot caps at rnd(4) = 1-4: 1 base + 1 Expert + 1 Skilled + 1 class (dothrow.c:177-190, 63-67)
+- athame engraving Elbereth does NOT dull the weapon, so no enchantment is consumed (engrave.c:1306-1307, 1361). Duration is unchanged
+- silver weapons hurt demons, vampires, lycanthropes, shades, and imps (except tengu) per mon_hates_silver (mondata.c:524-528)
+- silver does NOT hurt liches, zombies, mummies, wraiths, ghouls, or ghosts (none of those classes appear in hates_silver, mondata.c:524-528)
+- silver damage bonus is rolled in mhitm/hmon, +1d20 vs hates_silver targets for silver weapons (uhitm.c:1376-1377)
+-->
+<p>投擲および刺突。短剣はスタック（束ねて所持）可能で壊れにくく、盗賊（Rogue）は投擲時にマルチショット（連続投擲）ボーナスを得られます（エキスパート時には1ターンに最大4本投擲）。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>短剣 (dagger)</td>
+<td>1d4 / 1d3</td>
+<td>10</td>
+<td>4</td>
+<td>+2</td>
+<td>鉄</td>
+<td>スタック可能。スキルがエキスパートの盗賊は1回の投擲で最大4本までマルチショット可能。</td>
+</tr>
+<tr>
+<td>エルフの短剣 (elven dagger)</td>
+<td>1d5 / 1d3</td>
+<td>10</td>
+<td>4</td>
+<td>+2</td>
+<td>木</td>
+<td>スタック可能。アーティファクト形態はスティング (Sting)。</td>
+</tr>
+<tr>
+<td>オークの短剣 (orcish dagger)</td>
+<td>1d3 / 1d3</td>
+<td>10</td>
+<td>4</td>
+<td>+2</td>
+<td>鉄</td>
+<td>スタック可能。</td>
+</tr>
+<tr>
+<td>銀の短剣 (silver dagger)</td>
+<td>1d4 / 1d3</td>
+<td>12</td>
+<td>40</td>
+<td>+2</td>
+<td>銀</td>
+<td>スタック可能。悪魔、吸血鬼、獣人、影、小悪魔（インプ）に対して銀特効ダメージ。盗賊や野伏（Ranger）の一般的な利き手以外の武器。</td>
+</tr>
+<tr>
+<td>アサメ (athame)</td>
+<td>1d4 / 1d3</td>
+<td>10</td>
+<td>4</td>
+<td>+2</td>
+<td>鉄</td>
+<td>スタック可能。アサメで文字を刻んでも<strong>刃先が鈍ることはない</strong>（強化値が減少しない）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- 5 knife rows verified: P_KNIFE skill, scalpel METAL, knife/stiletto IRON, worm tooth/crysknife BONE (objects.h:215-233)
+- scalpel is Healer's starter (u_init.c:77)
+- crysknife reverts to worm tooth on drop via type-id swap, NOT poly (do.c:903-918)
+- fixed (erodeproof) crysknife only reverts ~10% of drops (do.c:911)
+-->
+</section>
+<section id="ナイフ-knife" class="level4">
+<h4>ナイフ (Knife)</h4>
+<p>主に近接戦闘用。ナイフはスタック可能で投擲もできますが、投擲ナイフによるマルチショットボーナスを得られる職業はありません。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メス (scalpel)</td>
+<td>1d3 / 1d3</td>
+<td>5</td>
+<td>6</td>
+<td>+2</td>
+<td>金属</td>
+<td>医師（Healer）の初期装備。</td>
+</tr>
+<tr>
+<td>ナイフ (knife / shito: 刺刀)</td>
+<td>1d3 / 1d2</td>
+<td>5</td>
+<td>4</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>スティレット (stiletto)</td>
+<td>1d3 / 1d2</td>
+<td>5</td>
+<td>4</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>ワームの歯 (worm tooth)</td>
+<td>1d2 / 1d2</td>
+<td>20</td>
+<td>2</td>
+<td>—</td>
+<td>骨</td>
+<td></td>
+</tr>
+<tr>
+<td>クリスナイフ (crysknife)</td>
+<td>1d10 / 1d10</td>
+<td>20</td>
+<td>100</td>
+<td>+3</td>
+<td>骨</td>
+<td>床に落としたり投げたりするとワームの歯に戻ってしまう。耐腐食（erodeproof）加工されたものは戻る確率が約10%に軽減される。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- 4 short sword rows verified: short 1d6/1d8, elven 1d8/1d8, orcish 1d5/1d8, dwarvish 1d7/1d8 (objects.h:244-255)
+- all share P_SHORT_SWORD; scimitar uses P_SABER and is correctly excluded
+- Rogue starter (u_init.c:134); Samurai "wakizashi" is a short sword aliased in objnam.c:106 (u_init.c:144)
+- no artifact uses SHORT_SWORD as base type
+-->
+</section>
+<section id="小剣-short-sword" class="level4">
+<h4>小剣 (Short sword)</h4>
+<p>片手持ち近接武器。脇差（wakizashi）と小剣（short
+sword）は職業による表示名が異なるだけで、同一の武器です。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小剣 (short sword / wakizashi: 脇差)</td>
+<td>1d6 / 1d8</td>
+<td>30</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td>盗賊（Rogue）の初期装備。</td>
+</tr>
+<tr>
+<td>エルフの小剣 (elven short sword)</td>
+<td>1d8 / 1d8</td>
+<td>30</td>
+<td>10</td>
+<td>—</td>
+<td>木</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの小剣 (orcish short sword)</td>
+<td>1d5 / 1d8</td>
+<td>30</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフの小剣 (dwarvish short sword)</td>
+<td>1d7 / 1d8</td>
+<td>30</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="サーベル-saber" class="level4">
+<h4>サーベル (Saber)</h4>
+<!-- audit
+2026-05-19:
+- 10 saber cells verified clean (objects.h)
+- Grayswandir is a SILVER_SABER artifact, PHYS(5,0): +1d5 to-hit and double damage (artilist.h:170, artifact.c:1083-1086, 1106-1107)
+- Werebane is also a silver saber artifact (artilist.h:166); +d5 vs lycanthropes via SPFX_DFLAG2 M2_WERE
+- inline effects deferred to Artifacts chapter rather than duplicated
+-->
+<p>片手持ち近接武器。銀のサーベルを母体とするアーティファクト形態（グレイスワンディール、獣の災い）は、ゲーム内屈指の強力な片手武器です。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>シミター (scimitar)</td>
+<td>1d8 / 1d8</td>
+<td>40</td>
+<td>15</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>銀のサーベル (silver saber)</td>
+<td>1d8 / 1d8</td>
+<td>40</td>
+<td>75</td>
+<td>—</td>
+<td>銀</td>
+<td>銀特効により悪魔、獣人、吸血鬼、小悪魔に追加ダメージ。アーティファクト形態：<strong>グレイスワンディール
+(Grayswandir)</strong> および <strong>獣の災い (Werebane)</strong>（<a
+href="#artifacts">アーティファクト一覧</a>参照）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="幅広の剣-broadsword" class="level4">
+<h4>幅広の剣 (Broadsword)</h4>
+<!-- audit
+2026-05-19:
+- Stormbringer's base item is RUNESWORD, NOT broadsword (artilist.h:93)
+- runesword and broadsword share P_BROAD_SWORD skill and 1d4+1d4 / 1d6+1 dice, hence the confusion
+- artifact details kept in the Artifacts chapter, not duplicated here
+-->
+<p>片手持ち近接武器。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>幅広の剣 (broadsword / ninja-to: 忍者刀)</td>
+<td>1d4+1d4 / 1d6+1</td>
+<td>70</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>エルフの幅広の剣 (elven broadsword)</td>
+<td>1d6+1d4 / 1d6+1</td>
+<td>70</td>
+<td>10</td>
+<td>—</td>
+<td>木</td>
+<td></td>
+</tr>
+<tr>
+<td>ルーンの剣 (runesword)</td>
+<td>1d4+1d4 / 1d6+1</td>
+<td>40</td>
+<td>300</td>
+<td>—</td>
+<td>鉄</td>
+<td>ストームブリンガー (Stormbringer)
+は混沌のアーティファクト形態。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="長剣-long-sword" class="level4">
+<h4>長剣 (Long sword)</h4>
+<!-- audit
+2026-05-19:
+- long sword stats verified (objects.h:270-280)
+- Excalibur dipping requires LONG_SWORD, XL >= 5, quan == 1, not already artifact, no extant Excalibur (fountain.c:404-408)
+- dip roll: !rn2(6) for Knights, !rn2(30) otherwise (fountain.c:405)
+- non-Lawfuls get the sword cursed, spe possibly decremented, oerodeproof cleared (fountain.c:411-421)
+- LONG_SWORD artifacts: Excalibur, Frost Brand, Fire Brand, Giantslayer, Vorpal Blade, Sunsword (artilist.h:85, 149, 153, 174, 191, 209)
+- Vorpal Blade is a LONG_SWORD artifact, NOT a two-handed sword (artilist.h:191)
+- two-handed sword has no dedicated artifact (no TWO_HANDED_SWORD entries in artilist.h)
+-->
+<p>片手持ち近接武器。秩序属性の長剣は、序盤で単一武器として最も大きな見返りを得られる「泉への浸しによるエクスカリバー入手」の対象となります。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>長剣 (long sword)</td>
+<td>1d8 / 1d12</td>
+<td>40</td>
+<td>15</td>
+<td>—</td>
+<td>鉄</td>
+<td>経験レベル5以上で泉に浸すと、1/30の確率（騎士は1/6）で判定が行われる。成功時、秩序属性のキャラクターは<strong>エクスカリバー
+(Excalibur)</strong>
+を獲得する。それ以外の属性では剣が呪われる。アーティファクト形態：エクスカリバー、フロストブランド、ファイヤーブランド、巨人殺し、ヴォーパルブレード、サンソード。</td>
+</tr>
+<tr>
+<td>刀 (katana)</td>
+<td>1d10 / 1d12</td>
+<td>40</td>
+<td>80</td>
+<td>+1</td>
+<td>鉄</td>
+<td>武器自体に+1の命中補正が組み込まれている。スニッカースニー
+(Snickersnee) がアーティファクト形態。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="両手剣-two-handed-sword" class="level4">
+<h4>両手剣 (Two-handed sword)</h4>
+<!-- audit
+2026-05-19:
+- two-handed sword stats verified (objects.h:273-285)
+- 5.0 bimanual weapons get 3/2 Str damage bonus, melee only (uhitm.c:1467-1468; gated on bimanual(uwep) + HMON_MELEE)
+- bonus also applies to battle-axe, dwarvish mattock, bardiche
+- Tsurugi is the two-handed sword artifact (artilist.h:285-289); Vorpal Blade is a LONG_SWORD (artilist.h:191), NOT the artifact form here
+-->
+<p>両手持ち武器は 5.0 において<strong>筋力ダメージに 1.5
+倍（3/2）のボーナス</strong>を受けます。筋力によるダメージ補正値が 1.5
+倍されます。下記の高い基本ダイス値と合わさることで、盾の装備枠を放棄しなければならないにもかかわらず、両手剣が片手武器＋盾の構成に匹敵する大きな理由となっています。
+このボーナスは戦斧、ドワーフのつるはし、バーディックなど、あらゆる両手持ち武器に適用されます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>両手剣 (two-handed sword)</td>
+<td>1d12 / 1d6+2d6</td>
+<td>150</td>
+<td>50</td>
+<td>—</td>
+<td>鉄</td>
+<td>両手持ち（盾および利き手以外の武器の併用不可）。</td>
+</tr>
+<tr>
+<td>大刀 (tsurugi)</td>
+<td>1d16 / 1d8+2d6</td>
+<td>60</td>
+<td>500</td>
+<td>+2</td>
+<td>金属</td>
+<td>両手持ち。村正の大刀 (The Tsurugi of Muramasa)
+がアーティファクト形態。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="斧-axe" class="level4">
+<h4>斧 (Axe)</h4>
+<!-- audit
+2026-05-19:
+- axe 1d6/1d4, battle-axe 1d8+1d4 small / 1d6+2d4 large with bonus dice (objects.h:236-241, weapon.c:251-289)
+- both use P_AXE skill; battle-axe is bimanual and gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
+- Cleaver is the BATTLE_AXE artifact (artilist.h:114-116)
+-->
+<p>近接武器。通常の斧は片手持ちです。戦斧（battle-axe）は両手持ち（筋力ダメージ
+1.5 倍ボーナス適用）となります。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>斧 (axe)</td>
+<td>1d6 / 1d4</td>
+<td>60</td>
+<td>8</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>戦斧 (battle-axe)</td>
+<td>1d8+1d4 / 1d6+2d4</td>
+<td>120</td>
+<td>40</td>
+<td>—</td>
+<td>鉄</td>
+<td>両手持ち（5.0の筋力ダメージ 1.5
+倍ボーナス適用）。小型に+1d4、大型に+2d4。野蛮人（Barbarian）のクエストアーティファクトである<strong>なた
+(Cleaver)</strong> は戦斧が母体。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- pick-axe: WEPTOOL, wt 100, cost 50, 1d6/1d3, iron (objects.h:1007-1009)
+- mattock stats verified (objects.h:345-347)
+- both share P_PICK_AXE skill and route through use_pick_axe (apply.c:4290-4292)
+- mattock is bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
+- dig-down creates a pit, then a hole (dig.c:432-433, 372-374)
+-->
+</section>
+<section id="つるはし-pick-axe" class="level4">
+<h4>つるはし (Pick-axe)</h4>
+<p>近接武器かつ掘削道具。<code>a</code> (apply)
+キーで使用することで、任意の方向の壁や床を掘り進めることができます。ドワーフのつるはしも同様の機能を持ち、こちらは両手持ちです。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>つるはし (pick-axe)</td>
+<td>1d6 / 1d3</td>
+<td>100</td>
+<td>50</td>
+<td>—</td>
+<td>鉄</td>
+<td>武器道具（Weapon-tool）。使用（apply）することで壁を掘り崩したり、床を掘り抜く（落とし穴、続いて穴を作成）ことができる。ドワーフのつるはしと同じ
+<code>pick-axe</code> スキル。</td>
+</tr>
+<tr>
+<td>ドワーフのつるはし (dwarvish mattock)</td>
+<td>1d12 / 1d8+2d6</td>
+<td>120</td>
+<td>50</td>
+<td>−1</td>
+<td>鉄</td>
+<td>両手持ち（筋力ダメージ 1.5
+倍ボーナス適用）。つるはし同様に壁を掘り崩せる。わずかな命中ペナルティ（−1）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="こん棒-club" class="level4">
+<h4>こん棒 (Club)</h4>
+<!-- audit
+2026-05-19:
+- club and aklys stats verified (objects.h:371-373, 381-383)
+- starting inventory uses blessorcurse(otmp, 10): roughly 10% chance any starter item is cursed (mkobj.c:876-885)
+- club is a Caveman starter
+- aklys returns when thrown only if wielded (W_WEP), with ~1% misfire (dothrow.c:30-34, 1710-1759)
+-->
+<p>打撃系の片手近接武器。アキリスは革紐で繋がれており、主武器として手に持った状態で投擲すると手元に戻ってきます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>こん棒 (club)</td>
+<td>1d6 / 1d3</td>
+<td>30</td>
+<td>3</td>
+<td>—</td>
+<td>木</td>
+<td>洞窟人（Caveman）の初期装備。</td>
+</tr>
+<tr>
+<td>アキリス (aklys)</td>
+<td>1d6 / 1d3</td>
+<td>15</td>
+<td>4</td>
+<td>—</td>
+<td>鉄</td>
+<td>主武器として装備中に投げると手元に戻ってくる（紐付き）。ごく稀に投げ損ない（不発）が発生する。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="メイス-mace" class="level4">
+<h4>メイス (Mace)</h4>
+<!-- audit
+2026-05-19:
+- mace stats verified (objects.h:355-361)
+- Demonbane PHYS(5,0): +1d5 to-hit and double damage vs demons (artifact.c:1083-1085 spec_abon, 1106-1107 spec_dbon); also has banish invoke
+- silver mace: +1d20 vs mon_hates_silver targets (uhitm.c:1376-1377)
+- silver hates list: demons, weres, vampires, shades, most imps (mondata.c:524-528)
+- silver does NOT hit "undead" or "shape-changers" generally (mummies, zombies, ghosts, chameleons excluded)
+- Mjollnir is a war hammer, NOT a mace (artilist.h:109 `A("Mjollnir", WAR_HAMMER, ...)`)
+-->
+<p>片手持ちの打撃系近接武器。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メス (mace)</td>
+<td>1d6+1 / 1d6</td>
+<td>30</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>僧侶（Priest）が生贄の捧げ物で最初に確定入手するアーティファクト「デーモンベイン
+(Demonbane)」の母体：悪魔に対して命中+1d5かつダメージ2倍の銀のメイス、さらに追放効果の発動（invoke）付き。</td>
+</tr>
+<tr>
+<td>銀のメイス (silver mace)</td>
+<td>1d6+1 / 1d6</td>
+<td>36</td>
+<td>60</td>
+<td>—</td>
+<td>銀</td>
+<td>悪魔、獣人、吸血鬼、影、大半の小悪魔に対して+1d20の追加ダメージ。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="モーニングスター-morning-star" class="level4">
+<h4>モーニングスター (Morning star)</h4>
+<!-- audit
+2026-05-19:
+- morning star: 1d4+1d4 / 1d6+1, wt 120, cost 10, hit 0, iron (objects.h:363-365, weapon.c:225-289)
+- P_MORNING_STAR is its own skill, distinct from P_MACE (skills.h:35)
+- Trollsbane IS a MORNING_STAR artifact: regenerates while wielded, +d5 vs trolls (artilist.h:182-184)
+-->
+<p>片手持ちの打撃系近接武器。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>モーニングスター (morning star)</td>
+<td>1d4+1d4 / 1d6+1</td>
+<td>120</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4、大型に+1。片手武器として堅実なダメージ力を誇る。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="フレイル-flail" class="level4">
+<h4>フレイル (Flail)</h4>
+<!-- audit
+2026-05-19:
+- flail: base 1d6/1d4, +1 small (weapon.c:272-275), +1d4 large (weapon.c:239-243); objects.h:384-386
+- grappling hook: 1d2/1d6, WEPTOOL that trains P_FLAIL (objects.h:1010-1012)
+- grappling hook #apply pulls target toward you; range 4 (P_NONE/Basic), 5 (Skilled), 8 (Expert+) (apply.c:3686-3698)
+- no flail artifact
+-->
+<p>片手持ちの打撃系近接武器。同じスキルを修練できる実用的な道具として鍵縄（grappling
+hook）も含まれます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フレイル (flail / nunchaku: ヌンチャク)</td>
+<td>1d6+1 / 1d4+1d4</td>
+<td>15</td>
+<td>4</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1、大型に+1d4。片手持ち。</td>
+</tr>
+<tr>
+<td>鍵縄 (grappling hook)</td>
+<td>1d2 / 1d6</td>
+<td>30</td>
+<td>50</td>
+<td>—</td>
+<td>鉄</td>
+<td>フレイルスキルを修練可能。使用（apply）すると2マス先のアイテムを引き寄せたり、超小型モンスターを引き寄せたり、自分自身を1歩引き寄せることができる。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ハンマー-hammer" class="level4">
+<h4>ハンマー (Hammer)</h4>
+<!-- audit
+2026-05-19:
+- war hammer stats verified (objects.h:367-369, weapon.c); +1 small bonus matches sdam/ldam fields
+- Mjollnir can be gifted to ANY Valkyrie, not just Neutral: hack_artifacts fixes alignment to player's initalign (artifact.c:92-95)
+- aklys uses P_CLUB and is correctly placed elsewhere
+-->
+<p>片手持ちの打撃系近接武器。ワルキューレ（Valkyrie）のアーティファクトであるウォーハンマー「ミョルニル
+(Mjollnir)」は、投擲すると手元に戻ってきます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ウォーハンマー (war hammer)</td>
+<td>1d4+1 / 1d4</td>
+<td>50</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>ミョルニル (Mjollnir)
+がアーティファクト形態（ワルキューレへの生贄の賜物。属性はプレイヤーの初期属性に一致する）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="六尺棒-quarterstaff" class="level4">
+<h4>六尺棒 (Quarterstaff)</h4>
+<!-- audit
+2026-05-19:
+- quarterstaff: bimanual, 1d6/1d6, wt 40, cost 5, WOOD, P_QUARTERSTAFF (objects.h:377-379).
+- Wizard starter weapon (u_init.c:168).
+- bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467).
+- Expert caps: Wizard, Priest, Healer, Caveman (u_init.c:314,334,396,555 P_QUARTERSTAFF=P_EXPERT).
+- No Knight or Rogue entry: P_QUARTERSTAFF absent from Skill_K and Skill_R (u_init.c:346-413).
+-->
+<p>両手持ち近接武器。控えめな基本ダイス値にもかかわらず、筋力ダメージ
+1.5 倍（3/2）ボーナスが適用されます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>六尺棒 (quarterstaff)</td>
+<td>1d6 / 1d6</td>
+<td>40</td>
+<td>5</td>
+<td>—</td>
+<td>木</td>
+<td>両手持ちだが軽量。魔法使い（Wizard）の初期装備。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="長柄武器-polearms" class="level4">
+<h4>長柄武器 (Polearms)</h4>
+<!-- audit
+2026-05-19:
+- 12 polearm rows verified: all two-handed, all P_POLEARMS, all iron (objects.h:294-341).
+- per-row dice/weight/cost from objects.h:294-341 WEAPON() macros; +d4/+d6 vs-large bonuses applied in weapon.c dmgval.
+- polearm reach is skill-dependent, NOT a fixed 2 squares (apply.c:3355-3382).
+- use_pole has NO "empty intervening square" check (apply.c:3355-3382).
+- polearms CAN bash an adjacent monster (uhitm.c:1467-1484).
+- adjacent polearm bash: damage clamps to 1d2 base, no weapon-skill bonus, Strength still applies (uhitm.c:1075-1086, 1447-1469).
+-->
+<p>すべての長柄武器は両手持ちです。離れた敵を攻撃するには、武器を手に持って通常攻撃するのではなく、<code>#apply</code>（使用）コマンドを使います。ベーシック（入門）スキルでは直線2マス先の敵を攻撃でき、熟練（エキスパート）になるとさらに攻撃可能な位置が広がります。長柄武器を持った状態で隣接するモンスターを通常攻撃することも可能ですが、強打（打撃）扱いとなり、ボーナス加算前の基本ダメージが
+1d2
+に制限され、武器スキルによるダメージボーナスも乗りません（筋力補正は適用されます）。この「間合い（リーチ）」こそが、長柄武器を持ち歩く最大の意義です。各武器の追加ダメージの詳細は下記の備考を参照してください。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>パルチザン (partisan)</td>
+<td>1d6 / 1d6+1</td>
+<td>80</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td>リーチ攻撃可能。</td>
+</tr>
+<tr>
+<td>ランサー (ranseur)</td>
+<td>1d4+1d4 / 1d4+1d4</td>
+<td>50</td>
+<td>6</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4、大型に+1d4。</td>
+</tr>
+<tr>
+<td>スペタム (spetum)</td>
+<td>1d6+1 / 1d6+1d6</td>
+<td>50</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1、大型に+1d6。</td>
+</tr>
+<tr>
+<td>グレイブ (glaive / naginata: 薙刀)</td>
+<td>1d6 / 1d10</td>
+<td>75</td>
+<td>6</td>
+<td>—</td>
+<td>鉄</td>
+<td>リーチ攻撃可能。</td>
+</tr>
+<tr>
+<td>ハルバード (halberd)</td>
+<td>1d10 / 1d6+1d6</td>
+<td>150</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td>大型に+1d6。</td>
+</tr>
+<tr>
+<td>バーディック (bardiche)</td>
+<td>1d4+1d4 / 1d4+2d4</td>
+<td>120</td>
+<td>7</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4、大型に+2d4。</td>
+</tr>
+<tr>
+<td>ヴォウジェ (voulge)</td>
+<td>1d4+1d4 / 1d4+1d4</td>
+<td>125</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4、大型に+1d4。</td>
+</tr>
+<tr>
+<td>フォシャール (fauchard)</td>
+<td>1d6 / 1d8</td>
+<td>60</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>リーチ攻撃可能。</td>
+</tr>
+<tr>
+<td>ギザルム (guisarme)</td>
+<td>1d4+1d4 / 1d8</td>
+<td>80</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4。</td>
+</tr>
+<tr>
+<td>ビル・ギザルム (bill-guisarme)</td>
+<td>1d4+1d4 / 1d10</td>
+<td>120</td>
+<td>7</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4。</td>
+</tr>
+<tr>
+<td>ルッツェルンハンマー (lucern hammer)</td>
+<td>1d4+1d4 / 1d6</td>
+<td>150</td>
+<td>7</td>
+<td>—</td>
+<td>鉄</td>
+<td>小型に+1d4。</td>
+</tr>
+<tr>
+<td>ベック・ド・コルバン (bec de corbin)</td>
+<td>1d8 / 1d6</td>
+<td>100</td>
+<td>8</td>
+<td>—</td>
+<td>鉄</td>
+<td>リーチ攻撃可能。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="槍-spear" class="level4">
+<h4>槍 (Spear)</h4>
+<!-- audit
+2026-05-19:
+- 6 spear rows (spear/elven/orcish/dwarvish/silver/javelin) verified P_SPEAR (objects.h:174-191).
+- silver spear: SILVER material, cost 40, +d20 vs silver-haters (objects.h:186-188; artifact.c spec_dbon).
+- Valkyrie starts with a plain spear and trains to Expert (u_init.c:160-161, 537).
+- spear kebab bonus: +2 to-hit vs xorns, dragons, jabberwocks, nagas, giants (weapon.c:71-73, 167-168, is_spear).
+- trident uses P_TRIDENT, a separate skill from spears (objects.h:195 P_TRIDENT).
+- +1 thrown-spear multishot belongs to Caveman (PM_CAVE_DWELLER), NOT Valkyrie (dothrow.c:47-52).
+- Valkyrie has no class-specific spear multishot, only the generic Expert ceiling (dothrow.c).
+-->
+<p>槍類はすべて同じスキルを共有します。トライデントは別のスキルを使用します（後述）。ワルキューレ（Valkyrie）は通常の槍を持ってスタートし、エキスパートまで鍛えることができます。槍の投擲マルチショットの真のスペシャリストは<strong>洞窟人（Caveman）</strong>です。洞窟人は投げた槍（通常の槍、銀の槍、ジャベリンのいずれでも）に対してマルチショット+1のボーナスを得るため、束ねたジャベリンは彼らにとって強力な遠距離攻撃手段となります。</p>
+<p>槍は大型モンスター（ゾーン、ドラゴン、ジャバウォック、ナーガ、巨人）に対して<strong>命中+2のボーナス</strong>（串刺しボーナス
+/ kebab bonus）を得られます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>槍 (spear)</td>
+<td>1d6 / 1d8</td>
+<td>30</td>
+<td>3</td>
+<td>—</td>
+<td>鉄</td>
+<td>投擲可能。ワルキューレの初期装備。</td>
+</tr>
+<tr>
+<td>エルフの槍 (elven spear)</td>
+<td>1d7 / 1d8</td>
+<td>30</td>
+<td>3</td>
+<td>—</td>
+<td>木</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの槍 (orcish spear)</td>
+<td>1d5 / 1d8</td>
+<td>30</td>
+<td>3</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフの槍 (dwarvish spear)</td>
+<td>1d8 / 1d8</td>
+<td>35</td>
+<td>3</td>
+<td>—</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>銀の槍 (silver spear)</td>
+<td>1d6 / 1d8</td>
+<td>36</td>
+<td>40</td>
+<td>—</td>
+<td>銀</td>
+<td>悪魔や獣人に対して銀特効ダメージ。</td>
+</tr>
+<tr>
+<td>ジャベリン (javelin)</td>
+<td>1d6 / 1d6</td>
+<td>20</td>
+<td>3</td>
+<td>—</td>
+<td>鉄</td>
+<td>スタック可能な投擲武器。洞窟人は遠距離から連射できる。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="トライデント-trident" class="level4">
+<h4>トライデント (Trident)</h4>
+<!-- audit
+2026-05-19:
+- trident stats verified (objects.h:195)
+- the +1/+2d4 large-creature bonus is the universal land bonus, NOT trident-specific (weapon.c:251-276)
+- trident's signature bonus: +4 to-hit vs swimmers in water, +2 vs eels and snakes (weapon.c:170-176 hitval, not dmgval)
+-->
+<p>片手持ち近接武器で、槍とは異なる独立したスキルを使用します。水中で戦う際にその真価を発揮する特徴的なボーナスを備えています。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>トライデント (trident)</td>
+<td>1d6+1 / 1d4+2d4</td>
+<td>25</td>
+<td>5</td>
+<td>—</td>
+<td>鉄</td>
+<td>片手持ち。<strong>水中の遊泳モンスターに対して命中+4、ウナギやヘビに対して命中+2</strong>：トライデント固有の特徴的なボーナス。水辺以外では標準的なサイドアームとして機能する。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- lance: P_LANCE, one-handed, IRON, 1d6/1d8 (objects.h:349)
+- on foot lance still hits and damages normally, just NO joust bonus
+- mounted joust bonus: +2d10 primary, +2d2 off-hand (objects.h:351-352, uhitm.c:1546)
+- shatter chance 1/250 per successful joust (uhitm.c:2123-2125, 1559)
+-->
+</section>
+<section id="ランス-lance" class="level4">
+<h4>ランス (Lance)</h4>
+<p>騎乗戦闘に特化して作られた近接武器。馬などの騎乗中に命中させると、馬上槍試合（Joust）による強大な追加ダメージを与えるチャンスがあります。徒歩でも有用な間合い攻撃（リーチ）武器として機能し、2マス離れた敵に使用（apply）して攻撃できます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ランス (lance)</td>
+<td>1d6 / 1d8</td>
+<td>180</td>
+<td>10</td>
+<td>—</td>
+<td>鉄</td>
+<td>片手持ち。騎乗攻撃が命中すると馬上槍試合（Joust）判定が発生し、主武器なら+2d10、利き手以外の武器なら+2d2の追加ダメージを与える。成功した馬上攻撃の約1/250の確率でランスが砕け散る。徒歩でも長柄武器のような間合い攻撃は維持されるが、馬上ボーナスは得られない。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- rubber hose and bullwhip stats verified; P_WHIP skill (objects.h:374-376, 390-392, skills.h:49)
+- bullwhip #apply can disarm (apply.c:3127-3174) and yank from a pit (apply.c:3069-3125)
+- rubber hose does NOT damage shades: it's PLASTIC, shade_glare needs SILVER (artifact.c:555-562, weapon.c:307-308)
+- rubber hose prob=0: never randomly spawns (objects.h:374-376 WEAPON row, probability field is 0)
+- Archeologist starts with bullwhip +1 at Basic (apply.c:2992-2993)
+- no whip artifacts
+-->
+</section>
+<section id="鞭-whip" class="level4">
+<h4>鞭 (Whip)</h4>
+<p>軽量な片手近接武器であり、実用的な道具でもあります。鞭を
+<code>#apply</code>（使用）することで、隣接するモンスターの武器を叩き落としたり（武装解除）、落とし穴から自分自身を引き上げたりできます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ゴムホース (rubber hose)</td>
+<td>1d4 / 1d3</td>
+<td>20</td>
+<td>3</td>
+<td>—</td>
+<td>プラスチック</td>
+<td>ジョーク武器。自然生成されることはない。キーストン・コップ（お巡りさん）が所持していることがある。</td>
+</tr>
+<tr>
+<td>鞭 (bullwhip)</td>
+<td>1d2 / 1</td>
+<td>20</td>
+<td>4</td>
+<td>—</td>
+<td>革</td>
+<td>考古学者（Archeologist）の初期装備。使用（apply）することで隣接モンスターの武器を叩き落としたり（相手が武器を装備している場合のみ）、落とし穴から脱出するために自身を引き上げることができる（近くの岩、家具、大型モンスターに巻き付ける）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- 5 PROJECTILE arrow rows (objects.h:141-154); 4 BOW launcher rows (objects.h:395-402).
+- arrows: 1d6/1d6 (1d7/1d6 elven, 1d5/1d6 orcish, 1d6/1d6 silver) wt 1, cost 2 (objects.h:141-152).
+- ya: 1d7/1d7, +1 hit, METAL, cost 4 (objects.h:153-154).
+- yumi prob=0: Samurai-only, never randomly spawns (objects.h:401-402).
+-->
+</section>
+<section id="弓-bow" class="level4">
+<h4>弓 (Bow)</h4>
+<p>片手持ちの発射具（ランチャー）。弓を手（主武器）に装備し、矢筒に矢を入れて
+<code>f</code>
+キーで発射します。エキスパートの射手はマルチショット（一斉射撃）が可能で、野伏（Ranger）と侍（Samurai）がそのスペシャリストです。弓は二刀流戦闘を阻害しますが、盾を装備することは可能です。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矢 (arrow)</td>
+<td>1d6 / 1d6</td>
+<td>1</td>
+<td>2</td>
+<td>—</td>
+<td>鉄</td>
+<td>すべての弓で使用可能。</td>
+</tr>
+<tr>
+<td>エルフの矢 (elven arrow)</td>
+<td>1d7 / 1d6</td>
+<td>1</td>
+<td>2</td>
+<td>—</td>
+<td>木</td>
+<td>エルフの弓から放つと最適（エルフの一斉射撃ボーナス）。</td>
+</tr>
+<tr>
+<td>オークの矢 (orcish arrow)</td>
+<td>1d5 / 1d6</td>
+<td>1</td>
+<td>2</td>
+<td>—</td>
+<td>鉄</td>
+<td>オークの弓から放つと最適（オークの一斉射撃ボーナス）。</td>
+</tr>
+<tr>
+<td>銀の矢 (silver arrow)</td>
+<td>1d6 / 1d6</td>
+<td>1</td>
+<td>5</td>
+<td>—</td>
+<td>銀</td>
+<td>すべての弓で使用可能。悪魔や獣人に対して銀特効ダメージ。</td>
+</tr>
+<tr>
+<td>竹矢 (ya)</td>
+<td>1d7 / 1d7</td>
+<td>1</td>
+<td>4</td>
+<td>+1</td>
+<td>金属</td>
+<td>和弓から放つと最適（侍の一斉射撃ボーナス）。</td>
+</tr>
+<tr>
+<td>弓 (bow)</td>
+<td>—</td>
+<td>30</td>
+<td>60</td>
+<td>—</td>
+<td>木</td>
+<td>あらゆる矢を発射可能。</td>
+</tr>
+<tr>
+<td>エルフの弓 (elven bow)</td>
+<td>—</td>
+<td>30</td>
+<td>60</td>
+<td>—</td>
+<td>木</td>
+<td>エルフの矢と組み合わせると真価を発揮。</td>
+</tr>
+<tr>
+<td>オークの弓 (orcish bow)</td>
+<td>—</td>
+<td>30</td>
+<td>60</td>
+<td>—</td>
+<td>木</td>
+<td>オークの矢と組み合わせると真価を発揮。</td>
+</tr>
+<tr>
+<td>和弓 (yumi)</td>
+<td>—</td>
+<td>30</td>
+<td>60</td>
+<td>—</td>
+<td>木</td>
+<td>侍専用の弓。竹矢と組み合わせると最適。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- crossbow bolt: 1d4 / 1d6, NO +1 bonus (objects.h:155-156 PROJECTILE)
+- crossbows CAN multishot: requires Str 18 (Str 16 for gnomes), with +1 baseline gnome bonus (dothrow.c:225-231, 205-209)
+- skill caps: Rogue Expert, Ranger Expert, Knight Skilled (u_init.c)
+- Valkyries cap at Unskilled, NOT Skilled: Skill_V has no P_CROSSBOW entry (u_init.c:525-547)
+-->
+</section>
+<section id="クロスボゥ-crossbow" class="level4">
+<h4>クロスボゥ (Crossbow)</h4>
+<p>片手持ちの発射具。弓よりも1発あたりの威力が高くなっていますが、リロードが遅く、完全なマルチショットを行うには筋力
+18（ノームは筋力
+16）が必要です。弓と同様、二刀流は阻害しますが盾の装備は可能です。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クロスボゥボルト (crossbow bolt)</td>
+<td>1d4+1 / 1d6+1</td>
+<td>1</td>
+<td>2</td>
+<td>—</td>
+<td>鉄</td>
+<td>スタック可能。</td>
+</tr>
+<tr>
+<td>クロスボゥ (crossbow)</td>
+<td>—</td>
+<td>50</td>
+<td>40</td>
+<td>—</td>
+<td>木</td>
+<td>ボルトは敵を貫通する。<strong>筋力 18</strong>（ノームは
+16）以上でマルチショットが通常通りのダイス判定となる。それ未満の場合、ゲームは2回ロールして小さい方の連射数を採用する。またノームはマルチショット数に+1される。盗賊と野伏はエキスパート、騎士は熟練まで習得可能。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- sling stats verified (objects.h:403)
+- sling skill trains from hits while wielding a sling, NOT from picking up rocks (weapon.c:1750)
+- sling launches rocks, flint stones, and gems
+- Caveman starts with one sling
+-->
+</section>
+<section id="スリング-sling" class="level4">
+<h4>スリング (Sling)</h4>
+<p>片手持ちの発射具。弾薬は床に落ちている（または持ち運んでいる）石や宝石なら何でも使えるため、弾薬費は実質的にゼロです。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>スリング (sling)</td>
+<td>—</td>
+<td>3</td>
+<td>20</td>
+<td>—</td>
+<td>革</td>
+<td>石、火打石、宝石を発射可能。洞窟人（Caveman）の初期装備。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- dart stats verified (objects.h:161)
+- darts are poisonable (is_poisonable)
+- Tourist starts with 21-40 darts via trquan() = 21+rn2(20), NOT ~25-60 (u_init.c:150-151)
+-->
+</section>
+<section id="投げ矢-dart" class="level4">
+<h4>投げ矢 (Dart)</h4>
+<p>投擲専用。大量にスタックでき、重量がほとんどなく、病気の薬から毒を塗布することができます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>投げ矢 (dart)</td>
+<td>1d3 / 1d2</td>
+<td>1</td>
+<td>2</td>
+<td>—</td>
+<td>鉄</td>
+<td>毒を塗布可能。観光客（Tourist）は+2に強化された束（約21〜40本）を持ってスタートする。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- shuriken: 1d8/1d6, wt 1, cost 5, +2 hit, iron, PIERCE missile, P_SHURIKEN (objects.h:163)
+- is_poisonable (obj.h:264-268)
+- Samurai trains to Expert (u_init.c:481)
+-->
+</section>
+<section id="手裏剣-shuriken" class="level4">
+<h4>手裏剣 (Shuriken)</h4>
+<p>投擲専用。修道士（Monk）は手裏剣投擲時にマルチショット+1のボーナスを得られます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手裏剣 (shuriken)</td>
+<td>1d8 / 1d6</td>
+<td>1</td>
+<td>5</td>
+<td>+2</td>
+<td>鉄</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- audit
+2026-05-19:
+- boomerang stats verified (objects.h:166-168)
+- boomerang does NOT always return: 10-step curved path that stops on monster, wall, door, or sink hits (zap.c:4148-4220 boomhit; loop ct<10, breaks on isok, monster, ZAP_POS or closed_door)
+- catching the return requires a Dex check, auto-fails if Fumbling; a missed catch hits the thrower
+- enchanted boomerang hits (spe+1) times
+- useless underwater
+-->
+</section>
+<section id="ブーメラン-boomerang" class="level4">
+<h4>ブーメラン (Boomerang)</h4>
+<p>投擲専用。放物線を描いて飛行し、途中の軌道が遮られていなければ投げた本人の手元へ戻ってきます。戻ってきたブーメランをキャッチするには器用さ（Dex）の判定が必要です。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 3%" />
+<col style="width: 11%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器名</th>
+<th>ダメージ (小/大)</th>
+<th>重量</th>
+<th>価格</th>
+<th>命中</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ブーメラン (boomerang)</td>
+<td>1d9 / 1d9</td>
+<td>5</td>
+<td>20</td>
+<td>—</td>
+<td>木</td>
+<td>障害物のない経路なら弧を描いて手元に戻る。モンスター、壁、扉、流し台（シンク）に当たると止まる。器用さが低いか、あるいは「お手玉（Fumbling）」状態のときは顔面に直撃してダメージを受ける。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="防具一覧表-armor-tables" class="level3">
+<h3>防具一覧表 (Armor Tables)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. Every armor row (AC=10-macro-arg, MC, weight, material, slot) verified across ARMOR/HELM/CLOAK/SHIELD/GLOVES/BOOTS macros.
+-->
+<!-- audit
+2026-05-19:
+- body armor: AC/Wt/Cost via ARMOR() macros (objects.h:556-600); plate mail AC+7 wt450 cost600 (line 556-558).
+- mithril coats: AC+6/+5, wt 150, cost 240, MITHRIL material (objects.h:571-576).
+- shirts wt 5 (Hawaiian/T-shirt, objects.h:603-608); cloaks at objects.h:611-650.
+- helmets at objects.h:445-487; gloves at objects.h:686-697; boots at objects.h:700-727.
+- shields at objects.h:653-679; cloak of protection MC 3 (objects.h:637-640).
+- helm of brilliance: adds spe to Int and Wis (literal enchantment), NO dice (do_wear.c:3328-3334 adj_abon).
+- gauntlets of dexterity: adds spe to Dex, NO dice (do_wear.c adj_abon).
+- dunce cap is NOT pre-cursed at generation: follows standard mkobj; auto-curses when worn (do_wear.c:475-491).
+- 9/10-cursed-on-generation items: FUMBLE_BOOTS, LEVITATION_BOOTS, HELM_OF_OPPOSITE_ALIGNMENT, GAUNTLETS_OF_FUMBLING (mkobj.c:1086-1090).
+- mithril DOES suffer casting penalty: MITHRIL is in is_metallic range, spelarmr applies (objclass.h:194-196, spell.c:2191-2193).
+- blue dragon scale mail and scales give extrinsic Very_fast tier matching speed boots, NOT intrinsic Fast (do_wear.c:817-828 EFast).
+- speed boots mechanic: free action on 2/3 of turns, NOT "+1 speed". (allmain.c:125-128 `if (Very_fast) { if (rn2(3) != 0) moveamt += NORMAL_SPEED; }`)
+- levitation boots: Boots_off handles in-air removal (do_wear.c:300-310); the trap is the 9/10 curse.
+- robe casting bonus cancels most of the metal-armor penalty (spell.c:2192-2195 spelarmr subtraction).
+- chain mail: all iron mails are Mines drops (the "Dwarves drop these" framing is misleading).
+- follow-ups: build_armor_appendix.py may be stale; "yellow dragon scale mail | Rare." not verified against 5.0 generation rules.
+-->
+<p><strong>AC</strong>はその防具が提供するアーマークラス補正値です（数値が大きいほど防御力が高く、画面上のAC表示からこの数値が減算されます）。<strong>MC</strong>は魔法防御能力レベル（1〜3）を表し、数値が高いほど敵の魔法攻撃を防ぐ確率が高まります。<strong>重量
+(Wt)</strong>はユニット重量、<strong>価格
+(Cost)</strong>は店での基本価格です。<strong>備考</strong>列には、装備中に付与される固有能力（耐性や特性）および戦術上の注意点をまとめています。防具は装備部位ごとに分類されています。ドラゴンの鱗鎧は終盤における圧倒的重要性から、個別の項目として取り上げています。一部の防具にある括弧内の名称は、侍（Samurai）プレイ時に表示される別名です（ゲーム内部では同一アイテム）。</p>
+<section id="胴鎧-body-armor-suits" class="level4">
+<h4>胴鎧 (Body armor / suits)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>鋼鉄の鎧 (plate mail / tanko: 短甲)</td>
+<td>+7</td>
+<td>2</td>
+<td>450</td>
+<td>600</td>
+<td>鉄</td>
+<td>魔法詠唱ペナルティあり。</td>
+</tr>
+<tr>
+<td>水晶の鎧 (crystal plate mail)</td>
+<td>+7</td>
+<td>2</td>
+<td>415</td>
+<td>820</td>
+<td>ガラス</td>
+<td>決して錆びない。魔法詠唱ペナルティあり。</td>
+</tr>
+<tr>
+<td>青銅の鎧 (bronze plate mail)</td>
+<td>+6</td>
+<td>1</td>
+<td>450</td>
+<td>400</td>
+<td>銅</td>
+<td></td>
+</tr>
+<tr>
+<td>鉄片の鎧 (splint mail)</td>
+<td>+6</td>
+<td>1</td>
+<td>400</td>
+<td>80</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>帯金の鎧 (banded mail)</td>
+<td>+6</td>
+<td>1</td>
+<td>350</td>
+<td>90</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフのミスリル服 (dwarvish mithril-coat)</td>
+<td>+6</td>
+<td>2</td>
+<td>150</td>
+<td>240</td>
+<td>ミスリル</td>
+<td>軽量だが金属製：魔法詠唱へのペナルティは鋼鉄の鎧と同等。</td>
+</tr>
+<tr>
+<td>エルフのミスリル服 (elven mithril-coat)</td>
+<td>+5</td>
+<td>2</td>
+<td>150</td>
+<td>240</td>
+<td>ミスリル</td>
+<td>軽量だが金属製：魔法詠唱へのペナルティは鋼鉄の鎧と同等。</td>
+</tr>
+<tr>
+<td>鎖かたびら (chain mail)</td>
+<td>+5</td>
+<td>1</td>
+<td>300</td>
+<td>75</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの鎖かたびら (orcish chain mail)</td>
+<td>+4</td>
+<td>1</td>
+<td>300</td>
+<td>75</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>鱗の鎧 (scale mail)</td>
+<td>+4</td>
+<td>1</td>
+<td>250</td>
+<td>45</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>鋲付き革鎧 (studded leather armor)</td>
+<td>+3</td>
+<td>1</td>
+<td>200</td>
+<td>15</td>
+<td>革</td>
+<td>魔法詠唱ペナルティなし。</td>
+</tr>
+<tr>
+<td>鉄環の鎧 (ring mail)</td>
+<td>+3</td>
+<td>1</td>
+<td>250</td>
+<td>100</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの鉄環の鎧 (orcish ring mail)</td>
+<td>+2</td>
+<td>1</td>
+<td>250</td>
+<td>80</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>革鎧 (leather armor)</td>
+<td>+2</td>
+<td>1</td>
+<td>150</td>
+<td>5</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>革の服 (leather jacket)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>10</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>灰色ドラゴンの鱗鎧 (gray dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>1200</td>
+<td>ドラゴンの皮</td>
+<td>魔法防御（Magic resistance）。終盤における最終目標の胴鎧。</td>
+</tr>
+<tr>
+<td>銀色ドラゴンの鱗鎧 (silver dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>1200</td>
+<td>ドラゴンの皮</td>
+<td>反射（Reflection）。</td>
+</tr>
+<tr>
+<td>黒色ドラゴンの鱗鎧 (black dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>1200</td>
+<td>ドラゴンの皮</td>
+<td>分解耐性（Disintegration resistance）＋吸命耐性（Drain
+resistance）。</td>
+</tr>
+<tr>
+<td>黄色ドラゴンの鱗鎧 (yellow dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>酸耐性（Acid resistance）＋石化耐性（Stoning resistance）。</td>
+</tr>
+<tr>
+<td>橙色ドラゴンの鱗鎧 (orange dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>睡眠耐性（Sleep resistance）＋自由行動（Free action）。</td>
+</tr>
+<tr>
+<td>白色ドラゴンの鱗鎧 (white dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>冷気耐性（Cold resistance）＋消化遅延（Slow digestion）。</td>
+</tr>
+<tr>
+<td>赤色ドラゴンの鱗鎧 (red dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>火炎耐性（Fire resistance）＋赤外線視覚（Infravision）。</td>
+</tr>
+<tr>
+<td>緑色ドラゴンの鱗鎧 (green dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>毒耐性（Poison resistance）＋病気耐性（Sickness resistance）。</td>
+</tr>
+<tr>
+<td>青色ドラゴンの鱗鎧 (blue dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>電撃耐性（Shock resistance）＋高速移動（韋駄天の靴と同等）。</td>
+</tr>
+<tr>
+<td>金色ドラゴンの鱗鎧 (gold dragon scale mail)</td>
+<td>+9</td>
+<td>—</td>
+<td>40</td>
+<td>900</td>
+<td>ドラゴンの皮</td>
+<td>幻覚耐性（Hallucination
+resistance）＋恒久光源（胴部位唯一の光源）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ドラゴンの鱗-dragon-scales" class="level4">
+<h4>ドラゴンの鱗 (Dragon scales)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灰色ドラゴンの鱗 (gray dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>700</td>
+<td>ドラゴンの皮</td>
+<td>魔法防御。鎧作成の巻物で鱗鎧へアップグレード可能。</td>
+</tr>
+<tr>
+<td>銀色ドラゴンの鱗 (silver dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>700</td>
+<td>ドラゴンの皮</td>
+<td>反射。</td>
+</tr>
+<tr>
+<td>黒色ドラゴンの鱗 (black dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>700</td>
+<td>ドラゴンの皮</td>
+<td>分解耐性＋吸命耐性。</td>
+</tr>
+<tr>
+<td>黄色ドラゴンの鱗 (yellow dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>酸耐性＋石化耐性。</td>
+</tr>
+<tr>
+<td>橙色ドラゴンの鱗 (orange dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>睡眠耐性＋自由行動。</td>
+</tr>
+<tr>
+<td>白色ドラゴンの鱗 (white dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>冷気耐性＋消化遅延。</td>
+</tr>
+<tr>
+<td>赤色ドラゴンの鱗 (red dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>火炎耐性＋赤外線視覚。</td>
+</tr>
+<tr>
+<td>緑色ドラゴンの鱗 (green dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>毒耐性＋病気耐性。</td>
+</tr>
+<tr>
+<td>青色ドラゴンの鱗 (blue dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>電撃耐性＋高速移動（韋駄天の靴と同等）。</td>
+</tr>
+<tr>
+<td>金色ドラゴンの鱗 (gold dragon scales)</td>
+<td>+3</td>
+<td>—</td>
+<td>40</td>
+<td>500</td>
+<td>ドラゴンの皮</td>
+<td>幻覚耐性＋恒久光源。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="シャツ-shirts-1" class="level4">
+<h4>シャツ (Shirts)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アロハシャツ (Hawaiian shirt)</td>
+<td>+0</td>
+<td>—</td>
+<td>5</td>
+<td>3</td>
+<td>布</td>
+<td>観光客（Tourist）の初期装備。胴鎧の下に着用可能。</td>
+</tr>
+<tr>
+<td>Ｔシャツ (T-shirt)</td>
+<td>+0</td>
+<td>—</td>
+<td>5</td>
+<td>2</td>
+<td>布</td>
+<td>胴鎧の下に着用可能。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="クローク-cloaks" class="level4">
+<h4>クローク (Cloaks)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ミイラの包帯 (mummy wrapping)</td>
+<td>+0</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+<td>布</td>
+<td>着用中は透明化（Invisibility）の効果を無効化する。</td>
+</tr>
+<tr>
+<td>エルフのクローク (elven cloak)</td>
+<td>+1</td>
+<td>1</td>
+<td>10</td>
+<td>60</td>
+<td>布</td>
+<td>忍び足（Stealth）。</td>
+</tr>
+<tr>
+<td>オークのクローク (orcish cloak)</td>
+<td>+0</td>
+<td>1</td>
+<td>10</td>
+<td>40</td>
+<td>布</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフのクローク (dwarvish cloak)</td>
+<td>+0</td>
+<td>1</td>
+<td>10</td>
+<td>50</td>
+<td>布</td>
+<td></td>
+</tr>
+<tr>
+<td>防水クローク (oilskin cloak)</td>
+<td>+1</td>
+<td>2</td>
+<td>10</td>
+<td>50</td>
+<td>布</td>
+<td>掴み攻撃や水濡れを防ぐ。</td>
+</tr>
+<tr>
+<td>ローブ (robe)</td>
+<td>+2</td>
+<td>2</td>
+<td>15</td>
+<td>50</td>
+<td>布</td>
+<td>魔法詠唱ボーナス。金属鎧による詠唱ペナルティの大半を相殺する。</td>
+</tr>
+<tr>
+<td>錬金術の仕事着 (alchemy smock)</td>
+<td>+1</td>
+<td>1</td>
+<td>10</td>
+<td>50</td>
+<td>布</td>
+<td>毒耐性（Poison resistance）。</td>
+</tr>
+<tr>
+<td>革のクローク (leather cloak)</td>
+<td>+1</td>
+<td>1</td>
+<td>15</td>
+<td>40</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>守りのクローク (cloak of protection)</td>
+<td>+3</td>
+<td>3</td>
+<td>10</td>
+<td>50</td>
+<td>布</td>
+<td>クロークの中で最高の魔法防御能力（MC 3）を誇る。</td>
+</tr>
+<tr>
+<td>透明のクローク (cloak of invisibility)</td>
+<td>+1</td>
+<td>1</td>
+<td>10</td>
+<td>60</td>
+<td>布</td>
+<td>透明化（Invisibility）。</td>
+</tr>
+<tr>
+<td>魔法を防ぐクローク (cloak of magic resistance)</td>
+<td>+1</td>
+<td>1</td>
+<td>10</td>
+<td>60</td>
+<td>布</td>
+<td>魔法防御（Magic resistance）。最も軽量な魔法防御の供給源。</td>
+</tr>
+<tr>
+<td>幻影のクローク (cloak of displacement)</td>
+<td>+1</td>
+<td>1</td>
+<td>10</td>
+<td>50</td>
+<td>布</td>
+<td>幻影（Displacement）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="兜帽子-helmets" class="level4">
+<h4>兜・帽子 (Helmets)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>エルフの革帽子 (elven leather helm)</td>
+<td>+1</td>
+<td>—</td>
+<td>3</td>
+<td>8</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの兜 (orcish helm)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>10</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>ドワーフの鉄兜 (dwarvish iron helm)</td>
+<td>+2</td>
+<td>—</td>
+<td>40</td>
+<td>20</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>フィドーラ (fedora)</td>
+<td>+0</td>
+<td>—</td>
+<td>3</td>
+<td>1</td>
+<td>布</td>
+<td>考古学者（Archeologist）の初期装備。同職業に幸運+1を付与。</td>
+</tr>
+<tr>
+<td>とんがり帽子 (cornuthaum)</td>
+<td>+0</td>
+<td>1</td>
+<td>4</td>
+<td>80</td>
+<td>布</td>
+<td>透視（Clairvoyance）。魔法使いのみ有効。魔法使い以外が被ると他の透視能力を阻害する。</td>
+</tr>
+<tr>
+<td>道化の帽子 (dunce cap)</td>
+<td>+0</td>
+<td>—</td>
+<td>4</td>
+<td>1</td>
+<td>布</td>
+<td>知力と知恵が強制的に 6
+に低下する。被ると自動的に呪われる。外すには呪い解除が必要。</td>
+</tr>
+<tr>
+<td>くぼんだ鍋 (dented pot)</td>
+<td>+1</td>
+<td>—</td>
+<td>10</td>
+<td>8</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>知性の兜 (helm of brilliance)</td>
+<td>+1</td>
+<td>—</td>
+<td>40</td>
+<td>50</td>
+<td>ガラス</td>
+<td>着用中、強化値が知力と知恵の両方に加算される（+3の兜なら知力+3、知恵+3）。</td>
+</tr>
+<tr>
+<td>兜 (helmet / kabuto: 兜)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>10</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>警戒の兜 (helm of caution)</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>50</td>
+<td>鉄</td>
+<td>警告（Warning）。</td>
+</tr>
+<tr>
+<td>逆属性の兜 (helm of opposite alignment)</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>50</td>
+<td>鉄</td>
+<td>着用中、属性が反転する。生成時に90%の確率で呪われている。</td>
+</tr>
+<tr>
+<td>テレパシーの兜 (helm of telepathy)</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>50</td>
+<td>鉄</td>
+<td>目が見えているときは周囲8マス、盲目時はフロア全体のテレパシーを得る。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>逆属性の兜は基本的には罠アイテムですが、属性反転を意図的に利用できる局面もあります。異属性の祭壇で生贄を捧げる、反対属性のクエストアーティファクトを所持する、あるいは星界の面（Astral
+Plane）で魔除けを受け入れる祭壇の属性を変更する際などに活用されます。</p>
+</section>
+<section id="小手手袋-glovers" class="level4">
+<h4>小手・手袋 (Glovers)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>革の手袋 (leather gloves / yugake: ゆがけ) *</td>
+<td>+1</td>
+<td>—</td>
+<td>10</td>
+<td>8</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>お手玉の小手 (gauntlets of fumbling) *</td>
+<td>+1</td>
+<td>—</td>
+<td>10</td>
+<td>50</td>
+<td>革</td>
+<td>頻繁に足をもつれさせる（お手玉状態）。生成時に90%の確率で呪われている。回避推奨。</td>
+</tr>
+<tr>
+<td>力の小手 (gauntlets of power) *</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>50</td>
+<td>鉄</td>
+<td>筋力を強制的に 25 に設定する。</td>
+</tr>
+<tr>
+<td>器用さの小手 (gauntlets of dexterity) *</td>
+<td>+1</td>
+<td>—</td>
+<td>10</td>
+<td>50</td>
+<td>革</td>
+<td>着用中、強化値が器用さに加算される（+3の小手なら器用さ+3）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>*
+印の付いたアイテムは、識別されるまで4種類の実見外見名（<em>古い手袋</em>、<em>パッド入り手袋</em>、<em>乗馬用手袋</em>、<em>フェンシング手袋</em>）のいずれかとして出現します（通常の革の手袋も含みます）。</p>
+</section>
+<section id="靴-boots-1" class="level4">
+<h4>靴 (Boots)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>かかとの低い靴 (low boots)</td>
+<td>+1</td>
+<td>—</td>
+<td>10</td>
+<td>8</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>鉄の靴 (iron shoes)</td>
+<td>+2</td>
+<td>—</td>
+<td>50</td>
+<td>16</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>かかとの高い靴 (high boots)</td>
+<td>+2</td>
+<td>—</td>
+<td>20</td>
+<td>12</td>
+<td>革</td>
+<td></td>
+</tr>
+<tr>
+<td>韋駄天の靴 (speed boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>20</td>
+<td>50</td>
+<td>革</td>
+<td>高速移動（Very
+fast）。3ターンのうち2ターンで無料の追加行動を得られる。</td>
+</tr>
+<tr>
+<td>水上歩行の靴 (water walking boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>15</td>
+<td>50</td>
+<td>革</td>
+<td>水上や氷上を歩行可能。耐火加工された靴と火炎耐性があれば溶岩も渡れる。</td>
+</tr>
+<tr>
+<td>跳躍の靴 (jumping boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>20</td>
+<td>50</td>
+<td>革</td>
+<td><code>#jump</code> コマンドで近くの任意のマスへ跳躍できる。</td>
+</tr>
+<tr>
+<td>エルフの靴 (elven boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>15</td>
+<td>8</td>
+<td>革</td>
+<td>忍び足（Stealth）。</td>
+</tr>
+<tr>
+<td>蹴りの靴 (kicking boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>8</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>お手玉の靴 (fumble boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>20</td>
+<td>30</td>
+<td>革</td>
+<td>頻繁に足をもつれさせる。生成時に90%の確率で呪われている。回避推奨。</td>
+</tr>
+<tr>
+<td>浮遊の靴 (levitation boots) *</td>
+<td>+1</td>
+<td>—</td>
+<td>15</td>
+<td>30</td>
+<td>革</td>
+<td>浮遊（Levitation）。生成時に90%の確率で呪われている。呪われた靴は脱ぐことができないため致命的な罠となる。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>*
+印の付いたアイテムは、識別されるまで7種類の実見外見名（<em>戦闘用ブーツ</em>、<em>ジャングルブーツ</em>、<em>ハイキングブーツ</em>、<em>泥靴</em>、<em>バックル付きブーツ</em>、<em>乗馬用ブーツ</em>、<em>スノーブーツ</em>）のいずれかとして出現します。</p>
+</section>
+<section id="盾-shields-1" class="level4">
+<h4>盾 (Shields)</h4>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 4%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th>防具名</th>
+<th>AC</th>
+<th>MC</th>
+<th>重量</th>
+<th>価格</th>
+<th>材質</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小さな盾 (small shield)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>3</td>
+<td>木</td>
+<td></td>
+</tr>
+<tr>
+<td>吸命耐性の盾 (shield of drain resistance)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>50</td>
+<td>木</td>
+<td>吸命耐性（Drain resistance）。</td>
+</tr>
+<tr>
+<td>電撃耐性の盾 (shield of shock resistance)</td>
+<td>+1</td>
+<td>—</td>
+<td>30</td>
+<td>50</td>
+<td>木</td>
+<td>電撃耐性（Shock resistance）。</td>
+</tr>
+<tr>
+<td>エルフの盾 (elven shield)</td>
+<td>+2</td>
+<td>—</td>
+<td>40</td>
+<td>7</td>
+<td>木</td>
+<td></td>
+</tr>
+<tr>
+<td>ウルク＝ハイの盾 (Uruk-hai shield)</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>7</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>オークの盾 (orcish shield)</td>
+<td>+1</td>
+<td>—</td>
+<td>50</td>
+<td>7</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>大きな盾 (large shield)</td>
+<td>+2</td>
+<td>—</td>
+<td>100</td>
+<td>10</td>
+<td>鉄</td>
+<td>他のすべての盾と同様、両手持ち武器および二刀流戦闘を阻害する。</td>
+</tr>
+<tr>
+<td>ドワーフの丸盾 (dwarvish roundshield)</td>
+<td>+2</td>
+<td>—</td>
+<td>100</td>
+<td>10</td>
+<td>鉄</td>
+<td></td>
+</tr>
+<tr>
+<td>反射の盾 (shield of reflection)</td>
+<td>+2</td>
+<td>—</td>
+<td>50</td>
+<td>50</td>
+<td>銀</td>
+<td>反射（Reflection）。胴鎧の装備枠を自由に選べるようになる。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="呪文一覧表-spell-tables" class="level3">
+<h3>呪文一覧表 (Spell Tables)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. All 41 spell rows' level/school/type verified (incl. chain lightning lvl 2). Spell damage figures live in spell.c/zap.c, outside this table's source.
+-->
+<!-- audit
+2026-05-19:
+- 41 spells, sourced from objects.h SPELL() macros (P_ATTACK..P_MATTER); SPELL macro signature at objects.h:1277-1281, oc_level=oc_oc2.
+- attack spells at objects.h:1297-1330 (force bolt/magic missile/drain life/cone of cold/fireball/finger of death/chain lightning).
+- healing spells at objects.h:1313-1408 (healing/cure blindness/cure sickness/extra healing/stone to flesh/restore ability).
+- divination spells at objects.h:1308-1384 (light/detect monsters/detect food/clairvoyance/detect unseen/identify/detect treasure/magic mapping).
+- enchantment spells at objects.h:1305-1354 (confuse monster/slow monster/cause fear/sleep/charm monster).
+- cleric spells at objects.h:1337-1400 (protection/create monster/remove curse/create familiar/turn undead).
+- escape spells at objects.h:1355-1404 (jumping/haste self/invisibility/levitation/teleport away).
+- matter spells at objects.h:1293-1407 (knock/wizard lock/dig/polymorph/cancellation/stone to flesh).
+- Flame sphere and freeze sphere are `#if 0 DEFERRED` (objects.h:1413-1422), NOT shipped in 5.0.
+- Chain lightning is level 2 per macro (objects.h:1409-1411); body table at line 4986 and What's New at 8585 still say L4: follow-up fix.
+- Magic missile IS Antimagic-blocked (zap.c:4410-4419, "missiles bounce off!"), NOT unresistable.
+- Finger of death: monster MR resists, but player gets no Antimagic check on death-ray instakill (zap.c:2885-2902).
+- Clairvoyance gets a P_SKILLED upgrade detecting nearby monsters per pulse (spell.c:1572-1576).
+- Fireball/cone of cold become aimed explosions at P_SKILLED (spell.c spelleffects).
+- Remove curse/confuse monster/detect food/cause fear/identify/charm monster get blessed-scroll behavior at P_SKILLED.
+- Haste self/detect treasure/detect monsters/levitation/restore ability get blessed-potion behavior at P_SKILLED.
+- Protection doubles uspmtime at P_EXPERT (spell.c:1169); jumping distance scales with role_skill.
+- Charm monster is untargeted (read.c:1679-1708 seffect_taming is area-centered-on-caster, no direction prompt).
+- Charm monster area: 3×3 normal, 11×11 confused (`bd = confused ? 5 : 1`, -bd..bd inclusive), NOT 5×5. (read.c:1689 seffect_taming)
+- Charm monster P_SKILLED upgrade is blessed-scroll reliability, NOT a radius bump. (spell.c:1524-1525 sets pseudo->blessed when role_skill >= P_SKILLED; read.c:1689 radius `bd` depends only on `confused`, not on blessed)
+- Cause fear blessed and uncursed are identical (read.c:1454-1486); loop hits every visible monster on the level, not just nearby.
+- Remove curse blessed branch uncurses every non-coin inventory item (read.c:1514-1577), NOT just worn/wielded.
+-->
+<p>魔法書の完全カタログです。系統順、続いてレベル順に並んでいます。<strong>レベル
+(Lvl)</strong>は呪文レベル、<strong>消費魔力 (Pw
+cost)</strong>は常に「5×呪文レベル」です。<strong>種別
+(Type)</strong>は呪文の目標指定方法を区分しています：</p>
+<ul>
+<li><strong>方向指定 (aimed):</strong>
+方向を指定し、その直線の1マスに命中します。</li>
+<li><strong>光線 (ray):</strong>
+術者から直線状に伸び、遮られるまで進むビームです。</li>
+<li><strong>目標不要 (untargeted):</strong>
+方向指定は不要で、自身、フロア全体、または固定範囲に効果が発現します。</li>
+</ul>
+<p><strong>上位効果 (Upgrade)</strong>はその系統のスキルが<strong>熟練
+(Skilled)</strong>以上になった際の挙動変化です（防護の呪文のみエキスパートで発動し、跳躍の距離はランクに応じて連続的に拡大します）。</p>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 4%" />
+<col style="width: 10%" />
+<col style="width: 32%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>呪文名</th>
+<th>系統</th>
+<th>レベル</th>
+<th>種別</th>
+<th>効果</th>
+<th>上位効果 (Skilled以上)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>衝撃 (force bolt)</td>
+<td>攻撃</td>
+<td>1</td>
+<td>方向指定</td>
+<td>2d12の魔法打撃ダメージ</td>
+<td>—</td>
+</tr>
+<tr>
+<td>連鎖雷撃 (chain lightning)</td>
+<td>攻撃</td>
+<td>2</td>
+<td>目標不要</td>
+<td>周囲のモンスターに電撃ダメージ</td>
+<td>—</td>
+</tr>
+<tr>
+<td>生命力吸収 (drain life)</td>
+<td>攻撃</td>
+<td>2</td>
+<td>方向指定</td>
+<td>対象から経験値レベルを1吸収</td>
+<td>—</td>
+</tr>
+<tr>
+<td>マジックミサイル (magic missile)</td>
+<td>攻撃</td>
+<td>2</td>
+<td>光線</td>
+<td>(XL÷2 + 1)d6の衝撃ビーム（端数切捨て）。魔法防御で防がれる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>冷気 (cone of cold)</td>
+<td>攻撃</td>
+<td>4</td>
+<td>光線</td>
+<td>(XL÷2 + 1)d6の冷気ビーム（端数切捨て）</td>
+<td>目標指定の爆発</td>
+</tr>
+<tr>
+<td>火炎 (fireball)</td>
+<td>攻撃</td>
+<td>4</td>
+<td>光線</td>
+<td>(XL÷2 + 1)d6の火炎ビーム（端数切捨て）</td>
+<td>目標指定の爆発</td>
+</tr>
+<tr>
+<td>死の指 (finger of death)</td>
+<td>攻撃</td>
+<td>7</td>
+<td>光線</td>
+<td>死の光線。敵の魔法防御で防がれるが、自身に反射・誤射した際は防御チェックを迂回して即死する</td>
+<td>—</td>
+</tr>
+<tr>
+<td>回復 (healing)</td>
+<td>回復</td>
+<td>1</td>
+<td>方向指定</td>
+<td>HPを回復</td>
+<td>盲目も治療</td>
+</tr>
+<tr>
+<td>盲目治療 (cure blindness)</td>
+<td>回復</td>
+<td>2</td>
+<td>目標不要</td>
+<td>盲目状態を回復</td>
+<td>—</td>
+</tr>
+<tr>
+<td>病気治療 (cure sickness)</td>
+<td>回復</td>
+<td>3</td>
+<td>目標不要</td>
+<td>食中毒および病気を治療</td>
+<td>—</td>
+</tr>
+<tr>
+<td>完全回復 (extra healing)</td>
+<td>回復</td>
+<td>3</td>
+<td>方向指定</td>
+<td>より多くのHPを回復</td>
+<td>—</td>
+</tr>
+<tr>
+<td>石から肉へ (stone to flesh)</td>
+<td>回復</td>
+<td>3</td>
+<td>方向指定</td>
+<td>石像を生きたモンスターに変える。石化を治療</td>
+<td>—</td>
+</tr>
+<tr>
+<td>能力回復 (restore ability)</td>
+<td>回復</td>
+<td>4</td>
+<td>目標不要</td>
+<td>低下した能力値を1つ全快</td>
+<td>低下したすべての能力値を全快</td>
+</tr>
+<tr>
+<td>怪物探知 (detect monsters)</td>
+<td>予見</td>
+<td>1</td>
+<td>目標不要</td>
+<td>フロア上のモンスターを表示</td>
+<td>効果時間が延長</td>
+</tr>
+<tr>
+<td>明かり (light)</td>
+<td>予見</td>
+<td>1</td>
+<td>目標不要</td>
+<td>現在の部屋を照らす</td>
+<td>—</td>
+</tr>
+<tr>
+<td>食料探知 (detect food)</td>
+<td>予見</td>
+<td>2</td>
+<td>目標不要</td>
+<td>フロア上の食料を表示</td>
+<td>有害な食事の前に警告</td>
+</tr>
+<tr>
+<td>透視 (clairvoyance)</td>
+<td>予見</td>
+<td>3</td>
+<td>目標不要</td>
+<td>周囲のマップを周期的に開拓視認</td>
+<td>熟練：周期ごとに周囲のモンスターも探知</td>
+</tr>
+<tr>
+<td>不可視探知 (detect unseen)</td>
+<td>予見</td>
+<td>3</td>
+<td>目標不要</td>
+<td>不可視のモンスターや罠を表示</td>
+<td>—</td>
+</tr>
+<tr>
+<td>識別 (identify)</td>
+<td>予見</td>
+<td>3</td>
+<td>目標不要</td>
+<td>所持品を1つ識別</td>
+<td>複数の所持品を一括識別</td>
+</tr>
+<tr>
+<td>宝探知 (detect treasure)</td>
+<td>予見</td>
+<td>4</td>
+<td>目標不要</td>
+<td>フロア上のすべてのアイテムを表示</td>
+<td>探知したアイテムの種別を識別</td>
+</tr>
+<tr>
+<td>地図化 (magic mapping)</td>
+<td>予見</td>
+<td>5</td>
+<td>目標不要</td>
+<td>フロア全体の地形を開拓表示</td>
+<td>—</td>
+</tr>
+<tr>
+<td>怪物混乱 (confuse monster)</td>
+<td>付与</td>
+<td>1</td>
+<td>目標不要</td>
+<td>次の近接攻撃で対象を混乱させる</td>
+<td>複数回の攻撃分チャージされる</td>
+</tr>
+<tr>
+<td>怪物減速 (slow monster)</td>
+<td>付与</td>
+<td>2</td>
+<td>方向指定</td>
+<td>対象モンスターの移動速度を低下</td>
+<td>—</td>
+</tr>
+<tr>
+<td>恐怖 (cause fear)</td>
+<td>付与</td>
+<td>3</td>
+<td>目標不要</td>
+<td>視界内のモンスターを逃走させる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>睡眠 (sleep)</td>
+<td>付与</td>
+<td>3</td>
+<td>光線</td>
+<td>射線上のモンスターを眠らせる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>魅了 (charm monster)</td>
+<td>付与</td>
+<td>5</td>
+<td>目標不要</td>
+<td>周囲 3×3 エリアのモンスターを手懐ける</td>
+<td>—</td>
+</tr>
+<tr>
+<td>防護 (protection)</td>
+<td>僧侶</td>
+<td>1</td>
+<td>目標不要</td>
+<td>魔力を消費して一時的なACボーナスを得る</td>
+<td><strong>エキスパート</strong>: 効果時間が2倍</td>
+</tr>
+<tr>
+<td>怪物作成 (create monster)</td>
+<td>僧侶</td>
+<td>2</td>
+<td>目標不要</td>
+<td>近くにランダムなモンスターを召喚</td>
+<td>—</td>
+</tr>
+<tr>
+<td>呪い解除 (remove curse)</td>
+<td>僧侶</td>
+<td>3</td>
+<td>目標不要</td>
+<td>装備中のアイテムの呪いを解く</td>
+<td>所持している全アイテムの呪いを解く</td>
+</tr>
+<tr>
+<td>ペット作成 (create familiar)</td>
+<td>僧侶</td>
+<td>6</td>
+<td>目標不要</td>
+<td>手懐けられたペットを召喚する</td>
+<td>—</td>
+</tr>
+<tr>
+<td>アンデッド退散 (turn undead)</td>
+<td>僧侶</td>
+<td>6</td>
+<td>方向指定</td>
+<td>アンデッドや悪魔にダメージを与えて逃走させる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>跳躍 (jumping)</td>
+<td>緊急脱出</td>
+<td>1</td>
+<td>目標不要</td>
+<td>近くの指定したマスへ跳躍する</td>
+<td>スキルランクに応じて跳躍距離が拡大</td>
+</tr>
+<tr>
+<td>加速 (haste self)</td>
+<td>緊急脱出</td>
+<td>3</td>
+<td>目標不要</td>
+<td>一時的な高速移動状態になる</td>
+<td>効果時間が延長</td>
+</tr>
+<tr>
+<td>不可視 (invisibility)</td>
+<td>緊急脱出</td>
+<td>4</td>
+<td>目標不要</td>
+<td>透明状態になる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>浮遊 (levitation)</td>
+<td>緊急脱出</td>
+<td>4</td>
+<td>目標不要</td>
+<td>落とし穴や水面の上に浮かび上がる</td>
+<td><code>&gt;</code> キーで任意に着地可能</td>
+</tr>
+<tr>
+<td>テレポート (teleport away)</td>
+<td>緊急脱出</td>
+<td>6</td>
+<td>方向指定</td>
+<td>対象をフロアの別の場所へテレポートさせる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>開錠 (knock)</td>
+<td>物質操作</td>
+<td>1</td>
+<td>方向指定</td>
+<td>扉を開け、錠前を解除する</td>
+<td>—</td>
+</tr>
+<tr>
+<td>施錠 (wizard lock)</td>
+<td>物質操作</td>
+<td>2</td>
+<td>方向指定</td>
+<td>扉を閉じて鍵をかける</td>
+<td>—</td>
+</tr>
+<tr>
+<td>穴掘り (dig)</td>
+<td>物質操作</td>
+<td>5</td>
+<td>光線</td>
+<td>壁、岩、床を掘り抜く</td>
+<td>—</td>
+</tr>
+<tr>
+<td>変身 (polymorph)</td>
+<td>物質操作</td>
+<td>6</td>
+<td>方向指定</td>
+<td>対象を変身させる</td>
+<td>—</td>
+</tr>
+<tr>
+<td>変化消失 (cancellation)</td>
+<td>物質操作</td>
+<td>7</td>
+<td>方向指定</td>
+<td>対象の魔法特性を打ち消す</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>光線系呪文（睡眠、マジックミサイル、死の指、および未熟練状態の冷気や火炎）の命中率も、スキルランクに応じて上昇します。</p>
+</section>
 </section>
 </section>
 </main>
