@@ -7934,6 +7934,3458 @@ href="#a-note-on-wraiths">レイスについての覚書</a> を参照）。</p>
 は、防具に油を塗って巻きつき攻撃、接着攻撃、マインドフレアの触手を滑らせて回避できるようにします。また、鞄に油を塗ることで、油が乾くまで中身を水濡れから保護することができます。</p>
 </section>
 </section>
+<section id="武具庫-the-armory" class="level3">
+<h3>武具庫 (The Armory)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Shield spell penalty is weight-gated (weight > small-shield's 30, spell.c:2269); the 30-weight drain- and shock-resistance shields also avoid it, so the small shield isn't the "only" one.
+- Crysknife reverts to a worm tooth EVERY time unless erodeproofed (then ~10%); the book had it inverted (do.c:911).
+- Monk martial-arts -20 to-hit applies to ANY body armor including dragon scale mail (uhitm.c:397, "if (uarm)"); DSM is not exempt.
+- Rangers CAN two-weapon (unskilled, -9), not "cannot at all" (can_twoweapon has no role gate, wield.c:766).
+- Verified correct: AC/MC values, DSM +3 vs mail +9 & merge rules, enchant destruction thresholds, robe halving metal-suit penalty, gauntlets of power Str 25, Excalibur odds, lance joust.
+-->
+<!-- audit
+2026-05-18:
+- shield of drain resistance is a second non-artifact source (objects.h:656-658)
+- warning glyph levels: white, red ×3, magenta, bright-magenta — no yellow (drawing.c:39-52)
+- cloak of protection MC3; cloak of magic resistance MC1 (objects.h:637-646)
+- MC formula at uhitm.c:87 — MC3 blocks 90% of monster spells
+- helm of caution grants the WARNING intrinsic (do_wear.c:448-450)
+- DSM dual-property pattern: armor + per-color intrinsic (do_wear.c:806-883)
+- gray and silver DSM grant no extra intrinsic
+- DSM scroll-of-enchant transformation requires spe ≥ 0 (read.c:1225)
+- shield casting penalty has two parts: ANY shield adds flat spelshld to splcaster (spell.c:2197; Wiz 3, Pri 2), and a shield heavier than small-shield (>30 weight) quarters the final chance (spell.c:2269). Small shield + the 30-weight drain/shock-resistance shields dodge only the /4; the flat penalty still applies to any shield.
+- strategy aligned with NetHackWiki Dragon scale mail, Cloak of protection, Magic cancellation, Speed boots: GDSM as the popular MR wish, MC3 from cloak of protection, speed boots make turns more numerous (https://nethackwiki.com/wiki/Dragon_scale_mail, https://nethackwiki.com/wiki/Cloak_of_protection, https://nethackwiki.com/wiki/Magic_cancellation, https://nethackwiki.com/wiki/Speed_boots)
+-->
+<p>このセクションでは、装備の選び方を解説します。<a
+href="#weapons-tables">武器一覧表</a> および <a
+href="#armor-tables">防具一覧表</a>
+の付録には、すべてのアイテムの完全な性能値が記載されています。</p>
+<section id="防具とac-armor-and-ac" class="level4">
+<h4>防具とAC (Armor and AC)</h4>
+<p>アーマークラス（AC）は敵の攻撃がどれくらいの頻度で命中するかを決定する数値であり、ゲーム内で最も重要な防御指標です。ACの数値を1点下げるごとに、モンスターの攻撃が空振りに終わる確率が上がります。ACは10から始まり、防護を重ねることで低下していきます（値が低いほど優秀です）。ACが
+−10
+以下になれば物理攻撃でダメージを受けることは極めて稀になります。昇天用装備セットの実用的な目標値は
+<strong>AC −20</strong> であり、−25
+を超えると低下の恩恵は逓減していきます。</p>
+<p>もしあなたの <strong>ACが 6 またはそれより悪い</strong>
+場合、祭壇でのBUC判定をいつまでも待っていてはいけません。一般的な胴防具、兜、盾、マントなどは、通常そのリスクを冒してでも装備する価値があります。ただし、靴、小手、円錐形の帽子は、呪いや有害な魔法効果で身動きが取れなくなる恐れがあるため、装備する前に必ずテストしてください。</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>スロット</th>
+<th>今すぐ装備</th>
+<th>探すべき装備</th>
+<th>注意点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>胴 (Body)</td>
+<td>過重にならない範囲で最良の鎧</td>
+<td>ドラゴンの鱗鎧</td>
+<td>修道士は命中率に−20のペナルティ。金属製は詠唱を激しく妨害</td>
+</tr>
+<tr>
+<td>マント (Cloak)</td>
+<td>呪われていない有用なマント全般</td>
+<td>魔法耐性、防護、幻影</td>
+<td>ミイラの包帯は透明化を無効化する</td>
+</tr>
+<tr>
+<td>兜 (Helm)</td>
+<td>ACが貧弱なときは一般的な兜</td>
+<td>知恵、警戒、テレパシー</td>
+<td>円錐形の帽子（三角帽子/道化帽）は事前識別必須</td>
+</tr>
+<tr>
+<td>小手 (Gloves)</td>
+<td>BUC判定後にのみ装備</td>
+<td>力または器用さ</td>
+<td>お手玉の小手は通常呪われている</td>
+</tr>
+<tr>
+<td>靴 (Boots)</td>
+<td>BUC判定後にのみ装備</td>
+<td>スピード、水上歩行、跳躍</td>
+<td>浮遊の靴やつまずきの靴は通常呪われている</td>
+</tr>
+<tr>
+<td>盾 (Shield)</td>
+<td>片手武器使用かつ修道士以外</td>
+<td>反射または各種耐性</td>
+<td>盾全般が両手持ちを封じ、魔法詠唱にペナルティを与える</td>
+</tr>
+<tr>
+<td>シャツ (Shirt)</td>
+<td>入手次第装備</td>
+<td>いずれのシャツでも（要強化）</td>
+<td>露出したシャツ（胴鎧未装備）は店の販売価格を悪化させる</td>
+</tr>
+</tbody>
+</table>
+<section id="胴防具-body-suits" class="level5">
+<h5>胴防具 (Body suits)</h5>
+<p>胴防具は身につける装備の中で最も重く、単体で最も大きなAC供給源となります。修道士（Monk）はこのスロットを空にしておくことで最も真価を発揮します。ドラゴンの鱗鎧を含め、<strong>いかなる</strong>
+胴防具であっても、装備すると武術（Martial Arts）の命中率に −20
+のペナルティを受けます。終盤では、ペナルティを回避できないと知りつつも、優れたACと耐性のためにドラゴンの鱗鎧をあえて装備する修道士もいます。</p>
+<p>胴防具の最下層は主に革製品です。<strong>レザーのジャケット</strong>
+(AC 1, 重量 30)
+は半身用の服であり、鞄の中身を整理する間に羽織るには十分軽いですが、本格的な鎧にはなりません。<strong>革の鎧</strong>
+(AC 2, 重量 150)
+は頑丈な牛革製で、洞窟人の初期装備であり、ミスリルがまだ手に入らない魔法使いの中盤の標準装備でもあります。どちらも呪文詠唱へのペナルティがなく、錆びることもありません。<strong>鋲付き革の鎧</strong>
+(AC 3, 重量 200)
+はその名の通り革に金属鋲を打ち込んだもので、これも詠唱に対して安全です。</p>
+<p>鉄製の鎧は小規模なものから本格的なものまであります。<strong>環鎖鎧</strong>
+(Ring mail)
+は鉄の環を編み込まずに裏地に縫い付けたもので、鎖帷子よりも軽く、通常版で
+AC 3、オーク製で AC 2 の防御力です。<strong>鱗札鎧</strong> (Scale mail)
+(AC 4, 重量 250)
+は、魚の鱗が重なり合うように鉄の小札を裏地に縫い付けたもので、古代ローマのロリカ・スクアマタのような外観です。<strong>鎖帷子</strong>
+(Chain mail) (AC 5, 重量 300)
+は一般に「鎧」と聞いて誰もが思い浮かべる姿であり、数千個の連結した鉄の環がチュニックに縫い合わされています。オークの鎖帷子は防御力が1点劣り、まるで初心者が作ったかのような粗雑な外見です。</p>
+<p><strong>ドワーフのミスリル服</strong> (Dwarvish mithril-coat)
+は、わずか 150 の重量で AC 6
+を誇り、錆びることもありません。<strong>エルフのミスリル服</strong>
+(Elven mithril-coat) は同じ重量で AC 5
+を与えます。ミスリルは依然として金属製であるため、呪文詠唱に対するペナルティはプレートメイルと同等ですが、ローブを着用すればそのペナルティを半減できます。魔法の使い手にとっても、この優れたACは詠唱ペナルティの代償を払う価値が十分にあります。</p>
+<p>信頼できる重装鎧としては、<strong>薄板鎧</strong> (Splint mail:
+革の裏地に鉄板の帯をリベット留めしたもの) と、<strong>帯鋼鎧</strong>
+(Banded mail: チュニックの周りに水平な鉄の帯を重ねて巻いたもの)
+があります。どちらも AC 6 で、重量は 350〜400
+です。プレートメイルよりわずか1点ACが劣るだけで、重量は著しく軽くなっています。魔法使い以外のほとんどの冒険者にとって、ドラゴンの鱗を入手するまでは、これら2つのいずれかが現実的な胴防具の選択肢となります。</p>
+<p>頂点に君臨するのが <strong>プレートメイル</strong> (Plate mail)
+です。これは中世後期のヨーロッパ騎士がまとった全身甲冑であり、キルティングジャケットの上に可動式の鋼鉄プレートをストラップで固定したものです。ダンジョンで最も重い胴防具
+(重量 450) であり、最強の防御力 (AC 7)
+を誇ります。この重さは騎士やワルキューレであっても瞬く間に重荷（Burdened）へと追い込み、鉄の材質は呪文詠唱の失敗率を跳ね上げます。侍の画面では同じアイテムが
+<strong>炭胴</strong> (tanko)
+として表示されます。<strong>水晶のプレートメイル</strong>
+は同じ形状を透明なガラスで再現したもので、錆びる危険がなく、同じACで、はるかに希少です。<strong>青銅のプレートメイル</strong>
+はその古い地中海の祖先であり、1点劣る AC 6
+で、銅系であるため錆びる代わりに腐食（緑青）します。</p>
+<p>ドラゴンの鱗およびドラゴンの鱗鎧については、後述の <a
+href="#dragon-scale-mail">ドラゴンの鱗鎧</a> を参照してください。</p>
+</section>
+<section id="シャツ-shirts" class="level5">
+<h5>シャツ (Shirts)</h5>
+<p>シャツは胴防具の <em>下</em> に着用します。基本ACは 0
+ですが、呪文詠唱を一切妨害せず、重量もほとんどないため、+5
+まで強化されたシャツは極めて大きな働きをします。ダンジョンに存在する2種類のシャツは、性能面では完全に同一の重量
+5 の布製トップスです。<strong>アロハシャツ</strong> (Hawaiian shirt)
+は観光客の初期装備であり、<strong>Tシャツ</strong> (T-shirt)
+は無地の別バージョンです。どちらも防具を着込む際に最初に身につける必要があるため、すでに胴防具を着ている状態でシャツを着ようとすると、すべての防具を一度脱いでから着直す必要があります。</p>
+</section>
+<section id="マント-cloaks" class="level5">
+<h5>マント (Cloaks)</h5>
+<p>マントは胴防具の上に羽織り、適度なAC
+(0〜+3)、魔法防御（MC）、そして多くの場合有用な特性（能力）をもたらします。また、下に着ている鎧を一部の攻撃から保護する役割も果たします。</p>
+<p>一般的な地域産マント（<strong>オークのマント</strong>、<strong>ドワーフのマント</strong>、<strong>革のマント</strong>）はいずれも
+AC 0〜1、重量 10〜15
+であり、主にそれを身につけている種族によって区別されます。このグループの中で際立っているのが
+<strong>エルフのクローク</strong> (Elven cloak) であり、AC 1
+に加えて忍び（Stealth）の能力を付与します。これはACそのものよりもはるかに有用です。</p>
+<p><strong>防水クローク</strong> (Oilskin cloak)
+は船乗りが着る油引きキャンバス地のアウターであり、ダンジョン内では AC
+1、MC2
+に加え、モンスターの巻きつき攻撃や溺れを防ぐ耐性をもたらします。<strong>ローブ</strong>
+(Robe) はまさに呪文の使い手が着るべきものであり、AC
+2、MC2、そして最も重要な点として、金属製防具による呪文詠唱ペナルティの大部分を相殺します。鎖帷子とローブを身につけた魔法使いは、革鎧を着ているのとほぼ同等に呪文を唱えられます。修道士は
++1
+のローブを持ってゲームを開始するため、これを保持し続けるべきです。<strong>錬金術の仕事着</strong>
+(Alchemy smock) は化学者のエプロンであり、AC 1、MC1
+に加え、毒耐性を付与します。体質としての毒耐性を得る前には素晴らしい防護具となります。</p>
+<p><strong>ミイラの包帯</strong> (Mummy wrapping)
+は見た目通りのものですが、1つ重大な特徴があります。着用中は透明化が無効化されます。これを拾った冒険者の大半は投げ捨てるべきです。他のマントで得られる
+AC 0 や MC1 は、透明化を封じることなく手に入ります。</p>
+<p>特に注目すべき4つの魔法のマントがあります：</p>
+<ul>
+<li><strong>守りのクローク</strong> (Cloak of protection)
+は、単体で防具中最高の MC3 を誇り、AC も 3
+上昇させます。他の手段ですでに魔法耐性を確保している冒険者にとって、最終盤の定番マントとなります。</li>
+<li><strong>魔法を防ぐクローク</strong> (Cloak of magic resistance)
+は、ダンジョンで最も単純かつ軽量な魔法耐性の供給源であり、ドラゴンの鱗鎧を入手するまでの中盤のあらゆる装備構成における生命線です。</li>
+<li><strong>幻影のクローク</strong> (Cloak of displacement)
+は、モンスターがあなたの幻影を攻撃するように仕向け、低いACを競合することなく見事に補完します。</li>
+<li><strong>透明のクローク</strong> (Cloak of invisibility)
+は透明化を付与し、モンスターの攻撃が外れやすくなるため、主に攻防一体のボーナスとなります。</li>
+</ul>
+</section>
+<section id="兜-helmets" class="level5">
+<h5>兜 (Helmets)</h5>
+<p>兜のスロットは頭部を覆い、転がる巨岩の罠、頭上からの落石、トンネル崩落による落盤といったダンジョンのささやかな奇襲からあなたを守ります。大半の兜は金属製であるため呪文詠唱を妨害します。魔法使いには布製の帽子が適しています。</p>
+<p>一般的な兜（<strong>オークの兜</strong>、<strong>ドワーフの鉄兜</strong>、<strong>兜（kabuto）</strong>、<strong>へこんだ鍋</strong>）は鉄製で
+AC 1〜2、重量 10〜40
+です。戦士系には実用的ですが、それぞれ呪文の失敗率計算に4ポイントのペナルティを加算します。<strong>エルフの革帽子</strong>
+(Elven leather helm) は呪文詠唱者向けの妥協案であり、革製で重量わずか
+3、AC 1、ペナルティなしです。<strong>ソフト帽</strong> (Fedora)
+は考古学者の初期装備の帽子であり、考古学者がかぶっている間は幸運（Luck）が
++1 されます。</p>
+<p><strong>三角帽子</strong> (Cornuthaum)
+は魔法使いのとんがり帽子です。基本ACは 0 ですが MC1
+を持ち、魔法使いがかぶると千里眼（Clairvoyance）を得られる一方、魔法使い以外の職業がかぶると千里眼が封じられます。<strong>道化帽</strong>
+(Dunce cap)
+は三角帽子の邪悪な双子です。かぶると自動的に呪われ、知力と知恵が強制的に
+6
+に固定され、呪いをとく巻物等なしには脱ぐことができなくなります。どちらも祭壇でBUC判定が可能です。また基本価格でも見分けがつきます（三角帽子は
+80 zm、道化帽は 1 zm）。</p>
+<p><strong>知恵の兜</strong> (Helm of brilliance)
+は、装備中にその強化値を知力と知恵の両方に加算します。+3
+の知恵の兜をかぶれば知力と知恵がともに +3
+され、呪文使いの中盤の目標装備となります。<strong>警告の兜</strong>
+(Helm of caution)
+は警告（Warning）の能力を付与します。視認していなくても周囲のモンスターが危険度に応じた色のシンボルで表示されるようになり、安価で軽量な、最序盤における最高の兜の1つです。<strong>テレパシーの兜</strong>
+(Helm of telepathy)
+は、目を開けているときは周囲8マス以内の怪物の心を感知し、目が見えない（盲目）状態ではフロア全体のテレパシーへと拡大します。</p>
+<p><strong>逆属性の兜</strong> (Helm of opposite alignment)
+は、装備中に自身の属性を逆転させます（そして10回中9回は呪われて生成されます）。基本的には罠アイテムですが、異なる属性の祭壇で生贄を捧げる、逆属性のクエストアーティファクトを我が物にする、あるいは星界の面で異なる属性の祭壇を選ぶなど、意図的に活用できる場面もあります。</p>
+</section>
+<section id="小手-gloves" class="level5">
+<h5>小手 (Gloves)</h5>
+<p>小手は防具の中で最も小さなスロット（全種類一律で AC
+1）ですが、決定的に重要な防御の役割を果たします。小手を着用していれば、<strong>コカトリスの死体</strong>
+を安全に拾い上げ、武器として振り回すことすら可能です。小手なしで素手で触れれば、即座に石化してゲームオーバーになります（<a
+href="#petrification-stoning">石化</a> を参照）。</p>
+<p><strong>革の手袋</strong> (Leather gloves: 侍には
+<strong>弓掛け</strong> と表示) は AC 1、重量 10
+の標準的な革製品で、詠唱ペナルティはありません。<strong>力の小手</strong>
+(Gauntlets of power)
+はダンジョンの腕力ショートカットであり、装備すると元の強さに関係なく強さが強制的に
+25
+にセットされ、魔法使いであっても瞬く間に侮れない近接戦士へと変貌します。<strong>器用さの小手</strong>
+(Gauntlets of dexterity) は、その強化値を器用さに加算します。+3
+の小手なら、鍛えた本来の器用さにさらに +3 が上乗せされます。</p>
+<p><strong>お手玉の小手</strong> (Gauntlets of fumbling)
+は罠アイテムです。10回中9回は呪われて生成され、着用者を絶えずつまずかせます。未識別の小手は装備する前に必ず祭壇テストを行ってください。呪われた小手を着け、さらに呪われた武器を手に持ってしまうのは、ダンジョンで最も古典的な膠着状態（デッドロック）です。呪いをとく巻物、聖水、あるいは祈りなしにはどちらも外せなくなります。</p>
+</section>
+<section id="靴-boots" class="level5">
+<h5>靴 (Boots)</h5>
+<p>靴は移動に関する特性（水上歩行、跳躍、浮遊、加速）の宝庫であるため、ほとんどのビルドにおいて、このスロットはAC（1〜2）よりも「その靴が何をもたらすか」によって選ばれます。</p>
+<p>一般的な靴には2つの丈といくつかの重量があります。<strong>短靴</strong>
+(Low boots: AC 1) と <strong>長靴</strong> (High boots: AC 2)
+は軽量な革製で日常的な基本装備です。<strong>鉄の靴</strong> (Iron shoes:
+AC 2) と <strong>蹴りの靴</strong> (Kicking boots: AC 1)
+はキックを多用する戦士向けの重い鉄製バリエーションです。</p>
+<p>有用な魔法の靴は、あなたの移動のあり方を劇的に変えます：</p>
+<ul>
+<li><strong>韋駄天の靴</strong> (Speed boots) は超高速（Very
+Fast）の能力を付与し、3ターンのうち2ターンがフリーアクションになります。ゲーム内で最も願われる靴です。</li>
+<li><strong>水上歩行の靴</strong> (Water walking boots)
+は水の上を歩くことを可能にし、城の跳ね橋の堀や、深層の水のエレメンタルプレーンで決定的な役割を果たします。その瞬間まで大切に保管しておきましょう。</li>
+<li><strong>飛び跳ねる靴</strong> (Jumping boots) は <code>#jump</code>
+コマンドを追加し、呪文を唱えることなく戦闘中に隣接マスへと一気に飛び跳ねることができます。</li>
+<li><strong>エルフの靴</strong> (Elven boots)
+は忍び（Stealth）を付与し、盗賊やレンジャーにとって頼りになる選択肢です。</li>
+</ul>
+<p><strong>罠の靴</strong> は10回中9回は呪われて生成されます：</p>
+<ul>
+<li><strong>浮遊の靴</strong> (Levitation boots)
+は着用者を常に宙に浮かび上がらせ、呪われていると脱ぐことができなくなります。</li>
+<li><strong>つまずきの靴</strong> (Fumble boots) は 1〜20
+ターンごとに転倒させ、2ターンを行動不能にします。</li>
+</ul>
+<p>靴を履く前には必ず祭壇テストを行ってください。呪われた靴は呪いを解くまで脱げず、浮遊の靴で堀の上で無力に浮かんだままになる危険もあります。</p>
+</section>
+<section id="盾-shields" class="level5">
+<h5>盾 (Shields)</h5>
+<p>盾は AC 1〜2
+をもたらしますが、装備構成の他の部分で大きな妥協を迫られます。いかなる盾であっても、二刀流および両手持ち武器の使用を封じます。また、すべての盾は一律の呪文詠唱ペナルティを加算し、さらに重量が
+30 を超える盾は最終的な呪文成功率を 4分の1
+に激減させます。修道士は盾を装備できますが、装備中は武術の命中率ボーナスを失います。なお、盾は見えない光線や矢の罠を防ぐことはできません。</p>
+<p>一般的な盾（<strong>小さい盾</strong>、<strong>エルフの盾</strong>、<strong>オークの盾</strong>、<strong>ウルク＝ハイの盾</strong>、<strong>ドワーフの丸盾</strong>）は
+AC 1〜2 で、特別な特性はありません。<strong>小さい盾</strong> (AC 1)
+は、重量 30
+の2種類の耐性の盾とともに、呪文成功率の激減（4分の1化）を回避できます。ただしこれら3つであっても一律の詠唱ペナルティは受けるため、純粋な魔法使いにとっては盾スロットを空にしておくのが最強です。</p>
+<p><strong>大きな盾</strong> (Large shield) と
+<strong>ドワーフの丸盾</strong> は AC 2 ですが重く（重量
+100）、他のあらゆる盾と同様の制限（着用中は両手剣、両刃の斧、長柄武器を振るえない）を課されます。</p>
+<p><strong>吸魔耐性の盾</strong> (Shield of drain resistance: AC 1,
+吸魔耐性) と <strong>耐電の盾</strong> (Shield of shock resistance: AC
+1, 電撃耐性)
+は、それぞれ名付けられた耐性を付与します。吸魔耐性（レベルドレイン耐性）は、この盾以外にアーティファクト以外の定常入手源が存在せず、耐電の盾もゲーム中で最も手軽な電撃耐性源の1つです。<strong>反射の盾</strong>
+(Shield of reflection) は銀製で AC
+2、そして死の光線、冷気の円錐、各種ブレス攻撃を術者へと跳ね返す「反射」の能力を付与します。これは盾スロットで反射を確保することで、胴防具を（魔法耐性を付与する）灰色ドラゴンの鱗鎧のために空けておけるため、定番の昇天用装備セットにおいて重要な役割を果たします。</p>
+<p><strong>損耗、強化、そして防護</strong>
+については、それぞれ後述のセクションで詳しく扱います。防具は錆び、燃え、あるいは腐食します（<a
+href="#erosion-and-proofing">腐食と防蝕加工</a>
+を参照）。鎧に魔法をかける巻物は防具を強化しますが、+3
+を超えると破壊のリスクが伴います（<a href="#enchantment">防具の強化</a>
+を参照）。自属性の僧侶にゴールドを寄付すると、装備ACに累積し、さらにMC0をMC1に引き上げる体質としての防護を購入できます（<a
+href="#donating-to-priests">僧侶への寄付</a> を参照）。</p>
+<p><span id="magic-cancellation"></span> <strong>魔法防御 (Magic
+cancellation: MC)。</strong> 身につけている防具は、最大 3
+までの隠れた防御力を提供します。MCは、レベルドレイン、毒、麻痺、睡眠、減速、混乱、気絶、獣化症、病気、スライム化、およびテレポート攻撃の二次効果を無効化する可能性があります。視線攻撃、ブレス攻撃、コカトリスの接触、または脳吸い出し攻撃を防ぐことはできません。防衛確率はMCレベルによって決定されます：</p>
+<table>
+<thead>
+<tr>
+<th>MC</th>
+<th>防御成功率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>1</td>
+<td>30%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>60%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>90%</td>
+</tr>
+</tbody>
+</table>
+<p>着用している防具の中で最も高いMC値から計算を開始します。外来の防護（Extrinsic
+Protection）はMCを +1 します（<strong>防護の魔除け</strong> の場合は
++2）。複数の外来防護源があっても重複して加算されることはありません。僧侶への寄付や呪文による内在の防護（Intrinsic
+Protection）は、単に MC0 を MC1 へと引き上げるだけです。合計値は最大 3
+で頭打ちとなります。守りのクロークは単体で MC3 に達し、防護の魔除けは
+MC1 の鎧を MC3 へと引き上げます。</p>
+<p><strong>MCは魔法耐性（Magic Resistance）とは異なります。</strong>
+魔法耐性は特定の <em>魔法的な</em>
+攻撃（死の杖の光線、マジックミサイル、死の指先呪文、へんげ光線、魔法の罠など）を
+100%
+遮断する二者択一（ON/OFF）の耐性フラグです。これに対してMCは、前述の近接攻撃による状態異常効果を確率で防御するものです。マインドフレアの触手攻撃を阻止するのはMCではなく通常は兜であり、コカトリスの接触には固有の予防策が必要です。昇天を目指す英雄は、この両方の防御を揃える必要があります。</p>
+<p><strong>魔法を防ぐクローク vs. 守りのクローク。</strong>
+これら2つのマントは、上述の異なる2つの防御を担っています：</p>
+<ul>
+<li><strong>魔法を防ぐクローク</strong> (Cloak of magic resistance)
+は、魔法耐性の特性を付与し、MC1
+を提供します。ゲーム内で最もシンプルな魔法耐性の入手源であり、灰色ドラゴンの鱗鎧をまだ願っていない中盤の英雄たちを支え続けます。</li>
+<li><strong>守りのクローク</strong> (Cloak of protection)
+は魔法耐性を付与しませんが、単体で最高の MC3
+をもたらします。他の手段ですでに魔法耐性を確保している場合、最終盤のベストな選択肢となります。</li>
+</ul>
+<p>定番の昇天用装備セット（Ascension Kit）では、胴スロットに
+<strong>灰色ドラゴンの鱗鎧</strong>
+を装備して魔法耐性を確保し、マントスロットに
+<strong>守りのクローク</strong> を着用して MC3
+を得ることで、両方の防御を完璧に成立させます。灰色ドラゴンの鱗鎧を手に入れるまでは、マントスロットで魔法を防ぐクロークが不可欠な役割を果たし、守りのクロークは鞄の中で出番を待つことになります。</p>
+<p>ゲーム内のすべての防具のAC、MC、重量、価格、および付与される能力の完全な数値データについては、付録の
+<a href="#armor-tables">防具一覧表</a> を参照してください。</p>
+</section>
+</section>
+<section id="武器-weapons" class="level4">
+<h4>武器 (Weapons)</h4>
+<p>武器は攻撃の射程、ダメージ、そして鍛えられるスキルを決定します。以下のセクションでは、武器を用途ごとに分類して解説します。スキルごとの詳細な性能表については、付録の
+<a href="#weapons-tables">武器一覧表</a> を参照してください。</p>
+<p>武器の操作には一握りの基本コマンドを用います：<strong><code>w</code></strong>
+で武器を装備（手に持つ）；<strong><code>x</code></strong>
+でサブ武器スロットと持ち替える；<strong><code>t</code></strong>
+で任意のアイテムを投げる；<strong><code>f</code></strong>
+で矢筒に装填された弾丸・飛び道具を発射する；<strong><code>Q</code></strong>
+で矢筒に装填するアイテムを指定する。また、長柄武器、鞭、つるはし、鉄のフックなどは、多くの道具と同様に
+<strong><code>a</code></strong> (使用 / apply) キーでも操作します。</p>
+<p>最初のプレイでは、自身の職業が最後まで使い続けられる武器スキルを鍛えましょう：</p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr>
+<th>職業</th>
+<th>最初に鍛えるべき武器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>考古学者 (Archeologist)</td>
+<td>まずは牛追い鞭。ダメージが必要になったらサーベルかつるはしへ移行</td>
+</tr>
+<tr>
+<td>蛮族 (Barbarian)</td>
+<td>初期装備に合わせ、斧または両手剣</td>
+</tr>
+<tr>
+<td>洞窟人 (Cave Dweller)</td>
+<td>こん棒</td>
+</tr>
+<tr>
+<td>治癒師 (Healer)</td>
+<td>ナイフ（メスのスキル）またはクォータースタッフ</td>
+</tr>
+<tr>
+<td>騎士 (Knight)</td>
+<td>長剣。騎乗を維持するならランス</td>
+</tr>
+<tr>
+<td>修道士 (Monk)</td>
+<td>素手格闘・武術 (Martial Arts)</td>
+</tr>
+<tr>
+<td>僧侶 (Priest)</td>
+<td>メイスまたはモーニングスター</td>
+</tr>
+<tr>
+<td>レンジャー (Ranger)</td>
+<td>弓</td>
+</tr>
+<tr>
+<td>盗賊 (Rogue)</td>
+<td>短剣</td>
+</tr>
+<tr>
+<td>侍 (Samurai)</td>
+<td>長剣（刀）。遠距離用として弓</td>
+</tr>
+<tr>
+<td>観光客 (Tourist)</td>
+<td>投げ矢</td>
+</tr>
+<tr>
+<td>ワルキューレ (Valkyrie)</td>
+<td>長剣</td>
+</tr>
+<tr>
+<td>魔法使い (Wizard)</td>
+<td>短剣またはクォータースタッフ</td>
+</tr>
+</tbody>
+</table>
+<section id="片手近接剣-one-handed-melee-swords" class="level5">
+<h5>片手近接剣 (One-handed melee swords)</h5>
+<p>騎士、ワルキューレ、侍をはじめとする多くの戦士たちが日常的に振るう剣です。片手持ちであるため、もう一方の手に盾を持ったり、逆手武器を構えたりする自由があります。</p>
+<p><strong>小剣</strong> (Short sword: 侍には <strong>脇差 /
+wakizashi</strong> と表示)
+は、近接刺突用に設計された60cmほどの直剣です。小型モンスターに
+d6、大型に d8
+のダメージ。盗賊の初期武器であり、侍の逆手武器でもあります。</p>
+<p><strong>シミターと銀のサーベル</strong> (Scimitar and silver
+saber)。これらはサーベルスキルの刀剣です。<strong>シミター</strong>
+は『千夜一夜物語』に登場するような湾曲した斬撃剣で、一般的な鉄製の片手剣です。<strong>銀のサーベル</strong>
+はその銀製の同系武器であり、悪魔、獣化モンスター、吸血鬼、幽霊、そして大半のインプに対して強烈な追加ダメージを与えるため、ゲーム終盤における最強クラスの片手武器の1つです。2つのアーティファクト銀サーベルとして、<strong>グレイズワンディル</strong>
+(Grayswandir:
+銀製、全攻撃でダメージ2倍、幻覚耐性をもたらす最高峰の願い候補)
+と、<strong>獣の災い</strong> (Werebane: 獣化モンスター特効)
+があります。</p>
+<p><strong>幅広の剣</strong>
+(Broadsword)。長剣よりも幅広でやや短く、十字の鍔を備えた中世ヨーロッパの刀剣です。<strong>ルーンの剣</strong>
+(Runesword)
+は幅広の剣の混沌バージョンです。そのアーティファクト形態である
+<strong>ストームブリンガー</strong> (Stormbringer)
+は敵からレベルを吸い取りますが、こちらの意図に関係なく平和的な中立NPCにも勝手に襲いかかる危険を孕んでいます。</p>
+<p><strong>長剣</strong> (Long
+sword)。ダンジョンを象徴する刀剣です。経験レベル5以上のキャラクターが長剣を泉に浸す（<code>#dip</code>）と、<strong>エクスカリバー</strong>
+(Excalibur) へと変貌するチャンスがあります。確率は騎士で
+6分の1、他の秩序属性で 30分の1
+です。秩序属性以外の者が浸すと、剣が呪われるだけです。エクスカリバーは序盤における至宝です：命中率
++d5、ダメージ
++d10、レベルドレイン耐性、そして1歩歩くごとの無料索敵（オートサーチ）をもたらします。長剣クラスには、<strong>刀</strong>
+(katana: 侍の片手曲刀で、本来的に命中 +1
+が備わり、通常の長剣よりわずかにダイスが大きい)
+や、数々の長剣アーティファクト（<strong>フロストブランド</strong>、<strong>ファイヤーブランド</strong>、<strong>巨人殺し</strong>、<strong>ヴォーパルブレード</strong>、<strong>太陽の剣</strong>、そして刀アーティファクトの
+<strong>スニッカー・スニー</strong>）が属しています。</p>
+<p>弓などの発射機（ランチャー）を使用する際は、サブ武器スロットに近接武器をセットしておきましょう。モンスターが隣接してきたら
+<code>x</code> キーで瞬時に近接武器へと切り替え、撃破したら再び
+<code>x</code> を押して発射機へと戻します。</p>
+</section>
+<section id="両手近接武器-two-handed-melee" class="level5">
+<h5>両手近接武器 (Two-handed melee)</h5>
+<p>盾スロットや逆手を犠牲にする代償として、より重い一撃を繰り出します。NetHack
+5.0 では、両手持ち武器による近接打撃すべてに
+<strong>強さダメージボーナス 1.5倍 (3/2)</strong>
+が適用されるようになり（腕力によるダメージ加算値が1.5倍になる）、両手武器ビルドは片手武器＋盾ビルドに対して極めて本格的な競争力を取り戻しました。</p>
+<p><strong>両手剣</strong> (Two-handed
+sword)。16世紀後半のドイツのツヴァイヘンダーであり、ランツクネヒト傭兵が両手で振り回した1.5メートルの鋼鉄刀です。小型に
+d12、大型に d6+2d6 という破格の打撃力を持ちますが、重量 150
+と極めて重厚です。<strong>ツルギ</strong> (Tsurugi)
+は日本の直刃両手刀であり、はるかに軽量（重量
+60）ながら、ゲーム内の全武器中で最も高い対小型ダメージダイス（d16）を誇ります。そのアーティファクト形態が、侍のクエストアーティファクトである
+<strong>村正のツルギ</strong> (Tsurugi of Muramasa) です。</p>
+<p><strong>クォータースタッフ</strong>
+(Quarterstaff)。シンプルな木製の棒で、両手持ちで小型・大型ともに
+d6、重量わずか 40
+です。武器は防具と違って呪文詠唱ペナルティを与えません。それどころか、クォータースタッフを装備していると呪文詠唱にわずかなボーナスすら得られます。魔法使いはこれを持って冒険を開始し、治癒師、僧侶、洞窟人、魔法使いが「エキスパート」までスキルを鍛えることができます。</p>
+<p>一部の両手武器は、両手持ちであること以上に独自の戦術的役割が際立っているため、他の節で解説しています：<strong>両刃の斧</strong>
+は「斧」、<strong>ドワーフのつるはし</strong>
+は「つるはし」、長柄武器は「リーチ武器」、ランスは「騎乗武器」、弓やクロスボウは「遠距離武器」を参照してください。</p>
+</section>
+<section id="斧-axes" class="level5">
+<h5>斧 (Axes)</h5>
+<p>斧の刃は大型の標的に対して強い偏重を持っています（大型モンスターに対する追加ダメージダイス）。<strong>斧</strong>
+(Axe) は標準的な片手用の木こりの斧で、小型 d6 / 大型 d4
+のダメージです。<strong>両刃の斧</strong> (Battle-axe)
+は長い柄と幅広の刃（多くは両刃）を持つ両手持ちバージョンで、小型 d8+d4 /
+大型 d6+2d4 の威力を誇り、両手持ちであるため強さボーナス
+1.5倍の恩恵を受けます（盾は装備不可）。蛮族のクエストアーティファクト
+<strong>なた</strong> (Cleaver) は両刃の斧です。</p>
+</section>
+<section id="片手打撃武器-blunt-one-handed" class="level5">
+<h5>片手打撃武器 (Blunt one-handed)</h5>
+<p>メイスとこん棒の系統です。聖職者のフレーバー通りアンデッドに対して有効（血を流さない）であり、歴史的な意味でも重装甲の敵に対して効果的です（こん棒の一撃は相手がプレートメイルを着ていようがお構いなしに骨を砕きます）。</p>
+<p><strong>こん棒</strong>
+(Club)。先端が太くなった木の棒です。洞窟人の初期装備で、小型 d6 / 大型
+d3、軽量で特別な特性はありません。</p>
+<p><strong>アキリス</strong>
+(Aklys)。柄に革紐が結び付けられた古代ギリシャの珍しい投擲用こん棒です。ダンジョンではこの革紐が決定的な意味を持ちます：アキリスをメイン武器として構えて投げると、紐によって手元へと瞬時に引き戻され、ヨーヨーのように手元に帰還します。小型
+d6 / 大型 d3 のダメージで、ごく稀に戻ってこないこともあります。</p>
+<p><strong>メイス</strong>
+(Mace)。成形された打撃ヘッドを持つ中世ヨーロッパの鋼鉄製メイスです。僧侶の初期装備です。僧侶への確定生贄ギフト（第1号）は
+<strong>悪魔の災い</strong> (Demonbane)
+であり、悪魔特効ダメージと追放（banish）の能力（<code>#invoke</code>）を備えた銀のメイスです。<strong>銀のメイス</strong>
+はその通常銀製バージョンです。</p>
+<p><strong>モーニングスター</strong> (Morning
+star)。トゲ付きの金属球を柄に取り付けた武器で、小型 2d4 / 大型 d6+1
+という片手武器としては非常に重い打撃力を持ちます。アーティファクト
+<strong>トロールの災い</strong> (Trollsbane)
+はモーニングスターであり、装備中にHPが自然回復し、トロールに対して追加ダメージを与えます。</p>
+<p><strong>フレイル</strong>
+(Flail)。柄に鎖で繋がれた重り付きの鉄球です（侍には <strong>ヌンチャク /
+nunchaku</strong> と表示）。小型 d6+1 / 大型 d4+d4、重量わずか 15
+で、大型モンスターに対して優れた累積ダメージを発揮します。<strong>鉄のフック</strong>
+(Grappling hook)
+も同じフレイルスキルで扱います。2マス離れた位置に向けて使用（<code>a</code>）すると、ごく小さなモンスターを1マス引き寄せたり、アイテムを引っ掛けたり、自身を1マス引き寄せたりできます（通常の敵を近接間合いに引きずり込むことはできません）。</p>
+<p><strong>戦のハンマー</strong> (War
+hammer)。打撃面と背面のスパイクを備えた小型の片手戦槌です。小型 d4+1 /
+大型
+d4。ワルキューレへの確定生贄ギフトは、北欧神話の雷神トールの雷槌である
+<strong>ミョルニル</strong> (Mjollnir)
+です。命中時に電撃ダメージを与えます。強さ 25
+を備えたワルキューレだけが、これを投げて確実に手元へ戻すことができます。</p>
+</section>
+<section id="リーチ武器-reach" class="level5">
+<h5>リーチ武器 (Reach)</h5>
+<p>リーチ武器は、<strong><code>a</code></strong> (使用 / apply)
+コマンドによって離れた間合いから攻撃できる武器群です。長柄武器、ランス、そして長剣アーティファクトの
+<strong>スニッカー・スニー</strong> (Snickersnee)
+がこのカテゴリに属し、いずれも同じリーチ処理ルーチンを用います：攻撃射程は武器スキルのランクに応じて広がり、「入門」段階の2マス離れた間合いから、「エキスパート」ではおよそ
+2.8マス（斜め2マス）まで届くようになります。使用コマンドは斜めを含む全8方向に対して有効です。さらに快適な操作法として、<strong><code>f</code></strong>
+(発射 / fire)
+コマンドがリーチ攻撃としても機能します：リーチ武器を構えている状態で
+<code>f</code>
+を押すと、射程内のモンスターを自動的にターゲットし、方角の入力なしに1キーストロークで打撃を加えます。</p>
+<p><strong>長柄武器</strong> (Polearms)
+は、長い柄の先端に刃や鉤を取り付けた武器の総称です：グレイブ、ハルバード、パルチザン、バルディッシュ、ヴォルジュ、フォシャール、ギザルム、ビル＝ギザルム、ルツェルンハンマー、カラスの嘴（bec
+de
+corbin）、ランカ（ranseur）、スペタム。これらの大半は15世紀のヨーロッパ戦場で、騎兵を馬から引きずり降ろしたり甲冑の継ぎ目をこじ開けたりするために考案されたものです。<strong>グレイブ</strong>
+は侍の従者が振るう長柄の曲刀である <strong>長刀 / naginata</strong>
+としても扱われます。すべての長柄武器は両手持ちです。もし長柄武器を持って隣接するモンスターに通常移動でぶつかると、その打撃は
+<strong>強打 (bash)</strong> として扱われます：ダメージは基本 1d2
+に激減し、武器スキルボーナスは一切適用されず、強さボーナスのみが加算されます。リーチ攻撃こそが長柄武器を携行する唯一の価値であり、至近距離では短剣よりも劣る性能になります。</p>
+<p><strong>ランス</strong>
+(Lance)。鋼鉄の穂先を備えた長い木製の槍であり、全速力で突撃する騎馬騎士の武器です。他の長柄武器と同様のリーチ攻撃に加え、最大の特長である
+<strong>馬上槍試合 (joust)</strong>
+突撃を行えます：馬やポニーに騎乗した状態で敵へと突撃すると、接触時に
+<strong>+2d10</strong>
+の追加ダメージを与えます（ランスを逆手に持っている場合は
++2d2）。激しい突撃の際、250分の1
+の確率でランスが粉々に砕け散ることがあります。騎士はランスのスキルをエキスパートまで鍛えることができ、鞍付きのポニーとランスを手にしてゲームを開始します。馬上の騎士は、接触時の馬上突撃と離れた位置からのリーチ攻撃の双方を自在に使い分けることができ、ランスはこの職業で最も汎用性の高い武器の1つとなります。騎士以外のほとんどの職業はランスを目にすることすら滅多にありません。</p>
+</section>
+<section id="短剣とナイフ-daggers-and-knives" class="level5">
+<h5>短剣とナイフ (Daggers and knives)</h5>
+<p>小型の刃物類であり、ダンジョンで最も汎用性の高い武器クラスです。</p>
+<p><strong>短剣</strong>
+(Dagger)。青銅器時代から腰に佩き続けられてきた、基本的な30cmほどの両刃の刃物です。小型
+d4 / 大型 d3、最初から +2
+の命中補正が組み込まれており、軽量で、そして極めて重要なことに
+<strong>スタック（束ねて所持）可能</strong>
+です。短剣は、まとまった数を積極的に投げたくなる唯一の刃物です：エキスパート段階かつ盗賊のクラスボーナスがあれば、<strong><code>f</code>
+キーを1回押すごとに最大4本の短剣を一度に投擲</strong>
+できます。<code>Q</code>
+で短剣のスタックを矢筒にセットし、<code>f</code>
+で発射し、戦闘が終わったら歩いて回収します（短剣が破損することは滅多にありません）。短剣ファミリーにはフレーバー豊かな派生があります：<strong>エルフの短剣</strong>
+(アーティファクト形態の <strong>スティング / つらぬき丸</strong>
+はトールキン作品へのオマージュでオークが近づくと青く光ります)、<strong>オークの短剣</strong>
+(やや粗悪)、<strong>銀の短剣</strong>
+(銀嫌いの敵に特効、レンジャーの定番逆手武器)。そして
+<strong>アサメ</strong> (Athame)
+は、刃を鈍らせることなくエルベレス（Elbereth）を床に刻み込める儀式用短剣です。</p>
+<p><strong>ナイフ</strong>
+(Knife)。家庭用の包丁や折りたたみナイフであり、小型かつ軽量です。小型 d3
+/ 大型 d2 で、多重投擲ボーナスはありません。<strong>メス</strong>
+(Scalpel) は治癒師の初期装備である極小の手術用メスです。</p>
+<p><strong>クリスカッター</strong> (Crysknife:
+クリスナイフ)。フランク・ハーバートの小説『デューン』に登場するフレーメンの刃であり、砂虫の歯から削り出された20cmの刀身を持ちます。小型・大型ともに
+d10、命中 +3
+という驚異的な威力を誇りますが、1つ大きな癖があります：防蝕加工（erodeproof）を施していない限り、床に落とすたびに例外なく元の「砂虫の歯」へと戻ってしまいます（あらかじめ防蝕加工しておけば、元に戻る確率を約10分の1に抑えられます）。</p>
+<p>短剣やナイフは、<code>w</code> (主武器) + 副武器 + <code>x</code>
+(持ち替え)
+のローテーションパターンの恩恵を最大限に享受できます。典型的な盗賊は、小剣をメインに構え、逆手に短剣スタックを持ち、敵が遠くにいるときは
+<code>x</code>
+で短剣スタックを主武器スロットへと切り替えて投げつけます。</p>
+</section>
+<section id="鞭と鉄のフック-whips-and-grappling-hooks" class="level5">
+<h5>鞭と鉄のフック (Whips and grappling hooks)</h5>
+<p>道具としても機能する武器類です。<strong>牛追い鞭</strong> (Bullwhip)
+は考古学者の初期装備です：先端に小さなクラッカー（破裂音を鳴らす房）がついた、編み革製の6フィートの鞭です。小型
+d2 / 大型 d1
+と戦闘用としては非力ですが、牛追い鞭を使用（<code>a</code>）することで、隣接するモンスターの武器を叩き落として武装解除させたり、落とし穴から自分を引き上げたりできます（房が周囲の調度品、巨岩、あるいは大型モンスターに引っ掛かって足場になります）。<strong>ゴムのホース</strong>
+(Rubber hose)
+はダンジョンのジョーク武器であり、キーストン・コップが携帯していることがあります。</p>
+<p><strong>鉄のフック</strong> (Grappling
+hook)。鎖に取り付けられた3本爪の鉄の鉤です。2マスの射程で使用（<code>a</code>）してアイテムを引っ掛けたり、ごく小さなモンスターを1マス引き寄せたり、自分自身を1歩引き寄せたりできます。フレイルのスキルを鍛えることができます。</p>
+</section>
+<section id="射撃武器-ranged" class="level5">
+<h5>射撃武器 (Ranged)</h5>
+<p>射撃戦闘の体系的な概要は、戦闘章の <a
+href="#ranged-combat">射撃戦</a>
+で解説されています。ここでは具体的なアイテムを紹介します：</p>
+<p><strong>弓と矢</strong> (Bows and arrows)。通常の <strong>弓</strong>
+(Bow)、<strong>エルフの弓</strong>、<strong>オークの弓</strong>
+は、様々な品質の1.5メートルの木製弓であり、すべて <strong>矢</strong>
+(Arrow: 1本につき重量 1) を発射します。<strong>和弓</strong> (Yumi)
+は日本の長い非対称の弓であり、侍の射撃武器で、<strong>ヤ</strong> (ya:
+竹の矢) と組み合わせて使われます。レンジャーのクエストアーティファクトは
+<strong>ディアナの長弓</strong> (Longbow of Diana)
+であり、ローマ神話の狩猟の女神にちなんで名付けられ、何もない虚空から矢を無限に生み出す能力を持ちます。弓を
+<code>w</code> で構え、矢を <code>Q</code>
+で矢筒にセットし、<code>f</code>
+で発射します。レンジャーと侍は弓スキルをエキスパートまで鍛えられます。盗賊は弓スキルを一切鍛えることができません。</p>
+<p>どの弓であっても任意の矢を発射できますが、一致した組み合わせ（エルフの弓とエルフの矢、オークの弓とオークの矢、和弓とヤ）を使うと、対応する種族または職業は1回の一斉射撃につき追加で矢をもう1本発射（マルチショット）できます。組み合わせの詳細については
+<a href="#weapons-tables">武器一覧表</a> を参照してください。</p>
+<p><strong>クロスボウとボルト</strong> (Crossbows and
+bolts)。<strong>クロスボウ</strong> は、短く重い
+<strong>クロスボウの矢（ボルト）</strong>
+を発射する中世後期の機械仕掛けの弓です。1発あたりの威力は通常の弓よりも重いですが、装填に時間がかかり、フルのマルチショット（多重発射）を放つには強さ
+18（ノームなら
+16）が必要です。ボルトを撃つには必ずクロスボウが必要であり、通常の弓からボルトを射ることはできません。盗賊とレンジャーはエキスパートまで鍛えることができ、騎士は熟練（Skilled）で上限となります。</p>
+<p><strong>スリング</strong>
+(Sling)。2本の紐の間に革のポケットを取り付けた最もシンプルな射撃武器であり、ダビデが巨人ゴリアテを倒した武器です。洞窟人の初期装備です。石、火打石、あるいは宝石を発射します。</p>
+<p><strong>投擲専用武器</strong> (Throw-only
+weapons)。<strong>投げ矢</strong> (Dart)
+は大量にスタックでき、病気の薬に浸すことで毒を塗ることができます。<strong>手裏剣</strong>
+(Shuriken)
+は日本の投擲星型刃物であり、修道士は手裏剣の多重投擲ボーナスを得られます。<strong>ブーメラン</strong>
+(Boomerang)
+はオーストラリアの湾曲した投擲棍であり、標的を外すと自身のマスへと戻ってきます（キャッチするには器用さ判定が必要）。<strong>アキリス</strong>
+もこのカテゴリに属します（前述の「片手打撃武器」を参照）。</p>
+<p>すべての投擲武器は、<code>Q</code>
+でスタックを矢筒にセットし、<code>f</code>
+で発射できます。矢筒を使わずに投げる場合は、<code>t</code>
+を押し、アイテムを選び、方向を入力します。</p>
+</section>
+<section id="二刀流スタイル-two-weapon-style" class="level5">
+<h5>二刀流スタイル (Two-weapon style)</h5>
+<p>自身が二刀流可能な職業である場合、逆手に何を持つかはメイン武器と同じくらい重要です。ルールと損益分岐点の計算については戦闘章の
+<a href="#two-weapon-combat">二刀流戦闘</a>
+で解説されています。代表的な組み合わせは以下の通りです：</p>
+<ul>
+<li><strong>侍:</strong>
+メインに刀、逆手に脇差。脇差は（長剣ではなく）小剣であるため、刀の長剣スキルを共有しません。これが侍が二刀流のフレーバーを楽しむために支払う代償です。</li>
+<li><strong>盗賊:</strong> メインに小剣、逆手に短剣スタック（短剣は
+<code>Q</code> + <code>f</code>
+による投擲用スタックも兼ねます）。銀嫌いの敵に対しては、銀の短剣を逆手に持つのも非常に効果的です。</li>
+<li><strong>ワルキューレまたは騎士:</strong>
+メインに長剣、逆手に銀の短剣（二刀流スキルを「熟練」まで育成）。通常、武器の強化値が極めて高くなるまでは、逆手武器を持つよりも両手持ち武器を振るう方が数値的に有利です。</li>
+<li><strong>蛮族:</strong>
+二刀流スキルは「入門」で頭打ちになります。命中ペナルティがメリットを打ち消してしまうため、1本の優れた武器を振るう方が賢明です。</li>
+<li><strong>レンジャーは二刀流を行えますが、未習熟（Unskilled: 命中率 −9
+のペナルティ）から鍛えることができません。</strong>
+したがって、1本の優れた武器を扱う方が通常は勝利につながります。</li>
+</ul>
+</section>
+</section>
+<section id="強化-enchantment" class="level4">
+<h4>強化 (Enchantment)</h4>
+<p>武器や防具は、武器に魔法をかける巻物や鎧に魔法をかける巻物を使って強化することができます。呪われていない武器強化の巻物は
++1 を加算し、呪われていない防具強化の巻物は 1〜2（未強化の +0
+防具ならそれ以上の上昇もあり得る）を加算します。祝福された巻物ならさらに大きな上昇が見込めます。武器の場合、<strong>+6
+以上</strong> の状態でさらに強化を試みると、3分の2
+の確率で武器が蒸発して消滅します。<strong>防具</strong>
+も同様のリスクを抱えています：<strong>+3
+を超えると</strong>、巻物を読むたびにアイテムが破壊される危険が生じます（エルフ製の防具や、魔法使いの三角帽子などの「特殊」な防具の場合は
+<strong>+5 を超えると</strong>
+危険になります）。祝福された巻物は1回の読書で得られる強化値の幅を増やしますが、破壊の閾値そのものを変えるわけではありません。呪われた巻物は逆に強化値を下げる恐れがあるため、強化目的で読んではいけません。</p>
+</section>
+<section id="腐食と防蝕加工-erosion-and-proofing" class="level4">
+<h4>腐食と防蝕加工 (Erosion and Proofing)</h4>
+<p>武器や防具は、錆（鉄製品）、火（有機物製品）、そして腐食（銅製品の緑青や酸による腐食）によって損傷を受けます。ひどく傷んだアイテムはACやダメージの数値が低下します。</p>
+<p>この損耗を修復するには、<strong>混乱した状態で呪われていない</strong>
+武器に魔法をかける巻物を読む（構えている武器が対象）、または混乱した状態で呪われていない鎧に魔法をかける巻物を読みます（装備している防具の中からランダムに1箇所が対象）。これにより、アイテムに防蝕加工（erodeproofed）が施され、既存の損耗も完全に修復されます。逆に、混乱状態で呪われた巻物を読むと防蝕加工が剥ぎ取られてしまいます。</p>
+<p>魔法を使わずに損耗の進行を遅らせることも可能です。脂の缶を使用（<code>a</code>）して防具に脂（グリース）を塗りつけます。脂の層は、モンスターによる抱きつき、巻きつき、粘着攻撃、そしてマインドフレアの触手攻撃を受け流す効果がありますが、通常の盗み攻撃や武器強奪を防ぐことはできません。また、脂は水からも装備を守ります：脂を塗った武器や防具は、泉への浸漬、水の罠、あるいは深い水の中の歩行であっても錆びるのを防ぎます。ただし、水に浸かるたびに約
+50%
+の確率で脂が洗い流されてしまうため、数回の水没を耐えるための一時的な保険であり、永久的な防水加工ではありません。</p>
+</section>
+<section id="ドラゴンの鱗鎧-dragon-scale-mail" class="level4">
+<h4>ドラゴンの鱗鎧 (Dragon Scale Mail)</h4>
+<p>ドラゴンの鱗はその強靭さと魔法的な防御特性によって珍重され、その鱗から鍛え上げられた鱗鎧はゲーム内でも最高の胴防具の1つです。</p>
+<p>ドラゴンを倒しても必ず鱗を落とすとは限らず、鱗鎧そのものを落とすことは決してありません。新たに仕留めたドラゴンが鱗を落とす確率は約3回に1回であり、蘇生させたドラゴンの場合は20回に1回に過ぎません。<strong>ドラゴンの鱗</strong>
+は鱗鎧と同様に胴防具として身につけることができ、その色の持つ完全な固有耐性（灰色は魔法耐性、銀色は反射、といったように鱗鎧と同一の効果）をもたらします。しかし、鱗単体のACはわずか
++3 であるのに対し、完全に加工されたドラゴンの鱗鎧は +9
+のACを誇ります。重量はどちらも同じです。</p>
+<p>ドラゴンの鱗をドラゴンの鱗鎧へと強化・アップグレードするには：鱗を装備した状態で、呪われていない鎧に魔法をかける巻物を読みます。鱗が融合・硬化し、対応する色のドラゴンの鱗鎧（+0、祝福された巻物ならさらに高い強化値で、結果も祝福される）へと変化します。呪われた巻物を読んだ場合は、融合せず通常の悪い強化効果が発生するだけです。</p>
+<hr />
+</section>
+</section>
+<section id="呪いとその解除法-curses-and-how-to-break-them"
+class="level3">
+<h3>呪いとその解除法 (Curses and How to Break Them)</h3>
+<!-- audit
+2026-07-30: audited with The Armory vs NetHack-5.0 source; remove-curse scope (uncursed=worn, blessed=all; read.c:1524), confused-cursing, prayer uncurse, autocurse-9/10 items verified. No corrections.
+-->
+<!-- audit
+2026-05-18:
+- bones items are 80% cursed at pickup (bones.c:290)
+- rings of teleport/polymorph and amulet of strangulation generate 90% cursed (mkobj.c:1063-1066, 1143-1147)
+- cursed bag of holding doubles its contents' weight (mkobj.c:1950-1953)
+- confused remove-curse uncurses 25/curses 25/no-op 50 per item (read.c:1556-1557, mkobj.c:1846-1852)
+- blessed remove-curse hits all worn+carried; uncursed only worn (read.c:1524, 1549)
+- temple priests do NOT reveal BUC for a fee; only Priest CLASS sees BUC free (priest.c:629-718 sets HClairvoyant + Protection, not bknown)
+- shop price-id can infer BUC indirectly
+- strategy aligned with NetHackWiki BUC, Scroll of remove curse, Potion of holy water: altar/pet test, blessed remove-curse hits entire inventory, holy water dip uncurses (https://nethackwiki.com/wiki/BUC, https://nethackwiki.com/wiki/Scroll_of_remove_curse, https://nethackwiki.com/wiki/Potion_of_holy_water)
+- polymorph into a sliparm form drops body armor (cursed or not) into inventory (polyself.c:1198-1228)
+-->
+<p>遅かれ早かれ、あなたは呪われた装備を身につけてしまうことになります。事前にテストしなかった指輪かもしれません。ボーンズ階層で拾った靴かもしれません。あるいは、モンスターがあなたの持ち物に触れて呪いをかけたことに気づかなかったのかもしれません。何が原因であれ、外すことを頑なに拒むアイテムを身につけ、おそらく何か恐ろしい災難に見舞われているはずです。呪いを解かない限り、それを脱ぎ捨てることはできません。</p>
+<section id="アイテムが呪われる原因-how-items-get-cursed"
+class="level4">
+<h4>アイテムが呪われる原因 (How Items Get Cursed)</h4>
+<ul>
+<li><strong>生まれつき呪われている。</strong>
+一部のアイテムは、生成時から大半が呪われています（テレポートの指輪、変身の指輪、窒息の魔除けなど、ダンジョンが冒険者をからかうのにふさわしいと判断したすべて）。</li>
+<li><strong>ボーンズ階層からの遺品。</strong>
+ボーンズ階層に落ちているアイテムは、80% の確率で呪われています。</li>
+<li><strong>モンスターの干渉。</strong>
+特定のモンスターは、あなたの所持品にあるアイテムを直接呪うことができます。</li>
+<li><strong>混乱した状態での呪いを解く巻物。</strong>
+混乱状態で読むと、呪いを解くどころかアイテムを <em>呪ってしまう</em>
+可能性があります。</li>
+<li><strong>呪われた水。</strong>
+聖水の邪悪な双子であり、触れたものを呪います。</li>
+</ul>
+</section>
+<section id="呪われたアイテムの効果-effects-of-cursed-items"
+class="level4">
+<h4>呪われたアイテムの効果 (Effects of Cursed Items)</h4>
+<ul>
+<li><strong>呪われた防具や指輪</strong>
+は身体に固着して外せなくなります：呪われたテレポートの指輪は止められないランダムテレポートを意味し、呪われた浮遊の靴は二度と地面に足をつけられなくなることを意味します。</li>
+<li><strong>呪われた武器</strong>
+は手放す（持ち替える）ことができません。−3
+のオークの短剣を心ゆくまで愛用できることを願っています。</li>
+<li><strong>呪われた薬や巻物</strong>
+は特定の変質した効果を持ちます。効果が弱まるもの、有害になるもの、そしてごく一部は意図的に活用できるものもあります。</li>
+<li><strong>呪われた道具</strong>
+は劇的な大誤作動を起こします。呪われた軽量化の鞄は、中身の重量を減らすどころか
+<em>2倍に増やします</em>。</li>
+<li><strong>呪われた食料</strong>
+は不快ですが、致命的になることは滅多にありません。不幸中の幸いです。</li>
+</ul>
+</section>
+<section id="呪いの検知-detecting-curses" class="level4">
+<h4>呪いの検知 (Detecting Curses)</h4>
+<p>予防は治療に勝ります。アイテムを身につける <em>前に</em>
+テストしてください：</p>
+<ul>
+<li><strong>祭壇テスト。</strong>
+アイテムを祭壇の上に落とします。黒い閃光は「呪われている」ことを意味し、閃光が起きなければ「呪われていない（無呪）」です。</li>
+<li><strong>ペットテスト。</strong>
+ペットは呪われたアイテムの上に立ち入るのを嫌がります。狭い通路にアイテムを置き、ペットが何度もそこを通過するか観察してください（1度横切っただけでは安全の証明にはなりません）。</li>
+<li><strong>識別の巻物。</strong>
+常に完全な状態（BUC）を判明させます。</li>
+</ul>
+<p>（寺院の僧侶への寄付は BUC を判明
+<em>させません</em>。これはスポイラーによくある俗説です。僧侶に寄付すると一時的な千里眼と防護ボーナスが得られますが、所持品のBUCは未識別のままです。）</p>
+</section>
+<section id="呪いの解除-removing-curses" class="level4">
+<h4>呪いの解除 (Removing Curses)</h4>
+<p>予防に失敗したとき、あなたには3つの治療法があります：</p>
+<ul>
+<li><strong>呪いをとく巻物。</strong>
+呪われていない（無呪の）巻物は、装備中および構えているアイテムの呪いを解きます。祝福された巻物は、所持品全体のすべてのアイテムの呪いを一括で解きます。</li>
+<li><strong>聖水。</strong>
+呪われたアイテムを聖水に浸す（<code>#dip</code>）と、無呪になります。これこそが聖水を大量に蓄える最大の理由です。</li>
+<li><strong>祈り。</strong>
+呪われた浮遊、空き手がない状態での呪われた武器の固着、呪われた目隠しなどは「大問題（Major
+Trouble）」とみなされ、祈りによって優先的に修復される対象となります。通常の呪われた装備品は「小問題（Minor
+Trouble）」です：正の幸運（Luck）があり、他に治すべき重篤な異常がなければ、祈りが成功した際に最大1個の装備の呪いが解かれます。</li>
+</ul>
+<p>呪われた胴防具を着たまま抜け出せなくなりましたか？
+その鎧を着られないほど小さな生物形態へと変身（ポリモーフ）すると、通常なら脱げないはずの鎧が（呪われた状態のまま）所持品の中へと外れ落ちます。そこから聖水に浸して呪いを解き、再び着直せばよいのです。詳細については
+<a href="#polymorph-as-a-tool">道具としてのへんげ</a>
+を参照してください。</p>
+<p>大半のベテラン冒険者は、いかなる時も聖水と呪いをとく巻物を常に携帯しています。</p>
+<hr />
+</section>
+</section>
+</section>
+<section id="第5部熟練と最終決戦-part-five-mastery-and-endgame"
+class="level2">
+<h2>第5部：熟練と最終決戦 (Part Five: Mastery and Endgame)</h2>
+<p>ゲーム中盤以降、生存率は「ダンジョンが偶然何を落としてくれたか」ではなく、「それをもとに何を自ら構築できたか」に左右されるようになります：鍛え上げられたスキル、適切に管理された幸運（Luck）、確実に唱えられる呪文、そしてまだ見ぬ脅威に備えて組み上げられた装備セットです。ここに続く各章では、ゲヘナ（Gehennom）の深淵へと足を踏み入れる前に、冒険者を支えるこれらの重要システムを解説します。</p>
+<section id="魔法詠唱-spellcasting" class="level3">
+<h3>魔法詠唱 (Spellcasting)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Cursed-spellbook contact poison is 3-6 Str + 1d10 HP by default; 1-2 Str + 1d6 HP only with poison res (spell.c:164, poison_strdmg). Was "1-2 Str + 1d10 HP".
+- Verified correct: read-success formula & lenses bonus, blessed/cursed auto results, exploding-rune 2d10+5, Pw cost 5*level, failed-cast half-Pw, Pw-regen ticks, chain lightning 2d6.
+-->
+<!-- audit
+2026-05-21:
+- spellbook of type SPE_NOVEL appears as "paperback" until read (objects.h:1433-1436)
+- reading the first novel in a game grants more_experienced(20, 0) and the ACH_NOVL achievement; u.uevent.read_tribute gates the once-per-game bonus (spell.c:513-535)
+- 20 XP is the XL 1->2 threshold so a fresh character gains an experience level on the first paperback read
+- novel title is rolled at game start per novelidx; titles come from a list of Terry Pratchett Discworld novels stored in the tribute file (do_name.c:297 noveltitle, files.c:3474 read_tribute)
+2026-05-18:
+- force bolt damage is 2d12; school skill does NOT scale damage (zap.c:2720-2724)
+- chain lightning is level 2 NODIR, not level 7, not a bouncing ray (objects.h:1409-1411; SPELL fields are name,desc,sub,prob,delay=4,level=2)
+- failed spellbook read effects: teleport (lvl 1+), aggravate (lvl 2+), blindness (lvl 3+), take-gold (lvl 4+), confusion (lvl 5+), contact poison (lvl 6+), exploding rune (lvl 7+, 2d10+5 dmg, antimagic resists). Default rndcurse branch never fires: max spell level is 7 so rn2(lev) maxes at 6 (spell.c:130-185)
+- failed read has a single 1/3 destruction chance (spell.c:612)
+- spellbook fade ceiling is 4 successful reads: MAX_SPELL_STUDY=3 with `> MAX_SPELL_STUDY` (spell.c:400-418)
+- no Pw drain from memorized spells exists; "spell maintenance" is fabricated (allmain.c moveloop has no per-spell Pw decrement; only cast_spell at spell.c:1245 decrements via SPELL_LEV_PW)
+- drain_en only ever DECREASES Pw — no reflection+vortex max-Pw trick (trap.c:5202-5240 drain_en only subtracts from u.uen and decreases u.uenmax)
+- blessed book bypasses the read-ability check entirely (auto-success)
+- Pw cost per spell = 5 × level: SPELL_LEV_PW(spellev) (spell.c:1245)
+- confused casts fail outright (spell.c:1372); charm monster has no confused-area mode
+- Skilled+ casting acts like a blessed scroll (spell.c:1524-1525) or blessed potion (spell.c:1540-1541)
+- Pw regen: (Wis + Int)/15 + 1; Wizards tick on factor 3 vs 4 (allmain.c:605-607)
+- Valkyries restricted in divination, so reading scroll of identify is occasional at best (u_init.c:525-546)
+- strategy aligned with NetHackWiki Spellbook, Spellcasting: Int + 4 + XL/2 − 2·level success formula, blessed book auto-success, Pw = 5 × level (https://nethackwiki.com/wiki/Spellbook, https://nethackwiki.com/wiki/Spellcasting)
+-->
+<p>呪文は、魔法書から学ぶことで何度でも繰り返し行使できる能力です。使うと消滅する巻物や、使用回数が限られている杖とは異なり、マナ（Pw
+/
+魔力）が残っており、酷使され続ける冒険者の頭脳から記憶が失われていない限り、何度でも呪文を唱える（<code>Z</code>）ことができます。</p>
+<section id="呪文の習得-learning-spells" class="level4">
+<h4>呪文の習得 (Learning Spells)</h4>
+<p>魔法書を読む（<code>r</code>
+キー。巻物を読むのと同じキーです）ことで、その呪文を習得できます。魔法書の店での基本価格は、呪文レベルの
+100倍
+です。読書には数ターンを要し、失敗することもあります：失敗すると、テレポートさせられる、ゴールドを奪われる、盲目や混乱に陥る、毒を受ける、あるいは爆発で負傷するなどのペナルティを受けます。破壊されずに残った魔法書には再挑戦できます。NetHack
+5.0
+では、魔法使いが確実に成功できない状況で読もうとすると、<em>「この魔法書を理解するのは難しそうだ。続けますか？」</em>（“This
+spellbook is difficult to comprehend.
+Continue?”）という警告メッセージが表示され、「いいえ」を選べばペナルティなしで中断できます。</p>
+<p>魔法書のレベルによって、発生し得る失敗効果が決まります。レベル1の魔法書は失敗時にランダムな場所へテレポートさせることがあります。レベル2の魔法書は周囲のモンスターを怒らせて呼び寄せる（反感）可能性があります。レベル3の魔法書を読み違えると、250〜350ターンの間盲目にされます。レベル4の魔法書は全所持金を奪い去り、レベル5は16〜22ターンの間混乱させます。レベル6の魔法書を読み違えると接触毒を受ける恐れがあります：小手を着用していれば小手が腐食し、素手の場合は強さが
+3〜6 低下して 1d10 のHPダメージを受けます（毒耐性があれば強さ低下
+1〜2、1d6
+ダメージに軽減）。そしてレベル7の魔法書には爆発のルーンが仕掛けられていることがあります。魔法耐性があれば爆発を防げますが、耐性がなければ
+2d10+5
+のダメージを受けます。実用的な教訓：失敗の痛手を受け止めきれない魔法書は読んではいけません。</p>
+<p>魔法書の読書成功率は、<strong>呪文レベル</strong>、自身の
+<strong>知力 (Intelligence)</strong>、および <strong>経験レベル
+(XL)</strong> に依存します。正確な計算式は、1d20 のロールに対して
+<code>知力 + 4 + XL/2 − 2×呪文レベル</code>
+となります。したがって、この計算値が 20 以上であれば常に 100% 成功し、10
+なら半々の確率（50%）、それ未満なら危険な賭けとなります。知力
+15、経験レベル 2 でレベル7の魔法書を読もうとすると、読書スコアはわずか 6
+となり、成功率はたったの 30% です。レンズ（眼鏡）をかけているとスコアに
++2 されます。<strong>祝福された</strong>
+魔法書はこの判定を完全に免除され、常に 100%
+成功します。<strong>呪われた</strong>
+魔法書は自動的に失敗し、上記の恐ろしい失敗効果のいずれかが発動します。</p>
+<p>この計算式から <strong>読書スコア</strong> が算出されます。スコア 5
+なら成功率 25%、10 なら 50%、15 なら 75%、20
+で自動成功（100%）です。レンズなしで確実に読書成功させるためには、<code>知力 + XL/2</code>
+の合計値がレベル1魔法書で 18、以降レベル2から7に向けて
+20、22、24、26、28、30
+必要になります。レンズを装着していれば、この必要値がそれぞれ 2
+緩和されます。</p>
+<p>貴重な聖水は、未読の最も難解な高レベル魔法書のために取っておきましょう。</p>
+<p><strong>魔法使い</strong> (Wizard)
+は疑いようのない魔法の絶対王者です：魔法書をより確実に読みこなし、呪文をより確実に唱え、すべての魔法系統において「エキスパート」まで極めることができます。完璧に育て上げられた魔法使いは、最終的にゲーム内の
+<em>すべての</em>
+呪文を習得することすら可能であり、これは迷宮において最も反則（チート）に近い領域です。<strong>修道士</strong>
+(Monk)
+は驚くべき第2位の魔法適性を誇ります。彼らもまた全7系統の魔法を習得可能であり、胴防具を着ないという制約そのものが、金属鎧による詠唱失敗ペナルティを排除してくれます（さらに修道士が好むローブは詠唱ボーナスを与えます）。僧侶や治癒師は、自身の得意系統において優れた詠唱能力を発揮します。その他の職業でも、外的支援があれば時折呪文を役立てることができます。ワルキューレであっても能力獲得の薬で知力を引き上げればレベル3の「識別」を読めることがありますが、呪文職以外のキャラクターは通常は巻物に頼る方が無難です。</p>
+<p><span id="wizards-identify-books"></span>
+<strong>魔法使いはスキルの訓練によって魔法書を識別する。</strong>
+魔法系統のスキルランクを昇格させると、その系統に属する魔法書の外見（タイトル）が自動的に識別されます：「未習熟」でレベル1の外見、「入門」でレベル3、「熟練」でレベル5、「エキスパート」でレベル7が明らかになります。魔法使いは開始時点で全レベル1の外見と、攻撃・付与魔法のレベル3の外見をあらかじめ知っているため、自身の主要系統においては最初から数多くの魔法書を見分けることができます。</p>
+<p>記憶した呪文は約20,000ターンの間脳内に留まり、その後忘れ去られるため再学習が必要になります。呪文一覧メニュー（<code>+</code>
+キー）で残りターン数を確認できます。また、魔法書を使用（<code>a</code>）することで、その本がどれくらい摩耗しているかを点検できます：<strong>成功した読書</strong>
+1回ごとに摩耗カウントが進み、最大4回読んだ時点で魔法書は白紙へと消え去ります。失敗した読書はこのカウンターを進めませんが、失敗1回につき
+3分の1
+の確率で魔法書そのものが消滅します。終盤でも頼りにする重要な魔法書は、忘れずに持ち歩くようにしましょう。</p>
+<p><strong>ペーパーバック (Paperbacks)。</strong>
+外見が「ペーパーバック」と表示されている魔法書は、本物の魔法書ではなく小説です。見つけたらぜひ読んでください：ゲーム内で最初に読んだ小説は
+<strong>20 XP</strong>
+を与え、これは生まれたてのキャラクターを経験レベル 1 から 2
+へと押し上げるのにちょうどぴったりの経験値です（この 20 XP
+ボーナスはゲーム中最初の1回のみ発動し、以降のペーパーバックは引用文を表示するだけです）。各ペーパーバックのタイトルはテリー・プラチェットの『<strong>ディスクワールド</strong>』(Discworld)
+シリーズから取られており、読むとその小説の一節が開かれます。</p>
+</section>
+<section id="主要な呪文-key-spells" class="level4">
+<h4>主要な呪文 (Key Spells)</h4>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 8%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>呪文名</th>
+<th>レベル</th>
+<th>効果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>力のボルト (Force bolt)</td>
+<td>1</td>
+<td>2d12 の遠距離打撃。知力/経験レベル補正により −3 から +3 調整</td>
+</tr>
+<tr>
+<td>治癒 (Healing)</td>
+<td>1</td>
+<td>ヒットポイントを回復する</td>
+</tr>
+<tr>
+<td>怪物探知 (Detect monsters)</td>
+<td>1</td>
+<td>フロア全体のモンスターの位置を暴く</td>
+</tr>
+<tr>
+<td>識別 (Identify)</td>
+<td>3</td>
+<td>アイテムを識別する（巻物の消費を節約）</td>
+</tr>
+<tr>
+<td>呪いをとく (Remove curse)</td>
+<td>3</td>
+<td>装備中・構えているアイテムの呪いを解く</td>
+</tr>
+<tr>
+<td>連鎖雷撃 (Chain lightning)</td>
+<td>2</td>
+<td>術者から全方向に電撃を放ち、周囲のモンスターへと連鎖する</td>
+</tr>
+<tr>
+<td>地図化 (Magic mapping)</td>
+<td>5</td>
+<td>フロアの地形構造を明らかにする（巻物の消費を節約）</td>
+</tr>
+<tr>
+<td>魅了 (Charm monster) (Charm monster)</td>
+<td>5</td>
+<td>3×3 範囲の周囲の魅了 (Charm
+monster)（熟練以上で祝福された巻物と同等）</td>
+</tr>
+<tr>
+<td>死の指先 (Finger of death)</td>
+<td>7</td>
+<td>光線で対象を即死させる。魔法耐性で無効化される</td>
+</tr>
+</tbody>
+</table>
+<p>残る32種類の呪文については、その系統、種類、およびスキルランクごとの強化効果を含め、付録の
+<a href="#spell-tables">呪文一覧表</a> にまとめられています。</p>
+<p>魔法使いにとって、<strong>識別</strong> と
+<strong>魔法の地図</strong>
+を呪文として習得することは、巻物への依存度を劇的に減らします。これはインベントリの空き枠を消費する代わりにマナを支払う、無限の巻物を手に入れたようなものです。<strong>死の指先</strong>
+はあらゆる議論を即座に終わらせる究極の解決策です。<strong>魅了 (Charm
+monster)</strong>
+は敵を味方に変えてしまいます。味方は荷物を運んでくれ、身代わりとなって敵の攻撃を受け止めてくれるため、敵を単に殺すことよりもさらに価値があります。</p>
+<p><strong>連鎖雷撃</strong> (Chain lightning)
+は素晴らしい部屋掃除呪文です。レベル2であるため、呪文を少しでも唱えられるキャラクターなら誰でも実用圏内に入ります。この呪文はターゲット方向の入力を求めることなく全8方向へと自動発射され、命中ごとに
+2d6
+のダメージを与え、さらに平和的なNPCや手懐けたペットに当たるとそこでピタリと停止するため、通路の先にペットや店主がいても巻き込むことなく敵対部屋だけを一掃できます。電撃耐性を持つ敵はその光線を1回だけ受け止めて消滅させます。</p>
+<p>もし <code>+</code> メニューで <strong>失敗率 100%</strong>
+と表示されている場合、原因は通常魔法書ではなく、身につけている装備やスキルにあります。まず盾を外し、次に金属製の胴鎧、兜、小手、靴を脱いでください。そして自身の職業の詠唱能力値を高め、その呪文の魔法系統スキルを鍛えましょう。ローブを着れば金属鎧のペナルティを半減でき、クォータースタッフを構えればわずかな詠唱ボーナスが得られます。すべての盾は一律のペナルティを課し、重量30を超える盾は最終成功率を4分の1に激減させます。</p>
+</section>
+<section id="マナ管理-mana-management" class="level4">
+<h4>マナ管理 (Mana Management)</h4>
+<p>あなたの魔力（Pw）プールは、部屋の隅に座り込んでスマートフォンのバッテリーのように自然回復を待つまでに、あと何回呪文を唱えられるかを決定します。呪文の詠唱には
+<strong>呪文レベル × 5 の Pw</strong> を消費します（したがって死の指先は
+35 Pw です）。詠唱に失敗した場合でも、半分のマナが消費されます。</p>
+<p>Pw
+は定期的な周期（ティック）ごとに自然回復し、この回復間隔はレベルが上がるにつれて短縮されます：経験レベル
+1 では 24ターンごと（魔法使いは 18ターン）、レベル 10 では
+18ターン（魔法使い 14）、レベル 20 では 12ターン（魔法使い 9）、レベル
+30 では 5ターン（魔法使い 4）となります。各ティックごとに、1 から
+<strong>((知恵 + 知力) / 15) + 1</strong> の Pw（通常 1〜3
+Pw）が回復します。呼吸の能力（呼吸の魔除けなど）を持っていると、この回復上限がさらに
++2 されます。<strong>魔力回復</strong> (energy regeneration)
+の能力（『アイソピカの目』などから得られる）は、この周期ティックをバイパスし、<strong>毎ターン</strong>
+Pw を回復させます。なお、「圧迫 (Stressed)」以上の負荷ステータスになると
+Pw の自然回復は完全に停止します（「重荷
+(Burdened)」なら問題ありません）。</p>
+<p>予備の杖や巻物を常に携帯しておきましょう。Pw
+を使い果たした魔法使いは、バスローブを着て木の棒を握りしめているただの無力な人間に過ぎません。</p>
+</section>
+</section>
+<section id="幸運と運命-luck-and-fortune" class="level3">
+<h3>幸運と運命 (Luck and Fortune)</h3>
+<!-- audit
+2026-09-27 luckstone rewrite vs NetHack-5.0 source:
+- timeout.c:600-616 (nh_timeout): time_luck = stone_luck(FALSE) = sgn(blessed - cursed luck items); good Luck decays only if no stone or time_luck < 0; bad Luck recovers only if no stone or time_luck > 0. So BLESSED keeps good Luck but lets bad Luck recover; UNCURSED freezes both; CURSED freezes bad and lets good decay. The earlier "any non-cursed luckstone freezes drift" was wrong for blessed.
+- the +-3 is u.moreluck (attrib.c set_moreluck, LUCKADD you.h:465), added to every Luck check via Luck = u.uluck + u.moreluck (you.h:464); it is not a cap. u.uluck clamps at +-10 (change_luck, attrib.c:411), so total Luck spans +-13.
+- several luck items: stone_luck nets cursed against non-cursed (moreluck) and cursed against blessed (timeout); never more than +-3.
+- drift every 300 turns with the Amulet or an angry god (timeout.c:604).
+- luck items: any LUCKSTONE (incl. the Heart of Ahriman) or SPFX_LUCK artifacts, the Tsurugi of Muramasa and the Orb of Fate (artifact.c:526 confers_luck, artilist.h).
+-->
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Removed three "Luck +5 benefits" that use plain rn2 (no Luck term): enchant-scroll success (read.c:1180, wield.c:1004), wand wresting (rn2(121), hack.h:1419), fountain wishes (fountain.c:78). Kept to-hit and prayer (which Luck does affect).
+- Verified correct (also covers Exercising Your Stats): effective Luck range & timeout, luckstone freeze/±3, luck artifacts, the whole gain/lose-Luck table, sacrifice ceiling, prayer-fails-on-negative-Luck, all stat exercise/abuse actions.
+-->
+<!-- audit
+2026-05-19:
+- cursed luckstone holds NEGATIVE Luck in place, but positive Luck still decays toward baseline (timeout.c:616-619)
+- any non-cursed luckstone (blessed or uncursed) gives +3 max-Luck cap (attrib.c:441-450)
+- killing peaceful: -1 with 50% probability (mon.c:3665); -5 reserved for co-aligned unicorns (mon.c:3667)
+- prayer is rejected on ANY negative Luck (pray.c:2155), not just <= -10
+- no Sokoban-down-stairs Luck penalty exists
+- thrown gem to cross-aligned unicorn: identified -3..+3 (dothrow.c:2334 rn2(7)-3); unidentified -1..+1 (dothrow.c:2349 rn2(3)-1)
+- "ID gems for shopkeeper +1" is fabricated; shk.c has no such hook (shk.c contains no change_luck or adjalign call on GEM_CLASS sale)
+- killing quest leader: -4 baseline, immediate change_luck(-20), u.ugangr += 7 (mon.c:3680, timeout.c:600)
+- killing pet: -1 plus alignment -15 via adjalign (mon.c:3664, 3704)
+- only mirror breaks for Luck -2 (uhitm.c:1133, dothrow.c:2496, dokick.c:445/1724); crystal balls/armor don't
+- full-moon/Friday-the-13th baseline shift (timeout.c:595-598)
+- carrying the Amulet or u.ugangr > 0 doubles drift rate (300 turns, timeout.c:607)
+- Archeologists start with TOUCHSTONE knowledge only (u_init.c:50, 903); gems are NOT pre-identified
+- strategy aligned with NetHackWiki Luck, Luckstone, Luck item: ±13 cap with non-cursed luckstone, drift toward 0 every 600 turns, cursed luckstone locks negative Luck (https://nethackwiki.com/wiki/Luck, https://nethackwiki.com/wiki/Luckstone, https://nethackwiki.com/wiki/Luck_item)
+-->
+<p>幸運（Luck）は画面には表示されない隠しステータスですが、以下の4つの原則を頭に入れておけば大半の状況を正しくコントロールできます：</p>
+<ol type="1">
+<li>祈りを常に安全に行えるよう、幸運を常に 0 以上に保つこと。</li>
+<li>幸運の石を手に入れたら、祝福して鞄に入れずインベントリに直接携帯すること。</li>
+<li>識別済みの本物の宝石を、自属性と同じユニコーンに投げ与えること。</li>
+<li>理由もなく平和的な生物を殺したり、鏡を割ったりしないこと。</li>
+</ol>
+<section id="幸運の仕組み-how-luck-works" class="level4">
+<h4>幸運の仕組み (How Luck Works)</h4>
+<p>幸運は −13 から +13 の範囲を取り、通常は 0
+から始まります。そのまま放置しておくと、時間の経過とともにカレンダー基準値へと徐々に減衰（ドリフト）していきます。</p>
+<p><strong>幸運の自然減衰（タイムアウト）。</strong>
+600ターンごとに、幸運は基準値（通常は 0）に向かって 1点
+近づいていきます。イェンダーの魔除けを所持している間、あるいは神が怒っている間は、この間隔が
+300ターンごとへと倍速になります。</p>
+<p><strong>幸運の石 (Luckstones)。</strong>
+鞄の中に入れず、持ち物（直接の所持品）として携帯している幸運の石は、幸運に
++3（呪われている場合は
+−3）を加算し、さらに自然減衰のルールを変更します：</p>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 12%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr>
+<th>幸運の石</th>
+<th>幸運修正</th>
+<th>正の幸運（善運）</th>
+<th>負の幸運（悪運）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>祝福 (Blessed)</td>
+<td>+3</td>
+<td><strong>保持される</strong></td>
+<td><strong>自然減衰（回復）する</strong></td>
+</tr>
+<tr>
+<td>無呪 (Uncursed)</td>
+<td>+3</td>
+<td><strong>保持される</strong></td>
+<td><strong>保持される（回復しない）</strong></td>
+</tr>
+<tr>
+<td>呪い (Cursed)</td>
+<td>−3</td>
+<td>自然減衰（消失）する</td>
+<td><strong>保持される（悪運が固定）</strong></td>
+</tr>
+</tbody>
+</table>
+<p>手に入れたら必ず祝福してください。祝福された幸運の石は、自ら稼ぎ出した正の幸運を永久に保持しつつ、過ちによって負ってしまった悪運だけを時間経過で回復させてくれます。鉱山の最深部で手に入る幸運の石は無呪であるため、聖水に浸して祝福しましょう。呪われた幸運の石を持ち歩いてはいけません。</p>
+<p><a
+href="#heart-of-ahriman">アリマンの心臓</a>（それ自体が幸運の石）、<a
+href="#tsurugi-of-muramasa">村正のツルギ</a>、および <a
+href="#orb-of-fate">運命の宝珠</a>
+も幸運の石として機能します。複数携帯してもボーナスが +3
+を超えることはなく、1つでも呪われた石が混ざっていると他の石の効果を弱めてしまいます。</p>
+<p><strong>カレンダーと幸運。</strong> 減衰の収束先は常に 0
+とは限りません：</p>
+<ul>
+<li><strong>満月</strong> の夜は、幸運の基準値が +1 になります：幸運は 0
+ではなく +1
+に向かって減衰します。セッションを満月の夜に開始した場合、最初から無料で
++1 の幸運を持っています。</li>
+<li><strong>13日の金曜日</strong> は、幸運の基準値が −1
+になります。可能であればこの日のプレイは階段を登るような慎重な行動を控えましょう。どれほど徳の高い行動をしていても、蓄積した善運は
+−1 に向かって吸い取られていきます。</li>
+</ul>
+<p>（NetHack
+はコンピュータの実時間・日付を参照してこの判定を行います。）</p>
+</section>
+<section id="幸運の増減-gaining-and-losing-luck" class="level4">
+<h4>幸運の増減 (Gaining and Losing Luck)</h4>
+<table>
+<colgroup>
+<col style="width: 71%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>行動</th>
+<th>幸運の変動</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>識別済みの本物の宝石を自属性のユニコーンに投げる</td>
+<td><strong>+5</strong></td>
+</tr>
+<tr>
+<td>名前を付けたが未識別の本物の宝石を自属性のユニコーンに投げる</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>未識別の本物の宝石を自属性のユニコーンに投げる</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>完全識別済みの本物の宝石を逆属性のユニコーンに投げる</td>
+<td>−3 〜 +3 (ランダム)</td>
+</tr>
+<tr>
+<td>未識別の本物の宝石を逆属性のユニコーンに投げる</td>
+<td>−1 〜 +1 (ランダム)</td>
+</tr>
+<tr>
+<td>自属性の祭壇で生贄を捧げる（死体の価値により変動）</td>
+<td>通常 +1</td>
+</tr>
+<tr>
+<td>玉座に座る（幸運がマイナスのときのみこの効果が発生）</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>倉庫番のルール違反（すり抜け、破壊、岩のへんげ、大地の巻物）</td>
+<td>1回につき −1</td>
+</tr>
+<tr>
+<td>平和的な生物を殺害する</td>
+<td>−1 (殺害ごとに 50% の確率)</td>
+</tr>
+<tr>
+<td>自属性のユニコーンを殺害する</td>
+<td><strong>−5</strong></td>
+</tr>
+<tr>
+<td>クエストの指導者を殺害する</td>
+<td>即座に −20 (下限 −10)、神の怒り +7、基準幸運に永続 −4</td>
+</tr>
+<tr>
+<td>自身のペットを殺害する</td>
+<td>−1、さらに属性値（アライメント）−15</td>
+</tr>
+<tr>
+<td>同族食い（人肉食 / Cannibalism）</td>
+<td>−2 〜 −5</td>
+</tr>
+<tr>
+<td>鏡を割る</td>
+<td>−2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ユニコーンへの宝石投擲は、ゲーム内で最も強力な能動的幸運獲得手段です。</strong>
+自身の属性と一致するユニコーンに対して、きちんと識別した本物の宝石（ガラス玉ではなく）を投げると、即座に
+<strong>+5</strong>
+の幸運を獲得できます。ユニコーンは平和的になり、贈り物を受け取ってテレポートで飛び去りますが、後で再び出会えばまた贈り物を受け取ってくれます。宝石は
+<em>事前に</em>
+識別（試金石や識別の巻物）してください。自分が何を投げているのか正確に把握していない場合、得られるボーナスは
++5 から +1
+へと激減してしまいます。ガラス玉（模造宝石）は無害ですが幸運は増えません（本物の宝石を消費せずに邪魔なユニコーンを大人しくさせて立ち去らせる安全な手段としては使えます）。属性が異なるユニコーンに本物の宝石を投げるのは避けてください。結果は
+−3 から +3 の間のランダムな変動になってしまいます。考古学者は
+<strong>試金石</strong> (Touchstone)
+を持ってスタートするため、ユニコーンに投げる前にそれが本物の宝石かどうかを自力で簡単に判別できます。</p>
+<p>祭壇での生贄によって幸運を高められるのは、捧げた死体の難易度（モンスターレベル）が現在の幸運値を上回っているときだけです。コボルドのような弱い死体では幸運を上げることはできません。後半に幸運を稼ぐには、強敵の新鮮な死体を生贄に捧げてください。</p>
+</section>
+<section id="幸運が重要な理由-why-luck-matters" class="level4">
+<h4>幸運が重要な理由 (Why Luck Matters)</h4>
+<p>幸運が
++5（または幸運の石を含めてそれ以上）になると、ダンジョンでの冒険生活は
+<strong>目に見えて</strong> 快適になります：</p>
+<ul>
+<li>戦闘での命中率が上がります。本来なら空振りしていたはずの攻撃が敵を捉えるようになります。</li>
+<li>祈りが聞き届けられる確率が格段に高まります。神々は幸運な者を好むのです（神とは気まぐれなものです）。</li>
+<li>その他数多くの小さな判定が、あなたに有利な方向へと傾きます。</li>
+</ul>
+<p>負の幸運（マイナスの幸運）は祈りを極めて危険なものにします。幸運が −1
+または −2
+のとき、神が激怒していない状態であれば、呪いや神罰の雷を受ける代わりに単に不興を買って祈りのタイマーがリセットされるだけで済むのが通例です。しかし、さらに深い負の幸運や神の怒りがある場合、より悲惨な結果が待ち受けています。また、幸運は攻撃や様々なロール結果に影響を及ぼしますが、巻物が一般的に暴発するようになるわけではありません。</p>
+<hr />
+</section>
+</section>
+<section id="能力値の訓練-exercising-your-stats" class="level3">
+<h3>能力値の訓練 (Exercising Your Stats)</h3>
+<p>舞台裏では、ダンジョンはあなたの6つの能力値のうち4つ（<strong>強さ
+(Str)</strong>、<strong>器用さ (Dex)</strong>、<strong>体力
+(Con)</strong>、<strong>知恵
+(Wis)</strong>）について、隠された訓練カウンターを記録しています（知力
+(Int) とカリスマ (Cha)
+は訓練されず、能力獲得の薬のような魔法的手段によってのみ変動します）。能力値を「鍛える」ような生き方を続けているとカウンターが徐々に上がり、「酷使（虐待）」するような生活を続けているとカウンターが下がっていきます。数百ターンごとにゲームはこのカウンターをチェックし、+1
+または −1 の変動をもたらします。</p>
+<section id="訓練の仕組み-how-exercise-works" class="level4">
+<h4>訓練の仕組み (How Exercise Works)</h4>
+<p>このカウンターは不可視です。訓練となる行動を十分に長く続け、さらにランダムな判定に合格する（すでに能力値が上昇していると恩恵は逓減します）と、<em>「身軽になった気がする！
+反射神経を鍛えたに違いない！」</em>（“You feel agile! You must have been
+working on your
+reflexes!”）というメッセージや、他の能力値に応じた同様のメッセージが表示されます。逆に、酷使カウンターが優勢になった場合は、<em>「最近反射神経を鍛えていない気がする」</em>（“You
+haven’t been working on reflexes
+lately.”）という警告が発せられます。</p>
+<p>日常的な訓練によって引き上げられる能力値の上限は <strong>18</strong>
+です（種族固有の生来の上限を超えることはできず、能力値の極致を目指すなら依然として能力獲得の薬が不可欠です）。一方、酷使による能力値の低下は、種族固有の最低値まで落ち込む可能性があります。</p>
+</section>
+<section id="訓練と酷使をもたらす行動-actions-that-exercise-and-abuse"
+class="level4">
+<h4>訓練と酷使をもたらす行動 (Actions That Exercise and Abuse)</h4>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 44%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th>能力値</th>
+<th>訓練となる行動 (Exercises)</th>
+<th>酷使となる行動 (Abuses)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>強さ (Str)</strong></td>
+<td>重い荷物の運搬（圧迫 / Stressed
+状態。ただし超過重は不可）、体質による自然回復（HP再生）、巨岩の投擲や押し動かし、重い鉄球の投擲</td>
+<td>空腹による「衰弱 (Weak)」状態</td>
+</tr>
+<tr>
+<td><strong>器用さ (Dex)</strong></td>
+<td>成功したキック（鍵、流し台、扉）、命中した投擲武器</td>
+<td>「満腹
+(Satiated)」状態、重い負荷状態、つまずき（Fumbling）、気絶（Stunned）、足の負傷（Wounded
+legs）、キックの空振り</td>
+</tr>
+<tr>
+<td><strong>体力 (Con)</strong></td>
+<td>常に「空腹でない (Not-Hungry)」状態を適切に維持すること</td>
+<td>空腹による卒倒（Fainting）、病気（Sick）、嘔吐（Vomiting）、汚染された泉、極度の負荷状態</td>
+</tr>
+<tr>
+<td><strong>知恵 (Wis)</strong></td>
+<td>能動的な千里眼、探知能力の成功（ゴールド/モンスター/食料探知）、自主的な祈り、価値ある生贄の奉納</td>
+<td>混乱（Confusion）、幻覚（Hallucination）、呪われた啓蒙の読書、墓堀り（Gravedigging）</td>
+</tr>
+</tbody>
+</table>
+<p>修道士に特有の2つの癖：断食によって「衰弱」状態にある修道士は知恵を鍛え、逆に「満腹」状態にある修道士は知恵を酷使します。</p>
+</section>
+<section id="訓練が重要な理由-why-exercise-matters" class="level4">
+<h4>訓練が重要な理由 (Why Exercise Matters)</h4>
+<p>能力値はゲーム内のほぼすべての要素に直結しています：強さはダメージと所持限界量、器用さは命中率、体力はレベルアップ時のHP上昇量、知恵はPwの自然回復速度に影響します。日々の積み重ねによる能力値の上昇は、やがて大きな差となって現れます。満腹やつまずき状態で漫然と過ごした500ターンもまた、同様に恐ろしい結果として跳ね返ってくるのです。</p>
+<hr />
+</section>
+</section>
+<section id="スキルの向上-enhancing-skills" class="level3">
+<h3>スキルの向上 (Enhancing Skills)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Valkyrie two-weapon caps at Skilled, not Expert (Skill_V, u_init.c:544); the example's slot count corrected to eleven.
+- Verified correct: practice thresholds level^2*20, slot costs, all to-hit/damage bonus tables, start-2/+1-per-level/+1-crowning, all 494 role skill-cap cells, training gates.
+-->
+<!-- audit
+2026-05-18:
+- skill ranks P_UNSKILLED through P_GRAND_MASTER; practice formula level²×20 (skills.h:92-106)
+- cumulative practice thresholds: 20/80/180/320/500
+- weapon slot costs 1/2/3 per rank; non-weapon costs 1/1/2/2/3
+- two-weapon uses the WEAPON slot column (weapon.c:1141)
+- bare-hand and martial-arts bonuses apply every hit (weapon.c:1611-1613)
+- bare-hand 50% / martial-arts 75% rate is the practice-training check, not bonus gating (uhitm.c:847 `dmg = rnd(!martial_bonus() ? 2 : 4)`; uhitm.c:849 `train_weapon_skill = (dmg > 1)` — rnd(2)>1 is 1/2, rnd(4)>1 is 3/4)
+- riding trains after 100 mounted squares (steed.c:393-396, u.urideturns >= 100)
+- Knights start at Basic riding; target is Skilled (weapon.c:1787-1789)
+- pickup/loot/dip/trap/engrave actions gated at Basic riding
+- slot ceiling 32 for an XL-30 crowned hero: 2 starting + 29 level-ups + 1 crowning (u_init.c:884, pray.c:992-993)
+- Ranger divination caps at Expert (u_init.c:461)
+- Wizard restricted from long sword: no P_LONG_SWORD entry in Skill_W (u_init.c:548-569)
+- spell schools start with a 20-use precredit at Basic
+- Skilled cone-of-cold and fireball: cluster of 3×3 explosions (spell.c:1419-1452), not room-clearing
+- Valkyrie 6+6+2 = 14 slot example math
+- crown gives +1 slot
+- strategy aligned with NetHackWiki Skill, Twoweapon: slot budget tied to XL + crowning, non-weapon skills cost half, restricted skills only unrestrict to Basic via artifact gift (https://nethackwiki.com/wiki/Skill, https://nethackwiki.com/wiki/Twoweapon)
+2026-05-23:
+- Wizard dagger Expert opening: Wizards are unrestricted in dagger (Skill_W u_init.c:548-569), cap at Expert; thrown daggers benefit from a class multishot bonus (dothrow.c:177-190); early Pw budget is tight at base regen (Wis+Int)/15+1 (allmain.c:605-607)
+- six-slot Dagger Expert cost = 1+2+3 (weapon column, skills.h:92-106)
+- citation: community Wizard opening guides on NetHackWiki Wizard strategy and Damerell, "How to play a Wizard" (https://nethackwiki.com/wiki/Wizard, https://www.steelypips.org/nethack/)
+-->
+<p>多くの冒険者は、初めて <strong><code>#enhance</code></strong>
+コマンドを入力し、これまで何レベルにもわたって振り回してきた幅広の剣が、ついに「入門」から「熟練」へと昇格できる状態になっていることに気づいた瞬間に、このスキルシステムの存在を知ります。武器、戦闘スタイル、そして魔法系統はそれぞれ個別に熟練度を記録しており、貴重なスキルスロットを1枠ずつ消費して向上させていきます。</p>
+<p>序盤のうちに1つの武器系統を定め、それに専念してください。スキルは武器の持ち替えをやめて初めて累積していきます。自分が「熟練（Skilled）」（命中率
++2）に達した武器は、「未習熟（Unskilled）」（命中率 −4
+のペナルティ）のまま振るう基本攻撃力の高い武器よりもはるかに敵を圧倒します。したがって、訓練していないピカピカの新しい剣に乗り換えることは、通常は戦力ダウンにしかなりません。見つかった強そうな武器に次々と目移りしていては、あらゆる武器で未習熟のまま取り残されてしまいます。</p>
+<section id="スキル階梯-the-skill-ladder" class="level4">
+<h4>スキル階梯 (The Skill Ladder)</h4>
+<p>武器を使い込む（実戦で振るう）ことで、命中率とダメージが向上します。ゲームはこの熟練度を
+<strong>スキルランク</strong>
+として記録します：訓練を重ねるほどランクが上がり、より致命的な一撃を放てるようになります。大半のスキルは
+<strong>未習熟 (Unskilled) → 入門 (Basic) → 熟練 (Skilled) →
+エキスパート (Expert)</strong> の順に上昇します。<strong>素手格闘 (Bare
+hands)</strong> と <strong>武術 (Martial arts)</strong>
+のみ、さらにその上の <strong>マスター (Master)</strong> および
+<strong>総師範 (Grand Master) (Grand Master)</strong>
+に到達できます。各ランクへの昇格には、<strong>実践回数（累積使用数）</strong>
+と <strong>スキルスロット（経験レベルに応じた有限の枠数）</strong>
+の両方が必要になります。</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 34%" />
+<col style="width: 19%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>到達ランク</th>
+<th>必要実践回数 (累積)</th>
+<th>武器スロット消費</th>
+<th>武器以外スロット消費</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入門 (Basic)</td>
+<td>20</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>熟練 (Skilled)</td>
+<td>80</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>エキスパート (Expert)</td>
+<td>180</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>マスター (Master)</td>
+<td>320</td>
+<td>—</td>
+<td>2</td>
+</tr>
+<tr>
+<td>総師範 (Grand Master) (Grand Master)</td>
+<td>500</td>
+<td>—</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>武器以外のスキル（魔法系統、騎乗、素手格闘、武術）は、近接武器に比べて必要なスロット数が約半分で済み、これはダンジョンが魔法や格闘に与えている密かな優遇措置です（ただし「二刀流」はその名に反して武器側のスロット列を消費します）。プレイヤーは開始時に
+2スロット を持ち、経験レベルが1上がるごとに1枠を獲得し（レベル30までに
++29枠）、さらに戴冠（Crowning）を受けると追加で +1枠
+を得るため、レベル30で戴冠した英雄の絶対的な上限は
+<strong>32スロット</strong>
+です。レベルドレインによって経験レベルを失うとスキルスロットも失われ、直近に取得したスキルが降格される場合があります。</p>
+<p>各職業にはスキルごとにこれ以上鍛えられない
+<strong>上限（キャップ）</strong>
+が設定されています。例えば魔法使いはメイスを「入門」までしか鍛えられず、長剣は制限（Restricted）されています。制限されたスキルは
+<code>#enhance</code>
+メニューに表示されず「未習熟」のまま固定されますが、神から生贄のギフトとして授かったアーティファクト武器がある場合、その武器のスキル制限が解除されて「入門」まで訓練可能になります。各職業ごとの完全なスキル上限表は、後述の
+<a href="#per-role-skill-caps">職業別スキル上限表</a>
+を参照してください。</p>
+</section>
+<section id="スキルの訓練-training-a-skill" class="level4">
+<h4>スキルの訓練 (Training a Skill)</h4>
+<p>実践を重ねる（使い込む）ことで、スキル経験値が蓄積されていきます：</p>
+<ul>
+<li><strong>武器スキル</strong>
+は、近接攻撃または投擲攻撃が命中し、<strong>2ダメージ以上</strong>
+を与えるたびにカウントされます。1ダメージの微弱な攻撃はカウントされません。槍、ジャベリン、ナイフ、短剣、アキリスは、突いても投げても同一の武器スキルが鍛えられます。</li>
+<li><strong>素手格闘</strong> は命中のうち <strong>50%</strong>
+がカウント対象となり、<strong>武術</strong> は命中の
+<strong>75%</strong>
+がカウントされます（ランクによる補正自体は毎回の攻撃に適用されますが、昇格への歩みだけが緩やかになります）。</li>
+<li><strong>騎乗</strong> は、騎乗状態で <strong>100マス</strong>
+移動するごとに1カウント獲得します。</li>
+<li><strong>魔法系統</strong>
+は、<strong>レベルNの呪文を1回詠唱成功させるごとに N回
+の実践カウント</strong>
+を獲得します。各系統には素振り用のレベル1呪文が存在します（下記の魔法系統表を参照）。</li>
+</ul>
+<p>自身の職業が開始時点で「入門（Basic）」を持っているスキルには、<strong>あらかじめ20回分の実践クレジットが付与</strong>
+されており、ゲーム開始時点で既に「熟練（Skilled）」への道のりの4分の1を達成しています。</p>
+<p>十分な実践経験を積むと、そのカテゴリに応じたメッセージが表示されます：<strong>「武器の扱いに自信がついてきた」</strong>（“You
+feel more confident in your weapon
+skills”）、<strong>「呪文の扱いに自信がついてきた」</strong>（“spell
+casting skills”）、または
+<strong>「格闘技の扱いに自信がついてきた」</strong>（“fighting
+skills”）。これが <code>#enhance</code>
+コマンドを入力する合図です。1つスキルを昇格させた後、まだ他に昇格可能なスキルが残っている場合は、<strong>「もっと強くなれそうな気がする！」</strong>（“You
+feel you could be more
+dangerous!”）と表示されます。続けて強化しましょう。</p>
+</section>
+<section id="ランクがもたらす恩恵-what-a-rank-buys-you" class="level4">
+<h4>ランクがもたらす恩恵 (What a Rank Buys You)</h4>
+<p>武器や戦闘スタイルの各ランクは、命中率とダメージのボーナスを一律の数値で書き換えます（加算ではなく置き換えられます）：</p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 12%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>ランク</th>
+<th>武器</th>
+<th>二刀流</th>
+<th>騎乗</th>
+<th>素手格闘</th>
+<th>武術</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未習熟 (Unskilled)</td>
+<td>−4 / −2</td>
+<td>−9 / −3</td>
+<td>−2 / 0</td>
+<td>+1 / 0</td>
+<td>+2 / +1</td>
+</tr>
+<tr>
+<td>入門 (Basic)</td>
+<td>0 / 0</td>
+<td>−7 / −1</td>
+<td>−1 / 0</td>
+<td>+1 / +1</td>
+<td>+3 / +3</td>
+</tr>
+<tr>
+<td>熟練 (Skilled)</td>
+<td>+2 / +1</td>
+<td>−5 / 0</td>
+<td>0 / +1</td>
+<td>+2 / +1</td>
+<td>+4 / +4</td>
+</tr>
+<tr>
+<td>エキスパート (Expert)</td>
+<td>+3 / +2</td>
+<td>−3 / +1</td>
+<td>0 / +2</td>
+<td>+2 / +2</td>
+<td>+5 / +6</td>
+</tr>
+<tr>
+<td>マスター (Master)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>+3 / +2</td>
+<td>+6 / +7</td>
+</tr>
+<tr>
+<td>総師範 (Grand Master) (Grand Master)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>+3 / +3</td>
+<td>+7 / +9</td>
+</tr>
+</tbody>
+</table>
+<p>（各セルは <strong>命中補正 / ダメージ補正</strong>
+を示します。）二刀流のペナルティは左右 <strong>それぞれ</strong>
+の打撃に適用されます。入門段階の二刀流は2回攻撃できますが、それぞれに −7
+の命中ペナルティがかかるため、1本の武器でしっかり殴るよりも遥かに命中率が悪化します。素手格闘と武術のボーナスはあらゆる打撃に適用され、実践カウンターだけが微弱打撃を除外します。武器エキスパートの数値（+3
+/ +2）こそが、1つの武器に専念した冒険者への最大の報酬です。</p>
+</section>
+<section id="つの魔法系統-the-seven-spell-schools" class="level4">
+<h4>7つの魔法系統 (The Seven Spell Schools)</h4>
+<p>すべての魔法書は7つの魔法系統のいずれかに属しており、その系統におけるスキルランクが詠唱の成功率を左右します。また、ランクが上がることで一部の呪文に追加の効果や強化が解禁されます。例えば「冷気の円錐」は熟練で
+3×3
+の爆発群となり、「識別」はスタック全体を一括識別できるようになり、「自己加速」は効果持続時間が延びます。</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 59%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>系統</th>
+<th>専門領域</th>
+<th>レベル1の素振り用呪文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>攻撃魔法 (Attack)</td>
+<td>直接ダメージ（衝撃、火炎球）</td>
+<td>衝撃 (Force bolt)</td>
+</tr>
+<tr>
+<td>回復魔法 (Healing)</td>
+<td>HP回復と状態異常の治療</td>
+<td>回復 (Healing)</td>
+</tr>
+<tr>
+<td>予見魔法 (Divination)</td>
+<td>探知、識別、マッピング</td>
+<td>灯り (Light)</td>
+</tr>
+<tr>
+<td>付与魔法 (Enchantment)</td>
+<td>強化、弱体化、魅了</td>
+<td>怪物を混乱させる (Confuse monster)</td>
+</tr>
+<tr>
+<td>僧侶魔法 (Cleric)</td>
+<td>神聖な防護と召喚</td>
+<td>防護 (Protection)</td>
+</tr>
+<tr>
+<td>脱出魔法 (Escape)</td>
+<td>移動、回避、浮遊</td>
+<td>跳躍 (Jumping)</td>
+</tr>
+<tr>
+<td>変化魔法 (Matter)</td>
+<td>操作、変成、へんげ</td>
+<td>開錠 (Knock)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="職業別スキル上限表-per-role-skill-caps" class="level4">
+<h4>職業別スキル上限表 (Per-Role Skill Caps)</h4>
+<!-- audit
+2026-05-19:
+- All 13 role skill tables sourced from u_init.c (Skill_A through Skill_W); skills not in def_skill are P_UNSKILLED-locked. (u_init.c:257-569 tables Skill_A/B/C/H/K/Mon/P/R/Ran/S/T/V/W; weapon.c:1738-1781 skill_init defaults all to P_ISRESTRICTED then walks the def_skill list)
+- All 494 cells (27 weapons + 4 fighting styles + 7 spell schools × 13 roles) exact-match against u_init.c:257-572.
+- Scimitar omitted: no role has it in 5.0 (merged into saber per skills.h header note).
+- P_MARTIAL_ARTS appears only in Skill_Mon (P_GRAND_MASTER) and Skill_S (P_MASTER); Monks have P_BARE_HANDED_COMBAT restricted (they get martial arts instead).
+- Wizard and Monk are the only roles with all 7 spell schools listed in their def_skill table (Skill_W u_init.c:562-568 has all 7 P_*_SPELL entries; Skill_Mon u_init.c:380-386 has all 7). Other roles list a subset (Priest at u_init.c:408-410 has only 3, Healer at u_init.c:342 has only 1, etc.).
+-->
+<p>以下に武器、戦闘スタイル、魔法系統の固定上限値を示す3つの表を掲載します。各職業の欄に記載されていないスキルは
+<strong>制限（Restricted）</strong>
+されており、1つの例外（神から生贄ギフトとして授かったアーティファクト武器は、その武器スキルを「入門」まで制限解除する）を除き、ランクは「未習熟」に固定されます。記号の凡例：<strong>B</strong>=入門
+(Basic)、<strong>S</strong>=熟練
+(Skilled)、<strong>E</strong>=エキスパート
+(Expert)、<strong>M</strong>=マスター
+(Master)、<strong>GM</strong>=総師範 (Grand Master) (Grand
+Master)、<strong>—</strong>=制限（未習熟固定）。</p>
+<p>空欄（—）のスキルであっても使用不能というわけではなく、永遠に「未習熟」のままであることを意味します。治療師であっても衝撃の魔法書を読んで唱えることは可能ですし、魔法使いであっても長剣を振り回すことはできます。ただし、<a
+href="#the-skill-ladder">スキル階梯</a>
+に記された未習熟のペナルティ（武器なら −4/−2、二刀流なら1打撃ごとに
+−9/−3、魔法系統なら高い詠唱失敗率）を常に支払い続け、成長の余地はありません。職業略称：Arc=考古学者、Bar=野蛮人、Cav=洞窟人、Hea=治療師、Kni=騎士、Mon=武闘家、Pri=司祭、Rog=盗賊、Ran=レンジャー、Sam=侍、Tou=観光客、Val=ワルキューレ、Wiz=魔法使い。</p>
+<section id="武器スキル上限表-weapon-skill-caps" class="level5">
+<h5>武器スキル上限表 (Weapon Skill Caps)</h5>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr>
+<th>武器</th>
+<th>Arc</th>
+<th>Bar</th>
+<th>Cav</th>
+<th>Hea</th>
+<th>Kni</th>
+<th>Mon</th>
+<th>Pri</th>
+<th>Rog</th>
+<th>Ran</th>
+<th>Sam</th>
+<th>Tou</th>
+<th>Val</th>
+<th>Wiz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>短剣 (dagger)</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>E</td>
+<td>B</td>
+<td>E</td>
+<td>E</td>
+<td>E</td>
+</tr>
+<tr>
+<td>ナイフ (knife)</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>S</td>
+<td>S</td>
+<td>—</td>
+<td>S</td>
+</tr>
+<tr>
+<td>斧 (axe)</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>S</td>
+</tr>
+<tr>
+<td>つるはし (pick-axe)</td>
+<td>E</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>小剣 (short sword)</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+<td>S</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>E</td>
+<td>E</td>
+<td>S</td>
+<td>B</td>
+</tr>
+<tr>
+<td>幅広の剣 (broadsword)</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>長剣 (long sword)</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>両手剣 (two-handed sword)</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>サーベル (saber)</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+</tr>
+<tr>
+<td>こん棒 (club)</td>
+<td>S</td>
+<td>S</td>
+<td>E</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+</tr>
+<tr>
+<td>メイス (mace)</td>
+<td>—</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+</tr>
+<tr>
+<td>モーニングスター (morning star)</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>フレイル (flail)</td>
+<td>—</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>S</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ハンマー (hammer)</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>六尺棒 (quarterstaff)</td>
+<td>S</td>
+<td>B</td>
+<td>E</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>E</td>
+</tr>
+<tr>
+<td>長柄武器 (polearms)</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>槍 (spear)</td>
+<td>—</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+<td>E</td>
+<td>S</td>
+<td>B</td>
+<td>E</td>
+<td>B</td>
+</tr>
+<tr>
+<td>三叉槍 (trident)</td>
+<td>—</td>
+<td>S</td>
+<td>S</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+</tr>
+<tr>
+<td>ランス (lance)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>弓 (bow)</td>
+<td>—</td>
+<td>B</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>E</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>スリング (sling)</td>
+<td>S</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>B</td>
+<td>S</td>
+</tr>
+<tr>
+<td>クロスボウ (crossbow)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>B</td>
+<td>E</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>投げ矢 (dart)</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>E</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>E</td>
+</tr>
+<tr>
+<td>手裏剣 (shuriken)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>B</td>
+<td>S</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+</tr>
+<tr>
+<td>ブーメラン (boomerang)</td>
+<td>E</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>鞭 (whip)</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ユニコーンの角 (unicorn horn)</td>
+<td>S</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>5.0
+ではシミターはサーベルに統合されました。現在はどちらも同一のスキルを参照します。</p>
+</section>
+<section id="戦闘スタイル上限表-fighting-style-caps" class="level5">
+<h5>戦闘スタイル上限表 (Fighting Style Caps)</h5>
+<div class="dense-table">
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr>
+<th>スタイル</th>
+<th>Arc</th>
+<th>Bar</th>
+<th>Cav</th>
+<th>Hea</th>
+<th>Kni</th>
+<th>Mon</th>
+<th>Pri</th>
+<th>Rog</th>
+<th>Ran</th>
+<th>Sam</th>
+<th>Tou</th>
+<th>Val</th>
+<th>Wiz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>素手格闘 (bare hands)</td>
+<td>E</td>
+<td>M</td>
+<td>M</td>
+<td>B</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+</tr>
+<tr>
+<td>二刀流 (two-weapon)</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>騎乗 (riding)</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+<td>S</td>
+<td>B</td>
+</tr>
+<tr>
+<td>武術 (martial arts)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>GM</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>M</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>武術を扱えるのは武闘家と侍だけであり、総師範 (Grand
+Master)に到達できるのは武闘家のみです。</p>
+</section>
+<section id="魔法系統上限表-spell-school-caps" class="level5">
+<h5>魔法系統上限表 (Spell School Caps)</h5>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr>
+<th>系統</th>
+<th>Arc</th>
+<th>Bar</th>
+<th>Cav</th>
+<th>Hea</th>
+<th>Kni</th>
+<th>Mon</th>
+<th>Pri</th>
+<th>Rog</th>
+<th>Ran</th>
+<th>Sam</th>
+<th>Tou</th>
+<th>Val</th>
+<th>Wiz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>攻撃魔法 (Attack)</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+</tr>
+<tr>
+<td>回復魔法 (Healing)</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+<td>S</td>
+<td>E</td>
+<td>E</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+</tr>
+<tr>
+<td>予見魔法 (Divination)</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>E</td>
+<td>S</td>
+<td>E</td>
+<td>B</td>
+<td>B</td>
+<td>—</td>
+<td>E</td>
+</tr>
+<tr>
+<td>付与魔法 (Enchantment)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+</tr>
+<tr>
+<td>僧侶魔法 (Cleric)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>S</td>
+<td>E</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+</tr>
+<tr>
+<td>脱出魔法 (Escape)</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>B</td>
+<td>E</td>
+</tr>
+<tr>
+<td>変化魔法 (Matter)</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>B</td>
+<td>—</td>
+<td>S</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>E</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>治療師は回復魔法をエキスパートまで極められますが、他のすべての魔法系統が制限されています。このような単一系統特化は治療師だけの特徴です。全7系統すべてにアクセスできるのは魔法使いと武闘家だけであり、そのうち4系統をエキスパートまで引き上げられるのは魔法使いだけです（武闘家がエキスパートになれるのは回復魔法のみ）。野蛮人とワルキューレは利用可能な2系統（攻撃と脱出）で入門が上限であり、他の5系統は制限されています。</p>
+</section>
+</section>
+<section id="スキルスロットの賢い使い方-spending-slots-wisely"
+class="level4">
+<h4>スキルスロットの賢い使い方 (Spending Slots Wisely)</h4>
+<p>32スロットという数字は一見十分に思えますが、実際に計算し始めるとあっという間に底をつきます。1つの武器をエキスパートにするだけで、単独で
+<strong>6スロット</strong>（1+2+3）を消費します。長剣エキスパート、二刀流熟練、騎乗熟練を目指すワルキューレは、いかなる魔法系統に投資する前であってもすでに11スロットを使い果たしています。</p>
+<p>賢い運用のためのいくつかの原則：</p>
+<ul>
+<li><strong>反射的に昇格させないこと。</strong>
+スロットは（レベルドレインでレベルを失わない限り）永久に消費されます。一生添い遂げる決意が固まっていない武器であれば、確信が持てるまでスロットを温存してください。</li>
+<li><strong>上限（キャップ）を意識した投資。</strong>
+スキルを職業上限まで引き上げるのは何ら問題ありません：上限に達するとメニューからその選択肢が消えるだけです。上限を超えて無駄にスロットを浪費する心配はありません（そもそも選択肢が表示されません）。</li>
+<li><strong>魔法使いは魔法系統から2重の恩恵を受ける。</strong>
+ランクが上がるごとに詠唱成功率が向上するだけでなく、その系統に属する魔法書の外見がより多く判明します（魔法詠唱の章で述べた
+<a
+href="#wizards-identify-books">識別の恩恵</a>）。未識別の魔法書が多く眠っている系統を優先的に鍛えましょう。この2重の恩恵を受けられるのは魔法使いだけです（他の職業は詠唱成功率の上昇のみ）。</li>
+<li><strong>魔法使いの定石：魔法系統より先に短剣を鍛える。</strong>
+一般的な序盤戦略として、魔法系統へ本格的に投資する前に
+<strong>短剣をエキスパートまで引き上げる</strong>（6スロット消費）手法があります。マナ（Pw）が枯渇しやすい序盤を投擲短剣の圧倒的な打撃力で切り抜け、中盤以降にマナとスキル枠が潤沢になってから魔法系統を一気に開花させることで、序盤で餓死・戦死することなく終盤へと繋ぐことができます。</li>
+<li><strong>騎乗は立派なスキルである。</strong>
+<strong>騎乗入門（Basic）</strong>
+を持っていないと、馬上でアイテムを拾う、中身を漁る、水に浸す、罠を仕掛ける/解除する、床に文字を刻む、といった行動が一切行えません。騎士は入門でスタートします。これを「熟練」まで引き上げることで、鞍の上での命中
+−1 のペナルティが消え、さらにダメージ +1 が加算されます。</li>
+<li><strong>素手格闘と武術は武闘家の独壇場である。</strong> 総師範
+(Grand Master)に到達するには <strong>累積で9枠の非武器スロット</strong>
+が必要ですが、武闘家は自然にその領域に達します。野蛮人、洞窟人、侍はマスターまで到達可能であり、他の職業の上限はさらに低くなっています。</li>
+</ul>
+<p>いくつかの呪文は「熟練」で劇的に凶悪化します。「冷気の円錐」と「火炎球」は、離れた位置に精密着弾させられる
+3×3 の <strong>爆発群</strong>
+へと変貌します。「識別」「解呪」「自己加速」「怪物探知」をはじめとする多くの呪文は、祝福された巻物と同様の超強化効果を獲得します。</p>
+</section>
+</section>
+<section id="願いと願い方-wishes-and-wishing" class="level3">
+<h3>願いと願い方 (Wishes and Wishing)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified Vlad throne 4/13, Amulet-pickup wish, magic-lamp/smoky-potion/fountain odds, enchant-collapse & negative-Luck rules, artifact-wish denial, silent substitutes, Castle/Orcus guarantees.
+-->
+<p>画面に <em>「何をお望みですか？」（“For what do you wish?”）</em>
+と表示されたとき、ゲームは自由形式のアイテム指定文字列を受け付けます。入力する前に、望むアイテムと正確なスペルを完全に決定してください。たった1つのタイプミスが、ゲーム内で最も貴重な資源をただのゴミへと変えてしまいます。</p>
+<section id="願いの入手源-sources-of-wishes" class="level4">
+<h4>願いの入手源 (Sources of Wishes)</h4>
+<p>迷宮は基本的に出し惜しみしますが、大半の冒険者が考えているよりも多くの「願い」の発生源が存在します：</p>
+<ul>
+<li><strong>願いの杖 (Wand of wishing):</strong> <a
+href="#the-castle">城</a>
+の4つの隅にある小塔の1つに確定配置されています（充填や限界振りの仕様については
+<a href="#key-wands">主要な杖</a> を参照）。
+<!-- src/sit.c special_throne_effect(): cases 1-4 (of 13) = wish,
+   throne only vanishes on wish, so guaranteed eventual wish. --></li>
+<li><strong>ヴラドの玉座 (Vlad’s throne):</strong>
+座り続けることで確定で願いを獲得できる特殊な玉座です。13通りの結果のうち4つが「願い」（ここで初めて玉座が消滅）であり、残る9つは痛手を受けますが玉座は消えずに残ります。願いが出るまで座り続けてください。
+<!-- src/allmain.c: u.uhave.amulet && !u.uevent.amulet_wish --></li>
+<li><strong>イェンダーの魔除け:</strong>
+初めて拾い上げた瞬間に、1回の願いが授けられます。ダンジョンの最深部に到達した者への褒美です。すでに装備が完璧に揃っていればこの願いを辞退することも可能です（ミニマリストの昇天プレイヤーの中には、主義として意図的にスキップする者もいます）。</li>
+<li><strong>魔法のランプ:</strong>
+祝福された魔法のランプを擦ると、3分の1
+の確率でジンが出現します。そしてジンが出現した場合、80%
+の確率で願いを叶えてくれるため、1回擦るごとに約 27%
+の確率で願いが叶います。出るまで擦り続けましょう。オルクスの町には、魔法のランプまたは魔法のマーカーのどちらかが確定で配置されています。</li>
+<li><strong>泉 (Fountain):</strong> 飲むと約 30回に1回
+の確率で水の魔神（ウォーターデーモン）が出現し、その魔神が願いを叶えてくれる確率は浅い階層で約
+5回に1回（深い階層ではさらに低下）であるため、飲むごとの真の願い確率は
+150分の1
+前後です。蛇、ニンフ、呪い、あるいは嘔吐を引き起こす確率の方が圧倒的に高くなります。</li>
+<li><strong>通常の玉座:</strong>
+座った際にごく稀に願いが発生します。ただし同時にすべてが破滅する現実的なリスクも伴います。</li>
+<li><strong>煙の立つ薬から出現するジン:</strong> 稀であり（基本確率
+13分の1）、出現しても願いをくれる確率は 20%（祝福された薬なら
+80%）に過ぎません。しかし成功したときは、まるで天才になったかのような気分を味わえます。</li>
+</ul>
+<p>1回のゲームで得られる願いの総数は大きく変動します。城の杖の初期チャージ・再充填・限界振り、ヴラドの玉座、そして魔除け拾得時の願いを合わせると、堅実に見積もって約5回が予算の目安となります。ランプ、泉の魔神、煙の立つ薬がそれに上乗せされることがあります。</p>
+</section>
+<section id="何を願うべきか-what-to-wish-for" class="level4">
+<h4>何を願うべきか (What to Wish For)</h4>
+<p>2つのドラゴンの鱗鎧の願いは、対となる一対として選びます。すでに魔除けや盾から「反射」を得ている場合は、<strong>灰色ドラゴンの鱗鎧</strong>
+を願って「魔法耐性」を獲得してください。マントがすでに魔法耐性を提供しており反射が欠けている場合は、<strong>銀色ドラゴンの鱗鎧</strong>
+を願います。胴以外のスロットでどちらか一方の防御が確保できたら、もう一方の鱗鎧が最初の願いの最善候補となります。</p>
+<ol type="1">
+<li><strong>灰色ドラゴンの鱗鎧 (Gray dragon scale mail)</strong> (<a
+href="#damage-resistances">魔法耐性</a> +
+AC。魔法耐性はゲーム内で最も重要な防御能力です)。 入力例:
+<code>blessed greased fixed +2 gray dragon scale mail</code></li>
+<li><strong>銀色ドラゴンの鱗鎧 (Silver dragon scale mail)</strong> (反射
++ AC。反射は死の杖の光線や各種ブレス攻撃から身を守ります)。 入力例:
+<code>blessed greased fixed +2 silver dragon scale mail</code></li>
+<li><strong>韋駄天の靴 (Speed boots)</strong>
+(高速行動により1ターンあたりの手数が増え、攻撃にも脱出にも絶大な威力を発揮します)。
+入力例: <code>blessed greased fixed +2 speed boots</code></li>
+<li><strong>力の小手 (Gauntlets of power)</strong> (強さを 25
+に固定。殴り火力を高めたい多くの職業で恩恵があります)。 入力例:
+<code>blessed greased fixed +2 gauntlets of power</code></li>
+<li><strong>命の魔除け (Amulet of life saving)</strong>
+(エレメンタルプレーンでの不慮の死に備える予備の命)。 入力例:
+<code>blessed amulet of life saving</code>（魔除けは強化値や防蝕加工を持ちません）</li>
+<li><strong>特定のアーティファクト</strong> (<a
+href="#grayswandir">グレイズワンディル</a>
+が代表例です。銀製であり悪魔、インプ、吸血鬼、獣化モンスター、幽霊に致命的な特効ダメージを与えます)。
+入力例: <code>blessed greased fixed +2 Grayswandir</code></li>
+</ol>
+<p>切羽詰まった極限状況でない限り、消費アイテム（巻物や薬）を願ってはいけません。願いは、ドラゴンの鱗鎧、韋駄天の靴、強力なアーティファクトといった、他では手に入らない恒久的な装備品のために使うべきです。</p>
+</section>
+<section id="願いの構文-wish-syntax" class="level4">
+<h4>願いの構文 (Wish Syntax)</h4>
+<!-- audit
+2026-05-18:
+- bare "gray dragon scale mail" keeps random spe and rolls BUC via blessorcurse(otmp,10): ~5% blessed / ~5% cursed / ~90% uncursed (objnam.c:5094-5096, 5258-5268)
+- wished enchantment on armor/weapon/weptool/charged ring collapses to +0 if requested spe > rnd(5) (and > the item's random base spe): +1 always, +2 4/5, +3 3/5, +4 2/5, +5 1/5, +6+ never (objnam.c:5099-5105). Recommend +2. Roll is plain rnd(5), NOT luck-adjusted, so positive Luck gives no bonus.
+- Luck < 0 sabotages wishes: "blessed" -> cursed (objnam.c:5263-5264), erodeproof/"fixed" fails to apply (objnam.c:5287), and spe > 2 flips negative (objnam.c:5104). Luck >= 0 is all that's needed; extra Luck does nothing. Wiki: +3 higher average, +2 less chancy and strictly better if enchanting further (https://nethackwiki.com/wiki/Wish).
+- artifact wishes are probabilistic: oartifact && rn2(nartifact_exist())>1 (objnam.c:5374), scaled by TOTAL existing artifacts including bones
+- u.uconduct.wisharti increments whether the wish is granted or denied (objnam.c:5364)
+- only quest artifacts are absolutely blocked: restrict_name SPFX_NOGEN|SPFX_RESTR check (artifact.c:618)
+- silent substitutes: Amulet of Yendor, Bell of Opening, Book of the Dead, Candelabrum, magic lamp → oil lamp (objnam.c:5003-5006)
+- all gloves give +1 AC (objects.h:686-697); gauntlets of power give STR 25, not bonus AC (attrib.c:1214)
+- Vlad's throne wish rate is 4/13 per effective sit (sit.c:241-256)
+- magic lamp ≈27% wish-blessed: 1/3 djinni × 4/5 wish (apply.c:1817, potion.c:2833-2845)
+- fountain water-demon wish (fountain.c:78, 314); Amulet-of-Yendor pickup wish (allmain.c:446-451)
+- strategy aligned with NetHackWiki Wish, Gray dragon scale mail, Speed boots, Magic lamp: GDSM/SDSM as top wishes, speed boots and gauntlets of power as standard follow-ups, bare wishes risk cursed/random spe (https://nethackwiki.com/wiki/Wish, https://nethackwiki.com/wiki/Gray_dragon_scale_mail, https://nethackwiki.com/wiki/Speed_boots, https://nethackwiki.com/wiki/Magic_lamp)
+-->
+<p>プロンプトが「何をお望みですか？」（“For what do you
+wish?”）と尋ねてきたら、具体的に指定してください。それぞれの修飾語が何をもたらすかを解説します：</p>
+<ul>
+<li><code>blessed greased fixed +2 gray dragon scale mail</code>（祝福された
+脂を塗った 防蝕の +2
+灰色ドラゴンの鱗鎧）が標準的な完成形です。指定しないとBUCがランダムになるため
+<code>blessed</code>（祝福）を指定し、<code>greased</code>（脂塗り）は抱きつき、巻きつき、粘着攻撃、マインドフレアの触手を受け流すために付与し、<code>fixed</code>（または
+<code>rustproof</code> /
+<code>erodeproof</code>）で損耗を防ぐ防蝕加工を施し、<code>+2</code>
+で強化値を指定します。必要以上に高い強化値を欲張ってはいけません：防具や武器のプラス値を指定すると、裏で
+1〜5
+のダイスが振られ、指定した値がそのロール値を上回ると強化値は無慈悲にも
+<strong>+0 にリセット（崩壊）</strong> します。したがって +1 は 100%
+成功、+2 は 5分の4（80%）で成功、+3 は 5分の3（60%）で成功、+6
+以上は絶対に通りません。+3
+の方が通ったときの期待値はわずかに高いですが、それでも
+<strong>+2</strong>
+を指定することを強く推奨します。結果がより安定し、後から強化の巻物で仕上げを行えば、+3
+で願った場合と遜色ない値に安全に到達できます。</li>
+<li>願う前に自身の幸運（Luck）を確認してください。幸運が 0
+以上（マイナスでない）でありさえすれば十分であり、過剰に善運を溜め込んでも願いの判定にボーナスはありません。しかし、<strong>負の幸運（マイナス）</strong>
+は願い全体を毒牙にかけます：<code>blessed</code>
+を願っても呪われて生成され、<code>fixed</code> の防蝕加工は剥がれ、+2
+を超えるプラス値はマイナスへと反転します。幸運が悪化している場合は、装備を願う前にまず幸運を回復させてください。</li>
+<li>単に <code>gray dragon scale mail</code>
+とだけ願うと、BUCも強化値もダイス任せになり、最悪の場合呪われて出現します。せっかくの貴重な願いです。必ずBUCと強化値を明記してください。また、<code>scale</code>
+の単語を絶対に忘れないでください。<code>gray dragon mail</code>
+とだけ入力すると、代わりに「灰色の郵便の巻物」（scroll of
+mail）を渡されてしまいます。</li>
+<li>アーティファクトの願いは、世界に存在するアーティファクトの総数が増えるほど
+<strong>成功率が低下</strong>
+します。拒絶判定はダンジョン内に存在する総数（所持品、床落ち、ボーンズファイル内のものを含む）に応じて厳しくなり、出現しなかった場合でも「アーティファクト願いカウンター」は加算されます。なお、他職のクエストアーティファクトは絶対に生成されません（完全拒絶）。</li>
+<li>一部の禁止アイテムを願うと、黙って無価値な日用品へとすり替えられます。<strong>イェンダーの魔除け</strong>
+は偽物の魔除けに、<strong>開扉のベル</strong>
+はただの鈴に、<strong>死者の書</strong>
+は白紙の本に、<strong>祈りの燭台</strong>
+は獣脂のろうそくになります。また <strong>魔法のランプ</strong>
+を願っても失敗し、単なる油つぼ（普通のランプ）を手渡されます。あんなに一生懸命ランプを擦ってきた後では、あまりにも残酷な仕打ちです。</li>
+</ul>
+</section>
+</section>
+<section id="アーティファクト-artifacts" class="level3">
+<h3>アーティファクト (Artifacts)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Stormbringer is SPFX_INTEL: cross-alignment touch deals 4d10, not 4d4. (artilist.h:93-96 Stormbringer has SPFX_INTEL; artifact.c:953 `dmg = d((Antimagic ? 2 : 4), (self_willed ? 10 : 4))`)
+- Grimtooth +d6 damage bonus applies to ALL targets, not just elves (artifact.c:1099-1102).
+- Mitre of Holiness gives NO damage bonus vs undead; ATTK is NO_ATTK (artifact.c:1095-1098).
+- M2_UNDEAD flag only enables shade_glare on weapons, not worn helms (artifact.c:554-571).
+- Eye of the Aethiopica magic resistance requires worn, NOT carried (artilist.h:303-305, NO_CARY).
+- Eye of the Aethiopica carry effects: energy regen, half spell damage (cspfx EREGEN, HSPDAM).
+- strategy aligned with NetHackWiki Artifact weapon, Grayswandir, Magicbane, Mjollnir: Grayswandir/Magicbane/Mjollnir as the top wish artifacts; alignment-mismatched artifacts blast on touch (https://nethackwiki.com/wiki/Artifact_weapon, https://nethackwiki.com/wiki/Grayswandir, https://nethackwiki.com/wiki/Magicbane, https://nethackwiki.com/wiki/Mjollnir)
+-->
+<p>迷宮の各地には、伝説に彩られた至宝が散らばっています：通常の装備では到底及ばない超絶な力を宿した、固有の名を持つ武器、魔除け、そして道具たちです。各アーティファクトは1回のゲームにつき世界に1つしか存在しません。それらを入手する手段は以下の通りです：</p>
+<ul>
+<li><strong>泉に剣を浸す</strong>（秩序属性のキャラクターによるエクスカリバー）。</li>
+<li><strong>祭壇での生贄奉納</strong>（自属性の神からギフトとして授けられる）。</li>
+<li><strong>クエストの完遂</strong>（各職業固有のクエストアーティファクト）。</li>
+<li><strong>願い</strong>（大半のアーティファクトは願うことができますが、自身の属性と一致しない場合は拒絶されることがあります）。</li>
+<li><strong>ランダム生成</strong>（稀ですが、武器がアーティファクトとして自然生成される微小な確率があります）。</li>
+<li><strong>命名</strong>（スティングおよびオークリストのみ。後述参照）。</li>
+</ul>
+<section id="属性と侵害ダメージ-alignment-and-blasting" class="level4">
+<h4>属性と侵害ダメージ (Alignment and Blasting)</h4>
+<p>各アーティファクトには属性が宿っています。自身の属性と一致しないアーティファクトを手に取ろうとすると、激しい侵害ダメージ（ブラスト）を受けます：</p>
+<ul>
+<li><strong>知性を持つアーティファクト（知性体）</strong>
+は、職業または属性のいずれかが不一致の場合、触れるたびに
+<strong>4d10</strong> の侵害ダメージを与えます（魔法耐性があれば 2d10
+に半減）。職業と属性の <em>両方</em>
+が不一致の場合、アイテムはあなたの手をすり抜けて落下し、掴むことすら拒絶します。</li>
+<li><strong>その他の非知性アーティファクト</strong>
+は、属性が不一致の場合、触れるごとに 4分の1 の確率で
+<strong>4d4</strong> の侵害ダメージを与えます（魔法耐性があれば 2d4
+に半減）。</li>
+</ul>
+</section>
+<section id="願い可能ランダムアーティファクト-wishable-random-artifacts"
+class="level4">
+<h4>願い可能・ランダムアーティファクト (Wishable / random
+artifacts)</h4>
+<p>これらは自然生成、生贄ギフト、泉への浸漬（エクスカリバー）、あるいは願いによって入手可能なアーティファクト群です。追加ダメージは攻撃命中ごとにその都度ロールされます（例:
+<code>+d10</code> は 1d10
+を振る）。「追加ダメージ」列は、ベースとなる武器自体の基本ダメージの
+<em>上に上乗せ</em>
+される数値を表します。「対Xで×2」と記された武器は、そのモンスタークラスに属する敵に対してベース武器ダメージを
+<em>2回</em> ロールします。</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 7%" />
+<col style="width: 13%" />
+<col style="width: 5%" />
+<col style="width: 17%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>アーティファクト名</th>
+<th>属性</th>
+<th>ベース武器</th>
+<th>命中</th>
+<th>追加ダメージ</th>
+<th>特記事項</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>エクスカリバー (Excalibur)</td>
+<td>秩序</td>
+<td>長剣</td>
+<td>+d5</td>
+<td>+d10 物理</td>
+<td>吸魔耐性、自動索敵（歩くごとにオートサーチ）</td>
+</tr>
+<tr>
+<td>グレイズワンディル (Grayswandir)</td>
+<td>秩序</td>
+<td>銀のサーベル</td>
+<td>+d5</td>
+<td><strong>×2 物理</strong></td>
+<td>幻覚耐性（銀製特効）</td>
+</tr>
+<tr>
+<td>ミョルニル (Mjollnir)</td>
+<td>自属性</td>
+<td>ウォーハンマー</td>
+<td>+d5</td>
+<td><strong>+d24 電撃</strong></td>
+<td>ワルキューレは 99% キャッチ。投擲には強さ 25 が必要</td>
+</tr>
+<tr>
+<td>マジックベイン (Magicbane)</td>
+<td>中立</td>
+<td>アサメ</td>
+<td>+d3</td>
+<td>+d4 魔法 (気絶)</td>
+<td><strong>構えている間</strong>、魔法耐性と呪い防御を付与</td>
+</tr>
+<tr>
+<td>ストームブリンガー (Stormbringer)</td>
+<td>混沌</td>
+<td>ルーンの剣</td>
+<td>+d5</td>
+<td>+d2 生命吸収</td>
+<td>敵からレベルを吸いHPを回復。平和的NPCにも襲いかかる</td>
+</tr>
+<tr>
+<td>ヴォーパルブレード (Vorpal Blade)</td>
+<td>中立</td>
+<td>長剣</td>
+<td>+d5</td>
+<td>+d1 物理</td>
+<td>命中時に敵の首を切り落とす即死確率</td>
+</tr>
+<tr>
+<td>フロストブランド (Frost Brand)</td>
+<td>任意</td>
+<td>長剣</td>
+<td>+d5</td>
+<td><strong>×2 冷気</strong> (非耐性敵)</td>
+<td>構えている間、冷気耐性を付与</td>
+</tr>
+<tr>
+<td>ファイアブランド (Fire Brand)</td>
+<td>任意</td>
+<td>長剣</td>
+<td>+d5</td>
+<td><strong>×2 火炎</strong> (非耐性敵)</td>
+<td>構えている間、火炎耐性を付与</td>
+</tr>
+<tr>
+<td>サンソード (Sunsword) (Sunsword)</td>
+<td>秩序</td>
+<td>長剣</td>
+<td>+d5</td>
+<td>(基本のみ); 対アンデッド×2</td>
+<td>構えると光源になる。<code>#invoke</code>
+で全方位に目くらまし光線</td>
+</tr>
+<tr>
+<td>スニッカーズニー (Snickersnee)</td>
+<td>秩序</td>
+<td>刀</td>
+<td>—</td>
+<td>+d8 物理</td>
+<td>通常の刀近接に加え、毎ターン1回長柄武器間合いのリーチ攻撃（“Shkinng!”）</td>
+</tr>
+<tr>
+<td>クリーバー (Cleaver)</td>
+<td>中立</td>
+<td>戦斧</td>
+<td>+d3</td>
+<td>+d6 物理</td>
+<td>両手持ち。攻撃時に左右両脇の敵も同時に薙ぎ払う</td>
+</tr>
+<tr>
+<td>デーモンベイン (Demonbane)</td>
+<td>秩序</td>
+<td>銀のメイス</td>
+<td>+d5</td>
+<td>(基本のみ); 対悪魔×2</td>
+<td>悪魔を追放（banish）。司祭への第1回生贄ギフト確定</td>
+</tr>
+<tr>
+<td>スティング (Sting)</td>
+<td>混沌</td>
+<td>エルフの短剣</td>
+<td>+d5</td>
+<td>(基本のみ); 対オーク×2</td>
+<td>オークが近くにいると青く光る警告機能</td>
+</tr>
+<tr>
+<td>オークリスト (Orcrist)</td>
+<td>混沌</td>
+<td>エルフの幅広の剣</td>
+<td>+d5</td>
+<td>(基本のみ); 対オーク×2</td>
+<td>オーク接近時に警告</td>
+</tr>
+<tr>
+<td>グリムトゥース (Grimtooth)</td>
+<td>混沌</td>
+<td>オークの短剣</td>
+<td>+d2</td>
+<td>+d6 物理 (全対象)</td>
+<td>エルフ接近時に警告。毒から防御</td>
+</tr>
+<tr>
+<td>ドラゴンベイン (Dragonbane)</td>
+<td>任意</td>
+<td>幅広の剣</td>
+<td>+d5</td>
+<td>(基本のみ); 対ドラゴン×2</td>
+<td>構えている間、反射を付与</td>
+</tr>
+<tr>
+<td>ウェアベイン (Werebane)</td>
+<td>任意</td>
+<td>銀のサーベル</td>
+<td>+d5</td>
+<td>(基本のみ); 対獣化モンスター×2</td>
+<td>獣化症（ライカンスロープ）から防御</td>
+</tr>
+<tr>
+<td>ジャイアントスレイヤー (Giantslayer)</td>
+<td>中立</td>
+<td>長剣</td>
+<td>+d5</td>
+<td>(基本のみ); 対巨人×2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>オウガスマッシャー (Ogresmasher)</td>
+<td>任意</td>
+<td>ウォーハンマー</td>
+<td>+d5</td>
+<td>(基本のみ); 対オーガ×2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>トロルズベイン (Trollsbane)</td>
+<td>任意</td>
+<td>モーニングスター</td>
+<td>+d5</td>
+<td>(基本のみ); 対トロール×2</td>
+<td>構えている間、HP自然回復</td>
+</tr>
+</tbody>
+</table>
+<p>すべてのアーティファクトが同等に魅力的なわけではありません。<strong>グレイズワンディル</strong>
+と <strong>マジックベイン</strong>
+は大半のプレイヤーが最初に願う最高峰のアーティファクトです。<strong>ミョルニル</strong>
+はワルキューレにとって象徴的な願い候補です。<strong>エクスカリバー</strong>
+は願うよりも泉に剣を浸して得るのが通例です。<strong>フロストブランド</strong>、<strong>ヴォーパルブレード</strong>、<strong>ストームブリンガー</strong>
+は2番目の願いとしてよく選ばれます。5.0 では
+<strong>スニッカーズニー</strong>
+に毎ターンの無料リーチ攻撃が追加され、<strong>サンソード
+(Sunsword)</strong>
+は能動的に敵を目くらましできるようになりました。残る特効（ベイン）武器、ファイアブランド、クリーバーなどは、貴重な願いを費やすというよりは生贄ギフトとして授かるのが一般的です。</p>
+<p><strong><span id="excalibur-artifact">エクスカリバー</span></strong>
+は秩序属性キャラクターの決定的な定番武器です。より強い武器を手に入れた後でも、レベルドレイン耐性のためだけに持ち歩く価値があります。経験レベル5以上において、騎士は
+6分の1、他の秩序職は 30分の1
+の確率で泉への浸漬から授かることができます。</p>
+<p><strong><span id="grayswandir">グレイズワンディル</span></strong>
+は願うことが可能であり、ダンジョン内屈指の最強近接武器の1つです。銀製（多くの敵に致命的特効）、あらゆる攻撃で物理ダメージ2倍、命中
++d5、そして幻覚耐性をもたらします。</p>
+<p><strong><span id="mjollnir">ミョルニル</span></strong>
+はワルキューレを象徴する投擲帰還武器です：ワルキューレだけが 99%
+の確率で投げた槌をキャッチして手元に戻すことができます。他の職業でも近接武器として振るうことはできますが、投げると戻ってこないため投擲は極めて危険です。構えること自体は誰でも可能ですが、投げるには強さ
+25 が必須です（力の小手で達成可能）。+d24
+の電撃ダメージは電撃耐性のないあらゆる敵を粉砕します。</p>
+<p><strong><span id="magicbane">マジックベイン</span></strong>
+は魔法使いの定番アサメです。気絶ダメージ、呪い防御、魔法耐性はすべて単に持ち歩くだけではなく
+<strong>構えている（手に持っている）</strong>
+必要があります。中立属性の生贄ギフト第1号として頻繁に授けられます。二刀流の魔法使いにとって注意すべきニュアンス：呪い防御オーラが発動するのは、マジックベインが
+<em>主武器</em>
+として構えられている間だけです。重い武器を主武器にし、マジックベインを逆手に持っている場合、抗呪オーラは停止してしまいます。</p>
+<p><strong><span id="stormbringer">ストームブリンガー</span></strong>
+は平和的なモンスターにも自動的に襲いかかるため、属性値を急降下させる危険を孕んでいます。命中ごとに相手からレベルを吸い取り、犠牲者が失ったHPの半分だけ術者を回復させます（相手の経験レベルそのものを獲得できるわけではありません）。</p>
+<p><strong>スティング</strong> と <strong>オークリスト</strong>
+は、名付け（<code>#name</code>）によって生成できる唯一のアーティファクトです。それぞれエルフの短剣、エルフの幅広の剣を単体（束ではなく1本）にして名前を付けます。構えるとオークが接近した際に青く光り、オークに対して2倍ダメージを与えます。どちらも混沌属性であるため、混沌の英雄なら安全に扱えますが、他の属性の者が手に持つと時折侵害ダメージを受けます。</p>
+</section>
+<section id="クエストアーティファクト-quest-artifacts" class="level4">
+<h4>クエストアーティファクト (Quest artifacts)</h4>
+<p>各職業には固有のクエストアーティファクトが1つずつ存在し、その職業のクエストを完遂することで授与されます。これらのアーティファクトは知性を持っています：職業または属性が一致しない場合、触れるたびに
+<strong>4d10</strong>
+の侵害ダメージを受け、両方が不一致の場合は掴むことすらできずに手からすり抜けます。9種類の非武器クエストアーティファクトのうち3つ（探査の宝珠、マーリンの魔法の鏡、プラチナのイェンダー急行カード）は、<strong>インベントリに所持しているだけ（直接携帯）</strong>
+で魔法耐性を付与します。</p>
+<p>クエストアーティファクトを願うことは絶対にできません。必ずその職業のクエストで勝ち取る必要があります。以下の表では、所持品として携帯しているだけで効果を発揮する
+<strong>「所持 (Carry)」</strong>
+能力と、身につけたり手に構えたりする必要がある <strong>「装備/構え
+(Wear/wield)」</strong> 能力を明確に区別しています。</p>
+<p><code>M-i</code>（または
+<code>#invoke</code>）によって、アーティファクト固有の特殊能力を発動できます。十分休眠した（再使用待機時間を終えた）アーティファクトは魔力（エネルギー）を消費せずに発動でき、発動後は約100ターンの間クールダウンに入ります。サンソード
+(Sunsword)とグリムトゥースのみ、クールダウン中であっても 25 Pw
+を支払うことで能力を発動させることができます。</p>
+<div class="dense-table">
+<table style="width:99%;">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 28%" />
+<col style="width: 10%" />
+<col style="width: 23%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th>職業</th>
+<th>アーティファクト名</th>
+<th>形態</th>
+<th>装備/構え時効果</th>
+<th>所持時効果</th>
+<th><code>#invoke</code> (発動効果)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>考古学者</td>
+<td>探査の宝珠 (The Orb of Detection)</td>
+<td>水晶玉</td>
+<td>—</td>
+<td><strong>魔法耐性</strong>、テレパシー、呪文被ダメージ半減</td>
+<td>透明化</td>
+</tr>
+<tr>
+<td>野蛮人</td>
+<td>アリマンの心臓 (The Heart of Ahriman)</td>
+<td>幸運の石</td>
+<td>投擲時にダメージ2倍</td>
+<td>忍び、<strong>幸運保持(+3)</strong></td>
+<td>浮遊</td>
+</tr>
+<tr>
+<td>洞窟人</td>
+<td>権力の笏 (The Sceptre of Might)</td>
+<td>メイス</td>
+<td>命中+d5、非秩序敵に×2、<strong>魔法耐性</strong></td>
+<td>—</td>
+<td>争い (Conflict)</td>
+</tr>
+<tr>
+<td>治療師</td>
+<td>アスクレピオスの杖 (The Staff of Aesculapius)</td>
+<td>六尺棒</td>
+<td>命中時に生命吸収、吸魔耐性、HP自然回復</td>
+<td>—</td>
+<td>減少HPの半分回復、病気・スライム化・盲目を治療</td>
+</tr>
+<tr>
+<td>騎士</td>
+<td>マーリンの魔法の鏡 (The Magic Mirror of Merlin)</td>
+<td>鏡</td>
+<td>(時折話しかけてくる)</td>
+<td><strong>魔法耐性</strong>、テレパシー</td>
+<td>—</td>
+</tr>
+<tr>
+<td>武闘家</td>
+<td>現世の目 (The Eyes of the Overworld)</td>
+<td>レンズ</td>
+<td>星界視覚(周囲3マス透過視)、<strong>魔法耐性</strong> (着用時)</td>
+<td>—</td>
+<td>啓蒙 (自己ステータス判明)</td>
+</tr>
+<tr>
+<td>司祭</td>
+<td>神聖の司教冠 (The Mitre of Holiness)</td>
+<td>兜</td>
+<td>知性の兜ベース、防護+1 (MC1)</td>
+<td>火炎耐性</td>
+<td>魔力（Pw）大幅回復</td>
+</tr>
+<tr>
+<td>レンジャー</td>
+<td>ディアナの長弓 (The Longbow of Diana)</td>
+<td>弓</td>
+<td>命中+d5、<strong>反射</strong> (構え時)</td>
+<td>テレパシー</td>
+<td>矢を虚空から無限召喚</td>
+</tr>
+<tr>
+<td>盗賊</td>
+<td>盗賊の合鍵 (The Master Key of Thievery)</td>
+<td>万能鍵</td>
+<td>—</td>
+<td>警告、瞬間移動制御、物理被ダメージ半減</td>
+<td>罠解除確定成功</td>
+</tr>
+<tr>
+<td>侍</td>
+<td>村正の大刀 (The Tsurugi of Muramasa)</td>
+<td>大刀</td>
+<td>物理+d8、即死首切り確率、防護+1</td>
+<td><strong>幸運保持(+3)</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>観光客</td>
+<td>プラチナのイェンダー急行カード (PYEC)</td>
+<td>クレジットカード</td>
+<td>—</td>
+<td><strong>魔法耐性</strong>、テレパシー、呪文被ダメージ半減</td>
+<td>アイテムの充填 (チャージ)</td>
+</tr>
+<tr>
+<td>ワルキューレ</td>
+<td>運命の宝珠 (The Orb of Fate)</td>
+<td>水晶玉</td>
+<td>—</td>
+<td><strong>幸運保持(+3)</strong>、警告、<strong>全被ダメージ半減</strong></td>
+<td>階層テレポート</td>
+</tr>
+<tr>
+<td>魔法使い</td>
+<td>アイソピカの目 (The Eye of the Aethiopica)</td>
+<td>魔除け</td>
+<td><strong>魔法耐性</strong> (着用時)</td>
+<td>呪文被ダメージ半減、<strong>魔力高速自然回復</strong></td>
+<td>訪問済み支流へのポータル生成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong><span id="orb-of-detection">探査の宝珠</span></strong>
+(考古学者):
+水晶玉であり、所持しているだけでテレパシーと魔法耐性を授かります。<code>#invoke</code>
+で透明化を切り替えられます。考古学者は元々忍び能力に長けており、これにより完全な亡霊と化します。</p>
+<p><strong><span id="heart-of-ahriman">アリマンの心臓</span></strong>
+(野蛮人): 本物の幸運の石（幸運上限を +13
+に引き上げ、幸運の石として機能するあらゆる恩恵を持つ）であり、さらに忍びを与えます。野蛮人はこれを投擲武器として投げて2倍ダメージを与え、拾い直すこともできます。<code>#invoke</code>
+で浮遊します。</p>
+<p><strong><span id="sceptre-of-might">権力の笏</span></strong>
+(洞窟人): メイスがベースで、命中
++d5、属性が異なる敵すべてに対してダメージ2倍（笏自体が秩序であるため、混沌、中立、無属性のすべての敵に対して2倍ダメージとなり、<a
+href="#gehennom">ゲヘナ</a>
+の敵の大半に特効です）。構えている間は魔法耐性も付与します。<code>#invoke</code>
+でエネルギー消費なしに争い（敵同士の内輪もめ）を発生させます。</p>
+<p><strong><span
+id="staff-of-aesculapius">アスクレピオスの杖</span></strong> (治療師):
+命中ごとに相手から生命を吸い取ります（生命吸収武器はこれとストームブリンガーのみ）。HP自然回復と吸魔耐性は構えている必要があります。<code>#invoke</code>
+で失ったHPの半分を瞬時に回復し、病気、スライム化、盲目を完治させます。</p>
+<p><strong><span
+id="magic-mirror-of-merlin">マーリンの魔法の鏡</span></strong> (騎士):
+テレパシーと魔法耐性を付与し、使用または構えると時折噂話を囁いてきます。騎士はすでに戦闘用としてエクスカリバーを持っているため、この鏡はお守り兼保険として携帯されます。</p>
+<p><strong><span id="eyes-of-the-overworld">現世の目</span></strong>
+(武闘家): レンズであり、着用すると周囲3マスを見通す星界視覚（X線視覚）と
+<strong>魔法耐性</strong>
+をもたらします。どちらの効果も着用している必要があり、鞄や所持品に入れているだけでは発揮されません。<code>#invoke</code>
+で啓蒙されます。胴防具を着られない武闘家にとって、使用可能な装備枠で魔法耐性を確保できる極めて強力な至宝です。</p>
+<p><strong><span id="mitre-of-holiness">神聖の司教冠</span></strong>
+(司祭):
+知性の兜がベースであり、知力と知恵をブーストして呪文を確実にし、携帯中に火炎耐性、さらに外来防護（MC1）を提供します。<code>#invoke</code>
+で魔力（Pw）を大幅にチャージし、呪文を連射する司祭にとって生命線となります。なお、司教冠自体には近接攻撃がないためアンデッド特効ダメージはなく、吸魔耐性も与えません。</p>
+<p><strong><span id="longbow-of-diana">ディアナの長弓</span></strong>
+(レンジャー): 構え時に命中 +d5
+と反射、携帯時にテレパシーをもたらすアーティファクト弓です。<code>#invoke</code>
+で虚空から無償の矢を無限に生成します。レンジャーの射撃能力と合わさることで、この職業の完全無欠の主砲となります。</p>
+<p><strong><span id="master-key-of-thievery">盗賊の合鍵</span></strong>
+(盗賊):
+持っているだけで警告、瞬間移動制御、そして受ける物理ダメージ半減という破格の防御性能を誇ります。錠前に向けて使用すると罠を探知し、扉や宝箱に対する
+<code>#untrap</code>（罠解除）が確定で成功します。盗賊なら無呪の鍵でも機能しますが、他職の場合は祝福されている必要があります。</p>
+<p><strong><span id="tsurugi-of-muramasa">村正の大刀</span></strong>
+(侍): 刀クラスの両手剣であり、ダメージ
++d8、即死首切り確率（ヴォーパルブレード同等）、防護
++1、そして幸運の石としても機能します。なお、世間の評判とは異なり、村正の大刀は
+<strong>魔法耐性を与えない</strong>
+点に注意してください。侍が過酷なクエストを突破した末に手にする最高峰の業物です。</p>
+<p><strong><span
+id="platinum-yendorian-express-card">プラチナのイェンダー急行カード</span></strong>
+(観光客):
+観光客の窮地脱出カードです。携帯するだけでテレパシー、魔法耐性、呪文被ダメージ半減を付与し、<code>#invoke</code>
+でアイテム（杖、指輪、魔法のマーカー）を再充填します。願いの杖に1回分のチャージを追加することも可能ですが、その杖が耐えられる再充填は依然として1回のみです。</p>
+<p><strong><span id="orb-of-fate">運命の宝珠</span></strong>
+(ワルキューレ):
+ゲーム中で最も贅沢な携帯パッシブ能力を誇ります。幸運の石として機能し、警告を付与し、呪文被ダメージと物理被ダメージの
+<strong>両方を半減</strong> します。<code>#invoke</code>
+で階層テレポートを行います。</p>
+<p><strong><span
+id="eye-of-the-aethiopica">アイソピカの目</span></strong> (魔法使い):
+<strong>身につけている間</strong>
+魔法耐性を与え、携帯中に呪文被ダメージ半減と
+<strong>魔力超高速自然回復</strong>（毎ターン回復）をもたらします。<code>#invoke</code>
+で過去に訪れたダンジョン支流の一覧メニューが開き、選んだ支流へと一瞬でポータルを開いて移動します。</p>
+<hr />
+</section>
+</section>
+<section id="ゲヘナ突入-into-gehennom" class="level3">
+<h3>ゲヘナ突入 (Into Gehennom)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- Only Asmodeus/Baalzebub/Juiblex/Orcus have dedicated levels (dungeon.lua Gehennom list); Yeenoghu & Demogorgon are G_NOGEN (summon-only). Removed them from the throne-level list.
+- Orcus is speed 9 (LVL(66,9,...)), a slow flier, not "fast".
+- Verified correct: Valley roster, demon-lord attacks/resistances, bribe list & rules, Vlad throne, teleport-blocked-while-demon-lord-lives, Orcus loot.
+-->
+<p>ここから先は、冒険の最終段階であるゲヘナの深淵と、イェンダーの魔除けを奪取して地上へと駆け上がる「昇天への旅路」を解説します。</p>
+<section id="城-the-castle" class="level4">
+<h4>城 (The Castle)</h4>
+<!-- audit
+2026-05-18:
+- no minotaur or internal maze in castle.lua; minotaurs live in earth/fire/hellfill
+- wand chest is locked at creation (castle.lua:144); monsters cannot unlock chests (muse.c:2273 mloot_container bails on olocked)
+- Elbereth + cursed scroll target food-eaters, not shopkeepers (castle.lua:150 author comment)
+- throne room is filled with random court monsters (L/N/E/H/M/O/R/T/X/Z), not soldiers (castle.lua:54, 195-221)
+- soldiers and lieutenant guard the entry hall and tower corners
+- five trap doors at columns 40/44/48/52/55 (gaps 4/4/4/3), not strictly even (castle.lua:156-160)
+- trap door always sends you to Valley of the Dead (dlevel=1), not a random Gehennom level (trap.c:669-670, dungeon.c:1949-1953)
+- storerooms hold four D-class dragons; moat holds sea monsters; fountain present (castle.lua:60, 180, 185)
+- drawbridge passtune is 5 notes A-G, Mastermind-style miss feedback (music.c:793, 836-884)
+- any instrument can attempt the passtune; flutes/horns/bugle require can_blow, harp and drums don't (music.c:769-771)
+- wand of striking DESTROYS the drawbridge; wand of locking/spell of wizard lock closes it (zap.c:3290-3305)
+- wand of opening or spell of knock opens the drawbridge (zap.c:3263-3273, 2184)
+- strategy aligned with NetHackWiki Castle, Passtune, Drawbridge, Wand of wishing: passtune-as-Mastermind, wand-of-opening/spell-of-knock alternatives, wand of striking destroys, bring conflict for crowd control, plan a small wishlist, secure MR/reflection/fire-res/poison-res before descending (https://nethackwiki.com/wiki/Castle, https://nethackwiki.com/wiki/Passtune, https://nethackwiki.com/wiki/Drawbridge, https://nethackwiki.com/wiki/Wand_of_wishing)
+2026-05-31 audit:
+- Castle has NO conventional down-stair to Gehennom. The Gehennom branch is flagged `branchtype = "no_down"` in dungeon.lua, so the branch connection point gets no automatic `>` stair. The five trap doors in the central hallway at columns 40/44/48/52/55 (castle.lua:156-160) are the only way to descend into Gehennom.
+- The Castle level is one of only two levels that opt out of random mirroring via `noflipx`/`noflipy` in its .lua definition; the other is bigrm-12.lua (Big Room variant 12). All other special levels — Sokoban, Oracle, Mines branch, Quest levels, Medusa, Valley of the Dead, the four Elemental Planes, demon lord lairs, Vlad's Tower, Orcus Town, Wizard's Tower, Moloch's Sanctum, Astral Plane — can flip on either axis via sp_lev.c:967 flip_level_rnd with allow_flips default 3.
+- ★ glyph on the dungeon map figure (Quest goal, Vlad the Impaler, Wizard of Yendor) is rendered upright on otherwise-italic detail lines via a tspan font-style:normal override in dungeon_map.py.
+-->
+<p>城（The Castle）は運命の迷宮（Dungeons of
+Doom）の終点であり、ゲヘナ（Gehennom）へと続く唯一のルートを守護しています。ここを一大補給基地として攻略してください：ここに配置された願いの杖と宝物庫は、貧弱な装備構成を立て直す最後の確実なチャンスです。</p>
+<p>最初の難関は跳ね橋です。これを下ろす手段は4つあります：</p>
+<ul>
+<li><strong>合言葉のメロディを演奏する。</strong>
+音程のある楽器（木製のフルート、魔法のフルート、角笛、冷気や炎の角笛、ラッパ、竪琴）で5音のメロディを奏でると跳ね橋が開きます。メロディはゲームごとにランダムです。様々な音階を試すことで特定できます：ゲームはマスターマインドのように、試行ごとに何音が合っていたかを教えてくれます。メロディを機能させるには、跳ね橋が周囲8マスのいずれかにある必要があります。跳ね橋の真上や城門のマスに立って演奏してはいけません。橋が動いた瞬間に押し潰されて即死します。音階は
+A〜G（ラ〜ソ）です（ドイツ音名表記の “H” も受け付けられ、シ / B
+を意味します）。</li>
+<li><strong>開扉の杖</strong> を跳ね橋に向けて振る。</li>
+<li><strong>開錠の呪文 (Knock)</strong> を跳ね橋に向けて唱える。</li>
+<li><strong>衝撃の杖</strong> で跳ね橋を完全に
+<strong>破壊する</strong>。橋桁が崩落して堀の水に戻ります。破壊後はメロディも効かなくなるため、堀を渡る別の手段を用意してください。</li>
+</ul>
+<p>橋を渡ると、城の内部には以下の施設が広がっています：</p>
+<ul>
+<li><strong>玉座の間:</strong>
+玉座と、高レベルモンスターの宮廷（リッチ、ニンフ、目玉、巨人など）が待ち構えています。玉座に座るのは魅力的ですが危険も伴います。玉座の間にはランダムな戦利品が入った
+<strong>宝箱</strong>
+も置かれています（これは願いの杖の箱ではなく、副賞に過ぎません）。</li>
+<li><strong>兵舎:</strong>
+優秀な装備品を持った兵士たちで溢れています。彼らを片付ければ、それらの装備はすべてあなたのものになります。</li>
+<li><strong>4つの四隅の小塔:</strong>
+そのうちの1つ（ランダムで1箇所のみ）の施錠された宝箱の中に、<strong>願いの杖</strong>
+が収められています。<em>すべての小塔を捜索する</em>
+か、中庭から物体探知の薬を飲んでどの塔に宝箱があるかを特定し、他の3つを無視してください。この宝箱には
+<strong>レベルアップの薬</strong>
+も一緒に入っています。宝箱のマスは床に刻まれた <em><a
+href="#elbereth">エルベレス (Elbereth)</a></em>
+の文字で守られ、さらに呪われた怪物を怯えさせる巻物で封印されています。これらの結界は、ゼラチナス・キューブのような食料を貪る怪物が宝箱に近づくのを防ぐためのものです。呪われた巻物は罠でもあるため、気軽に読もうとしてはいけません。施錠された宝箱は、力任せの破壊、鍵、または開扉の杖で開けられます。</li>
+<li><strong>4つの貯蔵庫:</strong>
+北壁と南壁に沿って配置され、それぞれドラゴン（<code>D</code>
+クラス）が守護しています。隅の小塔と混同しないでください。防具、武器、宝石、食料が部屋ごとに分類されて収められています。</li>
+<li><strong>5つの落とし蓋が並ぶ中央廊下:</strong>
+踏むと死の谷へと真っ逆さまに落下します。この段階ではまだ望まない事態です。足元を注意深く確認してください。なお、この落とし蓋は城から下層へと降りる
+<strong>唯一の手段</strong>
+でもあります。この階層にはゲヘナへと続く通常の降下階段（<code>&gt;</code>）が存在しないため、ゲヘナへ突入する準備が整ったら、意図的にこの落とし蓋の1つを踏んで落下します。</li>
+<li><strong>流し台と泉:</strong>
+堀沿いの通路にあり、緊急時には使えますが、願いの杖を危険に晒してまで試す価値はありません。</li>
+<li><strong>堀:</strong>
+要塞を取り囲んでおり、巨大ウナギや時折サメが潜んでいます。</li>
+</ul>
+<p>攻略戦術：城は慎重に制圧してください。争いの指輪（Ring of
+conflict）を身につければ、兵士や警備兵同士が勝手に殺し合ってくれます：足を踏み入れ、指輪をはめ、兵士たち自身にモンスター問題を解決させましょう。すべてを略奪し尽くしたら、願いの杖を使って装備の致命的な欠落を埋めてください（灰色ドラゴンの鱗鎧、銀色ドラゴンの鱗鎧、力の小手、韋駄天の靴など、足りないものすべて）。</p>
+<p>施錠された城の願いの杖の宝箱は、<strong>一時的に放置しても安全</strong>
+です：NetHack 5.0 のモンスターは <em>開いている</em>
+容器を拾い上げて中身を漁ることができ、鍵を使って扉を開けることもできますが、宝箱を解錠することはできません。生成時から施錠されている宝箱は、あなたや開扉の杖が介入しない限り施錠されたまま保たれます。</p>
+<p>城の杖単体から得られる願いは実質2回（初期チャージ＋限界振りの1回）であるため、<em>コンパクトな</em>
+ウィッシュリストを計画し、それ以上の願いは他の入手源（ヴラドの玉座、魔除け拾得時、オルクスの町のランプ、泉の幸運）から得るものと割り切ってください。</p>
+<p>完全装備を整えたら、ゲヘナへ飛び降りる前に一息つきましょう。座って、軽食を取り、所持品を二重三重に点検してください。あなたの鞄には、<strong><a
+href="#damage-resistances">魔法耐性</a></strong>、<strong>反射</strong>、<strong>火炎耐性</strong>、<strong><a
+href="#damage-resistances">毒耐性</a></strong>、<strong>穴掘りの杖</strong>、<strong>ユニコーンの角</strong>、潤沢な食料、聖水、テレポートと識別の巻物、そして
+<strong>クエストアーティファクト</strong>
+が揃っていなければなりません。</p>
+<hr />
+</section>
+<section id="ゲヘナ-gehennom" class="level4">
+<h4>ゲヘナ (Gehennom)</h4>
+<!-- audit
+2026-05-19:
+- Asmodeus carries wands of cold AND fire (makemon.c:804-807)
+- Asmodeus is fire-, cold-, AND poison-resistant: MR_FIRE|MR_COLD|MR_POISON (monsters.h:3124)
+- Baalzebub: AT_BITE/AD_DRST (drain Str, poisonous) + AT_GAZE/AD_STUN (stun) — NO gas cloud, NO fly summons (monsters.h:3110-3119)
+- Baalzebub's lair is beetle-shaped (mkmaze.c:471 baalz_fixup)
+- demon-lord teleport blocked (teleport.c:21-34)
+- Geryon/Dispater/Baalzebub/Asmodeus are the bribable major demons (MS_BRIBE) — minion.c:309-311 sets bribe price
+- Vlad's throne effect rate: only rnd(6) > 4 (= 1/3 of sits) triggers anything; 4/13 of those are the wish (sit.c:45, 238-353)
+- so unconditional wish rate is (1/3)·(4/13) = 4/39 ≈ 10%; ~10 sits average, ~7 bad effects absorbed
+- Orcus drops magic lamp or magic marker, 50/50 (orcus.lua:107-111)
+- Sanctum has noteleport + nommap (sanctum.lua:8)
+- Valley of the Dead has noteleport + nommap + non-diggable walls (valley.lua:10, 74)
+- strategy aligned with NetHackWiki Gehennom, Bribe, Demon lords and princes: prayer dead, bribery (gold in open inventory) for the lawful demon princes, Excalibur disables bribery, dig don't navigate (https://nethackwiki.com/wiki/Gehennom, https://nethackwiki.com/wiki/Bribe, https://nethackwiki.com/wiki/Demon_lords_and_princes)
+- blessed scroll of genocide on class 'L' wipes lich/demilich/master lich/arch-lich (read.c:2638-3015 do_class_genocide, monsters.h:1864-1899 four S_LICH entries); Wizard of Yendor is S_HUMAN (monsters.h:2847-2858), not affected
+-->
+<p><a href="#the-castle">城</a>
+の下層では、ダンジョンはその様相を一変させます。直線的な通路は迷路（メイズ）へと姿を変え、一般的なモンスターは凶悪な悪魔たちへと取って代わられます。何よりも恐ろしいのは、あなたの神が沈黙することです。ゲヘナでは祈りが一切通じず、ここから先は城で整えた所持品だけを頼りに生き延びなければなりません。</p>
+</section>
+<section id="死の谷-the-valley-of-the-dead" class="level4">
+<h4>死の谷 (The Valley of the Dead)</h4>
+<p>城の直下に広がるゲヘナの第1層が <strong>死の谷</strong> (The Valley
+of the Dead) です。到達すると <em>「死の谷に到着した…」（“You arrive at
+the Valley of the Dead…”）</em>
+というメッセージが表示され、ダンジョン概要にもゲーム終了までその名前が記録されます。マップは広大で不規則な形状をしており、3つの墓地が点在しています。あなたは右下に出現します。降下階段は左上にあり、左側の中ほどには恒久的な
+<strong>モロクの祭壇（祠）</strong>
+が鎮座しています。この祭壇は無属性の高位祭壇（High
+Altar）であるため、ここでは絶対に祈ってはいけません。壁は全面にわたって掘削不能（non-diggable）であり、ショートカットは作れません。さらに
+<code>noteleport</code>（瞬間移動不能）と
+<code>nommap</code>（魔法の地図無効）の両方が設定されているため、地図化の巻物は通用せず、テレポートによる移動も封じられています。</p>
+<p>注目に値する不気味な細部があります。フロアの至る所に、かつてこのダンジョンに挑んで命を落とした
+<strong>あらゆるプレイヤー職業の死体</strong>
+が散らばっています：考古学者、野蛮人、洞窟人、治療師、騎士、レンジャー、盗賊、侍、観光客、ワルキューレ、魔法使いの死体がそれぞれ2体ずつ横たわっています。そして際立って不在なのが、司祭と武闘家です。モロク神は、これらの信仰・修道クラスの者たちに対して、死体すら残さない特別な運命を用意しているのかもしれません。</p>
+</section>
+<section id="ゲヘナの特殊環境-whats-different-in-gehennom"
+class="level4">
+<h4>ゲヘナの特殊環境 (What’s Different in Gehennom)</h4>
+<ul>
+<li><strong>祈りの完全無効。</strong>
+あなたの神はゲヘナにおいて完全に耳を塞いでいます（あなたがモロクの信者でない限り。そしてもちろんあなたは違います）。緊急のHP回復も、食料の救済も、神罰による呪い解除も一切期待できません。周到に荷造りしてください。ここから先は完全にあなた一人きりです。</li>
+<li><strong>至る所に燃え盛る火炎。</strong>
+通路には火の罠が散乱し、悪魔たちは息をするように自然に火炎ブレスを吐きかけてきます。もし現時点で
+<a href="#damage-resistances">火炎耐性</a>
+を持っていないなら、今すぐ引き返してください。</li>
+<li><strong>熱を帯びた床面。</strong>
+床に落とした薬は熱で粉々に砕け散ります（インベントリ内の薬を破壊するのは主に火の罠です）。所持品を整理するためであっても、貴重な薬の小瓶を床に無造作に置いてはいけません。</li>
+<li><strong>溶岩の河。</strong>
+一部の階層を溶岩の奔流が分断しています。浮遊や飛行によって渡ることができ、耐火加工を施した水上歩行の靴でも通過できます。最も鮮やかな手口：冷気の光線（吹雪の杖、冷気の円錐呪文、冷気の角笛、冷気ブレス）を吹き付けると、溶岩が一瞬で永久的な通常の床へと凍りつき、真っ直ぐ渡れる歩道が完成します。火炎耐性がない場合、溶岩に触れると即死します。耐性がある場合でも沈み込んでしまい、浮遊、テレポート、または歩いて脱出するまでに約12ターンの猶予しかありません。</li>
+<li><strong>固有の階層に君臨する魔王たち。</strong>
+アスモデウス、バアルゼブブ、ジュイブレクス、オルクスがそれぞれの専用玉座階層に居を構えています。それぞれの戦闘は死闘となり、何体かは援軍を召喚し、全員があなたの侵入に激怒しています。彼らの居城と買収（ワイロ）のルールについては後述します。</li>
+<li><strong>テレポートの制限。</strong>
+魔王が君臨する居城フロアでは、その魔王が生存している間はテレポートが封じられます。魔王を殺害するか追放（banish）すれば、この制限は解除されます。旧バージョンとは異なり、近年のNetHackではゲヘナの全フロアで恒久的にテレポートが禁止されているわけではありません。</li>
+<li><strong>全面迷路。</strong>
+ほぼすべての階層が迷路（メイズ）構造です。穴掘りの杖やつるはしはもはや贅沢品ではなく生存の必需品です。階段へ向けて一直線に壁を掘り進み、決して後ろを振り返らないでください。</li>
+</ul>
+</section>
+<section id="魔王たちの巣窟-the-demon-prince-lairs" class="level4">
+<h4>魔王たちの巣窟 (The demon-prince lairs)</h4>
+<p>ゲヘナの特殊階層のうち3つは、<strong>アスモデウス</strong> (Asmodeus:
+火炎・冷気・毒耐性を持ち、冷気呪文を唱え、吹雪の杖と炎の杖を携帯)、<strong>バアルゼブブ</strong>
+(Baalzebub:
+蝿の王であり、気絶の視線と強さを吸い取る毒の噛みつきを持つ。居城は甲虫の形をした迷路)、そして
+<strong>ジュイブレクス</strong> (Juiblex:
+顔なき主、近接攻撃で相手を飲み込み酸を吐きかける巨大スライム)
+の個人玉座です。彼らはあなたが視界に入るまで居城で待ち構えており、視界に入った後は階段を追跡してきます。</p>
+<p><strong>4体の魔王は買収（ワイロ）を受け付けます：アスモデウス、バアルゼブブ、ゲリュオン、ディスパテル。</strong>
+要求額はメイン所持品にあるゴールドのランダムな割合であるため、大半のゴールドを袋の中に隠し、少額の支払い分だけを袋の外（直接のインベントリ）に残しておきましょう。袋の外にゴールドを一切持たずに接近すると、魔王は即座に襲いかかってきます。4体とも秩序属性であるため、秩序属性の冒険者は半額で済みます。ジュイブレクス、イエノグ、オルクス、デモゴルゴンらは問答無用で視界に入り次第攻撃してきます。</p>
+<p>終盤であればジュイブレクスと戦って倒すことも可能ですが、近接戦闘では丸呑みされる危険があるため、必ず距離を保ってください。悪魔は死の光線（死の杖）に対して完全耐性を持っています。通常の物理ダメージ、追放アーティファクト、あるいは他の脱出手段を使ってください。なお、提示された買収を
+<strong>拒否</strong>
+すると、魔王は永久に敵対化し、二度と交渉に応じてくれません。買収するか、戦うかの二者択一です。</p>
+<p><strong><a href="#excalibur-artifact">エクスカリバー</a> または
+デーモンベイン を構えていると、買収交渉は完全に封じられます。</strong>
+これらの聖剣を手にした冒険者を目にした魔王は即座に激怒して襲いかかってくるため、接近する前に必ず武器を鞘に収めて（装備を外して）ください。</p>
+</section>
+<section id="ヴラドの塔-vlads-tower" class="level4">
+<h4>ヴラドの塔 (Vlad’s Tower)</h4>
+<p>ゲヘナから <strong>上向き</strong>
+に分岐する3層の塔であり、下層ダンジョンにおける数少ない支流の1つです。ユニークな吸血鬼の首領である
+<strong>串刺し公ヴラド</strong> (Vlad the Impaler) が、最上階で
+<strong>祈りの燭台</strong> (Candelabrum of Invocation)
+を守護しています。塔を登り、ヴラドを倒し、燭台を奪い取ってください。</p>
+<p>この塔には <strong>特殊な玉座</strong> も設置されており、5.0
+ではより見返りが大きく、同時に痛みを伴うものへと調整されました。朗報：通常の玉座のように使いすぎて崩壊することが一切ないため、何度でも座り直すことができます。悲報：賞品が出る確率は低いため、何度も座り直す羽目になります。座るたびに13種類の結果のいずれかが選ばれます。そのうち4つは「願い」を叶えてくれます（願いが叶った時点で、玉座は役目を終えて初めて崩壊します）。残る9つはすべて悲惨な災難です：恒久的なレベルドレイン、所持品全体を覆う油まみれの脂（武器が手から滑り落ち、盾が外れる）、耐性・能力の剥奪、振動する四角の階層への強制階層テレポート（時に有用、多くは迷惑）、3体の悪魔の召喚、所持品への混乱状態での祝福解呪、強制変身（ポリモーフ）、酸耐性がない場合
+50+8d6（平均約78）の酸ダメージ、あるいは大半のステータスを悪化させる能力値のランダムシャッフルです。</p>
+<p>計算の内訳：座っても3回に1回しか効果そのものが発動せず（残る3分の2は「場違いな気がする」と表示されて何も起きない）、発動したもののうち
+13分の4 が願いです。無条件での願い発生率は約
+10分の1（約10%）であるため、願いが出るまでに約10回座り、その過程で約2回の悪い効果を甘受する心構えが必要です。HPを満タンにし、貴重な装備品は床に置いてから座り（脂が付着するとインベントリ全体が覆われ、100〜200ターンの間手が滑って道具を使うたびに落としてしまう）、必ず
+<a href="#damage-resistances">酸耐性</a>
+を確保してから座ってください。酸ダメージは最大 80 HP
+に達し、魔法耐性であっても玉座の悪影響を防ぐことはできません。もし今すぐ願いを欲していない場合（例えば城の願いと魔除けの願いをすでに使い、この願いを最終昇天装備の予備として温存したい場合）、後から戻ってくることも可能です。何者かが破壊しない限り、玉座はその場に留まり続けます。</p>
+</section>
+<section id="オルクスの町-orcus-town" class="level4">
+<h4>オルクスの町 (Orcus Town)</h4>
+<p><strong>オルクス</strong> (Orcus)
+はローマ神話の冥府の神であり、破られた誓いを罰し死者を貪る冥界の支配者です。迷宮内における彼はユニークな魔王（<code>&amp;</code>、レベル66、速度9の緩慢な飛行体）であり、呪文を唱え、武器を振るい、2回爪で引き裂き、強さを吸い取る毒針を突き刺す
+<strong>アンデッドの君主</strong>
+です。彼が手にする武器はアーティファクトではなく、通常の
+<strong>死の杖</strong>
+です。彼の指先から放たれる簡易呪文もまた死の光線であるため、反射または魔法耐性を必ず準備してください。オルクスは悪魔であるため、こちらから放つ死の光線は無効化されます。物理ダメージまたは他の攻撃手段で戦ってください。</p>
+<p>彼の階層はゴーストタウンと化しています。打ち捨てられた店々には商品ではなくランダムな戦利品が転がっており、代金を請求する店主は一人も残っていません。残されているのは、リッチ、吸血鬼、グールたちによる儀仗兵の群れです。このフロアのどこかに、<strong>魔法のランプ</strong>
+または <strong>魔法のマーカー</strong>
+のいずれか（各50%）が確定で配置されています。火の罠や魔法の罠が散乱しているため慎重に進み、住人たちを排除して、立ち去る前にランプかマーカーを必ず回収してください。どちらを手に入れても、城の杖から引き出せる願いの回数をさらに拡張してくれます。</p>
+</section>
+<section id="魔法使いの塔-the-wizards-tower" class="level4">
+<h4>魔法使いの塔 (The Wizard’s Tower)</h4>
+<p>ゲヘナに存在する3層連続の特殊階層群です。最下層から魔法のポータルを通って進入し、最上階には
+<strong>イェンダーの魔法使い</strong> (Wizard of Yendor) と
+<strong>死者の書</strong> (Book of the Dead)
+が待ち構えています。彼の個々の攻撃を耐え抜くことは十分に可能ですが、最大の問題は彼が何度倒しても
+<strong>蘇り続ける</strong>
+点にあります。彼はあなたの元へテレポートし、モンスターの大群を召喚し、イェンダーの魔除けを奪い去り、ゲーム終了まで所持品に呪いをかけ続けます。</p>
+<p>最初の遭遇で手際よく仕留め、死者の書を奪い取って即座に立ち去りましょう。その後に再び彼を倒しても新たな戦利品を落とすことはないため（単に復活してくるだけ）、自発的に再戦を挑んではいけません。昇天への旅路において「戦うな、走れ」と言われる鉄則は、主として彼に対する心得です。</p>
+</section>
+<section id="モロクの聖域-molochs-sanctum" class="level4">
+<h4>モロクの聖域 (Moloch’s Sanctum)</h4>
+<p>ゲヘナの最深階層です。ここは <strong>封印</strong>
+されており、祈祷の儀式（後述の「強奪の儀式」を参照）を完遂するまで、聖域へと降りる階段は出現しません。封印が破られたら、階段を降りて
+<strong>高位祭壇</strong> の近くにいる <strong>モロクの高僧</strong>
+(High Priest of Moloch) を見つけ出してください。彼は
+<strong>イェンダーの魔除け</strong>
+を身につけています。モロクの高僧は買収不可能なユニークボスであり、強力な呪文を放ち、下僕を召喚し、近接間合いに入った者に手痛い制裁を加えます。標準的な攻略法は、安全な距離から死の杖や死の指先呪文を一撃叩き込むことです。</p>
+</section>
+<section id="強奪の儀式-the-heist" class="level4">
+<h4>強奪の儀式 (The Heist)</h4>
+<p>ゲームのクライマックスは、綿密に構成された一連の儀式です：3つの祈祷アイテム、1つの振動する四角、1体の最終ボス、そして地上へ向けての死に物狂いの脱出劇です。祈祷を始める直前までは、すべてを自分のペースで進めることができます。しかし一度儀式を行えば、強欲なモンスターたちが一斉にあなたを標的に定め、いかなる遅延も致命的な代償となります。儀式を始める前に、すべての装備セットを完璧に揃えておいてください。手順は以下の通りです：</p>
+<ol type="1">
+<li><p><strong>3種の神器を集める。</strong> <strong>開扉のベル</strong>
+(Bell of Opening:
+クエストの宿敵が落とす報酬)、<strong>祈りの燭台</strong> (Candelabrum of
+Invocation: <a href="#vlads-tower">ヴラドの塔</a> の最上階)、そして
+<strong>死者の書</strong> (Book of the Dead: 魔法使いの塔の最上階)
+の3つが必要です。どれか1つでも欠けていれば、遥かな道のりを歩いて取りに戻らなければなりません（特に開扉のベルは、<a
+href="#the-quest">クエスト</a>
+クリア時に宿敵の死体から拾い忘れて放置されがちです）。</p></li>
+<li><p><strong>燭台に7本のろうそくを取り付ける。</strong>
+各ろうそくを使用（<code>a</code>）し、祈りの燭台を選択して差し込みます。ろうそくは道中で頻繁に生成されるため自然と集まりますが、7本揃える確実な供給源が必要です：<strong>鉱山街にあるイツァークの照明具店</strong>（Izchak’s
+lighting
+shop）が最も明快な答えです（オークの町パターンで店がない場合でも、そのフロアに7本散らばっています）。</p></li>
+<li><p><strong>振動する四角を見つけ出す。</strong> <a
+href="#molochs-sanctum">モロクの聖域</a>
+の直上にあるゲヘナ階層において、特定のマスを踏むと足元が振動します：<em>「足元で奇妙な振動を感じる」（“You
+feel a strange vibration under your
+feet.”）</em>。このマスの位置は迷路内のランダムな1箇所であるため、歩き回って探す必要があります。地図化の巻物が絶大な威力を発揮します。</p></li>
+<li><p><strong>祈祷の儀式を執り行う。</strong>
+3つのアイテムはいずれも呪われていてはいけません。振動する四角の上に立ち、燭台を使用して火を灯し、ベルを使用して鳴らします。そして4ターン以内に、死者の書を読みます。床が開き、降下階段が出現します。</p></li>
+<li><p><strong>モロクから魔除けを奪い取る。</strong>
+階段を降り、<strong>モロクの高僧</strong>
+を打倒し（死の杖が有効）、その死体から
+<strong>イェンダーの魔除け</strong> を奪い取ります。</p></li>
+<li><p><strong>脱出劇の幕開け。</strong>
+上り階段へ駆け込みます（この階段は魔除けを手にする前から使用可能です）。ここからがいよいよ
+<strong>昇天への旅路</strong>
+です。ゲーム内のあらゆる強欲なモンスターたちが一斉にあなたの存在を感知し、イェンダーの魔法使いが魔除けを取り戻そうと何度もテレポートで襲来し、そして「謎の力」があなたを下層へと引きずり戻そうとします。全速力で地上へと駆け上がってください（後述の
+<a href="#the-ascension-run">昇天への旅路</a> を参照）。</p></li>
+</ol>
+</section>
+<section id="サバイバルの秘訣-survival-tips" class="level4">
+<h4>サバイバルの秘訣 (Survival Tips)</h4>
+<ul>
+<li><strong>余分な食料を携帯すること。</strong>
+あなたは全速力で移動し続けることになり、祈りによる空腹回復は期待できません。</li>
+<li><strong>解呪の巻物を携帯すること。</strong>
+持ち物に不慮の事故が起きた際、素早く所持品を立て直せます。</li>
+<li><strong>迂回せず、壁を掘り進むこと。</strong>
+迷路の通路を律儀に歩くよりも、壁を一直線に掘り抜く方が遥かに高速です。</li>
+<li><strong>魔法使いは即座に仕留めること。</strong>
+彼を生かしておくターンが1つ増えるごとに、新たなモンスターが召喚され、新たなアイテムが盗まれ、装備が呪われていきます。彼は必ず蘇りますが（何度でも蘇る）、出現と再出現の合間のインターバルこそが、あなたに貴重な呼吸の時間を与えてくれます。</li>
+<li><strong>魔除けの重力。</strong>
+イェンダーの魔除けを所持している間、階層テレポートは一切機能しません。地上までの全階層を、自らの足で一段ずつ登り切る必要があります。</li>
+<li><strong>リッチ系統を虐殺すること。</strong> 祝福された虐殺の巻物を
+<strong>L</strong>
+に適用すれば、リッチ、デミリッチ、マスターリッチ、アーチリッチを一挙に消滅させることができます。ゲヘナにおける最悪の脅威を、以後のゲームから完全に排除できます。</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="昇天-the-ascension" class="level3">
+<h3>昇天 (The Ascension)</h3>
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified Riders (lvl 30, 8d8, Death instakill 3/20), Famine/Pestilence downgrades, Rider-corpse fatal, wand-of-death-heals-Death, wrong-altar done(ESCAPED), Mysterious Force gating, plane order & altars.
+-->
+<p>イェンダーの魔除けを手にした今、真の最終試練が始まります。ダンジョンの最深底から地上への脱出、そして神々の領域たる四大元素の面と星界の面を突破して、不死の神へと昇天を果たす旅路です。</p>
+<section id="昇天用装備セット-the-ascension-kit" class="level4">
+<h4>昇天用装備セット (The Ascension Kit)</h4>
+<!-- audit
+2026-05-18:
+- there is no "helm of holiness"; the artifact is Mitre of Holiness
+- Mitre of Holiness = HELM_OF_BRILLIANCE base + CARY(AD_FIRE) + SPFX_PROTECT (+1) + M2_UNDEAD + ENERGY_BOOST invoke (artilist.h:265-269)
+- Eye of the Aethiopica is Wizard-only: SPFX_RESTR + PM_WIZARD; other classes get the badclass blast (artilist.h:303-307, artifact.c:920-948)
+- wand-of-death on the High Priest works: type=-1 skips saving throws (zap.c:4314); High Priest has no antimagic and mr1=70 does not gate ZT_DEATH
+- prayer CAN cure hunger and uncurse worn items (pray.c)
+- strategy aligned with NetHackWiki Ascension kit: GDSM/SDSM, cloak of MR, speed boots, gauntlets of power, life saving, bag of holding, wand of death, candles are the canonical kit (https://nethackwiki.com/wiki/Ascension_kit)
+-->
+<p>ゲヘナの深淵で散っていった冒険者たちも、ほぼこれと寸分違わぬ装備を身につけていました。以下の装備を揃え、そしてその後の「彼らはなぜ死んだのか」を読んで、先人たちの過ちを繰り返さないようにしてください。スロットごとの構成：</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 33%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr>
+<th>スロット</th>
+<th>定番の選択肢</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>胴防具 (Body)</strong></td>
+<td>ドラゴンの鱗鎧</td>
+<td>灰色（魔法耐性）または銀色（反射）が定番。青色（電撃）も可。</td>
+</tr>
+<tr>
+<td><strong>マント (Cloak)</strong></td>
+<td>魔法を防ぐクローク</td>
+<td>呪文職ならローブ。魔法耐性は死の光線と死の指先呪文を完全に遮断する。</td>
+</tr>
+<tr>
+<td><strong>兜 (Helm)</strong></td>
+<td>知性の兜 または テレパシーの兜</td>
+<td>呪文職には知性の兜。目隠し併用ならテレパシーの兜。</td>
+</tr>
+<tr>
+<td><strong>小手 (Gloves)</strong></td>
+<td>力の小手</td>
+<td>別の強さ確保手段（強さの指輪など）がない限り必須。</td>
+</tr>
+<tr>
+<td><strong>靴 (Boots)</strong></td>
+<td>韋駄天の靴</td>
+<td>手数が増える超高速行動はあらゆる職業で絶大な力を発揮する。</td>
+</tr>
+<tr>
+<td><strong>シャツ (Shirt)</strong></td>
+<td>アロハシャツ または Ｔシャツ</td>
+<td>他の防具の下に着る無料のスロット。高強化（+4〜+5）でACを大幅に底上げ。</td>
+</tr>
+<tr>
+<td><strong>盾 (Shield)</strong></td>
+<td>基本的には装備しない</td>
+<td>反射は銀色ドラゴンの鱗鎧や魔除けで確保。二刀流使いは盾を扱えない。</td>
+</tr>
+<tr>
+<td><strong>魔除け (Amulet)</strong></td>
+<td>命の魔除け</td>
+<td>エレメンタルプレーンに備える「予備の命」。</td>
+</tr>
+<tr>
+<td><strong>指輪（左）</strong></td>
+<td>自由行動の指輪</td>
+<td>星界の面は麻痺攻撃で満ちており、1歩たりとも外せない。</td>
+</tr>
+<tr>
+<td><strong>指輪（右）</strong></td>
+<td>消化不良、争い、再生のいずれか</td>
+<td>争いの指輪は星界の面での最強の群集制御（クラウドコントロール）手段。</td>
+</tr>
+<tr>
+<td><strong>武器 (Weapon)</strong></td>
+<td>最も鍛えた武器。予備に銀武器</td>
+<td>武器クエストアーティファクトは4職のみ。銀は悪魔やアンデッドに特効。</td>
+</tr>
+<tr>
+<td><strong>鞄の中身 (Pack)</strong></td>
+<td>軽量化の鞄、ユニコーンの角、幸運の石、死の杖、複数の瞬間移動の杖、7本のろうそく、聖水5本以上、祝福された完全回復の薬、電撃防御</td>
+<td>聖水は呪い修復用、完全回復の薬は緊急脱出ボタン、電撃耐性や反射は風の面の落雷対策。なお騎士（Riders）は石化に耐性があるためコカトリスの死体は効かない。</td>
+</tr>
+<tr>
+<td><strong>必須の戦利品</strong></td>
+<td>開扉のベル、祈りの燭台、死者の書、イェンダーの魔除け</td>
+<td>祈祷の儀式アイテムと最終目標。</td>
+</tr>
+</tbody>
+</table>
+<p>典型的な昇天時のACは <strong>−25 から −40</strong>
+の範囲に収まります。</p>
+<section id="昇天一歩手前で死んだ者たちの死因" class="level5">
+<h5>昇天一歩手前で死んだ者たちの死因</h5>
+<p>彼らの装備は、昇天を果たした者たちと何ら変わりませんでした。ACも −23
+から −40
+に達し、死の杖を持ち、3種の祈祷アイテムを揃え、銀色ドラゴンの鱗鎧を着ていました。彼らを殺したのは装備ではなく、<strong>行動（プレイングミス）</strong>
+でした：</p>
+<ul>
+<li><strong>戦闘中のインベントリ操作。</strong>
+地下35階の考古学者が、ジャバウォック、変幻獣、ズルーティに隣接されている最中に缶詰を開けようとしました。缶切りを取り出すプロンプトが、彼女に残されていなかった命の1ターンを奪い去りました。</li>
+<li><strong>空腹でないのに食べる。</strong> AC −40
+で3つの祈祷アイテムをすべて揃えてゲヘナの深部にいた観光客が、満腹状態であるにもかかわらずストーカーの死体を食べ、窒息死しました。指にはめていた消化不良の指輪は、窒息を防いではくれません。</li>
+<li><strong>脱出アイテムの枯死。</strong>
+聖域を目前にした地下50階の魔法使いが、逃走ルートを確保しないまま死の杖の最後のチャージを使い果たし、盲目状態で敵に包囲されて息絶えました。</li>
+</ul>
+<p>常に最低1つの脱出手段を手元に残しておいてください：テレポートの巻物、穴掘りの杖、あるいは完全回復の薬が入った防水袋です。</p>
+</section>
+</section>
+<section id="昇天への旅路-the-ascension-run" class="level4">
+<h4>昇天への旅路 (The Ascension Run)</h4>
+<!-- audit
+2026-05-21:
+- bones save converts the real Amulet of Yendor to FAKE_AMULET_OF_YENDOR and curses it when a previous adventurer dies carrying it (bones.c:170-173)
+- wish for an Amulet of Yendor silently substitutes a fake (objnam.c:5003-5006 substitution list)
+- Astral altar offering accepts only the real Amulet; fake amulets fail and the death message reads "(with a fake Amulet)" (end.c:1413-1414)
+2026-05-19:
+- Mysterious Force is gated on Gehennom only (do.c:1541); same-level shuffle is the majority outcome
+- odds = 3 + ualign.type; diff = rn2(odds): Chaotics max -1, Neutrals max -2, only Lawfuls reach -3 (do.c:1544)
+- never fires on bottom 4 levels (dunlev < dunlevs_in_dungeon-3)
+- Force frequency tapers with each trigger (do.c:1536-1563)
+- Amulet-pickup wish fires once on next moveloop iteration if !u.uevent.amulet_wish (allmain.c:446-451)
+- Elbereth is DEAD in Gehennom, all four Elemental Planes, and Astral: onscary returns FALSE for Inhell || In_endgame (teleport.c:68-70)
+- carrying the Amulet blocks level teleport via the u.uhave.amulet guard (teleport.c:1185-1189)
+- strategy aligned with NetHackWiki Ascension run, Mysterious force, Amulet of Yendor: run-don't-fight, dig straight lines, kill the Wizard fast, the Force as the primary climb obstacle (https://nethackwiki.com/wiki/Ascension_run, https://nethackwiki.com/wiki/Mysterious_force, https://nethackwiki.com/wiki/Amulet_of_Yendor)
+-->
+<p>ついにやり遂げました。ゲヘナを戦い抜き、モロクの高僧を打ち倒し、聖域からイェンダーの魔除けを奪い取りました。あとはこの魔除けをダンジョンの底からゲヘナの全階層、かつて倒したはずの魔王たちを潜り抜け、地上まで運び上げ、さらに元素界を越えて自らの神が待つ星界の面へと到達するだけです。簡単なことですよね？</p>
+<p><strong>魔除け拾得時の無料の願い。</strong>
+イェンダーの魔除けを拾い上げた瞬間、次のターンに自属性の神から1回分の願いが自動的に授与されます。能動的に願う必要はなく自動発動します。聖域に到達する
+<em>前に</em>
+ウィッシュリストを用意しておいてください：力の小手、お好みの +5
+武器、祝福された魔法を防ぐクロークなど、脱出の登攀に欠けている最後のピースを願うのです。この願いはゲーム中1回きりです。なお、呪われたレベルアップの薬は上階層へと移動させてくれますが、ゲヘナ内では依然として謎の力を誘発します。</p>
+<p><strong>本物の魔除けを携えること。</strong>
+登りの階段は常に開かれています。運命の迷宮の上り階段は、何を持っていようとあなたを地上へと近づけてくれます。地下1階の上り階段は、本物の魔除けの所持者を土の面へと導きます（魔除けを持たずに脱出すると「逃走」エンドとしてゲームが終了します）。モロクの聖域で高僧の死体から奪い取った魔除けだけが本物と認められます。ボーンズ階層に落ちている魔除けはすべて偽物です（冒険者が魔除けを持ったまま死亡すると、ゲームはその魔除けを偽物へと書き換えて呪いをかけます）。また、願いで願った魔除けも黙って偽物にすり替えられます。高僧から直接奪い取ったものでない限り、本物は手に入りません。</p>
+<section id="試練の連続-the-gauntlet" class="level5">
+<h5>試練の連続 (The Gauntlet)</h5>
+<p>ダンジョンは4つの包囲網であなたを阻み、そのすべてがあなたの鞄の中の魔除けを標的にしています：</p>
+<ul>
+<li><strong>イェンダーの魔法使い</strong>
+は定期的にあなたのマスへとテレポートし、モンスターを召喚し、魔除けを奪おうと手を伸ばしてきます。彼が諦めることはありません。現れるたびに仕留めてください。彼は必ず蘇ります。世界で最も執念深い元恋人のような存在です。</li>
+<li><strong>魔除けによるテレポートの封殺。</strong>
+魔除けを所持している間、階層テレポートは一切使えません。ゲヘナの最深部から地上に至るすべての階段を、自らの足で1段ずつ登らなければなりません。</li>
+<li><strong>強欲なモンスターたち。</strong>
+魔王たちや魔法使いは、あなたの現在地へと直接ワープして襲撃してきます。誰もがその魔除けを喉から手が出るほど欲しがっているのです。</li>
+<li><strong>謎の力 (The Mysterious Force)。</strong>
+ゲヘナ内で魔除けを携えて階段を登るたびに、謎の力によって引き戻される判定が発生します。引き戻しが発生した場合、秩序属性の英雄は4回に1回、中立は3回に1回、混沌は2回に1回の確率で同じ階層に留め置かれます。それ以外の場合は、1階層下（混沌の上限）、2階層下（中立の上限）、あるいは3階層下（秩序属性のみ）へと
+<strong>突き落とされます</strong>。最悪の引き落としは秩序属性に最も厳しく、混沌属性に最も寛大です（混沌属性は一度に1階層より深く落とされることはありません）。NetHack
+5.0 では、この引き戻し確率は発動するたびに
+<strong>減衰（発生率が低下）</strong>
+していくように改良されました。引き戻されるごとに次回の発動確率がわずかに下がり、深い引き落としほど以後の発動を抑制します。この減衰は秩序の英雄に最も大きな恩恵をもたらします。なお、謎の力はゲヘナを脱出した瞬間に停止し、ゲヘナの最下層4フロアでは決して発動しません。</li>
+<li><strong>属性反転の検討。</strong>
+逆属性の兜をかぶると、秩序は混沌へ、混沌は秩序へと反転します（中立はランダム）。混沌属性になれば、謎の力による落下が常に最大1階層に抑えられます。ただし代償として、星界の面での生贄は混沌の祭壇に捧げなければならなくなります（祭壇判定は
+<em>現在の</em>
+属性を参照するため）。トレードオフを理解した上での選択肢です。</li>
+</ul>
+</section>
+<section id="脱出戦術-strategy" class="level5">
+<h5>脱出戦術 (Strategy)</h5>
+<p>あなたはもはや探索者ではありません。相手チームの全員がタックルを狙う中、ボールを抱えてエンドゾーンへ疾走するランニングバックです。スピードこそがすべてです。</p>
+<ul>
+<li><strong>戦うな、走れ。</strong>
+探索するな。略奪するな。ただ上を目指せ。倒さなくてもいい敵と戦って過ごす1ターンごとに、魔法使いが魔除けを奪いに近づいてきます。</li>
+<li><strong>掘れ。</strong>
+穴掘りの杖を使って階段へ一直線に突き進んでください。迷路の通路を歩くより、壁をぶち抜いて最短距離を進む方が遥かに速いです。</li>
+<li><strong>邪魔者は光線で消せ。</strong>
+瞬間移動の杖で進路上のモンスターを遠くへ弾き飛ばしてください。死の杖で厄介な敵を永久に消し去ってください。惜しみなく使ってください。</li>
+<li><strong>呪文使いの裏技：魔除けを置いてから詠唱する。</strong>
+魔除けを所持していると、呪文の消費マナが基本コストの 2〜3倍
+に跳ね上がります。魔除けを床に置き、死の指先や地図化を唱え、再び拾い上げてください。3ターンの往復行動は、膨大なマナの浪費よりも遥かに安上がりです。</li>
+<li><strong>魔法使いは瞬殺しろ。</strong>
+彼が現れたら（必ず現れます）、技巧に走らず、死の指先、死の杖、または圧倒的な腕力で即座に沈めてください。早く倒すほど、召喚されるモンスターの数を減らせます。</li>
+<li><strong>城より先ではエルベレスに頼るな。</strong>
+エルベレスはゲヘナ、四大元素の面、および星界の面の全域において
+<strong>完全に無視</strong>
+されます。床に刻んでも効果はなく、モンスターは平然と踏み越えてきます。回復と体勢立て直しのための時間は、通路の地形、テレポートの巻物、そして争いの指輪を活用して確保してください。</li>
+</ul>
+<p>城での補給が完璧で各種耐性が万全であれば、この登攀はマラソンではなくスプリントになります。運命の迷宮の頂点に到達したとき、最後の階段は元素界へと続いています。あなたと神性との間を隔てる、最後の障壁です。</p>
+</section>
+</section>
+<section id="元素界-the-elemental-planes" class="level4">
+<h4>元素界 (The Elemental Planes)</h4>
+<!-- audit
+2026-05-19:
+- Portal is randomly placed via des.levregion in region {0,0,75,19} excluding the arrival corner {65,13,75,19} (dat/earth.lua:53). The portal lives in another cavern, not buried in undug rock.
+- Level flag `shortsighted` (rm.h:449 Bitfield, set via dat/earth.lua:15) only affects monster vision range, not the player's.
+- `;` class on the Plane of Water (S_EEL) species verified from monsters.h: jellyfish, piranha, shark, giant eel, electric eel, kraken. "sea monsters" was the section comment header, not a species name. Water moccasin is S_SNAKE and NOT affected by class-`;` genocide.
+-->
+<p>運命の迷宮の頂点を超えると、世界はその根源たる元素へと解体されます。あなたと神々との間には4つの面が横たわり、それぞれが異なる悪意で満ちています。ここには階段はなく、各面に隠された魔法のポータルだけが次の面へと続いています。各面は閉ざされた世界であり、見つけ出したポータルが唯一の脱出路であり、くぐり抜けた瞬間に背後で閉ざされます。</p>
+<p><strong>ポータルを見つけ出す2つの安価な手段。</strong>
+混乱した状態でゴールド探知の巻物を読むと、ポータルを含むフロア全体のすべての罠の位置がマップに刻まれます（1回の読書で全盲解消）。また、イェンダーの魔除けそれ自体が、携行している間コンパスとして機能します：手に構えるか首にかけると、ポータルに近づくにつれて時折
+<em>「熱い（hot）」「非常に温かい（very warm）」「温かい（warm）」</em>
+と囁いてきます（ポータルから
+3マス、8マス、12マス以内）。虚空を横断する宝探しゲームです。</p>
+<section id="土の面-plane-of-earth" class="level5">
+<h5>土の面 (Plane of Earth)</h5>
+<p>あなたはこの面の隅にある小さな洞窟に到着します。薄暗い光の中、すでに2体の敵があなたを待ち構えています：エルフの王とミノタウロス、どちらも敵対的です。この面は掘削可能な岩盤の中に無数の小洞窟が散らばった星団のような構造をしており、風の面へと続くポータルはその中の別の洞窟に隠されています。進む唯一の道は岩盤を掘り抜くことです。他の洞窟には土のエレメンタル、ストーンジャイアント、ロックトロール、ストーンゴーレム、ピットフィーンド、ダストボルテックス、アンバーハルクが潜んでいます。テレポートは封じられているため、一度戦闘が始まれば杖で逃げることはできません。穴掘りの杖が必須です。魔法の地図は洞窟の配置を明かしますが、隠されたポータルそのものは暴けません。混乱状態でゴールド探知を読むか、水晶玉を使ってポータルの位置を特定してから掘り進んでください。</p>
+</section>
+<section id="風の面-plane-of-air" class="level5">
+<h5>風の面 (Plane of Air)</h5>
+<p>土の面とは正反対の極限世界です：壁も、足で感じられる床もなく、ただ虚空の空が広がり、思考よりも速く動く風のエレメンタルたちが吹き荒れています。彼らは1ターンに何度も攻撃を加え、虐殺することもできません。ここでは争いの指輪（Ring
+of
+conflict）が絶大な効果を発揮します：ポータルを探す間、エレメンタル同士を互いに引き裂かせましょう。魔法の地図は隠されたポータルを映し出しませんが、混乱ゴールド探知や水晶玉なら位置を特定できます。この面は毎ターン自律的に漂流する
+<strong>雲の泡 (cloud bubbles)</strong>
+によって分断されており、泡の中に立っていれば泡と一緒に流されていきます。流れに逆らわずに乗ることで虚空を高速で横断でき、やがて泡があなたをポータルの真上へと運んでくれることもあります。</p>
+<p>雲の雷撃はおよそ8ターンに1回落ちてきて 8d6
+のダメージを与え、さらに3分の1の確率で露出している杖や指輪を焼き尽くします。電撃耐性または反射が必須です。予備の充填済みアイテムは袋の中にしまっておいてください。</p>
+<p>なお、この面にはショートカットへの制約があります。自分自身へのテレポートは
+<em>「謎の力があなたのテレポートを妨害した！」</em>
+というメッセージで弾かれます。瞬間移動の杖は追ってくる敵を吹き飛ばすことはできますが、自分自身を移動させることはできません。</p>
+</section>
+<section id="火の面-plane-of-fire" class="level5">
+<h5>火の面 (Plane of Fire)</h5>
+<p>フロア全体を溶岩の湖が覆い尽くし、その隙間に火の罠が仕掛けられ、火のエレメンタルやヘルハウンドが徘徊しています。火炎耐性があればそれらのダメージの大部分は無力化され、あとはポータルを探すだけの問題になります。耐性がない場合、あらゆる移動と遭遇があなた自身と所持品を灰へと変えてしまいます。</p>
+</section>
+<section id="水の面-plane-of-water" class="level5">
+<h5>水の面 (Plane of Water)</h5>
+<p>この面は漂流する空気の泡が点在する見渡す限りの大海原です。あなたはその泡の1つの内部に出現します。泡から足を踏み外して水中に落ちると通常は泡へと這い戻ることになりますが、真の溺死の脅威は巨大ウナギやクラーケンがあなたに巻きついて水底へと引きずり込むことです。呼吸の魔除け（魔法の呼吸）があればその危険を排除できますが、単にこの階層に立つだけであれば必須ではありません。</p>
+<p><strong>到着時の定石戦術：<code>;</code> クラスの虐殺。</strong>
+虐殺の巻物を読み、<strong><code>;</code></strong>
+クラス全体（クラゲ、ピラニア、サメ、巨大ウナギ、電気ウナギ、クラーケン）を指定してください。あなたを引きずり込もうとするあらゆる海の怪物が、この面から瞬時に消滅します。これこそが虐殺の巻物を切るべき決定的な瞬間です。<code>;</code>
+クラスはゲーム内の他の場所にはほとんど現れず（メデューサの池に時折クラーケンがいる程度）、次の面では完全に無関係になります。怪物を一掃したら、落ち着いてポータルを探し、飛び込んでください。</p>
+</section>
+<section id="星界の面-the-astral-plane" class="level5">
+<h5>星界の面 (The Astral Plane)</h5>
+<p>ついにあなたは神々の御前へと浮上します。3つの独立した寺院に、秩序、中立、混沌の祭壇がそれぞれ祀られています。昇天を果たすには、<strong>自身の属性と一致する祭壇</strong>
+にイェンダーの魔除けを生贄として捧げなければなりません。<strong>間違った祭壇を選ぶとその瞬間にゲームオーバー</strong>
+となります：敵対する神があなたの神を屈服させ、あなたは敵対勢力に完全な勝利を明け渡してしまうのです。やり直しは利きません。最初から正しい祭壇を選んでください。遠見（<code>;</code>
+キー）による確認は、祭壇に <strong>隣接</strong>
+しているときしかその属性を明かしません。部屋の反対側から見ても単に「属性の一致した高位祭壇」としか表示されないため、各寺院の祭壇の隣まで1つずつ歩いて確認する計画を立ててください。</p>
+<p>この面は無数の天使たちと、3体の <strong>黙示録の四騎士
+(Riders)</strong>（<strong>死 (Death)</strong>、<strong>飢餓
+(Famine)</strong>、<strong>疫病
+(Pestilence)</strong>）で埋め尽くされています。彼らはレベル30であり、戦闘中もHPを急速回復し、透明を看破し、進路上のモンスターを力任せに押し退けて突進してきます。それぞれが1ターンに2回、8d8
+ダメージの接触攻撃を繰り出します。</p>
+<ul>
+<li><strong>死 (Death)</strong>
+はその名の通りの避けがたい確実さで迫ってきます。接触ごとに 8d8
+ダメージを与え、およそ 20回中3回 の確率で即死効果を叩き込みます。<a
+href="#damage-resistances">魔法耐性</a>
+は即死効果を防ぎますが、基本ダメージは防げません。魔法耐性がなければ、毎ターンの打撃で生きるか死ぬかの運試しを強いられます。</li>
+<li><strong>疫病 (Pestilence)</strong> は、20 +
+体力（Con）ターンの病気タイマーを開始させます。その後の接触ごとに、残り時間が3分の1へと短縮されます。病気耐性があれば防げます。耐性がない場合は、即座にユニコーンの角を使用して治療してください。</li>
+<li><strong>飢餓 (Famine)</strong>
+は消耗戦であなたを殺しにかかります。接触ごとに 8d8
+ダメージに加え、あなたの栄養度から直接
+40〜79ターン分の空腹を奪い去ります。1発で餓死するわけではありませんが、戦闘前の満腹度によって耐えられる打撃数が決まります。</li>
+</ul>
+<p>NetHack 5.0
+で追加されたささやかな慈悲：疫病または飢餓が1ターン目の最初の攻撃を命中させた場合、そのターンの2回目の攻撃は気絶へとダウングレードされます。</p>
+<p><strong>騎士たちを恒久的に殺害することはできません。</strong>
+彼らは何度でも蘇り、追跡し、決して止まりません。<strong>いかなる騎士の死体であっても、食べることは即座に致命的（即死）となります。</strong>
+あなたは彼らと戦うためにここにいるのではありません。正しい祭壇に到達し、魔除けを捧げ、すべてを終わらせるためにここにいるのです。</p>
+<p>どうしても騎士と交戦せざるを得ない場合、<strong>最も恐れるべきは「疫病」です</strong>：距離を取った後でも病気タイマーがあなたを蝕み続け、ユニコーンの角の治療判定が間に合わずに死亡することがあります。死の即死は魔法耐性で防げ、飢餓は大量の食料で耐え抜くことができます。</p>
+<p><strong>防御策。</strong> <strong>命の魔除け</strong>
+は星界の面における最高の保険です。魔法耐性は死の即死を止めます。病気耐性は疫病を無力化します（緑色ドラゴンの鱗鎧が入手源）。十分な食料とユニコーンの角を携帯してください。3体の騎士はいずれも石化に耐性があるため、コカトリスの死体で片付けることはできません。<strong>争いの指輪</strong>
+は周囲のモンスター同士を争わせることができますが、高レベルの騎士はほとんどのターンで争いに抵抗します。守護天使がまだ生きている間に争いの指輪をはめてはいけません：守護天使が消滅し、あなたの神が怒って2〜4体の敵対的な天使を送り込んできます。テレポートの杖は群衆を押し退けて道を切り開くのに役立ちます。<strong>元素界・星界の面では自分自身へのテレポートはすべて失敗する</strong>
+ため、杖は敵に向けて振ってください。</p>
+<p><strong>死 (Death) に向けて死の杖を振ってはいけません。</strong>
+死の光線は彼を回復させてしまいます。マジックミサイルは3体の騎士すべてに有効です。代わりにそれを使ってください。</p>
+<p>正しい祭壇に魔除けを捧げてください。あなたの神はその至宝を受け入れ、魔除けは神聖な炎の中へと消え去り、あなたはいまや不死の神々の一員として昇天を果たします。この瞬間に到達できる冒険者はごくわずかです。本書はここで幕を閉じます。心からの祝福を。</p>
+</section>
+</section>
+</section>
 </section>
 </section>
 </main>
