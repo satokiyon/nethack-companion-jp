@@ -27,3 +27,4 @@
      rn1(101, 150 + cheapskate * 40) × u.ulevelpeak. Tier thresholds
      at suggested × quan, 2 × suggested × quan, 3 × suggested × quan,
      where quan = max(1, money / (3 × suggested × XL)). -->
+

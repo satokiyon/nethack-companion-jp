@@ -40,3 +40,4 @@
 ² 眠りと死で共通。</small>
 
 <div class="price-id-toolbar"></div>
+
