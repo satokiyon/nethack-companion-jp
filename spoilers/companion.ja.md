@@ -5882,3 +5882,423 @@ OPTIONS=pickup_burden:unencumbered
 28. N を左へ1マス押す。N を Q と同様に埋める。
 
 巨岩が2個（O と S）残ります。魔除けまたは軽量化の鞄の賞品は、モンスター動物園に隣接する小部屋群（(17,11), (17,13), (17,15)）のいずれかに収められています。
+
+### 自主的挑戦 (Voluntary Challenges)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- vegetarian-safe puddings: gray ooze, brown pudding, green slime; not black pudding (mondata.h:241). Puddings leave globs, not corpses.
+- Vegan excludes fortune cookies (they contain eggs).
+- Foodless is not broken by polymorph (polyself.c only increments u.uconduct.polyselfs).
+- Verified correct: all conduct triggers/checks, Pauper starting kit, Petless/Permadeaf/Bonesless/Sokoban mechanics, all roleplay flags.
+-->
+
+NetHack を一度クリア（昇天）した冒険者の多くは、さらなる高みを目指してゲームが本来許容している強力な手段を自らに禁じる「自主的挑戦（コンダクト / Conducts）」に挑みます。ゲームはこれらの行動制限を裏で厳密に追跡しており、昇天時や死亡時に遵守したコンダクトが公式に認定・表彰されます。
+
+::: dense-table
+
+| コンダクト名 | 破棄される条件 | 開始方法 |
+|---------|----------------|---------------|
+| 菜食主義者 (Vegetarian) | 肉や禁じられた動物性食品を食べる | 自動開始 |
+| 完全菜食主義者 (Vegan) | あらゆる動物性食品を口にする | 自動開始 |
+| 絶食 (Foodless) | 壁の咀嚼を含め、いかなるものも口にしない | 自動開始 |
+| 無神論者 (Atheist) | 祈る、生贄を捧げる、アンデッド退散、僧侶と会話、祭壇でのBUC判定 | 自動開始 |
+| 武器なし (Weaponless) | 装備した武器や武器道具で敵を殴る | 自動開始 |
+| 平和主義者 (Pacifist) | 自身の戦果として記録されるモンスターの殺害 | 自動開始 |
+| 文盲 (Illiterate) | 読む、または単一の `x` を超える文字を刻む | 自動開始 |
+| 虐殺なし (Genocideless) | モンスター種族またはクラスを虐殺する | 自動開始 |
+| 自己変身なし (Polyselfless) | 自分自身の姿を変身させる | 自動開始 |
+| アイテム変身なし (Polypileless) | アイテムを変身（ポリパイル）させる | 自動開始 |
+| 願いなし (Wishless) | いかなる願いも叶えてもらう | 自動開始 |
+| アーティファクト願いなし | アーティファクトを願う（拒絶された場合も含む） | 自動開始 |
+| 裸族 (Nudist) | いかなる防具も身につけない | `OPTIONS=nudist` |
+| 盲目 (Blind / Zen) | 全盲状態がゲーム全編を通じて持続 | `OPTIONS=blind` |
+| 赤貧 (Pauper) | 何も持たずに開始する（5.0新要素） | `OPTIONS=pauper` |
+| ペットなし (Petless) | いかなるモンスターも手懐けない（5.0新要素） | `OPTIONS=pettype:none` |
+| 完全聾 (Permadeaf) | 聴覚喪失がゲーム全編を通じて持続（5.0新要素） | `OPTIONS=permadeaf` |
+| 倉庫番 (Sokoban) | 進入後に巨岩ルールを破る（5.0新要素） | 進入時に自動開始 |
+| ボーンズなし (Bonesless) | ボーンズ階層の生成を無効化（5.0新要素） | `OPTIONS=!bones` |
+| 振り直しなし (Unrerolled) | 最初に提示されたキャラクターをそのまま受け入れる | 最初のキャラを受け入れ |
+
+:::
+
+#### 食料コンダクト (The Food Conducts)
+
+<!-- audit
+2026-05-19:
+- vegetarian-safe puddings: gray ooze, brown pudding, green slime; not black pudding (mondata.h:241)
+- no yellow pudding exists (monsters.h:2081-2113)
+- puddings are G_NOCORPSE and leave globs, not corpses
+- shriekers are S_FUNGUS, already covered by "all F (fungi and molds)"
+- vegan-violating VEGGY foods: eggs, pancakes, royal jelly, cream pies, candy bars, fortune cookies (eat.c:3016-3018)
+- fortune cookies contain eggs, so they break vegan
+- ghosts are G_NOCORPSE; ghost corpses don't exist (monsters.h:2888,2897)
+- watch out for: yellow mold, violet fungus, acid blob — vegetarian-by-macro but unsafe to eat (yellow mold M1_POIS monsters.h:1638; violet fungus AT_TUCH AD_STCK monsters.h:1670; acid blob AD_ACID monsters.h:139; eat.c:1303-1308 violet fungus corpse hallucinates)
+- polymorph does NOT break foodless: polyself.c has no u.uconduct.food increment (polyself.c:750-751 only increments u.uconduct.polyselfs)
+- prayer cures hunger at Hungry/Weak/Fainting (pray.c:275, uhs >= HUNGRY)
+- wishing for slow digestion is a viable foodless route
+- Monk: vegetarian is nearly free
+- strategy aligned with NetHackWiki Conduct, Foodless, Veggy: vegetarian/vegan/foodless hierarchy and the slow-digestion / prayer / stone-to-flesh strategy for foodless are canonical (https://nethackwiki.com/wiki/Conduct, https://nethackwiki.com/wiki/Foodless, https://nethackwiki.com/wiki/Veggy)
+-->
+
+食料コンダクトには厳格な階層構造があります：絶食はヴィーガンより厳しく、ヴィーガンはベジタリアンより厳格です。
+
+**菜食主義者 (Vegetarian)。** 肉を口にしてはいけません。具体的には、肉食性・動物性モンスターの死体を避け、動物由来の食品（ジャーキー、肉食生物の卵など）を食べないことです。実践上は、許容された植物性・無生物性の死体や粘塊（glob）を食べて生活します。地衣類、ゼリー、菌類・カビ類、灰色ウーズや茶色プリンの粘塊はすべて安全です。フォーチュンクッキー、レンバス、床に落ちている野菜類も食べられます。緑色スライムは定義上は菜食対象ですが、食べるとスライム化して即座に死亡します。菜食対象モンスターは多岐にわたります：すべての `b`（ブロッブ）、すべての `j`（ゼリー）、すべての `F`（菌類とカビ）、すべての `v`（ボルテックス）、すべての `y`（光）、ストーカーを除くすべての `E`（エレメンタル）、肉と革を除くすべての `'`（ゴーレム）です。多くの菜食死体が有用な耐性を授けてくれます。ただし「菜食規定上セーフ」と「毒性的に安全」は別物です。黄色モールドは毒を持ち、紫色キノコは幻覚を引き起こし、酸ブロブは喉を焼きます。武闘家（修道士）は元々肉を食べると属性ペナルティを受けるため、ベジタリアンに最も適した職業です。
+
+**完全菜食主義者 (Vegan)。** ベジタリアンの全制限に加え、卵、パンケーキ、ローヤルゼリー、クリームパイ、キャンディバー、そして **フォーチュンクッキー** を口にしてはいけません（フォーチュンクッキーには生地に卵が含まれているため、ベジタリアンでは許容されてもヴィーガンでは失格となります）。このコンダクトは「食べる」ことのみに適用されるため、動物由来のアイテムを携行・使用することは許されます（蝋燭に火を灯す、革防具を着る、角笛を吹くなどはセーフです）。またヴィーガンではプリンの粘塊も除外されます。
+
+**絶食 (Foodless)。** あらゆる食物を一切口にしてはいけません。現実的な解決策は、祈り（「空腹」ステータス以降ならいつでも空腹を満たしてくれる）と、消化不良の指輪（通常の空腹進行を完全に停止させる）の2つです。岩を肉に変える魔法でミートボールを作れますが、それを食べるとコンダクト違反になります。大半の絶食ランは、序盤に消化不良の指輪を拾うか、出るまで祈りで空腹を凌ぐ戦略を取ります。願いの杖や魔法のランプが出現した際、消化不良の指輪を願うのが定石です。なお、壁を掘り進む際に岩を咀嚼して食べる行為も絶食違反となります。
+
+#### 無神論者 (Atheist)
+
+<!-- audit
+2026-05-19:
+- Atheist tracks u.uconduct.gnostic (insight.c:2134, topten.c:590)
+- breaks on: #pray (pray.c:2221), #offer corpse (pray.c:1977), #turn (pray.c:2426), #chat with priest (priest.c:572)
+- dropping any non-coin on an altar breaks the conduct via the BUC flash (do.c:370)
+- final Amulet offering for ascension is exempt (pray.c:1529-1588 has no gnostic increment)
+- Priest's starting holy water does NOT auto-break the conduct (u_init.c:716-722)
+- strategy aligned with NetHackWiki Atheist: no prayer / sacrifice / chat-with-priest / altar drops; final ascension Amulet offering is exempt (https://nethackwiki.com/wiki/Atheist)
+-->
+
+神仏とのいかなる交わりも絶ちます。具体的には：**`#pray`（祈る）を行わない**、祭壇で死体を **`#offer`（捧げる）を行わない**、アンデッドを **`#turn`（退散させる）を行わない**、そして寺院の僧侶と **`#chat`（会話する）を行わない** ことです。祭壇によるBUC判定の閃光も神聖な接触とみなされるため、金貨以外のアイテムを祭壇の上に落とす行為も失格となります（祭壇識別トリックは使用不可）。これにより、餓死、石化、病気、呪われた装備に対する神の救済という安全網が完全に失われます。
+
+祈りで空腹を治せないため安定した食料確保が必須となり、生贄や祭壇BUCが使えないため識別の難易度が跳ね上がり、神からのアーティファクト下賜も望めません。ただし、星界の面で昇天を果たすための最終的なイェンダーの魔除けの奉納だけは例外として許されており、無神論を維持したまま昇天を完遂することが仕様上可能です。
+
+#### 武器なし (Weaponless)
+
+<!-- audit
+2026-05-19:
+- weaphit++ requires weapon non-NULL AND (WEAPON_CLASS OR is_weptool) (uhitm.c:616-617)
+- weapon-tools that break: pick-axe, unicorn horn, other is_weptool items
+- wielded polearm at range via #apply DOES break (HMON_APPLIED, dothrow.c:2199-2203)
+- do NOT break: thrown weapons, fired ammo, wands, spells, barehand, martial arts, cockatrice-corpse-wield
+- iron chain is CHAIN_CLASS, not a weptool; swinging it does NOT break (objects.h:101, 1631)
+- aklys is WEAPON_CLASS, not a weptool; it breaks via the WEAPON_CLASS branch (objects.h:381-383)
+- strategy aligned with NetHackWiki Weaponless, Martial arts: thrown/fired weapons and martial arts preserve the conduct, wielded-polearm-#apply still breaks it (https://nethackwiki.com/wiki/Weaponless, https://nethackwiki.com/wiki/Martial_arts)
+-->
+
+構えている武器や武器道具で敵を殴ってはいけません。武器を投げる、弓やクロスボウから射出する、杖や呪文を行使することは許されます。また、素手格闘や武術（Martial Arts）で殴り倒すことも完全に合法です（武闘家が圧倒的な強さを誇ります）。禁じられているのは、剣、斧、メイス、アキリス、つるはし、ユニコーンの角など、武器クラスまたは武器道具に分類されるアイテムを手に持った状態で敵を直接殴打することです。なお、長柄武器を構えて離れた位置から `a`（使用）でリーチ攻撃する行為もコンダクト違反となります。
+
+これは一見するほど過酷な制約ではありません。武闘家は強力無比な武術で開始し、さらに成長します。他の職業であっても、呪文、杖、投擲短剣に頼ることができます。また、コカトリスの死体を素手（小手着用）で掴んで殴りつける行為も合法です（死体は武器ではないため）。最大の犠牲は、近接武器のアーティファクトが持つ圧倒的なダメージボーナスを諦めなければならない点にあります。
+
+#### 平和主義者 (Pacifist)
+
+<!-- audit
+2026-05-19:
+- Pacifist tracks u.uconduct.killer; only xkilled (mon.c:3500) and pet-pushed-into-trap (hack.c:2201) increment
+- pet kills and conflict kills do NOT break the conduct: xkilled() only increments on !noconduct branch (mon.c:3499-3502)
+- charm-monster spell, Elbereth, and pet tactics are all safe (no killer++ in those code paths)
+- strategy aligned with NetHackWiki Pacifist, Conflict: pacifist runs lean on strong pets (often polymorph-amplified) and a ring of conflict for crowds (https://nethackwiki.com/wiki/Pacifist, https://nethackwiki.com/wiki/Conflict)
+-->
+
+いかなるモンスターも自らの手で殺害してはいけません。ペットによる撃破や、争い（Conflict）によってモンスター同士が殺し合った結果は、このコンダクトを破棄しません（ただしペットを押しのけて致命的な罠に突き落として殺す行為は違反となります）。平和主義者ランでは、戦闘をペットに任せ、群衆には争いの指輪を用い、[エルベレス](#elbereth) で怪物を寄せ付けない戦術を取ります。
+
+平和主義者での昇天は十分に可能ですが、ダンジョンのルールに対する深い洞察が求められます。終盤の定番戦略は、願った **アルコンの小像**（割って出現させ、敵対した場合は再テイムする）を最強のチャンピオン闘士として育成し、怪物を手懐ける（魅了）呪文で群衆を鎮め、話し合いで解決できない局面を争いの指輪で乗り切ることです。
+
+#### 文盲 (Illiterate)
+
+<!-- audit
+2026-05-19:
+- only an "x" or "X" signature engrave is exempt; everything else breaks the conduct (engrave.c:1213)
+- breaks: scrolls, spellbooks, fortune cookies, T-shirts, magic-marker writing (read.c:602, eat.c:2525, read.c:397, write.c:245)
+- do NOT break: blank paper, unread novels, Book of the Dead, Hawaiian shirts, reading floor engravings (Elbereth)
+- pet-on-scroll workaround for identifying scrolls is safe
+- Wizard/Priest/Healer/Monk/Knight keep one pre-learned spell until it fades, ~20K turns (spell.h:17 KEEN)
+- strategy aligned with NetHackWiki Illiterate: only an "x"-signature engrave is safe, scroll of scare monster is the rare exception that doesn't break the conduct (https://nethackwiki.com/wiki/Illiterate)
+-->
+
+いかなる文字も読んではいけません。巻物、魔法書、フォーチュンクッキー、Ｔシャツの文字を読むことは禁じられます。また、床に文字を刻む際も、伝統的な文盲の署名である単一の「x」または「X」以外の文字を刻むことは許されません（エルベレスを手動で刻むことはできません）。ただし、白紙の巻物や魔法書、アロハシャツ、死者の書、あるいは床に元から刻まれているメッセージを読む行為はセーフです。
+
+巻物が読めないため、識別、武器・防具の強化、瞬間移動、解呪、虐殺といった強力な手段のほとんどが絶たれます。魔法書が読めないため、新しい呪文を学ぶことも古い呪文を再学習することもできず、初期習得呪文はやがて忘れ去られます。これにより、杖、薬、そして創意工夫に満ちた回避策への依存度が極限まで高まります。代表的な回避策は、**ペットの足踏みによるBUC判定**（犬がその上を歩くか？）と、**店主への売却価格による識別（価格識別）**（店主の提示価格を見ることは「読書」には含まれない）であり、これらを組み合わせることで識別の巻物の大半の役割を代行できます。
+
+#### 虐殺なし (No Genocide)
+
+<!-- audit
+2026-05-19:
+- genocide is only prompted by scroll of genocide and by sitting on a regular throne; wishes never offer it (do_genocide callers: read.c:1735-1737 SCR_GENOCIDE and sit.c:131 throne only)
+- uncursed scroll: single species; blessed scroll: whole class (do_class_genocide, read.c:2638)
+- throne prompt is single-species only: case 8 of 13 in throne_sit_effect, calls do_genocide(5) (sit.c:125-132)
+- Vlad's tower thrones take a different path with no genocide case (special_throne_effect, sit.c:63-66)
+- on a cursed scroll, empty input re-prompts and rndmonst() creates monsters; type "none" to escape (read.c:2848-2871)
+- end-of-game tracking counts G_GENOD species in mvitals[], not a u_conduct counter (insight.c:2951-2966 num_genocides)
+- cursed-scroll monster-creation preserves the conduct (no species gets G_GENOD'd)
+- strategy aligned with NetHackWiki Genocide, Throne: answer "none" at the prompt, throne genocides are always safe, Plane of Water class-`;` wipe is off-limits for genocideless (https://nethackwiki.com/wiki/Genocide, https://nethackwiki.com/wiki/Throne)
+-->
+
+いかなるモンスターも虐殺（ジェノサイド）してはいけません。虐殺のプロンプトが表示されるのは、**虐殺の巻物** を読んだとき（無呪は1種族、祝福はクラス全体）と、**通常の玉座に座ったとき**（13通りの結果のうちケース8で単一种族の虐殺を促される）の2つです。コンダクトを維持するには、対象を聞かれた際に **"none"** と入力してください（Enterキーだけを押すと再入力を求められるだけです）。呪われた巻物は入力した名前に応じたモンスターを逆虐殺（召喚）しますが、召喚自体は虐殺なしコンダクトを破棄しません。
+
+これは、マスターリッチやアーチリッチ、マインドフレア、コカトリスといった、熟練冒険者が普段なら即座に根絶する凶悪なモンスターのすべてと正面から向き合い続けることを意味します。また、**水の面** においても、クラゲやウナギやクラーケン（`;` クラス）を一網打尽にする定石が使えないため、呼吸の魔除けを用意して海の怪物たちの間合いを警戒しながら正攻法で渡り切らなければなりません。
+
+もっとも、これは比較的達成しやすいコンダクトの1つです。巻物を拾えず、玉座で虐殺を引かなかったために、意図せず自然にこのコンダクトを達成して昇天するプレイヤーも数多くいます。
+
+#### 変身の制限 (Polymorph Restrictions)
+
+<!-- audit
+2026-05-19:
+- no SCR_POLYMORPH exists in 5.0; "cursed scroll of polymorph" is not a thing (objects.h:1187-1265 scroll list has no polymorph entry; no SCR_POLYMORPH token anywhere in source)
+- breaks: genetic engineer claw (AD_POLY -> polyself)
+- breaks: eating chameleon, doppelganger, or mimic corpses (eat.c:1244-1263, eat.c:1199)
+- breaks: green slime auto-poly (timeout.c:493)
+- breaks: stone-golem auto-poly via poly_when_stoned (trap.c:3848)
+- Unchanging blocks all polymorph; system shock does NOT break the conduct (polyself.c:483-495)
+- sandestins are G_NOCORPSE; their corpses are unreachable (eat.c:1246)
+- poly_when_stoned only fires if already polymorphed into a non-stone golem; normal characters die (mondata.c:80-86)
+- strategy aligned with NetHackWiki Polymorph, Amulet of unchanging, Polypiling: Unchanging blocks every involuntary path, polypileless forfeits the polypile item-generation trick (https://nethackwiki.com/wiki/Polymorph, https://nethackwiki.com/wiki/Amulet_of_unchanging, https://nethackwiki.com/wiki/Polypiling)
+-->
+
+変身（ポリモーフ）に関する2つの独立したコンダクトがあります：
+
+**自己変身なし (Polyselfless)。** 自分自身の姿をいかなる形態にも変身させてはいけません。分かりやすい発生源：変身の薬や指輪、変身の杖や呪文の被弾、変身の罠。分かりにくい発生源：遺伝子工学者の爪攻撃、カメレオンやドッペルゲンガーやミミックの死体の摂食、そしてスライム化の未治療（緑色スライムに変身して死亡）。耐へんげの魔除け（Amulet of unchanging）を身につけていれば、これらすべての意図しない変身を遮断できます。なお、変身失敗によるショック死（システムショック）はコンダクト違反にはなりません。このコンダクトを守ることは、マスターマインドフレア、ゾーン、各種ドラゴンといった強力なモンスター形態の恩恵をすべて放棄することを意味します。
+
+**アイテム変身なし (Polypileless)。** アイテムを変身させてはいけません。変身の杖をアイテム山に振ったり、変身の薬にアイテムを浸したり、その他の手段でアイテムを別のアイテムへと変換する行為を禁じます。これにより、ダンジョン最強のアイテム錬成技である「ポリパイル」が封印されます。
+
+#### 願いの制限 (Wishing Restrictions)
+
+<!-- audit
+2026-05-19:
+- u.uconduct.wishes and u.uconduct.wisharti are separate counters with separate xlogfile achievements (you.h:157-158, topten.c:596-597)
+- wishing for the literal string "nothing" doesn't tick the counter (zap.c:6369)
+- Amulet-of-Yendor first-pickup wish must be declined for wishless (allmain.c:445)
+- wisharti ticks even for DENIED artifact wishes: increment is before the deny branch (objnam.c:5362-5365)
+- fountain water demon routes through mongrantswish -> makewish
+- wresting empty wands routes through makewish (zap.c:2583)
+- strategy aligned with NetHackWiki Conduct, Wish: wishless vs no-wishing-for-artifacts are separately tracked, "nothing" is the canonical escape for a forced wish (https://nethackwiki.com/wiki/Conduct, https://nethackwiki.com/wiki/Wish)
+-->
+
+願いに関する2つの独立したコンダクトがあります：
+
+**願いなし (Wishless)。** いかなる願いも叶えてもらってはいけません。杖、泉、煙の立つ薬のジン、玉座、その他すべての入手源からの願いを拒絶します。**イェンダーの魔除けを拾った瞬間に発生する願いプロンプト** においても、文字列として **"nothing"**（何もない）と入力すれば、願いカウンターを進めずにパスできます（"nothing" の入力は、あらゆる強制的な願いプロンプトを安全にやり過ごす標準的な脱出口です）。ダンジョンが偶然ドロップしてくれなかった必需品（銀色ドラゴンの鱗鎧、韋駄天の靴、軽量化の鞄など）を願いで補うことが一切できないため、極めて過酷な挑戦となります。
+
+**アーティファクト願いなし (No wishing for artifacts)。** 通常のアイテムを願うことは許されますが、アーティファクトを願うことだけを禁じます。これにより、[グレイズワンディル](#grayswandir) や [アイソピカの目](#eye-of-the-aethiopica) といった最強の至宝を即座に手に入れる最も効率的な戦略が封じられ、日用品や基本装備の補給だけに願いが限定されます。なお、アーティファクトを願って **拒絶された場合（手元に普通のアイテムが出現した場合）であってもカウンターは加算される** ため、誤ってアーティファクト名を指定しないよう注意してください。
+
+#### 複合コンダクト (Combining Conducts)
+
+<!-- audit
+2026-05-19:
+- Pauper does NOT suppress the starting pet; makedog() only returns NULL on pettype:none (dog.c:219-229)
+- only OPTIONS=pettype:none can skip the starting pet
+- nudist and blind have been tracked since 3.6
+- 5.0 added pauper, petless, permadeaf, sokoban, bonesless
+- vegan is a strict subset of vegetarian
+- all conducts appear in the show_conduct end-screen
+-->
+
+複数のコンダクトを組み合わせることで、難易度は跳ね上がります。ベジタリアン無神論者はどちらか単体よりも遥かに困難です。そして平和主義者・文盲・完全菜食・絶食・無神論・素手戦闘の全乗せ（いわゆる「フルコンダクト」）は、もはや伝説の領域であり、実際に達成者が存在します。規模感の目安として：公開サーバー NAO において、昇天者の約9人に1人が「願いなし」を達成していますが、「絶食」を達成しているのは約80人に1人に過ぎません。
+
+近年の NetHack では、公式に記録されるコンダクトがさらに拡張されました：
+
+**裸族 (Nudist)。** 鎧、シャツ、マント、小手、靴、兜、盾など、いかなる防具も身につけてはいけません。ゲーム開始時に `OPTIONS=nudist` を設定します。ダンジョン全体を下着一丁で戦い抜くことになります（NetHack 3.6 から公式追跡）。
+
+**盲目 (Blind / Zen)。** ゲーム全編を視覚なしでプレイします。ゲーム開始時に `OPTIONS=blind` を設定します。移動と戦闘にはテレパシーやその他の知覚手段が不可欠となります（NetHack 3.6 から公式追跡）。
+
+NetHack 5.0 では、さらに6つの追跡コンダクトが追加されました：赤貧 (Pauper)、ペットなし (Petless)、完全聾 (Permadeaf)、[倉庫番](#sokoban)、ボーンズなし (Bonesless)、そして振り直しなし (Unrerolled) です。Pauper、Permadeaf、Petless、Bonesless はゲーム開始前のオプション設定で宣言します。Sokoban はプレイ中の実際の行動に基づいて自動追跡され、Unrerolled はゲームが最初に提示したキャラクターを受け入れたことを記録します。
+
+#### 赤貧 (Pauper: 5.0新要素)
+
+<!-- audit
+2026-05-19:
+- Pauper is set_in_config: rcfile or NETHACKOPTIONS env only, not in-game O menu (optlist.h:559)
+- ini_inv early-return suppresses starting items only, not the pet (u_init.c:1308-1309)
+- Pauper does NOT suppress the starting pet (dog.c:219-229; only pettype:none does)
+- dog.c:262-267 skips the pony saddle for Pauper
+- Cleric, Knight, Monk start knowing SPE_PROTECTION (pauper_reinit, u_init.c:890-922)
+- Cave Dweller starts knowing FLINT (pauper_reinit, u_init.c:890-922)
+- Protection book is a load-bearing early-game pickup for those three roles
+- nudist cascade triggers when pauper is set (options.c:5290-5293)
+- end-of-game string at insight.c:2117-2119; xlogfile at topten.c:604
+-->
+
+完全に何もない無一文の状態でゲームを開始します：所持金ゼロ、所持品ゼロ、防具なし、初期武器なし。設定ファイルに `OPTIONS=pauper` を記述します（設定ファイルまたは環境変数 `NETHACKOPTIONS` からのみ設定可能であり、ゲーム内の `O` メニューでは切り替えられません）。赤貧を設定すると自動的に裸族（Nudist）も有効化されます。これは後から失われることのない恒久的コンダクトです：後からゴールドを拾ったり使ったりすることは禁じられておらず、「何もない状態でスタートしたこと」そのものが達成条件となります。
+
+開幕が完全に不可能になるのを防ぐため、わずかな補償措置が与えられます：未消費の武器スキルスロットが2枠与えられ、さらに各職業ごとに象徴的な呪文またはアイテムを1つ最初から認知しています。魔法使いは「衝撃」を、治療師は「回復」を、司祭・騎士・武闘家は「防護」を（司祭は聖水も認知）、考古学者は「試金石」を、洞窟人は「火打石」を、盗賊と観光客は「麻袋」を、侍は「軍糧丸」の食料をあらかじめ認知しています。浅い階層に配置された [補給コンテナ](#supply-containers) が、あなたの最初の装備セットの多くを賄ってくれるはずです。
+
+#### ペットなし (Petless: 5.0新要素)
+
+<!-- audit
+2026-05-19:
+- pettype:none bypasses pet_type (dog.c:225-229)
+- tamedog increments u.uconduct.pets across all taming paths
+- the endgame angel preserves petless (minion.c:533-539)
+- xlogfile achievement "petless" via add_achieveX (topten.c)
+- "dairy to foocubi" is fabricated: befriend_with_obj gates on is_domestic, and foocubi aren't (mondata.h:255-261)
+- foocubus + ring of adornment is pacification, not taming (mhitu.c doseduce only reads mon->mtame at 2263 and mon->mpeaceful at 2279; never sets mtame nor calls tamedog)
+- food thrown at hostile dogs and cats IS a taming path that breaks petless (dothrow.c:2268-2269 routes to tamedog)
+-->
+
+いかなるペットも従えてはいけません。設定ファイルに `OPTIONS=pettype:none` を記述して初期の相棒を完全にスキップします（各職業の初期設定を上書きします）。その後、いかなるモンスターであっても手懐けられた（tame になった）瞬間に、このコンダクトは失格となります。ゲームがそれを止めることはありません。怪物を飼いならす巻物、魅了呪文、敵対的な犬や猫に肉を投げ与える行為、魔法の罠の暴発など、いずれもその場で「ペットなし」を破棄します。
+
+#### 完全聾 (Permadeaf: 5.0新要素)
+
+<!-- audit
+2026-05-19:
+- permadeaf is u.uroleplay.deaf, in xlogfile (topten.c:602) and show_conduct (insight.c:2113)
+- Deaf macro at youprop.h:125
+- rcfile option name is `permadeaf` (or `deaf`), NOT `!acoustics` (a different flavor flag, flags.acoustics) (optlist.h:267-269 declares `deaf` with alias "permadeaf" binding u.uroleplay.deaf; optlist.h:143-145 declares `acoustics` binding flags.acoustics — separate flag)
+- permadeaf is set_in_config: rcfile only, not in-game O menu (options.c:5207)
+- there is no `-Dpermadeaf` syntax; `-D` is the debug/wizard-mode flag (unixmain.c:359-365)
+- Deaf only suppresses shrieker MESSAGES; makemon and aggravate still run (mon.c:4089-4106)
+-->
+
+いかなる音も聞こえない状態でプレイします。設定ファイルに `OPTIONS=permadeaf`（または `OPTIONS=deaf`）を記述します（設定ファイル専用であり、ゲーム内の `O` メニューでは切り替えられません。無関係な効果音設定の `acoustics` と混同しないようにしてください）。ゲームは第1ターンから恒久的な難聴（Deaf）の特性を持った状態として進行します：「水が流れる音がする」「誰かが金を数えている音がする」「扉が開く音がする」といった環境音メッセージや、モンスターの気配（「ズルズルという音がする」等）のメッセージがすべて抑制されます。
+
+抑制されるのは *メッセージの表示だけ* です。叫びキノコ（シュリーカー）は依然として叫び声をあげ、モンスターを召喚し、フロア全体を怒らせます（あなたにその警告メッセージが表示されないだけです）。`F` クラスのキノコの近くの不気味な静寂を、通常の「叫び声をあげた」メッセージと同等の致命的脅威として察知しなければなりません。
+
+完全聾プレイでは、視覚と論理的推論だけを頼りに迷宮を探索します。
+
+#### 倉庫番 (Sokoban: 5.0新要素)
+
+<!-- audit
+2026-05-19:
+- digging does NOT trigger sokoban_guilt; dig.c has no such call (sokoban_guilt callers limited to hack.c:299/307/398/403, read.c:1951, steed.c:767, zap.c:1711/5556 — none in dig.c)
+- breaks: squeeze through (hack.c:299, 307), boulder fracture by wand of striking (zap.c:5556)
+- breaks: polymorph a boulder (zap.c:1711), scroll of earth (read.c:1951), dismount onto a boulder (steed.c:767)
+- each violation costs -1 Luck and increments u.uconduct.sokocheat (trap.c:7039-7054)
+- achievement reported only if the branch was entered (insight.c:2215-2228)
+- teleportation is blocked by the level's noteleport flag (teleport.c:1185); it's a level constraint, not a conduct trigger
+-->
+
+倉庫番のルールを一度も破ることなく進入・プレイします。ゲーム終了時にこのコンダクトが記録されるために、必ずしも倉庫番を最後まで登りきる必要はありません。違反行為1回ごとに **幸運が 1点 低下** し、不正カウンターが加算されます：小型形態や極度に身軽な荷物による **巨岩のすり抜け**、力のボルトやつるはしや衝撃の杖による **巨岩の粉砕**、巨岩の **変身**、**大地の巻物** の読書、あるいは巨岩のマスへの **下馬** です。ゲームはこれらの違反を自動的に追跡します。
+
+#### ボーンズなし (Bonesless: 5.0新要素)
+
+<!-- audit
+2026-05-19:
+- bonesless achievement requires !flags.bones; you must turn bones loading off (topten.c:605)
+- not encountering bones is a separate Miscellaneous enlightenment line, NOT the conduct (insight.c:439)
+- you cannot get bonesless by luck alone
+- show_conduct never lists lifesaving uses; there is no amulet-of-life-saving tracking (insight.c:2089-2200 show_conduct enumerates rerolling/food/atheist/weaphit/pacifist/illiterate/pets/genocides/polypiles/polyselfs/wishes — no lifesaving counter; u.uconduct has no lifesave field)
+- `bones` is set_in_config: config file or command line only, not in-game O menu (optlist.h:213-215)
+- !flags.bones blocks both save (bones.c:360) and load (bones.c:642) — cuts both directions
+- "never encountered any bones levels" enlightenment requires flags.bones true AND u.uroleplay.numbones==0 (insight.c:439-441)
+-->
+
+過去のプレイヤー（または自分自身）の亡骸や遺留品から一切の遺産を受け継ぐことなくプレイします。設定ファイルに `OPTIONS=!bones` を記述します（[セーブとボーンズ](#saving-and-bones) を参照）。単に偶然ボーンズ階層に遭遇しなかっただけのプレイは、この公式コンダクトの対象にはなりません（明示的にオプションでボーンズ生成を無効化しておく必要があります）。
+
+---
+
+### 店の利用：信用・借金・トラブル {#shopping-and-shopkeeper-pricing}
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source:
+- 22 gem prices, Mohs hardness, hard-gem threshold >=8 verified (objects.h, shk.c).
+- Dunce cap and low-XL Tourist each multiply buy by 4/3.
+- Angry-shopkeeper surcharge adds (price+2)/3 per billed item (~33%).
+- Charisma price tiers: >18 halves, =18 2/3, 16-17 3/4, <=5 doubles, 6-7 3/2, 8-10 4/3.
+- Touchstone full ID requires blessed (or non-cursed for Archeologist/Gnome); uncursed gives streak color.
+-->
+
+店は単に品物を売買するだけの場所ではありません：その価格設定システムは、ゲーム内で最も強力な未識別アイテムの判別ツールです。詳細なメカニズムと価格換算表については第4部の [価格識別法](#the-price-is-right) で解説しました。ここでは残る重要な要素である、預け金（クレジット）、借金、店主との戦闘、そして見落としがちな特殊ルールを網羅します。
+
+何よりもまず、最大の致命的ミスを防ぐための鉄則：**「未払いの品物を持ったまま店の敷居を跨いではならない」**。店主は即座に敵対化し、出口を塞ぎ、キーストン・コップを召喚します。店を出る前に必ず `I` を押して `u`（未払い品）を確認し、代金を清算してください。後から代金を支払えば、追跡してくるキーストン・コップは全員撤収します。
+
+#### 信用と借金 (Credit and Debt)
+
+各店主は、顧客ごとに「預け金（クレジット / Credit）」「借金（デビット / Debit）」「一時借受金（ローン / Loan）」の3つの数字を記録した台帳を管理しています。
+
+**預け金（クレジット）を得る方法。** 通常は2つのルートがあります：
+
+1. **ゴールドを持っていない店主にアイテムを売却する。** 現金を支払えない店主は、通常の提示買取価格の 10分の9 に相当する額を預け金として提案してきます：*「現在現金を持ち合わせておりません。代わりに N ゾークミドの預け金でよろしいですか？」*（店主が現金を持っていれば普通に現金で支払われます。一部不足している場合でも不足分だけが預け金になるわけではありません）。
+2. **店の床にゴールドを置く。** 店の床の上にゴールドを置く（または投げる）と、既存の借金を返済した後の残額がすべてあなたの預け金残高として記録されます。これにより、持ち歩いているゴールドをレプラコーンに盗まれない安全な店限定の預金へと変換できます。
+
+**預け金の使われ方。** 店で買い物をする際、店主はまず預け金残高から購入代金を相殺します（*「代金は預け金から差し引かれました」*）。不足分がある場合のみ、所持金から支払われます。預け金は店主ごとに個別に記録され、現金として払い戻すことはできません。
+
+**預け金での支払いは現金より有利か不利か？** 価格そのものは全く同一です：預け金はカリスマ補正、観光客補正、激怒補正を適用した *後の* 最終価格から厳密に 1:1 の比率で差し引かれ、割引も割増もありません。違いは資金の「安全性」と「流動性」にあります：
+
+- **有利な点：** レプラコーンに盗まれる心配がなく、所持重量もゼロになります。何度も立ち寄る予定の店は銀行として機能します。
+- **不利な点：** その店主の店でしか使えません。欲しい品がない店で預け金を溜め込みすぎたり、店主が死亡・敵対化した場合、その預け金は電子の藻屑と消え去ります。また、祭壇への寄付や僧侶への謝礼、悪魔へのワイロとして預け金を使うことはできません。
+
+現実的な運用：何度も訪れる予定の拠点（[ノーム鉱山](#the-gnomish-mines) の雑貨屋などが定番）に余剰資金を預け金として保管するのは賢明ですが、そこで使う予定以上の金額を預け入れないようにしましょう。
+
+（なお、古い小技として *クレジット複製* があります：ゴールドを入れた袋を店内に置き、ペットにその袋を咥えさせて店外へと運ばせます。店には預け金が計上されたまま、コインそのものも手元に回収できます。）
+
+**借金（Debit）** はその逆です：店内で未払いのアイテムを *使用* した際（巻物を読む、薬を飲む、杖を振るなど）、購入手続きが完了していない場合に発生します。品物の価格の一部が使用料として請求され、以後の売却金や床置きゴールドはまずこの借金の返済に充当されます。
+
+**一時借受金（Loan）** は、店の床に落ちていた店主のゴールドをあなたが拾い上げた際に記録される名目です。店内にゴールドを置くことで、まずこのローンが返済されてから預け金へと加算されます。
+
+#### 店主の行動 (Shopkeeper Behavior)
+
+店主はゲーム内で最強クラスのNPCです：高いHP、優れたAC、重い打撃力を誇り、エルベレスも通用せず、他のモンスターに通用する賢い脱出技も効きません。さらに彼らはすべてを見通しています：透明状態であっても、あなたが拾い上げた品物や店内に持ち込まれたアイテムのすべてを正確に把握しています。
+
+::: dense-table
+
+| トラブル内容 | 店主の反応 | 最も安全な解決法 |
+|---------|-----------------------|------------|
+| 未払いのまま店を出ようとする | 出口を塞ぎ、強行脱出にはコップを呼ぶ | `I` を押して `u` で確認し、先に支払う |
+| 未払いの品物を破損・使用する | 損害賠償や使用料を請求額に加算する | 店を出る前に清算する |
+| 施錠された店の扉を蹴り破る | 400 zm の弁償を要求。拒否すると戦闘 | 鍵開け器具を使うか開扉の杖で開ける |
+| 店の壁を掘り抜く | 強さ1点につき 10 zm の弁償を要求 | 弁償するか、そもそも壁を掘らない |
+| 借金を抱えたまま下へ穴を掘る | 所持品の鞄・荷物全体を差し押さえる | 掘る前に借金を完全に完済する |
+| 店主を攻撃する | 激怒して敵対化する | `#chat` で話し掛け、1,000 zm 支払って和解 |
+| 透明状態またはつるはしを構えて入店 | 入店を拒絶される | 姿を現し、つるはしを鞘に収める |
+
+:::
+
+アーティファクトの売買価格は、基本価格の4倍に設定されます（巨人殺しの 800 zm から、ストームブリンガーやグレイズワンディルの 32,000 zm まで）。未識別の長剣に5桁（数万ゾークミド）の提示価格がついた場合、細心の注意を払う価値があります。
+
+店主を倒して在庫のすべてとレジの現金（死亡時に 1,000〜4,000 zm と万能鍵をドロップ）を強奪することも *可能* ですが、極めて危険な死闘になります。店主を殺害すること自体はキーストン・コップを召喚しません（コップは未払いのまま店を出たときに現れます）。しかし殺害は属性値を激減させ、混沌以外の属性は幸運 −2 とテレパシーを喪失します。**あらかじめ店主を変身（ポリモーフ）させてから倒す** と「殺人」としてカウントされなくなるため、秩序や中立のキャラクターが店主を始末する際はこの手段が好まれます。終盤の屈強な英雄が店を制圧することはありますが、中盤に気軽に行うべき策ではありません。
+
+店でのミスを防ぐ3つの習慣：
+
+- **請求額を直接確認する。** `I` を押して `u` を選択し、未払いの所持品を一覧表示してください。扉のマスの上では売却が成立しないため、すべてを敷居に落とす古い裏技よりも所持品コマンドの方が遥かに正確です。
+- **売却してから預け入れる。** 通常の売却は現金で支払われます。預け金にしたい場合は、受け取ったゴールドをそのまま店の床に置いてください。
+- **ボーンズ階層の店に注意。** 過去のプレイヤーのボーンズ階層で見つかった店では、店内のすべてのアイテムは死亡した冒険者の幽霊店主に帰属しています。床から拾えば、新しい店主から定価を請求されます。店の床はタダの戦利品置き場ではありません。
+- **扉に刻まれた「棚卸しのため休業中」（"Closed for inventory"）。** これは放棄された店ではなく、扉が **施錠されて** 生成された店を意味します。店主は依然として店内に控えており、商品は未払いです。鍵開け器具を使うか開扉の杖で開けてください（オルクスの町は店主のいない本物の廃墟であるため、そこのアイテムだけは本当に持ち主がいません）。
+
+#### 宝石の売却識別 (Gem Identification Through Selling)
+
+未識別の宝石を店主に売却することは、**信頼できる価格識別手段ではありません**。店主は、本物の宝石であれ模造品（無価値なガラス）であれ、未識別の宝石には一律 3〜8 zm 程度しか提示しません。その提示額は宝石の真の正体と店主の気分によって変動します。本物のダイヤモンドも無価値なガラス玉も同じ 3〜8 zm の範囲で提示されるため、売却価格だけで両者を見分けることは不可能です。同じ未識別宝石を2つの異なる店に持ち込んでも、提示額はバラバラになります。
+
+本物の識別には **試金石** (Touchstone: 灰色の石、基本価格 45、鉱山などで時折発見される) を使用してください。未識別の宝石を **祝福された** 試金石に擦りつける（`#apply`）と、その宝石の真の名称が即座に判明します。無呪の試金石では、条痕色（擦り痕の色）が判明するだけにとどまります（考古学者とノームは種族・職業特権により、無呪の石であっても完全な名称を看破できます）。硬度は関係なく、あらゆる宝石を判別可能です。一度識別されれば、本物の宝石はその真の価値（多くは数百〜数千 zm）で売却できるようになり、ガラス玉は二値同然となります。
+
+##### 本物の宝石の価格表 (Real-gem prices)
+
+正体が判明した宝石は、その種類によって基本価格が決定されます。すべての宝石は重量 1 であり、同種かつ識別済みの宝石は何個あってもインベントリの1枠にスタックされるため、大量のルビーを溜め込む負担はアイテム欄1枠の消費だけで済みます。
+
+以下にすべての本物の宝石の基本価格を掲載します。通常の売却時の買取提示額は、カリスマ補正や各種修正が入る前の段階で、基本価格のおよそ半分から始まります。
+
+::: web-only
+カリスマ / 売却 / 観光客 / 激怒ツールバーを使用して、各種補正による価格変動を確認できます。
+:::
+
+「モース」列は、現実の鉱物硬度（滑石 1、ダイヤモンド 10）を表すモース硬度であり、ゲーム内でも2つの重要な判定に使われます。モース硬度 8 以上の宝石は **「硬い (hard)」** とみなされ、柔らかい宝石やガラス玉には不可能な2つの特性を持ちます：床に [エルベレス](#elbereth) などの文字を刻む際、指先や柔らかい宝石のような一時的な埃の落書きではなく、**永久的な刻み文字** として刻み込むスタイラス（鉄筆）として機能します。また、投げた宝石が命中した際、硬い宝石なら 3回中2回 は壊れずに残ります（柔らかい宝石やガラス玉は 3回中1回 しか残りません）。なお硬度は試金石による識別には影響せず、あらゆる宝石が祝福された試金石で識別可能です。
+
+<div class="price-id-toolbar"></div>
+
+| 基本価格 | 宝石名 | 色 | モース硬度 | 特記事項 |
+|------:|-----------------------|-----------------|-----:|--------------------------------|
+|  4500 | ダイリチウムの結晶 (Dilithium crystal) | 白色 |    5 | 最も希少な白い宝石 |
+|  4000 | ダイヤモンド (Diamond) | 白色 |   10 | ゲーム内で最も硬い物質 |
+|  3500 | ルビー (Ruby) | 赤色 |    9 | |
+|  3250 | 風信子石 (Jacinth) | 橙色 |    9 | 2種類ある橙色の宝石の1つ |
+|  3000 | サファイア (Sapphire) | 青色 |    9 | |
+|  2500 | ブラックオパール (Black opal) | 黒色 |    8 | |
+|  2500 | エメラルド (Emerald) | 緑色 |    8 | |
+|  2000 | トルコ石 (Turquoise) | 緑色 |    6 | |
+|  1500 | 黄水晶 (Citrine) | 黄色 |    6 | |
+|  1500 | 藍玉 (Aquamarine) | 緑色 |    8 | |
+|  1000 | 琥珀 (Amber) | 黄褐色 |    2 | 最も柔らかい宝石。埃文字のみ |
+|   900 | 黄玉 (Topaz) | 黄褐色 |    8 | |
+|   850 | 黒玉 (Jet) | 黒色 |    7 | |
+|   800 | オパール (Opal) | 白色 |    6 | |
+|   700 | 金緑石 (Chrysoberyl) | 黄色 |    5 | |
+|   700 | 柘榴石 (Garnet) | 赤色 |    7 | |
+|   600 | 紫水晶 (Amethyst) | 紫色 |    7 | |
+|   500 | 碧玉 (Jasper) | 赤色 |    7 | |
+|   400 | 蛍石 (Fluorite) | 紫色 |    4 | |
+|   300 | 翡翠 (Jade) | 緑色 |    6 | |
+|   200 | 黒曜石 (Obsidian) | 黒色 |    6 | |
+|   200 | 瑪瑙 (Agate) | 橙色 |    6 | |
+|     0 | (模造宝石 / ガラス玉) | 任意の色 |    5 | 未識別時は 3〜8 zm で売却 |
+
+<div class="price-id-toolbar"></div>
+
+持ち歩くか捨てるかの判断は、「所持枠が逼迫した際、どの色から優先して間引くか」という点に集約されます。ブラックオパール、エメラルド、ルビーは常に確保すべきであり、瑪瑙や黒曜石は真っ先に捨てる候補となります。
+
+いくつかの経験則：
+
+- **本物の宝石はどれもユニコーンの幸運獲得において完全に同等の価値を持つ。** 200 zm の瑪瑙を自属性のユニコーンに投げても、3250 zm の風信子石を投げても、得られる幸運は等しく **+5** です。自属性のユニコーンに食べさせる前に、安価な宝石を売却してしまってはいけません。
+- **価格の列は、売却時および最終スコアの計算において重要になります。**
+- **どうしても宝石を捨てなければならない場合**（鉱山最深部でアイテム枠が溢れたり、拠点を整理する際）、*安価な色の重複した個体から優先して捨ててください*。試金石による識別作業がすでに完了しているため、各色の識別済み宝石は最低1個ずつ手元に残しておきましょう。
+- **最上位グループ**（2500 zm 以上：ダイリチウム、ダイヤモンド、ルビー、風信子石、サファイア、ブラックオパール、エメラルド）は、個別売却する価値があります。基本レートでの買取価格は基本価格の半分（ダイヤモンドなら 2,000 zm）から始まり、宝石を扱わない店は買い取ってくれません。
+- **無価値なガラス玉が幸運を減らすことは絶対にない。** ガラス玉をユニコーンに投げた場合、拒絶される（「そんなゴミには興味がない」）か、好意的に受け取られるかのどちらかです。幸運が変動するリスクがあるのは、**異なる属性** のユニコーンに *本物の宝石* を投げた場合（−3 から +3 のランダム変動）だけです。メッセージの言い回しに注目してください：幸運を高めてくれた本物の宝石を受け取ったユニコーンは *「感謝して（gratefully）」* 受け取り、何も起きなかったガラス玉を受け取ったユニコーンは *「愛想よく（graciously）」* 受け取ります。
