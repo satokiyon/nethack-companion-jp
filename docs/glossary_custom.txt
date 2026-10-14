@@ -1,15 +1,17 @@
-# NetHack Japanese Custom Glossary (Extracted from NetHackJP & Standard JNetHack)
+# NetHack Japanese Custom Glossary (Strict NetHackJP 5.0 Source-Aligned)
+# Single Source of Truth: NetHackJP (mon_jp.c, obj_jp.c, spell_jp.c, botl.c, fountain.c, role.c)
 
-## Roles (役職)
+## Roles (役職) - from NetHackJP role.c & mon_jp.c
 Archeologist: 考古学者
-Barbarian: バーバリアン
+Barbarian: 野蛮人
 Caveman: 洞窟人
 Cavewoman: 洞窟人
-Healer: 僧侶(治療者/Healer)
+Cave Dweller: 洞窟人
+Healer: 治療師
 Knight: 騎士
-Monk: 修道士
-Priest: 僧侶
-Priestess: 女僧侶
+Monk: 武闘家
+Priest: 司祭
+Priestess: 司祭
 Ranger: レンジャー
 Rogue: 盗賊
 Samurai: 侍
@@ -17,75 +19,113 @@ Tourist: 観光客
 Valkyrie: ワルキューレ
 Wizard: 魔法使い
 
-## Races (種族)
+## Races (種族) - from NetHackJP role.c & mon_jp.c
 Human: 人間
 Elf: エルフ
 Dwarf: ドワーフ
 Gnome: ノーム
 Orc: オーク
 
-## Alignments (属性)
+## Alignments (属性) - from NetHackJP
 Lawful: 秩序
 Neutral: 中立
 Chaotic: 混沌
 Unaligned: 無属性
 
-## Dungeon Branches & Special Levels (ダンジョン階層・特殊面)
-Dungeons of Doom: 運命の迷宮
-Gnomish Mines: ノームの鉱山
-Mine's End: 鉱山最下層
-Sokoban: 倉庫番
-Fort Ludios: フォートルディオス
-Quest: クエスト
-Rogue Level: ローグ階層
-Medusa's Island: メデューサの島
-Castle: 城
-Gehennom: ゲヘナ
-Vlad's Tower: ヴラドの塔
-Wizard's Tower: 魔法使いの塔
-Fake Wizard's Tower: 偽の魔法使いの塔
-Vibrating Square: 振動する正方形
-Sanctum: 最奥部(サンクトゥム)
-Moloch's Sanctum: モロクの至聖所
-Elemental Planes: 精霊界
-Plane of Earth: 土の界
-Plane of Air: 風の界
-Plane of Fire: 火の界
-Plane of Water: 水の界
-Astral Plane: 幽体界
+## Monsters (モンスター抜粋・注意語) - from mon_jp.txt
+Floating eye: さまよう目
+Water nymph: 水のニンフ
+Wood nymph: 木のニンフ
+Mountain nymph: 山のニンフ
+Pony: 仔馬
+Horse: 馬
+Warhorse: 戦闘用の馬
+Kitten: 小猫
+Fire ant: 火蟻
+Killer bee: 殺人蜂
+Newt: イモリ
+Kobold: コボルド
 
-## Attributes & Stats (能力値・ステータス)
-Strength: 腕力
-Dexterity: 器用度
-Constitution: 体質
-Intelligence: 知力
-Wisdom: 賢さ
-Charisma: 魅力
-Hit Points: ヒットポイント(HP)
-Magic Energy: 魔法エネルギー(PW)
-Armor Class: アーマークラス(AC)
-Alignment: 属性
+## Items & Equipment (武具・道具・アイテム) - from obj_jp.txt / obj_jp.c
+Touchstone: 試金石
+Bullwhip: 鞭
+Fedora: フィドーラ
+Tinning kit: 缶詰作成道具
+Lock pick: 鍵開け器具
+Cloak of displacement: 幻影のクローク
+Cloak of magic resistance: 魔法を防ぐクローク
+Ring mail: 鉄環の鎧
+Splint mail: 鉄片の鎧
+Plate mail: 鋼鉄の鎧
+Chain mail: 鎖かたびら
+Scale mail: 鱗の鎧
+Gray dragon scale mail: 灰色ドラゴンの鱗鎧
+Silver dragon scale mail: 銀色ドラゴンの鱗鎧
+Quarterstaff: 六尺棒
+Flint: 火打ち石
+Sling: スリング
+Small shield: 小さな盾
+Hawaiian shirt: アロハシャツ
+Expensive camera: 高価なカメラ
+Credit card: クレジットカード
+Apple: りんご
+Carrot: にんじん
+Amulet of strangulation: 絞殺の魔除け
+Amulet of reflection: 反射の魔除け
+Amulet of life saving: 命の魔除け
+Wand of sleep: 眠りの杖
+Scroll of magic mapping: 地図の巻物
+Scroll of identify: 識別の巻物
+Potion of healing: 回復の薬
+Potion of extra healing: 超回復の薬
+Potion of sickness: 病気の薬
+Holy water: 聖水
 
-## Status Conditions (状態異常・負荷・空腹度)
-burdened: 負担
-stressed: 重荷
+## Spells (呪文) - from spell_jp.c
+force bolt: 衝撃
+magic mapping: 地図化
+sleep: 眠り
+healing: 回復
+extra healing: 超回復
+cure sickness: 病気治療
+remove curse: 解呪
+
+## Artifacts (アーティファクト) - from obj_jp.c
+Excalibur: エクスカリバー
+Mjollnir: ミョルニル
+Demonbane: デーモンベイン
+Platinum Yendorian Express Card: 白金のエンドール急行カード
+
+## Dungeon Features & Terrain (施設・地形) - from NetHackJP C sources
+fountain: 泉
+sink: 流し台
+throne: 玉座
+altar: 祭壇
+grave: 墓
+chest: 宝箱
+box: 箱
+sack: 麻袋
+door: 扉
+stair: 階段
+
+## Status Conditions (状態異常・負荷・空腹度) - from botl.c
+burdened: 重荷
+stressed: 圧迫
 strained: 過重
-overtaxed: 限界
+overtaxed: 超過重
 overloaded: 過積載
 hungry: 空腹
 weak: 衰弱
-fainting: 気絶寸前
-fainted: 気絶
-starved: 餓死
+fainting: 失神寸前
+fainted: 失神
+starved: 飢餓
 blind: 盲目
 confused: 混乱
 stunned: 朦朧
 hallucinating: 幻覚
-hallucination: 幻覚
 paralyzed: 麻痺
 poisoned: 毒
-
-## BUC Status (呪詛状態)
-blessed: 祝福された
-uncursed: 無呪の
-cursed: 呪われた
+stoning: 石化
+sliming: スライム化
+illness: 病気
+strangulation: 窒息

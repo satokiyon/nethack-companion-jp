@@ -21,9 +21,16 @@ def build(skip_pdf=False):
     os.chdir(spoilers_dir)
 
     # Pandoc のパス追加 (Windows)
-    pandoc_standard = r"C:\Program Files\Pandoc"
-    if os.path.exists(pandoc_standard) and pandoc_standard not in os.environ.get('PATH', ''):
-        os.environ['PATH'] = pandoc_standard + os.pathsep + os.environ.get('PATH', '')
+    pandoc_candidates = [
+        os.path.expandvars(r"%LOCALAPPDATA%\Pandoc"),
+        r"C:\Users\satok\AppData\Local\Pandoc",
+        r"C:\Program Files\Pandoc",
+        r"C:\Program Files (x86)\Pandoc"
+    ]
+    for pc in pandoc_candidates:
+        if os.path.exists(pc) and pc not in os.environ.get('PATH', ''):
+            os.environ['PATH'] = pc + os.pathsep + os.environ.get('PATH', '')
+            break
 
     print("=== 1. ASCII マップ整合性検証 ===")
     ja_md = 'companion.ja.md'

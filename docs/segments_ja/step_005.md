@@ -10,7 +10,7 @@
 
 4. [迷宮の地形と構造](#the-lay-of-the-land) — 部屋、通路、ダンジョンの特徴（マップ付き）
 5. [ダンジョン生態系フィールドガイド](#field-guide-to-dungeon-fauna) — モンスター系統の一覧
-6. [注目の名所・設備](#points-of-interest) — 噴水、祭壇、玉座、流し台
+6. [注目の名所・設備](#points-of-interest) — 泉、祭壇、玉座、流し台
 7. [分岐とランドマーク](#branches-and-landmarks) — 鉱山、倉庫番、そしてその先へ
 8. [罠と危険](#traps-and-hazards) — ダンジョンが仕掛ける数々の罠
 9. [感覚と物音](#feelings-and-sounds) — 何が起きたかを伝える謎めいたメッセージ
@@ -42,7 +42,7 @@
 
 27. [呪文の詠唱](#spellcasting) — 学びを重んじる冒険者のための魔法
 28. [幸運と運命](#luck-and-fortune) — 冒険者の運命を形作る隠された数値
-29. [能力値の鍛錬](#exercising-your-stats) — 腕力・器用度・体質・賢さを育てる日常の行動
+29. [能力値の鍛錬](#exercising-your-stats) — 腕力・知力・賢さ・器用度・体質・魅力を育てる日常の行動
 30. [スキルの熟達](#enhancing-skills) — 戦闘スタイルと魔法技能の強化
 31. [願いと祈願](#wishes-and-wishing) — 望むものを手に入れる究極の力
 32. [アーティファクト](#artifacts) — 伝説の武具とその入手方法
@@ -63,4 +63,3 @@
 44. [内在・外在能力データ表](#intrinsic-and-extrinsic-tables) — 獲得できる能力とその付与源
 45. [前回からの変更点](#what-changed-since-last-time) — 3.6.x と 5.0 の違いと対策
 46. [謝辞](#acknowledgements) — 巨人の肩の上に立って
-

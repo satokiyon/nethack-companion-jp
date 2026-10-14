@@ -67,7 +67,7 @@ def check_text(text, orig_text=""):
     cleaned = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL) # HTMLコメントを除外
     cleaned = re.sub(r'『[A-Za-z0-9\s,\'-\./]+』', '', cleaned) # 日本語書籍・ゲーム名表記を除外
     cleaned = re.sub(r'「[A-Za-z0-9\s,\'-\./]+」', '', cleaned)
-    cleaned = re.sub(r'\([A-Za-z0-9\s,\'-\./]+\)', '', cleaned)
+    cleaned = re.sub(r'[（\(][^）\)]*?[A-Za-z]+[^）\)]*?[）\)]', '', cleaned) # 半角・全角カッコ内の英語併記を除外
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
     cleaned = re.sub(r'`.*?`', '', cleaned)
     cleaned = re.sub(r'\[.*?\]\(.*?\)', '', cleaned) # リンクURL

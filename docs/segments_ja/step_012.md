@@ -4,7 +4,7 @@
 
 敵対的なモンスターを討ち倒せば、通常はこの数値が上昇します。逆に、平和的な（友好的・中立的な）モンスターを殺害すると、どの属性であっても属性値が即座に5ポイント削られ、理不尽な虐殺は幸運 (Luck) の喪失という重い罰を招きます。一部の役職にはさらに固有の厳しい戒律が存在します。騎士が無力な敵を攻撃すると騎士道違反として評価を失い、侍が平和的な者に斬りかかれば武士の義理を欠いたとして手痛いペナルティを受けます。傷ついた属性値は、通常の敵対モンスターを討伐することや、祭壇に新鮮な[生贄](#sacrifice)を捧げることで回復できます。
 
-属性はまた、信仰する神、挑むべき固有のクエスト、そして触れても安全なアーティファクトを決定づけます。秩序のキャラクターは経験レベル5 (XL 5) 以上で噴水からエクスカリバーを引き抜く資格を得ます。盗賊は常に混沌であり、ドワーフは常に秩序です。祭壇に関する詳細なルールについては、[祭壇と属性](#altars-and-alignment)を参照してください。
+属性はまた、信仰する神、挑むべき固有のクエスト、そして触れても安全なアーティファクトを決定づけます。秩序のキャラクターは経験レベル5 (XL 5) 以上で**泉 (fountain)** からエクスカリバーを引き抜く資格を得ます。盗賊は常に混沌であり、ドワーフは常に秩序です。祭壇に関する詳細なルールについては、[祭壇と属性](#altars-and-alignment)を参照してください。
 
 ---
 
@@ -20,4 +20,3 @@
 - food ration weight and nutrition (objects.h:1110)
 - strategy aligned with NetHackWiki Curse-testing, Altar: altar amber/black flash and pet step-avoidance are confirmed canonical curse-testing techniques (https://nethackwiki.com/wiki/Curse-testing, https://nethackwiki.com/wiki/Altar)
 -->
-
