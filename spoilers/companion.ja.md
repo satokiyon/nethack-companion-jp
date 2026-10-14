@@ -2517,3 +2517,513 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 ペットも耐性を獲得でき、時には死から蘇ることもできます。適切なモンスターの死体を食べたペットは耐性を獲得します：[火炎耐性](#damage-resistances)、冷気耐性など、ダンジョンの死体ビュッフェが提供するあらゆる耐性が対象となります。これを計画的にコントロールすることは難しいですが、すべての死体をプレイヤー自身が独占するのではなく、ペットにも死体を食べさせる十分な理由になります。
 
 もし愛用の仲間が戦闘で倒れてしまったら、同属性の祭壇の上でペットの死体の上に立ち、神に祈ってください。神がペットを生き返らせてくれることがあります。ただしこれは最終手段であり、何度も使える技ではありません（祈りのクールダウン、属性値、幸運値のすべてが消費・判定されます）。
+
+## 第4部：装備と補給品 (Part Four: Gear and Provisions)
+
+NetHackに登場する大半のアイテムは、正体を偽って出現します。その外見（未識別名）はゲームごとにシャッフルされますが、価格、重量、材質、そしてその挙動が変わることはありません。本章では、それらの変わらない手がかりを活用して的確な判断を下す方法を解説します。何をテストし、何を装備し、何を温存し、そして何に触れてはならないのかを学んでいきましょう。
+
+### 実践的な識別戦略 (A Practical Identification Strategy)
+
+<!-- audit
+2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified every price-group membership (scrolls/potions/rings/wands/spellbooks/armor/gems, objects.h), Charisma buy/sell multipliers & surcharges (shk.c), cursed gain-level rise, shopkeeper buyoff.
+-->
+
+ここに、恐るべき迷宮における核心的なパズルがあります。あなたは無数のアイテムを発見することになりますが、その大半は何であるか分からないのです。
+
+ゲームを開始するたびに、ダンジョンは山札をシャッフルします。薬、巻物、杖、指輪、魔除け、そして魔法書には、すべてランダムな外見が割り振られます。あるゲームでの「濁った薬」は回復の薬かもしれませんが、次のゲームでは麻痺の薬かもしれません。ゲーム間で一貫性を保ち続けるのは、アイテムの種別記号そのもの（`!` は常に薬、`?` は常に巻物）と、**アイテムの価格** だけです。そしてこの価格こそが、あなたが持つ最も強力な識別ツールのひとつとなります。
+
+<!-- FLOWCHART-BEGIN -->
+::: web-only
+
+<div><figure style="margin: 1.5em 0; text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 736" role="img" aria-label="識別のフローチャート" style="max-width: 760px; width: 100%; height: auto; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;"><title>識別のフローチャート</title><defs><marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker><style>.start{fill:#E8F4FD;stroke:#3B6FA0;stroke-width:2}.decision{fill:#FFF4E6;stroke:#B5651D;stroke-width:2}.action{fill:#F0F9E8;stroke:#5B8E3A;stroke-width:2}.final{fill:#FCE8E6;stroke:#A14A3F;stroke-width:2}.label{font-size:18px;fill:#1f2933;text-anchor:middle}.startlbl{font-size:19px;font-weight:600;fill:#1f2933;text-anchor:middle}.branch{font-size:16px;font-style:italic;fill:#5a5a5a}.edge{fill:none;stroke:#5a5a5a;stroke-width:1.5}</style></defs><rect class="start" x="40" y="20" width="320" height="50" rx="25" ry="25"/><text class="startlbl" x="200" y="51">アイテムを発見した</text><path class="edge" d="M 200 70 L 200 100" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="100" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="133">祭壇へ行けるか？</text><path class="edge" d="M 360 128 L 430 128" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="121" text-anchor="middle">はい</text><rect class="action" x="430" y="100" width="290" height="56" rx="8" ry="8"/><text class="label" x="575" y="133">床に落とし、BUCを確認。</text><text class="branch" x="210" y="172">いいえ</text><path class="edge" d="M 200 156 L 200 190" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="190" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="223">ペットが近くにいるか？</text><path class="edge" d="M 360 218 L 430 218" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="211" text-anchor="middle">はい</text><rect class="action" x="430" y="184" width="290" height="62" rx="8" ry="8"/><text class="label" x="575" y="210">落とす。ペットが避けるか？</text><text class="label" x="575" y="232" style="font-size: 16px;"><tspan style="font-style: italic; fill:#5a5a5a;">はい</tspan>: おそらく呪い; <tspan style="font-style: italic; fill:#5a5a5a;">いいえ</tspan>: 不明</text><text class="branch" x="210" y="262">いいえ</text><path class="edge" d="M 200 246 L 200 290" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="290" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="323">店へ行けるか？</text><path class="edge" d="M 360 318 L 430 318" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="311" text-anchor="middle">はい</text><rect class="action" x="430" y="290" width="290" height="56" rx="8" ry="8"/><text class="label" x="575" y="323">価格を確認。</text><text class="branch" x="210" y="362">いいえ</text><path class="edge" d="M 200 346 L 200 380" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="380" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="413">杖か？</text><path class="edge" d="M 360 408 L 430 408" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="401" text-anchor="middle">はい</text><rect class="action" x="430" y="380" width="290" height="56" rx="8" ry="8"/><text class="label" x="575" y="413">試し書きテスト。</text><text class="branch" x="210" y="452">いいえ</text><path class="edge" d="M 200 436 L 200 470" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="470" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="503">流し台があり、予備の指輪や薬か？</text><path class="edge" d="M 360 498 L 430 498" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="491" text-anchor="middle">はい</text><rect class="action" x="430" y="470" width="290" height="56" rx="8" ry="8"/><text class="label" x="575" y="503">指輪を落とす、または薬を浸す。</text><text class="branch" x="210" y="542">いいえ</text><path class="edge" d="M 200 526 L 200 560" marker-end="url(#arrowhead)"/><rect class="decision" x="40" y="560" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="593">使用テストは安全か？</text><path class="edge" d="M 360 588 L 430 588" marker-end="url(#arrowhead)"/><text class="branch" x="395" y="581" text-anchor="middle">はい</text><rect class="action" x="430" y="560" width="290" height="56" rx="8" ry="8"/><text class="label" x="575" y="593">慎重に試す。</text><text class="branch" x="210" y="632">いいえ</text><path class="edge" d="M 200 616 L 200 660" marker-end="url(#arrowhead)"/><rect class="final" x="40" y="660" width="320" height="56" rx="10" ry="10"/><text class="label" x="200" y="693">識別の巻物を読む。</text></svg><figcaption style="font-style: italic; color: #5a5a5a; font-size: 0.9em; margin-top: 0.5em;">識別のフローチャート：最も安価な方法から順に試し、識別の巻物は最後の手段とする。</figcaption></figure></div>
+
+:::
+<!-- FLOWCHART-END -->
+
+#### 祝福、無呪、呪い (BUC)
+<!-- audit
+2026-05-18:
+- altar flash on drop: amber blessed, black cursed, no flash uncursed (do.c:379-388)
+- pet steps around cursed items (dogmove.c:535-538); starvation exception
+- cursed gain-level rockets you through the ceiling (potion.c:1083-1109)
+- cursed or confused scroll of teleportation is a LEVEL teleport (read.c:2015-2025)
+- holy water made by praying on a co-aligned altar with potions of water (pray.c:2336-2339)
+- Priest senses BUC naturally (invent.c:2763, 3545)
+- blessed scroll of identify: at least 2 items, plus 1-in-5 chance for the whole pack (read.c:2086-2092)
+- cursed scroll of identify IDs only itself on first cursed read (read.c:2074-2081)
+- strategy aligned with NetHackWiki Identification, Curse-testing, BUC: altar > pet > shop-price > engrave/sink > use-test > scroll-of-identify ordering matches canonical advice (https://nethackwiki.com/wiki/Identification, https://nethackwiki.com/wiki/Curse-testing, https://nethackwiki.com/wiki/BUC)
+-->
+
+アイテムが「何であるか」を気にする前に、まずそれが「どのような状態にあるか」を知る必要があります。恐るべき迷宮にあるすべてのアイテムは、**祝福（blessed）**、**無呪（uncursed）**、または **呪い（cursed）** のいずれかの状態にあります（略して **BUC** と呼ばれます）。神々はあなたの装備に対して強い関心を持っており、その関心は具体的な結果をもたらします：
+
+- **祝福された** 識別の巻物は、1〜4個のアイテムを識別し、5回に1回の確率で手持ちの全アイテムを識別します。幸運値がプラスであれば最低識別数が2個に保証されます。*無呪の* 巻物は通常1個しか識別しませんが、5回に1回の確率で祝福時と同じ結果を引き当てます。*呪われた* 巻物をその種類で初めて読んだときは自分自身しか識別せず、2回目以降の呪われた読書では1個ずつしか識別しません。
+- **呪われた** 防具は、まるで愛着障害を抱えているかのように肌に密着して固着します。呪いを解くまで外すことはできません。
+- **呪われた** レベルアップの薬は、「レベルを上げる」という言葉を最も文字通りかつ建築学的な意味で解釈します。経験値レベルが上がるのではなく、天井を突き破って直上の階層へとロケットのように吹き飛ばされます。
+
+BUCの状態は、それぞれのアイテムに固有の変化をもたらします。祝福された「幸せの石」は良い幸運値を維持し、悪い幸運値の自然減衰を許しますが、呪われたものはその逆になります。呪われた、あるいは混乱した状態で読む「瞬間移動の巻物」は、フロア内のテレポートではなく、ランダムな *別の階層* へと飛ばされます。
+
+初期状態では、BUCの状態を直接目で見ることはできません。僧侶だけが例外であり、手に取った瞬間に直感でBUCを感知できます。僧侶以外のすべてのキャラクターは、テストを行って確かめなければなりません。
+
+**祭壇テスト。** アイテムを祭壇の上に落としてください：
+
+- 琥珀色（黄色）の閃光が走れば、**祝福** されています。
+- 黒い閃光が走れば、**呪われて** います。
+- 閃光が走らなければ、**無呪** です。
+
+祭壇テストは完全に無料であり、回数制限もありません。序盤で祭壇を見つけたら、積極的に活用してください。
+
+**ペットテスト。** ペットは通常、呪われたアイテムの上を踏むことを嫌がります。ドアの開口部や通路にアイテムを落とし、ペットが何度かそこを通過する様子を観察してください。何度も迂回して歩くようであれば、呪われている強力な証拠です。ただし、一度上を歩いたからといって安全の証明にはなりません。食料への執着、恐怖、戦闘、移動ルーチンの都合によってテストが狂うことがあるからです。さらに厄介な罠として、「逆属性の兜」や「とんがり帽子」は落とした時点では無呪と判定されても、頭にかぶった瞬間に自己呪詛化して固着します。「不器用の小手」や「浮遊の靴」は自己呪詛化こそしませんが、最初から呪われて生成される確率が非常に高いため、必ず事前にテストを行ってください。
+
+**聖水。** 祝福された水（聖水）にアイテムを浸す（dip）と、呪われたアイテムの呪いを解くか、無呪のアイテムを祝福することができます。呪われた水に浸すと、無呪のアイテムを呪うか、祝福されたアイテムの祝福を解除します。聖水を作るには、自分と同属性の祭壇の上に「水」の薬を置き、そこで祈りを成功させます。序盤において聖水は極めて貴重であるため、すでに正体が判明している重要なアイテムのために温存してください。
+
+**識別の巻物。** より安価なテスト手段では決着がつかないアイテムのために温存してください。祝福された識別の巻物は、1〜4個（幸運値プラスで最低2個）、あるいは5回に1回の確率でインベントリ内の全アイテムを一挙に識別します。祝福された識別の巻物を読む前に、持っている未識別アイテムをすべて手持ちの荷物袋に入れておき、全識別が引けた際にすべてのアイテムに効果が及ぶように準備しておきましょう。
+
+#### 価格識別 (The Price Is Right)
+<!-- audit
+2026-05-18:
+- buy/sell multipliers and Cha bands match shk.c get_cost/set_cost
+- sell offer is 1/2 base (shk.c:3160); 3/8 on unID items from an unfamiliar shopkeeper (shk.c:3173-3174)
+- Tourist surcharge (+33%) applies with dunce cap, Tourist below XL 15, or visible Hawaiian shirt — non-stacking
+- ~1/4 of unID items carry a 4/3 buy surcharge rolled per item instance via oid % 4 (shk.c:2864-2872 oid_price_adjustment); two identical-looking stacks on a shop floor can roll differently because place_object doesn't auto-merge
+- ~1/4 of shopkeepers are "unfamiliar" with unID; they offer 3/4 sell, fixed per shop
+- angry-shop +33% surcharge sticks: pacify_shk(FALSE) at shk.c:2663 does NOT clear it
+- only pacify_shk(TRUE) clears (shk.c:302, 793 — bones-load and new-customer transitions)
+- the JS price widget mirrors get_cost/set_cost exactly
+- AMULET macro hard-codes base price 150 for every magic amulet; FAKE_AMULET_OF_YENDOR is base 0 (objects.h:831-834, 865-869)
+-->
+
+すべての未識別アイテムには、固定された基本価格が設定されています。魅力（Charisma）が 11〜15 で追加割増がない場合、店主が提示する購入価格（buy quote）はその基本価格そのものになります。また、手持ちのアイテムを店主に売却する際の通常買取価格は、基本価格の半額（1/2）です。この仕様により、店は単なる市場であるだけでなく、極めて優れた **「識別ステーション」** として機能します。
+
+> *店主の価格設定システムは、Gregory Bond氏の『買い物スポイラー (Shopping Spoiler)』（Kate Nepveu氏がHTML化しsteelypips.orgで公開）で初めて詳細に文書化されました。その後、David Damerell氏の『アイテム識別スポイラー (Object Identification Spoiler)』によって価格に基づく識別技法がさらに拡張されました。以下の解説はその両方を基盤にしています。*
+
+アイテムを拾い上げずに価格を確認するには、そのアイテムの上に立ち、**`:`** を押すか、その場に立ったまま店主に向かって **`#chat`** で話しかけてください。店の入口から手持ちのアイテムを店内に投げ入れてはいけません。価格の提示は一切受けられず、店主の懐にそのまま着服されてしまいます。
+
+以下の3つの条件のいずれかを満たすと、同一の **「カモ（観光客）割増」** が適用されます：
+- *とんがり帽子（dunce cap）* を着用している
+- *経験値レベル15未満の観光客* でプレイしている
+- 鎧やクロークを着用せず、*Tシャツまたはアロハシャツ* を丸出しにしている
+
+これらに該当すると、購入価格が 1/3（約33%）引き上げられ、売却価格は基本価格の 1/2 から 1/3 へと買い叩かれます（これらの条件は重複して累積しません）。魅力の値は購入価格にのみ影響します。店で商談を行う前に、必ずシャツの上に防具を着て覆い隠してください。
+
+同じカテゴリに属し、同じ基本価格を共有するアイテム群を **「価格帯グループ（price group）」** と呼びます。価格を確認するだけで、多くの場合2〜3種類の候補にまで絞り込むことができます。魅力が低いと購入価格が跳ね上がり（魅力5以下で基本価格の2倍）、魅力が高いと安くなります（魅力19以上で基本価格の半額）。換算方法は後述の表を参照してください。
+
+未識別の商品には2つの例外的なブレが生じます。商品の約4個に1個には、恒久的な **1/3（約33%）の購入割増** がランダムに付与されます（そのため、同じ外見のアイテムの山であっても個体ごとに提示額が異なる場合があります）。また、店主のおよそ4人に1人は、未識別の品物に対して通常の買取価格の **3/4** しか提示してくれません（この傾向はアイテムごとではなく店主ごとに固定されています）。提示された価格が想定したティアと微妙にズレている場合は、前後のティアも確認してください。
+
+**怒った店主。** 店主を攻撃したり、店主に向けて杖を振ったり、代金を支払わずに店を出ようとしたり、店舗の破損代金の支払いを拒否すると店主は激怒します。事態を収拾して店主を宥めた後であっても、その店主は恒久的に 1/3 の購入割増を請求し続けます（売却価格には影響しません）。
+
+**戦闘後の買収。** 単なる借金ではなく実際に店主に刃を向けた場合、店主はお金ではなく血を求めます。しかし、それでも買収して許してもらう道は残されています。手元に1000ゴールド以上の現金を持った状態で `p` を押すと、1000金貨を支払って宥める試行ができます。あなたがその店の常連顧客として登録されている場合、この買収は約3回に1回の確率で失敗し、金貨を失った上に店主は激怒したままになります。それ以外の場合は店主は落ち着きを取り戻します（ただし前述の割増は残ります）。
+
+**不可視状態での入店。** 店主は目に見えない顧客とは商売をしてくれません。透明化（不可視）の状態で足を踏み入れると、「透明なお客様はお断りです！（Invisible customers are not welcome!）」と怒鳴られ、価格の提示も売買も一切拒否されます。もし不可視状態から戻れなくなってしまった場合は、クロークのスロットに「ミイラの包帯」を着用してください。透明化が遮断されて姿が可視化され、店主と通常通り取引できるようになります。再び姿を消したければ、店を出る際に包帯を脱ぎましょう。
+
+<!-- audit
+2026-08-01: shop stock is theme-restricted (shknam.c shtypes[]).
+- lighting store lists only specific light items, no generic class slot:
+  wax/tallow candle, oil lamp, brass lantern, magic lamp, POT_OIL,
+  WAN_LIGHT, SCR_LIGHT, SPE_LIGHT (shknam.c:333-346) -> every wand=light,
+  potion=oil, scroll=light, spellbook=light.
+- delicatessen potions limited to POT_FRUIT_JUICE/POT_BOOZE/POT_WATER;
+  rest random FOOD_CLASS + ICE_BOX (shknam.c:269-274).
+- restriction applies to generated stock; resold dropped items are not.
+-->
+
+**専門店の品揃えも重要なヒント。** 特定のジャンルを専門に扱う店舗は、そのテーマに合致したアイテムしか仕入れません。したがって、**「どこで見つけたか」** だけでアイテムの正体を特定できることがあります。照明器具店の棚に並んでいるものはすべて光に関連するアイテムです：そこにあるすべての杖は「明かりの杖」、すべての薬は「油」、すべての巻物は「明かりの巻物」、すべての魔法書は「光の魔法書」です。食料品店に並ぶ薬は「果物ジュース」、「酒」、「水」のいずれかしかありません。これらは店主が元から仕入れていた商品にのみ適用されるルールであり、あなたやモンスターが床に落とした品物には当てはまりません。
+
+以下に、アイテム種別ごとの価格表を掲載します。
+
+::: print-only
+
+```{=latex}
+\clearpage
+\thispagestyle{plain}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[width=0.92\linewidth]{cover/build/flowchart.pdf}\\[0.6em]
+{\itshape\footnotesize 識別のフローチャート：最も安価な方法から順に試し、識別の巻物は最後の手段とする。}
+\end{center}
+\vspace*{\fill}
+\clearpage
+```
+
+##### 提示価格換算表 (Quoted-price conversion)
+
+各行は、指定された基本価格に対して取引される実際の価格を示しています。
+
+**購入行（Buy rows）** は魅力（Charisma）の区分（購入時に **提示される** 価格）です。記号のない区分（*11–15* など）は基準値です。*11–15^T^* は魅力11〜15に4/3倍（約33%）の割増が1つ適用された状態、*11–15^T2^* は2つの割増が重複適用された状態です。割増の発生源は3つあります：「カモ割増」（低レベル観光客、とんがり帽子、シャツ丸出し）、「怒った店主」、あるいは未識別アイテムの約4個に1個にランダムで付与される割増です。
+
+**売却行（Sell rows）** は表の最下部にあり、怒っていない店主が買い取り時に **提示する** 価格を示します。売却価格には魅力は影響しません。*S* は基本価格の 1/2 の基準値です。*S^T^* は前述のカモ条件（とんがり帽子、低レベル観光客、シャツ丸出し）であり、売却提示額が 1/2 から 1/3 へと買い叩かれます。*S^P^* は、未識別アイテムの提示額を 1/4 差し引く（通常の3/4にする）店主（4人に1人）を示します。*S^TP^* はその両方が重複適用された状態です。
+
+| 魅力 / 割増条件                  |   倍率 |  20 |  50 |  60 |  80 | 100 | 150 | 175 | 200 | 300 |  500 |
+|----------------------------------|:-------|----:|----:|----:|----:|----:|----:|----:|----:|----:|-----:|
+| 6–7^T2^                          |  ×2.67 |  53 | 133 | 160 | 213 | 267 | 400 | 467 | 533 | 800 | 1333 |
+| 8–10^T2^                         |  ×2.37 |  47 | 119 | 142 | 190 | 237 | 356 | 415 | 474 | 711 | 1185 |
+| 6–7^T^                           |  ×2.0  |  40 | 100 | 120 | 160 | 200 | 300 | 350 | 400 | 600 | 1000 |
+| 8–10^T^, 11–15^T2^               |  ×1.78 |  36 |  89 | 107 | 142 | 178 | 267 | 311 | 356 | 533 |  889 |
+| 6–7                              |  ×1.5  |  30 |  75 |  90 | 120 | 150 | 225 | 263 | 300 | 450 |  750 |
+| 8–10, 11–15^T^, 16–17^T2^        |  ×1.33 |  27 |  67 |  80 | 107 | 133 | 200 | 233 | 267 | 400 |  667 |
+| 18^T2^                           |  ×1.19 |  24 |  59 |  71 |  95 | 119 | 178 | 207 | 237 | 356 |  593 |
+| 11–15, 16–17^T^                  |  ×1.00 |  20 |  50 |  60 |  80 | 100 | 150 | 175 | 200 | 300 |  500 |
+| 18^T^, 19+^T2^                   |  ×0.89 |  18 |  44 |  53 |  71 |  89 | 133 | 156 | 178 | 267 |  444 |
+| 16–17                            |  ×0.75 |  15 |  38 |  45 |  60 |  75 | 113 | 131 | 150 | 225 |  375 |
+| 18, 19+^T^                       |  ×0.67 |  13 |  33 |  40 |  53 |  67 | 100 | 117 | 133 | 200 |  333 |
+| 19+, S                           |  ×0.5  |  10 |  25 |  30 |  40 |  50 |  75 |  88 | 100 | 150 |  250 |
+| S^P^                             |  ×0.375 |   8 |  19 |  23 |  30 |  38 |  56 |  66 |  75 | 113 |  188 |
+| S^T^                             |  ×0.333 |   7 |  17 |  20 |  27 |  33 |  50 |  58 |  67 | 100 |  167 |
+| S^TP^                            |  ×0.25 |   5 |  13 |  15 |  20 |  25 |  38 |  44 |  50 |  75 |  125 |
+
+:::
+
+##### 巻物の価格 (Scroll Prices)
+
+| 価格 | 巻物の種類 |
+| ---: | --- |
+|   20 | 識別の巻物 (identify) |
+|   50 | 明かりの巻物 (light) |
+|   60 | 白紙の巻物 (blank paper), 武器に魔法をかける巻物 (enchant weapon) |
+|   80 | 鎧に魔法をかける巻物 (enchant armor), 呪いをとく巻物 (remove curse) |
+|  100 | 混乱の巻物 (confuse monster), 鎧を破壊する巻物 (destroy armor), 火の巻物 (fire), 食料を探す巻物 (food detection), 金貨を探す巻物 (gold detection), 地図の巻物 (magic mapping), 怪物を怯えさせる巻物 (scare monster), 瞬間移動の巻物 (teleportation) |
+|  200 | 記憶喪失の巻物 (amnesia), 怪物召喚の巻物 (create monster), 大地の巻物 (earth), 怪物を飼いならす巻物 (taming) |
+|  300 | 充填の巻物 (charging), 虐殺の巻物 (genocide), 処罰の巻物 (punishment), 悪臭雲の巻物 (stinking cloud) |
+
+<div class="price-id-toolbar"></div>
+
+100ゴールドのグループは該当アイテムが多いため、価格だけでは正体を確定できません。一方、20ゴールドの巻物は「識別の巻物」で確定します。60ゴールドのグループには「白紙の巻物」と「武器に魔法をかける巻物」しかなく、80ゴールドは「鎧に魔法をかける巻物」か「呪いをとく巻物」の2択です。これらの候補が絞られているグループは、BUCが判明した後に実際に読んで試す（使用テスト）のに最適な候補となります。
+
+```{=latex}
+\needspace{6\baselineskip}
+```
+
+扉のない1マスだけの狭い小部屋（時には鉄格子の奥）に密閉された **たった1枚の巻物** は、「瞬間移動の巻物」です。小部屋の中にテレポートして閉じ込められた生物が脱出できるように置かれています。
+
+##### 魔法書の価格 (Spellbook Prices)
+
+魔法書の価格は、呪文のレベル × 100ゴールドに設定されています。そのため、読む際のリスクを容易に見極めることができます：700ゴールドの魔法書はレベル7の呪文であり、慎重な魔法使い以外の者が読めば十中八九その手の中で大爆発を起こします。
+
+<div class="price-id-toolbar"></div>
+
+| 価格 | レベル | 魔法書の種類 |
+| ---: | :---: | --- |
+|  100 | 1 | 混乱 (confuse monster), 怪物探知 (detect monsters), 衝撃 (force bolt), 回復 (healing), 跳躍 (jumping), 施錠開錠 (knock), 灯り (light), 防護 (protection) |
+|  200 | 2 | 連鎖雷撃 (chain lightning), 怪物創造 (create monster), 盲目治療 (cure blindness), 食料探知 (detect food), 生命吸収 (drain life), マジックミサイル (magic missile), 怪物減速 (slow monster), 施錠 (wizard lock) |
+|  300 | 3 | 恐怖 (cause fear), 千里眼 (clairvoyance), 病気治療 (cure sickness), 不可視探知 (detect unseen), 超回復 (extra healing), 加速 (haste self), 識別 (identify), 解呪 (remove curse), 眠り (sleep), 石化解除 (stone to flesh) |
+|  400 | 4 | 冷気の円錐 (cone of cold), 宝探知 (detect treasure), 火の玉 (fireball), 透明化 (invisibility), 浮遊 (levitation), 能力回復 (restore ability) |
+|  500 | 5 | 怪物魅了 (charm monster), 穴掘り (dig), 地図化 (magic mapping) |
+|  600 | 6 | 使い魔創造 (create familiar), 変化 (polymorph), テレポート (teleport away), アンデッド退散 (turn undead) |
+|  700 | 7 | 無力化 (cancellation), 死の指 (finger of death) |
+
+<div class="price-id-toolbar"></div>
+
+##### 薬の価格 (Potion Prices)
+
+| 価格 | 薬の種類 |
+| ---: | --- |
+|   20 | 回復の薬 (healing) |
+|   50 | 酔っぱらいの薬 (booze), フルーツジュース (fruit juice), 可視の薬 (see invisible), 病気の薬 (sickness) |
+|  100 | 混乱の薬 (confusion), 超回復の薬 (extra healing), 幻覚の薬 (hallucination), 能力回復の薬 (restore ability), 睡眠の薬 (sleeping), 水 (water) |
+|  150 | 盲目の薬 (blindness), 魔力の薬 (gain energy), 透明の薬 (invisibility), 怪物を探す薬 (monster detection), 物体を探す薬 (object detection) |
+|  200 | 啓蒙の薬 (enlightenment), 完全回復の薬 (full healing), 浮遊の薬 (levitation), へんげの薬 (polymorph), 加速の薬 (speed) |
+|  250 | 酸の薬 (acid), 油の薬 (oil) |
+|  300 | 能力獲得の薬 (gain ability), レベルアップの薬 (gain level), 麻痺の薬 (paralysis) |
+
+<div class="price-id-toolbar"></div>
+
+回復の薬は20ゴールドに単独で属しているため、値札を見るだけで一意に特定できます。また、水は常に「透明な薬」の外見を持つため、価格を確認するまでもなく正体が分かります。50ゴールドのグループは要注意です。「病気の薬」と「[可視の薬](#senses-and-perception)」が同居しているためです（一方は極めて有害、もう一方は極めて有益）。200ゴールドのグループには優秀な薬がぎっしり詰まっています。
+
+##### 指輪の価格 (Ring Prices)
+
+| 価格 | 指輪の種類 |
+| ---: | --- |
+|  100 | 飾りの指輪 (adornment), 飢餓の指輪 (hunger), 守りの指輪 (protection), 耐へんげの指輪 (protection from shape changers), 忍びの指輪 (stealth), 能力維持の指輪 (sustain ability), 警告の指輪 (warning) |
+|  150 | 反感の指輪 (aggravate monster), 耐冷の指輪 (cold resistance), 体力の指輪 (gain constitution), 強さの指輪 (gain strength), 命中の指輪 (increase accuracy), 攻撃の指輪 (increase damage), 透明の指輪 (invisibility), 耐毒の指輪 (poison resistance), 可視の指輪 (see invisible), 耐電の指輪 (shock resistance) |
+|  200 | 耐炎の指輪 (fire resistance), 自由行動の指輪 (free action), 浮遊の指輪 (levitation), 回復の指輪 (regeneration), 探索の指輪 (searching), 消化不良の指輪 (slow digestion), 瞬間移動の指輪 (teleportation) |
+|  300 | 争いの指輪 (conflict), へんげの指輪 (polymorph), へんげ制御の指輪 (polymorph control), 瞬間移動制御の指輪 (teleport control) |
+
+<div class="price-id-toolbar"></div>
+
+300ゴールドの指輪は4種類しかなく、そのうち3種類は極めて優秀です：争いの指輪、[へんげ制御の指輪](#special-and-utility)、そして[瞬間移動制御の指輪](#movement-and-spatial-behavior) です。残る4つ目はへんげの指輪であり、通常は呪われた状態で生成されます。
+
+##### 杖の価格 (Wand Prices)
+
+| 価格 | 杖の種類 |
+| ---: | --- |
+|  100 | 灯りの杖 (light), 単なる杖 (nothing) |
+|  150 | 穴掘りの杖 (digging), 啓蒙の杖 (enlightenment), 施錠の杖 (locking), マジックミサイルの杖 (magic missile), 透明化の杖 (make invisible), 開錠の杖 (opening), 探査する杖 (probing), 扉探索の杖 (secret door detection), 減速の杖 (slow monster), 加速の杖 (speed monster), 静止の杖 (stasis), 衝撃の杖 (striking), 蘇生の杖 (undead turning) |
+|  175 | 吹雪の杖 (cold), 炎の杖 (fire), 雷の杖 (lightning), 眠りの杖 (sleep) |
+|  200 | 無力化の杖 (cancellation), 怪物召喚の杖 (create monster), へんげの杖 (polymorph), 瞬間移動の杖 (teleportation) |
+|  500 | 死の杖 (death), 願いの杖 (wishing) |
+
+<div class="price-id-toolbar"></div>
+
+もし500ゴールドの杖を見つけたら、今日は最高にツイている日です。
+
+##### 魔除けの価格 (Amulet Prices)
+
+安物のイェンダーの魔除けのイミテーション（0ゴールド）を除き、すべての魔除けの基本価格は **150ゴールド** で統一されています。そのため、価格から魔除けの正体を識別することはできません。他の識別手段を用いる必要があります。
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toolbars = document.querySelectorAll('.price-id-toolbar');
+  if (!toolbars.length) return;
+  var CHA_BUY = {
+    'lt5':    [2, 1],
+    '6to7':   [3, 2],
+    '8to10':  [4, 3],
+    '11to15': [1, 1],
+    '16to17': [3, 4],
+    '18':     [2, 3],
+    'ge19':   [1, 2]
+  };
+  var state = {cha: '11to15', sell: false, touristy: false, angry: false};
+
+  // Populate each toolbar with the same compact button set.
+  // Cha bracket on the left, then independent toggles: Sell, Tourist, Dunce.
+  var btnHTML =
+    '<span class="price-id-label">魅力</span>' +
+    '<button data-group="cha" data-val="lt5">≤5</button>' +
+    '<button data-group="cha" data-val="6to7">6-7</button>' +
+    '<button data-group="cha" data-val="8to10">8-10</button>' +
+    '<button data-group="cha" data-val="11to15">11-15</button>' +
+    '<button data-group="cha" data-val="16to17">16-17</button>' +
+    '<button data-group="cha" data-val="18">18</button>' +
+    '<button data-group="cha" data-val="ge19">≥19</button>' +
+    '<span class="price-id-sep">·</span>' +
+    '<button data-group="toggle" data-val="sell">売却</button>' +
+    '<button data-group="toggle" data-val="touristy">カモ</button>' +
+    '<button data-group="toggle" data-val="angry">怒り</button>';
+  toolbars.forEach(function(tb) {
+    tb.innerHTML = btnHTML;
+    tb.classList.add('price-id-widget');
+  });
+
+  function adj(base, m, d) {
+    var n = base * m;
+    if (d > 1) n = Math.floor((n * 10 / d + 5) / 10);
+    return Math.max(1, n);
+  }
+  function computeBuy(base, surcharge) {
+    // Replicates shk.c get_cost. Default Cha 11-15 no penalty: buy = base.
+    var m = 1, d = 1;
+    var cha = CHA_BUY[state.cha];
+    m *= cha[0]; d *= cha[1];
+    if (state.touristy) { m *= 4; d *= 3; }
+    if (surcharge) { m *= 4; d *= 3; }
+    var n = adj(base, m, d);
+    // Angry-shopkeeper surcharge: added AFTER mult/div in shk.c:2986
+    // (tmp + (tmp + 2) / 3, ~+33%). Stacks with Tourist. Buy-side only.
+    if (state.angry) n = n + Math.floor((n + 2) / 3);
+    return n;
+  }
+  function computeSell(base, unfamiliar) {
+    // Replicates shk.c set_cost. Default no penalty: sell = base / 2.
+    var m = 1, d = 1;
+    if (state.touristy) d *= 3; else d *= 2;
+    if (unfamiliar) { m *= 3; d *= 4; }
+    return adj(base, m, d);
+  }
+  function pair(n1, n2) {
+    return n1 === n2
+      ? '' + n1
+      : n1 + '<span class="pi-alt"> / ' + n2 + '</span>';
+  }
+
+  // Find every table whose first column header is "Price" or "価格". Stash the base
+  // price (which is what shows initially, since default state quotes buy =
+  // base) on each row's price cell. We also tolerate "Sell" or "売却" as a header
+  // (e.g. after a previous render).
+  var priceTables = [];
+  document.querySelectorAll('table').forEach(function(t) {
+    var hdrs = t.querySelectorAll('thead th');
+    if (!hdrs.length) return;
+    if (!/^(Price|Sell|価格|売却)$/i.test(hdrs[0].textContent.trim())) return;
+    hdrs[0].classList.add('pi-col');
+    t.querySelectorAll('tbody tr').forEach(function(tr) {
+      var firstTd = tr.querySelector('td');
+      if (!firstTd) return;
+      var m = firstTd.textContent.trim().match(/^\$?(\d+)/);
+      if (!m) return;
+      if (!firstTd.dataset.basePrice) firstTd.dataset.basePrice = m[1];
+      firstTd.classList.add('pi-price', 'pi-col');
+    });
+    priceTables.push(t);
+  });
+
+  function renderTables() {
+    priceTables.forEach(function(t) {
+      var hdr = t.querySelector('thead th.pi-col');
+      if (hdr) hdr.textContent = state.sell ? '売却' : '価格';
+      t.querySelectorAll('td.pi-price').forEach(function(td) {
+        var base = parseInt(td.dataset.basePrice, 10);
+        if (state.sell) {
+          td.innerHTML = pair(computeSell(base, false), computeSell(base, true));
+        } else {
+          td.innerHTML = pair(computeBuy(base, false), computeBuy(base, true));
+        }
+      });
+    });
+  }
+
+  function syncToolbars() {
+    toolbars.forEach(function(tb) {
+      tb.querySelectorAll('button[data-group="cha"]').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.val === state.cha);
+      });
+      tb.querySelectorAll('button[data-group="toggle"]').forEach(function(b) {
+        b.classList.toggle('active', !!state[b.dataset.val]);
+      });
+    });
+  }
+
+  toolbars.forEach(function(tb) {
+    tb.addEventListener('click', function(ev) {
+      var btn = ev.target.closest('button');
+      if (!btn) return;
+      var g = btn.dataset.group, v = btn.dataset.val;
+      if (g === 'cha') state.cha = v;
+      else state[v] = !state[v];
+      syncToolbars();
+      renderTables();
+    });
+  });
+
+  syncToolbars();
+  renderTables();
+});
+</script>
+
+#### 杖の試し書きテスト (The Engrave Test (Wands))
+
+杖の識別テストは1チャージを消費しますが、残りのチャージを安全に温存できます。
+
+> *手順は、かつてRGRNに投稿されたKieron Dunbar氏のスポイラー『杖を振って識別する (Identifying Wands by Zapping)』に基づいています。*
+
+1. **まず杖のBUCをテストする。** 呪われた杖で床に文字を刻もうとすると、100分の1の確率で爆発します。チャージを消費する前に、祭壇に落とすか他の呪いテストを行ってください。
+2. **指を使って床の埃に短いメッセージを刻む。** まず自分の指（コマンド `E` を押し、道具の選択で「`-`」を指定）で、埃の中に適当な言葉を1〜2語刻んでおきます。一部の杖はまっさらな床に効果を及ぼすのではなく、**「既存の文字」に対して作用する** ためです。へんげの杖は文字をランダムな別のメッセージへと書き換え、無力化の杖、透明化の杖、瞬間移動の杖はそれぞれ文字を「消滅」させます。事前に文字を書いておかないと、これらの挙動を見落としてしまいます。
+3. **杖を使って重ねて刻む。** 再び `E` を押し、テストしたい杖を選択します。発生した結果を観察してください。[杖の一覧表](#the-wand-table) に各杖の試し書き結果が記載されており、大半の杖はこのテストだけで正体が判明します。なお、雷の杖は試し書き時に最大50ターンの間盲目状態を引き起こすため、近くにモンスターがいる状況では絶対にテストしないでください。一部の杖は同一のメッセージを共有します。詳細は [曖昧な試し書き結果の解決法](#resolving-ambiguous-engrave-results) を参照してください。
+
+**願いの杖の疑いがある場合も試し書きは安全です。** 500ゴールドの杖の候補で試し書きを行い、*「何を願いますか？ (For what do you wish?)」* と尋ねられたら、テストによって1チャージが消費され、願いが成就します。最大限に価値のある願いを叶えましょう。
+
+#### 流し台テスト (The Sink Test (Rings))
+<!-- audit
+2026-05-18:
+- dosinkring at do.c:498-650 — all 28 ring types give a sink message, BUT 13 only when sighted (second switch do.c:592+ gated on !Blind); 15 work even blind (first switch). Message is a hint via trycall, NOT makeknown/formal ID. Overlaps: protection & warning both "sink glows", teleportation & polymorph can both "sink vanishes", aggravate monster & meat ring near-identical fly message
+- searching and slow digestion goto giveback, dropped back on the floor identified (do.c:507-516)
+- other rings usually consumed: 1/20 backup chance, 1/5 buried chance (do.c:649-660)
+-->
+
+ダンジョン内で流し台（sink）を見つけたら、その中に指輪を落としてテストすることができます。指輪の種類ごとに固有の手がかりメッセージが発生します（ただしメッセージが重複するものもあり、目が見えている状態でなければ表示されないものもあるため、常に完全な正式識別になるとは限りません）。探索の指輪と[消化不良の指輪](#special-and-utility) は、落とした瞬間に手元へと跳ね返ってきて即座に識別されます。それ以外の指輪は、20分の1の確率で手元に戻り、5分の1の確率で流し台の下に埋没しますが、それ以外の場合は排水溝に飲み込まれて失われます。したがって、唯一の貴重な指輪ではなく、ダブった予備の指輪でのみ試してください。メッセージの詳細な一覧は [流し台](#sinks) を参照してください。
+
+#### 使用テスト（慎重なアプローチ） (Use-Testing (The Careful Way))
+<!-- audit
+2026-05-18:
+- engrave-test messages: fire "Flames fly", cold "A few ice cubes drop", lightning "Lightning arcs", digging "Gravel flies up", magic missile "riddled by bullet holes" (engrave.c, zap.c)
+- polymorph randomizes existing engraving, not "vanishes" (engrave.c:618-633 WAN_POLYMORPH case calls random_engraving on existing engraving)
+- cancellation, make-invisible, teleportation all share the "vanishes" message
+- wand of wishing engrave DOES grant the wish (zap.c:2575-2585)
+- unicorn horn dipped in sickness → fruit juice; in confusion/hallucination/blindness → water (potion.c:2151-2159)
+- is_poisonable requires oc_skill in [-P_SHURIKEN, -P_BOW] (obj.h:264-268) — ranged ammo only
+- daggers (skill +1) and spears (skill +17) are NOT poisonable
+- confused remove curse via blessorcurse(obj, 2): 1/4 bless, 1/4 curse, 1/2 unchanged (mkobj.c:1841-1853)
+- non-blessed confused remove curse touches only worn/wielded (read.c:1549-1552); blessed touches all
+- 90% auto-curse branch (mkobj.c:1087-1090) covers fumble boots, levitation boots, gauntlets of fumbling, helm of opposite alignment
+- cursed worn armor refuses to be taken off via the otmp->cursed check (do_wear.c:1900); cursed loadstone refuses to drop (do.c:685-695)
+-->
+
+店や流し台が利用できない場合でも、慎重にアイテムを実際に使ってみることで正体を暴けることがあります。カテゴリーごとの手法は以下の通りです：
+
+**薬。** 最も安全なテストは、**モンスターに向けて投げつける** ことです。自分で飲むリスクを完全に回避できます。薬がモンスターの傷を治せば何らかの回復の薬、モンスターが俊敏になれば加速の薬、モンスターが透明になれば透明の薬です（ただし、透明になった敵を相手にする羽目にはなりますが）。
+
+また、アイテムを薬に浸す（dip）ことでもテストできます。毒を塗れる弾薬（矢、クロスボウの矢、ダーツ、手裏剣）の束を「病気の薬」に浸すと毒矢になり、薬の正体が確定します（剣などの近接武器には毒を塗ることはできません）。また、**ユニコーンの角** を「混乱の薬」、「幻覚の薬」、「盲目の薬」に浸すと真水に変化し、「病気の薬」に浸すと果物ジュースへと浄化されます。
+
+**油の薬は、唯一使用（`#apply`）できる薬です。** 未識別の薬に使用コマンドを使い、火を灯すプロンプトが出れば、それは油の薬です。他の薬は一切反応しません。
+
+薬を飲む前の安全確認としても浸漬は有効です。予備の矢を浸して何も変化が起きなければ、その薬は酸でも病気でもないことが確定します（油、へんげ、聖水でもありません）。ただし麻痺や睡眠の薬は浸しても無反応ですが、飲めば無防備に昏倒するため油断は禁物です。
+
+**200ゴールドの薬をテストする。** 200ゴールドのグループ（啓蒙、完全回復、浮遊、へんげ、加速）は素晴らしい見返りがありますが、2つの罠が潜んでいます。無呪の浮遊は10〜149ターン持続し、祝福された浮遊は250〜299ターン持続します（`>` を押すことで早めに着地できます）。また、へんげの薬は身につけている鎧を破壊したり脱落させたりするモンスター形態に変身してしまう危険があります。テストする際はシャツ1枚まで脱ぎ、周囲に敵がいない安全な場所で行ってください。
+
+**巻物。** 読む行為には常にリスクが伴います。一部の巻物（鎧破壊、健忘、処罰）は明白に有害です。最も安全なのは、まず価格識別を行い、安全な価格帯グループの巻物だけを読むことです。どうしても目隠し状態で読まなければならない場合は、鎧破壊の可能性を考慮して事前に防具をすべて脱ぎ、テレポートしても致命的にならない場所で読んでください。
+
+**混乱読書** は多くの巻物に特殊な効果をもたらし、時には極めて有用です。混乱状態で「呪いをとく巻物」を読むと、**無呪のアイテムのBUCがランダムにシャッフルされます**（約1/4が祝福、1/4が呪い、1/2が無呪のまま）。すでに呪われているアイテムの呪いはそのまま残ります。無呪の巻物であれば装備中の武具のみ、祝福された巻物であれば全所持品が対象となります。これは装備品に安価な祝福を付与する裏技であり、呪いを解く道具ではありません。呪いを解きたいときに混乱状態で読んではいけません。
+
+**指輪。** まず祭壇テストやペットテストで呪われていないことを確認してください。その上で指にはめます。多くの指輪は即座にメッセージや目に見える効果をもたらします：宙に浮く、姿が消える、筋力がみなぎるなどです。目立った変化がない場合は、ステータス画面やインベントリを確認して微小な変化（AC改善、隠密、探索など）をチェックしてください。通常よりも空腹の進行が早くなったり（空腹の指輪）、モンスターが急激に好戦的になったり（反感の指輪）した場合は、ただちに外してください。
+
+**魔除け。** 首にかける前に必ずBUCをテストしてください。「絞殺の魔除け」はわずか6ターンであなたを窒息死させます。首が締まったら即座に外すか、呪われて外せない場合は神に祈ってください。また「安らかな睡眠の魔除け」は無防備な眠りに落ちてしまいます。「ESPの魔除け」は目隠しなどで盲目状態になった際に効果が現れ、「反射の魔除け」は敵の光線が跳ね返った瞬間に判明します。
+
+**防具。** 魔法の防具は身につけた瞬間に効果を現します：韋駄天の靴は足を速くし、透明のクロークは姿を消します。しかし、店の中で未識別の防具を試着するのは危険です。もし呪われていれば脱ぐことができず、店主は代金の支払いを要求してくるからです。「逆属性の兜」や「とんがり帽子」は着用した瞬間に自己呪詛化して固着することすらあります。**店内で未識別の防具を試着する前に、必ずBUCを確認してください。** 店の外では生存が最優先です：ACが6より悪い状態であれば、テストできなくても拾った鎧、兜、盾、クロークを着用すべきです。ただし靴と小手は必ず事前にテストしてください。その有害な変種は致命的な危険を招くからです。
+
+各特殊防具は **ランダムな外見** を持ちます。前回のゲームで安全な浮遊だった「スノーブーツ」が、今回のゲームでは跳躍や不器用の靴である可能性があります。シャッフルされる4つのプールは以下の通りです：
+
+- 4種類の魔法の **兜** は4つの外見を共有：羽飾りのついた兜 / 彫刻された兜 / 鶏冠のついた兜 / 面頬のついた兜 → 兜、警戒の兜、逆属性の兜、知力感知の兜 のいずれか。（知性の兜は常に「クリスタル兜」。とんがり帽子と魔力回復の帽子はどちらも「円錐形の帽子」）。
+- 4種類の魔法の **クローク** は4つの外見を共有：ボロボロのマント / オペラクローク / 装飾された法衣 / 布切れ → 守りのクローク、透明のクローク、耐魔のクローク、変位のクローク のいずれか。いずれも極めて優秀です。
+- 4種類の **小手** は4つの外見を共有：古びた手袋 / 綿入れの手袋 / 乗馬用の手袋 / フェンシング用の手袋 → 革の手袋、あるいは3種類のガントレット（不器用の小手、怪力の小手、敏捷の小手）のいずれか。
+- 7種類の魔法の **靴** は7つの外見を共有：戦闘用の靴 / ジャングルブーツ / 登山靴 / 泥靴 / 留め金付きの靴 / 乗馬靴 / スノーブーツ → 韋駄天の靴、水上歩行の靴、飛び跳ねる靴、エルフの靴、蹴りの靴、不器用の靴、浮遊の靴 のいずれか。
+
+ただし価格はシャッフルされません。価格を確認することで、安全な靴やクロークと呪われた品とを判別できます。
+
+##### 防具の価格 (Armor Prices)
+
+| 価格 | 防具の部位 | 該当アイテム |
+| ---: | --- | --- |
+|   10 | 兜 | 通常の兜 (plain helmet) |
+|   50 | 兜 | 警戒の兜 (caution), 逆属性の兜 (opposite alignment), 知力感知の兜 (telepathy) |
+|    8 | 靴 | エルフの靴 (elven boots / 忍び), 蹴りの靴 (kicking) |
+|   30 | 靴 | 不器用の靴 (fumble), 浮遊の靴 (levitation) （どちらも高確率で呪われている！） |
+|   50 | 靴 | 韋駄天の靴 (speed), 水上歩行の靴 (water walking), 飛び跳ねる靴 (jumping) （いずれも極めて有用） |
+|    8 | 小手 | 革の手袋 (leather gloves) （これのみ） |
+|   50 | 小手 | 不器用の小手 (fumbling), 怪力の小手 (power), 敏捷の小手 (dexterity) |
+|   50 | クローク | 守りのクローク (protection), 変位のクローク (displacement) |
+|   60 | クローク | 透明のクローク (invisibility), 耐魔のクローク (magic resistance) |
+
+<div class="price-id-toolbar"></div>
+
+30ゴールドの靴は危険信号です。どちらの候補も通常呪われて生成されます。50ゴールドの靴はどれも当たりです。60ゴールドのクロークは透明か耐魔の2択です。価格だけでは8ゴールドのエルフの靴と蹴りの靴、あるいは50ゴールドの3種類の小手を区別できません。BUCをテストした上で実際に装備し、表示されるメッセージを観察してください。
+
+#### 灰色石：4つの石、幸運は1つ (Gray Stones: Four Stones, One Lucky)
+<!-- audit
+2026-05-18:
+- best mimic test here is SEARCH, not the pet: an explicit `s` adjacent to an object-mimic reveals it unconditionally — mfind0 (detect.c:1965) calls seemimic() for any M_AP_TYPE monster with NO rng roll (unlike SDOOR rnl(7-fund) / traps rnl(8)). the minend-1 mimics are appear_as="obj:..." => M_AP_OBJECT, so one search beside a suspect stone exposes it every time; a real stone stays a stone. reworked the prose to lead with search (consistent with the existing "A note on mimics" section, which already says search reveals mimics) instead of the fiddly pet-in-a-niche. search only flags mimics, so price-ID still separates the real luckstone from the cursed loadstone.
+- "name it The Heart of Ahriman -> hand slips = it's the luckstone" is FAKE. restrict_name (artifact.c:575) builds sametype[] from shared description / shuffle-range; all four gray stones share descr "gray" and the o_ranges band (objects.h:1594-1604), so for ANY unidentified gray stone sametype includes luckstone -> naming it the Heart (SPFX_RESTR) trips the restriction -> "While engraving, your %s slips." (do_name.c:330-351) identically for luckstone/loadstone/touchstone/flint. the slip only confirms "unidentified gray stone," which you already know; it cannot single out the luckstone.
+- other two layouts: minend-2 ("Gnome King's Wine Cellar") luckstone is at fixed (70,5) in a walled gem-pile vault, NO stone decoys. minend-3 ("Catacombs") luckstone (place[2]) + flint decoy (place[1]) are shuffled among 3 spots, and there is a level-teleport trap under BOTH (lines 89-90, "one-time annoyance") — stepping onto the prize can fling you off-level.
+- BUC/pet-test note: the minend-1 decoy loadstone IS cursed on the floor (mksobj curses all loadstones, mkobj.c:978; des.object with no buc => curse_state 0 => no override in sp_lev.c:2234). so a pet registers it as cursed and won't step on it (cursed_object_at dogmove.c:145, "avoid cursed items unless starving" dogmove.c:535). the pet thus avoids all 4 mimics AND the loadstone; the one gray-stone square it will walk onto is the uncursed luckstone. "loadstone isn't cursed until picked up" is false for floor loadstones — that idea is really the freeinv re-curse (invent.c:1386), which only bites an uncursed (wished) loadstone on REMOVAL. caveat: luring a pet into a 1-tile dead-end niche is fiddly, so price-ID stays the clean fallback.
+- luckstone default BUC: a luckstone is uncursed by default — GEM_CLASS in mksobj_init (mkobj.c:976-986) never calls blessorcurse for it, and mksobj zeroes the obj (mkobj.c:1185). so the Mine's End buc="not-cursed" (=> uncurse(), a no-op) yields an UNCURSED (not blessed) luckstone. "always uncursed" in the prose is accurate.
+2026-08-13:
+- fixed a loadstone claim in the 5.0-changes section (was "resist knockback ... a niche use if you can keep one uncursed"): m_is_steadfast (uhitm.c:5216) grants knockback immunity for carrying ANY loadstone via m_carrying(mtmp, LOADSTONE) with NO BUC check (line 5235) — cursed works too, including the welded one. only gate is being grounded (not Flying/Levitation, not air/cloud/bubble level, lines 5224-5228). corrected the "if you can keep one uncursed" qualifier.
+-->
+
+「灰色の石」の正体は、ゲームクリアまでずっと肌身離さず持ち歩くべき「幸せの石」から、一度拾うと絶対に手放せなくなる呪われた「重し」まで、天と地ほどの開きがあります。全部で4種類存在します：
+
+| 価格 | 石の種類 | 効果 |
+| ---: | --- | --- |
+|    1 | 火打ち石 (flint) **または** 重し (loadstone) | 火打ち石はスリング用の弾薬です。重しは重量が500ユニットもあり、通常呪われており、一度拾うと捨てられなくなります。蹴りテストを行ってください（重しは滑りません）。 |
+|   45 | 試金石 (touchstone) | 宝石を擦り付けると正体を識別できます。極めて有用です。 |
+|   60 | 幸せの石 (luckstone) | 幸運値を維持します。ゲームクリアに必須の至宝です。 |
+
+<div class="price-id-toolbar"></div>
+
+見分けるための手順は以下の通りです：
+
+**蹴りテスト（キックテスト）。** 床に落ちている未識別の灰色の石を蹴ってください（`Ctrl-D` または `k`）。通常通りスッと滑って転がれば、重しではありません。重しは異常に重いため、蹴られても転がることに抵抗してその場に留まります。テストする前に、怪力の小手や蹴りの靴を脱いでおいてください。怪力で本物の重しを強引に吹き飛ばしてしまい、安全だと誤認する危険があるからです。
+
+**拾いテスト。** 重しは生成された時点で呪われており、呪われた重しは床に置く（ドロップする）ことが一切できなくなります。ゲーム画面に「どういうわけか、石を手放すことができない！（For some reason, you cannot drop the stone!）」と表示され、荷物袋に居座り続けます。もし灰色の石を拾い上げて不審なほど過重になったら、床に置いてみてください。置くことができなければ、呪いを解く（聖水、呪いをとく巻物、祈り）まで呪われた重しを背負い続ける羽目になります。呪いを解いた後であれば、安全に捨てることができます。
+
+**価格テスト。** 基本価格において、60ゴールドは「幸せの石」、45ゴールドは「試金石」、1ゴールドは「火打ち石」または「重し」です。ただし未識別アイテムのランダム割増（1/3）によって45ゴールドの試金石が60ゴールドと提示される場合があるため、一意に確定できるのは45ゴールドの提示のみです。
+
+**擦りテスト。** 手持ちの宝石に灰色の石を適用（`a`）するか、宝石に対して `#rub` コマンドで擦り付けてください。試金石であれば色のついた筋（ストリーク）のメッセージが表示されます。さらに試金石が **祝福** されている場合（あるいはあなたが考古学者かノームであり無呪の試金石を持っている場合）、その筋によって宝石の正式な正体が識別されます。他の灰色の石でも似たような擦り筋メッセージが出ることがあるため、単に筋がついただけでは試金石の証明にはなりません。「宝石の正式識別」が発生して初めて試金石と確定します。なお、呪われた試金石は擦った宝石を粉砕してしまうことがあります。
+
+**フロア配置の手がかり。** [地下鉱山](#the-gnomish-mines) の最下層（鉱山最深部：Mine's End）にある幸せの石は確定生成であり、常に無呪です。そのため鉱山最深部で見つかる灰色の石は十中八九本物です。ただし、フロアバリエーションの1つ（minend-1）では巧妙な罠が仕掛けられており、4体の [ミミック](#a-note-on-mimics) が灰色の石に化けており、さらに本物の呪われた重しが1個配置されています。疑わしい石の隣で捜索（`s`）を行えば、ミミックの正体を100%確実に暴くことができます。その上で、残った2つの本物の石を価格識別（60ゴールドと1ゴールド）してください。狭い小部屋の窪みでは蹴りテストは壁にぶつかって判定が狂いやすいため、価格識別が最も安全です。
+
+灰色の石を拾い上げる前に、必ず蹴って転がるか確認し、BUCをテストしてください。数秒のテストを惜しまないだけで、背中に溶接された500ユニットの呪われた重しに苦しめられる悲劇を完全に回避できます。
+
+#### 判明した情報の名付け (Naming What You've Learned)
+<!-- audit
+2026-05-21:
+- mergable() requires identical otyp, enchantment (spe), BUC, erodeproof state, erosion (oeroded, oeroded2), greased state, oeaten/orotten for food; coins merge unconditionally (invent.c:4379-4460)
+- on merge that propagates a previously-unknown property, the game prints "You learn more about your items by comparing them." (invent.c:938-942); guarded against LOST_THROWN to avoid spam when monsters strip ID
+2026-05-18:
+- `#name` and `#call` aliases at cmd.c:1773-1774
+- class naming at do_name.c:571-588
+- rename-by-overwrite at do_name.c:660-672
+- N keystroke only works in number_pad mode; default vi-keys binds N to run-north — cross-layout shortcut is C for #call
+-->
+
+手がかりを集めたら、`#name`（または `#call`）コマンドを活用して判明した情報を記録しましょう。アイテムの種別クラス全体に対して、任意の名前を **呼び名（call）** として付けることができます。たとえば、「泡立つ薬」が200ゴールドの価格帯グループに属することが分かったら、忘れないように「泡立つ=200G」と名付けておきます。その後モンスターに投げつけて相手が加速したら、そのクラスの名前を「加速」へと上書き変更すればよいのです。
+
+**スタック（同一枠まとめ）による識別。** アイテムを拾い上げた際、ゲームはそのアイテムが手持ちの既存アイテムと **完全に同一** である場合にのみ、同じスロットへと合体（スタック）させます：同じ種類、同じ強化値、同じBUC、同じ耐腐食加工などです。したがって、新しく拾ったアイテムが既知のアイテムとまとまるかどうかを見るだけで、無料で情報を得ることができます。合体によって実際に新たな知識が得られた場合、ゲームは明示的にメッセージを表示します：*「持ち物を比較して、より多くのことが分かった (You learn more about your items by comparing them.)」*。このメッセージが出たら、既知の特性（BUC、強化値、腐食状態など）が未知のアイテム側にも引き継がれた合図です。同じ外見でありながらスタックしないアイテムは、異なる薬であるか、BUCが異なるか、あるいは希釈・腐食されているかのいずれかです。
