@@ -211,7 +211,7 @@ Tinning kit: 缶詰作成道具
 Tin opener: 缶切り
 Can of grease: 脂の缶
 Figurine: 人形
-Magic marker: 魔法のマーカ
+Magic marker: 魔法のマーカー
 Land mine: 地雷
 Beartrap: 熊の罠
 Tin whistle: ブリキの笛

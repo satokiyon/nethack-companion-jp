@@ -9,7 +9,7 @@
 | [`w`](#worms-w)    | [紫ワーム (Purple worms)](#worms-w)     | 超巨大なワームです：[命中すると丸呑みされ、体内で消化されます](#engulfment)。内側から刃物で切り裂いて脱出しましょう。 |
 | [`X`](#xorns-x)    | [ゾーン (Xorn)](#xorns-x)             | 壁をすり抜けて移動します。毎ターン3回の鉤爪攻撃と1回の噛みつきを放ち、待ち伏せも逃亡も困難です。 |
 | [`;`](#sea-monsters)    | [海の怪物 (Sea monsters)](#sea-monsters)     | [溺死は即死です](#drowning)。確実な対策（計画）がないまま水中で戦ってはいけません。 |
-| [`&`](#major-demons)    | [悪魔 (Demons)](#major-demons)           | 上位の悪魔（オルクス、デモゴルゴン、アスモデウスなど）はボス級の脅威です。 |
+| [`&`](#major-demons)    | [悪魔 (Demons)](#major-demons)           | 上位の悪魔（オーケス、デモゴルゴン、アスモデウスなど）はボス級の脅威です。 |
 | [`@`](#humans-and-elves)    | [人間（敵対的） (Humans (hostile))](#humans-and-elves) | ゲーム中最も執拗で厄介な敵である「イェンダーの魔法使い」が含まれます。 |
 | [`Q`](#quantum-mechanics-q)    | [量子物理学者と遺伝子工学者 (Quantum mechanics / genetic engineers)](#quantum-mechanics-q) | 量子物理学者は攻撃が命中した対象をテレポートさせ、遺伝子工学者（5.0で新登場）は対象を変身（ポリモーフ）させます。 |
 

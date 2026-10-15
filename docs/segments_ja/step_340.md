@@ -1,4 +1,4 @@
-#### 量子力学士 `Q` (Quantum mechanics `Q`)
+#### 量子物理学者 `Q` (Quantum mechanics `Q`)
 
 <!-- audit
 2026-05-19:
@@ -7,7 +7,7 @@
 - Quantum corpse toggles Fast (eat.c:1227); genetic engineer corpse triggers polyself (eat.c:1247).
 -->
 
-特殊な爪攻撃を持つ2種類の生物です。**量子力学士 (Quantum mechanic)**は命中時にプレイヤーをランダムな場所へテレポートさせます。**遺伝子工学者 (Genetic engineer)**はプレイヤーを変身（変身(へんげ)）させます。不変（Unchanging）の魔除けや魔法防御がなければ、一撃で別の生物に変えられてしまいます。
+特殊な爪攻撃を持つ2種類の生物です。**量子物理学者 (Quantum mechanic)**は命中時にプレイヤーをランダムな場所へテレポートさせます。**遺伝子工学者 (Genetic engineer)**はプレイヤーを変身（変身(へんげ)）させます。不変（Unchanging）の魔除けや魔法防御がなければ、一撃で別の生物に変えられてしまいます。
 
 両種とも自らランダムにテレポートし、毒のある死体を残します。
 

@@ -80,9 +80,11 @@ def build(skip_pdf=False):
             browser_path = edge_path
 
         if browser_path:
+            import tempfile
             html_abs = os.path.abspath('index.ja.html')
             pdf_out = os.path.abspath('companion.ja.pdf')
             html_uri = 'file:///' + html_abs.replace('\\', '/')
+            temp_profile = os.path.join(tempfile.gettempdir(), 'nh_pdf_profile')
             
             print(f"ブラウザ ({os.path.basename(browser_path)}) で PDF レンダリング中...")
             cmd_browser = [

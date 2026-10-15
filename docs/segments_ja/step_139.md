@@ -12,7 +12,7 @@
 |  100 | 単なる杖 (Nothing) | ビーム | 4–8 | メッセージなし（無反応） |
 |  150 | [穴掘りの杖 (Digging)](#wand-digging) | 光線 | 4–8 | 小石が飛び散る |
 |  150 | 啓蒙の杖 (Enlightenment) | 無指向性 | 11–15 | 啓蒙された気分になる |
-|  150 | マジックミサイルの杖 (Magic missile) | 光線 | 4–8 | 弾痕のような穴があく |
+|  150 | 矢の杖 (Magic missile) | 光線 | 4–8 | 弾痕のような穴があく |
 |  150 | [透明化の杖 (Make invisible)](#wand-make-invisible) | ビーム | 4–8 | 刻んだ文字が消滅する ¹ |
 |  150 | 開錠の杖 (Opening) | ビーム | 4–8 | メッセージなし（無反応） |
 |  150 | 探査する杖 (Probing) | ビーム | 4–8 | メッセージなし（無反応） |
@@ -28,7 +28,7 @@
 |  175 | [雷の杖 (Lightning)](#wand-fire-cold-lightning) | 光線 | 4–8 | 電撃が走る（自身も盲目化） |
 |  175 | 眠りの杖 (Sleep) | 光線 | 4–8 | 虫の動きが完全に止まる ² |
 |  200 | [無力化の杖 (Cancellation)](#wand-cancellation) | ビーム | 4–8 | 刻んだ文字が消滅する ¹ |
-|  200 | 怪物召喚の杖 (Create monster) | 無指向性 | 11–15 | 虫が出現する |
+|  200 | 怪物を造る杖 (Create monster) | 無指向性 | 11–15 | 虫が出現する |
 |  200 | [へんげの杖 (Polymorph)](#wand-polymorph) | ビーム | 4–8 | 刻んだ文字が別の文章に書き換わる |
 |  200 | [瞬間移動の杖 (Teleportation)](#wand-teleportation) | ビーム | 4–8 | 刻んだ文字が消滅する ¹ |
 |  500 | [死の杖 (Death)](#wand-death) | 光線 | 4–8 | 虫の動きが完全に止まる ² |

@@ -34,9 +34,9 @@
 | 価格 | 杖の種類 |
 | ---: | --- |
 |  100 | 灯りの杖 (light), 単なる杖 (nothing) |
-|  150 | 穴掘りの杖 (digging), 啓蒙の杖 (enlightenment), 施錠の杖 (locking), マジックミサイルの杖 (magic missile), 透明化の杖 (make invisible), 開錠の杖 (opening), 探査する杖 (probing), 扉探索の杖 (secret door detection), 減速の杖 (slow monster), 加速の杖 (speed monster), 静止の杖 (stasis), 衝撃の杖 (striking), 蘇生の杖 (undead turning) |
+|  150 | 穴掘りの杖 (digging), 啓蒙の杖 (enlightenment), 施錠の杖 (locking), 矢の杖 (magic missile), 透明化の杖 (make invisible), 開錠の杖 (opening), 探査する杖 (probing), 扉探索の杖 (secret door detection), 減速の杖 (slow monster), 加速の杖 (speed monster), 静止の杖 (stasis), 衝撃の杖 (striking), 蘇生の杖 (undead turning) |
 |  175 | 吹雪の杖 (cold), 炎の杖 (fire), 雷の杖 (lightning), 眠りの杖 (sleep) |
-|  200 | 無力化の杖 (cancellation), 怪物召喚の杖 (create monster), へんげの杖 (polymorph), 瞬間移動の杖 (teleportation) |
+|  200 | 無力化の杖 (cancellation), 怪物を造る杖 (create monster), へんげの杖 (polymorph), 瞬間移動の杖 (teleportation) |
 |  500 | 死の杖 (death), 願いの杖 (wishing) |
 
 <div class="price-id-toolbar"></div>

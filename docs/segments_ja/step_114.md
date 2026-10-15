@@ -43,16 +43,16 @@
 | 価格 | 巻物の種類 |
 | ---: | --- |
 |   20 | 識別の巻物 (identify) |
-|   50 | 明かりの巻物 (light) |
+|   50 | 光の巻物 (light) |
 |   60 | 白紙の巻物 (blank paper), 武器に魔法をかける巻物 (enchant weapon) |
-|   80 | 鎧に魔法をかける巻物 (enchant armor), 呪いをとく巻物 (remove curse) |
+|   80 | 鎧に魔法をかける巻物 (enchant armor), 解呪の巻物 (remove curse) |
 |  100 | 混乱の巻物 (confuse monster), 鎧を破壊する巻物 (destroy armor), 火の巻物 (fire), 食料を探す巻物 (food detection), 金貨を探す巻物 (gold detection), 地図の巻物 (magic mapping), 怪物を怯えさせる巻物 (scare monster), 瞬間移動の巻物 (teleportation) |
-|  200 | 記憶喪失の巻物 (amnesia), 怪物召喚の巻物 (create monster), 大地の巻物 (earth), 怪物を飼いならす巻物 (taming) |
+|  200 | 記憶喪失の巻物 (amnesia), 怪物を作る巻物 (create monster), 大地の巻物 (earth), 怪物を飼いならす巻物 (taming) |
 |  300 | 充填の巻物 (charging), 虐殺の巻物 (genocide), 処罰の巻物 (punishment), 悪臭雲の巻物 (stinking cloud) |
 
 <div class="price-id-toolbar"></div>
 
-100ゴールドのグループは該当アイテムが多いため、価格だけでは正体を確定できません。一方、20ゴールドの巻物は「識別の巻物」で確定します。60ゴールドのグループには「白紙の巻物」と「武器に魔法をかける巻物」しかなく、80ゴールドは「鎧に魔法をかける巻物」か「呪いをとく巻物」の2択です。これらの候補が絞られているグループは、BUCが判明した後に実際に読んで試す（使用テスト）のに最適な候補となります。
+100ゴールドのグループは該当アイテムが多いため、価格だけでは正体を確定できません。一方、20ゴールドの巻物は「識別の巻物」で確定します。60ゴールドのグループには「白紙の巻物」と「武器に魔法をかける巻物」しかなく、80ゴールドは「鎧に魔法をかける巻物」か「解呪の巻物」の2択です。これらの候補が絞られているグループは、BUCが判明した後に実際に読んで試す（使用テスト）のに最適な候補となります。
 
 ```{=latex}
 \needspace{6\baselineskip}

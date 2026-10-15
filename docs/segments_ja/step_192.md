@@ -36,11 +36,11 @@
 | 六尺棒 (quarterstaff) | S | B | E | E | — | B | E | — | B | B | B | B | E |
 | 長柄武器 (polearms) | — | — | S | B | S | — | S | B | S | S | B | S | S |
 | 槍 (spear) | — | S | E | B | S | B | S | B | E | S | B | E | B |
-| 三叉槍 (trident) | — | S | S | B | B | — | S | — | B | — | B | B | B |
+| トライデント (trident) | — | S | S | B | B | — | S | — | B | — | B | B | B |
 | ランス (lance) | — | — | — | — | E | — | B | — | — | S | B | S | — |
 | 弓 (bow) | — | B | S | — | B | — | B | — | E | E | B | — | — |
 | スリング (sling) | S | — | E | S | — | — | B | — | E | — | B | B | S |
-| クロスボウ (crossbow) | — | — | — | — | S | B | B | E | E | — | B | — | — |
+| クロスボゥ (crossbow) | — | — | — | — | S | B | B | E | E | — | B | — | — |
 | 投げ矢 (dart) | B | — | — | E | — | — | B | E | E | — | E | — | E |
 | 手裏剣 (shuriken) | — | — | — | S | — | B | B | S | S | E | B | — | B |
 | ブーメラン (boomerang) | E | — | E | — | — | — | B | — | E | — | B | — | — |

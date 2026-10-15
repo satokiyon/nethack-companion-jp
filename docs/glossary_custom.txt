@@ -51,10 +51,28 @@ Touchstone: 試金石
 Bullwhip: 鞭
 Fedora: フィドーラ
 Tinning kit: 缶詰作成道具
+Tin opener: 缶切り
 Lock pick: 鍵開け器具
 Luckstone: 幸せの石
+Oilskin sack: 防水袋
+Magic marker: 魔法のマーカー
+Oil lamp: オイルランプ
 Cloak of displacement: 幻影のクローク
 Cloak of magic resistance: 魔法を防ぐクローク
+Cloak of protection: 守りのクローク
+Cloak of invisibility: 透明のクローク
+Helm of caution: 知性の兜
+Helm of telepathy: テレパシーの兜
+Helm of opposite alignment: 逆属性の兜
+Helm of brilliance: 賢さの兜
+Gauntlets of power: 力の小手
+Gauntlets of dexterity: 器用さの小手
+Gauntlets of fumbling: お手玉の小手
+Fumble boots: つまずきの靴
+Kicking boots: 蹴り挙げ靴
+Speed boots: 韋駄天の靴
+Water walking boots: 水上歩行の靴
+Jumping boots: 飛び跳ねる靴
 Ring mail: 鉄環の鎧
 Splint mail: 鉄片の鎧
 Plate mail: 鋼鉄の鎧
@@ -63,23 +81,105 @@ Scale mail: 鱗の鎧
 Gray dragon scale mail: 灰色ドラゴンの鱗鎧
 Silver dragon scale mail: 銀色ドラゴンの鱗鎧
 Quarterstaff: 六尺棒
+Club: こん棒
 Flint: 火打ち石
 Sling: スリング
 Small shield: 小さな盾
+Large shield: 大きな盾
 Hawaiian shirt: アロハシャツ
 Expensive camera: 高価なカメラ
 Credit card: クレジットカード
 Apple: りんご
 Carrot: にんじん
+Tripe ration: モツの塊
+Lembas wafer: レンバス
+Cram ration: 携帯糧食
+Food ration: 食料
+
+## Amulets (魔除け) - from NetHackJP obj_jp.c
+Amulet of esp: 遠視の魔除け
+Amulet of restful sleep: 安眠の魔除け
+Amulet of guarding: 守りの魔除け
 Amulet of strangulation: 絞殺の魔除け
 Amulet of reflection: 反射の魔除け
 Amulet of life saving: 命の魔除け
+Amulet versus poison: 耐毒の魔除け
+Amulet of change: 性転換の魔除け
+Amulet of unchanging: 耐へんげの魔除け
+Amulet of magical breathing: 呼吸の魔除け
+Amulet of flying: 飛行の魔除け
+
+## Wands (杖) - from NetHackJP obj_jp.c
+Wand of magic missile: 矢の杖
+Wand of create monster: 怪物を造る杖
+Wand of probing: 探査する杖
+Wand of secret door detection: 扉探索の杖
+Wand of light: 灯りの杖
+Wand of nothing: 単なる杖
+Wand of digging: 穴掘りの杖
+Wand of enlightenment: 啓蒙の杖
+Wand of make invisible: 透明化の杖
+Wand of opening: 開錠の杖
+Wand of locking: 施錠の杖
+Wand of slow monster: 減速の杖
+Wand of speed monster: 加速の杖
+Wand of stasis: 静止の杖
+Wand of striking: 衝撃の杖
+Wand of undead turning: 蘇生の杖
+Wand of cold: 吹雪の杖
+Wand of fire: 炎の杖
+Wand of lightning: 雷の杖
 Wand of sleep: 眠りの杖
+Wand of cancellation: 無力化の杖
+Wand of polymorph: へんげの杖
+Wand of teleportation: 瞬間移動の杖
+Wand of death: 死の杖
+Wand of wishing: 願いの杖
+
+## Rings (指輪) - from NetHackJP obj_jp.c
+Ring of teleportation: 瞬間移動の指輪
+Ring of teleport control: 瞬間移動制御の指輪
+Ring of conflict: 争いの指輪
+Ring of slow digestion: 消化不良の指輪
+Ring of adornment: 飾りの指輪
+Ring of shock resistance: 耐電の指輪
+Ring of protection: 守りの指輪
+Ring of regeneration: 回復の指輪
+Ring of searching: 探索の指輪
+Ring of stealth: 忍びの指輪
+Ring of sustain ability: 能力維持の指輪
+Ring of levitation: 浮遊の指輪
+Ring of hunger: 飢餓の指輪
+Ring of aggravate monster: 反感の指輪
+Ring of poison resistance: 耐毒の指輪
+Ring of fire resistance: 耐炎の指輪
+Ring of cold resistance: 耐冷の指輪
+Ring of free action: 自由行動の指輪
+Ring of polymorph: へんげの指輪
+Ring of polymorph control: へんげ制御の指輪
+
+## Scrolls & Potions (巻物・薬) - from NetHackJP obj_jp.c
 Scroll of magic mapping: 地図の巻物
 Scroll of identify: 識別の巻物
+Scroll of teleportation: 瞬間移動の巻物
+Scroll of remove curse: 解呪の巻物
+Scroll of enchant weapon: 武器に魔法をかける巻物
+Scroll of enchant armor: 鎧に魔法をかける巻物
+Scroll of genocide: 虐殺の巻物
+Scroll of charging: 充填の巻物
 Potion of healing: 回復の薬
 Potion of extra healing: 超回復の薬
+Potion of full healing: 完全回復の薬
 Potion of sickness: 病気の薬
+Potion of gain ability: 能力獲得の薬
+Potion of restore ability: 能力回復の薬
+Potion of gain level: レベルアップの薬
+Potion of speed: 加速の薬
+Potion of levitation: 浮遊の薬
+Potion of invisibility: 透明の薬
+Potion of see invisible: 可視の薬
+Potion of monster detection: 怪物を探す薬
+Potion of object detection: 物体を探す薬
 Holy water: 聖水
 
 ## Spells (呪文) - from spell_jp.c
@@ -95,7 +195,7 @@ remove curse: 解呪
 Excalibur: エクスカリバー
 Mjollnir: ミョルニル
 Demonbane: デーモンベイン
-Platinum Yendorian Express Card: 白金のエンドール急行カード
+Platinum Yendorian Express Card: プラチナイェンダー印エクスプレスカード
 Bell of Opening: 開放の鐘
 Candelabrum of Invocation: 祈りの燭台
 Book of the Dead: 死者の書
@@ -134,3 +234,19 @@ stoning: 石化
 sliming: スライム化
 illness: 病気
 strangulation: 窒息
+
+## Quest Artifacts (クエストアーティファクト) - from NetHackJP obj_jp.c
+The Orb of Detection: 探知のオーブ
+The Heart of Ahriman: アーリマンの心臓
+The Sceptre of Might: 力の王笏
+The Staff of Aesculapius: アスクレピオスの杖
+The Magic Mirror of Merlin: マーリンの魔法の鏡
+The Eyes of the Overworld: オーバーワールドの目
+The Mitre of Holiness: 神聖の僧帽
+The Longbow of Diana: ディアナの長弓
+The Master Key of Thievery: 盗賊術のマスターキー
+The Tsurugi of Muramasa: 村正の剣
+The Platinum Yendorian Express Card: プラチナイェンダー印エクスプレスカード
+The Orb of Fate: 運命のオーブ
+The Eye of the Aethiopica: エチオピカの目
+Grayswandir: グレイスワンダー

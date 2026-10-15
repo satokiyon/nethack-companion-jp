@@ -9,7 +9,7 @@
 5. **即死カウントダウンの対処法**:
    - **石化 (stoning)**: 直ちにトカゲの死骸 (lizard corpse) を食べる。
    - **スライム化 (sliming)**: 炎の杖や炎の巻物など、炎（火）を使って身を焼く。
-   - **病気 (illness)**: 祝福された回復の薬 (blessed potion of healing)、または無呪の超回復の薬 (potion of extra healing) を飲む。ユニコーンの角を使う。
+   - **病気 (illness)**: 祝福された回復の薬 (blessed potion of healing)、または呪われていない超回復の薬 (potion of extra healing) を飲む。ユニコーンの角を使う。
    - **窒息・首吊り (strangulation)**: 直ちに首飾り（絞殺の魔除け / amulet of strangulation）を外すか、神に祈る。
 6. **死の記録**: 持ち物のすべてを尽くしても助からないときは、その死の経緯をメモに残しておく。NetHack は、プレイヤーが二度と同じ過ちを繰り返さないよう痛烈な教訓を刻み込むのが実に得意なゲームです。
 
