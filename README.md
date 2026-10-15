@@ -2,7 +2,7 @@
 
 NetHack 5.0 対応の世界的名スポイラー『A Traveler's Companion to the Mazes of Menace』（David Bau 著）の(非公式)日本語翻訳プロジェクトです。
 
-オンラインで読む→ [https://satokiyon.github.oi//nethack-companion-jp](https://satokiyon.github.oi//nethack-companion-jp) 
+オンラインで読む→ [https://satokiyon.github.io/nethack-companion-jp](https://satokiyon.github.io/nethack-companion-jp) 
 
 ---
 
