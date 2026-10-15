@@ -13,7 +13,7 @@
 |  100 | 警告の指輪 (Warning) | 近くにいるモンスターの危険度を表示 |
 |  150 | 反感の指輪 (Aggravate monster) | 非常に有害（生成時90%呪い） |
 |  150 | 耐冷の指輪 (Cold resistance) | 冷気属性の攻撃に完全耐性 |
-|  150 | 体力の指輪 (Gain constitution) | 耐久力（CON）増大、充填可能 |
+|  150 | 体力の指輪 (Gain constitution) | 耐久 (Con) 増大、充填可能 |
 |  150 | 強さの指輪 (Gain strength) | 筋力（STR）増大、充填可能 |
 |  150 | 命中の指輪 (Increase accuracy) | 命中率上昇（To-Hitボーナス）、充填可能 |
 |  150 | 攻撃の指輪 (Increase damage) | 与ダメージ上昇、充填可能 |

@@ -8,6 +8,6 @@
 | 回復魔法 (Healing) | HP回復と状態異常の治療 | 回復 (Healing) |
 | 予見魔法 (Divination) | 探知、識別、マッピング | 灯り (Light) |
 | 付与魔法 (Enchantment) | 強化、弱体化、魅了 | 怪物を混乱させる (Confuse monster) |
-| 僧侶魔法 (Cleric) | 神聖な防護と召喚 | 防護 (Protection) |
+| 司祭魔法 (Cleric) | 神聖な防護と召喚 | 防護 (Protection) |
 | 脱出魔法 (Escape) | 移動、回避、浮遊 | 跳躍 (Jumping) |
 | 変化魔法 (Matter) | 操作、変成、へんげ | 開錠 (Knock) |

@@ -10,7 +10,7 @@
 | *"Your hands begin to glow red."*<br>（両手が赤く輝き始めた。） | 「モンスター混乱」の巻物を読んだか呪文を唱えました。次の近接攻撃が命中すると相手を混乱させます。（すでに混乱している状態で読むと紫色に光ります。） |
 | *"You feel guilty."*<br>（罪悪感を覚えた。） | 祝福された、または混乱状態で「罰の巻物」を読みました。鉄球と鎖は取り付けられませんでしたが、巻物は識別されました。 |
 | *"Who was that Maud person anyway?"*<br>*"As your mind turns inward…"* | 「健忘の巻物」を読みました。記憶していた呪文の一部を忘れてしまいました（祝福された巻物なら忘れずに済みます）。 |
-| *"You have an uneasy feeling…"*<br>（不安な気分になった…） | 呪われた「啓蒙の薬」を飲んだか、上昇できない場所で呪われた「レベルアップの薬」を飲みました。薬は識別され、それ以外の悪影響はありません（啓蒙の薬の場合は知恵のエクササイズ値が少し下がります）。 |
+| *"You have an uneasy feeling…"*<br>（不安な気分になった…） | 呪われた「啓蒙の薬」を飲んだか、上昇できない場所で呪われた「レベルアップの薬」を飲みました。薬は識別され、それ以外の悪影響はありません（啓蒙の薬の場合は賢明のエクササイズ値が少し下がります）。 |
 | *"You feel like a hypocrite."*<br>（偽善者になったような気分だ。） | エルベレス（Elbereth）の上に立った状態でモンスターを攻撃しました。刻み文字は消滅し、属性値にペナルティを受けました（実績値が十分に高ければ一律−5、低ければ−1〜−5）。 |
 | *"You feel that monsters are aware of your presence."*<br>（モンスターたちがあなたの存在に気づいた気配がする。） | モンスターがモンスター怒号（反感）の呪文を唱え、フロア中のモンスターを目覚めさせてあなたに向かわせました。 |
 | *"You feel that monsters have difficulty pinpointing your location."*<br>（モンスターたちがあなたの位置を正確に捉えにくくなった気がする。） | 「幻影のクローク」の効果が発動しました。*「…no longer have difficulty…」* は効果が切れたことを意味します。 |
@@ -21,7 +21,7 @@
 | *"You feel mildly hot."* / *"You feel mildly chilly."* | 火炎（または冷気）攻撃を受けましたが、自身が持つ内在耐性がそれを吸収しました。自分が思っている通りの耐性を実際に持っていることを確認できる貴重な手がかりです。 |
 | *"You feel rather itchy under your mummy wrapping."* | 透明の巻物、杖、または呪文を使用しましたが、装備中の「ミイラの包帯」が透明化を遮断しました。透明にはなっていませんが、その巻物／杖が透明化であることを確認できました。 |
 | *"You feel less paranoid."*<br>（被害妄想が薄らいだ気がする。） | 扉探索の効果によって、マップ上の古い不可視マーカー `I` が消去されました。モンスターがどこへ移動したかまでは分かりません。 |
-| *"You feel agile! You must have been working on your reflexes!"* (および力／知恵／体力の各種) | 隠されたエクササイズ（鍛錬）システムによって能力値が上昇しました。何が鍛錬に当たるかは [能力値のエクササイズ (Exercising Your Stats)](#exercising-your-stats) を参照してください。逆に *"You haven't been working on reflexes lately"* は不摂生（アビュース）が続いたときに表示されます。 |
+| *"You feel agile! You must have been working on your reflexes!"* (および筋力／知力／賢明／器用／耐久／魅力の各種) | 隠されたエクササイズ（鍛錬）システムによって能力値が上昇しました。何が鍛錬に当たるかは [能力値のエクササイズ (Exercising Your Stats)](#exercising-your-stats) を参照してください。逆に *"You haven't been working on reflexes lately"* は不摂生（アビュース）が続いたときに表示されます。 |
 | *"You move very quietly."*<br>（非常に静かに移動できる。） | 「忍びの指輪」またはエルフのクロークを装備しました。（エルフの靴の場合は *"You walk very quietly"* となります。） |
 | *"Wow! This makes you feel good!"*<br>（おお！ 気分が良くなった！） | 呪われていない「能力回復の薬」を飲み、低下していた能力値が1つ回復しました。 |
 | *"Wow! This makes you feel great!"*<br>（おお！ 素晴らしい気分だ！） | 祝福された「能力回復の薬」を飲んですべての能力値が回復したか、あるいは魔法の泉の水を飲みました。 |

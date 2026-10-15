@@ -30,3 +30,7 @@ __pycache__/
 
 # Local Python venv for the LaTeX build
 .venv/
+
+# Tooling intermediate / session files
+.github/context-mode/
+

@@ -18,3 +18,10 @@
 ## 4. リポジトリ・コミットのクリーンアップ方針
 - 監査や一括置換のために作成した作業用スクリプト（例: `tools/check_*.py`, `tools/apply_*.py` 等）は、最終コミット前に必ず削除し、ワーキングツリーを本質的な成果物のみに保ってください。
 
+<!-- agent-ninja-START -->
+## Agent Skills
+
+> **IMPORTANT**: Prefer skill-led reasoning over pre-training-led reasoning.
+> See [Agent Skills](.github/skills/README.md) before working on tasks covered by these skills.
+
+<!-- agent-ninja-END -->

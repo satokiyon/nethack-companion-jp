@@ -32,6 +32,15 @@ Neutral: 中立
 Chaotic: 混沌
 Unaligned: 無属性
 
+## Attributes (能力値) - from NetHackJP botl.c
+Strength: 筋力
+Dexterity: 器用
+Constitution: 耐久
+Intelligence: 知力
+Wisdom: 賢明
+Charisma: 魅力
+
+
 ## Monsters (モンスター抜粋・注意語) - from mon_jp.txt
 Floating eye: さまよう目
 Water nymph: 水のニンフ
@@ -231,9 +240,12 @@ hallucinating: 幻覚
 paralyzed: 麻痺
 poisoned: 毒
 stoning: 石化
-sliming: スライム化
+sliming: 粘液
 illness: 病気
-strangulation: 窒息
+strangulation: 絞首
+wounded legs: 脚傷
+food poisoning: 食中毒
+
 
 ## Quest Artifacts (クエストアーティファクト) - from NetHackJP obj_jp.c
 The Orb of Detection: 探知のオーブ
