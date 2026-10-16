@@ -1,4 +1,4 @@
-#### 蜘蛛および百足 `s` (Arachnids and centipedes `s`)
+#### 蜘蛛および百足 `s` (Arachnids and centipedes `s`) {#arachnids-and-centipedes-s}
 
 <!-- audit
 2026-05-19:

@@ -1,4 +1,4 @@
-#### 槍 (Spear)
+#### 槍 (Spear) {#spear}
 <!-- audit
 2026-05-19:
 - 6 spear rows (spear/elven/orcish/dwarvish/silver/javelin) verified P_SPEAR (objects.h:174-191).

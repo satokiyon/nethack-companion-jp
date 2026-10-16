@@ -1,4 +1,4 @@
-### 謝辞 (Acknowledgements)
+### 謝辞 (Acknowledgements) {#acknowledgements}
 <!-- audit
 2026-05-19:
 - NetHack 1987, Fenlason -> Brouwer -> Stephenson lineage verified (Wikipedia, dat/history)

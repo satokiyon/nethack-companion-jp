@@ -1,4 +1,4 @@
-### 前回からの変更点 (What Changed Since Last Time)
+### 前回からの変更点 (What Changed Since Last Time) {#what-changed-since-last-time}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:

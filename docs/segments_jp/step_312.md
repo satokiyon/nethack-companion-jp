@@ -1,4 +1,4 @@
-#### ニンフ `n` (Nymphs `n`)
+#### ニンフ `n` (Nymphs `n`) {#nymphs-n}
 
 <!-- audit
 2026-05-19:

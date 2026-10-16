@@ -1,4 +1,4 @@
-### 呪文一覧表 (Spell Tables)
+### 呪文一覧表 (Spell Tables) {#spell-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. All 41 spell rows' level/school/type verified (incl. chain lightning lvl 2). Spell damage figures live in spell.c/zap.c, outside this table's source.

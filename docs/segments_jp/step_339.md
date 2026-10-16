@@ -1,4 +1,4 @@
-#### プリンおよびウーズ `P` (Puddings and oozes `P`)
+#### プリンおよびウーズ `P` (Puddings and oozes `P`) {#puddings-and-oozes-p}
 
 <!-- audit
 2026-05-19:

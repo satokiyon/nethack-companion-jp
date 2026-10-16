@@ -1,4 +1,4 @@
-#### 六尺棒 (Quarterstaff)
+#### 六尺棒 (Quarterstaff) {#quarterstaff}
 <!-- audit
 2026-05-19:
 - quarterstaff: bimanual, 1d6/1d6, wt 40, cost 5, WOOD, P_QUARTERSTAFF (objects.h:377-379).

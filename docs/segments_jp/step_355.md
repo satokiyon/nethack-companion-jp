@@ -1,4 +1,4 @@
-### 固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables)
+### 固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables) {#intrinsic-and-extrinsic-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:

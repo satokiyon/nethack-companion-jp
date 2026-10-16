@@ -1,4 +1,4 @@
-#### ノーム `G` (Gnomes `G`)
+#### ノーム `G` (Gnomes `G`) {#gnomes-g}
 
 <!-- audit
 2026-05-19:

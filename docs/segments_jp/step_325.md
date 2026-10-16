@@ -1,4 +1,4 @@
-#### 天使・神聖なる存在 `A` (Angelic beings `A`)
+#### 天使・神聖なる存在 `A` (Angelic beings `A`) {#angelic-beings-a}
 
 <!-- audit
 2026-05-19:

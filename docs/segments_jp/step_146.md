@@ -1,4 +1,4 @@
-#### 指輪の一覧表 (The Ring Table)
+#### 指輪の一覧表 (The Ring Table) {#the-ring-table}
 
 <div class="price-id-toolbar"></div>
 
@@ -36,4 +36,3 @@
 <div class="price-id-toolbar"></div>
 
 「生成時90%呪い」と記載された指輪は、生成された時点で約90%の確率で呪われており、呪いを解くまで手から外すことができなくなります。
-

@@ -1,4 +1,4 @@
-#### 錆の怪物および魔法中和者 `R` (Rust monsters and disenchanters `R`)
+#### 錆の怪物および魔法中和者 `R` (Rust monsters and disenchanters `R`) {#rust-monsters-and-disenchanters-r}
 
 <!-- audit
 2026-05-19:

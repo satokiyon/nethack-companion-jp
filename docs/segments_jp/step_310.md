@@ -1,4 +1,4 @@
-#### レプラコーン `l` (Leprechauns `l`)
+#### レプラコーン `l` (Leprechauns `l`) {#leprechauns-l}
 
 <!-- audit
 2026-05-19:

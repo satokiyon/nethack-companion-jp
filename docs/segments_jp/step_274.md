@@ -1,4 +1,4 @@
-#### フレイル (Flail)
+#### フレイル (Flail) {#flail}
 <!-- audit
 2026-05-19:
 - flail: base 1d6/1d4, +1 small (weapon.c:272-275), +1d4 large (weapon.c:239-243); objects.h:384-386

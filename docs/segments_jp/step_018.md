@@ -1,4 +1,4 @@
-#### 補給用の箱 (Supply Containers)
+#### 補給用の箱 (Supply Containers) {#supply-containers}
 
 **NetHack 5.0の新要素:** 誰かがダンジョン内に親切な救援物資（ケアパッケージ）を配置してくれています。
 

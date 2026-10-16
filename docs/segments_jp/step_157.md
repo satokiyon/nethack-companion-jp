@@ -1,4 +1,4 @@
-### 武具庫 (The Armory)
+### 武具庫 (The Armory) {#the-armory}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -23,4 +23,3 @@
 -->
 
 このセクションでは、装備の選び方を解説します。[武器一覧表](#weapons-tables) および [防具一覧表](#armor-tables) の付録には、すべてのアイテムの完全な性能値が記載されています。
-

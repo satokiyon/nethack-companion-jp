@@ -1,4 +1,4 @@
-### アーティファクト (Artifacts)
+### アーティファクト (Artifacts) {#artifacts}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:

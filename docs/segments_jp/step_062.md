@@ -1,4 +1,4 @@
-### 戦闘の技術 (The Art of Combat)
+### 戦闘の技術 (The Art of Combat) {#the-art-of-combat}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -33,4 +33,3 @@
 -->
 
 迷宮における最も重要な戦闘技術は、「戦うべきではない状況を弁えること」です。2番目に重要な技術は、「いざ戦うと決めたら、確実に、そして痛烈無比な打撃を叩き込むこと」です。
-

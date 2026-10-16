@@ -1,4 +1,4 @@
-#### 内在能力と死体効果 (Intrinsics and Corpse Effects)
+#### 内在能力と死体効果 (Intrinsics and Corpse Effects) {#intrinsics-and-corpse-effects}
 
 | メッセージ | 意味 |
 |------------|------|
@@ -12,4 +12,3 @@
 | *"You seem faster."*<br>（足が速くなったようだ。） | 量子物理学者の死体を食べて「高速（スピード）」の内在能力を獲得しました。（すでにスピードを持っていた場合は代わりに *"seem slower"*（足が遅くなったようだ）となり、量子物理学者の死体はオン／オフを切り替えます。） |
 | *"You feel a mild buzz."*<br>（かすかな刺激を感じる。） | イモリの死体を食べてMP（魔力）が1〜3回復しました。 |
 | *"You see an image of someone stalking you. But it disappears."*<br>（盲目時: *"You feel very self-conscious. Then it passes."*） | 泉の水を飲んで永続的な「不可視の視覚（透明視）」を獲得しました。幸運な一口でした。 |
-

@@ -1,4 +1,4 @@
-#### 杖の一覧表 (The Wand Table)
+#### 杖の一覧表 (The Wand Table) {#the-wand-table}
 
 各杖の基本スペックと試し書き結果を示します。未識別の杖を絞り込むための価格については [杖の価格](#wand-prices) を参照してください。右端の列にある **試し書きテスト結果** は極めて実用的であり、大半の杖は1回埃に文字を刻むだけでその正体を看破できます。具体的な手順については [杖の試し書きテスト](#the-engrave-test-wands) を、少数の重複するメッセージの判別法については [曖昧な試し書き結果の解決法](#resolving-ambiguous-engrave-results) を参照してください。
 
@@ -40,4 +40,3 @@
 ² 眠りと死で共通。</small>
 
 <div class="price-id-toolbar"></div>
-

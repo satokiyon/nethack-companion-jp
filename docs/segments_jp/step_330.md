@@ -1,4 +1,4 @@
-#### 菌類およびモールド `F` (Fungi and molds `F`)
+#### 菌類およびモールド `F` (Fungi and molds `F`) {#fungi-and-molds-f}
 
 <!-- audit
 2026-05-19:

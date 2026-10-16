@@ -1,4 +1,4 @@
-# NetHack スポイラー
+# NetHack スポイラー {#nethack-spoilers}
 
 ```{=html}
 <p style="text-align: center; font-size: 1.25em; margin: 0.2em 0 1.4em;">脅威の迷宮への旅人の手引き (A Traveler's Companion to the <span class="nobr">Mazes of Menace</span>)</p>
@@ -21,4 +21,3 @@ NetHack の素晴らしいところの一つは、あまりにも奥深く、あ
 NetHack の世界へようこそ！
 
 ---
-

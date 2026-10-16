@@ -1,4 +1,4 @@
-### 幸運と運命 (Luck and Fortune)
+### 幸運と運命 (Luck and Fortune) {#luck-and-fortune}
 
 <!-- audit
 2026-09-27 luckstone rewrite vs NetHack-5.0 source:
@@ -37,4 +37,3 @@
 2. 幸運の石を手に入れたら、祝福して鞄に入れずインベントリに直接携帯すること。
 3. 識別済みの本物の宝石を、自属性と同じユニコーンに投げ与えること。
 4. 理由もなく平和的な生物を殺したり、鏡を割ったりしないこと。
-

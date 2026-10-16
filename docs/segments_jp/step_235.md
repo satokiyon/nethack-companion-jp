@@ -1,4 +1,4 @@
-#### 第1階層・バージョンB (Level 1, Version B) {.sokoban-level data-width=15 data-height=11}
+#### 第1階層・バージョンB (Level 1, Version B) {#level-1-version-b .sokoban-level data-width=15 data-height=11}
 <!-- audit
 2026-05-19:
 - Map walls/floors and all 12 boulders A-L match soko4-2.lua:9-21, 29-42.
@@ -65,4 +65,3 @@
 16. A を B と同様に埋める。
 
 巨岩が2個（D と E）残ります。(2,10) と (3,10) に落ちている巻物は大地の巻物です。
-

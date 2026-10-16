@@ -1,4 +1,4 @@
-#### コカトリス `c` (Cockatrices `c`)
+#### コカトリス `c` (Cockatrices `c`) {#cockatrices-c}
 
 <!-- audit
 2026-05-19:

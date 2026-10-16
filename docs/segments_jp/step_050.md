@@ -1,4 +1,4 @@
-#### 捜索と探知 (Searching and Detection)
+#### 捜索と探知 (Searching and Detection) {#searching-and-detection}
 <!-- audit
 2026-05-18:
 - dosearch0 search mechanics at detect.c:2016-2093

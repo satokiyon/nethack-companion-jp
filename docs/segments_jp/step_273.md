@@ -1,4 +1,4 @@
-#### モーニングスター (Morning star)
+#### モーニングスター (Morning star) {#morning-star}
 <!-- audit
 2026-05-19:
 - morning star: 1d4+1d4 / 1d6+1, wt 120, cost 10, hit 0, iron (objects.h:363-365, weapon.c:225-289)

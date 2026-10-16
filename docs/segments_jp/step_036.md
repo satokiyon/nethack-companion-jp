@@ -1,4 +1,4 @@
-### 支流とランドマーク (Branches and Landmarks)
+### 支流とランドマーク (Branches and Landmarks) {#branches-and-landmarks}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -7,4 +7,3 @@
 -->
 
 ダンジョンの主幹はまっすぐ地下深奥へと続いていますが、大きな報酬の大半は、主幹から枝分かれした支流ダンジョンや、以下に順を追って解説する名高きランドマークで待ち構えています。
-

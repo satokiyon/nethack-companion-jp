@@ -5,7 +5,7 @@
 - ya: 1d7/1d7, +1 hit, METAL, cost 4 (objects.h:153-154).
 - yumi prob=0: Samurai-only, never randomly spawns (objects.h:401-402).
 -->
-#### 弓 (Bow)
+#### 弓 (Bow) {#bow}
 
 片手持ちの発射具（ランチャー）。弓を手（主武器）に装備し、矢筒に矢を入れて `f` キーで発射します。エキスパートの射手はマルチショット（一斉射撃）が可能で、野伏（Ranger）と侍（Samurai）がそのスペシャリストです。弓は二刀流戦闘を阻害しますが、盾を装備することは可能です。
 

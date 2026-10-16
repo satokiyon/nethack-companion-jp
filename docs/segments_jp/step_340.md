@@ -1,4 +1,4 @@
-#### 量子物理学者 `Q` (Quantum mechanics `Q`)
+#### 量子物理学者 `Q` (Quantum mechanics `Q`) {#quantum-mechanics-q}
 
 <!-- audit
 2026-05-19:

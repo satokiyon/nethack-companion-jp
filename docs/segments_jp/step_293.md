@@ -1,4 +1,4 @@
-#### 兜・帽子 (Helmets)
+#### 兜・帽子 (Helmets) {#helmets-1}
 
 ::: dense-table
 

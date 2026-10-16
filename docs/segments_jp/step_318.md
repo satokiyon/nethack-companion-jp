@@ -1,4 +1,4 @@
-#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`)
+#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`) {#trappers-and-lurkers-t}
 
 <!-- audit
 2026-05-19:

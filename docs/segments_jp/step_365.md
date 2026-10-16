@@ -1,4 +1,4 @@
-## 有用な知識の索引 (Index of Useful Knowledge)
+## 有用な知識の索引 (Index of Useful Knowledge) {#index-of-useful-knowledge}
 
 ```{=latex}
 \begin{multicols}{2}

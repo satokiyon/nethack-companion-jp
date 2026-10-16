@@ -1,4 +1,4 @@
-#### 靴 (Boots)
+#### 靴 (Boots) {#boots-1}
 
 ::: dense-table
 

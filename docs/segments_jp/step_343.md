@@ -1,4 +1,4 @@
-#### トロール `T` (Trolls `T`)
+#### トロール `T` (Trolls `T`) {#trolls-t}
 
 <!-- audit
 2026-05-19:

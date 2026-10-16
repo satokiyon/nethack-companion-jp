@@ -1,4 +1,4 @@
-#### ヘビ `S` (Snakes `S`)
+#### ヘビ `S` (Snakes `S`) {#snakes-s}
 
 <!-- audit
 2026-05-19:

@@ -1,4 +1,4 @@
-### 防具一覧表 (Armor Tables)
+### 防具一覧表 (Armor Tables) {#armor-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. Every armor row (AC=10-macro-arg, MC, weight, material, slot) verified across ARMOR/HELM/CLOAK/SHIELD/GLOVES/BOOTS macros.

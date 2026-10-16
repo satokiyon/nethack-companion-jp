@@ -1,4 +1,4 @@
-#### 戦闘と防御 (Combat and defense)
+#### 戦闘と防御 (Combat and defense) {#combat-and-defense}
 
 昇天用装備セットを支える多層防御：AC、反射、自由行動、自動回復など。
 

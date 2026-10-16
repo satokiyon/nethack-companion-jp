@@ -1,4 +1,4 @@
-#### ケンタウロス `C` (Centaurs `C`)
+#### ケンタウロス `C` (Centaurs `C`) {#centaurs-c}
 
 <!-- audit
 2026-05-19:

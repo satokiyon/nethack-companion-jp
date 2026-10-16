@@ -1,6 +1,6 @@
 ---
 
-### 呪いとその解除法 (Curses and How to Break Them)
+### 呪いとその解除法 (Curses and How to Break Them) {#curses-and-how-to-break-them}
 
 <!-- audit
 2026-07-30: audited with The Armory vs NetHack-5.0 source; remove-curse scope (uncursed=worn, blessed=all; read.c:1524), confused-cursing, prayer uncurse, autocurse-9/10 items verified. No corrections.
@@ -19,4 +19,3 @@
 -->
 
 遅かれ早かれ、あなたは呪われた装備を身につけてしまうことになります。事前にテストしなかった指輪かもしれません。ボーンズ階層で拾った靴かもしれません。あるいは、モンスターがあなたの持ち物に触れて呪いをかけたことに気づかなかったのかもしれません。何が原因であれ、外すことを頑なに拒むアイテムを身につけ、おそらく何か恐ろしい災難に見舞われているはずです。呪いを解かない限り、それを脱ぎ捨てることはできません。
-

@@ -1,4 +1,4 @@
-#### 吸血鬼 `V` (Vampires `V`)
+#### 吸血鬼 `V` (Vampires `V`) {#vampires-v}
 
 <!-- audit
 2026-05-19:

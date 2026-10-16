@@ -5,7 +5,7 @@
 - crysknife reverts to worm tooth on drop via type-id swap, NOT poly (do.c:903-918)
 - fixed (erodeproof) crysknife only reverts ~10% of drops (do.c:911)
 -->
-#### ナイフ (Knife)
+#### ナイフ (Knife) {#knife}
 
 主に近接戦闘用。ナイフはスタック可能で投擲もできますが、投擲ナイフによるマルチショットボーナスを得られる職業はありません。
 

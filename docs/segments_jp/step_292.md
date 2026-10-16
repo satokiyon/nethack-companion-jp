@@ -1,4 +1,4 @@
-#### クローク (Cloaks)
+#### クローク (Cloaks) {#cloaks-1}
 
 ::: dense-table
 

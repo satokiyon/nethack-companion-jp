@@ -1,4 +1,4 @@
-# NetHack スポイラー
+# NetHack スポイラー {#nethack-spoilers}
 
 ```{=html}
 <p style="text-align: center; font-size: 1.25em; margin: 0.2em 0 1.4em;">脅威の迷宮への旅人の手引き (A Traveler's Companion to the <span class="nobr">Mazes of Menace</span>)</p>
@@ -22,7 +22,7 @@ NetHack の世界へようこそ！
 
 ---
 
-## 読み進める前に
+## 読み進める前に {#before-you-read-further}
 
 **警告。** 本書を読むことで、あなたが「脅威の迷宮」で得るゲーム体験は大きく変わることになります。さまよう目 (floating eye) を見つめるだけで麻痺してしまうという事実をひとたび知ってしまえば、それを「知らなかった頃」に戻ることは二度とできません。周到な準備の安心感よりも、自らの手で発見するスリルを好む冒険者もいます。もしあなたがそうであるなら、今すぐ本書を閉じ、痛い目を見ながら自力で学んでいくべきです。それもまた、このゲームの真の醍醐味なのですから。
 
@@ -30,7 +30,7 @@ NetHack の世界へようこそ！
 
 度重なる水のニンフ (water nymph) に所持品を根こそぎ奪われたことがある方、[ノームの鉱山](#the-gnomish-mines)をどうしても突破できない方、あるいはダンジョン地下4階で食料が尽き、神に見捨てられて餓死することにうんざりしている方は、ぜひこの先をお読みください。あなたが生き延びられるよう、全力を尽くして手引きします。
 
-### 本書の使い方
+### 本書の使い方 {#how-to-use-this-book}
 
 初めて潜る際は、まず[持ち物の準備](#what-to-pack)、[序盤の黄金律](#the-golden-rules-of-early-survival)、そして[差し迫った死から身を守る方法](#delayed-deaths)をお読みください。各種データ表や終盤の攻略章は、ダンジョン内で必要に迫られるまでは後回しで構いません。
 
@@ -38,7 +38,7 @@ NetHack の世界へようこそ！
 
 **表記規則。** `@` や `#pray` などの等幅フォントテキストは、ゲーム画面に表示される文字や、プレイヤーがキーボードで入力するコマンドを表します。**太字**は覚えておくべき重要な鉄則・指針です。*Dlvl* はダンジョンの深度（地下階数）を、*XL* はキャラクターの経験レベルを表します。通貨単位はゾークミッド（*zm*）です。**5.0の新要素**と記された項目は、NetHack 3.6以前のバージョンで学んだプレイヤーにとって特に重要です。久しぶりにプレイする復帰冒険者は、まず[前回からの変更点](#what-changed-since-last-time)から読み始めるのもおすすめです。
 
-#### ダンジョン緊急時チェックリスト
+#### ダンジョン緊急時チェックリスト {#dungeon-emergency-checklist}
 
 状況が一変して絶体絶命の危機に陥ったときは、**キーボードを叩くのを直ちに止め、画面上部に表示されたメッセージをもう一度よく読み直してください。**
 
@@ -63,7 +63,7 @@ NetHack の世界へようこそ！
 
 ---
 
-## 目次
+## 目次 {#table-of-contents}
 
 **第1部: 旅立ちの前に (Part One: Before You Set Out)**
 
@@ -129,7 +129,7 @@ NetHack の世界へようこそ！
 45. [前回からの変更点](#what-changed-since-last-time) — 3.6.x と 5.0 の違いと対策
 46. [謝辞](#acknowledgements) — 巨人の肩の上に立って
 
-## 第1部: 旅立ちの前に (Part One: Before You Set Out)
+## 第1部: 旅立ちの前に (Part One: Before You Set Out) {#part-one-before-you-set-out}
 
 <!-- audit
 2026-05-22 community-strategy additions citation index:
@@ -137,7 +137,7 @@ NetHack の世界へようこそ！
 - 個々の引用エントリについては strategy-audit.md を参照してください。
 -->
 
-### 遠征の選択
+### 遠征の選択 {#choosing-your-expedition}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -177,7 +177,7 @@ NetHack の世界へようこそ！
 
 初めての冒険なら、**「秩序」の「人間」または「ドワーフ」の「ワルキューレ」**を選ぶのがおすすめです。初期能力値と装備が強力で、最初から冷気耐性を持ち、序盤から強力な武器を入手する確実なルートが存在します。もちろん、他に興味を惹かれる役職があれば、迷わずそちらを選んでください。最初の数回の死は、キャラクター選択画面の解説文の何倍もの教訓を与えてくれるはずです。
 
-#### 役職 (The Roles)
+#### 役職 (The Roles) {#the-roles}
 
 | 役職 (Role) | 属性 (Alignments) | 種族 (Races) | 序盤の強み (Early edge) | 主な難点 (Main difficulty) |
 |---|---|---|---|---|
@@ -233,7 +233,7 @@ carrcap=MAX_CARR_CAP (hack.c weight_cap), so riding raises carrying capacity.
 
 **魔法使い (Wizard)** *（中立または混沌）*。大半の冒険者がゲーム全体を通じて血眼になって探し求める至宝を、最初から羽織って旅立ちます。すなわち**魔法を防ぐクローク (cloak of magic resistance)** です。1ターン目から凶悪な即死魔法の数々を完全に無力化できます。さらに六尺棒 (quarterstaff)、杖、2つの指輪、一握りの薬と巻物、魔法のマーカー、そして接近するあらゆる敵を吹き飛ばす**衝撃 (force bolt)** の呪文を携えています。最も脆いのは序盤です。肉体は打たれ弱く、魔法エネルギー (PW) も乏しいため、拳で殴り合うのではなく、杖と衝撃の呪文を駆使して慎重に戦わなければなりません。魔法の各系統を学ぶにつれ、呪文の書を一目で識別できるようになります。充実した魔法の書庫を手に入れた中盤の魔法使いは、あらゆる戦闘に対して完璧な解答を持っています。呪文を唱えるときは六尺棒を手に持っておきましょう（呪文詠唱の成功率を安定させてくれます）。そして2つの注意点があります。初期食料を持たず、分け前を譲ってくれない**小猫 (kitten)** を連れていること、そして衝撃の呪文は床に落ちている薬を粉砕してしまうことです（詳細は[呪文の詠唱](#spellcasting)を参照）。
 
-#### 種族 (The Races)
+#### 種族 (The Races) {#the-races}
 
 種族は、キャラクターの初期能力値、能力値の最大上限、そして最初から持っている内在能力に影響を与えます。いかなる能力値も 3 未満には下がりません。以下の表は、各種族が到達できる各能力値の最大上限値を示しています。
 
@@ -255,7 +255,7 @@ carrcap=MAX_CARR_CAP (hack.c weight_cap), so riding raises carrying capacity.
 
 **オーク (Orc)**。レベル1からの毒耐性が極めて有用で、毒を持つコボルド (kobold) の死骸を安全に平らげることができます（序盤の貴重な無料の栄養源になります）。また、同族食い（共食い）のペナルティを受けることなく、倒した他のオークの死骸を食べることができます。全体的な能力値上限は低めで、人間・エルフ・ドワーフからは種族的に敵視されがちです。ただし、普段から平和的な店主、司祭、監視員などは敵対化しません（他のオークも自動的に仲間になるわけではありません）。選択可能役職: 野蛮人、レンジャー、盗賊、魔法使い。
 
-#### 属性 (Alignment)
+#### 属性 (Alignment) {#alignment}
 
 秩序 (Lawful)、中立 (Neutral)、混沌 (Chaotic) という3つの属性を、一般的な「善・中庸・悪」と捉えてしまいがちですが、NetHack はそうした道徳的な善悪でプレイヤーを裁くわけではありません。本作における属性とは、**「自分が信仰する神の教義や戒律をどれほど忠実に守り抜いているか」を測る客観的な数値（属性信仰値）**なのです。
 
@@ -278,11 +278,11 @@ carrcap=MAX_CARR_CAP (hack.c weight_cap), so riding raises carrying capacity.
 - strategy aligned with NetHackWiki Curse-testing, Altar: altar amber/black flash and pet step-avoidance are confirmed canonical curse-testing techniques (https://nethackwiki.com/wiki/Curse-testing, https://nethackwiki.com/wiki/Altar)
 -->
 
-### 持ち物の準備 (What to Pack)
+### 持ち物の準備 (What to Pack) {#what-to-pack}
 
 初期装備（スターティングキット）は役職ごとにあらかじめ決まっており、それぞれの強みに適したものが揃っていますが、すぐに強化していく必要があります。ゲーム序盤に階層を下りていく際は、以下に挙げるアイテムに常に目を光らせておきましょう。大半の役職の弱点を劇的に補ってくれます。
 
-#### 序盤の買い物・調達リスト (The Early Shopping List)
+#### 序盤の買い物・調達リスト (The Early Shopping List) {#the-early-shopping-list}
 
 **食料の確保。** 冒険者は必ず空腹になります。それは想像以上の早さで訪れます。しかし、主な食料源は持ち物袋の中に入っているレーションではありません。菜食主義の役職をプレイしているのでない限り、**序盤のダンジョンにおける主食は、自分が倒した敵の死骸です。** 倒したばかりの新鮮な死骸をその場で食べながら進めば（`e` を押して足元の死骸を選択）、食料レーションは主食ではなく非常用の備蓄食料となります。見かけた食料（food ration）はもちろんすべて拾うべきですが、持ち歩くのは2〜3個で十分です。溜め込む必要はありません。モツの塊 (tripe ration) はペットのためのものであり、あなたが食べるものではありません。
 
@@ -305,7 +305,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### 最初の潜行 (Your First Descent)
+### 最初の潜行 (Your First Descent) {#your-first-descent}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -338,7 +338,7 @@ juice / see invisible / sickness (50). -->
 
 最初の数フロアは手加減してくれますが、それはあくまで相対的な話です。モンスターも弱いですが、あなたもまた、最低限の装備、低いHP、そして中盤以降の生存に不可欠な耐性を何ひとつ持たない最も脆弱な状態です。他のどの階層よりも地下1階から5階で命を落とす冒険者が圧倒的に多いのは、敵が強大だからではなく、こちらに対抗手段がほとんどないからです。
 
-#### 序盤生存の黄金律 (The Golden Rules of Early Survival)
+#### 序盤生存の黄金律 (The Golden Rules of Early Survival) {#the-golden-rules-of-early-survival}
 
 **鉄則 1: 勝てない相手とは戦うな。** 最初の交戦（1発殴り合った直後）で撤退するかどうかを決断してください。残りHPが数ポイントに削られてからでは手遅れです。可能なら上り階段へ逃げ込みましょう。それが無理なら、閉められる扉、そして一本道の通路へと退避します。どうしても退路がない場合は、モンスターが隣接する前に、`E` を押して `-`（指）を選択し、床の埃に `Elbereth` と刻みましょう。
 
@@ -367,7 +367,7 @@ juice / see invisible / sickness (50). -->
 
 **鉄則 7: キー入力は慎重に、キーリピートは厳禁。** キーを1回押すごとに1ターンが消費されます。移動キーを押しっぱなしにしてオートリピートさせると、キャラクターは盲目的に前進し、予期せぬ強敵との遭遇、現れたばかりの罠、あるいは誤って泉 (fountain) の水を飲むなどして命を落とします。キーは1回ずつ押し、状況を確認してください。1マスずつキーを叩かずに長い通路を移動するには、**Shift＋方向キー**のショートカットを活用しましょう。大文字の `H J K L Y U B N` はアイテムや扉を通り過ぎて走り、前方にモンスターが現れるか攻撃を受けたときに自動停止します。さらに慎重に進むなら `G`＋方向キーを使いましょう。モンスター、アイテム、扉の隣で確実に停止します。オートリピートにはそうした安全機能は一切ありません。
 
-#### ダンジョンの危険と生き残り術 (Dungeon Hazards and How to Survive Them)
+#### ダンジョンの危険と生き残り術 (Dungeon Hazards and How to Survive Them) {#dungeon-hazards-and-how-to-survive-them}
 
 序盤に多発する典型的な死因と、その防止策を以下にまとめます。
 
@@ -383,7 +383,7 @@ juice / see invisible / sickness (50). -->
 
 **[ノームの鉱山](#the-gnomish-mines)への無謀な早急突入。** 鉱山町 (Minetown) より深い鉱山フロアには、重厚な防具をまとったドワーフやノームの領主 (gnome lord) がひしめいています。強固な防具を持つ敵の集団と白兵戦を繰り広げる準備が整っていないなら、深入りせずに運命の迷宮のメインルートへと引き返し、装備が充実してから再挑戦しましょう。
 
-#### 補給用の箱 (Supply Containers)
+#### 補給用の箱 (Supply Containers) {#supply-containers}
 
 **NetHack 5.0の新要素:** 誰かがダンジョン内に親切な救援物資（ケアパッケージ）を配置してくれています。
 
@@ -401,7 +401,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-## 第2部: ダンジョンの光景 (Part Two: Dungeon Sights)
+## 第2部: ダンジョンの光景 (Part Two: Dungeon Sights) {#part-two-dungeon-sights}
 
 マップはさまざまな記号で埋め尽くされていますが、本当に立ち止まって警戒すべき記号はごく一部です。ダンジョン内の施設や設備を見つけたときは[注目の名所・設備](#points-of-interest)を、見慣れない階段を降りる前には[分岐とランドマーク](#branches-and-landmarks)を参照してください。生態系フィールドガイドは辞書のように引くためのものです。アルファベットを見つけたら、短い警告だけでは不十分な場合にリンク先を追ってください。
 
@@ -415,7 +415,7 @@ juice / see invisible / sickness (50). -->
 \vspace*{0.4in}
 ```
 
-### 迷宮の地形と構造 (The Lay of the Land)
+### 迷宮の地形と構造 (The Lay of the Land) {#the-lay-of-the-land}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified DoD depths, all branch placements, Gehennom & Elemental Planes ordering (dungeon.lua), Sokoban/Orcus prizes, Big Room 40%, map symbols.
@@ -450,7 +450,7 @@ juice / see invisible / sickness (50). -->
 
 脅威の迷宮の構造はゲームごとに毎回新しく生成されますが、各分岐ダンジョン、特殊フロア、そして大まかな階層の深さは常に一定です。その全体の骨格を把握していれば、次に何が待ち受けているかを常に予測することができます。
 
-#### 全体像 (The Big Picture)
+#### 全体像 (The Big Picture) {#the-big-picture}
 
 ダンジョンは、主幹となる本流といくつかの支流（分岐ダンジョン）を持つ樹形図のような構造になっています。正確な深度はゲームごとに多少変動しますが、以下の図が典型的な全貌を示しています。
 
@@ -462,7 +462,7 @@ juice / see invisible / sickness (50). -->
 <div><figure style="margin: 1.5em 0; text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 611" role="img" aria-label="Dungeons of Doom map" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><line x1="380" y1="55" x2="380" y2="611" stroke="#B5651D" stroke-width="2.5" fill="none"/><rect x="40" y="0" width="680" height="39" rx="4" fill="#B5651D"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">DUNGEONS OF DOOM</text><line x1="150" y1="140" x2="150" y2="246" stroke="#5B8E3A" stroke-width="2" fill="none"/><line x1="630" y1="166" x2="630" y2="194" stroke="#B58A1A" stroke-width="2" fill="none"/><line x1="630" y1="305" x2="630" y2="343" stroke="#3B6FA0" stroke-width="2" fill="none"/><rect x="290" y="55" width="180" height="40" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="72" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">The Dungeon Entrance</text><text x="380" y="89" font-size="12" font-style="italic" fill="#555" text-anchor="middle">up-stair to exit</text><rect x="60" y="108" width="180" height="32" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="129" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Gnomish Mines</text><rect x="60" y="168" width="180" height="40" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="185" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Minetown</text><text x="150" y="202" font-size="12" font-style="italic" fill="#555" text-anchor="middle">shops, temple</text><rect x="60" y="246" width="180" height="40" rx="6" fill="#E8F4DC" stroke="#5B8E3A" stroke-width="1.5"/><text x="150" y="263" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Mine's End</text><text x="150" y="280" font-size="12" font-style="italic" fill="#555" text-anchor="middle">luckstone</text><rect x="290" y="163" width="180" height="40" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="180" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">The Oracle</text><text x="380" y="197" font-size="12" font-style="italic" fill="#555" text-anchor="middle">paid hints</text><rect x="540" y="126" width="180" height="40" rx="6" fill="#FFF4CC" stroke="#B58A1A" stroke-width="1.5"/><text x="630" y="143" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Sokoban prize</text><text x="630" y="160" font-size="12" font-style="italic" fill="#555" text-anchor="middle">bag of holding/amulet of reflection</text><rect x="540" y="194" width="180" height="32" rx="6" fill="#FFF4CC" stroke="#B58A1A" stroke-width="1.5"/><text x="630" y="215" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Sokoban entry</text><rect x="290" y="269" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="290" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest portal</text><rect x="540" y="265" width="180" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="630" y="282" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest entry</text><text x="630" y="299" font-size="12" font-style="italic" fill="#555" text-anchor="middle">your role's dungeon</text><rect x="540" y="343" width="180" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="630" y="360" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle"><tspan>Q</tspan>uest goal</text><text x="630" y="377" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Bell of Opening, role artifact</text><rect x="290" y="329" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="350" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Big Room (40%)</text><rect x="290" y="389" width="180" height="32" rx="6" fill="#FAF3E0" stroke="#B5651D" stroke-width="1.5"/><text x="380" y="410" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Rogue Level</text><rect x="60" y="420" width="180" height="40" rx="6" fill="#FFD966" stroke="#B5891A" stroke-width="1.5"/><text x="150" y="437" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Fort Ludios</text><text x="150" y="454" font-size="12" font-style="italic" fill="#555" text-anchor="middle">vault of gold</text><rect x="290" y="479" width="180" height="32" rx="6" fill="#B8D4F0" stroke="#2E5C8E" stroke-width="1.5"/><text x="380" y="500" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Medusa's Island</text><rect x="230" y="539" width="300" height="58" rx="8" fill="#FFFFFF" stroke="#B5891A" stroke-width="2.5"/><text x="380" y="565" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">THE CASTLE</text><text x="380" y="582" font-size="14" font-style="italic" fill="#7A5A0A" text-anchor="middle">wand of wishing</text><line x1="380" y1="124" x2="240" y2="124" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="380" y1="210" x2="540" y2="210" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="470" y1="285" x2="540" y2="285" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><line x1="380" y1="440" x2="240" y2="440" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><text x="275" y="120" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">down</text><text x="500" y="206" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">up</text><text x="505" y="281" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portal</text><text x="275" y="436" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portal</text><circle cx="380" cy="124" r="4" fill="#B5651D"/><circle cx="380" cy="210" r="4" fill="#B5651D"/><circle cx="380" cy="440" r="4" fill="#B5651D"/><circle cx="380" cy="104.0" r="4" fill="#B5651D"/><circle cx="380" cy="114.0" r="4" fill="#B5651D"/><circle cx="150" cy="149.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="159.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="217.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="227.0" r="4" fill="#5B8E3A"/><circle cx="150" cy="237.0" r="4" fill="#5B8E3A"/><circle cx="380" cy="134.0" r="4" fill="#B5651D"/><circle cx="380" cy="144.0" r="4" fill="#B5651D"/><circle cx="380" cy="154.0" r="4" fill="#B5651D"/><circle cx="630" cy="175.0" r="4" fill="#B58A1A"/><circle cx="630" cy="185.0" r="4" fill="#B58A1A"/><circle cx="380" cy="220.0" r="4" fill="#B5651D"/><circle cx="380" cy="230.0" r="4" fill="#B5651D"/><circle cx="380" cy="240.0" r="4" fill="#B5651D"/><circle cx="380" cy="250.0" r="4" fill="#B5651D"/><circle cx="380" cy="260.0" r="4" fill="#B5651D"/><circle cx="630" cy="314.0" r="4" fill="#3B6FA0"/><circle cx="630" cy="324.0" r="4" fill="#3B6FA0"/><circle cx="630" cy="334.0" r="4" fill="#3B6FA0"/><circle cx="380" cy="310.0" r="4" fill="#B5651D"/><circle cx="380" cy="320.0" r="4" fill="#B5651D"/><circle cx="380" cy="370.0" r="4" fill="#B5651D"/><circle cx="380" cy="380.0" r="4" fill="#B5651D"/><circle cx="380" cy="430.0" r="4" fill="#B5651D"/><circle cx="380" cy="450.0" r="4" fill="#B5651D"/><circle cx="380" cy="460.0" r="4" fill="#B5651D"/><circle cx="380" cy="470.0" r="4" fill="#B5651D"/><circle cx="380" cy="520.0" r="4" fill="#B5651D"/><circle cx="380" cy="530.0" r="4" fill="#B5651D"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 681" role="img" aria-label="Gehennom map" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><line x1="380" y1="0" x2="380" y2="39" stroke="#B5651D" stroke-width="2.5" fill="none"/><line x1="380" y1="0" x2="380" y2="625" stroke="#A14A3F" stroke-width="2.5" fill="none"/><rect x="40" y="0" width="680" height="39" rx="4" fill="#A14A3F"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">GEHENNOM</text><line x1="150" y1="288" x2="150" y2="306" stroke="#6B4E96" stroke-width="2" fill="none"/><rect x="290" y="53" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="70" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Valley of the Dead</text><text x="380" y="87" font-size="12" font-style="italic" fill="#555" text-anchor="middle">Gehennom's entrance</text><rect x="290" y="141" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="162" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Asmodeus's Lair</text><rect x="290" y="191" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="212" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Juiblex's Swamp</text><rect x="290" y="251" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="272" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Baalzebub's Lair</text><rect x="60" y="248" width="180" height="40" rx="6" fill="#E3D8F0" stroke="#6B4E96" stroke-width="1.5"/><text x="150" y="265" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Vlad the Impaler</text><text x="150" y="282" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Candelabrum</text><rect x="60" y="306" width="180" height="32" rx="6" fill="#E3D8F0" stroke="#6B4E96" stroke-width="1.5"/><text x="150" y="327" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Vlad's Tower</text><rect x="290" y="351" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="368" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Orcus Town</text><text x="380" y="385" font-size="12" font-style="italic" fill="#555" text-anchor="middle">Wand of Orcus · magic lamp/marker</text><rect x="290" y="419" width="180" height="32" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="440" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Wizard's Tower</text><rect x="290" y="469" width="180" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="380" y="486" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Wizard of Yendor</text><text x="380" y="503" font-size="12" font-style="italic" fill="#555" text-anchor="middle"><tspan font-style="normal">★ </tspan>Book of the Dead</text><rect x="230" y="567" width="300" height="58" rx="8" fill="#2D2D2D" stroke="#FFC857" stroke-width="2.5"/><text x="380" y="593" font-size="17" font-weight="600" fill="#FFC857" text-anchor="middle">Moloch's Sanctum</text><text x="380" y="610" font-size="14" font-style="italic" fill="#FFE680" text-anchor="middle">the Amulet of Yendor</text><line x1="380" y1="322" x2="240" y2="322" stroke="#5a5a5a" stroke-width="1.5" marker-end="url(#arr)" fill="none"/><text x="275" y="318" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">up</text><circle cx="380" cy="322" r="4" fill="#A14A3F"/><circle cx="380" cy="102.0" r="4" fill="#A14A3F"/><circle cx="380" cy="112.0" r="4" fill="#A14A3F"/><circle cx="380" cy="122.0" r="4" fill="#A14A3F"/><circle cx="380" cy="132.0" r="4" fill="#A14A3F"/><circle cx="380" cy="182.0" r="4" fill="#A14A3F"/><circle cx="380" cy="232.0" r="4" fill="#A14A3F"/><circle cx="380" cy="242.0" r="4" fill="#A14A3F"/><circle cx="380" cy="292.0" r="4" fill="#A14A3F"/><circle cx="380" cy="302.0" r="4" fill="#A14A3F"/><circle cx="380" cy="312.0" r="4" fill="#A14A3F"/><circle cx="150" cy="297.0" r="4" fill="#6B4E96"/><circle cx="380" cy="332.0" r="4" fill="#A14A3F"/><circle cx="380" cy="342.0" r="4" fill="#A14A3F"/><circle cx="380" cy="400.0" r="4" fill="#A14A3F"/><circle cx="380" cy="410.0" r="4" fill="#A14A3F"/><circle cx="380" cy="460.0" r="4" fill="#A14A3F"/><circle cx="380" cy="518.0" r="4" fill="#A14A3F"/><circle cx="380" cy="528.0" r="4" fill="#A14A3F"/><circle cx="380" cy="538.0" r="4" fill="#A14A3F"/><circle cx="380" cy="548.0" r="4" fill="#A14A3F"/><circle cx="380" cy="558.0" r="4" fill="#A14A3F"/><line x1="380" y1="631" x2="380" y2="681" stroke="#5B8E3A" stroke-width="2.5" stroke-dasharray="7,5" fill="none"/><text x="400" y="661" font-size="15" font-weight="600" font-style="italic" fill="#5B8E3A">now go <tspan style="font-weight:800;font-size:17px">ALL</tspan> the way back up...</text></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 299" role="img" aria-label="Elemental Planes and Ascension" style="display:block;margin:0 auto;max-width:760px;width:100%;height:auto;font-family:'EB Garamond','Garamond','Georgia',serif;font-feature-settings:'liga' 0, 'dlig' 0;"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/></marker></defs><rect x="40" y="0" width="680" height="39" rx="4" fill="#5D3C8E"/><text x="380" y="26" font-size="22" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.08em">THE ELEMENTAL PLANES</text><rect x="68" y="89" width="120" height="40" rx="6" fill="#E8DDC8" stroke="#8B6F47" stroke-width="1.5"/><text x="128" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Earth</text><rect x="236" y="89" width="120" height="40" rx="6" fill="#E0F4FA" stroke="#3B9FA8" stroke-width="1.5"/><text x="296" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Air</text><rect x="404" y="89" width="120" height="40" rx="6" fill="#FAD7C0" stroke="#A14A3F" stroke-width="1.5"/><text x="464" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Fire</text><rect x="572" y="89" width="120" height="40" rx="6" fill="#DDE9F5" stroke="#3B6FA0" stroke-width="1.5"/><text x="632" y="115" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Water</text><rect x="260" y="179" width="240" height="42" rx="6" fill="#D8C6F0" stroke="#5D3C8E" stroke-width="1.5"/><text x="380" y="197" font-size="15" font-weight="600" fill="#1f2933" text-anchor="middle">Astral Plane</text><text x="380" y="213" font-size="12" font-style="italic" fill="#555" text-anchor="middle">three altars · pick yours</text><rect x="230" y="239" width="300" height="50" rx="10" fill="#FFE680" stroke="#B5891A" stroke-width="2.5"/><text x="380" y="262" font-size="18" font-weight="700" fill="#7A5A0A" text-anchor="middle" letter-spacing="0.1em">ASCENSION</text><text x="380" y="281" font-size="11" font-style="italic" fill="#7A5A0A" text-anchor="middle">offer the Amulet at your altar</text><path d="M 380 39 C 380 53 128 53 128 67 L 128 89" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="188" y1="109" x2="236" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><text x="212" y="105" font-size="11" font-style="italic" fill="#5a5a5a" text-anchor="middle">portals</text><line x1="356" y1="109" x2="404" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="524" y1="109" x2="572" y2="109" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><path d="M 632 129 C 632 143 380 143 380 157 L 380 179" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/><line x1="380" y1="221" x2="380" y2="239" stroke="#5a5a5a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/></svg><figcaption style="font-style: italic; color: #5a5a5a; font-size: 0.9em; margin-top: 0.5em;">支流は主幹の左右へと延びています。丸印（小さな色付きの点）はおおよそのフロア数を示します。★ はモロクの聖域に入り、魔除けを手に入れるために必要な3つの開扉のアイテム（開放の鐘、燭台、死者の書）を示しています。</figcaption></figure></div>
 <!-- DMAP-END -->
 
-#### マップの記号 (The Map Symbols)
+#### マップの記号 (The Map Symbols) {#the-map-symbols}
 
 ダンジョン内のすべてのものは、画面上では記号で表現されます。
 一目で判別できるように覚えておきましょう：
@@ -504,7 +504,7 @@ juice / see invisible / sickness (50). -->
 | `*`  | 宝石および石       |
 | `$`  | ゴールド（ゾークミッド、略称 **zm**） |
 
-#### 部屋の種類 (Room Types)
+#### 部屋の種類 (Room Types) {#room-types}
 
 ダンジョンのほとんどの部屋はありふれた通常の部屋で、何もないか、いくつかのアイテムやモンスターが点在している程度です。しかし、中には特殊な部屋もあります：
 
@@ -545,7 +545,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### ダンジョン生態系ガイド (Field Guide to Dungeon Fauna)
+### ダンジョン生態系ガイド (Field Guide to Dungeon Fauna) {#field-guide-to-dungeon-fauna}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -572,7 +572,7 @@ juice / see invisible / sickness (50). -->
 
 ここでは、各文字が何を意味するのか、おおむね序盤に出現する順に沿って手短に解説します。全モンスターの詳細なレベル、速度、AC、攻撃能力のデータについては、巻末の [モンスター図鑑 (Bestiary Tables)](#bestiary-tables) を参照してください。
 
-#### 序盤によく遭遇するモンスター (Common Early Encounters)
+#### 序盤によく遭遇するモンスター (Common Early Encounters) {#common-early-encounters}
 
 | 記号   | 分類                   | 備考                                                                       |
 | ------ | ---------------------- | -------------------------------------------------------------------------- |
@@ -593,7 +593,7 @@ juice / see invisible / sickness (50). -->
 | [`x`](#xans-and-fantastic-insects-x)    | [グリッドバグと幻虫 (Grid bugs)](#xans-and-fantastic-insects-x) | ゲーム中で最弱のモンスターです。斜め移動すらできません。死体は残りません。また `x` 分類には、ずっと深い階層に現れる **ザン** も含まれ、その針で刺されると足を不自由にされます（治癒するまで移動速度が大幅に低下します）。 |
 | [`:`](#lizards)    | [トカゲ類 (Lizards)](#lizards)   | イモリ、ヤモリ、イグアナは単体では非力です。この分類の重要性は主にその死体にあります。**トカゲの死体は [石化 (petrification)](#petrification-stoning) を治療します**（コカトリス保険として常に1つ携帯しましょう）。また、イモリの死体はMP（魔力）を1〜3回復させることがあります。 |
 
-#### 中層の脅威 (Mid-Dungeon Threats)
+#### 中層の脅威 (Mid-Dungeon Threats) {#mid-dungeon-threats}
 
 | 記号   | 分類              | 備考                                                                                                 |
 | ------ | ----------------- | ---------------------------------------------------------------------------------------------------- |
@@ -631,7 +631,7 @@ juice / see invisible / sickness (50). -->
 | [`z`](#zruties-z)    | [ズルティ (Zruty)](#zruties-z)             | 動きは遅いですが、毎ターン2回の3d4鉤爪攻撃と3d6の噛みつきを繰り出してきます。 |
 | [`Z`](#zombies-z)    | [ゾンビ (Zombies)](#zombies-z)           | 鈍足で数が多いです。死者退散（アンデッドの退散）の杖や呪文を使うと1d8ダメージを与えて逃走させることができます。種族ベースのゾンビは、その基礎種族のすでに腐敗した死体をドロップします。 |
 
-#### 極めて危険なモンスター (Very Dangerous Monsters)
+#### 極めて危険なモンスター (Very Dangerous Monsters) {#very-dangerous-monsters}
 
 | 記号   | 分類             | 備考                                                                                                     |
 | ------ | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -646,7 +646,7 @@ juice / see invisible / sickness (50). -->
 | [`@`](#humans-and-elves)    | [人間（敵対的） (Humans (hostile))](#humans-and-elves) | ゲーム中最も執拗で厄介な敵である「イェンダーの魔法使い」が含まれます。 |
 | [`Q`](#quantum-mechanics-q)    | [量子物理学者と遺伝子工学者 (Quantum mechanics / genetic engineers)](#quantum-mechanics-q) | 量子物理学者は攻撃が命中した対象をテレポートさせ、遺伝子工学者（5.0で新登場）は対象を変身（ポリモーフ）させます。 |
 
-#### 特殊な記号 (Special Symbols)
+#### 特殊な記号 (Special Symbols) {#special-symbols}
 
 マップ上の表示の中には、一般的な意味でのモンスターではないものの、画面上に出現しその意味を把握しておくべき記号がいくつか存在します。
 
@@ -659,7 +659,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### 注目の施設・地形 (Points of Interest)
+### 注目の施設・地形 (Points of Interest) {#points-of-interest}
 
 
 <!-- audit
@@ -719,10 +719,11 @@ juice / see invisible / sickness (50). -->
 - Croesus answer (with Croesus alive): guard says "Oh, yes, of course. Sorry to have disturbed you." and `mongone(guard)` removes him (vault.c:513-543). No corridor opens. Player keeps gold but stays sealed inside.
 - Croesus answer with Croesus dead: guard goes hostile and attacks (vault.c:525-540).
 - Implication: lying keeps the gold but requires the player to have an independent way out (wand of digging, scroll of teleportation, level teleport, etc.). Truth-telling guarantees escape at the cost of the gold.
+-->
 
 地下深くへと潜っていく中で、特別なランドマーク（固定施設）に立ち寄る時間を作りましょう。フロアの随所に散らばるこれらの建造物は、好奇心旺盛な探索者に多大な報酬を与え、時には手痛い罰を下します。
 
-#### 泉 (Fountains) `{`
+#### 泉 (Fountains) `{` {#fountains}
 
 ああ、泉。その穏やかなせせらぎの音は、冷たく心地よい喉の潤いを約束しながら、どんな罠よりも多くの冒険者を破滅へと誘惑してきました。
 
@@ -749,7 +750,7 @@ juice / see invisible / sickness (50). -->
 
 レベル5に達した秩序の騎士が長剣を持っているなら、エクスカリバーが出るまであらゆる泉に浸すべきです。1回浸すごとに約1/3の確率で泉が干上がってしまうため、1つの泉だけで成功することは稀です。その過程で長剣が錆びても心配いりません。剣がエクスカリバーへと変貌した瞬間、それまでの錆は完全に消え去り、刀身は永久に錆耐性（防錆）を得ます。注意点が2つあります：鉱山街の泉には手を出さないでください。町の泉を干上がらせると警備員隊に襲われます。また、秩序以外の属性のキャラクターは絶対に浸してはいけません。湖の乙女は剣を呪うだけです。他の秩序の役職でも試す価値はありますが、確率1/30ですので相当の忍耐力が必要です。
 
-#### 祭壇 (Altars) `_`
+#### 祭壇 (Altars) `_` {#altars-_}
 
 祭壇は清められた石造りの聖壇で、マップ上では `_` と表示され、3つの神のいずれかの属性に属しています。手に入れた装備品を祭壇の上に置くことで、祝福されているか呪われているかを一目で判別でき、新鮮な死体を捧げることで信仰する神の寵愛を得ることができます。
 
@@ -761,7 +762,7 @@ juice / see invisible / sickness (50). -->
 
 **祭壇の改宗（属性変換）** は極めてリスクが高いため、仕組みを正しく把握しておく必要があります。属性値が0以上（非負）であれば、異属性の死体を捧げることで祭壇の属性を反転（改宗）させるか、幸運が1低下します。どちらの結果でも敵対的な神の使いが召喚されることがあります。属性値がマイナスの場合、祭壇は逆に *あなた自身* の属性を強制的に変えてしまいます。試みる前に [祭壇と属性 (Altars and Alignment)](#altars-and-alignment) を熟読してください。
 
-#### 玉座 (Thrones) `\`
+#### 玉座 (Thrones) `\` {#thrones}
 
 玉座は華麗な王の座席で、記号 `\` で表され、専用の部屋に時折現れます。玉座に座る（`#sit`）ことは、迷宮における最も純粋なギャンブルです。起こりうる結果の一覧は、まるで願いのリストと暗殺命令書を混ぜ合わせたような内容です：
 
@@ -785,7 +786,7 @@ juice / see invisible / sickness (50). -->
      Vlad's throne: special_throne_effect(), cases 1-4 grant wish and
      destroy throne, cases 5-13 are negative but throne survives. -->
 
-#### 流し台 (Sinks) `{`
+#### 流し台 (Sinks) `{` {#sinks}
 
 ことわざに「流し台（キッチンのシンク）以外は何でも揃っている」と言いますが、恐怖の迷宮（Mazes of Menace）にはキッチンの流し台まで存在します。マップ上では白い `{` で表示され、便利な設備というよりは多彩な危険物と言えます。蹴る、飲む、物を投げ入れるといったアクションが可能で、いくつかの小技は実を結びますが、大半は無駄に終わり、中には命に関わる被害をもたらすものもあります。
 
@@ -838,7 +839,7 @@ juice / see invisible / sickness (50). -->
 
 他の大半の薬を注ぐと、流し台は代わりに *"A wisp of vapor rises up..."*（一筋の蒸気が立ち上った…）と表示し、薬の瓶が割れて蒸気を吸い込んだ時と同じ効果をもたらします：この副作用によって薬を識別できます。睡眠や麻痺は1〜5ターンの間無防備になり、幻覚は一瞬の幻視をもたらします。水、果汁、レベルアップの薬、エナジーの薬、怪物を探す薬を注ぐのは無駄になります。これらはすべて単に *"nothing seems to happen."*（何も起きないようだ）と表示されるだけです。
 
-#### 宝物庫 (Vaults)
+#### 宝物庫 (Vaults) {#vaults}
 
 宝物庫は、フロアの他の場所と一切接続されていない2×2マスの壁で遮断された小部屋です。どの宝物庫にもゴールドの山が眠っています。通常、岩を掘り進めるか、テレポートで偶然飛び込むことで発見されます。フロアに *"ad aerarium"* という刻み文字があれば、近くに宝物庫が存在する目印です（[刻み文字 (Engravings)](#engravings) を参照）。金貨を探す巻物（または物体を探す薬）を使えば壁越しに金貨の山を特定でき、地図化の魔法を使えばその隠し部屋の輪郭が直接明らかになります。
 
@@ -850,14 +851,14 @@ juice / see invisible / sickness (50). -->
 
 自力で壁を掘り進めるかテレポートで脱出する手段がない限り、餓死を避けるためには番兵に従ってゴールドを手放すのが賢明です。（ルディオスの要塞ですでにクロイソスを倒している場合、*Croesus* と答えると番兵が激怒して襲いかかってきます。その際は本名を名乗るルートを選んでください。）
 
-#### 石像 (Statues)
+#### 石像 (Statues) {#statues}
 
 石像はモンスターを模した石の彫刻であり、時折その場で石化させられた本物の生物であることもあります。ほとんどの石像は（つるはし、強打の杖、あるいは「衝撃」の呪文によって）破壊して内部のアイテムを取り出すことができますが、中には殴ったり上に乗ったりすると彫刻されたモンスターが生命を得て動き出す「石像の罠」もあります。
 考古学者にとって、歴史的価値のある重要な石像にはその名前に *historic（歴史的な）* という単語が付きます。これを破壊すると属性値を1ポイント失います。
 
 ---
 
-### 支流とランドマーク (Branches and Landmarks)
+### 支流とランドマーク (Branches and Landmarks) {#branches-and-landmarks}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -867,13 +868,13 @@ juice / see invisible / sickness (50). -->
 
 ダンジョンの主幹はまっすぐ地下深奥へと続いていますが、大きな報酬の大半は、主幹から枝分かれした支流ダンジョンや、以下に順を追って解説する名高きランドマークで待ち構えています。
 
-#### 進行ルートの目安 (The Route)
+#### 進行ルートの目安 (The Route) {#the-route}
 
 祭壇などの呪いを判別する確実な手段が見つかるまでは、運命の迷宮の上層を探索しましょう。ノームの鉱山の入り口は地下2〜4階に出現しますが、場所を記憶にとどめておき、準備が整うまでは先へ進むのが賢明です。挑戦の目安としては、経験レベル（XL）5程度、AC 5以下、HP満タン、投擲武器の束、そして脱出用アイテムが揃っている状態です。賢者（オラクル）のいるフロアの近くでは、上り階段の分岐から倉庫番へと向かい、軽量化の鞄または反射の魔除けを手に入れましょう。その後で鉱山街を訪れ、敵の集団を捌ける強さがついたら鉱山の最深部を攻略します。そしてレベル14になったらメインダンジョンへ戻ってクエストを達成し、メデューサの島を突破して城を目指しましょう。
 
 **[倉庫番 (Sokoban)](#sokoban) と鉱山のどちらを先に行くべきか？** 通常は鉱山の入り口に先に出遭いますが（地下2〜4階）、初心者に対する *戦略的な推奨* は「倉庫番を先に攻略する」ことです。倉庫番は管理されたパズル主体のフロア群であり、出現するモンスターも大半は手頃です。そして最上階で手に入るご褒美（反射の魔除け、または軽量化の鞄）は、その後の [ノームの鉱山 (the Gnomish Mines)](#the-gnomish-mines) 攻略に直結して役立ちます。倉庫番を先にクリアしてご褒美を手に入れ、経験レベルを少し上げてから鉱山に挑む方が、遥かに安全で対等な戦いができます。
 
-#### ノームの鉱山 (The Gnomish Mines)
+#### ノームの鉱山 (The Gnomish Mines) {#the-gnomish-mines}
 <!-- audit
 2026-05-18:
 - Mines branch DL 2-4 (dungeon.lua:15-19; base=2 range=3)
@@ -923,7 +924,7 @@ juice / see invisible / sickness (50). -->
 
 幸せの石を見つけ出すには慎重な探索が必要です。ほとんどのレイアウトでは隠し部屋の中に配置されているため、迷路が行き止まりになり宝が見当たらない場合は、掘削耐性のある壁を無理に掘るのではなく、壁を捜索（`s`、`10s`）して隠し扉を探してください。隠し部屋が複数存在することもあるため、最初の1つで見つからなくても諦めてはいけません。（バリエーションの1つでは、灰色の石に擬態した4体の [**ミミック**](#a-note-on-mimics) と、見た目が全く同じで手持ちの荷物に呪い張り付く本物の **呪われた重し (loadstone)** の中に幸せの石が紛れ込まされています。怪しい石の隣で捜索（`s`）を行えば、ミミックはその場で正体を現します。本物の石は何の反応も示しません。これで幸せの石と重しの2択に絞られるため、あとは店に持ち込んで価格で識別します（幸せの石は60zm、重しは1zm）。ここでは石を蹴って判定する方法に頼ってはいけません。壁の隙間に挟まっていると、本物の幸せの石であっても重しのように鈍い音を立てて足の指を痛めることがあります。）
 
-#### 倉庫番 (Sokoban)
+#### 倉庫番 (Sokoban) {#sokoban}
 
 最上階で手に入るご褒美は、通常は **軽量化の鞄 (bag of holding)**、さもなくば **反射の魔除け (amulet of reflection)** です。どちらも鉱山の戦いが本格的に厳しくなる前に、装備に関する重大な課題を解決してくれます。
 
@@ -979,7 +980,7 @@ juice / see invisible / sickness (50). -->
 - strategy aligned with NetHackWiki Oracle (level), List of major consultations: paying for a major consultation is a recognized wisdom-and-intel investment (https://nethackwiki.com/wiki/Oracle_(level), https://nethackwiki.com/wiki/List_of_major_consultations)
 -->
 
-#### 賢者 (The Oracle)
+#### 賢者 (The Oracle) {#the-oracle}
 
 運命の迷宮の中層（地下5階から9階のあたり）のどこかに、デルフィの賢者（神託所）が佇む特別な部屋が存在します。周囲はケンタウロスの石像（中は空っぽです）と4つの泉に囲まれています。古代以来のあらゆる神託の例に漏れず、彼女は謎めいた言葉を語り、先払いで代金を要求してきます。
 
@@ -992,7 +993,7 @@ juice / see invisible / sickness (50). -->
 
 それぞれの相談は、初回利用時に限り経験値（XP）を与えてくれます。もし生涯で最初の相談として「重要な相談」を選んだ場合、50〜100 XP（プレイヤーのレベルに応じて増加）が手に入ります。最初に「些細な相談」を受けるとわずか5 XPしか得られず、その後に受ける重要な相談の獲得XPも減少してしまいます。2回目以降の相談では経験値は得られません。
 
-#### クエスト (The Quest)
+#### クエスト (The Quest) {#the-quest}
 <!-- audit
 2026-05-18:
 - quest portal Dlvl 11-16: Oracle DL 5-9 + base=6 range=2 chained off Oracle (dungeon.lua:62-64, 27-31)
@@ -1033,7 +1034,7 @@ juice / see invisible / sickness (50). -->
 
 クエスト全体は、リーダーの認可にかかっています。経験レベルが14未満であるか、あるいは属性値（信仰実績）が不足している場合、自動的に追い出されます（問題を解決した後に再訪すれば受け入れてもらえます）。もしキャラクターの属性自体が変わってしまっていた場合、リーダーから永久に追放されてしまいます。クエストに挑む前に「逆属性の兜」を面白半分で試してはいけません。
 
-#### ローグ階層 (The Rogue Level)
+#### ローグ階層 (The Rogue Level) {#the-rogue-level}
 <!-- audit
 2026-05-18:
 - Rogue Level appears DL 15-18 per base=15 range=4 (dungeon.lua:54-58)
@@ -1059,7 +1060,7 @@ juice / see invisible / sickness (50). -->
 
 ただし、プレイヤー側の現代的な技術は依然として機能します。ハック（Hack）時代に追加された [エルベレス (Elbereth)](#elbereth) の文字をここに刻むことも可能です。ささやかな時代錯誤（アナクロニズム）と言えるでしょう。
 
-#### ルディオスの要塞 (Fort Ludios)
+#### ルディオスの要塞 (Fort Ludios) {#fort-ludios}
 <!-- audit
 2026-05-19:
 - portal placed Dlvl 11 up to just above Medusa, 1/3 chance per qualifying level (mklev.c:2647-2651)
@@ -1085,7 +1086,7 @@ juice / see invisible / sickness (50). -->
 
 このフロアは全域が掘削不能（non-diggable）であり、同一フロア内での通常のテレポートも封じられています。脱出するには入ってきたポータルを使うか、階層テレポート（レベルテレポート）を用います。宝物庫には60マスにわたって36,000〜54,000 zmもの莫大なゴールドが敷き詰められていますが、その約1/3のマスには地雷やトゲの落とし穴が潜んでいます。四隅の角塔にはダイヤモンド、エメラルド、ルビー、アメジストが保管されており、兵士たちは携帯食糧（レーション）と十分な武器を所持しています。クリアに必須のアイテムは何一つありません。ここを訪れる最大の理由は純粋にゴールドであり、それは司祭への寄付を通じてAC（防御力）の大幅な恒久強化へと化けます。
 
-#### メデューサの島 (Medusa's Island)
+#### メデューサの島 (Medusa's Island) {#medusas-island}
 <!-- audit
 2026-05-19:
 - Perseus loot is per-layout — not uniform: shield 75% in medusa-1/3/4 but 25% in medusa-2 (medusa-2.lua:58-63)
@@ -1154,7 +1155,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### 罠と危険 (Traps and Hazards)
+### 罠と危険 (Traps and Hazards) {#traps-and-hazards}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source (domagictrap trap.c:4319-4453):
@@ -1176,7 +1177,7 @@ juice / see invisible / sickness (50). -->
 
 以下はダンジョンで遭遇する罠の一覧であり、踏み抜いたときの痛恨度（後悔の度合い）によって大まかに分類されています：
 
-#### 軽微な罠 (Nuisance Traps)
+#### 軽微な罠 (Nuisance Traps) {#nuisance-traps}
 <!-- audit
 2026-05-18:
 - arrow trap empty-click is 1/15 once `trap->once && trap->tseen` (trap.c:1199, 1228)
@@ -1198,7 +1199,7 @@ juice / see invisible / sickness (50). -->
 
 厄介ではありますが、致命傷になることは稀です。不幸中の幸いとして、矢の罠やダーツの罠はタダで投擲・射撃用の弾薬を供給してくれるため、あえて安全に踏み抜いて弾薬をストックするテクニックもあります。
 
-#### 移動系の罠 (Movement Traps)
+#### 移動系の罠 (Movement Traps) {#movement-traps}
 <!-- audit
 2026-05-18:
 - trapdoor cascade: dlevel++ per loop iteration, `if (rn2(4)) break` = 25%/level chance to keep falling (trap.c:442-453)
@@ -1221,7 +1222,7 @@ juice / see invisible / sickness (50). -->
 
 落とし扉と階層テレポートの罠は、探索のリズムを最も狂わせる厄介な罠です：たった一歩の踏み外しで、ペット、保管しておいた貴重な物資、そして念入りに探索したフロア地図から強制的に分断されてしまいます。しかし、アイテムや内在能力によって [瞬間移動制御 (teleport control)](#movement-and-spatial-behavior) を得ていれば、テレポートの罠はタダで利用できる便利な長距離移動手段へと変わります。また、**浮遊や飛行** の状態であれば、落とし穴、穴、落とし扉のすべてを完全に無効化して上空を通過できます。ただし、パズルの厳格なルールにより無効化が無効化され、下降気流で問答無用に吸い込まれる [倉庫番 (Sokoban)](#sokoban) だけは例外です。
 
-#### 危険な罠 (Dangerous Traps)
+#### 危険な罠 (Dangerous Traps) {#dangerous-traps}
 <!-- audit
 2026-05-20:
 - random polymorph timer is rn1(500, 500) = 500-999 turns (polyself.c:813); decremented each turn until 0
@@ -1268,7 +1269,7 @@ juice / see invisible / sickness (50). -->
 
 鉄製の履物（鉄の靴、または蹴り挙げ靴）は、5.0において驚くほど多くの罠ダメージを肩代わりしてくれます：熊の罠による脚のダメージを無効化し、トゲの落とし穴の杭を防ぎ、変身(へんげ)の罠による肉体の変異を遮断し（代わりに履いていた靴が変身します）、プラスに強化されていれば強化値を1失うことで反魔法フィールドの魔力ドレインを身代わりに吸収してくれます。まだ他に優れた靴を見つけていない段階では、身につけておく価値の非常に高い防護装備です。
 
-#### 捜索と探知 (Searching and Detection)
+#### 捜索と探知 (Searching and Detection) {#searching-and-detection}
 <!-- audit
 2026-05-18:
 - dosearch0 search mechanics at detect.c:2016-2093
@@ -1291,7 +1292,7 @@ juice / see invisible / sickness (50). -->
 
 捜索を行うべき絶好のタイミングは、ダンジョンがすでに「何かがおかしい」という違和感のヒントを発しているときです：他に何もない部屋の中央に転がる不審な死体、床に散乱した矢やダーツ、あるいは隠された危険がギミックとなっているテーマのある部屋に遭遇したときがそれに当たります。
 
-#### 隠し扉の発見 (Finding Secret Doors)
+#### 隠し扉の発見 (Finding Secret Doors) {#finding-secret-doors}
 <!-- audit
 2026-05-19:
 - ring of searching auto-calls dosearch0(1) each turn unless level is noautosearch (allmain.c:342-344)
@@ -1329,7 +1330,7 @@ juice / see invisible / sickness (50). -->
 
 すでに下り階段が見つかっているなら、迷わず階段を降りましょう。壁叩きは出口や特殊な部屋が見つからないフロアでのみ行うべき手段であり、すべての階層で義務的に行う儀式ではありません。
 
-#### 鉄格子 (Iron Bars)
+#### 鉄格子 (Iron Bars) {#iron-bars}
 <!-- audit
 2026-05-18:
 - passes_bars uses verysmall() = msize < MZ_SMALL = TINY only (mondata.c:552-563)
@@ -1349,7 +1350,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### 感覚と物音 (Feelings and Sounds)
+### 感覚と物音 (Feelings and Sounds) {#feelings-and-sounds}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -1376,7 +1377,7 @@ juice / see invisible / sickness (50). -->
 
 （注意：**耳が聞こえない（聾・Deaf）**、モンスターに **丸呑みされている**、あるいは **水中** にいる間は、環境音に関するメッセージが一切届かなくなります。特に永久聾の縛りプレイでは、フロアの雰囲気から得られるあらゆる手掛かりを失うことになります。ただし、死体を食べたときに得られる感覚のメッセージはそのまま表示されます。）
 
-#### 緊急事態 (Emergencies)
+#### 緊急事態 (Emergencies) {#emergencies}
 
 | メッセージ | 意味と対処法 |
 |------------|--------------|
@@ -1385,7 +1386,7 @@ juice / see invisible / sickness (50). -->
 | *"You are turning into a green slime."*<br>（体が緑色のスライムに変化しつつある。） | 緑のスライムによるスライム化感染です。火で焼き払う（火の巻物を読む、自身に火球の呪文を唱える、あるいは火の杖を自分に振る）、または祈り（`#pray`）を捧げてください。 |
 | *"You feel deathly sick."*<br>（死ぬほど気分が悪い。） | 致死性の病気（ペスティレンスやデモゴルゴン等による攻撃）です。超回復の薬を飲む、ユーカリの葉を食べる、病気治療の呪文を唱える、または祈り（`#pray`）を捧げてください。 |
 
-#### フロアの環境音 (Level Ambience)
+#### フロアの環境音 (Level Ambience) {#level-ambience}
 
 | メッセージ                                       | 意味                                                                     |
 |--------------------------------------------------|--------------------------------------------------------------------------|
@@ -1403,7 +1404,7 @@ juice / see invisible / sickness (50). -->
 | *"You hear a crunching sound."*<br>（バリバリと噛み砕く音が聞こえる。） | 錆の怪物、岩モグラ、またはその他の金属食生物が金属アイテムを食べました。 |
 | *"You hear a bugle playing reveille!"*<br>（ラッパが起床ラッパを奏でるのが聞こえる！） | 兵士がラッパを吹いて周囲の兵士たちを起こしました。戦闘を警戒してください。 |
 
-#### 内在能力と死体効果 (Intrinsics and Corpse Effects)
+#### 内在能力と死体効果 (Intrinsics and Corpse Effects) {#intrinsics-and-corpse-effects}
 
 | メッセージ | 意味 |
 |------------|------|
@@ -1418,7 +1419,7 @@ juice / see invisible / sickness (50). -->
 | *"You feel a mild buzz."*<br>（かすかな刺激を感じる。） | イモリの死体を食べてMP（魔力）が1〜3回復しました。 |
 | *"You see an image of someone stalking you. But it disappears."*<br>（盲目時: *"You feel very self-conscious. Then it passes."*） | 泉の水を飲んで永続的な「不可視の視覚（透明視）」を獲得しました。幸運な一口でした。 |
 
-#### 識別と状態変化 (Identification and Status Changes)
+#### 識別と状態変化 (Identification and Status Changes) {#identification-and-status-changes}
 
 | メッセージ | 意味 |
 |------------|------|
@@ -1448,7 +1449,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-## 第3部：生存戦略 (Part Three: Survival)
+## 第3部：生存戦略 (Part Three: Survival) {#part-three-survival}
 
 危険なターンでゲームが一時停止したときは、まず [迫り来る死から生還する方法 (Saving Yourself from Imminent Death)](#delayed-deaths) を確認してください。通常の戦闘における鉄則は極めてシンプルです：常にHP満タンで交戦に入り、初撃の攻防を交わした段階で自分が勝てそうかどうかを冷静に判断し、勝てそうにない場合に逃げ込むべき階段や扉の場所を常に把握しておくことです。[エルベレス (Elbereth)](#elbereth) は、神への祈りや回復の薬と同じように、思考のツールキットとして常に手元に用意しておくべき奥の手です。モンスターに隣接される前に刻みましょう。
 
@@ -1517,7 +1518,7 @@ juice / see invisible / sickness (50). -->
 
 **覚えておくべき2つの特別な刻み文字。** ダンジョン内で見つかる刻み文字の大半は、ランダムな雰囲気描写（落書き、過去の冒険者が残した「elbereth」など）です。しかし、以下の2つの特定のメッセージは、ダンジョン生成時に配置された **罠の目印 (trap markers)** です。*"Ad aerarium"*（ラテン語で「宝物庫へ」の意）は、**宝物庫テレポート** または **階層テレポート** の罠が潜む隠し小部屋の目印です。宝物庫テレポートは、同一フロアにあるクロイソスの2×2マスのゴールド部屋へと転送してくれる使い切りの罠です。金貨を回収し、番兵が現れる前に脱出しましょう。階層テレポートはランダムな深さの階層へ飛ばされるため、瞬間移動制御がないと危険です。*"Vlad was here"*（ヴラド参上）は、**落とし扉** が仕掛けられた隠し小部屋の目印です。どちらのメッセージもメッセージログで見落としやすいため、見かけたら慎重に調査し、罠の向こう側で待ち受ける事態に備えましょう。
 
-#### エルベレス (Elbereth)
+#### エルベレス (Elbereth) {#elbereth}
 <!-- audit
 2026-05-19:
 - while levitating, finger and weapon engraving refused (engrave.c:1003-1006)
@@ -1541,30 +1542,30 @@ juice / see invisible / sickness (50). -->
 - Rogue "Elbereth in the doorway, daggers from beyond" cannot work in 5.0: throwing from Elbereth defiles it; standing off Elbereth means Elbereth doesn't protect anything (monmove.c:295-302 requires u_at(x,y))
 -->
 
-##### 単語の由来 (Where the word comes from)
+##### 単語の由来 (Where the word comes from) {#where-the-word-comes-from}
 
 *Elbereth*（エルベレス）はシンダール語で「星々の女王」を意味し、J.R.R.トールキンの『シルマリルの物語』に登場する最高位のヴァラであり天上に星々を撒き散らした **ヴァルダ・エレンターリ (Varda Elentári)** のエルフ名です。『指輪物語』において、エルフたちは邪悪に対する聖なる守護を求めて彼女の御名を呼び唱えます。フロドは風見荘で「オ・エルベレス！ ギルソニエル！」と叫んで魔王を後退させ、サムはシェロブの暗黒の巣窟でガラドリエルの玻璃瓶の光を輝かせるために彼女の名に祈りを捧げました。NetHackはこの設定をそのままゲームに採用しています：ダンジョンの床にヴァルダの名を刻みつけることは、絶対安全な聖域を求めて上位の超越者へと救いを求める行為なのです。
 
 > *以下の仕組みは、Kate Nepveu氏の「Elbereth FAQ」に着想を得ています。Kate氏は、数十年におよぶコミュニティのスポイラーを保存し続けてきた長期アーカイブ「steelypips.org」の管理者でもありました。*
 
-##### 聖なる結界 (The ward)
+##### 聖なる結界 (The ward) {#the-ward}
 
 床に **Elbereth** の文字を刻むことで、強力な防護結界が生成されます。エルベレスが刻まれたマスの上にプレイヤーが立っている限り、大半のモンスターは近接攻撃を仕掛けてくることができず、苛立ちながら周囲をうろうろと彷徨うだけになります。この結界は、自分で書いたものであっても、最初から床に書かれていたものであっても同様に機能します。また、書いた手法（埃、削り傷、焼き付け）は結界の防護力自体には一切影響せず、文字がどれだけ長く残り続けるか（耐久度）の違いに過ぎません。
 
-##### 結界の絶対ルール (Rules of the ward)
+##### 結界の絶対ルール (Rules of the ward) {#rules-of-the-ward}
 
 - **マスの上に立っている間だけ効果がある。** マスから一歩でも足を踏み出せば防護は途切れます。再びそのマスの上に戻れば結界の効果が復活します。
 - **厳密に完全な単語でなければならない。** "Elbereth" の8文字きっかりでなければならず、文字の不足や余計な文字は一切許されません。状態異常による誤字や、他の文字列が追記されたものは無効となります。
 - **一部のモンスターは結界を完全に無視する。** `@` で表されるすべての存在（人間、エルフ、プレイヤー系キャラクター）、霊界の死の騎士（Riders）、天使、ミノタウロス、固有の固有名を持つモンスター（クエストの宿敵、ヴラド、魔法使い）、店主、番兵、および **盲目のモンスター** は、結界を意に介さず平然と踏み越えて攻撃してきます。また、逃げ道のない袋小路に追い詰められたモンスターも同様です：逃げ場を失った怪物は、無抵抗で立ち尽くすくらいなら死に物狂いで反撃してきます。
 - **ゲヘナ、属性の諸平面、霊界では機能しない。** [城 (The Castle)](#the-castle) より下の階層では、エルベレスの神聖な力は届かず、すべて自分の実力だけで切り抜ける必要があります。
 
-##### エルベレスの御名を汚すこと（極めて重要）(Defiling the name of Elbereth (important))
+##### エルベレスの御名を汚すこと（極めて重要）(Defiling the name of Elbereth (important)) {#defiling-the-name-of-elbereth-important}
 
 もしエルベレスの上に立った状態でモンスターに対して何らかの攻撃を行った場合（近接攻撃、投擲武器、あるいは杖の発射を問わず）、その対象が結界を恐れるはずのモンスターであったり友好的な生物であったなら、刻み文字は **どのように書かれたものであっても即座に完全消滅します。** 火の杖で床に恒久的に焼き付けたエルベレスであっても、たった一振りの攻撃で跡形もなく消え去ります。同時にプレイヤーは「偽善者になったような気分だ (You feel like a hypocrite)」というメッセージとともに **属性値に手痛いペナルティを受け**、*"The engraving beneath you fades."*（足元の刻み文字が薄れて消えた）と表示されます。属性値の実績が十分に高ければ一律で−5、そうでなければランダムに−1〜−5の低下を被ります。
 
 耐久度の表にこの例外は書かれていません。「恒久」や「半恒久」とは、あくまで足踏みや風化といった *受動的な摩耗* に対する耐性のことです。プレイヤー自身の敵対行動は、どんな耐久度の文字であっても一瞬で消滅させます。したがって、エルベレスは **完全に防御専用の結界** として使う必要があります。体力を回復する、薬を飲む、巻物を読む、装備を整え直す、体勢を立て直すといった時間稼ぎに活用してください。結界の上からの攻撃は禁忌であるため、反撃に転じる際は必ずマスから一歩踏み出してから戦いましょう。
 
-##### 実践的な活用法 (Practical use)
+##### 実践的な活用法 (Practical use) {#practical-use}
 
 緊急事態に陥ったら、まずは指を使って埃の中に素手で Elbereth と書きましょう。アイテムを消費せずに行えますが、1回の手番（アクション）を消費するため、モンスターに接触される前に書く必要があります。大半のモンスターは怯えて距離を取り、落ち着いて次の行動を選ぶ猶予が生まれます。目先の危機を脱したら、埃の結界を次回のために温存する（モンスターがそのマスを踏まない限り文字は残ります）か、より耐久性の高い手段で書き直しましょう。
 
@@ -1576,7 +1577,7 @@ juice / see invisible / sickness (50). -->
 
 床に置かれた **怪物を怯えさせる巻物 (scroll of scare monster)** は、エルベレスのさらに強力な上位互換として機能します。その巻物の上に立つだけで大半のモンスターは間合いを取って接近できなくなりますが、エルベレスに対して以下の3つの決定的な優位性を持っています：エルベレスが無効化されるゲヘナや霊界でも問題なく機能すること、エルベレスを平然と通過してくるミノタウロスや盲目の敵をも退けること、そして刻み文字ではないため **巻物の上に立ったまま自由に攻撃を仕掛けても消滅せず、偽善者の属性ペナルティも一切受けないこと** です。巻物は自然摩耗せず、自分がマスから離れてもそのマスは敵の進入禁止エリアとして残り続けます。唯一の弱点は「拾い上げ」にあります：床から拾おうとすると高確率で崩壊して消滅します（呪われた巻物は1回目、呪われていない巻物は2回目で灰になります）。そのため、安全地帯として固定したい場所に置いて使用してください。城の「願いの杖」が入った宝箱の真下に呪われた怪物を怯えさせる巻物が敷かれているのは、まさにこの防衛機能のためです。また、店の中でも識別テクニックとして利用できます：未識別の巻物の上に乗り、連れているペットが嫌がって後ずさりしたら、それは怪物を怯えさせる巻物であり、拾い上げるリスクなしに安全に識別できます。
 
-### 戦闘の技術 (The Art of Combat)
+### 戦闘の技術 (The Art of Combat) {#the-art-of-combat}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -1612,7 +1613,7 @@ juice / see invisible / sickness (50). -->
 
 迷宮における最も重要な戦闘技術は、「戦うべきではない状況を弁えること」です。2番目に重要な技術は、「いざ戦うと決めたら、確実に、そして痛烈無比な打撃を叩き込むこと」です。
 
-#### 命中判定の計算 (To-Hit Calculation)
+#### 命中判定の計算 (To-Hit Calculation) {#to-hit-calculation}
 
 武器を振るうたびに20面ダイス（d20）が振られ、白兵戦において重要となるあらゆる要素によって修正されます：
 
@@ -1624,7 +1625,7 @@ juice / see invisible / sickness (50). -->
 
 基本値の1に、経験レベル（XL）、筋力と器用のボーナス、幸運値の約1/3、武器の強化値と武器スキルを足し合わせ、さらに標的のACを加算します。d20の出目がその合計値 *未満* であれば攻撃が命中します。相手のACがマイナス（良質）であるほど命中目標値が引き下げられるため、地下深くに潜るにつれて武器の強化値と武器スキルの重要性が飛躍的に高まります。
 
-#### ダメージの計算 (Damage)
+#### ダメージの計算 (Damage) {#damage}
 
 基本ダメージは、使用する武器の種類と、標的となるモンスターのサイズ（小型か大型か）によって決定されます。多くの武器はどちらかのサイズに特化したダメージ設定を持っています：コボルドには短い刀剣、オーガには両手持ちの大武器が効果的です。基本ダメージに以下の補正値が加算されます：
 
@@ -1636,7 +1637,7 @@ juice / see invisible / sickness (50). -->
 
 筋力が18/100に達している場合、両手剣では通常の筋力ボーナス+6が+9へと跳ね上がります。強化値や武器スキルを加味する前の素の状態で、両手剣のd12+9は長剣のd8+6よりも1撃あたり平均約5ポイント高い強烈なダメージを叩き出します。
 
-#### ACと防御力 (AC and Defense)
+#### ACと防御力 (AC and Defense) {#ac-and-defense}
 
 あなたのAC（アーマークラス・防御指数）は、モンスターの攻撃が *あなたに* どれだけ命中しやすいかを決定します。ACは10（防具を一切身につけていない無防備な状態）から始まり、防具を装備するにつれて数値が下がっていきます。数値が低ければ低いほど（マイナスが大きいほど）強固です。「ノームに殴り倒される」初心者段階から「あらゆる物理攻撃を寄せ付けない」段階への道のりは以下のようになります：
 
@@ -1655,7 +1656,7 @@ juice / see invisible / sickness (50). -->
 
 **防具の着脱にはターン数を要し、重ね着の順序がある。** 防具は `W` キーで着用し、`T` キーで脱ぎます。シャツが最内層、次が鎧、一番外側がクロークという順序になっているため、内側の防具を着脱するには上に重ね着している防具を先に脱ぐ必要があります。金属製の鎧は着脱に **5ターン** を要します。革鎧は3ターン、ミスリル鎧は1ターンです。兜と手袋はそれぞれ1ターン、靴は2ターンかかります。クローク、盾、シャツは即座（0ターン）で着脱できます。アロハシャツからクロークまで全身を着替えると6ターンも完全に無防備になり、その間モンスターから一方的に攻撃を受けるため、着替えは安全な部屋の中や背後を通路で塞いだ安全地帯で行ってください。
 
-#### 速度 (Speed)
+#### 速度 (Speed) {#speed}
 
 **交戦する前に速度比を計算せよ。** 戦闘において最も実用的な指標は、「モンスターの速度」を「あなたの実効速度」で割った比率です。この比率こそが、あなたが1回行動する間に相手が何回行動できるかを表しています。基本速度12の主人公が速度18のケンタウロスと対峙した場合、比率は 18 / 12 = 1.5 となります。つまり、あなたが2回攻撃を振る間に相手は3回攻撃を叩き込んでくるため、正面からの近接殴り合いでは確実に撃ち負けます。しかし「韋駄天の靴 (speed boots)」（実効速度約20）を履けば比率は 0.9 に逆転し、こちらが主導権を握る戦いになります。速度36の風のエレメンタルに対しては、加速なしで3.0、韋駄天の靴を履いていても1.8であり、徒歩での殴り合いは依然として無謀です。遠距離攻撃で倒すか、戦わずに逃げるべきです。速度比が1.0を超える相手との戦いは、開幕の猛攻で瞬殺できない限りジリ貧の消耗戦になります。比率が1.0未満の相手なら「引き撃ち（カイト）」が可能ですので、通路へと後退しながら相手が歩み寄る隙に攻撃を当てましょう。自分より素早いモンスターを即座に倒せない場合、開けた広い部屋で逃げ回ってはいけません。追いつかれて背後から殴られ続けるだけです。扉口、閉じた扉、あるいは階段を使って、同時に攻撃してくる敵の数を1体に絞り込みましょう。
 
@@ -1694,7 +1695,7 @@ juice / see invisible / sickness (50). -->
 
 韋駄天の靴は、俊足モンスターたちに対抗する上でそのスロットに見合う絶大な価値を発揮します。速度6のゾンビ相手なら速度比は0.5から0.3に縮まる程度ですが、速度18のケンタウロスに対しては1.5から0.9へと激変し、追撃されて討ち死にするか、決闘を制して勝利するかの決定的な差となります。
 
-#### 二刀流戦闘 (Two-Weapon Combat)
+#### 二刀流戦闘 (Two-Weapon Combat) {#two-weapon-combat}
 <!-- audit
 2026-05-19:
 - Rogue and Samurai are the only roles reaching Expert in P_TWO_WEAPON_COMBAT (u_init.c skill tables).
@@ -1711,7 +1712,7 @@ juice / see invisible / sickness (50). -->
 
 **二刀流のセットアップ手順。** 逆手（オフハンド）専用の装備コマンドは存在しません。スワップコマンドを使って「副装備スロット」に武器をセットすることで実現します。まず逆手に持ちたい武器を `w` で手に持ち、`x` キーを押してそれを副装備スロットへと退避させます。次にメインの主武器を `w` で手に持ち、最後に `X`（大文字、二刀流切り替えトグル）を押して二刀流戦闘を開始します。もう一度 `X` を押せば片手持ちに戻ります。逆手の武器は必ず片手持ち近接武器でなければなりません。逆手の武器が呪われている状態で二刀流を開始しようとすると、手から滑り落ちて床に落下します。
 
-#### 遠距離戦闘 (Ranged Combat)
+#### 遠距離戦闘 (Ranged Combat) {#ranged-combat}
 
 離れた間合いから攻撃することは、迷宮における最大の戦術的アドバンテージの1つです。モンスターが距離を詰めるために費やすターンは、すべてあなたが安全な位置から敵のHPを削るためのターンになります。レンジャーや侍は弓矢を主軸として生きていますが、どの役職であっても矢筒（クィヴァー）を設定して `f` キーに手を伸ばすことができます。そのツールキットは以下の通りです：
 
@@ -1730,11 +1731,11 @@ juice / see invisible / sickness (50). -->
 
 **矢弾の節約。** 矢やボルトは命中するたびに破損する確率を持っています：+0の矢弾はおよそ67%の確率で壊れ、+2まで強化された矢弾なら破損率は約25%まで激減します。普段の連射スキルの鍛錬には拾った安い矢を使い、+2に強化された貴重な矢弾は強敵との決戦のために温存しましょう。ダンジョン上層を抜ける段階で30本ほどの破損しない+2の矢を確保できたレンジャーは、長引くボス戦でも弾切れを起こさずに優位を維持できます。
 
-#### 賢い戦い方 (Fighting Smart)
+#### 賢い戦い方 (Fighting Smart) {#fighting-smart}
 
 ダンジョンは臆病さ、狡猾さ、そして器物損壊に対して惜しみない報酬を与えます。戦いが始まる前に、あらかじめ勝負を不公平なものにしておきましょう。
 
-##### 接触前の位置取り (Position before contact)
+##### 接触前の位置取り (Position before contact) {#position-before-contact}
 
 **通路を活用する。** 通路の中では、モンスターは1体ずつしかあなたに接近できません。近くに一本道の狭路（チョークポイント）があるなら、開けた広い部屋で大群を相手に戦ってはいけません。
 
@@ -1750,7 +1751,7 @@ juice / see invisible / sickness (50). -->
 
 **跳躍手段があるなら跳ぶ。** 跳躍の呪文、飛び跳ねる靴、あるいは騎士固有の跳躍能力があれば、`#jump` コマンドで1ターンに数マスを一気に跳び越えることができます。自分より足の速いモンスターから逃げる、敵の機会攻撃を受けずに通路やエルベレスのマスへ退避する、既知の罠を飛び越える（火炎の罠やレベルポータル、倉庫番の穴を除く）、内在能力を得られる死体を食べる前に「満腹 (Satiated)」状態を急いで消費する、あるいはメデューサの島の水路を跳び越える際に極めて重宝します。
 
-##### 戦闘中の立ち回り (During the fight)
+##### 戦闘中の立ち回り (During the fight) {#during-the-fight}
 
 **算定が成り立つときだけ殴り合う。** あなたがそのモンスターを倒すのに何ラウンド必要か、そして相手があなたを倒すのに何ラウンド必要かを瞬時に見積もってください。あなたのターン数の方が少なければ殴り合いましょう。相手のターン数の方が少ないなら、即座に退却してください：後退に費やす1ターンは、死ぬことに比べれば遥かに安いコストです。
 
@@ -1760,7 +1761,7 @@ juice / see invisible / sickness (50). -->
 
 **眠っている部屋は決して安全ではない。** あなたを視界に捉えているモンスターは、毎ターン1/7の確率で目を覚まします。犬系や人間系モンスターは視界に入った瞬間に即座に覚醒します。「忍び足（ステルス）」があればこの自然覚醒を防ぐことができます。1体の敵を攻撃すると標的は目を覚まし、その威嚇の咆哮（growl）によって周囲の眠っているモンスターも次々と目を覚まします（ノームなら約4マス、より大型のモンスターならさらに広範囲に届きます）。敵が密集した部屋では、2撃目を振る頃には部屋全体を巻き込んだ大乱闘に発展します。まずは通路へと **後退して** 敵を1列に並ばせて1体ずつ各個撃破するか、[エルベレス (Elbereth)](#elbereth) を刻んで群がる敵を結界の周囲に釘付けにしましょう。その上で、結界から一歩踏み出して1体ずつ始末してください（刻み文字の上から攻撃するとエルベレスが汚されて消滅します）。
 
-##### 戦況が悪化したとき (When the fight goes badly)
+##### 戦況が悪化したとき (When the fight goes badly) {#when-the-fight-goes-badly}
 
 **逃げ時を弁える。** 迷宮には勇気を称える勲章など存在せず、あるのは生き残った者への栄冠だけです。逃走することは回復にも繋がります：レベル1の冒険者であっても、通常のモンスターより早く自然治癒します（プレイヤーは概ね9ターンに1 HP回復するのに対し、敵は20ターンに1 HP）。中盤に達する頃には敵の5倍の速度で急速回復するため、再生能力を持たない足の遅い強敵（ミミック、オーガ、レオクロッタなど）から距離を取ることは、実質的にタダでHPを回復しているのと同じです。ただし、トロール、吸血鬼、そしてイェンダーの魔法使いは例外です：彼らは毎ターン急速回復し、時にはあなた以上の速度で傷を癒します。彼らを相手に持久戦を挑んではいけません。戦況がもはや絶望的であるなら、瞬間移動の巻物、瞬間移動の杖を使うか、あるいは全速力で逃げ出しましょう。命を落とした冒険者に二度目のチャンスはありません（命の魔除けを首に下げている場合を除きます）。
 
@@ -1768,7 +1769,7 @@ juice / see invisible / sickness (50). -->
 
 **緊急避難としてのエルベレス。** 文字を刻み、そのマスの上に立ち、体勢を立て直しましょう。モンスターたちは混乱と怒りに満ちた目であなたの周囲をうろうろと取り囲むだけになり、完全に無防備な時間が手に入ります。戦闘を再開する前に、必ずエルベレスのマスから一歩踏み出してください。結界の上からの攻撃は神聖な文字を汚して瞬時に消滅させ、「偽善者になったような気分だ」という痛烈な属性ペナルティを受けます。エルベレスは傷を癒すための安全な救護所であり、射撃用の砲台ではありません。
 
-##### 遠距離攻撃モンスターと恐怖したモンスター (Ranged and Frightened Monsters)
+##### 遠距離攻撃モンスターと恐怖したモンスター (Ranged and Frightened Monsters) {#ranged-and-frightened-monsters}
 
 **遠距離攻撃を行う敵は後退する。** 弓兵や呪文の使い手は、こちらが近接間合いに詰め寄ると後退して距離を取ろうとします。ケンタウロスの射手は後退しながら弓を射ち続けてきます。角を利用して退路を断つか、こちらも遠距離攻撃で応戦するか、瞬間移動の杖で敵を吹き飛ばして不毛な追いかけっこを終わらせましょう。呪文詠唱者も同様に、あなたが間合いを詰めようともがいている間に距離を取って魔法を浴びせ続けてきます。
 
@@ -1778,7 +1779,7 @@ juice / see invisible / sickness (50). -->
 
 ---
 
-### あなたを殺す脅威 (Things That Will Kill You)
+### あなたを殺す脅威 (Things That Will Kill You) {#things-that-will-kill-you}
 
 <!-- audit
 2026-08-13:
@@ -1826,7 +1827,7 @@ juice / see invisible / sickness (50). -->
 
 **探索ペースについて。** 戦闘の後は必ず足を止めて休息し、HP満タン（少なくとも90%以上）の状態で階段を降りてください。現在の階層と経験レベルを無理に一致させようとするよりも、最大HPの高さの方がはるかに生存率を正確に予測します。利用価値のあるものは探索すべきですが、下り階段が見つかった後は、空っぽの部屋を無意味にうろついたり実りのない捜索に貴重な食料を浪費してはいけません。遠距離攻撃の手段と、瞬間移動の巻物や瞬間移動の杖などの安全な離脱手段を必ず確保した上で次の階層へ降りましょう。階段を降りた直後の突然死の多くは、手負いの状態で逃走手段も持たずに新しいフロアへと踏み込んだことから始まっています。
 
-#### よくある戦死の原因 (Common Combat Deaths)
+#### よくある戦死の原因 (Common Combat Deaths) {#common-combat-deaths}
 
 死因の上位10種以外にも、階層の深さや外見から受ける印象以上に多くの初心者を死に至らしめる敵の系統が存在します。彼らは大群で押し寄せるか、プレイヤーを上回る超高速で移動するか、あるいは一撃でも喰らえば致命傷となる凶悪な特殊攻撃を秘めています。
 
@@ -1850,7 +1851,7 @@ juice / see invisible / sickness (50). -->
 
 **上位の悪魔はさらなる上位悪魔を召喚する。** 上位の悪魔（Major demons）は、攻撃手番ごとに1/16の確率（ゲヘナ内部では1/10の確率）で別の大悪魔を呼び寄せます。
 
-#### 命取りとなる過ち (Deadly Mistakes)
+#### 命取りとなる過ち (Deadly Mistakes) {#deadly-mistakes}
 
 珍しい即死トラップよりも、日常的な不注意や過ちによって命を落とす冒険者の方がはるかに多数を占めます。以下はサーバーの死亡統計に基づく、警戒すべき典型的なミスの実態です。
 
@@ -1878,7 +1879,7 @@ juice / see invisible / sickness (50). -->
 
 序盤の死の大半は、引くべき戦闘で「もう1手番だけ」と欲張って殴り合いを続けた結果として発生しています。
 
-#### ニンフについての覚書 (A Note on Nymphs)
+#### ニンフについての覚書 (A Note on Nymphs) {#a-note-on-nymphs}
 
 `n` クラス（木のニンフ、水のニンフ、山のニンフ）は、あなたを殺そうとはしません。彼女らが狙っているのは、あなたの所持品（インベントリ）です。序盤においてニンフは、身につけている防具を直接体から引き剥がしてせっかく構築したACを台無しにし、さらに爪による攻撃が命中するたびに荷物袋からランダムにアイテムを1つ奪い取ります。そして同フロアのランダムな場所へ **瞬間移動（テレポート）して逃げ去ります**。あなたの軽量化の鞄、反射の魔除け、願ったばかりの魔法を防ぐクロークなどが、マップの遥か彼方、往々にして未探索の部屋へと持ち去られてしまうのです。序盤のキャラクターにこれほど手痛い後退を強いるモンスターは他にほとんどおらず、しかもそれはたった一撃で発生します。
 
@@ -1890,7 +1891,7 @@ juice / see invisible / sickness (50). -->
 
 **昇天への登攀（Ascension Run）の最中、イェンダーの魔除けを所持した状態でニンフと交戦してはなりません。** もし魔除けを盗まれれば、登攀を一時中断してニンフを追跡・殺害しなければならず、その捜索中も「謎の力（mysterious force）」による妨害が止まることはありません。
 
-#### ミミックについての覚書 (A Note on Mimics)
+#### ミミックについての覚書 (A Note on Mimics) {#a-note-on-mimics}
 
 ミミックは、出現する深度から受ける印象よりもはるかに強敵です。その爪の一撃は低レベルのキャラクターを一撃死させるのに十分な威力を持ち、小さなミミックは死因ランキングのトップ10に名を連ねています。唯一の救いは、**すべてのミミックが鈍足である**（速度3、プレイヤーの基本速度の半分未満）という点です。もし擬態を暴いて相手にするのが危険だと感じたら、単に歩いて立ち去り、強くなってから戻ってくれば問題ありません。逃げ足が遅いミミックがどこかへ行ってしまう心配はありません。
 
@@ -1906,7 +1907,7 @@ juice / see invisible / sickness (50). -->
 
 **死体を食べる。** ミミックの死体を食べると、その体の大きさに応じて20 / 40 / 50ターンの間、金貨の山（幻覚症状の時はオレンジ）に変化します。何らかのモンスターが「あなた」を拾い上げようとすると、この変身の術が解けます。
 
-#### 獣化症モンスターについての覚書 (A Note on Werecreatures)
+#### 獣化症モンスターについての覚書 (A Note on Werecreatures) {#a-note-on-werecreatures}
 
 **人ジャッカル、人ネズミ、人狼** からの噛みつき攻撃を受けると、**獣化症（lycanthropy）** に感染する危険があります。そして噛みつきそのものよりも、この感染こそが真の脅威です。感染すると、およそ60〜80ターンごと（夜間はさらに高頻度）にランダムに獣の姿へと変身してしまいます。変身するたびに身につけている防具が強制的に脱げてしまいます。人狼に変身した場合は鎧とシャツが破壊され（クロークだけは無傷で床に落ちます）、脆弱な野獣の肉体に放り出されます。時間経過で自然と元の姿に戻りますが、戦闘の真っ只中に変身が起きると、最悪のタイミングで丸裸に剥ぎ取られてしまいます。
 
@@ -1916,7 +1917,7 @@ juice / see invisible / sickness (50). -->
 
 なお、感染中にへんげの薬を飲むか「へんげの罠」を踏んだ場合、ランダムなモンスターではなく自分自身の「獣化形態」に変身し、感染そのものは治癒しません。
 
-#### プリンについての覚書 (A Note on Puddings)
+#### プリンについての覚書 (A Note on Puddings) {#a-note-on-puddings}
 
 プリンは、ダンジョンを代表する自己増殖型モンスターであり、その倒した後に残る「塊（glob）」はゲーム中で見つかる最高の食料のひとつでもあります。このクラスはダンジョン中盤およびゲヘナに生息しています。**茶色プリンと黒プリンは、鉄製または金属製の武器で殴ると分裂します**。1体が2体に、2体が4体へと増殖し、ロングソードを振り回して狩るつもりが、たちまち大群に包囲される事態に陥ります。さらに **黒プリンは、受動的な反撃攻撃によって手持ちの武器を腐食・錆びさせます**。そのため分裂させるごとに、愛用の刃がボロボロに錆びていくことになります。
 
@@ -1926,7 +1927,7 @@ juice / see invisible / sickness (50). -->
 
 **塊を食べる。** プリンは通常の死体ではなく **「塊（glob）」** を残します。この塊はゲーム屈指の優れた栄養源です。通常の死体とは異なり、塊を祭壇に捧げて生贄にすることはできないため、プリンを奉納稼ぎに利用することはできません。塊は約500ターンの間可食状態を保ち、極めて優秀な耐性を授けてくれます。茶色プリンの塊を繰り返し食べることで **冷気耐性、電撃耐性、毒耐性** が獲得できます。灰色ウーズの塊は **火炎耐性、冷気耐性、毒耐性** を授けます。黒プリンの塊も同様に **冷気耐性、電撃耐性、毒耐性** を付与します。茶色プリンと灰色ウーズは *菜食主義者* でも安全に食べられますが、黒プリンは菜食には該当しません。なお、同じ種類の塊が床の同一マスに重なると1つの大きな食事に融合してしまい、耐性判定の抽選が1回分にまとまってしまうため、塊同士が合体する前に床から1つずつ拾って食べるようにしてください。死体による内在能力獲得の詳細な一覧は、[役立つ死体効果 (Useful Corpse Effects)](#useful-corpse-effects) を参照してください。
 
-#### ドラゴンについての覚書 (A Note on Dragons)
+#### ドラゴンについての覚書 (A Note on Dragons) {#a-note-on-dragons}
 
 ドラゴンには詳細な事前ブリーフィングが必要です。体色ごとに異なるブレス攻撃、耐性、ドラゴンブレス、そして鱗鎧の特性を持ち、何よりプレイヤーを殺そうとする執念の強さもそれぞれ異なります。以下はその要約です：
 
@@ -1952,7 +1953,7 @@ juice / see invisible / sickness (50). -->
 
 すべてのドラゴンの鱗鎧はドラゴンの皮製で、胴体スロットを占め、着用時の基本ACは+9です。ドラゴンの皮は錆、腐食、火炎に対して完全な耐性を持ちますが、吸魔（エンチャント低下）は防げません。どの色を狙うべきかは、通常「どのドラゴンの生息域に安全に到達できるか」で決まります。成長した成体ドラゴンを倒すと約3分の1の確率でドラゴンの鱗を落とします。これをそのまま身につけることもできますし、身につけた状態で呪われていない防具強化の巻物を読むことでドラゴンの鱗鎧へと仕立て直すことができます。
 
-#### トロールについての覚書 (A Note on Trolls)
+#### トロールについての覚書 (A Note on Trolls) {#a-note-on-trolls}
 
 `T` クラスは、一度倒しただけでは死んだままになってくれません。トロールを倒した後の死体は、床に数ターンの間横たわった後、怒り狂った完全回復（全HP）の状態で再び立ち上がってきます。およそ4体中3体のトロールの死体は、50ターン以内に蘇生します。
 
@@ -1962,7 +1963,7 @@ juice / see invisible / sickness (50). -->
 
 **クラスの構成員。** トロール（通常のトロール）、氷トロール、岩トロール、水トロール、そして終盤に出現するオログ＝ハイです。すべてが復活し、どの変種であっても死体の復活挙動は同じです。最も恐るべき変種はオログ＝ハイで、レベル13で3回攻撃を繰り出してきます。
 
-#### レイスについての覚書 (A Note on Wraiths)
+#### レイスについての覚書 (A Note on Wraiths) {#a-note-on-wraiths}
 
 `W` クラスは、接触攻撃によって **経験値レベルを1低下（レベルドレイン）** させてきます。これは本作においてキャラクターが被る数少ない「不可逆的な後退」のひとつです。最大HP、エナジー（魔力）、そして直近に取得したスキル枠を失います（ただし能力値ポイントは低下しません）。失ったレベルは「能力回復の薬 (potion of restore ability)」を飲むことで元に戻すことができます。レイスは放置すれば何度でもこの接触攻撃を繰り出してくるため、部屋の反対側から遠距離で仕留める計画を立ててください。
 
@@ -2011,7 +2012,7 @@ juice / see invisible / sickness (50). -->
 
 **黄色い光**（`y`、レベル3）と **黒い光**（`y`、レベル5）は、あなたが隣接した瞬間に自爆して攻撃してきます。黄色い光は 10d20 ターンの間 **あなたを盲目状態にします**（*祝福された* 回復の薬、あるいはあらゆる超回復の薬／完全回復の薬、ユニコーンの角で治癒可能）。黒い光は 10d12 ターンの間 **あなたを幻覚状態にします**（ユニコーンの角で治癒、または時間経過で回復）。どちらの光も自爆によって死亡します。危険なのは爆発そのものではなく、その後に続く盲目や幻覚の異常状態です。**防御策：** 杖、投げ短剣、あるいはブレス攻撃などを用いて遠距離から仕留めてください。「警告」能力は不可視状態の黒い光であっても感知できますが、「テレパシー」では感知できません（精神を持たないため）。
 
-### セーブとボーンズ (Saving and Bones)
+### セーブとボーンズ (Saving and Bones) {#saving-and-bones}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -2052,7 +2053,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **ボーンズを無効化する。** 設定ファイル（rcfile）に `OPTIONS=bones=false` を記述すれば、ボーンズのないクリーンな冒険が楽しめます。これにより、ボーンズの「生成（自分の死によってファイルが作られること）」と「読み込み（過去のボーンズ階を引き継ぐこと）」の両方が完全に遮断されます。自力達成の戒律である **ボーンズ不使用（Bonesless）** の導きを達成するためには、この設定が必須です。
 
-### 即死の危険 (Ways to Die Instantly)
+### 即死の危険 (Ways to Die Instantly) {#ways-to-die-instantly}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -2064,7 +2065,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 > *以下に掲載する即死カタログは、Dylan O'Donnell氏のRGRNファイルをもとにまとめたTrevor Powell氏の『即死スポイラー (Instadeath Spoiler)』に着想を得ています。Trevor氏は即死を「プレイヤーのヒットポイントが0まで削られる過程を伴わずに発生する、たった1手での死亡」と定義し、その分類体系は今日までスタンダードなリファレンスとして使われ続けています。*
 
-#### 攻撃の杖 (Attack Wands)
+#### 攻撃の杖 (Attack Wands) {#attack-wands}
 <!-- audit
 2026-05-18:
 - mwandexp gates the first-zap warning miss (muse.c:1830-1860)
@@ -2079,7 +2080,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **防御策：** 「反射」の能力はあらゆる光線を跳ね返します。「耐魔（魔法防御）」は死の光線およびマジックミサイルの光線を無効化します。通常、大半のモンスターがプレイヤーに対して光線系の杖（死、睡眠、炎、冷気、電撃、マジックミサイル）を最初に振る際、その初弾は必ず外れる仕様（警告射撃）になっています。モンスターが視界内にいれば、その瞬間に何の杖であるかが自動識別されるため、何が自分に向けて発射されたかを把握し、次の命中弾が飛んでくる前に対処するための1ターンの猶予が与えられます。ただし、城、要塞リュディオス、クエスト、ゲヘナ、ヴラドの塔、各大系などに自生する終盤のモンスターたちは、この初弾ミスの手加減をしてくれません。
 
-#### 窒息 (Choking)
+#### 窒息 (Choking) {#choking}
 <!-- audit
 2026-05-18:
 - eat-while-satiated death via done(CHOKING) (eat.c:248, 286); warning string at eat.c:3314
@@ -2096,7 +2097,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **防御策：** 満腹状態のときは決して食事をしないでください。また、未識別の魔除けを不用意に首にかけることには極めて慎重であってください。
 
-#### 飢餓 (Starvation)
+#### 飢餓 (Starvation) {#starvation}
 
 飢餓は厳密には「即死」ではありませんが、体感としては即死に極めて近いものです。栄養値が0まで落ち込むと、失神します。失神している間に何も食べられなければ、そのまま死亡します。食料供給の基盤が確立していないゲーム序盤において、飢餓は常に迅速な対応を迫られる命に関わる問題です。
 
@@ -2104,7 +2105,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 ゲーム終盤、アストラル大系に出現する黙示録の四騎士の一角 **「飢餓（Famine）」** は、一撃ごとに40〜80の栄養値を直接削り取って急速にプレイヤーを飢餓死に追い込んできます。これを防ぐ外部装備は存在しません。アストラル大系には「満腹」の状態で突入し、決戦の最中も大量の携帯食糧を常時ストックしておいてください。さもなくば「飢餓」の一撃を受けた直後に失神寸前に追い込まれてしまいます。
 
-#### 致死毒 (Deadly Poison)
+#### 致死毒 (Deadly Poison) {#deadly-poison}
 <!-- audit
 2026-05-19:
 - AD_DRST extra-damage roll is ~1/240 per qualifying hit: rn2(8) × rn2(30) (uhitm.c:3154, attrib.c:362)
@@ -2117,7 +2118,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **防御策：** [毒耐性](#damage-resistances) を持っていれば完全免疫となります。大半のキャラクターは、序盤に毒持ちモンスターの死体を適切に食べることで毒耐性を獲得できます。これはゲーム開始直後に真っ先に確保すべき最重要の内在能力のひとつです。
 
-#### 脳みそ吸引・脳死 (Brainlessness)
+#### 脳みそ吸引・脳死 (Brainlessness) {#brainlessness}
 <!-- audit
 2026-05-18:
 - mind flayer 3 tentacles, master 5 tentacles; AD_DRIN + AT_WEAP 1d8 (monsters.h:523-535)
@@ -2142,7 +2143,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 もうひとつの重要な詳細として、マインドフレアの「精神波（mind blast）」はテレパシーで感知されている状態では百発百中で飛んできますが、テレパシーを遮断していれば発動率は10分の1に激減します。遠視の魔除けを外すことで危険を大幅に減らせます（完全にゼロにはなりませんが）。
 ドレインされた知力を回復するには、**能力回復の薬 (potion of restore ability)**（呪われていないは1つの能力値、祝福は全能力値を回復）、能力回復の呪文、または神との関係が良好な状態での祈りが必要です。なお、**NetHack 5.0 においてユニコーンの角は低下した能力値を回復しなくなった** ため、ユニコーンの角に頼ってはいけません。マインドフレアの巣窟に突入する前に、必ず能力回復の薬を少なくとも1本はストックしておきましょう。
 
-#### 飲み込み・包み込み (Engulfment)
+#### 飲み込み・包み込み (Engulfment) {#engulfment}
 
 姿を隠して獲物を待ち伏せし、踏み込んできた者を一瞬で包み込むモンスターが2種類存在します。**ラーカー (lurker above)**（`t`、灰色、レベル10）は天井に張り付き、下を通りかかった者に覆い被さってきます。**トラッパー (trapper)**（`t`、緑色、レベル12）は床に擬態し、その上を踏んだ者を丸呑みにして包み込みます。どちらも発動するまでは通常の地形と見分けがつきません。これらの包み込み攻撃は、胃袋で消化するのではなく、圧迫によって締め潰す攻撃です。
 
@@ -2152,7 +2153,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **脱出方法。** 呑み込まれてしまったら、体内からホストを繰り返し攻撃してください。体内であっても武器による攻撃は正常に機能します。もし **掘削の杖 (wand of digging)** を持っていれば、それを振ってください（方向の指定は不要です）。ほぼ確実に即座に体外へと吐き出され、包み込んでいたモンスターのHPは1にまで削られます。**開錠の杖 (wand of opening)** や施錠開錠の呪文（ノック）を使えば、相手を殺すことなくその場で安全に吐き出させることができます（争いの効果などで *飼いならした* 紫ワームに誤って呑み込まれてしまった場合に極めて有用です）。遠距離呪文や光線系の杖を体内で放つことでも、内部から大ダメージを与えて破壊できます。
 
-#### 溺死 (Drowning)
+#### 溺死 (Drowning) {#drowning}
 <!-- audit
 2026-05-18:
 - drown check uses monster's tile (uhitm.c:3389-3390)
@@ -2169,7 +2170,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **防御策：** **呼吸の魔除け (amulet of magical breathing)**（または同名の呪文）を身につければ「無呼吸」となり、引きずり込みによる溺死の脅威を完全に無力化できます。「浮遊」は水たまりや堀の上を歩いて侵入するのを防いでくれますが、**ウナギに巻きつかれた場合の溺死は防げない** 点に注意してください。海洋モンスターとは可能な限り遠距離から交戦して撃破してください。奴らの巻きつき攻撃は隣接しなければ発動しません。
 
-#### 石化 (Petrification (Stoning))
+#### 石化 (Petrification (Stoning)) {#petrification-stoning}
 <!-- audit
 2026-05-18:
 - stoning timer starts at 5 (uhitm.c:3937)
@@ -2211,7 +2212,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **コインの裏返し（凶悪な兵器）：** 小手をはめた手でコカトリスの死体を武器として構える（wield）と、ゲーム内で最も凶悪な一撃必殺の武器になります。[石化耐性](#damage-resistances) を持たないあらゆるモンスターは、叩かれた瞬間に石像へと変わります。熟練プレイヤーの間で「ゴムのチキン（rubber chicken）」として親しまれるこの古典的戦術は、多くの魔神（デーモン・ロード）すら瞬殺します（メデューサと四騎士は石化耐性を持っています）。この戦術を使う際に最も注意すべき致命的ミスは、死体を構えたまま落とし穴、穴、または落とし戸に落ちること、そして小手が脱げてしまうことです。投げられたコカトリスの卵も同様の即死効果を持ち、モンスターが投げてきた場合も同様の脅威となります。
 
-#### 瞬間分解 (Disintegration)
+#### 瞬間分解 (Disintegration) {#disintegration}
 <!-- audit
 2026-05-18:
 - only player-facing AD_DISN is black dragon breath (monsters.h:1520, ZT_BREATH(ZT_DEATH) at zap.c:4464-4493)
@@ -2230,7 +2231,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **瞬間分解耐性がない場合、** 身につけている防具が身代わりとなってブレスを受け止めます：盾を持っていればまず **盾** が破壊され、次に **鎧とクローク** が同時に破壊されます。防具を何も身につけていない場合にのみ、プレイヤー自身が直撃を受けて即死します（その過程でクロークやシャツも破壊されます）。したがって、普通の盾であっても失われる前に少なくとも1発のブレスを肩代わりしてくれます。命の魔除けは致死の直撃から救ってくれますが、破壊された防具は失われます。
 
-#### 経験値レベル低下・ドレイン (Level Drain)
+#### 経験値レベル低下・ドレイン (Level Drain) {#level-drain}
 <!-- audit
 2026-05-18:
 - drain-life attacks (AD_DRLI) reduce u.ulevel by 1 and max HP by mlev gain (exper.c:232-260)
@@ -2251,7 +2252,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 レイスの死体は重量がなく、缶詰にすることもできません（栄養価ゼロ）。戦闘が終わったら新鮮なうちに即座に食べてレベルを回復・上昇させましょう。
 
-#### エンチャント吸魔 (Enchantment Drain)
+#### エンチャント吸魔 (Enchantment Drain) {#enchantment-drain}
 <!-- audit
 2026-05-18:
 - disenchanter generates only in Gehennom (G_HELL: monsters.h:2156, makemon.c:1935, 1998)
@@ -2276,7 +2277,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **防御策。** **魔法防御力（MC3）の防具** は、防具に対する能動的ドレインをほぼ遮断しますが、武器を劣化させる近接反撃を止めることはできません。争いの指輪やペットを使って他の標的へ誘導するのが有効です。アーティファクトは10回中9回の確率で吸魔に抵抗しますが、通常のアイテムは10回中1回しか抵抗できません。**死体は絶対に食べてはいけません**。ランダムに持っている内在能力を1つ奪い取られます。
 
-#### 死の接触 (The Touch of Death)
+#### 死の接触 (The Touch of Death) {#the-touch-of-death}
 <!-- audit
 2026-05-18:
 - self-zap WAN_DEATH or SPE_FINGER_OF_DEATH skips the Antimagic check (zap.c:2885-2902)
@@ -2297,7 +2298,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 なお、接触や死の杖の直撃によって即死した場合でも、命の魔除け（amulet of life saving）を身につけていれば1度だけその場で蘇生することができます。
 
-#### 虐殺 (Genocide)
+#### 虐殺 (Genocide) {#genocide}
 <!-- audit
 2026-05-18:
 - confused-uncursed scroll of genocide self-genocides your role's species (read.c:1737)
@@ -2307,7 +2308,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 混乱（Confused）した状態で呪われていない「虐殺の巻物」を読むと、自分自身の役職の種族を虐殺してしまい、即座にゲームオーバーとなります。巻物を読む前に、必ず自分の状態異常ステータスを確認してください。
 
-### 神との関係 (Divine Relations)
+### 神との関係 (Divine Relations) {#divine-relations}
 
 <!-- audit
 2026-05-31 audit:
@@ -2321,7 +2322,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 機嫌の良い神はあなたの祈りに応え、過ちを赦し、時には強力なアーティファクトを授けてくれます。一方、怒れる神は天罰を下してあなたを打ち倒します。
 
-#### 祈り (Prayer)
+#### 祈り (Prayer) {#prayer}
 
 神に祈る（`#pray`）ことで、守護神に救いを求めることができます。適切な状況であれば、祈りは石化、飢餓、あるいは瀕死の危機からあなたを救い出してくれます。しかし条件が満たされていない場合、祈りそのものがあなたの命を奪うことになります。
 
@@ -2358,13 +2359,13 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 **実践的な指針。** 本当に死に直面し、他に一切の手段がない場合（飢餓、石化、病気、瀕死の低HP）にのみ祈ってください。祈る前に、まず上記のチェックリスト（属性値がプラスか、クールダウンは空けているか、異属性祭壇の上ではないか）を確認してください。1つでも「いいえ」があるなら、祈り以外の解決策を探してください。
 
-#### アンデッド退散 (Turning Undead)
+#### アンデッド退散 (Turning Undead) {#turning-undead}
 
 **騎士** と **僧侶** は、`#turn` コマンドを使って神の御威光を呼び求め、アンデッドを退散させることができます。視界内の広範囲にいるすべてのアンデッドと吸血鬼（経験値レベル15以降は悪魔も含む）が対象となります。相手が強敵であるほど、単に恐怖させて追い払うだけでなく完全に *消滅* させるためには高い経験値レベルが必要です。ゾンビなら経験値レベル6で消滅させられますが、**亡霊（ゴースト）はレベル14**、リッチはレベル16に達するまで消滅させることはできません。必要なレベルに満たない場合、退散は敵を逃走させるだけに留まり、ゴーストのような耐魔を持つアンデッドは約半分の確率で退散自体に抵抗します。秩序および中立の英雄は退散させた敵を消滅させ、混沌の英雄は敵を平和化（非敵対化）させます。
 
 祈りとは異なり、アンデッド退散を行っても神との関係におけるコストは一切かかりません。クールダウンも神の恩恵の消費もないため、祈祷中に数ターン麻痺して無防備になる点さえ気をつければ、何度でも自由に使用できます。ただし祈りと同様に、**[ゲヘナ](#gehennom) では完全に失敗します**。そのため「死者の谷」では役に立ちません。なお、「アンデッド退散」の呪文（魔法書から学ぶもの）は別物であり、こちらは指定した一方向に放たれ、単体の標的を恐怖させる効果を持ち、ゲヘナ内でも問題なく機能します。
 
-#### 生贄 (Sacrifice)
+#### 生贄 (Sacrifice) {#sacrifice}
 
 生贄（いけにえ）は、新鮮なモンスターの死体を捧げることで神の恩恵を獲得する行為です。自分と同属性の祭壇の上で `#offer` を行うと、まず怒れる神を宥め、次に属性値を回復し、祈りのクールダウンを短縮します。これらが万全の状態になると、幸運値を上昇させたり、強力なアーティファクトを授けてくれたりします。なお、聖水の生成や戴冠（crowning）は、生贄そのものではなく祭壇の上で「祈る」ことによって発生します。
 
@@ -2380,7 +2381,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 特定の役職にとって、1つ目のギフトは単なるランダム抽選ではありません。ワルキューレ、魔法使い、野蛮人、侍、あるいは僧侶の場合、1つ目のギフトは必ずその役職の代表的なアーティファクトとなり、主人公自身の属性に適合した形で授与されます。また、捧げた死体の種類によって出現可能なアーティファクトに上限がかかります。「スティング」、「オーガスマッシャー」、「トロルズベイン」は価値1の生贄でも出現しますが、「ボーパルブレード」や「ファイアブランド」には価値5、「フロストブランド」には価値9、「グレイスワンダー」には価値10の生贄が必要です。最強のギフトを狙って生贄を捧げる際は、トロールクラスの死体を温存しておきましょう。
 
-#### 僧侶への寄付 (Donating to Priests)
+#### 僧侶への寄付 (Donating to Priests) {#donating-to-priests}
 
 自分自身の神殿の中にいる平和的な僧侶は、寄付を受け付けてくれます。僧侶に向かって `#chat` で話しかけるとプロンプトが表示されます：*「いくら寄付しますか？ (推奨額: X または Y)」*。この2つの数字は、2段階の報酬ティアに対応する僧侶からの推奨金額です。
 
@@ -2410,7 +2411,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
      at suggested × quan, 2 × suggested × quan, 3 × suggested × quan,
      where quan = max(1, money / (3 × suggested × XL)). -->
 
-#### 祭壇と属性 (Altars and Alignment)
+#### 祭壇と属性 (Altars and Alignment) {#altars-and-alignment}
 
 異属性の祭壇を自分の属性へと改宗させるには、その祭壇の上で通常の新鮮な死体を生贄に捧げます。試行するたびに、祭壇が自分の守護神の属性へと反転するか（成功）、幸運値を失うか（失敗）、あるいは現在の属性値がマイナスである場合は **主人公自身が祭壇の属性へと強制改宗** させられます。高い経験値レベルであるほど成功率は向上します。生贄によるギフト、聖水の作成、あるいはBUC（祝福・呪われていない・呪い）判定のために同属性の祭壇が必要な場合、リスクを冒す価値は十分にあります。
 
@@ -2421,7 +2422,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 - **自分と同種族の死体**（人間、エルフ、ノーム、ドワーフ、オークのうち自分の種族に該当するもの）。すべての祭壇で厳罰に処されます —— *ただし* あなたが混沌であり、祭壇も混沌である場合を除きます（その場合はご褒美として友好的な悪魔が出現し、幸運値と属性値が上昇します）。
 - **祭壇の属性と一致する属性のユニコーンの死体**。その神に対する重大な侮辱とみなされます。
 
-#### 戴冠 (Crowning)
+#### 戴冠 (Crowning) {#crowning}
 
 属性値が20に達し、かつ幸運値が10に達している状態で祈りが成功すると、あなたの守護神はあなたに **戴冠（Crowning）** の栄誉を授けてくれます。戴冠によって以下の恩恵が得られます：
 
@@ -2433,7 +2434,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 戴冠を受けると、それ以降のすべての祈りにおいて通常のクールダウンに加えて約1,000ターンの待ち時間が上乗せされます。生贄によってアーティファクトのギフトを釣り上げようとしている最中は、信仰心の高まりすぎに注意してください。神との関係が最高潮に達している状態で祈ると意図せず戴冠してしまうからです。自分自身に聴診器を当てることで現在の信仰状態を確認できます。「敬虔（piously）」と表示されたらそれが最高位の領域であり、祈れば戴冠が発動する可能性があります。
 
-### 仲間作り (Making Friends)
+### 仲間作り (Making Friends) {#making-friends}
 
 <!-- audit
 2026-06-03:
@@ -2451,7 +2452,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 恐るべき迷宮は暗く、過酷で、あなたを捕食しようと狙う危険な生物に満ち溢れています。そうした過酷な環境において、忠実な仲間は金貨の詰まった袋などよりも遥かに価値があります。幸いなことに、ダンジョンはそのための手段を用意してくれています。
 
-#### 初期ペット (Starting Pets)
+#### 初期ペット (Starting Pets) {#starting-pets}
 
 大半の役職は、最初から忠実なペットを一匹連れて冒険を開始します（役職に応じて子犬または子猫）。ペットは階段を昇降する際に隣接していれば階層間を追従し、共に戦い、アイテムを拾い上げ、床に落ちている食料を食べます。牙を持ち、自走し、自給自足する便利な「呪いテスター」と考えて差し支えありません。
 
@@ -2459,7 +2460,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 さらに重要な点として、ペットは呪われていない選択肢がある場合、原則として呪われたアイテムのマスを避けて歩きます。これを利用することで、**確率的な呪い検出器** として活用できます。未識別のアイテムを床に落とし、ペットがどのアイテムの上を素通りし、どのアイテムを避けて迂回するかを観察してください。どうしても他に通り道がない場合は呪われたマスを踏むこともありますが、何ターンにもわたって一貫して回避し続ける場合は、そのアイテムが呪われている強いサインです。また、ペットが呪われたアイテムの山の上に踏み込んだ場合（食料を追っている時や、魔法の笛で引き寄せられた時など）、ゲーム画面には *「[ペット]は気が進まない様子で〜の上に乗った（[pet] moves reluctantly onto ...）」* と表示されます。このメッセージが出たら呪い確定です。
 
-#### 給餌と忠誠心 (Feeding and Loyalty)
+#### 給餌と忠誠心 (Feeding and Loyalty) {#feeding-and-loyalty}
 
 ペットには内部的な「手なずけ度（tameness）」の数値が存在します。別の階層に何ターンも置き去りにしたり、引き綱で無理やり引っ張ったり、プレイヤー自身が攻撃を当ててしまうと低下します。空腹度はペットの行動に影響しますが、忠誠心そのものを直接減らすわけではありません（また、他のモンスターから戦闘ダメージを受けても忠誠心は低下しません）。手なずけ度がゼロまで落ち込むと、ペットは飼いならされていない平和的（非敵対的）な状態に戻るか、完全に敵対化してしまいます。給餌こそがその特効薬です：
 
@@ -2478,7 +2479,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 「空腹」の鳴き声が聞こえたら、それがエサを与える合図です。この鳴き声は「不機嫌」のサインも兼ねているため、落ち着いたタイミングで確認してください。猫が **ギャーギャー喚いたり (yowls)**、馬が **激しくいなないたり (neighs)** しているときは、野生化して敵対する寸前の危険信号です。
 
-#### 新たな生物のテイム (Taming New Creatures)
+#### 新たな生物のテイム (Taming New Creatures) {#taming-new-creatures}
 
 初期ペットが倒れてしまったり、ペットの軍団を編成したい場合、いくつかのテイム（手なずけ）方法が存在します：
 
@@ -2488,7 +2489,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 テイムできるのは小動物だけに留まりません。「手なずけの巻物」や「怪物を手なずける呪文」を駆使すれば、敵を一呑みにしてくれる紫ワーム、灼熱の炎を吐くドラゴン、敵を踏み潰すタイタンなどを従属させることができます。ただし、テイム不可能なモンスターの除外リストも膨大です：人間（`@`：僧侶、店主、番兵、兵士、王など）、欲深いモンスター（狂乱の魔法使い、リッチ、マスターマインドフレアなど）、悪魔（自分自身が悪魔に変身している場合を除く）、金庫番兵、クエストリーダーやネメシス、神の召喚獣はテイムできません。また、メデューサなどのユニークモンスターもテイムに抵抗します。
 
-#### ペットの役割 (What Pets Do for You)
+#### ペットの役割 (What Pets Do for You) {#what-pets-do-for-you}
 
 十分にエサを与えられたペットは、様々な形でその真価を発揮してくれます：
 
@@ -2506,7 +2507,7 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 - ゲーム終盤、**ペットを強力なモンスターへと変身(へんげ)** させます。**タイタン (Titan)** は最も人気の変身先です：レベル16、速度18、飛行能力を持ち、巨石を投げつけ、攻撃呪文を唱えます。これほど強力でありながら足が速いモンスターは他に存在しないため、速度ブーストを得たプレイヤーの移動速度にも追従でき、遠距離呪文で敵を圧倒してくれます。バルログは打撃力こそ上ですが、速度5と鈍足なため逃げる敵を取り逃がしてしまいます。灰色ドラゴンは、確実に耐魔の内在能力を持たせ、事故による再ポリモーフを防ぎたい場合の優れた選択肢です。
 - もし **アルコン (Archon)** を直接テイムできる機会があれば（敵対的なアルコンに手なずけの巻物を読む、以前テイムしたアルコンを魔法の笛で呼び戻す、争いの指輪による事故など）、絶対にテイムしてください。アルコンはゲーム内最強の究極ペットです：レベル19、速度16、AC −6、魔法防御、不可視の視覚、飛行、自己再生、そして盲目の視線や攻撃呪文を含む強力な連続攻撃を繰り出します。なお、**ペットをポリモーフさせてアルコンにすることはできません**。自然に遭遇した個体を直接テイムする必要があります。
 
-#### ペットを生存させる (Keeping Your Pet Alive)
+#### ペットを生存させる (Keeping Your Pet Alive) {#keeping-your-pet-alive}
 
 ペットもプレイヤーと同じ脅威によって命を落とします：罠、毒、強敵、水への溺死などです。聴診器を使って仲間の健康状態（HP）をこまめにチェックし、勝ち目のない無謀な戦いに突入させないように配慮してください。
 
@@ -2518,11 +2519,11 @@ NetHackの1回の冒険は、複数のプレイスッションにまたがるこ
 
 もし愛用の仲間が戦闘で倒れてしまったら、同属性の祭壇の上でペットの死体の上に立ち、神に祈ってください。神がペットを生き返らせてくれることがあります。ただしこれは最終手段であり、何度も使える技ではありません（祈りのクールダウン、属性値、幸運値のすべてが消費・判定されます）。
 
-## 第4部：装備と補給品 (Part Four: Gear and Provisions)
+## 第4部：装備と補給品 (Part Four: Gear and Provisions) {#part-four-gear-and-provisions}
 
 NetHackに登場する大半のアイテムは、正体を偽って出現します。その外見（未識別名）はゲームごとにシャッフルされますが、価格、重量、材質、そしてその挙動が変わることはありません。本章では、それらの変わらない手がかりを活用して的確な判断を下す方法を解説します。何をテストし、何を装備し、何を温存し、そして何に触れてはならないのかを学んでいきましょう。
 
-### 実践的な識別戦略 (A Practical Identification Strategy)
+### 実践的な識別戦略 (A Practical Identification Strategy) {#a-practical-identification-strategy}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified every price-group membership (scrolls/potions/rings/wands/spellbooks/armor/gems, objects.h), Charisma buy/sell multipliers & surcharges (shk.c), cursed gain-level rise, shopkeeper buyoff.
@@ -2540,7 +2541,7 @@ NetHackに登場する大半のアイテムは、正体を偽って出現しま�
 :::
 <!-- FLOWCHART-END -->
 
-#### 祝福、呪われていない、呪い (BUC)
+#### 祝福、呪われていない、呪い (BUC) {#blessed-uncursed-cursed-buc}
 <!-- audit
 2026-05-18:
 - altar flash on drop: amber blessed, black cursed, no flash uncursed (do.c:379-388)
@@ -2578,7 +2579,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 **識別の巻物。** より安価なテスト手段では決着がつかないアイテムのために温存してください。祝福された識別の巻物は、1〜4個（幸運値プラスで最低2個）、あるいは5回に1回の確率でインベントリ内の全アイテムを一挙に識別します。祝福された識別の巻物を読む前に、持っている未識別アイテムをすべて手持ちの荷物袋に入れておき、全識別が引けた際にすべてのアイテムに効果が及ぶように準備しておきましょう。
 
-#### 価格識別 (The Price Is Right)
+#### 価格識別 (The Price Is Right) {#the-price-is-right}
 <!-- audit
 2026-05-18:
 - buy/sell multipliers and Cha bands match shk.c get_cost/set_cost
@@ -2644,7 +2645,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 \clearpage
 ```
 
-##### 提示価格換算表 (Quoted-price conversion)
+##### 提示価格換算表 (Quoted-price conversion) {#quoted-price-conversion}
 
 各行は、指定された基本価格に対して取引される実際の価格を示しています。
 
@@ -2672,7 +2673,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 :::
 
-##### 巻物の価格 (Scroll Prices)
+##### 巻物の価格 (Scroll Prices) {#scroll-prices}
 
 | 価格 | 巻物の種類 |
 | ---: | --- |
@@ -2694,7 +2695,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 扉のない1マスだけの狭い小部屋（時には鉄格子の奥）に密閉された **たった1枚の巻物** は、「瞬間移動の巻物」です。小部屋の中にテレポートして閉じ込められた生物が脱出できるように置かれています。
 
-##### 魔法書の価格 (Spellbook Prices)
+##### 魔法書の価格 (Spellbook Prices) {#spellbook-prices}
 
 魔法書の価格は、呪文のレベル × 100ゴールドに設定されています。そのため、読む際のリスクを容易に見極めることができます：700ゴールドの魔法書はレベル7の呪文であり、慎重な魔法使い以外の者が読めば十中八九その手の中で大爆発を起こします。
 
@@ -2712,7 +2713,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 <div class="price-id-toolbar"></div>
 
-##### 薬の価格 (Potion Prices)
+##### 薬の価格 (Potion Prices) {#potion-prices}
 
 | 価格 | 薬の種類 |
 | ---: | --- |
@@ -2728,7 +2729,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 回復の薬は20ゴールドに単独で属しているため、値札を見るだけで一意に特定できます。また、水は常に「透明な薬」の外見を持つため、価格を確認するまでもなく正体が分かります。50ゴールドのグループは要注意です。「病気の薬」と「[可視の薬](#senses-and-perception)」が同居しているためです（一方は極めて有害、もう一方は極めて有益）。200ゴールドのグループには優秀な薬がぎっしり詰まっています。
 
-##### 指輪の価格 (Ring Prices)
+##### 指輪の価格 (Ring Prices) {#ring-prices}
 
 | 価格 | 指輪の種類 |
 | ---: | --- |
@@ -2741,7 +2742,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 300ゴールドの指輪は4種類しかなく、そのうち3種類は極めて優秀です：争いの指輪、[へんげ制御の指輪](#special-and-utility)、そして[瞬間移動制御の指輪](#movement-and-spatial-behavior) です。残る4つ目はへんげの指輪であり、通常は呪われた状態で生成されます。
 
-##### 杖の価格 (Wand Prices)
+##### 杖の価格 (Wand Prices) {#wand-prices}
 
 | 価格 | 杖の種類 |
 | ---: | --- |
@@ -2755,7 +2756,7 @@ BUCの状態は、それぞれのアイテムに固有の変化をもたらし�
 
 もし500ゴールドの杖を見つけたら、今日は最高にツイている日です。
 
-##### 魔除けの価格 (Amulet Prices)
+##### 魔除けの価格 (Amulet Prices) {#amulet-prices}
 
 安物のイェンダーの魔除けのイミテーション（0ゴールド）を除き、すべての魔除けの基本価格は **150ゴールド** で統一されています。そのため、価格から魔除けの正体を識別することはできません。他の識別手段を用いる必要があります。
 
@@ -2889,7 +2890,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-#### 杖の試し書きテスト (The Engrave Test (Wands))
+#### 杖の試し書きテスト (The Engrave Test (Wands)) {#the-engrave-test-wands}
 
 杖の識別テストは1チャージを消費しますが、残りのチャージを安全に温存できます。
 
@@ -2901,7 +2902,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 **願いの杖の疑いがある場合も試し書きは安全です。** 500ゴールドの杖の候補で試し書きを行い、*「何を願いますか？ (For what do you wish?)」* と尋ねられたら、テストによって1チャージが消費され、願いが成就します。最大限に価値のある願いを叶えましょう。
 
-#### 流し台テスト (The Sink Test (Rings))
+#### 流し台テスト (The Sink Test (Rings)) {#the-sink-test-rings}
 <!-- audit
 2026-05-18:
 - dosinkring at do.c:498-650 — all 28 ring types give a sink message, BUT 13 only when sighted (second switch do.c:592+ gated on !Blind); 15 work even blind (first switch). Message is a hint via trycall, NOT makeknown/formal ID. Overlaps: protection & warning both "sink glows", teleportation & polymorph can both "sink vanishes", aggravate monster & meat ring near-identical fly message
@@ -2911,7 +2912,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ダンジョン内で流し台（sink）を見つけたら、その中に指輪を落としてテストすることができます。指輪の種類ごとに固有の手がかりメッセージが発生します（ただしメッセージが重複するものもあり、目が見えている状態でなければ表示されないものもあるため、常に完全な正式識別になるとは限りません）。探索の指輪と[消化不良の指輪](#special-and-utility) は、落とした瞬間に手元へと跳ね返ってきて即座に識別されます。それ以外の指輪は、20分の1の確率で手元に戻り、5分の1の確率で流し台の下に埋没しますが、それ以外の場合は排水溝に飲み込まれて失われます。したがって、唯一の貴重な指輪ではなく、ダブった予備の指輪でのみ試してください。メッセージの詳細な一覧は [流し台](#sinks) を参照してください。
 
-#### 使用テスト（慎重なアプローチ） (Use-Testing (The Careful Way))
+#### 使用テスト（慎重なアプローチ） (Use-Testing (The Careful Way)) {#use-testing-the-careful-way}
 <!-- audit
 2026-05-18:
 - engrave-test messages: fire "Flames fly", cold "A few ice cubes drop", lightning "Lightning arcs", digging "Gravel flies up", magic missile "riddled by bullet holes" (engrave.c, zap.c)
@@ -2958,7 +2959,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ただし価格はシャッフルされません。価格を確認することで、安全な靴やクロークと呪われた品とを判別できます。
 
-##### 防具の価格 (Armor Prices)
+##### 防具の価格 (Armor Prices) {#armor-prices}
 
 | 価格 | 防具の部位 | 該当アイテム |
 | ---: | --- | --- |
@@ -2976,7 +2977,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 30ゴールドの靴は危険信号です。どちらの候補も通常呪われて生成されます。50ゴールドの靴はどれも当たりです。60ゴールドのクロークは透明か耐魔の2択です。価格だけでは8ゴールドのエルフの靴と蹴り挙げ靴、あるいは50ゴールドの3種類の小手を区別できません。BUCをテストした上で実際に装備し、表示されるメッセージを観察してください。
 
-#### 灰色石：4つの石、幸運は1つ (Gray Stones: Four Stones, One Lucky)
+#### 灰色石：4つの石、幸運は1つ (Gray Stones: Four Stones, One Lucky) {#gray-stones-four-stones-one-lucky}
 <!-- audit
 2026-05-18:
 - best mimic test here is SEARCH, not the pet: an explicit `s` adjacent to an object-mimic reveals it unconditionally — mfind0 (detect.c:1965) calls seemimic() for any M_AP_TYPE monster with NO rng roll (unlike SDOOR rnl(7-fund) / traps rnl(8)). the minend-1 mimics are appear_as="obj:..." => M_AP_OBJECT, so one search beside a suspect stone exposes it every time; a real stone stays a stone. reworked the prose to lead with search (consistent with the existing "A note on mimics" section, which already says search reveals mimics) instead of the fiddly pet-in-a-niche. search only flags mimics, so price-ID still separates the real luckstone from the cursed loadstone.
@@ -3012,7 +3013,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 灰色の石を拾い上げる前に、必ず蹴って転がるか確認し、BUCをテストしてください。数秒のテストを惜しまないだけで、背中に溶接された500ユニットの呪われた重しに苦しめられる悲劇を完全に回避できます。
 
-#### 判明した情報の名付け (Naming What You've Learned)
+#### 判明した情報の名付け (Naming What You've Learned) {#naming-what-youve-learned}
 <!-- audit
 2026-05-21:
 - mergable() requires identical otyp, enchantment (spe), BUC, erodeproof state, erosion (oeroded, oeroded2), greased state, oeaten/orotten for food; coins merge unconditionally (invent.c:4379-4460)
@@ -3028,7 +3029,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 **スタック（同一枠まとめ）による識別。** アイテムを拾い上げた際、ゲームはそのアイテムが手持ちの既存アイテムと **完全に同一** である場合にのみ、同じスロットへと合体（スタック）させます：同じ種類、同じ強化値、同じBUC、同じ耐腐食加工などです。したがって、新しく拾ったアイテムが既知のアイテムとまとまるかどうかを見るだけで、無料で情報を得ることができます。合体によって実際に新たな知識が得られた場合、ゲームは明示的にメッセージを表示します：*「持ち物を比較して、より多くのことが分かった (You learn more about your items by comparing them.)」*。このメッセージが出たら、既知の特性（BUC、強化値、腐食状態など）が未知のアイテム側にも引き継がれた合図です。同じ外見でありながらスタックしないアイテムは、異なる薬であるか、BUCが異なるか、あるいは希釈・腐食されているかのいずれかです。
 
-#### 実践的な戦略 (A Practical Strategy)
+#### 実践的な戦略 (A Practical Strategy) {#a-practical-strategy}
 
 **祭壇において（最優先事項）。** 未識別の装備品を祭壇まで運び、1点ずつ床に落としてください。BUC（祝福・呪われていない・呪い）ごとに手持ちのアイテムを仕分けます。そのアイテムを装備すべきか、保管すべきか、破棄すべきかは、正体が判明した後に判断します。
 
@@ -3046,7 +3047,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 最も安価で安全な方法から順に試してください：祭壇、店、試し書きテスト、慎重な使用テスト、そして最後の手段としての識別の巻物です。
 
-### 食料と食事 (Provisions and Dining)
+### 食料と食事 (Provisions and Dining) {#provisions-and-dining}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3080,7 +3081,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 空腹は、ダンジョンにおいて最も執拗にプレイヤーを追い詰めるタイマーです。行動するごとに毎ターン栄養が消費され、タンクが空になると失神が始まります。食事を取らずに失神を繰り返せば、やがて飢餓死するか、倒れ込んでいる隙に部屋にいたモンスターに撲殺されることになります。
 
-#### 空腹の仕組み (How Hunger Works)
+#### 空腹の仕組み (How Hunger Works) {#how-hunger-works}
 
 あなたの栄養値は900からスタートし、時間とともに着実に減少していきます。減少速度は行動内容によって異なります：
 
@@ -3101,7 +3102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 「空腹」のメッセージが出た段階で食事を取るようにし、「衰弱」まで引き延ばさないようにしてください。もし「失神寸前」に達して手元に一切の食料がない場合は、守護神に祈ってください（[神との関係](#divine-relations) を参照）。神の機嫌が良ければ空腹を完全に癒してくれます。まだ「空腹」の段階であり食料がない場合は、階段を降りて下の階へ進みましょう。新たなフロアには新たな死体や補給品がありますが、探索し尽くしたフロアを歩き回っても食料は見つかりません。
 
-#### 何を食べるべきか (What to Eat)
+#### 何を食べるべきか (What to Eat) {#what-to-eat}
 
 **安全なものを食べる。** 菜食主義の戒律を守っているのでない限り、必要な栄養の大半は倒したばかりの新鮮な獲物の死体から摂取することができます。保存食を温存する前に、まず死体の安全性を確認してください。単に新鮮であるというだけで、何でも食べられるわけではありません。
 
@@ -3119,7 +3120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 **菜食主義（Vegetarian）** のキャラクターは、食料、レンバス、果物、そしてごく少数の非肉類死体（キノコ、カビ、地衣類、ゼリー類、および卵）だけで生き延びなければなりません。**完全菜食主義（Vegan）** は卵すら食べられないためさらに厳しく、食料、レンバス、果物、植物の死体のみが対象となります。綿密な計画が必要です。どちらの戒律でも死体を貪り食う戦法は使えないため、食料や果物は見つけ次第確保しておくべき貴重な補給品となります。
 
-#### 危険な食物 (Dangerous Foods)
+#### 危険な食物 (Dangerous Foods) {#dangerous-foods}
 
 死体を口にする前に、以下の5つの問いを確認してください：
 
@@ -3141,7 +3142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 **共食い（同種族の肉を食べる）：** 幸運値を 2〜5 失い、「反感（aggravate monster）」の内在能力を永続的に獲得してしまいます。ただし洞窟人とオークはこのペナルティを免除されます。
 
-#### 役立つ死体効果 (Useful Corpse Effects)
+#### 役立つ死体効果 (Useful Corpse Effects) {#useful-corpse-effects}
 
 内在能力の獲得を目指して計画的に死体を食べることは、序盤から中盤にかけて極めて大きな成果をもたらします。各耐性の獲得は食べるごとに *一定の確率* で判定されるものであり、確定ではありません。そのため、最初の1体だけでなく見つけた **すべて** の対象死体を食べるようにしてください。以下の表は、各モンスター記号についての判定結果を示しています。死体は必ず **新鮮** なうちに食べてください（50ターンを大幅に超えると食中毒のリスクが生じます）。また、`*` は付与される耐性が **一時的（時限式）** であることを示します。
 
@@ -3212,7 +3213,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 **プリン、キューブ、カビ、ブロッブは優れた食料源です。** その多くが内在能力の獲得チャンスをもたらします。プリンや酸のブロッブは通常の死体ではなく **「塊（glob）」** を残します。床の同じマスに同一種の塊が重なると1つの食事に融合してしまい、耐性判定の抽選が1回分に減ってしまいます。塊同士が合体する前に、床から1個ずつ拾って食べるようにしてください。
 
-#### 食料戦略 (Food Strategy)
+#### 食料戦略 (Food Strategy) {#food-strategy}
 
 1. 安全で新鮮なモンスターの死体を主食とする。
 2. 食料やレンバスなどの保存食は緊急時用に温存する。
@@ -3221,7 +3222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 5. 金貨に余裕があれば、店で食料を購入しておく。
 6. 必要以上に大量の食料を持ち歩かない（重荷の原因になる）。
 
-### 薬屋 (The Apothecary)
+### 薬屋 (The Apothecary) {#the-apothecary}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3242,7 +3243,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 薬の外見（未識別名）はゲームごとにシャッフルされます。頼りになるのは価格と計画的なテストだけであり、「前回のゲームで泡立つ薬が回復の薬だった」という記憶は何の役にも立ちません。
 
-#### 薬の一覧表 (The Potion Table)
+#### 薬の一覧表 (The Potion Table) {#the-potion-table}
 
 各薬の基本的な効果と、ラベルからは読み取れない隠れた用途を以下にまとめます。未識別の薬の候補を絞り込むための価格については [薬の価格](#potion-prices) を参照してください。特に重要な薬については、後述の [主要な薬](#key-potions) で詳しく解説します。出現確率は自然生成される薬の中に占める割合であり、深度によって変化しません。
 
@@ -3280,7 +3281,7 @@ NOT grease or rustproof items (no POT_OIL link to greased / erode /
 rust anywhere in src/*.c); that protection comes from the can of
 grease. -->
 
-#### 主要な薬 (Key Potions)
+#### 主要な薬 (Key Potions) {#key-potions}
 
 []{#potion-healing}
 **回復の薬、超回復の薬、完全回復の薬。** 重点的にストックすべきは「超回復の薬」です。HPを大幅に回復するだけでなく、常に盲目を治療し、（呪われていなければ）病気も治療してくれます。呪われていない超回復の薬と完全回復の薬は、回復量が現在の最大HPを超過した場合に最大HPそのものを恒久的に引き上げます（祝福されたものが最大の伸び幅を持ちます）。当面必要のない呪われていない超回復や完全回復の薬は、すべてゲヘナおよび昇天への登攀のために温存しておきましょう。
@@ -3302,7 +3303,7 @@ grease. -->
 []{#potion-polymorph}
 **へんげの薬の識別。** スマートなテスト方法があります：未識別の薬に、予備の矢やダーツを1本だけ浸してみてください。もしその矢が別のアイテムへと変化したら、その薬はへんげの薬であり、即座に正式識別されます。矢1本と薬1本を消費するだけで、自分で飲んで危険なモンスターに変身させられるギャンブルを完全に回避できます。
 
-#### 錬金術 (Alchemy)
+#### 錬金術 (Alchemy) {#alchemy}
 
 ある薬を別の薬へと浸す（dip）ことで、より強力な薬へと錬成できる場合があります（あるいは大爆発を引き起こします）。大半の組み合わせは何も起きませんが、以下の実用的なレシピは暗記しておく価値があります：
 
@@ -3324,7 +3325,7 @@ grease. -->
 
 錬金術には爆発のリスクが伴います。水以外の組み合わせでは、約10%の確率で爆発事故が発生します（錬金術師の服を着用していれば約30分の1に激減します）。調合実験は貴重な保管場所から離れた隔離された部屋で行い、**呪われた薬を別の薬に浸してはなりません**。呪われた薬を浸すと100%確実に大爆発を起こし、両方の薬が消滅します。
 
-#### 状態異常の治療 (Neutralizing Ailments)
+#### 状態異常の治療 (Neutralizing Ailments) {#neutralizing-ailments}
 
 呪われていない **ユニコーンの角** は、盲目、難聴、混乱、朦朧、幻覚、嘔吐、そして病気を治療してくれます。完全に治すまでに数回適用（`a`）が必要になる場合があります（祝福および呪われていないでの正確な成功確率は [主要な道具](#key-tools) を参照）。なお、低下した能力値は回復できなくなっているため、能力回復の薬を使用してください。
 
@@ -3343,7 +3344,7 @@ grease. -->
 
 生成された水は祭壇で祈って聖水にでき、フルーツジュースは錬金術で可視の薬へと錬成できるため、一切の無駄がありません。
 
-### 巻物入れ (The Scroll Rack)
+### 巻物入れ (The Scroll Rack) {#the-scroll-rack}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3353,7 +3354,7 @@ grease. -->
 
 巻物は、ダンジョンにおける使い捨ての呪文です。1回読む（`r`）と効果が発動し、消滅します。巻物にはゲームごとにランダムにシャッフルされた奇妙な文字列（「ZELGO MER」、「DAIYEN FOOELS」、「PRATYAVAYAH」など）がラベルとして印字されており、識別するまでは意味を持ちません。
 
-#### 巻物の一覧表 (The Scroll Table)
+#### 巻物の一覧表 (The Scroll Table) {#the-scroll-table}
 
 各巻物の効果と最も有効な使い道を示します。未識別の巻物の候補を絞り込むための価格については [巻物の価格](#scroll-prices) を参照してください。特に重要な巻物については、後述の [主要な巻物](#key-scrolls) で詳しく解説します。出現確率は自然生成される巻物の中に占める割合であり、深度によって変化しません。
 
@@ -3382,7 +3383,7 @@ grease. -->
 | **処罰の巻物 (punishment)** | 1.5% | 重い鉄球と鎖を足首に繋がれる。解呪の巻物で解除可能。 |
 | **悪臭雲の巻物 (stinking cloud)** | 1.5% | 指定した遠距離のマスに、持続する毒ガスの雲を発生させる。 |
 
-#### 主要な巻物 (Key Scrolls)
+#### 主要な巻物 (Key Scrolls) {#key-scrolls}
 
 []{#scroll-identify}
 **識別の巻物。** この巻物は、**メインの所持品（インベントリ）** に直接入っているアイテムしか検査できません。鞄の中に入っているアイテムや床に落ちているアイテムは対象外です。読む前に、鞄の中身をすべて手元に出し、足元にある未識別の品も拾っておきましょう。祝福された巻物は1〜4個のアイテムを識別し、1/5の確率で手持ちの全アイテムを一挙に識別します（幸運値がプラスなら最低識別数が2個に保証されます）。呪われていない巻物は通常1個しか識別しませんが、1/5の確率で祝福時と同じ結果を引き当てます。
@@ -3420,7 +3421,7 @@ grease. -->
 []{#scroll-fire}
 **火の巻物。** 自身の周囲に激しい炎を噴出させます。呪われていないまたは呪われた状態で読むと、爆発の中心は **自分自身** となり、わずかなダメージを受けるとともに、荷物袋の中にある巻物や薬が焼き払われてしまいます。しかし **祝福された** 火の巻物は全くの別物です：5倍の威力を持ち、約5マス以内の視界内のマスを指定して発射できるため、非魔法系キャラクターが持ち歩ける数少ない遠距離範囲攻撃手段となります。また、どちらのバージョンであっても、浴びることで体に付着した「緑スライム」を焼き払うことができるため、スライム化の緊急治療法としても機能します。必ず祝福して保管してください。
 
-#### 混乱読書 (Confused Reading)
+#### 混乱読書 (Confused Reading) {#confused-reading}
 
 多くの巻物は、混乱状態で読んだ際に全く異なる効果を発揮します。その代替効果の中には、通常の効果よりも遥かに **強力で有益** なものが存在します：
 
@@ -3434,7 +3435,7 @@ grease. -->
 
 計画的に自身を混乱させる最もクリーンな方法は、**混乱の薬** を飲むことです（効果時間は約16〜22ターン持続します）。また、祝福されていない **酔っぱらいの薬**（侍の場合は **酒（sake）**）を飲むことでも数ターンの混乱状態を作り出せます。
 
-### 杖 (Wands)
+### 杖 (Wands) {#wands}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3465,7 +3466,7 @@ grease. -->
 
 杖のBUC（祝福・呪われていない・呪い）の状態は発動効果そのものを変えませんが、呪われた杖は振ったり試し書きしたりするたびに、約100分の1の確率で暴発して手の中で大爆発を起こします。爆風の威力は内部に残っているチャージ数に比例して増大するため、常用する杖（何よりも死の杖）は必ず呪いを解いてから使用してください。
 
-#### 杖の一覧表 (The Wand Table)
+#### 杖の一覧表 (The Wand Table) {#the-wand-table}
 
 各杖の基本スペックと試し書き結果を示します。未識別の杖を絞り込むための価格については [杖の価格](#wand-prices) を参照してください。右端の列にある **試し書きテスト結果** は極めて実用的であり、大半の杖は1回埃に文字を刻むだけでその正体を看破できます。具体的な手順については [杖の試し書きテスト](#the-engrave-test-wands) を、少数の重複するメッセージの判別法については [曖昧な試し書き結果の解決法](#resolving-ambiguous-engrave-results) を参照してください。
 
@@ -3508,7 +3509,7 @@ grease. -->
 
 <div class="price-id-toolbar"></div>
 
-#### 主要な杖 (Key Wands)
+#### 主要な杖 (Key Wands) {#key-wands}
 
 []{#wand-wishing}
 **願いの杖。** 振るたびに1つの願いを叶えてくれます。「願いの杖」は生成時に **1チャージ** を持っています。無理矢理振る（wrest）前に、まず「充填の巻物」で1度だけ安全に再充填してください。その上で最後の無理矢理搾り出したチャージを使用すれば、合計で3つの願いが叶います（充填の巻物がない場合は、初期チャージと無理矢理振るチャージで計2回）。[城](#the-castle) に到達する前に、何を願うべきか綿密に計画を立てておきましょう。
@@ -3541,7 +3542,7 @@ grease. -->
 
 **探査する杖。** 診断用の杖です。モンスターに向けて振ると、その残りHP、最大HP、レベル、そして **「何を持ち歩いているか」** を克明に開示します。店主、兵士、あるいは倒す価値がある装備を持っているか確かめたい名前付き冒険者に対して極めて有用です。聴診器はHPとステータスを報告してくれますが荷物の中身までは分かりません。敵の荷物袋を覗き見たいなら、探査する杖の出番です。
 
-#### 曖昧な試し書き結果の解決法 (Resolving Ambiguous Engrave Results)
+#### 曖昧な試し書き結果の解決法 (Resolving Ambiguous Engrave Results) {#resolving-ambiguous-engrave-results}
 
 一部の試し書きメッセージは、複数の杖で共有されています。
 
@@ -3559,7 +3560,7 @@ grease. -->
 
 曖昧さのない杖については、安全な標的に向けて1回振ることで、試し書きで推測された正体を確実に裏付けることができます：飼いならしたペットや弱い敵に **減速の杖** / **加速の杖**、閉じた扉に **衝撃の杖**、ゴミ装備の山に **へんげの杖** を振ります。未識別の杖を自分自身に向けて振ることは絶対に避けてください。
 
-#### 再充填 (Recharging)
+#### 再充填 (Recharging) {#recharging}
 
 杖は「充填の巻物」を読むことでチャージ数を回復できます。最も価値ある使い道は「願いの杖」であり、1回安全に再充填するだけで、1回の願いを2回へと増やすことができます。ただし、連続して再充填を重ねるごとに、杖が爆発して消滅するリスクが急上昇します。爆発確率は `(これまでの充填回数の3乗) / 343` で計算されます：
 
@@ -3573,11 +3574,11 @@ grease. -->
 
 指輪も充填可能ですが、爆発チェックには現在の強化値が使用されます：+0 は安全、+1 は 1/7 の確率で爆発、+3 は約43%、+5 は約71%、+7 は確実に爆発します。すでに高く強化された貴重な指輪を充填の標的にするのは極めて危険です。
 
-#### 無理矢理振る (Wresting)
+#### 無理矢理振る (Wresting) {#wresting}
 
 杖のチャージ数が0になっても、まだ振ることを試みることができます。杖が灰燼に帰して消滅する前に、**121分の1** の確率で最後の1チャージを「無理矢理搾り出す（wresting）」ことができます。これは最後の命綱となる裏技ですが、願いの杖に対しても同様に機能します。
 
-#### 道具としての変身(へんげ) (Polymorph as a Tool)
+#### 道具としての変身(へんげ) (Polymorph as a Tool) {#polymorph-as-a-tool}
 
 自身を変身(へんげ)させることには、リスクに見合うだけの絶大なメリットがあります。自分に向けて「へんげの杖」を振る、「へんげの薬」を飲む、「変化」の呪文を唱える、あるいは「へんげの罠」を踏むことで、新たなモンスターの肉体を獲得できます。**へんげ制御**（指輪または内在能力）があれば、どのモンスターに変身するかを *自分で自由に選択* できます。
 
@@ -3591,7 +3592,7 @@ grease. -->
 
 ゴミアイテムの **山（パイル）** に向けて「へんげの杖」を振ると、それぞれのアイテムが同じクラスの別のランダムなアイテムへと一斉に再抽選されます。このテクニックは「ポリパイル（polypiling）」と呼ばれ、大量のガラクタから必要な貴重品を錬成する強力な手段となります。パイルにするアイテムは、メインの荷物袋から十分に離れた別のマスに置いてください（誤射して軽量化の鞄を巻き込むと大惨事になります）。また、必ず事前に幸運値を最大まで高めておきましょう。ポリパイルが失敗すると、変化したアイテムがその材質の敵対的ゴーレムへと化けて襲いかかってきますが、幸運値が高いほどこの失敗率を抑えることができます。
 
-### 指輪と魔除け (Rings and Amulets)
+### 指輪と魔除け (Rings and Amulets) {#rings-and-amulets}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3617,7 +3618,7 @@ grease. -->
 
 指輪は左右の手の指に1つずつ計2つ、魔除けは首に1つ身につけることができます。身につけるには `P`（Put on）、外すには `R`（Remove）を押します。指輪と魔除けはこのキーペアで操作します（防具の着脱は `W` と `T` です）。
 
-#### 指輪の一覧表 (The Ring Table)
+#### 指輪の一覧表 (The Ring Table) {#the-ring-table}
 
 <div class="price-id-toolbar"></div>
 
@@ -3656,7 +3657,7 @@ grease. -->
 
 「生成時90%呪い」と記載された指輪は、生成された時点で約90%の確率で呪われており、呪いを解くまで手から外すことができなくなります。
 
-#### 主要な指輪 (Key Rings)
+#### 主要な指輪 (Key Rings) {#key-rings}
 
 []{#ring-free-action}
 **自由行動の指輪。** 麻痺状態を完全に防ぎます。麻痺はゲーム終盤において、モンスターから一方的にタコ殴りにされて命を落とす最も典型的な死因のひとつです。
@@ -3676,7 +3677,7 @@ grease. -->
 
 **隠されたコスト（空腹度ペナルティ）：** 通常の指輪は装備中20ターンごとに1ポイントの栄養を消費します。「争いの指輪」、「回復の指輪」、「飢餓の指輪」は **2ターンごとに1ポイント** という激しい栄養を消費します。状況に応じて使う指輪は荷物袋に入れておき、必要な時だけ指にはめてください。「自由行動の指輪」だけは例外であり、不意の麻痺死を防ぐ保険としての価値は、わずかな食料コストを補って余りあるものです。
 
-#### 魔除け (Amulets)
+#### 魔除け (Amulets) {#amulets}
 
 魔除けは指輪よりも種類が少なくシンプルですが、識別はより困難です。すべて基本価格が **150ゴールド** で統一されているため、価格識別が一切役に立ちません。装備テストを行うか、「識別の巻物」を読む必要があります。「命を救ってくれる至宝」から「首を絞めて即死させる凶器」まで効果の振れ幅が極めて大きいため、テストには細心の注意が必要です：
 
@@ -3696,7 +3697,7 @@ grease. -->
 
 未識別の魔除けを首にかける前に、**必ずBUCをテストしてください**。「絞殺の魔除け」はわずか6ターンの猶予しか与えずにあなたを窒息死させます。首にかかって絞殺が始まったら即座に外すか、呪われて外せない場合は神に祈ってください。
 
-#### 主要な魔除け (Key Amulets)
+#### 主要な魔除け (Key Amulets) {#key-amulets}
 
 **命の魔除け。** 死亡した瞬間に、50 HP ＋ 耐久ボーナス（本来の最大HPが上限）の状態で即座に蘇生し、身代わりとなって粉砕・消滅します（耐久が1減少します）。ただし「虐殺」による死亡は防げません。識別できたら、首にかけてそのまま忘れてしまって構いません。予期せぬ不慮の事故から身を守るための究極の保険です。
 
@@ -3710,11 +3711,11 @@ grease. -->
 
 **安眠の魔除け。** ランダムに眠りに落ちてしまう呪われたアイテムですが、睡眠中は毎ターンHPが+1追加回復するという加速再生能力を持ちます。扉に楔を打ち込んで完全に密閉した安全な小部屋で眠れば、ほぼ役立たずの呪いアイテムが即席の野戦病院へと変貌します。
 
-### 道具 (Tools of the Trade)
+### 道具 (Tools of the Trade) {#tools-of-the-trade}
 
 道具は、ダンジョンにおける多目的万能ツールです。武器のように振り回すことも、防具のように身につけることもありませんが、適用（`a`）することで様々な困難を打開してくれます。鍵を開け、暗闇を照らし、重い荷物を軽量化し、状態異常を治癒し、さらには白紙の巻物に新たな魔法を書き込むことすら可能です。
 
-#### 容器類 (Containers)
+#### 容器類 (Containers) {#containers}
 
 | 容器の名称 | 空の重量 | 特徴と用途 |
 | --- | :---: | --- |
@@ -3736,7 +3737,7 @@ grease. -->
 
 外見が全く同じ「**トリックの鞄 (bag of tricks)**」は別物です。通常の容器だと思って中身を漁ろう（loot）とすると、袋に巨大な牙が生えて噛みつかれ、手痛いダメージを受けます（痛い目を見ますが、少なくとも無料で正体が判明します）。正しく使うには、適用コマンド（`a`）を使用してください。1チャージを消費して、自分の足元にランダムな敵対モンスターを1体召喚します。アイテムは持っていませんが、祭壇の隣に立って使えば、即席の生贄調達＆経験値稼ぎマシーンとして機能します。ただし深層では危険な強敵が出現することもあるため、瀕死の時や追い詰められた状況では振らないでください。
 
-##### 所持許容量 (Carrying capacity)
+##### 所持許容量 (Carrying capacity) {#carrying-capacity}
 
 プレイヤーの最大所持重量の許容量は、おおよそ **25 × (筋力 + 耐久) + 50**（上限1000）です。平均的な人間の初期ステータスであれば約950ユニット、筋力の低い呪文詠唱者であれば約700ユニット前後から始まります。荷物を詰め込むにつれて、画面下部のステータス行には以下の負荷ステータスが表示されます：
 
@@ -3757,19 +3758,19 @@ grease. -->
 
 知能の高いモンスターは、施錠されていない箱を開けて中身を盗んだり箱ごと持ち去ったりしますが、**施錠された箱を開けることはできません**。床にアイテムを保管する際は、必ず鍵をかけてから立ち去るようにしてください。城の住人たちも施錠された宝箱を勝手に開けることはできません。
 
-#### 開錠道具 (Unlocking Tools)
+#### 開錠道具 (Unlocking Tools) {#unlocking-tools}
 
 ダンジョンは施錠された扉や箱で溢れており、力ずくで蹴り破るのは騒音を撒き散らし時間もかかります。**万能鍵 (skeleton key)** は最も信頼性の高い開錠道具です（扉の開錠成功率70%以上、箱類75%以上）。**鍵開け器具 (lock pick)**（侍の場合は **おさく (osaku)**）も十分な性能を持ちます。**クレジットカード (credit card)** は成功率こそ劣りますが、蹴り破るよりは遥かにマシです。これらはいずれも軽量であるため、必ず3つのうちいずれか1つを常時携帯してください。
 
 合鍵と鍵開けは、開錠だけでなく **「施錠（ロック）」** することも可能です。戦利品を箱に詰めた後、鍵をかけて安全に保管することができます（クレジットカードは開錠のみで施錠はできません）。
 
-#### 光源 (Light Sources)
+#### 光源 (Light Sources) {#light-sources}
 
 **油つぼ (oil lamps)** や **ろうそく (candles)** は暗い通路を照らしてくれます。**魔法のランプ (magic lamp)** は燃料切れを起こさず永久に燃え続け、火を灯した状態のままでも擦ることができます。ランプを擦る（`#rub`）と、1/3の確率で魔神（djinni）が出現し、さらに一定確率で願いを叶えてくれます（ランプが祝福されていれば魔神の願い付与率は80%であり、擦り1回あたりの総合的な願い成就率は約27%となります。呪われていないや呪いの場合は確率が低下します）。魔神が出現するまで同じランプを何度も擦り直すことができます。祝福して擦る準備が整うまでは通常の永久光源として活用しましょう。火を灯して明かりとして使っても願いの権利が消費されることはありません。
 
 **祈りの燭台 (Candelabrum of Invocation)** は、[ヴラドの塔](#vlads-tower) で手に入る唯一無二のアーティファクト燭台です。[モロクの聖域](#molochs-sanctum) に進入するための「召喚の儀式」に必要な3大アイテムのひとつです。儀式を執り行うためには **7本のろうそく** を立てる必要があるため、ダンジョン内でろうそくを見かけたら今から大事に集めておきましょう。
 
-#### 楽器 (Musical Instruments)
+#### 楽器 (Musical Instruments) {#musical-instruments}
 
 音階を演奏できるあらゆる楽器（木製のフルート、魔法のフルート、角笛、冷気の角笛、炎の角笛、ラッパ、竪琴）を使って、[城](#the-castle) の跳ね橋を下ろすための「合言葉のメロディ（passtune）」を演奏できます。合言葉の調べとその入手源については [城](#the-castle) を参照してください。
 
@@ -3777,7 +3778,7 @@ grease. -->
 
 角笛や皮の太鼓を鳴らすと、近くのモンスターを目覚めさせて恐怖させます（太鼓は自身も30〜49ターンの間難聴状態にします）。通常の木製のフルートは単に綺麗な音を鳴らすだけです。
 
-#### その他の注目すべき道具 (Other Notable Tools)
+#### その他の注目すべき道具 (Other Notable Tools) {#other-notable-tools}
 
 | 道具の名称 | 用途と特徴 |
 | --- | --- |
@@ -3794,7 +3795,7 @@ grease. -->
 | 開放の鐘 (Bell of Opening) | 召喚の儀式アイテム。クエストネメシスを倒して死体から回収 |
 | 紐 (leash) | ペットを繋ぎ止め、階段移動時に確実に追従させる |
 
-#### 主要な道具 (Key Tools)
+#### 主要な道具 (Key Tools) {#key-tools}
 
 呪われていない **ユニコーンの角** を使用（`a`）すると、混乱、盲目、病気、幻覚、朦朧、嘔吐、難聴といった主要な状態異常の大半を治療できます。常に1本携帯してください。
 
@@ -3827,7 +3828,7 @@ grease. -->
 
 **油の缶** は、防具に油を塗って巻きつき攻撃、接着攻撃、マインドフレアの触手を滑らせて回避できるようにします。また、鞄に油を塗ることで、油が乾くまで中身を水濡れから保護することができます。
 
-### 武具庫 (The Armory)
+### 武具庫 (The Armory) {#the-armory}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -3853,7 +3854,7 @@ grease. -->
 
 このセクションでは、装備の選び方を解説します。[武器一覧表](#weapons-tables) および [防具一覧表](#armor-tables) の付録には、すべてのアイテムの完全な性能値が記載されています。
 
-#### 防具とAC (Armor and AC)
+#### 防具とAC (Armor and AC) {#armor-and-ac}
 
 アーマークラス（AC）は敵の攻撃がどれくらいの頻度で命中するかを決定する数値であり、ゲーム内で最も重要な防御指標です。ACの数値を1点下げるごとに、モンスターの攻撃が空振りに終わる確率が上がります。ACは10から始まり、防護を重ねることで低下していきます（値が低いほど優秀です）。ACが −10 以下になれば物理攻撃でダメージを受けることは極めて稀になります。昇天用装備セットの実用的な目標値は **AC −20** であり、−25 を超えると低下の恩恵は逓減していきます。
 
@@ -3869,7 +3870,7 @@ grease. -->
 | 盾 (Shield) | 片手武器使用かつ修道士以外 | 反射または各種耐性 | 盾全般が両手持ちを封じ、魔法詠唱にペナルティを与える |
 | シャツ (Shirt) | 入手次第装備 | いずれのシャツでも（要強化） | 露出したシャツ（胴鎧未装備）は店の販売価格を悪化させる |
 
-##### 胴防具 (Body suits)
+##### 胴防具 (Body suits) {#body-suits}
 
 胴防具は身につける装備の中で最も重く、単体で最も大きなAC供給源となります。武闘家（Monk）はこのスロットを空にしておくことで最も真価を発揮します。ドラゴンの鱗鎧を含め、**いかなる** 胴防具であっても、装備すると武術（Martial Arts）の命中率に −20 のペナルティを受けます。終盤では、ペナルティを回避できないと知りつつも、優れたACと耐性のためにドラゴンの鱗鎧をあえて装備する武闘家もいます。
 
@@ -3885,11 +3886,11 @@ grease. -->
 
 ドラゴンの鱗およびドラゴンの鱗鎧については、後述の [ドラゴンの鱗鎧](#dragon-scale-mail) を参照してください。
 
-##### シャツ (Shirts)
+##### シャツ (Shirts) {#shirts}
 
 シャツは胴防具の *下* に着用します。基本ACは 0 ですが、呪文詠唱を一切妨害せず、重量もほとんどないため、+5 まで強化されたシャツは極めて大きな働きをします。ダンジョンに存在する2種類のシャツは、性能面では完全に同一の重量 5 の布製トップスです。**アロハシャツ** (Hawaiian shirt) は観光客の初期装備であり、**Ｔシャツ** (T-shirt) は無地の別バージョンです。どちらも防具を着込む際に最初に身につける必要があるため、すでに胴防具を着ている状態でシャツを着ようとすると、すべての防具を一度脱いでから着直す必要があります。
 
-##### マント (Cloaks)
+##### マント (Cloaks) {#cloaks}
 
 マントは胴防具の上に羽織り、適度なAC (0〜+3)、魔法防御（MC）、そして多くの場合有用な特性（能力）をもたらします。また、下に着ている鎧を一部の攻撃から保護する役割も果たします。
 
@@ -3906,7 +3907,7 @@ grease. -->
 - **幻影のクローク** (Cloak of displacement) は、モンスターがあなたの幻影を攻撃するように仕向け、低いACを競合することなく見事に補完します。
 - **透明のクローク** (Cloak of invisibility) は透明化を付与し、モンスターの攻撃が外れやすくなるため、主に攻防一体のボーナスとなります。
 
-##### 兜 (Helmets)
+##### 兜 (Helmets) {#helmets}
 
 兜のスロットは頭部を覆い、転がる巨岩の罠、頭上からの落石、トンネル崩落による落盤といったダンジョンのささやかな奇襲からあなたを守ります。大半の兜は金属製であるため呪文詠唱を妨害します。魔法使いには布製の帽子が適しています。
 
@@ -3918,7 +3919,7 @@ grease. -->
 
 **逆属性の兜** (Helm of opposite alignment) は、装備中に自身の属性を逆転させます（そして10回中9回は呪われて生成されます）。基本的には罠アイテムですが、異なる属性の祭壇で生贄を捧げる、逆属性のクエストアーティファクトを我が物にする、あるいは星界の面で異なる属性の祭壇を選ぶなど、意図的に活用できる場面もあります。
 
-##### 小手 (Gloves)
+##### 小手 (Gloves) {#gloves}
 
 小手は防具の中で最も小さなスロット（全種類一律で AC 1）ですが、決定的に重要な防御の役割を果たします。小手を着用していれば、**コカトリスの死体** を安全に拾い上げ、武器として振り回すことすら可能です。小手なしで素手で触れれば、即座に石化してゲームオーバーになります（[石化](#petrification-stoning) を参照）。
 
@@ -3926,7 +3927,7 @@ grease. -->
 
 **お手玉の小手** (Gauntlets of fumbling) は罠アイテムです。10回中9回は呪われて生成され、着用者を絶えずつまずかせます。未識別の小手は装備する前に必ず祭壇テストを行ってください。呪われた小手を着け、さらに呪われた武器を手に持ってしまうのは、ダンジョンで最も古典的な膠着状態（デッドロック）です。解呪の巻物、聖水、あるいは祈りなしにはどちらも外せなくなります。
 
-##### 靴 (Boots)
+##### 靴 (Boots) {#boots}
 
 靴は移動に関する特性（水上歩行、跳躍、浮遊、加速）の宝庫であるため、ほとんどのビルドにおいて、このスロットはAC（1〜2）よりも「その靴が何をもたらすか」によって選ばれます。
 
@@ -3946,7 +3947,7 @@ grease. -->
 
 靴を履く前には必ず祭壇テストを行ってください。呪われた靴は呪いを解くまで脱げず、浮遊の靴で堀の上で無力に浮かんだままになる危険もあります。
 
-##### 盾 (Shields)
+##### 盾 (Shields) {#shields}
 
 盾は AC 1〜2 をもたらしますが、装備構成の他の部分で大きな妥協を迫られます。いかなる盾であっても、二刀流および両手持ち武器の使用を封じます。また、すべての盾は一律の呪文詠唱ペナルティを加算し、さらに重量が 30 を超える盾は最終的な呪文成功率を 4分の1 に激減させます。修道士は盾を装備できますが、装備中は武術の命中率ボーナスを失います。なお、盾は見えない光線や矢の罠を防ぐことはできません。
 
@@ -3981,7 +3982,7 @@ grease. -->
 
 ゲーム内のすべての防具のAC、MC、重量、価格、および付与される能力の完全な数値データについては、付録の [防具一覧表](#armor-tables) を参照してください。
 
-#### 武器 (Weapons)
+#### 武器 (Weapons) {#weapons}
 
 武器は攻撃の射程、ダメージ、そして鍛えられるスキルを決定します。以下のセクションでは、武器を用途ごとに分類して解説します。スキルごとの詳細な性能表については、付録の [武器一覧表](#weapons-tables) を参照してください。
 
@@ -4005,7 +4006,7 @@ grease. -->
 | ワルキューレ (Valkyrie) | 長剣 |
 | 魔法使い (Wizard) | 短剣または六尺棒 |
 
-##### 片手近接剣 (One-handed melee swords)
+##### 片手近接剣 (One-handed melee swords) {#one-handed-melee-swords}
 
 騎士、ワルキューレ、侍をはじめとする多くの戦士たちが日常的に振るう剣です。片手持ちであるため、もう一方の手に盾を持ったり、逆手武器を構えたりする自由があります。
 
@@ -4019,7 +4020,7 @@ grease. -->
 
 弓などの発射機（ランチャー）を使用する際は、サブ武器スロットに近接武器をセットしておきましょう。モンスターが隣接してきたら `x` キーで瞬時に近接武器へと切り替え、撃破したら再び `x` を押して発射機へと戻します。
 
-##### 両手近接武器 (Two-handed melee)
+##### 両手近接武器 (Two-handed melee) {#two-handed-melee}
 
 盾スロットや逆手を犠牲にする代償として、より重い一撃を繰り出します。NetHack 5.0 では、両手持ち武器による近接打撃すべてに **強さダメージボーナス 1.5倍 (3/2)** が適用されるようになり（腕力によるダメージ加算値が1.5倍になる）、両手武器ビルドは片手武器＋盾ビルドに対して極めて本格的な競争力を取り戻しました。
 
@@ -4029,11 +4030,11 @@ grease. -->
 
 一部の両手武器は、両手持ちであること以上に独自の戦術的役割が際立っているため、他の節で解説しています：**両刃の斧** は「斧」、**ドワーフのつるはし** は「つるはし」、長柄武器は「リーチ武器」、ランスは「騎乗武器」、弓やクロスボウは「遠距離武器」を参照してください。
 
-##### 斧 (Axes)
+##### 斧 (Axes) {#axes}
 
 斧の刃は大型の標的に対して強い偏重を持っています（大型モンスターに対する追加ダメージダイス）。**斧** (Axe) は標準的な片手用の木こりの斧で、小型 d6 / 大型 d4 のダメージです。**戦斧** (battle-axe) は長い柄と幅広の刃（多くは両刃）を持つ両手持ちバージョンで、小型 d8+d4 / 大型 d6+2d4 の威力を誇り、両手持ちであるため強さボーナス 1.5倍の恩恵を受けます（盾は装備不可）。蛮族のクエストアーティファクト **クリーバー** (Cleaver) は両刃の斧です。
 
-##### 片手打撃武器 (Blunt one-handed)
+##### 片手打撃武器 (Blunt one-handed) {#blunt-one-handed}
 
 メイスとこん棒の系統です。聖職者のフレーバー通りアンデッドに対して有効（血を流さない）であり、歴史的な意味でも重装甲の敵に対して効果的です（こん棒の一撃は相手がプレートメイルを着ていようがお構いなしに骨を砕きます）。
 
@@ -4049,7 +4050,7 @@ grease. -->
 
 **ウォーハンマー** (war hammer)。打撃面と背面のスパイクを備えた小型の片手戦槌です。小型 d4+1 / 大型 d4。ワルキューレへの確定生贄ギフトは、北欧神話の雷神トールの雷槌である **ミョルニル** (Mjollnir) です。命中時に電撃ダメージを与えます。強さ 25 を備えたワルキューレだけが、これを投げて確実に手元へ戻すことができます。
 
-##### リーチ武器 (Reach)
+##### リーチ武器 (Reach) {#reach}
 
 リーチ武器は、**`a`** (使用 / apply) コマンドによって離れた間合いから攻撃できる武器群です。長柄武器、ランス、そして長剣アーティファクトの **スニッカーズニー** (Snickersnee) がこのカテゴリに属し、いずれも同じリーチ処理ルーチンを用います：攻撃射程は武器スキルのランクに応じて広がり、「入門」段階の2マス離れた間合いから、「エキスパート」ではおよそ 2.8マス（斜め2マス）まで届くようになります。使用コマンドは斜めを含む全8方向に対して有効です。さらに快適な操作法として、**`f`** (発射 / fire) コマンドがリーチ攻撃としても機能します：リーチ武器を構えている状態で `f` を押すと、射程内のモンスターを自動的にターゲットし、方角の入力なしに1キーストロークで打撃を加えます。
 
@@ -4057,7 +4058,7 @@ grease. -->
 
 **ランス** (Lance)。鋼鉄の穂先を備えた長い木製の槍であり、全速力で突撃する騎馬騎士の武器です。他の長柄武器と同様のリーチ攻撃に加え、最大の特長である **馬上槍試合 (joust)** 突撃を行えます：馬やポニーに騎乗した状態で敵へと突撃すると、接触時に **+2d10** の追加ダメージを与えます（ランスを逆手に持っている場合は +2d2）。激しい突撃の際、250分の1 の確率でランスが粉々に砕け散ることがあります。騎士はランスのスキルをエキスパートまで鍛えることができ、鞍付きのポニーとランスを手にしてゲームを開始します。馬上の騎士は、接触時の馬上突撃と離れた位置からのリーチ攻撃の双方を自在に使い分けることができ、ランスはこの職業で最も汎用性の高い武器の1つとなります。騎士以外のほとんどの職業はランスを目にすることすら滅多にありません。
 
-##### 短剣とナイフ (Daggers and knives)
+##### 短剣とナイフ (Daggers and knives) {#daggers-and-knives}
 
 小型の刃物類であり、ダンジョンで最も汎用性の高い武器クラスです。
 
@@ -4069,13 +4070,13 @@ grease. -->
 
 短剣やナイフは、`w` (主武器) + 副武器 + `x` (持ち替え) のローテーションパターンの恩恵を最大限に享受できます。典型的な盗賊は、小剣をメインに構え、逆手に短剣スタックを持ち、敵が遠くにいるときは `x` で短剣スタックを主武器スロットへと切り替えて投げつけます。
 
-##### 鞭と鉄のフック (Whips and grappling hooks)
+##### 鞭と鉄のフック (Whips and grappling hooks) {#whips-and-grappling-hooks}
 
 道具としても機能する武器類です。**牛追い鞭** (Bullwhip) は考古学者の初期装備です：先端に小さなクラッカー（破裂音を鳴らす房）がついた、編み革製の6フィートの鞭です。小型 d2 / 大型 d1 と戦闘用としては非力ですが、牛追い鞭を使用（`a`）することで、隣接するモンスターの武器を叩き落として武装解除させたり、落とし穴から自分を引き上げたりできます（房が周囲の調度品、巨岩、あるいは大型モンスターに引っ掛かって足場になります）。**ゴムホース** (rubber hose) はダンジョンのジョーク武器であり、キーストン・コップが携帯していることがあります。
 
 **鉄のフック** (Grappling hook)。鎖に取り付けられた3本爪の鉄の鉤です。2マスの射程で使用（`a`）してアイテムを引っ掛けたり、ごく小さなモンスターを1マス引き寄せたり、自分自身を1歩引き寄せたりできます。フレイルのスキルを鍛えることができます。
 
-##### 射撃武器 (Ranged)
+##### 射撃武器 (Ranged) {#ranged}
 
 射撃戦闘の体系的な概要は、戦闘章の [射撃戦](#ranged-combat) で解説されています。ここでは具体的なアイテムを紹介します：
 
@@ -4091,7 +4092,7 @@ grease. -->
 
 すべての投擲武器は、`Q` でスタックを矢筒にセットし、`f` で発射できます。矢筒を使わずに投げる場合は、`t` を押し、アイテムを選び、方向を入力します。
 
-##### 二刀流スタイル (Two-weapon style)
+##### 二刀流スタイル (Two-weapon style) {#two-weapon-style}
 
 自身が二刀流可能な職業である場合、逆手に何を持つかはメイン武器と同じくらい重要です。ルールと損益分岐点の計算については戦闘章の [二刀流戦闘](#two-weapon-combat) で解説されています。代表的な組み合わせは以下の通りです：
 
@@ -4101,11 +4102,11 @@ grease. -->
 - **蛮族:** 二刀流スキルは「入門」で頭打ちになります。命中ペナルティがメリットを打ち消してしまうため、1本の優れた武器を振るう方が賢明です。
 - **レンジャーは二刀流を行えますが、未習熟（Unskilled: 命中率 −9 のペナルティ）から鍛えることができません。** したがって、1本の優れた武器を扱う方が通常は勝利につながります。
 
-#### 強化 (Enchantment)
+#### 強化 (Enchantment) {#enchantment}
 
 武器や防具は、武器に魔法をかける巻物や鎧に魔法をかける巻物を使って強化することができます。呪われていない武器強化の巻物は +1 を加算し、呪われていない防具強化の巻物は 1〜2（未強化の +0 防具ならそれ以上の上昇もあり得る）を加算します。祝福された巻物ならさらに大きな上昇が見込めます。武器の場合、**+6 以上** の状態でさらに強化を試みると、3分の2 の確率で武器が蒸発して消滅します。**防具** も同様のリスクを抱えています：**+3 を超えると**、巻物を読むたびにアイテムが破壊される危険が生じます（エルフ製の防具や、魔法使いの三角帽子などの「特殊」な防具の場合は **+5 を超えると** 危険になります）。祝福された巻物は1回の読書で得られる強化値の幅を増やしますが、破壊の閾値そのものを変えるわけではありません。呪われた巻物は逆に強化値を下げる恐れがあるため、強化目的で読んではいけません。
 
-#### 腐食と防蝕加工 (Erosion and Proofing)
+#### 腐食と防蝕加工 (Erosion and Proofing) {#erosion-and-proofing}
 
 武器や防具は、錆（鉄製品）、火（有機物製品）、そして腐食（銅製品の緑青や酸による腐食）によって損傷を受けます。ひどく傷んだアイテムはACやダメージの数値が低下します。
 
@@ -4113,7 +4114,7 @@ grease. -->
 
 魔法を使わずに損耗の進行を遅らせることも可能です。脂の缶を使用（`a`）して防具に脂（グリース）を塗りつけます。脂の層は、モンスターによる抱きつき、巻きつき、粘着攻撃、そしてマインドフレアの触手攻撃を受け流す効果がありますが、通常の盗み攻撃や武器強奪を防ぐことはできません。また、脂は水からも装備を守ります：脂を塗った武器や防具は、泉への浸漬、水の罠、あるいは深い水の中の歩行であっても錆びるのを防ぎます。ただし、水に浸かるたびに約 50% の確率で脂が洗い流されてしまうため、数回の水没を耐えるための一時的な保険であり、永久的な防水加工ではありません。
 
-#### ドラゴンの鱗鎧 (Dragon Scale Mail)
+#### ドラゴンの鱗鎧 (Dragon Scale Mail) {#dragon-scale-mail}
 
 ドラゴンの鱗はその強靭さと魔法的な防御特性によって珍重され、その鱗から鍛え上げられた鱗鎧はゲーム内でも最高の胴防具の1つです。
 
@@ -4123,7 +4124,7 @@ grease. -->
 
 ---
 
-### 呪いとその解除法 (Curses and How to Break Them)
+### 呪いとその解除法 (Curses and How to Break Them) {#curses-and-how-to-break-them}
 
 <!-- audit
 2026-07-30: audited with The Armory vs NetHack-5.0 source; remove-curse scope (uncursed=worn, blessed=all; read.c:1524), confused-cursing, prayer uncurse, autocurse-9/10 items verified. No corrections.
@@ -4143,7 +4144,7 @@ grease. -->
 
 遅かれ早かれ、あなたは呪われた装備を身につけてしまうことになります。事前にテストしなかった指輪かもしれません。ボーンズ階層で拾った靴かもしれません。あるいは、モンスターがあなたの持ち物に触れて呪いをかけたことに気づかなかったのかもしれません。何が原因であれ、外すことを頑なに拒むアイテムを身につけ、おそらく何か恐ろしい災難に見舞われているはずです。呪いを解かない限り、それを脱ぎ捨てることはできません。
 
-#### アイテムが呪われる原因 (How Items Get Cursed)
+#### アイテムが呪われる原因 (How Items Get Cursed) {#how-items-get-cursed}
 
 - **生まれつき呪われている。** 一部のアイテムは、生成時から大半が呪われています（瞬間移動の指輪、へんげの指輪、絞殺の魔除けなど、ダンジョンが冒険者をからかうのにふさわしいと判断したすべて）。
 - **ボーンズ階層からの遺品。** ボーンズ階層に落ちているアイテムは、80% の確率で呪われています。
@@ -4151,7 +4152,7 @@ grease. -->
 - **混乱した状態での呪いを解く巻物。** 混乱状態で読むと、呪いを解くどころかアイテムを *呪ってしまう* 可能性があります。
 - **呪われた水。** 聖水の邪悪な双子であり、触れたものを呪います。
 
-#### 呪われたアイテムの効果 (Effects of Cursed Items)
+#### 呪われたアイテムの効果 (Effects of Cursed Items) {#effects-of-cursed-items}
 
 - **呪われた防具や指輪** は身体に固着して外せなくなります：呪われた瞬間移動の指輪は止められないランダムテレポートを意味し、呪われた浮遊の靴は二度と地面に足をつけられなくなることを意味します。
 - **呪われた武器** は手放す（持ち替える）ことができません。−3 のオークの短剣を心ゆくまで愛用できることを願っています。
@@ -4159,7 +4160,7 @@ grease. -->
 - **呪われた道具** は劇的な大誤作動を起こします。呪われた軽量化の鞄は、中身の重量を減らすどころか *2倍に増やします*。
 - **呪われた食料** は不快ですが、致命的になることは滅多にありません。不幸中の幸いです。
 
-#### 呪いの検知 (Detecting Curses)
+#### 呪いの検知 (Detecting Curses) {#detecting-curses}
 
 予防は治療に勝ります。アイテムを身につける *前に* テストしてください：
 
@@ -4169,7 +4170,7 @@ grease. -->
 
 （寺院の僧侶への寄付は BUC を判明 *させません*。これはスポイラーによくある俗説です。僧侶に寄付すると一時的な千里眼と防護ボーナスが得られますが、所持品のBUCは未識別のままです。）
 
-#### 呪いの解除 (Removing Curses)
+#### 呪いの解除 (Removing Curses) {#removing-curses}
 
 予防に失敗したとき、あなたには3つの治療法があります：
 
@@ -4183,11 +4184,11 @@ grease. -->
 
 ---
 
-## 第5部：熟練と最終決戦 (Part Five: Mastery and Endgame)
+## 第5部：熟練と最終決戦 (Part Five: Mastery and Endgame) {#part-five-mastery-and-endgame}
 
 ゲーム中盤以降、生存率は「ダンジョンが偶然何を落としてくれたか」ではなく、「それをもとに何を自ら構築できたか」に左右されるようになります：鍛え上げられたスキル、適切に管理された幸運（Luck）、確実に唱えられる呪文、そしてまだ見ぬ脅威に備えて組み上げられた装備セットです。ここに続く各章では、ゲヘナ（Gehennom）の深淵へと足を踏み入れる前に、冒険者を支えるこれらの重要システムを解説します。
 
-### 魔法詠唱 (Spellcasting)
+### 魔法詠唱 (Spellcasting) {#spellcasting}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -4219,7 +4220,7 @@ grease. -->
 
 呪文は、魔法書から学ぶことで何度でも繰り返し行使できる能力です。使うと消滅する巻物や、使用回数が限られている杖とは異なり、マナ（Pw / 魔力）が残っており、酷使され続ける冒険者の頭脳から記憶が失われていない限り、何度でも呪文を唱える（`Z`）ことができます。
 
-#### 呪文の習得 (Learning Spells)
+#### 呪文の習得 (Learning Spells) {#learning-spells}
 
 魔法書を読む（`r` キー。巻物を読むのと同じキーです）ことで、その呪文を習得できます。魔法書の店での基本価格は、呪文レベルの 100倍 です。読書には数ターンを要し、失敗することもあります：失敗すると、テレポートさせられる、ゴールドを奪われる、盲目や混乱に陥る、毒を受ける、あるいは爆発で負傷するなどのペナルティを受けます。破壊されずに残った魔法書には再挑戦できます。NetHack 5.0 では、魔法使いが確実に成功できない状況で読もうとすると、*「この魔法書を理解するのは難しそうだ。続けますか？」*（"This spellbook is difficult to comprehend. Continue?"）という警告メッセージが表示され、「いいえ」を選べばペナルティなしで中断できます。
 
@@ -4240,7 +4241,7 @@ grease. -->
 
 **ペーパーバック (Paperbacks)。** 外見が「ペーパーバック」と表示されている魔法書は、本物の魔法書ではなく小説です。見つけたらぜひ読んでください：ゲーム内で最初に読んだ小説は **20 XP** を与え、これは生まれたてのキャラクターを経験レベル 1 から 2 へと押し上げるのにちょうどぴったりの経験値です（この 20 XP ボーナスはゲーム中最初の1回のみ発動し、以降のペーパーバックは引用文を表示するだけです）。各ペーパーバックのタイトルはテリー・プラチェットの『**ディスクワールド**』(Discworld) シリーズから取られており、読むとその小説の一節が開かれます。
 
-#### 主要な呪文 (Key Spells)
+#### 主要な呪文 (Key Spells) {#key-spells}
 
 | 呪文名 | レベル | 効果 |
 | --------------- | ----- | --------------------------------------- |
@@ -4262,7 +4263,7 @@ grease. -->
 
 もし `+` メニューで **失敗率 100%** と表示されている場合、原因は通常魔法書ではなく、身につけている装備やスキルにあります。まず盾を外し、次に金属製の胴鎧、兜、小手、靴を脱いでください。そして自身の職業の詠唱能力値を高め、その呪文の魔法系統スキルを鍛えましょう。ローブを着れば金属鎧のペナルティを半減でき、六尺棒を構えればわずかな詠唱ボーナスが得られます。すべての盾は一律のペナルティを課し、重量30を超える盾は最終成功率を4分の1に激減させます。
 
-#### マナ管理 (Mana Management)
+#### マナ管理 (Mana Management) {#mana-management}
 
 あなたの魔力（Pw）プールは、部屋の隅に座り込んでスマートフォンのバッテリーのように自然回復を待つまでに、あと何回呪文を唱えられるかを決定します。呪文の詠唱には **呪文レベル × 5 の Pw** を消費します（したがって死の指先は 35 Pw です）。詠唱に失敗した場合でも、半分のマナが消費されます。
 
@@ -4270,7 +4271,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 予備の杖や巻物を常に携帯しておきましょう。Pw を使い果たした魔法使いは、バスローブを着て木の棒を握りしめているただの無力な人間に過ぎません。
 
-### 幸運と運命 (Luck and Fortune)
+### 幸運と運命 (Luck and Fortune) {#luck-and-fortune}
 
 <!-- audit
 2026-09-27 luckstone rewrite vs NetHack-5.0 source:
@@ -4310,7 +4311,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 3. 識別済みの本物の宝石を、自属性と同じユニコーンに投げ与えること。
 4. 理由もなく平和的な生物を殺したり、鏡を割ったりしないこと。
 
-#### 幸運の仕組み (How Luck Works)
+#### 幸運の仕組み (How Luck Works) {#how-luck-works}
 
 幸運は −13 から +13 の範囲を取り、通常は 0 から始まります。そのまま放置しておくと、時間の経過とともにカレンダー基準値へと徐々に減衰（ドリフト）していきます。
 
@@ -4335,7 +4336,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 （NetHack はコンピュータの実時間・日付を参照してこの判定を行います。）
 
-#### 幸運の増減 (Gaining and Losing Luck)
+#### 幸運の増減 (Gaining and Losing Luck) {#gaining-and-losing-luck}
 
 | 行動 | 幸運の変動 |
 | --------------------------------------------------- | -------------------- |
@@ -4358,7 +4359,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 祭壇での生贄によって幸運を高められるのは、捧げた死体の難易度（モンスターレベル）が現在の幸運値を上回っているときだけです。コボルドのような弱い死体では幸運を上げることはできません。後半に幸運を稼ぐには、強敵の新鮮な死体を生贄に捧げてください。
 
-#### 幸運が重要な理由 (Why Luck Matters)
+#### 幸運が重要な理由 (Why Luck Matters) {#why-luck-matters}
 
 幸運が +5（または幸運の石を含めてそれ以上）になると、ダンジョンでの冒険生活は **目に見えて** 快適になります：
 
@@ -4370,17 +4371,17 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 ---
 
-### 能力値の訓練 (Exercising Your Stats)
+### 能力値の訓練 (Exercising Your Stats) {#exercising-your-stats}
 
 舞台裏では、ダンジョンはあなたの6つの能力値のうち4つ（**筋力 (Str)**、**器用 (Dex)**、**耐久 (Con)**、**賢明 (Wis)**）について、隠された訓練カウンターを記録しています（知力 (Int) と魅力 (Cha) は訓練されず、能力獲得の薬のような魔法的手段によってのみ変動します）。能力値を「鍛える」ような生き方を続けているとカウンターが徐々に上がり、「酷使（虐待）」するような生活を続けているとカウンターが下がっていきます。数百ターンごとにゲームはこのカウンターをチェックし、+1 または −1 の変動をもたらします。
 
-#### 訓練の仕組み (How Exercise Works)
+#### 訓練の仕組み (How Exercise Works) {#how-exercise-works}
 
 このカウンターは不可視です。訓練となる行動を十分に長く続け、さらにランダムな判定に合格する（すでに能力値が上昇していると恩恵は逓減します）と、*「身軽になった気がする！ 反射神経を鍛えたに違いない！」*（"You feel agile! You must have been working on your reflexes!"）というメッセージや、他の能力値に応じた同様のメッセージが表示されます。逆に、酷使カウンターが優勢になった場合は、*「最近反射神経を鍛えていない気がする」*（"You haven't been working on reflexes lately."）という警告が発せられます。
 
 日常的な訓練によって引き上げられる能力値の上限は **18** です（種族固有の生来の上限を超えることはできず、能力値の極致を目指すなら依然として能力獲得の薬が不可欠です）。一方、酷使による能力値の低下は、種族固有の最低値まで落ち込む可能性があります。
 
-#### 訓練と酷使をもたらす行動 (Actions That Exercise and Abuse)
+#### 訓練と酷使をもたらす行動 (Actions That Exercise and Abuse) {#actions-that-exercise-and-abuse}
 
 | 能力値 | 訓練となる行動 (Exercises) | 酷使となる行動 (Abuses) |
 |------|-----------|--------|
@@ -4391,13 +4392,13 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 修道士に特有の2つの癖：断食によって「衰弱」状態にある修道士は賢明を鍛え、逆に「満腹」状態にある修道士は賢明を酷使します。
 
-#### 訓練が重要な理由 (Why Exercise Matters)
+#### 訓練が重要な理由 (Why Exercise Matters) {#why-exercise-matters}
 
 能力値はゲーム内のほぼすべての要素に直結しています：筋力はダメージと所持限界量、器用は命中率、耐久はレベルアップ時のHP上昇量、賢明はPwの自然回復速度に影響します。日々の積み重ねによる能力値の上昇は、やがて大きな差となって現れます。満腹やつまずき状態で漫然と過ごした500ターンもまた、同様に恐ろしい結果として跳ね返ってくるのです。
 
 ---
 
-### スキルの向上 (Enhancing Skills)
+### スキルの向上 (Enhancing Skills) {#enhancing-skills}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -4433,7 +4434,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 序盤のうちに1つの武器系統を定め、それに専念してください。スキルは武器の持ち替えをやめて初めて累積していきます。自分が「熟練（Skilled）」（命中率 +2）に達した武器は、「未習熟（Unskilled）」（命中率 −4 のペナルティ）のまま振るう基本攻撃力の高い武器よりもはるかに敵を圧倒します。したがって、訓練していないピカピカの新しい剣に乗り換えることは、通常は戦力ダウンにしかなりません。見つかった強そうな武器に次々と目移りしていては、あらゆる武器で未習熟のまま取り残されてしまいます。
 
-#### スキル階梯 (The Skill Ladder)
+#### スキル階梯 (The Skill Ladder) {#the-skill-ladder}
 
 武器を使い込む（実戦で振るう）ことで、命中率とダメージが向上します。ゲームはこの熟練度を **スキルランク** として記録します：訓練を重ねるほどランクが上がり、より致命的な一撃を放てるようになります。大半のスキルは **未習熟 (Unskilled) → 入門 (Basic) → 熟練 (Skilled) → エキスパート (Expert)** の順に上昇します。**素手格闘 (Bare hands)** と **武術 (Martial arts)** のみ、さらにその上の **マスター (Master)** および **総師範 (Grand Master) (Grand Master)** に到達できます。各ランクへの昇格には、**実践回数（累積使用数）** と **スキルスロット（経験レベルに応じた有限の枠数）** の両方が必要になります。
 
@@ -4449,7 +4450,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 各職業にはスキルごとにこれ以上鍛えられない **上限（キャップ）** が設定されています。例えば魔法使いはメイスを「入門」までしか鍛えられず、長剣は制限（Restricted）されています。制限されたスキルは `#enhance` メニューに表示されず「未習熟」のまま固定されますが、神から生贄のギフトとして授かったアーティファクト武器がある場合、その武器のスキル制限が解除されて「入門」まで訓練可能になります。各職業ごとの完全なスキル上限表は、後述の [職業別スキル上限表](#per-role-skill-caps) を参照してください。
 
-#### スキルの訓練 (Training a Skill)
+#### スキルの訓練 (Training a Skill) {#training-a-skill}
 
 実践を重ねる（使い込む）ことで、スキル経験値が蓄積されていきます：
 
@@ -4462,7 +4463,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 十分な実践経験を積むと、そのカテゴリに応じたメッセージが表示されます：**「武器の扱いに自信がついてきた」**（"You feel more confident in your weapon skills"）、**「呪文の扱いに自信がついてきた」**（"spell casting skills"）、または **「格闘技の扱いに自信がついてきた」**（"fighting skills"）。これが `#enhance` コマンドを入力する合図です。1つスキルを昇格させた後、まだ他に昇格可能なスキルが残っている場合は、**「もっと強くなれそうな気がする！」**（"You feel you could be more dangerous!"）と表示されます。続けて強化しましょう。
 
-#### ランクがもたらす恩恵 (What a Rank Buys You)
+#### ランクがもたらす恩恵 (What a Rank Buys You) {#what-a-rank-buys-you}
 
 武器や戦闘スタイルの各ランクは、命中率とダメージのボーナスを一律の数値で書き換えます（加算ではなく置き換えられます）：
 
@@ -4477,7 +4478,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 （各セルは **命中補正 / ダメージ補正** を示します。）二刀流のペナルティは左右 **それぞれ** の打撃に適用されます。入門段階の二刀流は2回攻撃できますが、それぞれに −7 の命中ペナルティがかかるため、1本の武器でしっかり殴るよりも遥かに命中率が悪化します。素手格闘と武術のボーナスはあらゆる打撃に適用され、実践カウンターだけが微弱打撃を除外します。武器エキスパートの数値（+3 / +2）こそが、1つの武器に専念した冒険者への最大の報酬です。
 
-#### 7つの魔法系統 (The Seven Spell Schools)
+#### 7つの魔法系統 (The Seven Spell Schools) {#the-seven-spell-schools}
 
 すべての魔法書は7つの魔法系統のいずれかに属しており、その系統におけるスキルランクが詠唱の成功率を左右します。また、ランクが上がることで一部の呪文に追加の効果や強化が解禁されます。例えば「冷気の円錐」は熟練で 3×3 の爆発群となり、「識別」はスタック全体を一括識別できるようになり、「自己加速」は効果持続時間が延びます。
 
@@ -4491,7 +4492,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 | 脱出魔法 (Escape) | 移動、回避、浮遊 | 跳躍 (Jumping) |
 | 変化魔法 (Matter) | 操作、変成、へんげ | 開錠 (Knock) |
 
-#### 職業別スキル上限表 (Per-Role Skill Caps)
+#### 職業別スキル上限表 (Per-Role Skill Caps) {#per-role-skill-caps}
 
 <!-- audit
 2026-05-19:
@@ -4506,7 +4507,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 空欄（—）のスキルであっても使用不能というわけではなく、永遠に「未習熟」のままであることを意味します。治療師であっても衝撃の魔法書を読んで唱えることは可能ですし、魔法使いであっても長剣を振り回すことはできます。ただし、[スキル階梯](#the-skill-ladder) に記された未習熟のペナルティ（武器なら −4/−2、二刀流なら1打撃ごとに −9/−3、魔法系統なら高い詠唱失敗率）を常に支払い続け、成長の余地はありません。職業略称：Arc=考古学者、Bar=野蛮人、Cav=洞窟人、Hea=治療師、Kni=騎士、Mon=武闘家、Pri=司祭、Rog=盗賊、Ran=レンジャー、Sam=侍、Tou=観光客、Val=ワルキューレ、Wiz=魔法使い。
 
-##### 武器スキル上限表 (Weapon Skill Caps)
+##### 武器スキル上限表 (Weapon Skill Caps) {#weapon-skill-caps}
 
 ::: dense-table
 
@@ -4544,7 +4545,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 5.0 ではシミターはサーベルに統合されました。現在はどちらも同一のスキルを参照します。
 
-##### 戦闘スタイル上限表 (Fighting Style Caps)
+##### 戦闘スタイル上限表 (Fighting Style Caps) {#fighting-style-caps}
 
 ::: dense-table
 
@@ -4559,7 +4560,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 武術を扱えるのは武闘家と侍だけであり、総師範 (Grand Master)に到達できるのは武闘家のみです。
 
-##### 魔法系統上限表 (Spell School Caps)
+##### 魔法系統上限表 (Spell School Caps) {#spell-school-caps}
 
 ::: dense-table
 
@@ -4577,7 +4578,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 治療師は回復魔法をエキスパートまで極められますが、他のすべての魔法系統が制限されています。このような単一系統特化は治療師だけの特徴です。全7系統すべてにアクセスできるのは魔法使いと武闘家だけであり、そのうち4系統をエキスパートまで引き上げられるのは魔法使いだけです（武闘家がエキスパートになれるのは回復魔法のみ）。野蛮人とワルキューレは利用可能な2系統（攻撃と脱出）で入門が上限であり、他の5系統は制限されています。
 
-#### スキルスロットの賢い使い方 (Spending Slots Wisely)
+#### スキルスロットの賢い使い方 (Spending Slots Wisely) {#spending-slots-wisely}
 
 32スロットという数字は一見十分に思えますが、実際に計算し始めるとあっという間に底をつきます。1つの武器をエキスパートにするだけで、単独で **6スロット**（1+2+3）を消費します。長剣エキスパート、二刀流熟練、騎乗熟練を目指すワルキューレは、いかなる魔法系統に投資する前であってもすでに11スロットを使い果たしています。
 
@@ -4592,7 +4593,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 いくつかの呪文は「熟練」で劇的に凶悪化します。「冷気の円錐」と「火炎球」は、離れた位置に精密着弾させられる 3×3 の **爆発群** へと変貌します。「識別」「解呪」「自己加速」「怪物探知」をはじめとする多くの呪文は、祝福された巻物と同様の超強化効果を獲得します。
 
-### 願いと願い方 (Wishes and Wishing)
+### 願いと願い方 (Wishes and Wishing) {#wishes-and-wishing}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified Vlad throne 4/13, Amulet-pickup wish, magic-lamp/smoky-potion/fountain odds, enchant-collapse & negative-Luck rules, artifact-wish denial, silent substitutes, Castle/Orcus guarantees.
@@ -4600,7 +4601,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 画面に *「何をお望みですか？」（"For what do you wish?"）* と表示されたとき、ゲームは自由形式のアイテム指定文字列を受け付けます。入力する前に、望むアイテムと正確なスペルを完全に決定してください。たった1つのタイプミスが、ゲーム内で最も貴重な資源をただのゴミへと変えてしまいます。
 
-#### 願いの入手源 (Sources of Wishes)
+#### 願いの入手源 (Sources of Wishes) {#sources-of-wishes}
 
 迷宮は基本的に出し惜しみしますが、大半の冒険者が考えているよりも多くの「願い」の発生源が存在します：
 
@@ -4617,7 +4618,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 1回のゲームで得られる願いの総数は大きく変動します。城の杖の初期チャージ・再充填・限界振り、ヴラドの玉座、そして魔除け拾得時の願いを合わせると、堅実に見積もって約5回が予算の目安となります。ランプ、泉の魔神、煙の立つ薬がそれに上乗せされることがあります。
 
-#### 何を願うべきか (What to Wish For)
+#### 何を願うべきか (What to Wish For) {#what-to-wish-for}
 
 2つのドラゴンの鱗鎧の願いは、対となる一対として選びます。すでに魔除けや盾から「反射」を得ている場合は、**灰色ドラゴンの鱗鎧** を願って「魔法防御」を獲得してください。クロークがすでに魔法防御を提供しており反射が欠けている場合は、**銀色ドラゴンの鱗鎧** を願います。胴以外のスロットでどちらか一方の防御が確保できたら、もう一方の鱗鎧が最初の願いの最善候補となります。
 
@@ -4642,7 +4643,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 切羽詰まった極限状況でない限り、消費アイテム（巻物や薬）を願ってはいけません。願いは、ドラゴンの鱗鎧、韋駄天の靴、強力なアーティファクトといった、他では手に入らない恒久的な装備品のために使うべきです。
 
-#### 願いの構文 (Wish Syntax)
+#### 願いの構文 (Wish Syntax) {#wish-syntax}
 
 <!-- audit
 2026-05-18:
@@ -4671,7 +4672,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 - アーティファクトの願いは、世界に存在するアーティファクトの総数が増えるほど **成功率が低下** します。拒絶判定はダンジョン内に存在する総数（所持品、床落ち、ボーンズファイル内のものを含む）に応じて厳しくなり、出現しなかった場合でも「アーティファクト願いカウンター」は加算されます。なお、他職のクエストアーティファクトは絶対に生成されません（完全拒絶）。
 - 一部の禁止アイテムを願うと、黙って無価値な日用品へとすり替えられます。**イェンダーの魔除け** は偽物の魔除けに、**開放の鐘** はただの鈴に、**死者の書** は白紙の本に、**祈りの燭台** は獣脂のろうそくになります。また **魔法のランプ** を願っても失敗し、単なる油つぼ（普通のランプ）を手渡されます。あんなに一生懸命ランプを擦ってきた後では、あまりにも残酷な仕打ちです。
 
-### アーティファクト (Artifacts)
+### アーティファクト (Artifacts) {#artifacts}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -4693,14 +4694,14 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 - **ランダム生成**（稀ですが、武器がアーティファクトとして自然生成される微小な確率があります）。
 - **命名**（スティングおよびオークリストのみ。後述参照）。
 
-#### 属性と侵害ダメージ (Alignment and Blasting)
+#### 属性と侵害ダメージ (Alignment and Blasting) {#alignment-and-blasting}
 
 各アーティファクトには属性が宿っています。自身の属性と一致しないアーティファクトを手に取ろうとすると、激しい侵害ダメージ（ブラスト）を受けます：
 
 - **知性を持つアーティファクト（知性体）** は、職業または属性のいずれかが不一致の場合、触れるたびに **4d10** の侵害ダメージを与えます（魔法耐性があれば 2d10 に半減）。職業と属性の *両方* が不一致の場合、アイテムはあなたの手をすり抜けて落下し、掴むことすら拒絶します。
 - **その他の非知性アーティファクト** は、属性が不一致の場合、触れるごとに 4分の1 の確率で **4d4** の侵害ダメージを与えます（魔法耐性があれば 2d4 に半減）。
 
-#### 願い可能・ランダムアーティファクト (Wishable / random artifacts)
+#### 願い可能・ランダムアーティファクト (Wishable / random artifacts) {#wishable-random-artifacts}
 
 これらは自然生成、生贄ギフト、泉への浸漬（エクスカリバー）、あるいは願いによって入手可能なアーティファクト群です。追加ダメージは攻撃命中ごとにその都度ロールされます（例: `+d10` は 1d10 を振る）。「追加ダメージ」列は、ベースとなる武器自体の基本ダメージの *上に上乗せ* される数値を表します。「対Xで×2」と記された武器は、そのモンスタークラスに属する敵に対してベース武器ダメージを *2回* ロールします。
 
@@ -4737,11 +4738,21 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 **[マジックベイン]{#magicbane}** は魔法使いの定番アサメです。気絶ダメージ、呪い防御、魔法耐性はすべて単に持ち歩くだけではなく **構えている（手に持っている）** 必要があります。中立属性の生贄ギフト第1号として頻繁に授けられます。二刀流の魔法使いにとって注意すべきニュアンス：呪い防御オーラが発動するのは、マジックベインが *主武器* として構えられている間だけです。重い武器を主武器にし、マジックベインを逆手に持っている場合、抗呪オーラは停止してしまいます。
 
-**[ストームブリンガー]{#stormbringer}** は平和的なモンスターにも自動的に襲いかかるため、属性値を急降下させる危険を孕んでいます。命中ごとに相手からレベルを吸い取り、犠牲者が失ったHPの半分だけ術者を回復させます（相手の経験レベルそのものを獲得できるわけではありません）。
+**[ストームブリンガー]{#stormbringer}** は平和的なモンスターにも自動的に襲いかかるため、属性値を急降下させる危険を孕んでいます。命中ごとに相手からレベルを吸い取り、犠牲者が失ったHPの半分だけ術者を回復させます（相手の経験レベルそのものを獲得できるわけではありません）。また、ストームブリンガーは *知性 (intelligent)* を持つため、秩序や中立の者が触れると通常の異属性アーティファクトの 4d4 ではなく 4d10 の電撃ダメージを受けます。
 
-**スティング** と **オークリスト** は、名付け（`#name`）によって生成できる唯一のアーティファクトです。それぞれエルフの短剣、エルフの幅広の剣を単体（束ではなく1本）にして名前を付けます。構えるとオークが接近した際に青く光り、オークに対して2倍ダメージを与えます。どちらも混沌属性であるため、混沌の英雄なら安全に扱えますが、他の属性の者が手に持つと時折侵害ダメージを受けます。
+**[クリーバー]{#cleaver}** は野蛮人のクエストアーティファクトです。両手持ちの戦斧であるため、盾と併用することはできません。一振りごとに正面の標的と左右両脇の計3マスを同時に薙ぎ払います。通路の入り口では非常に強力ですが、平和的なモンスターの隣で振るうのは危険です。
 
-#### クエストアーティファクト (Quest artifacts)
+**[フロストブランド]{#frost-and-fire-brand}** と **ファイアブランド** には、上の表には載っていない `#invoke`（発動）能力が備わっています。フロストブランドは周囲に吹雪（隣接マスへの冷気ダメージ）を、ファイアブランドは炎の嵐を巻き起こします。どちらも窮地に追い込まれた際に周囲の敵を一掃してくれます。
+
+**[スニッカーズニー]{#snickersnee}** は 5.0 で大幅な強化を受けました。1ターンに1回、`a`（適用）することで最大2マス離れた標的に対してターンを消費 *せずに* リーチ攻撃を繰り出せ、さらにその上から通常の近接攻撃も行うことができます。この無料攻撃の際には特徴的な「Shkinng!」という音が鳴り響きます。1ターンあたりリーチ攻撃1回＋近接攻撃1回という総合火力により、大半の侍にとって通常の刀を上回る性能を誇ります。
+
+**[サンソード]{#sunsword}** は道具のような性質を併せ持つ秩序属性の長剣です。構えている間は現在位置の周囲を照らし出すため、洞窟や[ノームの鉱山](#the-gnomish-mines)で油のランプを消費せずに済みます。`#invoke`（発動）すると指定した方向へ *目くらましの光線* を放ちます（内部処理としてはアンデッドに限らずあらゆる方向に有効なカメラのフラッシュと同じです）。十分な休息を経た状態での発動は魔力 (Pw) を消費せず、約100ターンのクールダウンに入ります。上下方向への発動は自分のいるマスのみを照らし、自分自身に向けて発動すると自らが盲目になります。クールダウン中であっても、25 Pw を消費することで強引に光線を放つことが可能です。
+
+**[特効武器 (Bane weapons)]{#bane-weapons}**（サンソード、デーモンベイン、スティング、オークリスト、グリムトゥース、ドラゴンベイン、ウェアベイン、ジャイアントスレイヤー、オウガスマッシャー、トロルズベイン）は、それぞれの対象モンスター系統に対して基本ダメージが2倍になります。武器自体の基本ダメージは控えめですが、防御面の付与能力を目当てに持ち替える価値があります。構えている間、トロルズベインはHP自然回復、ドラゴンベインは反射、ウェアベインは獣化症（ライカンスロープ）の無効化、グリムトゥースは毒防御を付与します。
+
+**[スティングとオークリストの名付け]{#naming-sting-orcrist}。** これら2振りのエルフの刃は、願いや生贄を必要とせず、ただ名前を付ける（`#name`）だけでこの世に呼び出せる唯一のアーティファクトです。単体のエルフの短剣に `Sting`、または単体のエルフの幅広の剣に `Orcrist` と名付ければ、そのゲーム内で該当アーティファクトがまだ生成されていない限り、その場で本物のアーティファクトへと変化します。束（スタック）ではなく1本だけに分けてから名付ける必要があるため、複数本持っている場合は先に1本だけ分割してください。構えるとオークが接近した際に青く光り、オークに対して2倍のダメージを与えるため、ノームの鉱山を突破する際の警報器兼武器として重宝します。どちらも混沌属性であるため、混沌の英雄なら安全に扱えますが、他の属性の者が手に持つと時折電撃ダメージを受けます。
+
+#### クエストアーティファクト (Quest artifacts) {#quest-artifacts}
 
 各職業には固有のクエストアーティファクトが1つずつ存在し、その職業のクエストを完遂することで授与されます。これらのアーティファクトは知性を持っています：職業または属性が一致しない場合、触れるたびに **4d10** の侵害ダメージを受け、両方が不一致の場合は掴むことすらできずに手からすり抜けます。9種類の非武器クエストアーティファクトのうち3つ（探知のオーブ、マーリンの魔法の鏡、プラチナイェンダー印エクスプレスカード）は、**インベントリに所持しているだけ（直接携帯）** で魔法耐性を付与します。
 
@@ -4797,7 +4808,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 ---
 
-### ゲヘナ突入 (Into Gehennom)
+### ゲヘナ突入 (Into Gehennom) {#into-gehennom}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -4808,7 +4819,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 ここから先は、冒険の最終段階であるゲヘナの深淵と、イェンダーの魔除けを奪取して地上へと駆け上がる「昇天への旅路」を解説します。
 
-#### 城 (The Castle)
+#### 城 (The Castle) {#the-castle}
 
 <!-- audit
 2026-05-18:
@@ -4860,7 +4871,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 ---
 
-#### ゲヘナ (Gehennom)
+#### ゲヘナ (Gehennom) {#gehennom}
 
 <!-- audit
 2026-05-19:
@@ -4881,13 +4892,13 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 [城](#the-castle) の下層では、ダンジョンはその様相を一変させます。直線的な通路は迷路（メイズ）へと姿を変え、一般的なモンスターは凶悪な悪魔たちへと取って代わられます。何よりも恐ろしいのは、あなたの神が沈黙することです。ゲヘナでは祈りが一切通じず、ここから先は城で整えた所持品だけを頼りに生き延びなければなりません。
 
-#### 死の谷 (The Valley of the Dead)
+#### 死の谷 (The Valley of the Dead) {#the-valley-of-the-dead}
 
 城の直下に広がるゲヘナの第1層が **死の谷** (The Valley of the Dead) です。到達すると *「死の谷に到着した...」（"You arrive at the Valley of the Dead..."）* というメッセージが表示され、ダンジョン概要にもゲーム終了までその名前が記録されます。マップは広大で不規則な形状をしており、3つの墓地が点在しています。あなたは右下に出現します。降下階段は左上にあり、左側の中ほどには恒久的な **モロクの祭壇（祠）** が鎮座しています。この祭壇は無属性の高位祭壇（High Altar）であるため、ここでは絶対に祈ってはいけません。壁は全面にわたって掘削不能（non-diggable）であり、ショートカットは作れません。さらに `noteleport`（瞬間移動不能）と `nommap`（魔法の地図無効）の両方が設定されているため、地図化の巻物は通用せず、テレポートによる移動も封じられています。
 
 注目に値する不気味な細部があります。フロアの至る所に、かつてこのダンジョンに挑んで命を落とした **あらゆるプレイヤー職業の死体** が散らばっています：考古学者、野蛮人、洞窟人、治療師、騎士、レンジャー、盗賊、侍、観光客、ワルキューレ、魔法使いの死体がそれぞれ2体ずつ横たわっています。そして際立って不在なのが、司祭と武闘家です。モロク神は、これらの信仰・修道クラスの者たちに対して、死体すら残さない特別な運命を用意しているのかもしれません。
 
-#### ゲヘナの特殊環境 (What's Different in Gehennom)
+#### ゲヘナの特殊環境 (What's Different in Gehennom) {#whats-different-in-gehennom}
 
 - **祈りの完全無効。** あなたの神はゲヘナにおいて完全に耳を塞いでいます（あなたがモロクの信者でない限り。そしてもちろんあなたは違います）。緊急のHP回復も、食料の救済も、神罰による呪い解除も一切期待できません。周到に荷造りしてください。ここから先は完全にあなた一人きりです。
 - **至る所に燃え盛る火炎。** 通路には火の罠が散乱し、悪魔たちは息をするように自然に火炎ブレスを吐きかけてきます。もし現時点で [火炎耐性](#damage-resistances) を持っていないなら、今すぐ引き返してください。
@@ -4897,7 +4908,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 - **テレポートの制限。** 魔王が君臨する居城フロアでは、その魔王が生存している間はテレポートが封じられます。魔王を殺害するか追放（banish）すれば、この制限は解除されます。旧バージョンとは異なり、近年のNetHackではゲヘナの全フロアで恒久的にテレポートが禁止されているわけではありません。
 - **全面迷路。** ほぼすべての階層が迷路（メイズ）構造です。穴掘りの杖やつるはしはもはや贅沢品ではなく生存の必需品です。階段へ向けて一直線に壁を掘り進み、決して後ろを振り返らないでください。
 
-#### 魔王たちの巣窟 (The demon-prince lairs)
+#### 魔王たちの巣窟 (The demon-prince lairs) {#the-demon-prince-lairs}
 
 ゲヘナの特殊階層のうち3つは、**アスモデウス** (Asmodeus: 火炎・冷気・毒耐性を持ち、冷気呪文を唱え、吹雪の杖と炎の杖を携帯)、**ベルゼブブ** (Baalzebub: 蝿の王であり、気絶の視線と強さを吸い取る毒の噛みつきを持つ。居城は甲虫の形をした迷路)、そして **ジョウビレックス** (Juiblex: 顔なき主、近接攻撃で相手を飲み込み酸を吐きかける巨大スライム) の個人玉座です。彼らはあなたが視界に入るまで居城で待ち構えており、視界に入った後は階段を追跡してきます。
 
@@ -4907,7 +4918,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 **[エクスカリバー](#excalibur-artifact) または デーモンベイン を構えていると、買収交渉は完全に封じられます。** これらの聖剣を手にした冒険者を目にした魔王は即座に激怒して襲いかかってくるため、接近する前に必ず武器を鞘に収めて（装備を外して）ください。
 
-#### ヴラドの塔 (Vlad's Tower)
+#### ヴラドの塔 (Vlad's Tower) {#vlads-tower}
 
 ゲヘナから **上向き** に分岐する3層の塔であり、下層ダンジョンにおける数少ない支流の1つです。ユニークな吸血鬼の首領である **吸血鬼ヴラド** (Vlad the Impaler) が、最上階で **祈りの燭台** (Candelabrum of Invocation) を守護しています。塔を登り、ヴラドを倒し、燭台を奪い取ってください。
 
@@ -4915,23 +4926,23 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 計算の内訳：座っても3回に1回しか効果そのものが発動せず（残る3分の2は「場違いな気がする」と表示されて何も起きない）、発動したもののうち 13分の4 が願いです。無条件での願い発生率は約 10分の1（約10%）であるため、願いが出るまでに約10回座り、その過程で約2回の悪い効果を甘受する心構えが必要です。HPを満タンにし、貴重な装備品は床に置いてから座り（脂が付着するとインベントリ全体が覆われ、100〜200ターンの間手が滑って道具を使うたびに落としてしまう）、必ず [酸耐性](#damage-resistances) を確保してから座ってください。酸ダメージは最大 80 HP に達し、魔法耐性であっても玉座の悪影響を防ぐことはできません。もし今すぐ願いを欲していない場合（例えば城の願いと魔除けの願いをすでに使い、この願いを最終昇天装備の予備として温存したい場合）、後から戻ってくることも可能です。何者かが破壊しない限り、玉座はその場に留まり続けます。
 
-#### オーケスの町 (Orcus Town)
+#### オーケスの町 (Orcus Town) {#orcus-town}
 
 **オーケス** (Orcus) はローマ神話の冥府の神であり、破られた誓いを罰し死者を貪る冥界の支配者です。迷宮内における彼はユニークな魔王（`&`、レベル66、速度9の緩慢な飛行体）であり、呪文を唱え、武器を振るい、2回爪で引き裂き、強さを吸い取る毒針を突き刺す **アンデッドの君主** です。彼が手にする武器はアーティファクトではなく、通常の **死の杖** です。彼の指先から放たれる簡易呪文もまた死の光線であるため、反射または魔法耐性を必ず準備してください。オーケスは悪魔であるため、こちらから放つ死の光線は無効化されます。物理ダメージまたは他の攻撃手段で戦ってください。
 
 彼の階層はゴーストタウンと化しています。打ち捨てられた店々には商品ではなくランダムな戦利品が転がっており、代金を請求する店主は一人も残っていません。残されているのは、リッチ、吸血鬼、グールたちによる儀仗兵の群れです。このフロアのどこかに、**魔法のランプ** または **魔法のマーカー** のいずれか（各50%）が確定で配置されています。火の罠や魔法の罠が散乱しているため慎重に進み、住人たちを排除して、立ち去る前にランプかマーカーを必ず回収してください。どちらを手に入れても、城の杖から引き出せる願いの回数をさらに拡張してくれます。
 
-#### 魔法使いの塔 (The Wizard's Tower)
+#### 魔法使いの塔 (The Wizard's Tower) {#the-wizards-tower}
 
 ゲヘナに存在する3層連続の特殊階層群です。最下層から魔法のポータルを通って進入し、最上階には **イェンダーの魔法使い** (Wizard of Yendor) と **死者の書** (Book of the Dead) が待ち構えています。彼の個々の攻撃を耐え抜くことは十分に可能ですが、最大の問題は彼が何度倒しても **蘇り続ける** 点にあります。彼はあなたの元へテレポートし、モンスターの大群を召喚し、イェンダーの魔除けを奪い去り、ゲーム終了まで所持品に呪いをかけ続けます。
 
 最初の遭遇で手際よく仕留め、死者の書を奪い取って即座に立ち去りましょう。その後に再び彼を倒しても新たな戦利品を落とすことはないため（単に復活してくるだけ）、自発的に再戦を挑んではいけません。昇天への旅路において「戦うな、走れ」と言われる鉄則は、主として彼に対する心得です。
 
-#### モロクの聖域 (Moloch's Sanctum)
+#### モロクの聖域 (Moloch's Sanctum) {#molochs-sanctum}
 
 ゲヘナの最深階層です。ここは **封印** されており、祈祷の儀式（後述の「強奪の儀式」を参照）を完遂するまで、聖域へと降りる階段は出現しません。封印が破られたら、階段を降りて **高位祭壇** の近くにいる **モロクの高僧** (High Priest of Moloch) を見つけ出してください。彼は **イェンダーの魔除け** を身につけています。モロクの高僧は買収不可能なユニークボスであり、強力な呪文を放ち、下僕を召喚し、近接間合いに入った者に手痛い制裁を加えます。標準的な攻略法は、安全な距離から死の杖や死の指先呪文を一撃叩き込むことです。
 
-#### 強奪の儀式 (The Heist)
+#### 強奪の儀式 (The Heist) {#the-heist}
 
 ゲームのクライマックスは、綿密に構成された一連の儀式です：3つの祈祷アイテム、1つの振動する四角、1体の最終ボス、そして地上へ向けての死に物狂いの脱出劇です。祈祷を始める直前までは、すべてを自分のペースで進めることができます。しかし一度儀式を行えば、強欲なモンスターたちが一斉にあなたを標的に定め、いかなる遅延も致命的な代償となります。儀式を始める前に、すべての装備セットを完璧に揃えておいてください。手順は以下の通りです：
 
@@ -4947,7 +4958,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 6. **脱出劇の幕開け。** 上り階段へ駆け込みます（この階段は魔除けを手にする前から使用可能です）。ここからがいよいよ **昇天への旅路** です。ゲーム内のあらゆる強欲なモンスターたちが一斉にあなたの存在を感知し、イェンダーの魔法使いが魔除けを取り戻そうと何度もテレポートで襲来し、そして「謎の力」があなたを下層へと引きずり戻そうとします。全速力で地上へと駆け上がってください（後述の [昇天への旅路](#the-ascension-run) を参照）。
 
-#### サバイバルの秘訣 (Survival Tips)
+#### サバイバルの秘訣 (Survival Tips) {#survival-tips}
 
 - **余分な食料を携帯すること。** あなたは全速力で移動し続けることになり、祈りによる空腹回復は期待できません。
 - **解呪の巻物を携帯すること。** 持ち物に不慮の事故が起きた際、素早く所持品を立て直せます。
@@ -4958,7 +4969,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 ---
 
-### 昇天 (The Ascension)
+### 昇天 (The Ascension) {#the-ascension}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified Riders (lvl 30, 8d8, Death instakill 3/20), Famine/Pestilence downgrades, Rider-corpse fatal, wand-of-death-heals-Death, wrong-altar done(ESCAPED), Mysterious Force gating, plane order & altars.
@@ -4966,7 +4977,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 イェンダーの魔除けを手にした今、真の最終試練が始まります。ダンジョンの最深底から地上への脱出、そして神々の領域たる四大元素の面と星界の面を突破して、不死の神へと昇天を果たす旅路です。
 
-#### 昇天用装備セット (The Ascension Kit)
+#### 昇天用装備セット (The Ascension Kit) {#the-ascension-kit}
 
 <!-- audit
 2026-05-18:
@@ -4998,7 +5009,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 典型的な昇天時のACは **−25 から −40** の範囲に収まります。
 
-##### 昇天一歩手前で死んだ者たちの死因
+##### 昇天一歩手前で死んだ者たちの死因 {#what-killed-the-runners-up}
 
 彼らの装備は、昇天を果たした者たちと何ら変わりませんでした。ACも −23 から −40 に達し、死の杖を持ち、3種の祈祷アイテムを揃え、銀色ドラゴンの鱗鎧を着ていました。彼らを殺したのは装備ではなく、**行動（プレイングミス）** でした：
 
@@ -5008,7 +5019,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 常に最低1つの脱出手段を手元に残しておいてください：瞬間移動の巻物、穴掘りの杖、あるいは完全回復の薬が入った防水袋です。
 
-#### 昇天への旅路 (The Ascension Run)
+#### 昇天への旅路 (The Ascension Run) {#the-ascension-run}
 
 <!-- audit
 2026-05-21:
@@ -5032,7 +5043,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 **本物の魔除けを携えること。** 登りの階段は常に開かれています。運命の迷宮の上り階段は、何を持っていようとあなたを地上へと近づけてくれます。地下1階の上り階段は、本物の魔除けの所持者を土の面へと導きます（魔除けを持たずに脱出すると「逃走」エンドとしてゲームが終了します）。モロクの聖域で高僧の死体から奪い取った魔除けだけが本物と認められます。ボーンズ階層に落ちている魔除けはすべて偽物です（冒険者が魔除けを持ったまま死亡すると、ゲームはその魔除けを偽物へと書き換えて呪いをかけます）。また、願いで願った魔除けも黙って偽物にすり替えられます。高僧から直接奪い取ったものでない限り、本物は手に入りません。
 
-##### 試練の連続 (The Gauntlet)
+##### 試練の連続 (The Gauntlet) {#the-gauntlet}
 
 ダンジョンは4つの包囲網であなたを阻み、そのすべてがあなたの鞄の中の魔除けを標的にしています：
 
@@ -5042,7 +5053,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 - **謎の力 (The Mysterious Force)。** ゲヘナ内で魔除けを携えて階段を登るたびに、謎の力によって引き戻される判定が発生します。引き戻しが発生した場合、秩序属性の英雄は4回に1回、中立は3回に1回、混沌は2回に1回の確率で同じ階層に留め置かれます。それ以外の場合は、1階層下（混沌の上限）、2階層下（中立の上限）、あるいは3階層下（秩序属性のみ）へと **突き落とされます**。最悪の引き落としは秩序属性に最も厳しく、混沌属性に最も寛大です（混沌属性は一度に1階層より深く落とされることはありません）。NetHack 5.0 では、この引き戻し確率は発動するたびに **減衰（発生率が低下）** していくように改良されました。引き戻されるごとに次回の発動確率がわずかに下がり、深い引き落としほど以後の発動を抑制します。この減衰は秩序の英雄に最も大きな恩恵をもたらします。なお、謎の力はゲヘナを脱出した瞬間に停止し、ゲヘナの最下層4フロアでは決して発動しません。
 - **属性反転の検討。** 逆属性の兜をかぶると、秩序は混沌へ、混沌は秩序へと反転します（中立はランダム）。混沌属性になれば、謎の力による落下が常に最大1階層に抑えられます。ただし代償として、星界の面での生贄は混沌の祭壇に捧げなければならなくなります（祭壇判定は *現在の* 属性を参照するため）。トレードオフを理解した上での選択肢です。
 
-##### 脱出戦術 (Strategy)
+##### 脱出戦術 (Strategy) {#strategy}
 
 あなたはもはや探索者ではありません。相手チームの全員がタックルを狙う中、ボールを抱えてエンドゾーンへ疾走するランニングバックです。スピードこそがすべてです。
 
@@ -5055,7 +5066,7 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 城での補給が完璧で各種耐性が万全であれば、この登攀はマラソンではなくスプリントになります。運命の迷宮の頂点に到達したとき、最後の階段は元素界へと続いています。あなたと神性との間を隔てる、最後の障壁です。
 
-#### 元素界 (The Elemental Planes)
+#### 元素界 (The Elemental Planes) {#the-elemental-planes}
 
 <!-- audit
 2026-05-19:
@@ -5068,11 +5079,11 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 **ポータルを見つけ出す2つの安価な手段。** 混乱した状態でゴールド探知の巻物を読むと、ポータルを含むフロア全体のすべての罠の位置がマップに刻まれます（1回の読書で全盲解消）。また、イェンダーの魔除けそれ自体が、携行している間コンパスとして機能します：手に構えるか首にかけると、ポータルに近づくにつれて時折 *「熱い（hot）」「非常に温かい（very warm）」「温かい（warm）」* と囁いてきます（ポータルから 3マス、8マス、12マス以内）。虚空を横断する宝探しゲームです。
 
-##### 土の面 (Plane of Earth)
+##### 土の面 (Plane of Earth) {#plane-of-earth}
 
 あなたはこの面の隅にある小さな洞窟に到着します。薄暗い光の中、すでに2体の敵があなたを待ち構えています：エルフの王とミノタウロス、どちらも敵対的です。この面は掘削可能な岩盤の中に無数の小洞窟が散らばった星団のような構造をしており、風の面へと続くポータルはその中の別の洞窟に隠されています。進む唯一の道は岩盤を掘り抜くことです。他の洞窟には土のエレメンタル、ストーンジャイアント、ロックトロール、ストーンゴーレム、ピットフィーンド、ダストボルテックス、アンバーハルクが潜んでいます。テレポートは封じられているため、一度戦闘が始まれば杖で逃げることはできません。穴掘りの杖が必須です。魔法の地図は洞窟の配置を明かしますが、隠されたポータルそのものは暴けません。混乱状態でゴールド探知を読むか、水晶玉を使ってポータルの位置を特定してから掘り進んでください。
 
-##### 風の面 (Plane of Air)
+##### 風の面 (Plane of Air) {#plane-of-air}
 
 土の面とは正反対の極限世界です：壁も、足で感じられる床もなく、ただ虚空の空が広がり、思考よりも速く動く風のエレメンタルたちが吹き荒れています。彼らは1ターンに何度も攻撃を加え、虐殺することもできません。ここでは争いの指輪（Ring of conflict）が絶大な効果を発揮します：ポータルを探す間、エレメンタル同士を互いに引き裂かせましょう。魔法の地図は隠されたポータルを映し出しませんが、混乱ゴールド探知や水晶玉なら位置を特定できます。この面は毎ターン自律的に漂流する **雲の泡 (cloud bubbles)** によって分断されており、泡の中に立っていれば泡と一緒に流されていきます。流れに逆らわずに乗ることで虚空を高速で横断でき、やがて泡があなたをポータルの真上へと運んでくれることもあります。
 
@@ -5080,17 +5091,17 @@ Pw は定期的な周期（ティック）ごとに自然回復し、この回�
 
 なお、この面にはショートカットへの制約があります。自分自身へのテレポートは *「謎の力があなたのテレポートを妨害した！」* というメッセージで弾かれます。瞬間移動の杖は追ってくる敵を吹き飛ばすことはできますが、自分自身を移動させることはできません。
 
-##### 火の面 (Plane of Fire)
+##### 火の面 (Plane of Fire) {#plane-of-fire}
 
 フロア全体を溶岩の湖が覆い尽くし、その隙間に火の罠が仕掛けられ、火のエレメンタルやヘルハウンドが徘徊しています。火炎耐性があればそれらのダメージの大部分は無力化され、あとはポータルを探すだけの問題になります。耐性がない場合、あらゆる移動と遭遇があなた自身と所持品を灰へと変えてしまいます。
 
-##### 水の面 (Plane of Water)
+##### 水の面 (Plane of Water) {#plane-of-water}
 
 この面は漂流する空気の泡が点在する見渡す限りの大海原です。あなたはその泡の1つの内部に出現します。泡から足を踏み外して水中に落ちると通常は泡へと這い戻ることになりますが、真の溺死の脅威は巨大ウナギやクラーケンがあなたに巻きついて水底へと引きずり込むことです。呼吸の魔除け（魔法の呼吸）があればその危険を排除できますが、単にこの階層に立つだけであれば必須ではありません。
 
 **到着時の定石戦術：`;` クラスの虐殺。** 虐殺の巻物を読み、**`;`** クラス全体（クラゲ、ピラニア、サメ、巨大ウナギ、電気ウナギ、クラーケン）を指定してください。あなたを引きずり込もうとするあらゆる海の怪物が、この面から瞬時に消滅します。これこそが虐殺の巻物を切るべき決定的な瞬間です。`;` クラスはゲーム内の他の場所にはほとんど現れず（メデューサの池に時折クラーケンがいる程度）、次の面では完全に無関係になります。怪物を一掃したら、落ち着いてポータルを探し、飛び込んでください。
 
-##### 星界の面 (The Astral Plane)
+##### 星界の面 (The Astral Plane) {#the-astral-plane}
 
 ついにあなたは神々の御前へと浮上します。3つの独立した寺院に、秩序、中立、混沌の祭壇がそれぞれ祀られています。昇天を果たすには、**自身の属性と一致する祭壇** にイェンダーの魔除けを生贄として捧げなければなりません。**間違った祭壇を選ぶとその瞬間にゲームオーバー** となります：敵対する神があなたの神を屈服させ、あなたは敵対勢力に完全な勝利を明け渡してしまうのです。やり直しは利きません。最初から正しい祭壇を選んでください。遠見（`;` キー）による確認は、祭壇に **隣接** しているときしかその属性を明かしません。部屋の反対側から見ても単に「属性の一致した高位祭壇」としか表示されないため、各寺院の祭壇の隣まで1つずつ歩いて確認する計画を立ててください。
 
@@ -5112,9 +5123,9 @@ NetHack 5.0 で追加されたささやかな慈悲：疫病または飢餓が1�
 
 正しい祭壇に魔除けを捧げてください。あなたの神はその至宝を受け入れ、魔除けは神聖な炎の中へと消え去り、あなたはいまや不死の神々の一員として昇天を果たします。この瞬間に到達できる冒険者はごくわずかです。本書はここで幕を閉じます。心からの祝福を。
 
-## 付録 (Appendices)
+## 付録 (Appendices) {#appendices}
 
-### 高度な操作法 (Advanced Controls)
+### 高度な操作法 (Advanced Controls) {#advanced-controls}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -5136,17 +5147,17 @@ NetHack 5.0 で追加されたささやかな慈悲：疫病または飢餓が1�
 
 基本的なキー操作だけで迷宮のあらゆる状況を乗り切ることは可能ですが、以下に挙げるコマンドを活用すれば遥かに素早く快適に操作できます。何千ターンにもわたって `s` キーを連打したり、通路を1マスずつ歩いたりした経験があれば、これらのショートカットがいかに指先に馴染むかを実感できるはずです。
 
-#### コマンドの反復回数指定 (Command counts)
+#### コマンドの反復回数指定 (Command counts) {#command-counts}
 
 コマンドの前に数字を入力すると、その回数だけコマンドが自動で繰り返されます：`10s` は10回探索し、`20.` は20ターンその場で待機し、`5h` は西へ5マス歩きます。何かしら重要な事象が発生した瞬間に（隣接マスにモンスターが現れた、HPが変動した、`--More--` プロンプトが表示された、探索で隠し扉等を発見したなど）、この反復動作は自動的に中断されます。また ESC キーを押せばいつでも途中でキャンセルできます。
 
 入力可能な数値は最大 32,767（5桁）まで受け付けられますが、現実的な上限は「画面の更新を忍耐を切らさずに眺めていられる長さ」です。実際の探索作業であれば `99s` で十分すぎます。
 
-#### 直前コマンドの再実行 (Ctrl+A)
+#### 直前コマンドの再実行 (Ctrl+A) {#repeat-last-command-ctrla}
 
 `Ctrl+A` は、直前に実行したコマンドを（回数指定も含めて）まったく同じ設定でもう一度実行します。最初に `10s` で探索を行った後は、以降の探索はすべて `Ctrl+A` の1キーだけで10回ずつ繰り返せます。これはキャンセルされたり壁にぶつかったりした試行ではなく、*「直前に実際に実行されたコマンド」* を正確に記憶します。
 
-#### 移動プレフィックス (Movement prefixes)
+#### 移動プレフィックス (Movement prefixes) {#movement-prefixes}
 
 いくつかのプレフィックス（接頭辞）キーは、直後のコマンドの挙動を修飾し、実行後にクリアされます。見えないモンスターへの攻撃、攻撃を避けた移動、あるいは長距離移動の停止条件の制御などに使用します。
 
@@ -5154,21 +5165,21 @@ NetHack 5.0 で追加されたささやかな慈悲：疫病または飢餓が1�
 - **`G`** に続けて方向キーを入力すると、アイテム、罠、分岐点、または閉じた扉に近づくまで走り続けます。**`g`** はさらに慎重であり、通路の交差点でも停止します。大文字の方向キー（`H`, `J`, `K`, `L` および `Y`, `U`, `B`, `N`）は高速走行モードを使用し、他の停止条件が介入しない限り、アイテム、扉、罠を無視して駆け抜けます。
 - **`m`** に続けて方向キーを入力すると、**「攻撃せず、アイテムも拾わずに移動」** します。ペットを殴らずにすれ違う（「ちょっと通してね」）、自動拾い対象の山を拾わずに通り過ぎる、あるいは既知の水たまりや溶岩マスに意図的に *足を踏み入れる* 際に使います（本来なら安全停止機能が働くところをプレフィックスで上書きします）。`e`（食べる）の前に押すと床落ちの食料を食べる確認をスキップし、`m,` は足元のアイテム山に対してメニュー一覧を強制表示します。
 
-#### トラベル機能 (Travel)
+#### トラベル機能 (Travel) {#travel}
 
 アンダースコアキー（`_`）は高速自動移動を行う「トラベル (travel)」コマンドです。`_` を押し、すでに探索済みの目的地をカーソルで指定して `.` で決定すると、キャラクターが最短経路でそこまで自動歩行します。閉じた扉を含むあらゆる中断事象で停止します（トラベルは扉の前まで歩きますが自動で開けたりはしません。扉に向かって移動するか、先に `o` で開けてください）。また、`_` の後にマップ上の背景シンボルを入力すると、カーソルがその種類の次のマスへ一瞬でジャンプします：`_<.` で上り階段へ移動、`_>.` で下り階段へ移動、`__.` で既知の祭壇へ移動できます。
 
-#### 鍵のかかった箱の力任せの解錠 (Forcing locked chests)
+#### 鍵のかかった箱の力任せの解錠 (Forcing locked chests) {#forcing-locked-chests}
 
 鍵開け器具や鍵を持っていない場合、**`#force`**（または `#f`）コマンドを使うと、構えている武器で施錠された箱を力ずくでこじ開けることができます。刃物類を使用すると鍵穴で刃が折れる危険があり、打撃武器を使用すると箱の中身そのものを粉砕してしまう危険を伴います。
 
-#### メッセージ履歴と画面再描画 (Message history and redraw)
+#### メッセージ履歴と画面再描画 (Message history and redraw) {#message-history-and-redraw}
 
 `Ctrl+P` は、過去のメッセージ履歴を1行ずつさかのぼって表示します。モンスターの特殊攻撃の警告、店主が提示した価格、あるいは状態異常の発生ログなど、流れてしまったメッセージをもう一度確認できます。デフォルトのバッファは20件を保持し、古いメッセージから順に押し出されて消去されます。
 
 `Ctrl+R` は画面全体を再描画します。端末の描画が乱れたり、表示がおかしいと感じたときの便利な基本操作です。
 
-#### ダンジョン概要と出来事記録 (Dungeon overview and event journal)
+#### ダンジョン概要と出来事記録 (Dungeon overview and event journal) {#dungeon-overview-and-event-journal}
 
 `Ctrl+O`（または `#overview`）は、これまでに訪れた重要な階層の一覧（祭壇、玉座、泉、流し台、店、寺院、墓、木、注釈、ボーンズ、支流階段、各支流の最深階、そして判明した場合は城の合言葉メロディを含む）を表示します。先頭に `m` を付けて `mCtrl+O` と入力すると、訪れた *すべての* 階層をメニュー形式で一覧表示し、そこから注釈（アノテーション）の追加・編集が可能です（現在立っている階層への注釈は `#annotate` でも行えます）。典型的な用途は、荷物を保管した拠点（スタッシュ）階層にラベルを付け、どのフロアに軽量化の鞄を置いたかを忘れないようにすることです。
 
@@ -5194,7 +5205,7 @@ NetHack のデフォルト設定は堅実ですが、以下の5つのオプシ�
 
 さらにもう1つ、インターフェースではなくキャラクター作成時に関わる設定があります。`OPTIONS=reroll` を設定すると、最初に振られた初期能力値と初期所持品を破棄して、別の組み合わせへと振り直すことができます。最初の手札にこだわりたいプレイヤーには快適な機能ですが、どのような初期値であっても、ゲーム開始後の決断ほど重要なものはありません。
 
-#### ステータス表示の強調 (Status display)
+#### ステータス表示の強調 (Status display) {#status-display}
 
 **`hilite_status`** は、最下行のステータスライン（HP、空腹度、ACなど）に閾値ごとのカラールールを適用して色付けします。ルールを定義することでハイライトが有効になります。各完全なルールは1行に記述してください：
 
@@ -5219,11 +5230,11 @@ MENUCOLOR=" blessed "=cyan
 
 **`pile_limit:5`** はデフォルト値です。同じマスに5個以上のスタックがある場合、個別のリストではなく要約が表示されます。`pile_limit:0` に設定すると、常にすべてのアイテムを一覧表示します。
 
-#### 安全機能設定 (Safety)
+#### 安全機能設定 (Safety) {#safety}
 
 **`paranoid_confirmation:+attack quit`** は、平和的なNPCへの誤攻撃や、ゲームの誤終了に対して、単なる y/n ではなく単語全体の入力を求める確認プロンプトを追加します（デフォルトの安全確認を解除することなく機能します）。なお `pray`（祈り）はデフォルトですでに単語確認が含まれています。また `Remove` は外す防具を選択するコマンドであり、外すこと自体の確認ではありません。
 
-#### アイテム拾得設定 (Pickup)
+#### アイテム拾得設定 (Pickup) {#pickup}
 
 **`autopickup`** は、アイテムの上を歩いたときに自動的に拾う機能であり、**`pickup_types`** で拾う種類をフィルタリングできます（例: `pickup_types:$?!=/` でゴールド、巻物、薬、指輪、杖のみを自動取得）。移動時に `m` プレフィックスを付けると、その1歩だけ自動拾いを一時停止できます。また、ゲーム中にいつでも `@` キーを押せば、そのセッションの自動拾い機能全体の ON/OFF を切り替えられます。
 
@@ -5231,13 +5242,13 @@ MENUCOLOR=" blessed "=cyan
 
 **`pickup_burden:unencumbered`** は、手動・自動を問わず、アイテムを拾うことで負荷状態が「通常 (Unencumbered)」を超えて悪化する場合に事前に確認を求めます。デフォルトの `S` は「圧迫 (Stressed)」を超えるまで確認しませんが、`U` に設定しておけば常に身軽さを保つことができます。
 
-#### 移動設定 (Movement)
+#### 移動設定 (Movement) {#movement}
 
 **`number_pad`** は、テンキー（1〜9）を全8方向＋待機の移動キーとして使用できるようにします。デフォルトは無効（off）です。有効にすると数字による反復回数指定の挙動が変わり、先に `n` を押してから数字を入力するようになります。
 
 **`runmode`** は、走行モードやトラベル中の画面再描画の頻度を設定します：`walk` は1歩ごとに画面を再描画します（歩行の様子を目で追えます）。`run`（デフォルト）は数歩ごとに再描画し、`teleport` は停止する最終地点まで画面を更新せず一気にワープ表示します。これは移動中に何が *見える* かを変える設定であり、何によって移動が停止するかを変えるものではありません。
 
-#### メッセージ詳細度 (Verbosity)
+#### メッセージ詳細度 (Verbosity) {#verbosity}
 
 **`verbose`** は、より詳細な解説メッセージを有効にします。メッセージログが騒がしく感じられる場合は無効（off）にしてください。
 
@@ -5257,7 +5268,7 @@ OPTIONS=pickup_burden:unencumbered
 
 **curses によるパネル分割 UI。** さらに大幅なインターフェースの進化を望む場合、**curses** ウィンドウインターフェースを有効にしてビルドされた NetHack バイナリが必要です（標準的な 5.0 端末ビルドには含まれていない場合があります）。利用可能な場合、curses は端末内に整然としたパネル分割 UI を描画します。設定ファイルに `windowtype:curses`、`align_message:right`、`align_status:bottom`、`perm_invent`、`windowborders` を指定し、120×40 の広めのターミナルを開けば、常時表示のインベントリカラム、複数行のメッセージパネル、そして枠線で区切られたステータスとマップ領域が手に入ります（通常の tty NetHack では、何を設定してもメッセージ行は常に最上行の行0に固定されます）。
 
-### 倉庫番の解答 (Sokoban Solutions)
+### 倉庫番の解答 (Sokoban Solutions) {#sokoban-solutions}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 dat/soko*.lua: no corrections. Verified prize odds (75/25), prize-chamber coords, variant->file mapping (spoiler L_N = soko(5-N)), pit-vs-hole per level, boulder tallies, scroll-of-earth positions, luck penalty, air-current mechanic.
@@ -5302,7 +5313,7 @@ OPTIONS=pickup_burden:unencumbered
 
 **反転（ミラーリング）に関する注意。** 倉庫番に到達した時点で、マップは最初から全域が表示されています。ゲーム画面の壁の輪郭をここに掲載されたマップと見比べてください。もし左右反転（または上下反転）している場合は、全手順の「左」と「右」（または「上」と「下」）を入れ替え、反対側の端から列を数えてください（Web版のフリップボタンを使えば視覚的に反転できます）。
 
-#### 第1階層・バージョンA (Level 1, Version A) {.sokoban-level data-width=14 data-height=13}
+#### 第1階層・バージョンA (Level 1, Version A) {#level-1-version-a .sokoban-level data-width=14 data-height=13}
 <!-- audit
 2026-05-19:
 - Scrolls land at spoiler (3,12) and (4,12); lua coords (02,11) and (03,11) (soko4-1.lua:94-95).
@@ -5361,7 +5372,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が1個（A）残ります。(3,12) と (4,12) に落ちている巻物は大地の巻物です。
 
-#### 第1階層・バージョンB (Level 1, Version B) {.sokoban-level data-width=15 data-height=11}
+#### 第1階層・バージョンB (Level 1, Version B) {#level-1-version-b .sokoban-level data-width=15 data-height=11}
 <!-- audit
 2026-05-19:
 - Map walls/floors and all 12 boulders A-L match soko4-2.lua:9-21, 29-42.
@@ -5429,7 +5440,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が2個（D と E）残ります。(2,10) と (3,10) に落ちている巻物は大地の巻物です。
 
-#### 第2階層・バージョンA (Level 2, Version A) {.sokoban-level data-width=29 data-height=12}
+#### 第2階層・バージョンA (Level 2, Version A) {#level-2-version-a .sokoban-level data-width=29 data-height=12}
 
 ```
             11111111112222222222
@@ -5460,7 +5471,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が5個（B, C, D, I, Q）残ります。
 
-#### 第2階層・バージョンB (Level 2, Version B) {.sokoban-level data-width=26 data-height=14}
+#### 第2階層・バージョンB (Level 2, Version B) {#level-2-version-b .sokoban-level data-width=26 data-height=14}
 <!-- audit
 2026-05-19:
 - 16-boulder layout and all 22 solution steps verified by simulation against soko3-2.lua.
@@ -5560,7 +5571,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が4個（A, D, G, H）残ります。
 
-#### 第3階層・バージョンA (Level 3, Version A) {.sokoban-level data-width=20 data-height=12}
+#### 第3階層・バージョンA (Level 3, Version A) {#level-3-version-a .sokoban-level data-width=20 data-height=12}
 
 ```
             11111111112
@@ -5595,7 +5606,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が3個（F, G, H）残ります。
 
-#### 第3階層・バージョンB (Level 3, Version B) {.sokoban-level data-width=22 data-height=13}
+#### 第3階層・バージョンB (Level 3, Version B) {#level-3-version-b .sokoban-level data-width=22 data-height=13}
 <!-- audit
 2026-05-19:
 - Upstair at spoiler (16,7); lua (15,6) (soko2-2.lua:25).
@@ -5664,7 +5675,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が5個（A, B, D, E, J）残ります。
 
-#### 第4階層・バージョンA (Level 4, Version A) {.sokoban-level data-width=26 data-height=18}
+#### 第4階層・バージョンA (Level 4, Version A) {#level-4-version-a .sokoban-level data-width=26 data-height=18}
 
 このバージョンの賞品は通常 **軽量化の鞄** ですが、4分の1 の確率で代わりに **反射の魔除け** になります。
 
@@ -5752,7 +5763,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が2個（A と E）残ります。軽量化の鞄または魔除けの賞品は、モンスター動物園（treasure zoo）に隣接する小部屋群（(17,12), (17,14), (17,16)）のいずれかに収められています。
 
-#### 第4階層・バージョンB (Level 4, Version B) {.sokoban-level data-width=26 data-height=17}
+#### 第4階層・バージョンB (Level 4, Version B) {#level-4-version-b .sokoban-level data-width=26 data-height=17}
 
 このバージョンの賞品は通常 **反射の魔除け** ですが、4分の1 の確率で代わりに **軽量化の鞄** になります。
 
@@ -5892,7 +5903,7 @@ OPTIONS=pickup_burden:unencumbered
 
 巨岩が2個（O と S）残ります。魔除けまたは軽量化の鞄の賞品は、モンスター動物園に隣接する小部屋群（(17,11), (17,13), (17,15)）のいずれかに収められています。
 
-### 自主的挑戦 (Voluntary Challenges)
+### 自主的挑戦 (Voluntary Challenges) {#voluntary-challenges}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -5931,7 +5942,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 :::
 
-#### 食料コンダクト (The Food Conducts)
+#### 食料コンダクト (The Food Conducts) {#the-food-conducts}
 
 <!-- audit
 2026-05-19:
@@ -5958,7 +5969,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 **絶食 (Foodless)。** あらゆる食物を一切口にしてはいけません。現実的な解決策は、祈り（「空腹」ステータス以降ならいつでも空腹を満たしてくれる）と、消化不良の指輪（通常の空腹進行を完全に停止させる）の2つです。岩を肉に変える魔法でミートボールを作れますが、それを食べるとコンダクト違反になります。大半の絶食ランは、序盤に消化不良の指輪を拾うか、出るまで祈りで空腹を凌ぐ戦略を取ります。願いの杖や魔法のランプが出現した際、消化不良の指輪を願うのが定石です。なお、壁を掘り進む際に岩を咀嚼して食べる行為も絶食違反となります。
 
-#### 無神論者 (Atheist)
+#### 無神論者 (Atheist) {#atheist}
 
 <!-- audit
 2026-05-19:
@@ -5974,7 +5985,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 祈りで空腹を治せないため安定した食料確保が必須となり、生贄や祭壇BUCが使えないため識別の難易度が跳ね上がり、神からのアーティファクト下賜も望めません。ただし、星界の面で昇天を果たすための最終的なイェンダーの魔除けの奉納だけは例外として許されており、無神論を維持したまま昇天を完遂することが仕様上可能です。
 
-#### 武器なし (Weaponless)
+#### 武器なし (Weaponless) {#weaponless}
 
 <!-- audit
 2026-05-19:
@@ -5991,7 +6002,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 これは一見するほど過酷な制約ではありません。武闘家は強力無比な武術で開始し、さらに成長します。他の職業であっても、呪文、杖、投擲短剣に頼ることができます。また、コカトリスの死体を素手（小手着用）で掴んで殴りつける行為も合法です（死体は武器ではないため）。最大の犠牲は、近接武器のアーティファクトが持つ圧倒的なダメージボーナスを諦めなければならない点にあります。
 
-#### 平和主義者 (Pacifist)
+#### 平和主義者 (Pacifist) {#pacifist}
 
 <!-- audit
 2026-05-19:
@@ -6005,7 +6016,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 平和主義者での昇天は十分に可能ですが、ダンジョンのルールに対する深い洞察が求められます。終盤の定番戦略は、願った **アルコンの小像**（割って出現させ、敵対した場合は再テイムする）を最強のチャンピオン闘士として育成し、怪物を手懐ける（魅了）呪文で群衆を鎮め、話し合いで解決できない局面を争いの指輪で乗り切ることです。
 
-#### 文盲 (Illiterate)
+#### 文盲 (Illiterate) {#illiterate}
 
 <!-- audit
 2026-05-19:
@@ -6021,7 +6032,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 巻物が読めないため、識別、武器・防具の強化、瞬間移動、解呪、虐殺といった強力な手段のほとんどが絶たれます。魔法書が読めないため、新しい呪文を学ぶことも古い呪文を再学習することもできず、初期習得呪文はやがて忘れ去られます。これにより、杖、薬、そして創意工夫に満ちた回避策への依存度が極限まで高まります。代表的な回避策は、**ペットの足踏みによるBUC判定**（犬がその上を歩くか？）と、**店主への売却価格による識別（価格識別）**（店主の提示価格を見ることは「読書」には含まれない）であり、これらを組み合わせることで識別の巻物の大半の役割を代行できます。
 
-#### 虐殺なし (No Genocide)
+#### 虐殺なし (No Genocide) {#no-genocide}
 
 <!-- audit
 2026-05-19:
@@ -6041,7 +6052,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 もっとも、これは比較的達成しやすいコンダクトの1つです。巻物を拾えず、玉座で虐殺を引かなかったために、意図せず自然にこのコンダクトを達成して昇天するプレイヤーも数多くいます。
 
-#### 変身の制限 (Polymorph Restrictions)
+#### 変身の制限 (Polymorph Restrictions) {#polymorph-restrictions}
 
 <!-- audit
 2026-05-19:
@@ -6062,7 +6073,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 **アイテム変身(へんげ)なし (Polypileless)。** アイテムを変身させてはいけません。へんげの杖をアイテム山に振ったり、へんげの薬にアイテムを浸したり、その他の手段でアイテムを別のアイテムへと変換する行為を禁じます。これにより、ダンジョン最強のアイテム錬成技である「ポリパイル」が封印されます。
 
-#### 願いの制限 (Wishing Restrictions)
+#### 願いの制限 (Wishing Restrictions) {#wishing-restrictions}
 
 <!-- audit
 2026-05-19:
@@ -6081,7 +6092,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 **アーティファクト願いなし (No wishing for artifacts)。** 通常のアイテムを願うことは許されますが、アーティファクトを願うことだけを禁じます。これにより、[グレイスワンダー](#grayswandir) や [エチオピカの目](#eye-of-the-aethiopica) といった最強の至宝を即座に手に入れる最も効率的な戦略が封じられ、日用品や基本装備の補給だけに願いが限定されます。なお、アーティファクトを願って **拒絶された場合（手元に普通のアイテムが出現した場合）であってもカウンターは加算される** ため、誤ってアーティファクト名を指定しないよう注意してください。
 
-#### 複合コンダクト (Combining Conducts)
+#### 複合コンダクト (Combining Conducts) {#combining-conducts}
 
 <!-- audit
 2026-05-19:
@@ -6103,7 +6114,7 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 
 NetHack 5.0 では、さらに6つの追跡コンダクトが追加されました：赤貧 (Pauper)、ペットなし (Petless)、完全聾 (Permadeaf)、[倉庫番](#sokoban)、ボーンズなし (Bonesless)、そして振り直しなし (Unrerolled) です。Pauper、Permadeaf、Petless、Bonesless はゲーム開始前のオプション設定で宣言します。Sokoban はプレイ中の実際の行動に基づいて自動追跡され、Unrerolled はゲームが最初に提示したキャラクターを受け入れたことを記録します。
 
-#### 赤貧 (Pauper: 5.0新要素)
+#### 赤貧 (Pauper: 5.0新要素) {#pauper-new-in-5.0}
 
 <!-- audit
 2026-05-19:
@@ -6122,7 +6133,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 開幕が完全に不可能になるのを防ぐため、わずかな補償措置が与えられます：未消費の武器スキルスロットが2枠与えられ、さらに各職業ごとに象徴的な呪文またはアイテムを1つ最初から認知しています。魔法使いは「衝撃」を、治療師は「回復」を、司祭・騎士・武闘家は「防護」を（司祭は聖水も認知）、考古学者は「試金石」を、洞窟人は「火打石」を、盗賊と観光客は「麻袋」を、侍は「軍糧丸」の食料をあらかじめ認知しています。浅い階層に配置された [補給コンテナ](#supply-containers) が、あなたの最初の装備セットの多くを賄ってくれるはずです。
 
-#### ペットなし (Petless: 5.0新要素)
+#### ペットなし (Petless: 5.0新要素) {#petless-new-in-5.0}
 
 <!-- audit
 2026-05-19:
@@ -6137,7 +6148,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 いかなるペットも従えてはいけません。設定ファイルに `OPTIONS=pettype:none` を記述して初期の相棒を完全にスキップします（各職業の初期設定を上書きします）。その後、いかなるモンスターであっても手懐けられた（tame になった）瞬間に、このコンダクトは失格となります。ゲームがそれを止めることはありません。怪物を飼いならす巻物、魅了呪文、敵対的な犬や猫に肉を投げ与える行為、魔法の罠の暴発など、いずれもその場で「ペットなし」を破棄します。
 
-#### 完全聾 (Permadeaf: 5.0新要素)
+#### 完全聾 (Permadeaf: 5.0新要素) {#permadeaf-new-in-5.0}
 
 <!-- audit
 2026-05-19:
@@ -6155,7 +6166,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 完全聾プレイでは、視覚と論理的推論だけを頼りに迷宮を探索します。
 
-#### 倉庫番 (Sokoban: 5.0新要素)
+#### 倉庫番 (Sokoban: 5.0新要素) {#sokoban-new-in-5.0}
 
 <!-- audit
 2026-05-19:
@@ -6169,7 +6180,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 倉庫番のルールを一度も破ることなく進入・プレイします。ゲーム終了時にこのコンダクトが記録されるために、必ずしも倉庫番を最後まで登りきる必要はありません。違反行為1回ごとに **幸運が 1点 低下** し、不正カウンターが加算されます：小型形態や極度に身軽な荷物による **巨岩のすり抜け**、衝撃やつるはしや衝撃の杖による **巨岩の粉砕**、巨岩の **変身**、**大地の巻物** の読書、あるいは巨岩のマスへの **下馬** です。ゲームはこれらの違反を自動的に追跡します。
 
-#### ボーンズなし (Bonesless: 5.0新要素)
+#### ボーンズなし (Bonesless: 5.0新要素) {#bonesless-new-in-5.0}
 
 <!-- audit
 2026-05-19:
@@ -6201,7 +6212,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 何よりもまず、最大の致命的ミスを防ぐための鉄則：**「未払いの品物を持ったまま店の敷居を跨いではならない」**。店主は即座に敵対化し、出口を塞ぎ、キーストン・コップを召喚します。店を出る前に必ず `I` を押して `u`（未払い品）を確認し、代金を清算してください。後から代金を支払えば、追跡してくるキーストン・コップは全員撤収します。
 
-#### 信用と借金 (Credit and Debt)
+#### 信用と借金 (Credit and Debt) {#credit-and-debt}
 
 各店主は、顧客ごとに「預け金（クレジット / Credit）」「借金（デビット / Debit）」「一時借受金（ローン / Loan）」の3つの数字を記録した台帳を管理しています。
 
@@ -6225,7 +6236,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 **一時借受金（Loan）** は、店の床に落ちていた店主のゴールドをあなたが拾い上げた際に記録される名目です。店内にゴールドを置くことで、まずこのローンが返済されてから預け金へと加算されます。
 
-#### 店主の行動 (Shopkeeper Behavior)
+#### 店主の行動 (Shopkeeper Behavior) {#shopkeeper-behavior}
 
 店主はゲーム内で最強クラスのNPCです：高いHP、優れたAC、重い打撃力を誇り、エルベレスも通用せず、他のモンスターに通用する賢い脱出技も効きません。さらに彼らはすべてを見通しています：透明状態であっても、あなたが拾い上げた品物や店内に持ち込まれたアイテムのすべてを正確に把握しています。
 
@@ -6254,13 +6265,13 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - **ボーンズ階層の店に注意。** 過去のプレイヤーのボーンズ階層で見つかった店では、店内のすべてのアイテムは死亡した冒険者の幽霊店主に帰属しています。床から拾えば、新しい店主から定価を請求されます。店の床はタダの戦利品置き場ではありません。
 - **扉に刻まれた「棚卸しのため休業中」（"Closed for inventory"）。** これは放棄された店ではなく、扉が **施錠されて** 生成された店を意味します。店主は依然として店内に控えており、商品は未払いです。鍵開け器具を使うか開扉の杖で開けてください（オーケスの町は店主のいない本物の廃墟であるため、そこのアイテムだけは本当に持ち主がいません）。
 
-#### 宝石の売却識別 (Gem Identification Through Selling)
+#### 宝石の売却識別 (Gem Identification Through Selling) {#gem-identification-through-selling}
 
 未識別の宝石を店主に売却することは、**信頼できる価格識別手段ではありません**。店主は、本物の宝石であれ模造品（無価値なガラス）であれ、未識別の宝石には一律 3〜8 zm 程度しか提示しません。その提示額は宝石の真の正体と店主の気分によって変動します。本物のダイヤモンドも無価値なガラス玉も同じ 3〜8 zm の範囲で提示されるため、売却価格だけで両者を見分けることは不可能です。同じ未識別宝石を2つの異なる店に持ち込んでも、提示額はバラバラになります。
 
 本物の識別には **試金石** (Touchstone: 灰色の石、基本価格 45、鉱山などで時折発見される) を使用してください。未識別の宝石を **祝福された** 試金石に擦りつける（`#apply`）と、その宝石の真の名称が即座に判明します。呪われていない試金石では、条痕色（擦り痕の色）が判明するだけにとどまります（考古学者とノームは種族・職業特権により、呪われていない石であっても完全な名称を看破できます）。硬度は関係なく、あらゆる宝石を判別可能です。一度識別されれば、本物の宝石はその真の価値（多くは数百〜数千 zm）で売却できるようになり、ガラス玉は二値同然となります。
 
-##### 本物の宝石の価格表 (Real-gem prices)
+##### 本物の宝石の価格表 (Real-gem prices) {#real-gem-prices}
 
 正体が判明した宝石は、その種類によって基本価格が決定されます。すべての宝石は重量 1 であり、同種かつ識別済みの宝石は何個あってもインベントリの1枠にスタックされるため、大量のルビーを溜め込む負担はアイテム欄1枠の消費だけで済みます。
 
@@ -6312,7 +6323,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - **最上位グループ**（2500 zm 以上：ダイリチウム、ダイヤモンド、ルビー、風信子石、サファイア、ブラックオパール、エメラルド）は、個別売却する価値があります。基本レートでの買取価格は基本価格の半分（ダイヤモンドなら 2,000 zm）から始まり、宝石を扱わない店は買い取ってくれません。
 - **無価値なガラス玉が幸運を減らすことは絶対にない。** ガラス玉をユニコーンに投げた場合、拒絶される（「そんなゴミには興味がない」）か、好意的に受け取られるかのどちらかです。幸運が変動するリスクがあるのは、**異なる属性** のユニコーンに *本物の宝石* を投げた場合（−3 から +3 のランダム変動）だけです。メッセージの言い回しに注目してください：幸運を高めてくれた本物の宝石を受け取ったユニコーンは *「感謝して（gratefully）」* 受け取り、何も起きなかったガラス玉を受け取ったユニコーンは *「愛想よく（graciously）」* 受け取ります。
 
-### 武器一覧表 (Weapons Tables)
+### 武器一覧表 (Weapons Tables) {#weapons-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h + weapon.c: no corrections. Every weapon row (base/bonus dice, weight, cost, to-hit, material, two-handed/launcher/skill notes) verified, including composite-damage entries vs dmgval().
@@ -6320,7 +6331,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 ダメージは**小型に対するダメージ / 大型に対するダメージ (vs small / vs large)**として表記されており、強化値（強化・呪い）が加算される前、かつ銀や材質による追加ボーナスを除いた基本ダイス値です。**重量 (Wt)**はユニット重量、**価格 (Cost)**は店における未強化時の基本価格（Zm: ゾークミッド）、**命中 (Hit)**は武器自体に組み込まれている命中補正ボーナス（大半は 0）を表します。盾の装備や二刀流（二刀流戦闘）を阻害する両手持ち武器には、備考欄にフラグが付けられています。武器はスキルごとに分類されています。スキル枠（スロット）を投資する前に、[職業別のスキル上限一覧](#per-role-skill-caps)を確認してください。一部の武器に見られる括弧内の名称は、侍（Samurai）がプレイした際に画面上に表示される別名です（ゲーム内部では同一のアイテムとして処理されます）。
 
-#### 短剣 (Dagger)
+#### 短剣 (Dagger) {#dagger}
 <!-- audit
 2026-05-19:
 - Expert Rogue dagger multishot caps at rnd(4) = 1-4: 1 base + 1 Expert + 1 Skilled + 1 class (dothrow.c:177-190, 63-67)
@@ -6351,7 +6362,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - crysknife reverts to worm tooth on drop via type-id swap, NOT poly (do.c:903-918)
 - fixed (erodeproof) crysknife only reverts ~10% of drops (do.c:911)
 -->
-#### ナイフ (Knife)
+#### ナイフ (Knife) {#knife}
 
 主に近接戦闘用。ナイフはスタック可能で投擲もできますが、投擲ナイフによるマルチショットボーナスを得られる職業はありません。
 
@@ -6374,7 +6385,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - Rogue starter (u_init.c:134); Samurai "wakizashi" is a short sword aliased in objnam.c:106 (u_init.c:144)
 - no artifact uses SHORT_SWORD as base type
 -->
-#### 小剣 (Short sword)
+#### 小剣 (Short sword) {#short-sword}
 
 片手持ち近接武器。脇差（wakizashi）と小剣（short sword）は職業による表示名が異なるだけで、同一の武器です。
 
@@ -6389,7 +6400,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### サーベル (Saber)
+#### サーベル (Saber) {#saber}
 <!-- audit
 2026-05-19:
 - 10 saber cells verified clean (objects.h)
@@ -6409,7 +6420,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 幅広の剣 (Broadsword)
+#### 幅広の剣 (Broadsword) {#broadsword}
 <!-- audit
 2026-05-19:
 - Stormbringer's base item is RUNESWORD, NOT broadsword (artilist.h:93)
@@ -6429,7 +6440,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 長剣 (Long sword)
+#### 長剣 (Long sword) {#long-sword}
 <!-- audit
 2026-05-19:
 - long sword stats verified (objects.h:270-280)
@@ -6452,7 +6463,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 両手剣 (Two-handed sword)
+#### 両手剣 (Two-handed sword) {#two-handed-sword}
 <!-- audit
 2026-05-19:
 - two-handed sword stats verified (objects.h:273-285)
@@ -6473,7 +6484,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 斧 (Axe)
+#### 斧 (Axe) {#axe}
 <!-- audit
 2026-05-19:
 - axe 1d6/1d4, battle-axe 1d8+1d4 small / 1d6+2d4 large with bonus dice (objects.h:236-241, weapon.c:251-289)
@@ -6500,7 +6511,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - mattock is bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
 - dig-down creates a pit, then a hole (dig.c:432-433, 372-374)
 -->
-#### つるはし (Pick-axe)
+#### つるはし (Pick-axe) {#pick-axe}
 
 近接武器かつ掘削道具。`a` (apply) キーで使用することで、任意の方向の壁や床を掘り進めることができます。ドワーフのつるはしも同様の機能を持ち、こちらは両手持ちです。
 
@@ -6513,7 +6524,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### こん棒 (Club)
+#### こん棒 (Club) {#club}
 <!-- audit
 2026-05-19:
 - club and aklys stats verified (objects.h:371-373, 381-383)
@@ -6533,7 +6544,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### メイス (Mace)
+#### メイス (Mace) {#mace}
 <!-- audit
 2026-05-19:
 - mace stats verified (objects.h:355-361)
@@ -6555,7 +6566,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### モーニングスター (Morning star)
+#### モーニングスター (Morning star) {#morning-star}
 <!-- audit
 2026-05-19:
 - morning star: 1d4+1d4 / 1d6+1, wt 120, cost 10, hit 0, iron (objects.h:363-365, weapon.c:225-289)
@@ -6573,7 +6584,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### フレイル (Flail)
+#### フレイル (Flail) {#flail}
 <!-- audit
 2026-05-19:
 - flail: base 1d6/1d4, +1 small (weapon.c:272-275), +1d4 large (weapon.c:239-243); objects.h:384-386
@@ -6593,7 +6604,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ハンマー (Hammer)
+#### ハンマー (Hammer) {#hammer}
 <!-- audit
 2026-05-19:
 - war hammer stats verified (objects.h:367-369, weapon.c); +1 small bonus matches sdam/ldam fields
@@ -6611,7 +6622,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 六尺棒 (Quarterstaff)
+#### 六尺棒 (Quarterstaff) {#quarterstaff}
 <!-- audit
 2026-05-19:
 - quarterstaff: bimanual, 1d6/1d6, wt 40, cost 5, WOOD, P_QUARTERSTAFF (objects.h:377-379).
@@ -6631,7 +6642,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 長柄武器 (Polearms)
+#### 長柄武器 (Polearms) {#polearms}
 <!-- audit
 2026-05-19:
 - 12 polearm rows verified: all two-handed, all P_POLEARMS, all iron (objects.h:294-341).
@@ -6663,7 +6674,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 槍 (Spear)
+#### 槍 (Spear) {#spear}
 <!-- audit
 2026-05-19:
 - 6 spear rows (spear/elven/orcish/dwarvish/silver/javelin) verified P_SPEAR (objects.h:174-191).
@@ -6692,7 +6703,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### トライデント (Trident)
+#### トライデント (Trident) {#trident}
 <!-- audit
 2026-05-19:
 - trident stats verified (objects.h:195)
@@ -6717,7 +6728,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - mounted joust bonus: +2d10 primary, +2d2 off-hand (objects.h:351-352, uhitm.c:1546)
 - shatter chance 1/250 per successful joust (uhitm.c:2123-2125, 1559)
 -->
-#### ランス (Lance)
+#### ランス (Lance) {#lance}
 
 騎乗戦闘に特化して作られた近接武器。馬などの騎乗中に命中させると、馬上槍試合（Joust）による強大な追加ダメージを与えるチャンスがあります。徒歩でも有用な間合い攻撃（リーチ）武器として機能し、2マス離れた敵に使用（apply）して攻撃できます。
 
@@ -6738,7 +6749,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - Archeologist starts with bullwhip +1 at Basic (apply.c:2992-2993)
 - no whip artifacts
 -->
-#### 鞭 (Whip)
+#### 鞭 (Whip) {#whip}
 
 軽量な片手近接武器であり、実用的な道具でもあります。鞭を `#apply`（使用）することで、隣接するモンスターの武器を叩き落としたり（武装解除）、落とし穴から自分自身を引き上げたりできます。
 
@@ -6758,7 +6769,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - ya: 1d7/1d7, +1 hit, METAL, cost 4 (objects.h:153-154).
 - yumi prob=0: Samurai-only, never randomly spawns (objects.h:401-402).
 -->
-#### 弓 (Bow)
+#### 弓 (Bow) {#bow}
 
 片手持ちの発射具（ランチャー）。弓を手（主武器）に装備し、矢筒に矢を入れて `f` キーで発射します。エキスパートの射手はマルチショット（一斉射撃）が可能で、野伏（Ranger）と侍（Samurai）がそのスペシャリストです。弓は二刀流戦闘を阻害しますが、盾を装備することは可能です。
 
@@ -6785,7 +6796,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - skill caps: Rogue Expert, Ranger Expert, Knight Skilled (u_init.c)
 - Valkyries cap at Unskilled, NOT Skilled: Skill_V has no P_CROSSBOW entry (u_init.c:525-547)
 -->
-#### クロスボゥ (Crossbow)
+#### クロスボゥ (Crossbow) {#crossbow}
 
 片手持ちの発射具。弓よりも1発あたりの威力が高くなっていますが、リロードが遅く、完全なマルチショットを行うには筋力 18（ノームは筋力 16）が必要です。弓と同様、二刀流は阻害しますが盾の装備は可能です。
 
@@ -6805,7 +6816,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - sling launches rocks, flint stones, and gems
 - Caveman starts with one sling
 -->
-#### スリング (Sling)
+#### スリング (Sling) {#sling}
 
 片手持ちの発射具。弾薬は床に落ちている（または持ち運んでいる）石や宝石なら何でも使えるため、弾薬費は実質的にゼロです。
 
@@ -6823,7 +6834,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - darts are poisonable (is_poisonable)
 - Tourist starts with 21-40 darts via trquan() = 21+rn2(20), NOT ~25-60 (u_init.c:150-151)
 -->
-#### 投げ矢 (Dart)
+#### 投げ矢 (Dart) {#dart}
 
 投擲専用。大量にスタックでき、重量がほとんどなく、病気の薬から毒を塗布することができます。
 
@@ -6841,7 +6852,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - is_poisonable (obj.h:264-268)
 - Samurai trains to Expert (u_init.c:481)
 -->
-#### 手裏剣 (Shuriken)
+#### 手裏剣 (Shuriken) {#shuriken}
 
 投擲専用。修道士（Monk）は手裏剣投擲時にマルチショット+1のボーナスを得られます。
 
@@ -6861,7 +6872,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 - enchanted boomerang hits (spe+1) times
 - useless underwater
 -->
-#### ブーメラン (Boomerang)
+#### ブーメラン (Boomerang) {#boomerang}
 
 投擲専用。放物線を描いて飛行し、途中の軌道が遮られていなければ投げた本人の手元へ戻ってきます。戻ってきたブーメランをキャッチするには器用 (Dex) の判定が必要です。
 
@@ -6873,7 +6884,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-### 防具一覧表 (Armor Tables)
+### 防具一覧表 (Armor Tables) {#armor-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. Every armor row (AC=10-macro-arg, MC, weight, material, slot) verified across ARMOR/HELM/CLOAK/SHIELD/GLOVES/BOOTS macros.
@@ -6900,7 +6911,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 **AC**はその防具が提供するアーマークラス補正値です（数値が大きいほど防御力が高く、画面上のAC表示からこの数値が減算されます）。**MC**は魔法防御能力レベル（1〜3）を表し、数値が高いほど敵の魔法攻撃を防ぐ確率が高まります。**重量 (Wt)**はユニット重量、**価格 (Cost)**は店での基本価格です。**備考**列には、装備中に付与される固有能力（耐性や特性）および戦術上の注意点をまとめています。防具は装備部位ごとに分類されています。ドラゴンの鱗鎧は終盤における圧倒的重要性から、個別の項目として取り上げています。一部の防具にある括弧内の名称は、侍（Samurai）プレイ時に表示される別名です（ゲーム内部では同一アイテム）。
 
-#### 胴鎧 (Body armor / suits)
+#### 胴鎧 (Body armor / suits) {#body-armor-suits}
 
 ::: dense-table
 
@@ -6934,7 +6945,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ドラゴンの鱗 (Dragon scales)
+#### ドラゴンの鱗 (Dragon scales) {#dragon-scales}
 
 ::: dense-table
 
@@ -6953,7 +6964,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### シャツ (Shirts)
+#### シャツ (Shirts) {#shirts-1}
 
 ::: dense-table
 
@@ -6964,7 +6975,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### クローク (Cloaks)
+#### クローク (Cloaks) {#cloaks-1}
 
 ::: dense-table
 
@@ -6985,7 +6996,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 兜・帽子 (Helmets)
+#### 兜・帽子 (Helmets) {#helmets-1}
 
 ::: dense-table
 
@@ -7008,7 +7019,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 逆属性の兜は基本的には罠アイテムですが、属性反転を意図的に利用できる局面もあります。異属性の祭壇で生贄を捧げる、反対属性のクエストアーティファクトを所持する、あるいは星界の面（Astral Plane）で魔除けを受け入れる祭壇の属性を変更する際などに活用されます。
 
-#### 小手・手袋 (Glovers)
+#### 小手・手袋 (Glovers) {#gloves-1}
 
 ::: dense-table
 
@@ -7023,7 +7034,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 \* 印の付いたアイテムは、識別されるまで4種類の実見外見名（*古い手袋*、*パッド入り手袋*、*乗馬用手袋*、*フェンシング手袋*）のいずれかとして出現します（通常の革の手袋も含みます）。
 
-#### 靴 (Boots)
+#### 靴 (Boots) {#boots-1}
 
 ::: dense-table
 
@@ -7044,7 +7055,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 \* 印の付いたアイテムは、識別されるまで7種類の実見外見名（*戦闘用ブーツ*、*ジャングルブーツ*、*ハイキングブーツ*、*泥靴*、*バックル付きブーツ*、*乗馬用ブーツ*、*スノーブーツ*）のいずれかとして出現します。
 
-#### 盾 (Shields)
+#### 盾 (Shields) {#shields-1}
 
 ::: dense-table
 
@@ -7062,7 +7073,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-### 呪文一覧表 (Spell Tables)
+### 呪文一覧表 (Spell Tables) {#spell-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h: no corrections. All 41 spell rows' level/school/type verified (incl. chain lightning lvl 2). Spell damage figures live in spell.c/zap.c, outside this table's source.
@@ -7151,7 +7162,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 光線系呪文（睡眠、マジックミサイル、死の指、および未熟練状態の冷気や火炎）の命中率も、スキルランクに応じて上昇します。
 
-### モンスター図鑑一覧表 (Bestiary Tables)
+### モンスター図鑑一覧表 (Bestiary Tables) {#bestiary-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 monsters.h: no corrections. ~100% of the numeric columns (Lvl/Spd/AC/MR), color, and full attack lists verified across all ~55 tables, including the tricky cases (floating eye 0d70, black dragon disint, AD_DRST-as-poison stings, deferred/#if0 monsters correctly excluded).
@@ -7159,7 +7170,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 ダンジョンで遭遇しうるあらゆるモンスターをマップ記号ごとに分類した一覧です。**レベル (Lvl)**はモンスターの基本レベル、**速度 (Spd)**は移動速度（プレイヤーの標準速度は 12）、**AC**はアーマークラス（低いほど強固）、**MR**は魔法防御率（プレイヤーの呪文や魔法攻撃に抵抗する確率%）を表します。**攻撃方法 (Attacks)**は各攻撃の種別、ダメージダイス、追加効果を記載しており、`·` で区切られた攻撃は1ターン内にすべて連続して繰り出されます。**備考 (Notes)**には飛行能力、不可視視認、自動回復、死体に毒があるかなど、戦闘を一変させる重要な特性をまとめています。
 
-#### 蟻および昆虫 `a` (Ants and insects `a`)
+#### 蟻および昆虫 `a` (Ants and insects `a`) {#ants-and-insects-a}
 
 <!-- audit
 2026-05-19:
@@ -7189,7 +7200,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ブロッブ `b` (Blobs `b`)
+#### ブロッブ `b` (Blobs `b`) {#blobs-b}
 
 <!-- audit
 2026-05-19:
@@ -7213,7 +7224,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### コカトリス `c` (Cockatrices `c`)
+#### コカトリス `c` (Cockatrices `c`) {#cockatrices-c}
 
 <!-- audit
 2026-05-19:
@@ -7236,7 +7247,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 犬およびイヌ科 `d` (Dogs and canines `d`)
+#### 犬およびイヌ科 `d` (Dogs and canines `d`) {#dogs-and-canines-d}
 
 野生のイヌ科生物は群れで狩りを行います。飼いならされたものは食料を与えることでペットにできます（[仲間の増やし方](#making-friends)参照）。ジャッカル人間や狼人間はプレイヤーを獣化（ライカンスロープ）に感染させることがあります。
 
@@ -7262,7 +7273,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 目および球体 `e` (Eyes and spheres `e`)
+#### 目および球体 `e` (Eyes and spheres `e`) {#eyes-and-spheres-e}
 
 <!-- audit
 2026-05-19:
@@ -7289,7 +7300,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ネコ科 `f` (Felines `f`)
+#### ネコ科 `f` (Felines `f`) {#felines-f}
 
 <!-- audit
 2026-05-19:
@@ -7319,7 +7330,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### グレムリン `g` (Gremlins `g`)
+#### グレムリン `g` (Gremlins `g`) {#gremlins-g}
 
 <!-- audit
 2026-05-19:
@@ -7341,7 +7352,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 人型生物 `h` (Humanoids `h`)
+#### 人型生物 `h` (Humanoids `h`) {#humanoids-h}
 
 <!-- audit
 2026-05-19:
@@ -7374,7 +7385,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 小悪魔および下級悪魔 `i` (Imps and minor demons `i`)
+#### 小悪魔および下級悪魔 `i` (Imps and minor demons `i`) {#imps-and-minor-demons-i}
 
 インプ、ホムンクルス、テングなどの下級悪魔です。テングは頻繁にテレポートを行い、その死体を食べることでテレポート能力やテレポート制御能力を獲得できるチャンスがあります。
 
@@ -7391,7 +7402,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ゼリー `j` (Jellies `j`)
+#### ゼリー `j` (Jellies `j`) {#jellies-j}
 
 <!-- audit
 2026-05-19:
@@ -7413,7 +7424,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### コボルド `k` (Kobolds `k`)
+#### コボルド `k` (Kobolds `k`) {#kobolds-k}
 
 <!-- audit
 2026-05-19:
@@ -7439,7 +7450,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### レプラコーン `l` (Leprechauns `l`)
+#### レプラコーン `l` (Leprechauns `l`) {#leprechauns-l}
 
 <!-- audit
 2026-05-19:
@@ -7458,7 +7469,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ミミック `m` (Mimics `m`)
+#### ミミック `m` (Mimics `m`) {#mimics-m}
 
 <!-- audit
 2026-05-19:
@@ -7480,7 +7491,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ニンフ `n` (Nymphs `n`)
+#### ニンフ `n` (Nymphs `n`) {#nymphs-n}
 
 <!-- audit
 2026-05-19:
@@ -7508,7 +7519,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### オーク `o` (Orcs `o`)
+#### オーク `o` (Orcs `o`) {#orcs-o}
 
 <!-- audit
 2026-05-19:
@@ -7541,7 +7552,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ピアサー `p` (Piercers `p`)
+#### ピアサー `p` (Piercers `p`) {#piercers-p}
 
 天井の鍾乳石に擬態し、直下を通った冒険者の頭上へ落下して大ダメージを与えます。天井を見上げるか、怪しい通路の天井を注意深く探索することで事前に察知できます。
 
@@ -7555,7 +7566,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 四足獣 `q` (Quadrupeds `q`)
+#### 四足獣 `q` (Quadrupeds `q`) {#quadrupeds-q}
 
 <!-- audit
 2026-05-19:
@@ -7583,7 +7594,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 齧歯類 `r` (Rodents `r`)
+#### 齧歯類 `r` (Rodents `r`) {#rodents-r}
 
 <!-- audit
 2026-05-19:
@@ -7607,7 +7618,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 蜘蛛および百足 `s` (Arachnids and centipedes `s`)
+#### 蜘蛛および百足 `s` (Arachnids and centipedes `s`) {#arachnids-and-centipedes-s}
 
 <!-- audit
 2026-05-19:
@@ -7633,7 +7644,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`)
+#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`) {#trappers-and-lurkers-t}
 
 <!-- audit
 2026-05-19:
@@ -7656,7 +7667,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ユニコーンおよび馬 `u` (Unicorns and horses `u`)
+#### ユニコーンおよび馬 `u` (Unicorns and horses `u`) {#unicorns-and-horses-u}
 
 馬（ポニー、馬、軍馬）は野生では敵対的に出現しますが、リンゴやニンジンを与えることで容易に手懐けられ、騎乗（Riding）スキルに活用できます。
 
@@ -7675,7 +7686,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 渦 `v` (Vortices `v`)
+#### 渦 `v` (Vortices `v`) {#vortices-v}
 
 <!-- audit
 2026-05-19:
@@ -7704,7 +7715,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ワーム `w` (Worms `w`)
+#### ワーム `w` (Worms `w`) {#worms-w}
 
 <!-- audit
 2026-05-19:
@@ -7727,7 +7738,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ザンおよび幻想昆虫 `x` (Xans and fantastic insects `x`)
+#### ザンおよび幻想昆虫 `x` (Xans and fantastic insects `x`) {#xans-and-fantastic-insects-x}
 
 <!-- audit
 2026-05-19:
@@ -7749,7 +7760,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 光 `y` (Lights `y`)
+#### 光 `y` (Lights `y`) {#lights-y}
 
 <!-- audit
 2026-05-19:
@@ -7773,7 +7784,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ズリティ `z` (Zruties `z`)
+#### ズリティ `z` (Zruties `z`) {#zruties-z}
 
 中盤に出現する手強い野獣で、2本の爪と強力な噛みつき攻撃を繰り出してきます。激しい連撃に耐えきることができれば、まとまった経験値を獲得できます。名称はスラブ神話の毛深い野生人に由来しています。
 
@@ -7785,7 +7796,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 天使・神聖なる存在 `A` (Angelic beings `A`)
+#### 天使・神聖なる存在 `A` (Angelic beings `A`) {#angelic-beings-a}
 
 <!-- audit
 2026-05-19:
@@ -7812,7 +7823,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### こうもりおよび鳥 `B` (Bats and birds `B`)
+#### こうもりおよび鳥 `B` (Bats and birds `B`) {#bats-and-birds-b}
 
 不規則に飛び回る飛行生物。吸血こうもりは毒のある噛みつきで筋力を吸い取ります（毒耐性があれば防げます）。オオガラスは目をつついて盲目にしようとします。
 
@@ -7829,7 +7840,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ケンタウロス `C` (Centaurs `C`)
+#### ケンタウロス `C` (Centaurs `C`) {#centaurs-c}
 
 <!-- audit
 2026-05-19:
@@ -7850,7 +7861,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ドラゴン `D` (Dragons `D`)
+#### ドラゴン `D` (Dragons `D`) {#dragons-d}
 
 <!-- audit
 2026-05-19:
@@ -7895,7 +7906,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 精霊・エレメンタル `E` (Elementals `E`)
+#### 精霊・エレメンタル `E` (Elementals `E`) {#elementals-e}
 
 <!-- audit
 2026-05-19:
@@ -7923,7 +7934,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 菌類およびモールド `F` (Fungi and molds `F`)
+#### 菌類およびモールド `F` (Fungi and molds `F`) {#fungi-and-molds-f}
 
 <!-- audit
 2026-05-19:
@@ -7953,7 +7964,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ノーム `G` (Gnomes `G`)
+#### ノーム `G` (Gnomes `G`) {#gnomes-g}
 
 <!-- audit
 2026-05-19:
@@ -7976,7 +7987,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 巨人 `H` (Giant humanoids `H`)
+#### 巨人 `H` (Giant humanoids `H`) {#giant-humanoids-h}
 
 <!-- audit
 2026-05-19:
@@ -8008,7 +8019,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ジャバウォック `J` (Jabberwocks `J`)
+#### ジャバウォック `J` (Jabberwocks `J`) {#jabberwocks-j}
 
 <!-- audit
 2026-05-19:
@@ -8028,7 +8039,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### キーストン・コップ `K` (Keystone Kops `K`)
+#### キーストン・コップ `K` (Keystone Kops `K`) {#keystone-kops-k}
 
 <!-- audit
 2026-05-19:
@@ -8052,7 +8063,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### リッチ `L` (Liches `L`)
+#### リッチ `L` (Liches `L`) {#liches-l}
 
 <!-- audit
 2026-05-19:
@@ -8081,7 +8092,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ミイラ `M` (Mummies `M`)
+#### ミイラ `M` (Mummies `M`) {#mummies-m}
 
 <!-- audit
 2026-05-19:
@@ -8107,7 +8118,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ナーガ `N` (Nagas `N`)
+#### ナーガ `N` (Nagas `N`) {#nagas-n}
 
 蛇の体を持つ人型生物で、遠距離から酸や毒のブレス・吐瀉攻撃を行ってきます。すべてのナーガは毒耐性を備えています。黒ナーガの死体を食べると恒久的な毒耐性を獲得できることがあり、酸耐性と石化耐性も一時的に得られます。
 
@@ -8126,7 +8137,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### オーガ `O` (Ogres `O`)
+#### オーガ `O` (Ogres `O`) {#ogres-o}
 
 <!-- audit
 2026-05-19:
@@ -8147,7 +8158,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### プリンおよびウーズ `P` (Puddings and oozes `P`)
+#### プリンおよびウーズ `P` (Puddings and oozes `P`) {#puddings-and-oozes-p}
 
 <!-- audit
 2026-05-19:
@@ -8175,7 +8186,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 量子物理学者 `Q` (Quantum mechanics `Q`)
+#### 量子物理学者 `Q` (Quantum mechanics `Q`) {#quantum-mechanics-q}
 
 <!-- audit
 2026-05-19:
@@ -8197,7 +8208,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 錆の怪物および魔法中和者 `R` (Rust monsters and disenchanters `R`)
+#### 錆の怪物および魔法中和者 `R` (Rust monsters and disenchanters `R`) {#rust-monsters-and-disenchanters-r}
 
 <!-- audit
 2026-05-19:
@@ -8217,7 +8228,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ヘビ `S` (Snakes `S`)
+#### ヘビ `S` (Snakes `S`) {#snakes-s}
 
 <!-- audit
 2026-05-19:
@@ -8245,7 +8256,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### トロール `T` (Trolls `T`)
+#### トロール `T` (Trolls `T`) {#trolls-t}
 
 <!-- audit
 2026-05-19:
@@ -8272,7 +8283,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### アンバーハルク `U` (Umber hulks `U`)
+#### アンバーハルク `U` (Umber hulks `U`) {#umber-hulks-u}
 
 混乱の凝視。視線が合うだけでプレイヤーを激しく混乱させます。目隠しやタオルを巻いて盲目状態で戦うか、遠距離から仕留めるのが定石です。混乱耐性やテレパシーを活用してください。
 
@@ -8284,7 +8295,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### 吸血鬼 `V` (Vampires `V`)
+#### 吸血鬼 `V` (Vampires `V`) {#vampires-v}
 
 <!-- audit
 2026-05-19:
@@ -8309,7 +8320,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### レイス `W` (Wraiths `W`)
+#### レイス `W` (Wraiths `W`) {#wraiths-w}
 
 <!-- audit
 2026-05-19:
@@ -8333,7 +8344,7 @@ NetHack 5.0 では、さらに6つの追跡コンダクトが追加されまし�
 
 :::
 
-#### ゾーン `X` (Xorns `X`)
+#### ゾーン `X` (Xorns `X`) {#xorns-x}
 
 <!-- audit
 2026-05-19:
@@ -8353,7 +8364,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### 類人猿 `Y` (Apelike creatures `Y`)
+#### 類人猿 `Y` (Apelike creatures `Y`) {#apelike-creatures-y}
 
 <!-- audit
 2026-05-19:
@@ -8377,7 +8388,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### ゾンビ `Z` (Zombies `Z`)
+#### ゾンビ `Z` (Zombies `Z`) {#zombies-z}
 
 <!-- audit
 2026-05-19:
@@ -8408,7 +8419,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### 人間およびエルフ `@` (Humans and elves `@`)
+#### 人間およびエルフ `@` (Humans and elves `@`) {#humans-and-elves}
 
 <!-- audit
 2026-05-19:
@@ -8500,7 +8511,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### 大悪魔 `&` (Major demons `&`)
+#### 大悪魔 `&` (Major demons `&`) {#major-demons}
 
 <!-- audit
 2026-05-19:
@@ -8548,7 +8559,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### ゴーレム `'` (Golems `'`)
+#### ゴーレム `'` (Golems `'`) {#golems}
 
 <!-- audit
 2026-05-19:
@@ -8581,7 +8592,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### 海の怪物 `;` (Sea monsters `;`)
+#### 海の怪物 `;` (Sea monsters `;`) {#sea-monsters}
 
 水中に生息する怪物です。巨大ウナギやクラーケンはプレイヤーの体に巻き付き、水中に引きずり込んで溺死させようとします。魔法の呼吸（Magical breathing）がなければ瞬時に命を落とします。
 
@@ -8600,7 +8611,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-#### トカゲ `:` (Lizards `:`)
+#### トカゲ `:` (Lizards `:`) {#lizards}
 
 <!-- audit
 2026-05-19:
@@ -8629,7 +8640,7 @@ D&Dに由来する、土の元素界からやってきた3本腕・3つ目の異
 
 :::
 
-### 固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables)
+### 固有能力および外在能力一覧表 (Intrinsic and Extrinsic Tables) {#intrinsic-and-extrinsic-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -8709,7 +8720,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 - **修道士（Monk）は全職業中最も幅広い耐性獲得ラダーを持つ。** レベル 1 から 17 にかけて 11 種類もの内在能力を自力で習得します。
 - **ドラゴンの鱗鎧はあらゆるアイテムの中で最も多くの重要能力を網羅する。** 各色ごとに1つの基本耐性を備え、さらに複数の色が強力な*二次的効果*（黒は分解＋吸命耐性、青は電撃＋高速移動など）を併せ持ちます。完全な対応関係は表を参照してください。
 
-#### ダメージ耐性 (Damage resistances)
+#### ダメージ耐性 (Damage resistances) {#damage-resistances}
 
 最も範囲が広く、最も活用される能力群です。大半は序盤に死体を食べることで獲得できます。魔法防御（Magic resistance）は獲得手段が極めて限られているため、昇天用装備セットでは防具、武器、アーティファクトの枠を1つ確保して補うのが基本です。
 
@@ -8733,7 +8744,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 
 :::
 
-#### 感覚と知覚 (Senses and perception)
+#### 感覚と知覚 (Senses and perception) {#senses-and-perception}
 
 テレパシーと警告は、敵が接近する前にその存在と位置を正確に感知させてくれます。
 
@@ -8751,7 +8762,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 
 :::
 
-#### 移動と空間挙動 (Movement and spatial behavior)
+#### 移動と空間挙動 (Movement and spatial behavior) {#movement-and-spatial-behavior}
 
 ::: dense-table
 
@@ -8768,7 +8779,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 
 :::
 
-#### 戦闘と防御 (Combat and defense)
+#### 戦闘と防御 (Combat and defense) {#combat-and-defense}
 
 昇天用装備セットを支える多層防御：AC、反射、自由行動、自動回復など。
 
@@ -8789,7 +8800,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 
 :::
 
-#### 特殊および実用能力 (Special and utility)
+#### 特殊および実用能力 (Special and utility) {#special-and-utility}
 
 満腹度、変身、生存、群衆制御に関わる特殊能力です。
 
@@ -8810,7 +8821,7 @@ NetHack はプレイヤーに対して 68 種類もの特性（プロパティ�
 
 一部の能力は実質的に**変身時限定**です：*遊泳*および*壁通過*（ゾーン、土の精、ゴースト）。*怪物探知*は杖や巻物による一過性のパルス効果としてのみ利用可能です。
 
-### 前回からの変更点 (What Changed Since Last Time)
+### 前回からの変更点 (What Changed Since Last Time) {#what-changed-since-last-time}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -8851,7 +8862,7 @@ NetHack 5.0.0 は 2026 年 5 月 2 日にリリースされました。旧バー
 - **ワルキューレの初期装備が長剣から通常の槍に変更されました。** 経験レベル5以上の騎士によるエクスカリバーの泉浸し（1/6の確率）は健在ですが、他の秩序職業の成功率は1/30です。
 - **死の指（Touch of death）の呪文は即死効果ではなくなりました。** 魔法防御がない場合、50+8d6 の大ダメージを受け、さらにその半分の値が最大HP上限から直接削り取られます（魔法防御があれば完全に防げます）。
 
-#### 新たな道具とチャンス (New Tools and Opportunities)
+#### 新たな道具とチャンス (New Tools and Opportunities) {#new-tools-and-opportunities}
 
 - **ドラゴンの鱗鎧が強力な二次効果を持つようになりました。** 黒は吸命耐性、緑は病気耐性、青は高速移動、橙は自由行動、白は消化遅延、赤は赤外線視覚を追加付与し、金は幻覚耐性に加えて半径3マスの恒久光源となります。
 - **知性の兜 (helm of caution)** が警告能力を付与します。**飛行の魔除け (amulet of flying)** は自身と騎乗ペットの両方に飛行を与え、**守りの魔除け (amulet of guarding)** は AC+2 および MC+2 を提供します。
@@ -8864,7 +8875,7 @@ NetHack 5.0.0 は 2026 年 5 月 2 日にリリースされました。旧バー
 - **流し台（シンク）に薬を浸すと、メッセージによって薬が識別されます。** 薬は失われますが、識別の巻物を節約できます。
 - **連鎖雷撃 (chain lightning)** が新たなレベル2の攻撃呪文として追加され、周囲の敵を次々と感電させます。通常フロアに新たな**テーマ別部屋**が生成されるようになり、4種の新モンスター（ディスプレイスビースト、遺伝子工学者、金ドラゴン、子金ドラゴン）が登場しました。
 
-#### その他の知っておくべき変更点 (Other Changes Worth Knowing)
+#### その他の知っておくべき変更点 (Other Changes Worth Knowing) {#other-changes-worth-knowing}
 
 - *魅了 (charm monster)* はレベル5、*眠り (sleep)* はレベル3、*怪物混乱 (confuse monster)* はレベル1に変更されました。魔法書を使用（apply）することで、本の磨耗度を確認できます。
 - マインドフレアの触手攻撃は、マップの記憶や識別済みの記憶を消去しなくなりました。知力の低下、記憶していた呪文の忘却、武器スキルの経験値ドレインは依然として発生します。
@@ -8877,7 +8888,7 @@ NetHack 5.0.0 は 2026 年 5 月 2 日にリリースされました。旧バー
 - 耐性を付与する死体、缶詰、卵は店での販売価格が高くなりました。モンスター死亡時に無関係な食料品をランダムドロップすることはなくなりました。
 - 店主は店内の落とし穴や蜘蛛の巣を除去するようになり、平和的な店主に接触して歩き込むと自動的に借金を精算してから所持品確認プロンプトへ進みます。
 
-## 有用な知識の索引 (Index of Useful Knowledge)
+## 有用な知識の索引 (Index of Useful Knowledge) {#index-of-useful-knowledge}
 
 ```{=latex}
 \begin{multicols}{2}
@@ -9634,7 +9645,7 @@ Yeti: \hyperref[apelike-creatures-y]{cold resistance corpse, p.~\pageref*{apelik
 
 ---
 
-### 謝辞 (Acknowledgements)
+### 謝辞 (Acknowledgements) {#acknowledgements}
 <!-- audit
 2026-05-19:
 - NetHack 1987, Fenlason -> Brouwer -> Stephenson lineage verified (Wikipedia, dat/history)

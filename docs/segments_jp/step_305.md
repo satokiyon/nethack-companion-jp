@@ -1,4 +1,4 @@
-#### グレムリン `g` (Gremlins `g`)
+#### グレムリン `g` (Gremlins `g`) {#gremlins-g}
 
 <!-- audit
 2026-05-19:

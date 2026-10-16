@@ -1,4 +1,4 @@
-#### 光 `y` (Lights `y`)
+#### 光 `y` (Lights `y`) {#lights-y}
 
 <!-- audit
 2026-05-19:

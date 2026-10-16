@@ -1,4 +1,4 @@
-#### 幅広の剣 (Broadsword)
+#### 幅広の剣 (Broadsword) {#broadsword}
 <!-- audit
 2026-05-19:
 - Stormbringer's base item is RUNESWORD, NOT broadsword (artilist.h:93)

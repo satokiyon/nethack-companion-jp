@@ -5,7 +5,7 @@
 - skill caps: Rogue Expert, Ranger Expert, Knight Skilled (u_init.c)
 - Valkyries cap at Unskilled, NOT Skilled: Skill_V has no P_CROSSBOW entry (u_init.c:525-547)
 -->
-#### クロスボゥ (Crossbow)
+#### クロスボゥ (Crossbow) {#crossbow}
 
 片手持ちの発射具。弓よりも1発あたりの威力が高くなっていますが、リロードが遅く、完全なマルチショットを行うには筋力 18（ノームは筋力 16）が必要です。弓と同様、二刀流は阻害しますが盾の装備は可能です。
 

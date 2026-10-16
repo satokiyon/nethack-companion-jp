@@ -1,4 +1,4 @@
-#### こん棒 (Club)
+#### こん棒 (Club) {#club}
 <!-- audit
 2026-05-19:
 - club and aklys stats verified (objects.h:371-373, 381-383)

@@ -1,4 +1,4 @@
-## 目次
+## 目次 {#table-of-contents}
 
 **第1部: 旅立ちの前に (Part One: Before You Set Out)**
 

@@ -1,4 +1,4 @@
-#### ジャバウォック `J` (Jabberwocks `J`)
+#### ジャバウォック `J` (Jabberwocks `J`) {#jabberwocks-j}
 
 <!-- audit
 2026-05-19:

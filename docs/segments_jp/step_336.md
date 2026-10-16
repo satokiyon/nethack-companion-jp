@@ -1,4 +1,4 @@
-#### ミイラ `M` (Mummies `M`)
+#### ミイラ `M` (Mummies `M`) {#mummies-m}
 
 <!-- audit
 2026-05-19:

@@ -1,4 +1,4 @@
-#### 巨人 `H` (Giant humanoids `H`)
+#### 巨人 `H` (Giant humanoids `H`) {#giant-humanoids-h}
 
 <!-- audit
 2026-05-19:

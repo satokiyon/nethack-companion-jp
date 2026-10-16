@@ -1,4 +1,4 @@
-#### 胴鎧 (Body armor / suits)
+#### 胴鎧 (Body armor / suits) {#body-armor-suits}
 
 ::: dense-table
 

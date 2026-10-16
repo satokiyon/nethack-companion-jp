@@ -5,7 +5,7 @@
 - mounted joust bonus: +2d10 primary, +2d2 off-hand (objects.h:351-352, uhitm.c:1546)
 - shatter chance 1/250 per successful joust (uhitm.c:2123-2125, 1559)
 -->
-#### ランス (Lance)
+#### ランス (Lance) {#lance}
 
 騎乗戦闘に特化して作られた近接武器。馬などの騎乗中に命中させると、馬上槍試合（Joust）による強大な追加ダメージを与えるチャンスがあります。徒歩でも有用な間合い攻撃（リーチ）武器として機能し、2マス離れた敵に使用（apply）して攻撃できます。
 

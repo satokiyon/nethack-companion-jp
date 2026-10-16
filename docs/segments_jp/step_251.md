@@ -1,4 +1,4 @@
-#### 複合コンダクト (Combining Conducts)
+#### 複合コンダクト (Combining Conducts) {#combining-conducts}
 
 <!-- audit
 2026-05-19:
@@ -19,4 +19,3 @@
 **盲目 (Blind / Zen)。** ゲーム全編を視覚なしでプレイします。ゲーム開始時に `OPTIONS=blind` を設定します。移動と戦闘にはテレパシーやその他の知覚手段が不可欠となります（NetHack 3.6 から公式追跡）。
 
 NetHack 5.0 では、さらに6つの追跡コンダクトが追加されました：赤貧 (Pauper)、ペットなし (Petless)、完全聾 (Permadeaf)、[倉庫番](#sokoban)、ボーンズなし (Bonesless)、そして振り直しなし (Unrerolled) です。Pauper、Permadeaf、Petless、Bonesless はゲーム開始前のオプション設定で宣言します。Sokoban はプレイ中の実際の行動に基づいて自動追跡され、Unrerolled はゲームが最初に提示したキャラクターを受け入れたことを記録します。
-

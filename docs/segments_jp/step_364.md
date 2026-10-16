@@ -1,4 +1,4 @@
-#### その他の知っておくべき変更点 (Other Changes Worth Knowing)
+#### その他の知っておくべき変更点 (Other Changes Worth Knowing) {#other-changes-worth-knowing}
 
 - *魅了 (charm monster)* はレベル5、*眠り (sleep)* はレベル3、*怪物混乱 (confuse monster)* はレベル1に変更されました。魔法書を使用（apply）することで、本の磨耗度を確認できます。
 - マインドフレアの触手攻撃は、マップの記憶や識別済みの記憶を消去しなくなりました。知力の低下、記憶していた呪文の忘却、武器スキルの経験値ドレインは依然として発生します。

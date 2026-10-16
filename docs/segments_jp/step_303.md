@@ -1,4 +1,4 @@
-#### 目および球体 `e` (Eyes and spheres `e`)
+#### 目および球体 `e` (Eyes and spheres `e`) {#eyes-and-spheres-e}
 
 <!-- audit
 2026-05-19:

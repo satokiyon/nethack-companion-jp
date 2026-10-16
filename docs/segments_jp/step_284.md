@@ -5,7 +5,7 @@
 - sling launches rocks, flint stones, and gems
 - Caveman starts with one sling
 -->
-#### スリング (Sling)
+#### スリング (Sling) {#sling}
 
 片手持ちの発射具。弾薬は床に落ちている（または持ち運んでいる）石や宝石なら何でも使えるため、弾薬費は実質的にゼロです。
 

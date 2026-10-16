@@ -1,4 +1,4 @@
-#### 精霊・エレメンタル `E` (Elementals `E`)
+#### 精霊・エレメンタル `E` (Elementals `E`) {#elementals-e}
 
 <!-- audit
 2026-05-19:

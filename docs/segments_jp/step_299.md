@@ -1,4 +1,4 @@
-#### 蟻および昆虫 `a` (Ants and insects `a`)
+#### 蟻および昆虫 `a` (Ants and insects `a`) {#ants-and-insects-a}
 
 <!-- audit
 2026-05-19:

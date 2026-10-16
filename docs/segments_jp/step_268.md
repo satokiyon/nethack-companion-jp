@@ -1,4 +1,4 @@
-#### 両手剣 (Two-handed sword)
+#### 両手剣 (Two-handed sword) {#two-handed-sword}
 <!-- audit
 2026-05-19:
 - two-handed sword stats verified (objects.h:273-285)

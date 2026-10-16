@@ -1,4 +1,4 @@
-#### 隠し扉の発見 (Finding Secret Doors)
+#### 隠し扉の発見 (Finding Secret Doors) {#finding-secret-doors}
 <!-- audit
 2026-05-19:
 - ring of searching auto-calls dosearch0(1) each turn unless level is noautosearch (allmain.c:342-344)
@@ -35,4 +35,3 @@
 - **祝福された地図の巻物 (Blessed scroll of magic mapping)**：フロア内のすべての隠し扉を通常扉へと変えて可視化します（祝福された巻物限定の効果です）。
 
 すでに下り階段が見つかっているなら、迷わず階段を降りましょう。壁叩きは出口や特殊な部屋が見つからないフロアでのみ行うべき手段であり、すべての階層で義務的に行う儀式ではありません。
-

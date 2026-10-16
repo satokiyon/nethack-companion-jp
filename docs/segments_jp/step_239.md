@@ -1,4 +1,4 @@
-#### 第3階層・バージョンB (Level 3, Version B) {.sokoban-level data-width=22 data-height=13}
+#### 第3階層・バージョンB (Level 3, Version B) {#level-3-version-b .sokoban-level data-width=22 data-height=13}
 <!-- audit
 2026-05-19:
 - Upstair at spoiler (16,7); lua (15,6) (soko2-2.lua:25).
@@ -66,4 +66,3 @@
 15. C を下へ2マス、(6,6) まで押す。C を H と同様に埋める。
 
 巨岩が5個（A, B, D, E, J）残ります。
-

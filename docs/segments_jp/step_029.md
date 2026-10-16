@@ -1,4 +1,4 @@
-### 注目の施設・地形 (Points of Interest)
+### 注目の施設・地形 (Points of Interest) {#points-of-interest}
 
 
 <!-- audit
@@ -58,5 +58,6 @@
 - Croesus answer (with Croesus alive): guard says "Oh, yes, of course. Sorry to have disturbed you." and `mongone(guard)` removes him (vault.c:513-543). No corridor opens. Player keeps gold but stays sealed inside.
 - Croesus answer with Croesus dead: guard goes hostile and attacks (vault.c:525-540).
 - Implication: lying keeps the gold but requires the player to have an independent way out (wand of digging, scroll of teleportation, level teleport, etc.). Truth-telling guarantees escape at the cost of the gold.
+-->
 
 地下深くへと潜っていく中で、特別なランドマーク（固定施設）に立ち寄る時間を作りましょう。フロアの随所に散らばるこれらの建造物は、好奇心旺盛な探索者に多大な報酬を与え、時には手痛い罰を下します。

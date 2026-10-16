@@ -1,4 +1,4 @@
-#### レイス `W` (Wraiths `W`)
+#### レイス `W` (Wraiths `W`) {#wraiths-w}
 
 <!-- audit
 2026-05-19:

@@ -6,7 +6,7 @@
 - enchanted boomerang hits (spe+1) times
 - useless underwater
 -->
-#### ブーメラン (Boomerang)
+#### ブーメラン (Boomerang) {#boomerang}
 
 投擲専用。放物線を描いて飛行し、途中の軌道が遮られていなければ投げた本人の手元へ戻ってきます。戻ってきたブーメランをキャッチするには器用 (Dex) の判定が必要です。
 

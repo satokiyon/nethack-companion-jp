@@ -1,4 +1,4 @@
-### モンスター図鑑一覧表 (Bestiary Tables)
+### モンスター図鑑一覧表 (Bestiary Tables) {#bestiary-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 monsters.h: no corrections. ~100% of the numeric columns (Lvl/Spd/AC/MR), color, and full attack lists verified across all ~55 tables, including the tricky cases (floating eye 0d70, black dragon disint, AD_DRST-as-poison stings, deferred/#if0 monsters correctly excluded).

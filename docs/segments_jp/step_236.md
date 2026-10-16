@@ -1,4 +1,4 @@
-#### 第2階層・バージョンA (Level 2, Version A) {.sokoban-level data-width=29 data-height=12}
+#### 第2階層・バージョンA (Level 2, Version A) {#level-2-version-a .sokoban-level data-width=29 data-height=12}
 
 ```
             11111111112222222222
@@ -28,4 +28,3 @@
 9. F と A を埋める。
 
 巨岩が5個（B, C, D, I, Q）残ります。
-

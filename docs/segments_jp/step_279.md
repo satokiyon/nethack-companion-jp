@@ -1,4 +1,4 @@
-#### トライデント (Trident)
+#### トライデント (Trident) {#trident}
 <!-- audit
 2026-05-19:
 - trident stats verified (objects.h:195)

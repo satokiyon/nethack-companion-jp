@@ -1,4 +1,4 @@
-#### 斧 (Axe)
+#### 斧 (Axe) {#axe}
 <!-- audit
 2026-05-19:
 - axe 1d6/1d4, battle-axe 1d8+1d4 small / 1d6+2d4 large with bonus dice (objects.h:236-241, weapon.c:251-289)

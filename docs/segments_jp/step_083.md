@@ -1,4 +1,4 @@
-### 即死の危険 (Ways to Die Instantly)
+### 即死の危険 (Ways to Die Instantly) {#ways-to-die-instantly}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -9,4 +9,3 @@
 迷宮には、現在の残りHPがどれほどあろうとも、たった1手でキャラクターを死に至らしめる要素がいくつか存在します。プレイヤーたちはこれらを「即死（instadeaths）」と呼びます。しかし、何に注意すべきかさえ知っていれば、ほぼすべての即死要因には1〜2ターン前の事前警告が存在します。
 
 > *以下に掲載する即死カタログは、Dylan O'Donnell氏のRGRNファイルをもとにまとめたTrevor Powell氏の『即死スポイラー (Instadeath Spoiler)』に着想を得ています。Trevor氏は即死を「プレイヤーのヒットポイントが0まで削られる過程を伴わずに発生する、たった1手での死亡」と定義し、その分類体系は今日までスタンダードなリファレンスとして使われ続けています。*
-

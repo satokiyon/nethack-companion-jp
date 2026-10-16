@@ -1,4 +1,4 @@
-#### 灰色石：4つの石、幸運は1つ (Gray Stones: Four Stones, One Lucky)
+#### 灰色石：4つの石、幸運は1つ (Gray Stones: Four Stones, One Lucky) {#gray-stones-four-stones-one-lucky}
 <!-- audit
 2026-05-18:
 - best mimic test here is SEARCH, not the pet: an explicit `s` adjacent to an object-mimic reveals it unconditionally — mfind0 (detect.c:1965) calls seemimic() for any M_AP_TYPE monster with NO rng roll (unlike SDOOR rnl(7-fund) / traps rnl(8)). the minend-1 mimics are appear_as="obj:..." => M_AP_OBJECT, so one search beside a suspect stone exposes it every time; a real stone stays a stone. reworked the prose to lead with search (consistent with the existing "A note on mimics" section, which already says search reveals mimics) instead of the fiddly pet-in-a-niche. search only flags mimics, so price-ID still separates the real luckstone from the cursed loadstone.

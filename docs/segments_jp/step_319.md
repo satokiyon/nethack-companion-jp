@@ -1,4 +1,4 @@
-#### ユニコーンおよび馬 `u` (Unicorns and horses `u`)
+#### ユニコーンおよび馬 `u` (Unicorns and horses `u`) {#unicorns-and-horses-u}
 
 馬（ポニー、馬、軍馬）は野生では敵対的に出現しますが、リンゴやニンジンを与えることで容易に手懐けられ、騎乗（Riding）スキルに活用できます。
 

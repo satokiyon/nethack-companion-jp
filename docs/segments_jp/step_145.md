@@ -1,4 +1,4 @@
-### 指輪と魔除け (Rings and Amulets)
+### 指輪と魔除け (Rings and Amulets) {#rings-and-amulets}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -23,4 +23,3 @@
 -->
 
 指輪は左右の手の指に1つずつ計2つ、魔除けは首に1つ身につけることができます。身につけるには `P`（Put on）、外すには `R`（Remove）を押します。指輪と魔除けはこのキーペアで操作します（防具の着脱は `W` と `T` です）。
-

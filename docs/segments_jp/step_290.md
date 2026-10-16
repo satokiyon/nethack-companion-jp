@@ -1,4 +1,4 @@
-#### ドラゴンの鱗 (Dragon scales)
+#### ドラゴンの鱗 (Dragon scales) {#dragon-scales}
 
 ::: dense-table
 

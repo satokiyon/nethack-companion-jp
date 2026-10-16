@@ -1,4 +1,4 @@
-#### ザンおよび幻想昆虫 `x` (Xans and fantastic insects `x`)
+#### ザンおよび幻想昆虫 `x` (Xans and fantastic insects `x`) {#xans-and-fantastic-insects-x}
 
 <!-- audit
 2026-05-19:

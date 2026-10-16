@@ -1,4 +1,4 @@
-#### 訓練と酷使をもたらす行動 (Actions That Exercise and Abuse)
+#### 訓練と酷使をもたらす行動 (Actions That Exercise and Abuse) {#actions-that-exercise-and-abuse}
 
 | 能力値 | 訓練となる行動 (Exercises) | 酷使となる行動 (Abuses) |
 |------|-----------|--------|
@@ -8,4 +8,3 @@
 | **賢明 (Wis)** | 能動的な千里眼、探知能力の成功（ゴールド/モンスター/食料探知）、自主的な祈り、価値ある生贄の奉納 | 混乱（Confusion）、幻覚（Hallucination）、呪われた啓蒙の読書、墓堀り（Gravedigging） |
 
 修道士に特有の2つの癖：断食によって「衰弱」状態にある修道士は賢明を鍛え、逆に「満腹」状態にある修道士は賢明を酷使します。
-

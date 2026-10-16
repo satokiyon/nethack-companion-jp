@@ -1,4 +1,4 @@
-#### 類人猿 `Y` (Apelike creatures `Y`)
+#### 類人猿 `Y` (Apelike creatures `Y`) {#apelike-creatures-y}
 
 <!-- audit
 2026-05-19:

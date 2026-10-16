@@ -1,4 +1,4 @@
-### 薬屋 (The Apothecary)
+### 薬屋 (The Apothecary) {#the-apothecary}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -18,4 +18,3 @@
 -->
 
 薬の外見（未識別名）はゲームごとにシャッフルされます。頼りになるのは価格と計画的なテストだけであり、「前回のゲームで泡立つ薬が回復の薬だった」という記憶は何の役にも立ちません。
-

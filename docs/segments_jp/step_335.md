@@ -1,4 +1,4 @@
-#### リッチ `L` (Liches `L`)
+#### リッチ `L` (Liches `L`) {#liches-l}
 
 <!-- audit
 2026-05-19:

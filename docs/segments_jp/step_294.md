@@ -1,4 +1,4 @@
-#### 小手・手袋 (Glovers)
+#### 小手・手袋 (Glovers) {#gloves-1}
 
 ::: dense-table
 

@@ -1,4 +1,4 @@
-#### シャツ (Shirts)
+#### シャツ (Shirts) {#shirts-1}
 
 ::: dense-table
 

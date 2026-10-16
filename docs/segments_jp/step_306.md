@@ -1,4 +1,4 @@
-#### 人型生物 `h` (Humanoids `h`)
+#### 人型生物 `h` (Humanoids `h`) {#humanoids-h}
 
 <!-- audit
 2026-05-19:

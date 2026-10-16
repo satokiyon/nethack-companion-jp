@@ -1,4 +1,4 @@
-#### 四足獣 `q` (Quadrupeds `q`)
+#### 四足獣 `q` (Quadrupeds `q`) {#quadrupeds-q}
 
 <!-- audit
 2026-05-19:

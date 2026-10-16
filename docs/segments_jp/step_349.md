@@ -1,4 +1,4 @@
-#### ゾンビ `Z` (Zombies `Z`)
+#### ゾンビ `Z` (Zombies `Z`) {#zombies-z}
 
 <!-- audit
 2026-05-19:

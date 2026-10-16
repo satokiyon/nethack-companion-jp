@@ -1,4 +1,4 @@
-#### 薬の一覧表 (The Potion Table)
+#### 薬の一覧表 (The Potion Table) {#the-potion-table}
 
 各薬の基本的な効果と、ラベルからは読み取れない隠れた用途を以下にまとめます。未識別の薬の候補を絞り込むための価格については [薬の価格](#potion-prices) を参照してください。特に重要な薬については、後述の [主要な薬](#key-potions) で詳しく解説します。出現確率は自然生成される薬の中に占める割合であり、深度によって変化しません。
 
@@ -35,4 +35,3 @@
 NOT grease or rustproof items (no POT_OIL link to greased / erode /
 rust anywhere in src/*.c); that protection comes from the can of
 grease. -->
-

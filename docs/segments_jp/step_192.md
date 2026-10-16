@@ -1,4 +1,4 @@
-#### 職業別スキル上限表 (Per-Role Skill Caps)
+#### 職業別スキル上限表 (Per-Role Skill Caps) {#per-role-skill-caps}
 
 <!-- audit
 2026-05-19:
@@ -13,7 +13,7 @@
 
 空欄（—）のスキルであっても使用不能というわけではなく、永遠に「未習熟」のままであることを意味します。治療師であっても衝撃の魔法書を読んで唱えることは可能ですし、魔法使いであっても長剣を振り回すことはできます。ただし、[スキル階梯](#the-skill-ladder) に記された未習熟のペナルティ（武器なら −4/−2、二刀流なら1打撃ごとに −9/−3、魔法系統なら高い詠唱失敗率）を常に支払い続け、成長の余地はありません。職業略称：Arc=考古学者、Bar=野蛮人、Cav=洞窟人、Hea=治療師、Kni=騎士、Mon=武闘家、Pri=司祭、Rog=盗賊、Ran=レンジャー、Sam=侍、Tou=観光客、Val=ワルキューレ、Wiz=魔法使い。
 
-##### 武器スキル上限表 (Weapon Skill Caps)
+##### 武器スキル上限表 (Weapon Skill Caps) {#weapon-skill-caps}
 
 ::: dense-table
 
@@ -51,7 +51,7 @@
 
 5.0 ではシミターはサーベルに統合されました。現在はどちらも同一のスキルを参照します。
 
-##### 戦闘スタイル上限表 (Fighting Style Caps)
+##### 戦闘スタイル上限表 (Fighting Style Caps) {#fighting-style-caps}
 
 ::: dense-table
 
@@ -66,7 +66,7 @@
 
 武術を扱えるのは武闘家と侍だけであり、総師範 (Grand Master)に到達できるのは武闘家のみです。
 
-##### 魔法系統上限表 (Spell School Caps)
+##### 魔法系統上限表 (Spell School Caps) {#spell-school-caps}
 
 ::: dense-table
 

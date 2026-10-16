@@ -1,4 +1,4 @@
-#### 短剣 (Dagger)
+#### 短剣 (Dagger) {#dagger}
 <!-- audit
 2026-05-19:
 - Expert Rogue dagger multishot caps at rnd(4) = 1-4: 1 base + 1 Expert + 1 Skilled + 1 class (dothrow.c:177-190, 63-67)

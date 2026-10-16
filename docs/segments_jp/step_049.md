@@ -1,4 +1,4 @@
-#### 危険な罠 (Dangerous Traps)
+#### 危険な罠 (Dangerous Traps) {#dangerous-traps}
 <!-- audit
 2026-05-20:
 - random polymorph timer is rn1(500, 500) = 500-999 turns (polyself.c:813); decremented each turn until 0

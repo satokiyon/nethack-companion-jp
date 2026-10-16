@@ -1,4 +1,4 @@
-#### 使用テスト（慎重なアプローチ） (Use-Testing (The Careful Way))
+#### 使用テスト（慎重なアプローチ） (Use-Testing (The Careful Way)) {#use-testing-the-careful-way}
 <!-- audit
 2026-05-18:
 - engrave-test messages: fire "Flames fly", cold "A few ice cubes drop", lightning "Lightning arcs", digging "Gravel flies up", magic missile "riddled by bullet holes" (engrave.c, zap.c)
@@ -45,7 +45,7 @@
 
 ただし価格はシャッフルされません。価格を確認することで、安全な靴やクロークと呪われた品とを判別できます。
 
-##### 防具の価格 (Armor Prices)
+##### 防具の価格 (Armor Prices) {#armor-prices}
 
 | 価格 | 防具の部位 | 該当アイテム |
 | ---: | --- | --- |
@@ -62,4 +62,3 @@
 <div class="price-id-toolbar"></div>
 
 30ゴールドの靴は危険信号です。どちらの候補も通常呪われて生成されます。50ゴールドの靴はどれも当たりです。60ゴールドのクロークは透明か耐魔の2択です。価格だけでは8ゴールドのエルフの靴と蹴り挙げ靴、あるいは50ゴールドの3種類の小手を区別できません。BUCをテストした上で実際に装備し、表示されるメッセージを観察してください。
-

@@ -1,4 +1,4 @@
-#### 識別と状態変化 (Identification and Status Changes)
+#### 識別と状態変化 (Identification and Status Changes) {#identification-and-status-changes}
 
 | メッセージ | 意味 |
 |------------|------|
@@ -27,4 +27,3 @@
 | *"Wow! This makes you feel great!"*<br>（おお！ 素晴らしい気分だ！） | 祝福された「能力回復の薬」を飲んですべての能力値が回復したか、あるいは魔法の泉の水を飲みました。 |
 
 ---
-

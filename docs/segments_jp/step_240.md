@@ -1,4 +1,4 @@
-#### 第4階層・バージョンA (Level 4, Version A) {.sokoban-level data-width=26 data-height=18}
+#### 第4階層・バージョンA (Level 4, Version A) {#level-4-version-a .sokoban-level data-width=26 data-height=18}
 
 このバージョンの賞品は通常 **軽量化の鞄** ですが、4分の1 の確率で代わりに **反射の魔除け** になります。
 
@@ -85,4 +85,3 @@
 19. B と D を C と同様に埋める。
 
 巨岩が2個（A と E）残ります。軽量化の鞄または魔除けの賞品は、モンスター動物園（treasure zoo）に隣接する小部屋群（(17,12), (17,14), (17,16)）のいずれかに収められています。
-

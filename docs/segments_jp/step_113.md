@@ -1,4 +1,4 @@
-#### 価格識別 (The Price Is Right)
+#### 価格識別 (The Price Is Right) {#the-price-is-right}
 <!-- audit
 2026-05-18:
 - buy/sell multipliers and Cha bands match shk.c get_cost/set_cost
@@ -51,4 +51,3 @@
 以下に、アイテム種別ごとの価格表を掲載します。
 
 ::: print-only
-

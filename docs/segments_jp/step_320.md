@@ -1,4 +1,4 @@
-#### 渦 `v` (Vortices `v`)
+#### 渦 `v` (Vortices `v`) {#vortices-v}
 
 <!-- audit
 2026-05-19:

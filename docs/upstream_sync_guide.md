@@ -65,13 +65,15 @@ git merge upstream/main -m "Sync: 本家の最新コミットを取り込み"
 1. 用語集（`docs/glossary_references/` および `docs/glossary_custom.txt`）を参照して翻訳。
 2. 誤訳・不自然な表現ナレッジ（`docs/translation_review_notes.md`）に違反していないかセルフレビュー。
 3. 該当するセグメントファイル（`docs/segments_jp/step_*.md`）を書き換え、`python tools/assemble_companion.py` で `spoilers/companion.jp.md` を再生成します。
+   - **アンカーID（`{#xxxxx}`）の保持・自動同期**: 見出しの表示文字列のみを日本語にし、アンカーIDは英語のまま維持します。万一新規見出し等で `{#xxxxx}` を省略しても、`assemble_companion.py` が原著 `spoilers/companion.md` の見出しから英語アンカーIDを自動算出して `step_*.md` と `companion.jp.md` に補完します。
 
 ### ステップ 6: 自動品質チェックの実行
-修正後、用語集チェックおよびASCIIマップチェックを実行します。
+修正後、用語集チェック、ASCIIマップチェック、および5重の完全性検証（アンカーID英語化・リンク切れゼロ検証を含む）を実行します。
 
 ```powershell
 python tools/check_glossary.py spoilers/companion.jp.md
 python spoilers/check_ascii_maps.py spoilers/companion.jp.md
+python tools/verify_completion.py
 ```
 
 問題がなければ、`docs/translation_progress.json` の該当ステップを `"reviewed"` に戻します。

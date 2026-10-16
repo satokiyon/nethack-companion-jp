@@ -1,4 +1,4 @@
-### 倉庫番の解答 (Sokoban Solutions)
+### 倉庫番の解答 (Sokoban Solutions) {#sokoban-solutions}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 dat/soko*.lua: no corrections. Verified prize odds (75/25), prize-chamber coords, variant->file mapping (spoiler L_N = soko(5-N)), pit-vs-hole per level, boulder tallies, scroll-of-earth positions, luck penalty, air-current mechanic.
@@ -42,4 +42,3 @@
 階層を解き終えたら、余った巨岩は部屋の隅に押し込んでおき、後から戻ってきたときに通路を塞がれないようにしましょう。巨岩の下にアイテムが隠されていることもあります。
 
 **反転（ミラーリング）に関する注意。** 倉庫番に到達した時点で、マップは最初から全域が表示されています。ゲーム画面の壁の輪郭をここに掲載されたマップと見比べてください。もし左右反転（または上下反転）している場合は、全手順の「左」と「右」（または「上」と「下」）を入れ替え、反対側の端から列を数えてください（Web版のフリップボタンを使えば視覚的に反転できます）。
-

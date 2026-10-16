@@ -1,4 +1,4 @@
-#### サーベル (Saber)
+#### サーベル (Saber) {#saber}
 <!-- audit
 2026-05-19:
 - 10 saber cells verified clean (objects.h)

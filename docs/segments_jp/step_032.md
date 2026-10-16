@@ -1,4 +1,4 @@
-#### 玉座 (Thrones) `\`
+#### 玉座 (Thrones) `\` {#thrones}
 
 玉座は華麗な王の座席で、記号 `\` で表され、専用の部屋に時折現れます。玉座に座る（`#sit`）ことは、迷宮における最も純粋なギャンブルです。起こりうる結果の一覧は、まるで願いのリストと暗殺命令書を混ぜ合わせたような内容です：
 
@@ -21,4 +21,3 @@
      activation, rnd(13) for effect, !rn2(3) for vanishing.
      Vlad's throne: special_throne_effect(), cases 1-4 grant wish and
      destroy throne, cases 5-13 are negative but throne survives. -->
-

@@ -1,4 +1,4 @@
-### 武器一覧表 (Weapons Tables)
+### 武器一覧表 (Weapons Tables) {#weapons-tables}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 objects.h + weapon.c: no corrections. Every weapon row (base/bonus dice, weight, cost, to-hit, material, two-handed/launcher/skill notes) verified, including composite-damage entries vs dmgval().

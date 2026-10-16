@@ -1,4 +1,4 @@
-#### ダメージ耐性 (Damage resistances)
+#### ダメージ耐性 (Damage resistances) {#damage-resistances}
 
 最も範囲が広く、最も活用される能力群です。大半は序盤に死体を食べることで獲得できます。魔法防御（Magic resistance）は獲得手段が極めて限られているため、昇天用装備セットでは防具、武器、アーティファクトの枠を1つ確保して補うのが基本です。
 

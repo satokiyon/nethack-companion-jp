@@ -1,4 +1,4 @@
-#### ハンマー (Hammer)
+#### ハンマー (Hammer) {#hammer}
 <!-- audit
 2026-05-19:
 - war hammer stats verified (objects.h:367-369, weapon.c); +1 small bonus matches sdam/ldam fields

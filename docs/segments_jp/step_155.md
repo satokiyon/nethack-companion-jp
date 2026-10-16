@@ -1,4 +1,4 @@
-#### その他の注目すべき道具 (Other Notable Tools)
+#### その他の注目すべき道具 (Other Notable Tools) {#other-notable-tools}
 
 | 道具の名称 | 用途と特徴 |
 | --- | --- |
@@ -14,4 +14,3 @@
 | [水晶玉 (Crystal ball)](#tool-crystal-ball) | 指定した記号のアイテムや敵をフロア全体からスキャン探索 |
 | 開放の鐘 (Bell of Opening) | 召喚の儀式アイテム。クエストネメシスを倒して死体から回収 |
 | 紐 (leash) | ペットを繋ぎ止め、階段移動時に確実に追従させる |
-

@@ -5,7 +5,7 @@
 - Rogue starter (u_init.c:134); Samurai "wakizashi" is a short sword aliased in objnam.c:106 (u_init.c:144)
 - no artifact uses SHORT_SWORD as base type
 -->
-#### 小剣 (Short sword)
+#### 小剣 (Short sword) {#short-sword}
 
 片手持ち近接武器。脇差（wakizashi）と小剣（short sword）は職業による表示名が異なるだけで、同一の武器です。
 

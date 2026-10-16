@@ -6,7 +6,7 @@
 - mattock is bimanual: gets 3/2 Str damage bonus in melee (uhitm.c:1467-1468)
 - dig-down creates a pit, then a hole (dig.c:432-433, 372-374)
 -->
-#### つるはし (Pick-axe)
+#### つるはし (Pick-axe) {#pick-axe}
 
 近接武器かつ掘削道具。`a` (apply) キーで使用することで、任意の方向の壁や床を掘り進めることができます。ドワーフのつるはしも同様の機能を持ち、こちらは両手持ちです。
 

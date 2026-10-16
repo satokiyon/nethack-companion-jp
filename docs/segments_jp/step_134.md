@@ -1,4 +1,4 @@
-### 巻物入れ (The Scroll Rack)
+### 巻物入れ (The Scroll Rack) {#the-scroll-rack}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -7,4 +7,3 @@
 -->
 
 巻物は、ダンジョンにおける使い捨ての呪文です。1回読む（`r`）と効果が発動し、消滅します。巻物にはゲームごとにランダムにシャッフルされた奇妙な文字列（「ZELGO MER」、「DAIYEN FOOELS」、「PRATYAVAYAH」など）がラベルとして印字されており、識別するまでは意味を持ちません。
-

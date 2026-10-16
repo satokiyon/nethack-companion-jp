@@ -1,4 +1,4 @@
-### 迷宮の地形と構造 (The Lay of the Land)
+### 迷宮の地形と構造 (The Lay of the Land) {#the-lay-of-the-land}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified DoD depths, all branch placements, Gehennom & Elemental Planes ordering (dungeon.lua), Sokoban/Orcus prizes, Big Room 40%, map symbols.
@@ -32,4 +32,3 @@
 -->
 
 脅威の迷宮の構造はゲームごとに毎回新しく生成されますが、各分岐ダンジョン、特殊フロア、そして大まかな階層の深さは常に一定です。その全体の骨格を把握していれば、次に何が待ち受けているかを常に予測することができます。
-

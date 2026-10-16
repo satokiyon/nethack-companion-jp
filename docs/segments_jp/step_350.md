@@ -1,4 +1,4 @@
-#### 人間およびエルフ `@` (Humans and elves `@`)
+#### 人間およびエルフ `@` (Humans and elves `@`) {#humans-and-elves}
 
 <!-- audit
 2026-05-19:

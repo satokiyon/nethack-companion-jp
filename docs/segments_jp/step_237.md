@@ -1,4 +1,4 @@
-#### 第2階層・バージョンB (Level 2, Version B) {.sokoban-level data-width=26 data-height=14}
+#### 第2階層・バージョンB (Level 2, Version B) {#level-2-version-b .sokoban-level data-width=26 data-height=14}
 <!-- audit
 2026-05-19:
 - 16-boulder layout and all 22 solution steps verified by simulation against soko3-2.lua.
@@ -97,4 +97,3 @@
 22. E を右へ2マス、(7,6) まで押す。E を F と同様に埋める。
 
 巨岩が4個（A, D, G, H）残ります。
-

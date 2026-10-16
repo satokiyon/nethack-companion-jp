@@ -1,4 +1,4 @@
-#### ドラゴン `D` (Dragons `D`)
+#### ドラゴン `D` (Dragons `D`) {#dragons-d}
 
 <!-- audit
 2026-05-19:

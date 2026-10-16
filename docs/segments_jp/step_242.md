@@ -1,4 +1,4 @@
-### 自主的挑戦 (Voluntary Challenges)
+### 自主的挑戦 (Voluntary Challenges) {#voluntary-challenges}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -36,4 +36,3 @@ NetHack を一度クリア（昇天）した冒険者の多くは、さらなる
 | 振り直しなし (Unrerolled) | 最初に提示されたキャラクターをそのまま受け入れる | 最初のキャラを受け入れ |
 
 :::
-

@@ -7,7 +7,7 @@
 - Archeologist starts with bullwhip +1 at Basic (apply.c:2992-2993)
 - no whip artifacts
 -->
-#### 鞭 (Whip)
+#### 鞭 (Whip) {#whip}
 
 軽量な片手近接武器であり、実用的な道具でもあります。鞭を `#apply`（使用）することで、隣接するモンスターの武器を叩き落としたり（武装解除）、落とし穴から自分自身を引き上げたりできます。
 

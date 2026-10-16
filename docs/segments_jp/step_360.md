@@ -1,4 +1,4 @@
-#### 特殊および実用能力 (Special and utility)
+#### 特殊および実用能力 (Special and utility) {#special-and-utility}
 
 満腹度、変身、生存、群衆制御に関わる特殊能力です。
 

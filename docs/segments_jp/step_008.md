@@ -1,4 +1,4 @@
-#### 役職 (The Roles)
+#### 役職 (The Roles) {#the-roles}
 
 | 役職 (Role) | 属性 (Alignments) | 種族 (Races) | 序盤の強み (Early edge) | 主な難点 (Main difficulty) |
 |---|---|---|---|---|

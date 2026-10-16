@@ -1,4 +1,4 @@
-### 実践的な識別戦略 (A Practical Identification Strategy)
+### 実践的な識別戦略 (A Practical Identification Strategy) {#a-practical-identification-strategy}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source: no corrections. Verified every price-group membership (scrolls/potions/rings/wands/spellbooks/armor/gems, objects.h), Charisma buy/sell multipliers & surcharges (shk.c), cursed gain-level rise, shopkeeper buyoff.
@@ -15,4 +15,3 @@
 
 :::
 <!-- FLOWCHART-END -->
-

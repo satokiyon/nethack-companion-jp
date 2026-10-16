@@ -1,4 +1,4 @@
-#### 第3階層・バージョンA (Level 3, Version A) {.sokoban-level data-width=20 data-height=12}
+#### 第3階層・バージョンA (Level 3, Version A) {#level-3-version-a .sokoban-level data-width=20 data-height=12}
 
 ```
             11111111112
@@ -32,4 +32,3 @@
 13. D を上へ2マス、次に左へ (5,4) まで押す。D を E と同様に埋める。
 
 巨岩が3個（F, G, H）残ります。
-

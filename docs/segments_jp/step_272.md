@@ -1,4 +1,4 @@
-#### メイス (Mace)
+#### メイス (Mace) {#mace}
 <!-- audit
 2026-05-19:
 - mace stats verified (objects.h:355-361)

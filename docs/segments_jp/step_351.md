@@ -1,4 +1,4 @@
-#### 大悪魔 `&` (Major demons `&`)
+#### 大悪魔 `&` (Major demons `&`) {#major-demons}
 
 <!-- audit
 2026-05-19:

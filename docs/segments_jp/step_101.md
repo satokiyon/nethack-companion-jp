@@ -1,4 +1,4 @@
-#### 僧侶への寄付 (Donating to Priests)
+#### 僧侶への寄付 (Donating to Priests) {#donating-to-priests}
 
 自分自身の神殿の中にいる平和的な僧侶は、寄付を受け付けてくれます。僧侶に向かって `#chat` で話しかけるとプロンプトが表示されます：*「いくら寄付しますか？ (推奨額: X または Y)」*。この2つの数字は、2段階の報酬ティアに対応する僧侶からの推奨金額です。
 
@@ -27,4 +27,3 @@
      rn1(101, 150 + cheapskate * 40) × u.ulevelpeak. Tier thresholds
      at suggested × quan, 2 × suggested × quan, 3 × suggested × quan,
      where quan = max(1, money / (3 × suggested × XL)). -->
-

@@ -4,7 +4,7 @@
 - is_poisonable (obj.h:264-268)
 - Samurai trains to Expert (u_init.c:481)
 -->
-#### 手裏剣 (Shuriken)
+#### 手裏剣 (Shuriken) {#shuriken}
 
 投擲専用。修道士（Monk）は手裏剣投擲時にマルチショット+1のボーナスを得られます。
 

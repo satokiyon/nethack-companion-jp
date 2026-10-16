@@ -1,4 +1,4 @@
-#### コボルド `k` (Kobolds `k`)
+#### コボルド `k` (Kobolds `k`) {#kobolds-k}
 
 <!-- audit
 2026-05-19:

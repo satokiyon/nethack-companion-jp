@@ -1,4 +1,4 @@
-#### 感覚と知覚 (Senses and perception)
+#### 感覚と知覚 (Senses and perception) {#senses-and-perception}
 
 テレパシーと警告は、敵が接近する前にその存在と位置を正確に感知させてくれます。
 

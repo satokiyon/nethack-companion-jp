@@ -1,4 +1,4 @@
-#### キーストン・コップ `K` (Keystone Kops `K`)
+#### キーストン・コップ `K` (Keystone Kops `K`) {#keystone-kops-k}
 
 <!-- audit
 2026-05-19:

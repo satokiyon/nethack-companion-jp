@@ -1,4 +1,4 @@
-#### 新たな道具とチャンス (New Tools and Opportunities)
+#### 新たな道具とチャンス (New Tools and Opportunities) {#new-tools-and-opportunities}
 
 - **ドラゴンの鱗鎧が強力な二次効果を持つようになりました。** 黒は吸命耐性、緑は病気耐性、青は高速移動、橙は自由行動、白は消化遅延、赤は赤外線視覚を追加付与し、金は幻覚耐性に加えて半径3マスの恒久光源となります。
 - **知性の兜 (helm of caution)** が警告能力を付与します。**飛行の魔除け (amulet of flying)** は自身と騎乗ペットの両方に飛行を与え、**守りの魔除け (amulet of guarding)** は AC+2 および MC+2 を提供します。

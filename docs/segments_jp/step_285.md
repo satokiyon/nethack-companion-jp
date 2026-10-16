@@ -4,7 +4,7 @@
 - darts are poisonable (is_poisonable)
 - Tourist starts with 21-40 darts via trquan() = 21+rn2(20), NOT ~25-60 (u_init.c:150-151)
 -->
-#### 投げ矢 (Dart)
+#### 投げ矢 (Dart) {#dart}
 
 投擲専用。大量にスタックでき、重量がほとんどなく、病気の薬から毒を塗布することができます。
 

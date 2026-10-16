@@ -1,4 +1,4 @@
-#### ミミック `m` (Mimics `m`)
+#### ミミック `m` (Mimics `m`) {#mimics-m}
 
 <!-- audit
 2026-05-19:

@@ -1,4 +1,4 @@
-#### 長剣 (Long sword)
+#### 長剣 (Long sword) {#long-sword}
 <!-- audit
 2026-05-19:
 - long sword stats verified (objects.h:270-280)

@@ -1,4 +1,4 @@
-#### 長柄武器 (Polearms)
+#### 長柄武器 (Polearms) {#polearms}
 <!-- audit
 2026-05-19:
 - 12 polearm rows verified: all two-handed, all P_POLEARMS, all iron (objects.h:294-341).

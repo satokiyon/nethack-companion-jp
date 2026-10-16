@@ -1,6 +1,6 @@
 ---
 
-### ゲヘナ突入 (Into Gehennom)
+### ゲヘナ突入 (Into Gehennom) {#into-gehennom}
 
 <!-- audit
 2026-07-30 accuracy pass vs NetHack-5.0 source:
@@ -10,4 +10,3 @@
 -->
 
 ここから先は、冒険の最終段階であるゲヘナの深淵と、イェンダーの魔除けを奪取して地上へと駆け上がる「昇天への旅路」を解説します。
-

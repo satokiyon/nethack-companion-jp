@@ -1,4 +1,4 @@
-#### 願いの構文 (Wish Syntax)
+#### 願いの構文 (Wish Syntax) {#wish-syntax}
 
 <!-- audit
 2026-05-18:
