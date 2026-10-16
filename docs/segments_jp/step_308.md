@@ -14,8 +14,8 @@
 
 | モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
 |---|---|---|---|---|---|---|---|
-| 青色ゼリー (blue jelly) | 青色 | 4 | 0 | 8 | 10 | 反撃 5d6 冷気 | corpse: cold + poison resistance. |
-| まだらゼリー (spotted jelly) | 緑色 | 5 | 0 | 8 | 10 | 反撃 6d6 酸 | corpse: temp acid + stone resistance. |
-| 黄土色ゼリー (ochre jelly) | 茶色 | 6 | 3 | 8 | 20 | engulf 3d6 酸 · 反撃 3d6 酸 | corpse: temp acid + stone resistance. |
+| 青色ゼリー (blue jelly) | 青色 | 4 | 0 | 8 | 10 | 反撃 5d6 冷気 | 死体：冷気耐性・毒耐性獲得。 |
+| まだらゼリー (spotted jelly) | 緑色 | 5 | 0 | 8 | 10 | 反撃 6d6 酸 | 死体：一時的な酸耐性・石化耐性獲得。 |
+| 黄土色ゼリー (ochre jelly) | 茶色 | 6 | 3 | 8 | 20 | engulf 3d6 酸 · 反撃 3d6 酸 | 死体：一時的な酸耐性・石化耐性獲得。 |
 
 :::

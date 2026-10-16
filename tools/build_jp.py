@@ -47,6 +47,10 @@ def build(skip_pdf=False):
         print("companion.jp.md が存在しないためスキップします。")
 
     print("\n=== 2. 日本語 HTML 版のビルド (Pandoc) ===")
+    create_tpl_script = os.path.join(root_dir, 'tools', 'create_template_jp.py')
+    if os.path.exists(create_tpl_script):
+        subprocess.run([sys.executable, create_tpl_script], cwd=root_dir, check=True)
+
     cmd_pandoc = [
         'pandoc',
         jp_md,

@@ -4366,8 +4366,8 @@
       "title": "Other Changes Worth Knowing",
       "orig_header": "Other Changes Worth Knowing",
       "start_line": 14052,
-      "end_line": 14081,
-      "line_count": 30,
+      "end_line": 14079,
+      "line_count": 28,
       "status": "reviewed",
       "notes": ""
     },
@@ -4377,9 +4377,9 @@
       "section": "What Changed Since Last Time",
       "title": "Index of Useful Knowledge (Part 1)",
       "orig_header": "Index of Useful Knowledge",
-      "start_line": 14082,
+      "start_line": 14080,
       "end_line": 14182,
-      "line_count": 101,
+      "line_count": 103,
       "status": "reviewed",
       "notes": ""
     },

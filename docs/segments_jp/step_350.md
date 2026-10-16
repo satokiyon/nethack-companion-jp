@@ -9,83 +9,83 @@
 - Master Assassin is the primary Rogue quest nemesis (Rog-goal.lua:72), NOT a backup.
 -->
 
-`@` のシンボルだけで相手を判断してはなりません。平和的な店主、僧侶、番兵、クエストリーダーであることもあれば、メデューサ、各職業のネメシス、富豪クロイソス、あるいはイェンダーの魔法使いである可能性もあります。動く前に対象の名前を必ず確認してください。このクラスには兵士、忍者、ドッペルゲンガー、獣人、冒険者、そしてプレイヤー自身も含まれます。
+最も多彩で予測不可能なクラスです。友好的な店主や見張り、神官から、凶悪な暗殺者、各職業のクエストリーダーや宿敵、そして最後の敵イェンダーの魔法使いまでが含まれます。マップ上の `@` を見ただけで油断してはなりません。
 
 ::: dense-table
 
 | モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
 |---|---|---|---|---|---|---|---|
 | 人間 (human) | 白色 | 0 | 12 | 10 | 0 | 武器攻撃 1d6 |  |
-| ねずみ人間 (wererat) | 茶色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
-| ジャッカル人間 (werejackal) | 赤色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
-| 狼人間 (werewolf) | 橙色 | 5 | 12 | 10 | 20 | 武器攻撃 2d4 | 自動回復. 死体を残さない。 |
-| エルフ (elf) | 白色 | 0 | 12 | 10 | 2 | 武器攻撃 1d8 | sees-不可視. |
-| Woodland-elf | 緑色 | 4 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
-| Green-elf | 明緑 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
-| Grey-elf | 灰色 | 6 | 12 | 10 | 10 | 武器攻撃 2d4 | sees-不可視. |
-| elf-lord | 明青 | 8 | 12 | 10 | 20 | 武器攻撃 2d4 ×2 | sees-不可視. |
-| Elvenking | 赤紫 | 9 | 12 | 10 | 25 | 武器攻撃 2d4 ×2 | sees-不可視. |
-| ドッペルゲンガー (doppelganger) | 白色 | 9 | 12 | 5 | 20 | 武器攻撃 1d12 | shapeshifter. |
-| 店主 (shopkeeper) | 白色 | 12 | 16 | 0 | 50 | 武器攻撃 4d4 ×2 | starts peaceful. Don't anger one. |
-| 番兵 (guard) | 青色 | 12 | 12 | 10 | 40 | 武器攻撃 4d10 | starts peaceful. |
-| 囚人 (prisoner) | 白色 | 12 | 12 | 10 | 0 | 武器攻撃 1d6 | starts peaceful. |
-| 賢者 (Oracle) | 明青 | 12 | 0 | 0 | 50 | 反撃 13d4 魔法 | starts peaceful. |
-| priest | 白色 | 12 | 12 | 10 | 50 | 武器攻撃 4d10 · 蹴り 1d4 · cast cleric | starts peaceful. Temple defenders. Convert their altars or sacrifice on them. |
-| high priest | 白色 | 25 | 15 | 7 | 70 | 武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視. Endgame altar guardian. Don't fight one head-on. |
-| 兵士 (soldier) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | follows stairs. |
-| 下士官 (sergeant) | 赤色 | 8 | 10 | 10 | 5 | 武器攻撃 2d6 | follows stairs. |
-| 看護婦 (nurse) | 白色 | 11 | 6 | 0 | 0 | 爪 2d6 heal |  |
-| 副官 (lieutenant) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | follows stairs. |
-| 指揮官 (captain) | 青色 | 12 | 10 | 10 | 15 | 武器攻撃 4d4 ×2 | follows stairs. |
-| 見張り (watchman) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | follows stairs, starts peaceful. |
-| 見張りの隊長 (watch captain) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | follows stairs, starts peaceful. |
-| メデューサ (Medusa) | 明緑 | 20 | 12 | 2 | 50 | 武器攻撃 2d4 · 爪 1d8 · 凝視 石化 · 噛みつき 1d6 毒 | 飛行, 遊泳, 水陸両用, 死体に毒あり. |
-| イェンダーの魔法使い (Wizard of Yendor) | 明紫 | 30 | 12 | -8 | 100 | 爪 2d12 盗み-amulet · cast spell | 飛行, 自動回復, sees-不可視, 火炎耐性, poison-res. Covetous: テレポート to you in late Gehennom and on the planes. The final boss. |
-| クロイソス (Croesus) | 赤紫 | 20 | 15 | 0 | 40 | 武器攻撃 4d10 | sees-不可視, follows stairs. Vault guardian on Fort Ludios. Wields a two-handed sword and hoards gold, gems, and magic items off the floor. |
-| 考古学者 (archeologist) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 | tunnels. |
+| ねずみ人間 (wererat) | 茶色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復。死体を残さない。 |
+| ジャッカル人間 (werejackal) | 赤色 | 2 | 12 | 10 | 10 | 武器攻撃 2d4 | 自動回復。死体を残さない。 |
+| 狼人間 (werewolf) | 橙色 | 5 | 12 | 10 | 20 | 武器攻撃 2d4 | 自動回復。死体を残さない。 |
+| エルフ (elf) | 白色 | 0 | 12 | 10 | 2 | 武器攻撃 1d8 | 不可視視認. |
+| 森のエルフ (Woodland-elf) | 緑色 | 4 | 12 | 10 | 10 | 武器攻撃 2d4 | 不可視視認. |
+| 緑エルフ (Green-elf) | 明緑 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | 不可視視認. |
+| 灰色エルフ (Grey-elf) | 灰色 | 6 | 12 | 10 | 10 | 武器攻撃 2d4 | 不可視視認. |
+| エルフの貴族 (elf-lord) | 明青 | 8 | 12 | 10 | 20 | 武器攻撃 2d4 ×2 | 不可視視認. |
+| エルフの君主 (Elvenking) | 赤紫 | 9 | 12 | 10 | 25 | 武器攻撃 2d4 ×2 | 不可視視認. |
+| ドッペルゲンガー (doppelganger) | 白色 | 9 | 12 | 5 | 20 | 武器攻撃 1d12 | シェイプシフター. |
+| 店主 (shopkeeper) | 白色 | 12 | 16 | 0 | 50 | 武器攻撃 4d4 ×2 | 初期状態は友好的。決して怒らせてはならない。 |
+| 番兵 (guard) | 青色 | 12 | 12 | 10 | 40 | 武器攻撃 4d10 | 初期状態は友好的. |
+| 囚人 (prisoner) | 白色 | 12 | 12 | 10 | 0 | 武器攻撃 1d6 | 初期状態は友好的. |
+| 賢者 (Oracle) | 明青 | 12 | 0 | 0 | 50 | 反撃 13d4 魔法 | 初期状態は友好的. |
+| 神官 (priest) | 白色 | 12 | 12 | 10 | 50 | 武器攻撃 4d10 · 蹴り 1d4 · 僧侶呪文 | 初期状態は友好的。寺院の守護者。彼らの祭壇を改宗させるか生贄を捧げること。 |
+| 高位神官 (high priest) | 白色 | 25 | 15 | 7 | 70 | 武器攻撃 4d10 · 蹴り 2d8 · 呪文詠唱 2d8 cleric ×2 | 不可視視認。最終盤の祭壇守護者。正面から戦ってはならない。 |
+| 兵士 (soldier) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | 階段を追跡. |
+| 下士官 (sergeant) | 赤色 | 8 | 10 | 10 | 5 | 武器攻撃 2d6 | 階段を追跡. |
+| 看護婦 (nurse) | 白色 | 11 | 6 | 0 | 0 | 爪 2d6 回復 |  |
+| 副官 (lieutenant) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | 階段を追跡. |
+| 指揮官 (captain) | 青色 | 12 | 10 | 10 | 15 | 武器攻撃 4d4 ×2 | 階段を追跡. |
+| 見張り (watchman) | 灰色 | 6 | 10 | 10 | 0 | 武器攻撃 1d8 | 階段を追跡、初期状態は友好的. |
+| 見張りの隊長 (watch captain) | 緑色 | 10 | 10 | 10 | 15 | 武器攻撃 3d4 ×2 | 階段を追跡、初期状態は友好的. |
+| メデューサ (Medusa) | 明緑 | 20 | 12 | 2 | 50 | 武器攻撃 2d4 · 爪 1d8 · 凝視 石化 · 噛みつき 1d6 毒 | 飛行、遊泳、水陸両用、死体に毒あり. |
+| イェンダーの魔法使い (Wizard of Yendor) | 明紫 | 30 | 12 | -8 | 100 | 爪 2d12 盗み-魔除け · 攻撃呪文 | 飛行、自動回復、不可視視認、火炎耐性、毒耐性。執着行動：ゲヘナ深層および各元素界でプレイヤーの元へテレポートしてくる。最後のボス。 |
+| クロイソス (Croesus) | 赤紫 | 20 | 15 | 0 | 40 | 武器攻撃 4d10 | 不可視視認、階段を追跡。ルディオス砦の財宝守護者。両手持ち剣を振るい、床の金貨、宝石、魔法のアイテムを溜め込む。 |
+| 考古学者 (archeologist) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 | 穴掘り移動. |
 | 野蛮人 (barbarian) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
-| caveman | 白色 | 10 | 12 | 10 | 0 | 武器攻撃 2d4 |  |
+| 洞窟人 (caveman) | 白色 | 10 | 12 | 10 | 0 | 武器攻撃 2d4 |  |
 | 治療師 (healer) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 |  |
 | 騎士 (knight) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
 | 武闘家 (monk) | 白色 | 10 | 12 | 10 | 2 | 爪 1d8 · 蹴り 1d8 |  |
-| priest | 白色 | 10 | 12 | 10 | 2 | 武器攻撃 1d6 · cast cleric | Temple defenders. Convert their altars or sacrifice on them. |
+| 司祭 (priest) | 白色 | 10 | 12 | 10 | 2 | 武器攻撃 1d6 · 僧侶呪文 | 寺院の守護者。彼らの祭壇を改宗させるか生贄を捧げること。 |
 | レンジャー (ranger) | 白色 | 10 | 12 | 10 | 2 | 武器攻撃 1d4 |  |
 | 盗賊 (rogue) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
 | 侍 (samurai) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d8 ×2 |  |
 | 観光客 (tourist) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d6 ×2 |  |
 | ワルキューレ (valkyrie) | 白色 | 10 | 12 | 10 | 1 | 武器攻撃 1d8 ×2 |  |
-| 魔法使い (wizard) | 白色 | 10 | 12 | 10 | 3 | 武器攻撃 1d6 · cast spell |  |
-| カーナボン卿 (Lord Carnarvon) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 4d8 spell | tunnels, starts peaceful. Archeologist quest leader. |
-| ペリアス (Pelias) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Barbarian quest leader. |
-| 呪術師カルノフ (Shaman Karnov) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 2d8 cleric | starts peaceful. Cave Dweller quest leader. |
-| ヒポクラテス (Hippocrates) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 1d6 · cast 3d8 cleric ×2 | starts peaceful. Healer quest leader. |
-| アーサー王 (King Arthur) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Knight quest leader. Holds Excalibur if you didn't get it. |
-| 総師範 (Grand Master) | 黒色 | 25 | 15 | 0 | 90 | 爪 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視, starts peaceful. Monk quest leader. |
-| 主席司祭 (Arch Priest) | 白色 | 25 | 15 | 7 | 90 | 武器攻撃 4d10 · 蹴り 2d8 · cast 2d8 cleric ×2 | sees-不可視, starts peaceful. Priest quest leader. |
-| 勇者オリオン (Orion) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 4d8 spell | 遊泳, 水陸両用, sees-不可視, starts peaceful. Ranger quest leader. Bow user. |
-| 盗賊の頭領 (Master of Thieves) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 武器攻撃 2d6 · 爪 2d4 盗み-amulet | starts peaceful. Rogue quest leader; also Tourist quest nemesis. |
-| 大名佐藤 (Lord Sato) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful. Samurai quest leader. |
-| ツーフラワー (Twoflower) | 白色 | 20 | 15 | 10 | 90 | 武器攻撃 4d10 | starts peaceful. Tourist quest leader. |
-| ノルン (Norn) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | starts peaceful, 冷気耐性. Valkyrie quest leader. |
-| 緑のネフェレト (Neferet the Green) | 緑色 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · cast 2d8 spell ×2 | starts peaceful. Wizard quest leader. |
-| トート・アモン (Thoth Amon) | 赤紫 | 16 | 12 | 0 | 10 | 武器攻撃 1d6 · cast spell ×2 · 爪 1d4 盗み-amulet | follows stairs. Barbarian quest nemesis. |
-| カエン (Master Kaen) | 赤紫 | 25 | 12 | -10 | 10 | 爪 16d2 ×2 · cast cleric · 爪 1d4 盗み-amulet | sees-不可視, follows stairs. Monk quest nemesis. |
-| 暗殺者の頭領 (Master Assassin) | 赤紫 | 15 | 12 | 0 | 30 | 武器攻撃 2d6 毒 · 武器攻撃 2d8 · 爪 2d6 盗み-amulet | follows stairs. Rogue quest nemesis. |
-| 足利尊氏 (Ashikaga Takauji) | 赤紫 | 15 | 12 | 0 | 40 | 武器攻撃 2d6 ×2 · 爪 2d6 盗み-amulet | follows stairs. Samurai quest nemesis. |
-| 暗きもの (Dark One) | 黒色 | 15 | 12 | 0 | 80 | 武器攻撃 1d6 ×2 · 爪 1d4 盗み-amulet · cast spell | follows stairs. Wizard quest nemesis. |
-| 学生 (student) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | tunnels, starts peaceful. |
-| 首領 (chieftain) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | starts peaceful. |
-| ネアンデルタール人 (neanderthal) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | starts peaceful. |
-| 随行員 (attendant) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | starts peaceful. |
-| 小姓 (page) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | starts peaceful. |
-| 師範 (abbot) | 白色 | 5 | 12 | 10 | 20 | 爪 8d2 · 蹴り 3d2 stun · cast cleric | starts peaceful. |
-| 侍者 (acolyte) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · cast cleric | starts peaceful. |
-| ハンター (hunter) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d4 | sees-不可視, starts peaceful. |
-| ちんぴら (thug) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | starts peaceful. |
+| 魔法使い (wizard) | 白色 | 10 | 12 | 10 | 3 | 武器攻撃 1d6 · 攻撃呪文 |  |
+| カーナボン卿 (Lord Carnarvon) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 呪文詠唱 4d8 spell | 穴掘り移動、初期状態は友好的。考古学者のクエストリーダー。 |
+| ペリアス (Pelias) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | 初期状態は友好的。野蛮人のクエストリーダー。 |
+| 呪術師カルノフ (Shaman Karnov) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 呪文詠唱 2d8 cleric | 初期状態は友好的。洞窟人のクエストリーダー。 |
+| ヒポクラテス (Hippocrates) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 1d6 · 呪文詠唱 3d8 cleric ×2 | 初期状態は友好的。治療師のクエストリーダー。 |
+| アーサー王 (King Arthur) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | 初期状態は友好的。騎士のクエストリーダー。プレイヤーが入手していない場合エクスカリバーを所持。 |
+| 総師範 (Grand Master) | 黒色 | 25 | 15 | 0 | 90 | 爪 4d10 · 蹴り 2d8 · 呪文詠唱 2d8 cleric ×2 | 不可視視認、初期状態は友好的。武闘家のクエストリーダー。 |
+| 主席司祭 (Arch Priest) | 白色 | 25 | 15 | 7 | 90 | 武器攻撃 4d10 · 蹴り 2d8 · 呪文詠唱 2d8 cleric ×2 | 不可視視認、初期状態は友好的。司祭のクエストリーダー。 |
+| 勇者オリオン (Orion) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 呪文詠唱 4d8 spell | 遊泳、水陸両用、不可視視認、初期状態は友好的。レンジャーのクエストリーダー。弓の使い手。 |
+| 盗賊の頭領 (Master of Thieves) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 武器攻撃 2d6 · 爪 2d4 盗み-魔除け | 初期状態は友好的。盗賊のクエストリーダー（観光客のクエスト宿敵でもある）。 |
+| 大名佐藤 (Lord Sato) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | 初期状態は友好的。侍のクエストリーダー。 |
+| ツーフラワー (Twoflower) | 白色 | 20 | 15 | 10 | 90 | 武器攻撃 4d10 | 初期状態は友好的。観光客のクエストリーダー。 |
+| ノルン (Norn) | 赤紫 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 ×2 | 初期状態は友好的、冷気耐性。ワルキューレのクエストリーダー。 |
+| 緑のネフェレト (Neferet the Green) | 緑色 | 20 | 15 | 0 | 90 | 武器攻撃 4d10 · 呪文詠唱 2d8 spell ×2 | 初期状態は友好的。魔法使いのクエストリーダー。 |
+| トート・アモン (Thoth Amon) | 赤紫 | 16 | 12 | 0 | 10 | 武器攻撃 1d6 · 攻撃呪文 ×2 · 爪 1d4 盗み-魔除け | 階段を追跡。野蛮人のクエスト宿敵。 |
+| カエン (Master Kaen) | 赤紫 | 25 | 12 | -10 | 10 | 爪 16d2 ×2 · 僧侶呪文 · 爪 1d4 盗み-魔除け | 不可視視認、階段を追跡。武闘家のクエスト宿敵。 |
+| 暗殺者の頭領 (Master Assassin) | 赤紫 | 15 | 12 | 0 | 30 | 武器攻撃 2d6 毒 · 武器攻撃 2d8 · 爪 2d6 盗み-魔除け | 階段を追跡。盗賊のクエスト宿敵。 |
+| 足利尊氏 (Ashikaga Takauji) | 赤紫 | 15 | 12 | 0 | 40 | 武器攻撃 2d6 ×2 · 爪 2d6 盗み-魔除け | 階段を追跡。侍のクエスト宿敵。 |
+| 暗きもの (Dark One) | 黒色 | 15 | 12 | 0 | 80 | 武器攻撃 1d6 ×2 · 爪 1d4 盗み-魔除け · 攻撃呪文 | 階段を追跡。魔法使いのクエスト宿敵。 |
+| 学生 (student) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | 穴掘り移動、初期状態は友好的. |
+| 首領 (chieftain) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | 初期状態は友好的. |
+| ネアンデルタール人 (neanderthal) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 2d4 | 初期状態は友好的. |
+| 随行員 (attendant) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 | 初期状態は友好的. |
+| 小姓 (page) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | 初期状態は友好的. |
+| 師範 (abbot) | 白色 | 5 | 12 | 10 | 20 | 爪 8d2 · 蹴り 3d2 朦朧 · 僧侶呪文 | 初期状態は友好的. |
+| 侍者 (acolyte) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · 僧侶呪文 | 初期状態は友好的. |
+| ハンター (hunter) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d4 | 不可視視認、初期状態は友好的. |
+| ちんぴら (thug) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d6 ×2 | 初期状態は友好的. |
 | 忍者 (ninja) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 |  |
-| 浪士 (roshi) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | starts peaceful. |
-| ガイド (guide) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · cast spell | starts peaceful. |
-| 戦士 (warrior) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | starts peaceful. |
-| 実習生 (apprentice) | 白色 | 5 | 12 | 10 | 30 | 武器攻撃 1d6 · cast spell | starts peaceful. |
+| 浪士 (roshi) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | 初期状態は友好的. |
+| ガイド (guide) | 白色 | 5 | 12 | 10 | 20 | 武器攻撃 1d6 · 攻撃呪文 | 初期状態は友好的. |
+| 戦士 (warrior) | 白色 | 5 | 12 | 10 | 10 | 武器攻撃 1d8 ×2 | 初期状態は友好的. |
+| 実習生 (apprentice) | 白色 | 5 | 12 | 10 | 30 | 武器攻撃 1d6 · 攻撃呪文 | 初期状態は友好的. |
 
 :::

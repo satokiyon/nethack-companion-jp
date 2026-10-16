@@ -180,7 +180,7 @@ Umber hulk: アンバーハルク
 Ogre: オーガ
 Ogre leader: オーガの首領
 Ogre tyrant: オーガの暴君
-Displacer beast: ディスプレイサービースト
+Displacer beast: 幻影の獣
 Ghost: 幽霊
 Medusa: メデューサ
 Wizard of yendor: イェンダーの魔法使い

@@ -54,6 +54,10 @@ Fire ant: 火蟻
 Killer bee: 殺人蜂
 Newt: イモリ
 Kobold: コボルド
+Displacer beast: 幻影の獣
+Lurker above: ラーカー
+Disenchanter: 吸魔の怪物
+Cockatrice: コカトリス
 
 ## Items & Equipment (武具・道具・アイテム) - from obj_jp.txt / obj_jp.c
 Touchstone: 試金石

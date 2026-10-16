@@ -7,7 +7,7 @@
 - Forest centaurs spawn with BOW+arrows; plains and mountain centaurs spawn with CROSSBOW+bolts (50% armed rate per makemon.c:474-484).
 -->
 
-強力な弓矢と近接攻撃を兼ね備えた半人半馬の射手です。森のケンタウロスは弓を放ち、平原や山のケンタウロスは複合弓を用いて強烈な矢の連射を浴びせてきます。離れた位置からの射撃戦は危険なため、角を曲がって誘い込むか接近戦に持ち込んでください。
+上半身が人間、下半身が馬の俊足狩人です。遠距離から弓矢を連射してくるため、通路に誘い込んで射線を切るか、接近して近接戦に持ち込みましょう。
 
 ::: dense-table
 

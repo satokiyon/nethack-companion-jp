@@ -1,4 +1,4 @@
-#### トラッパーおよびラーカー `t` (Trappers and lurkers `t`) {#trappers-and-lurkers-t}
+#### 罠生物 `t` (Trappers and lurkers `t`) {#trappers-and-lurkers-t}
 
 <!-- audit
 2026-05-19:
@@ -8,15 +8,13 @@
 - Both M2_STALK (follow stairs).
 -->
 
-床や天井に擬態する固定型の包み込み捕食者です。遠見（Farlook）でも隠れたラーカーを見抜くことはできません。怪しいマスには乗る前に隣から探索（Search）を行って正体を暴いてください。
-
-トラッパーとラーカーはすべて潜伏能力を持ち、階段の上り下りにも追従してきます。
+床に擬態するトラッパーと、天井に擬態するラーカーが含まれます。不用意に踏み込むと丸呑み（圧搾）され、脱出するまで毎ターンダメージを受け続けます。
 
 ::: dense-table
 
 | モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
 |---|---|---|---|---|---|---|---|
-| ラーカー (lurker above) | 灰色 | 10 | 3 | 3 | 0 | engulf 1d6 wrap · engulf 2d6 | 飛行. |
-| トラッパー (trapper) | 緑色 | 12 | 3 | 3 | 0 | engulf 1d8 wrap · engulf 2d8 |  |
+| ラーカー (lurker above) | 灰色 | 10 | 3 | 3 | 0 | engulf 1d6 巻きつき · engulf 2d6 | 飛行. |
+| トラッパー (trapper) | 緑色 | 12 | 3 | 3 | 0 | engulf 1d8 巻きつき · engulf 2d8 |  |
 
 :::

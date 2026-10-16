@@ -222,7 +222,32 @@ def check_anchors_and_links():
             print(f"FAILED: index.jp.html 内にリンク切れのアンカーが {len(broken_links)} 件あります: {broken_links[:10]}")
             return False
 
-    print(f"[OK] 全 {len(expected_slugs)} 見出し・全インラインアンカーが英語化され、非ASCII混入 0 件・内部リンク切れ 0 件です。")
+        # 4. テンプレート JS 内の indexEntries および sectionIcons のターゲットID実在確認
+        m_idx = re.search(r'var indexEntries = \[(.*?)\];', jp_html, re.S)
+        if m_idx:
+            js_idx_targets = re.findall(r"\['[^']+',\s*'([^']+)'\]", m_idx.group(1))
+            broken_idx = [t for t in js_idx_targets if t not in html_id_set]
+            if broken_idx:
+                print(f"FAILED: index.jp.html の indexEntries に存在しないアンカーIDがあります: {broken_idx}")
+                return False
+        else:
+            print("FAILED: index.jp.html 内に indexEntries が見つかりません。")
+            return False
+
+        m_icons = re.search(r'var sectionIcons = \{(.*?)\};', jp_html, re.S)
+        if m_icons:
+            js_icon_targets = re.findall(r"'([^']+)':\s*(?:glyph|'<span)", m_icons.group(1))
+            broken_icons = [t for t in js_icon_targets if t not in html_id_set]
+            if broken_icons:
+                print(f"FAILED: index.jp.html の sectionIcons に存在しないアンカーIDがあります: {broken_icons}")
+                return False
+
+        # 5. 未閉じの Pandoc div フェンス (<p>:::</p>) が残っていないか確認
+        if "<p>:::" in jp_html:
+            print("FAILED: index.jp.html 内に未変換の Pandoc div フェンス (<p>:::) が残っています。")
+            return False
+
+    print(f"[OK] 全 {len(expected_slugs)} 見出し・全インラインアンカー・JS内インデックスが英語IDと完全整合し、非ASCII混入 0 件・リンク切れ 0 件です。")
     return True
 
 

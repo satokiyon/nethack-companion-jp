@@ -20,7 +20,7 @@ for s in progress["segments"]:
         end = s["end_line"]
         chunk = "".join(companion_lines[start:end])
         # Replace the header line if it starts with ## Index of Useful Knowledge
-        chunk = chunk.replace("## Index of Useful Knowledge", "## 有用な知識の索引 (Index of Useful Knowledge)")
+        chunk = chunk.replace("## Index of Useful Knowledge", "## 有用な知識の索引 (Index of Useful Knowledge) {#index-of-useful-knowledge}")
         out_path = os.path.join("docs", "segments_jp", f"{s['id']}.md")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(chunk.strip() + "\n")

@@ -1,4 +1,4 @@
-#### 類人猿 `Y` (Apelike creatures `Y`) {#apelike-creatures-y}
+#### 猿類およびイエティ `Y` (Apes and yetis `Y`) {#apelike-creatures-y}
 
 <!-- audit
 2026-05-19:
@@ -7,7 +7,7 @@
 - Sasquatch has M1_SEE_INVIS (monsters.h:2413); both yeti and sasquatch speed 15.
 -->
 
-類人猿や大猿が中心です。サスクワッチ（雪男）は素早い動きで殴りかかってきます。肉食獣の死体は安全な食料となります。
+人喰い猿、サル、イエティ、サスカッチなどの霊長類系モンスターです。イエティは冷気耐性を持ち、その死体から冷気耐性を獲得できます。
 
 ::: dense-table
 
@@ -18,6 +18,6 @@
 | アウルベア (owlbear) | 茶色 | 5 | 12 | 5 | 0 | 爪 1d6 ×2 · 締め付け 2d8 |  |
 | イエティ (yeti) | 白色 | 5 | 15 | 6 | 0 | 爪 1d6 ×2 · 噛みつき 1d4 | 冷気耐性. |
 | 人喰い猿 (carnivorous ape) | 黒色 | 6 | 12 | 6 | 0 | 爪 1d4 ×2 · 締め付け 1d8 |  |
-| サスカッチ (sasquatch) | 灰色 | 7 | 15 | 6 | 0 | 爪 1d6 ×2 · 蹴り 1d8 | sees-不可視. |
+| サスカッチ (sasquatch) | 灰色 | 7 | 15 | 6 | 0 | 爪 1d6 ×2 · 蹴り 1d8 | 不可視視認. |
 
 :::

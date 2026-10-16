@@ -22,11 +22,11 @@
 | モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
 |---|---|---|---|---|---|---|---|
 | ホビット (hobbit) | 緑色 | 1 | 9 | 10 | 0 | 武器攻撃 1d6 |  |
-| ドワーフ (dwarf) | 赤色 | 2 | 6 | 10 | 10 | 武器攻撃 1d8 | tunnels. |
+| ドワーフ (dwarf) | 赤色 | 2 | 6 | 10 | 10 | 武器攻撃 1d8 | 穴掘り移動. |
 | バグベアー (bugbear) | 茶色 | 3 | 9 | 5 | 0 | 武器攻撃 2d4 |  |
-| dwarf lord | 青色 | 4 | 6 | 10 | 10 | 武器攻撃 2d4 ×2 | tunnels. |
-| dwarf king | 赤紫 | 6 | 6 | 10 | 20 | 武器攻撃 2d6 ×2 | tunnels. |
-| マインドフレア (mind flayer) | 明紫 | 9 | 12 | 5 | 90 | 武器攻撃 1d4 · tentacle 2d1 エナジードレイン-Int ×3 | 飛行, sees-不可視. Tentacles drain Int; once it reaches 3, the next tentacle that lands kills you. Any helmet blocks 7/8 of tentacles. |
-| マスターマインドフレア (master mind flayer) | 明紫 | 13 | 12 | 0 | 90 | 武器攻撃 1d8 · tentacle 2d1 エナジードレイン-Int ×5 | 飛行, sees-不可視. Five tentacles per turn. Any helmet blocks 7/8 of tentacles. |
+| ドワーフの首領 (dwarf lord) | 青色 | 4 | 6 | 10 | 10 | 武器攻撃 2d4 ×2 | 穴掘り移動. |
+| ドワーフの支配者 (dwarf king) | 赤紫 | 6 | 6 | 10 | 20 | 武器攻撃 2d6 ×2 | 穴掘り移動. |
+| マインドフレア (mind flayer) | 明紫 | 9 | 12 | 5 | 90 | 武器攻撃 1d4 · tentacle 2d1 知力吸収 ×3 | 飛行、不可視視認。触手が知力を吸収。知力が3に達すると次の触手攻撃で即死。兜を着用していれば触手を7/8の確率で防御可能。 |
+| マスターマインドフレア (master mind flayer) | 明紫 | 13 | 12 | 0 | 90 | 武器攻撃 1d8 · tentacle 2d1 知力吸収 ×5 | 飛行、不可視視認。1ターンに5回の触手攻撃。兜を着用していれば触手を7/8の確率で防御可能。 |
 
 :::

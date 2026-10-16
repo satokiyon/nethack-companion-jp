@@ -1,4 +1,4 @@
-#### 精霊・エレメンタル `E` (Elementals `E`) {#elementals-e}
+#### エレメンタル `E` (Elementals `E`) {#elementals-e}
 
 <!-- audit
 2026-05-19:
@@ -10,18 +10,16 @@
 - Water: claw 5d6; M1_SWIM|M1_AMPHIBIOUS; MR_POISON|MR_STONE. Water elementals lack a drown attack, but spawn only on water tiles so encounters happen near drowning risk.
 -->
 
-風の精はプレイヤーを包み込んで瓦礫の嵐で叩きのめします。火の精は周囲を灼熱で焼き焦がし、水の精は強打を繰り出し、土の精は動きは鈍いものの極めて強固です。
-
-*ストーカー*を除き、すべてのエレメンタルは精神を持ちません。
+四大元素（風、火、土、水）の精霊です。風の精は素早く丸呑み攻撃を繰り出し、土の精は壁をすり抜けて奇襲してきます。対応する属性耐性と高いACが攻略の鍵です。
 
 ::: dense-table
 
 | モンスター名 | 色 | レベル | 速度 | AC | MR | 攻撃方法 | 備考 |
 |---|---|---|---|---|---|---|---|
-| ストーカー (stalker) | 白色 | 8 | 12 | 3 | 0 | 爪 4d4 | 飛行, sees-不可視, follows stairs. |
+| ストーカー (stalker) | 白色 | 8 | 12 | 3 | 0 | 爪 4d4 | 飛行、不可視視認、階段を追跡. |
 | 風の精 (air elemental) | 水色 | 8 | 36 | 2 | 30 | engulf 1d10 | 飛行. |
 | 火の精 (fire elemental) | 黄色 | 8 | 12 | 2 | 30 | 爪 3d6 火炎 · 反撃 9d4 火炎 | 飛行. |
-| 土の精 (earth elemental) | 茶色 | 8 | 6 | 2 | 30 | 爪 4d6 | 火炎耐性, 冷気耐性, 毒耐性, 石化耐性. |
-| 水の精 (water elemental) | 青色 | 8 | 5 | 2 | 30 | 爪 5d6 | 遊泳, 水陸両用, 毒耐性, 石化耐性. |
+| 土の精 (earth elemental) | 茶色 | 8 | 6 | 2 | 30 | 爪 4d6 | 火炎耐性、冷気耐性、毒耐性、石化耐性. |
+| 水の精 (water elemental) | 青色 | 8 | 5 | 2 | 30 | 爪 5d6 | 遊泳、水陸両用、毒耐性、石化耐性. |
 
 :::

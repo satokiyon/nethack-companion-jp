@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>@media print { #index-of-useful-knowledge { display: none !important; } }</style>
 </head>
 <body>
 <nav id="sidebar-toc" aria-label="Table of contents">
@@ -44,7 +45,7 @@ $body$
     'provisions-and-dining': glyph('%'),
     'the-apothecary':     glyph('!'),
     'the-scroll-rack':    glyph('?'),
-    'wands-and-staves':   glyph('/'),
+    'wands':              glyph('/'),
     'rings-and-amulets':  glyph('= &quot;'),
     'tools-of-the-trade': glyph('('),
     'weapons-tables':     glyph(')'),
@@ -229,7 +230,7 @@ $body$
     var start = 0;
     for (var j = pos; j > 0; j--) {
       var c = text.charCodeAt(j - 1);
-      if (c === 46 || c === 33 || c === 63) {  // .!?
+      if (c === 46 || c === 33 || c === 63 || c === 0x3002 || c === 0xFF01 || c === 0xFF1F) {  // .!?。！？
         start = j;
         while (start < text.length && /\s/.test(text[start])) start++;
         break;
@@ -238,7 +239,7 @@ $body$
     var end = text.length;
     for (var k = pos + 1; k < text.length; k++) {
       var cc = text.charCodeAt(k);
-      if (cc === 46 || cc === 33 || cc === 63) { end = k; break; }
+      if (cc === 46 || cc === 33 || cc === 63 || cc === 0x3002 || cc === 0xFF01 || cc === 0xFF1F) { end = k; break; }
     }
     return { start: start, end: end };
   }
@@ -366,7 +367,14 @@ $body$
   // a search for "Quest" lost to the Bestiary section listing every
   // role's "quest leader" / "quest nemesis").
   function titleMatchBonus(title, word) {
-    var contentWords = title.toLowerCase().split(/\s+/).map(function(w) {
+    var lowerTitle = title.toLowerCase();
+    if (/[^\x00-\x7F]/.test(word)) {
+      if (lowerTitle.indexOf(word) === -1) return 0;
+      var jpTitle = lowerTitle.replace(/\s*\([^)]*\)\s*/g, '').trim() || lowerTitle;
+      var ratio = Math.min(1.0, word.length / Math.max(1, jpTitle.length));
+      return 50 * Math.max(0.5, ratio);
+    }
+    var contentWords = lowerTitle.split(/\s+/).map(function(w) {
       return w.replace(/[^a-z0-9]/g, '');
     }).filter(function(w) { return w && !STOPWORDS[w]; });
     if (contentWords.length === 0) return 0;
@@ -389,7 +397,8 @@ $body$
 
   function doSearch() {
     var query = searchInput.value.trim().toLowerCase();
-    if (query.length < 2) {
+    var minLen = /[^\x00-\x7F]/.test(query) ? 1 : 2;
+    if (query.length < minLen) {
       searchResults.innerHTML = '';
       searchResults.style.display = 'none';
       searchIndex.style.display = '';
@@ -416,7 +425,7 @@ $body$
     matches.sort(function(a, b) { return b.score - a.score; });
 
     if (matches.length === 0) {
-      searchResults.innerHTML = '<div class="search-empty">No results found.<br><span class="search-hint">The dungeon keeps its secrets.</span></div>';
+      searchResults.innerHTML = '<div class="search-empty">一致する項目が見つかりません。<br><span class="search-hint">迷宮は秘密を隠し通している。</span></div>';
       return;
     }
 
@@ -432,7 +441,7 @@ $body$
       html += '</a>';
     }
     if (matches.length > shown) {
-      html += '<div class="search-more">' + (matches.length - shown) + ' more results...</div>';
+      html += '<div class="search-more">他 ' + (matches.length - shown) + ' 件の結果...</div>';
     }
     searchResults.innerHTML = html;
 
@@ -615,41 +624,41 @@ $body$
 
   // --- Humorous index (shown when search is empty) ---
   var indexEntries = [
-    ['Amorous demon, expensive evening with', 'seduction'],
-    ['Amulet of Yendor, retrieving', 'the-ascension-run'],
-    ['Ascension, how to not die during', 'the-ascension-run'],
-    ['Boulders, pushing (see: Sokoban)', 'sokoban-solutions'],
-    ['BUC, avoiding curses by checking', 'blessed-uncursed-cursed-buc'],
-    ['Castle, storming the', 'the-castle'],
-    ['Cockatrice corpse, wielding', 'petrification-stoning'],
-    ['Death, causes of (see: everything)', 'things-that-will-kill-you'],
-    ['Disenchanter, mourning your former +5', 'enchantment-drain'],
-    ['Displacer beast, taming', 'the-displacer-beast'],
-    ['Drowning, preventable', 'drowning'],
-    ['Elbereth, writing frantically', 'engravings'],
-    ['Floating eye, do not hit', 'eyes-and-spheres-e'],
-    ['Food, running out of', 'how-hunger-works'],
-    ['Gehennom, why is it so hot', 'gehennom'],
-    ['Gods, angering', 'altars-and-alignment'],
-    ['Identify, never enough scrolls of', 'the-scroll-rack'],
-    ['Luck, secretly ruining yours', 'gaining-and-losing-luck'],
-    ['Lurker above, looking up too late', 'engulfment'],
-    ['Mines, gnomish', 'the-gnomish-mines'],
-    ['Pet, accidentally killing your', 'keeping-your-pet-alive'],
-    ['Prayer, when to', 'prayer'],
-    ['Shopkeeper, angering', 'shopping-and-shopkeeper-pricing'],
-    ['Sokoban, solving without cheating', 'sokoban-solutions'],
-    ['Stoning, avoiding', 'petrification-stoning'],
-    ['Tourists, playing as', 'choosing-your-expedition'],
-    ['Unicorn horn, no longer a cure-all', 'what-changed-since-last-time'],
-    ['Vlad&rsquo;s throne, fourth sit&rsquo;s the charm', 'vlads-tower'],
-    ['Wand, identifying by engraving', 'identification-by-engraving'],
-    ['Wand of wishing, found with one charge', 'the-castle'],
-    ['Wishes, optimal use of', 'what-to-wish-for'],
-    ['YASD, inevitability of', 'your-first-descent'],
+    ['イェンダーの魔除け（奪還作戦）', 'the-ascension-run'],
+    ['祈り（いつ祈るべきか）', 'prayer'],
+    ['岩押し（参照：倉庫番）', 'sokoban-solutions'],
+    ['ヴラドの玉座（4度目の正直）', 'vlads-tower'],
+    ['運（知らぬ間に自滅している理由）', 'gaining-and-losing-luck'],
+    ['エルベレス（半狂乱で床に刻む）', 'engravings'],
+    ['溺れ死に（防げたはずの）', 'drowning'],
+    ['神々（怒らせてしまったら）', 'altars-and-alignment'],
+    ['観光客（あえて選ぶなら）', 'choosing-your-expedition'],
+    ['吸魔の怪物（かつて+5だった武器を悼む）', 'enchantment-drain'],
+    ['ゲヘナ（なぜこれほど暑いのか）', 'gehennom'],
+    ['幻影の獣（手懐ける）', 'felines-f'],
+    ['コカトリスの死体（武器として振り回す）', 'petrification-stoning'],
+    ['さまよう目（決して殴るな）', 'eyes-and-spheres-e'],
+    ['死因（参照：すべて）', 'things-that-will-kill-you'],
+    ['識別の巻物（いくらあっても足りない）', 'the-scroll-rack'],
+    ['城（突入作戦）', 'the-castle'],
+    ['昇天（その途中で死なない方法）', 'the-ascension-run'],
+    ['食料（尽き果てたとき）', 'how-hunger-works'],
+    ['好色な悪魔（高くつく一夜）', 'seduction'],
+    ['石化（回避する方法）', 'petrification-stoning'],
+    ['倉庫番（ズルせずに解く）', 'sokoban-solutions'],
+    ['杖（床に刻んで識別する）', 'the-engrave-test-wands'],
+    ['店主（怒らせてしまったら）', 'shopping-and-shopkeeper-pricing'],
+    ['願い（最適な使い道）', 'what-to-wish-for'],
+    ['願いの杖（残り1回で見つかる）', 'the-castle'],
+    ['ノームの鉱山（攻略）', 'the-gnomish-mines'],
+    ['BUC（確認して呪いを避ける）', 'blessed-uncursed-cursed-buc'],
+    ['ペット（うっかり殺してしまったら）', 'keeping-your-pet-alive'],
+    ['ユニコーンの角（もはや万能薬ではない）', 'what-changed-since-last-time'],
+    ['ラーカー（見上げた時にはもう遅い）', 'engulfment'],
+    ['YASD（避けられぬくだらない死）', 'your-first-descent'],
   ];
 
-  var indexHtml = '<div class="humorous-index"><div class="index-title">Index of Useful Knowledge</div>';
+  var indexHtml = '<div class="humorous-index"><div class="index-title">有用な知識の索引</div>';
   indexEntries.forEach(function(entry) {
     indexHtml += '<a class="index-entry" href="#' + entry[1] + '">' + entry[0] + '</a>';
   });
@@ -679,6 +688,8 @@ $body$
   // Direction-word mappings used for solution prose.
   var H_WORD = {'left':'right','right':'left'};
   var V_WORD = {'up':'down','down':'up'};
+  var H_WORD_JP = {'左へ':'右へ','右へ':'左へ'};
+  var V_WORD_JP = {'上へ':'下へ','下へ':'上へ'};
 
   // Fixed offset where column 1 of the playable area begins inside each
   // body row. The column header is "   123..." with 3 leading spaces, so
@@ -805,11 +816,15 @@ $body$
     if (state.h) {
       html = html.replace(/\b(left|right)\b/g, function(w) {
         return H_WORD[w];
+      }).replace(/(左へ|右へ)/g, function(w) {
+        return H_WORD_JP[w];
       });
     }
     if (state.v) {
       html = html.replace(/\b(up|down)\b/g, function(w) {
         return V_WORD[w];
+      }).replace(/(上へ|下へ)/g, function(w) {
+        return V_WORD_JP[w];
       });
     }
     // Coordinate tuples (X,Y) and (X, Y). The grid is 1-indexed, so the
@@ -837,10 +852,10 @@ $body$
     var bar = document.createElement('div');
     bar.className = 'sokoban-flipbar';
     bar.innerHTML =
-      '<button type="button" data-flip="h" title="Mirror left-right">' +
-      'Flip ↔</button>' +
-      '<button type="button" data-flip="v" title="Mirror top-bottom">' +
-      'Flip ↕</button>';
+      '<button type="button" data-flip="h" title="左右反転">' +
+      '左右反転 ↔</button>' +
+      '<button type="button" data-flip="v" title="上下反転">' +
+      '上下反転 ↕</button>';
     var heading = level.querySelector('h4');
     if (heading && heading.nextSibling) {
       heading.parentNode.insertBefore(bar, heading.nextSibling);
