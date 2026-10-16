@@ -4,6 +4,6 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-PY_SCRIPT="$ROOT_DIR/tools/build_ja.py"
+PY_SCRIPT="$ROOT_DIR/tools/build_jp.py"
 
 python3 "$PY_SCRIPT" "$@"

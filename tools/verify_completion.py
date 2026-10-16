@@ -20,7 +20,7 @@ def check_segments():
     empty = []
     for i in range(1, 375):
         sid = f"step_{i:03d}"
-        path = os.path.join("docs", "segments_ja", f"{sid}.md")
+        path = os.path.join("docs", "segments_jp", f"{sid}.md")
         if not os.path.exists(path):
             missing.append(sid)
         elif os.path.getsize(path) < 10:
@@ -32,13 +32,13 @@ def check_segments():
     if empty:
         print(f"FAILED: 空または極小のセグメントがあります: {empty[:10]}... (計 {len(empty)} 件)")
         return False
-    print("[OK] 全 374 セグメントが docs/segments_ja/ に正常に存在します。")
+    print("[OK] 全 374 セグメントが docs/segments_jp/ に正常に存在します。")
     return True
 
 def check_banned_terms():
     print("=== [検証 2/5] 厳格定訳および表記揺れ検証 (NetHackJP用語) ===")
     
-    with open(os.path.join("spoilers", "companion.ja.md"), "r", encoding="utf-8") as f:
+    with open(os.path.join("spoilers", "companion.jp.md"), "r", encoding="utf-8") as f:
         content = f.read()
     
     errors = []
@@ -66,22 +66,22 @@ def check_headings():
     print("=== [検証 3/5] 見出し構造の対応確認 ===")
     with open(os.path.join("spoilers", "companion.md"), "r", encoding="utf-8") as f:
         orig_text = f.read()
-    with open(os.path.join("spoilers", "companion.ja.md"), "r", encoding="utf-8") as f:
-        ja_text = f.read()
+    with open(os.path.join("spoilers", "companion.jp.md"), "r", encoding="utf-8") as f:
+        jp_text = f.read()
 
     orig_h = re.findall(r'^(#{1,4}\s+.+)$', orig_text, re.MULTILINE)
-    ja_h = re.findall(r'^(#{1,4}\s+.+)$', ja_text, re.MULTILINE)
+    jp_h = re.findall(r'^(#{1,4}\s+.+)$', jp_text, re.MULTILINE)
 
-    print(f"原文の見出し数: {len(orig_h)}, 日本語版の見出し数: {len(ja_h)}")
-    if len(orig_h) != len(ja_h):
-        print(f"警告: 見出し数に差分があります（原文: {len(orig_h)}, 日本語版: {len(ja_h)}）")
+    print(f"原文の見出し数: {len(orig_h)}, 日本語版の見出し数: {len(jp_h)}")
+    if len(orig_h) != len(jp_h):
+        print(f"警告: 見出し数に差分があります（原文: {len(orig_h)}, 日本語版: {len(jp_h)}）")
     print("[OK] 見出し構造が原文と完全に対応しています。")
     return True
 
 def check_ascii_maps():
     print("=== [検証 4/5] ASCII マップ整合性検証 ===")
     spoilers_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "spoilers")
-    res = subprocess.run([sys.executable, os.path.join(spoilers_dir, "check_ascii_maps.py"), os.path.join(spoilers_dir, "companion.ja.md")], capture_output=True, text=True)
+    res = subprocess.run([sys.executable, os.path.join(spoilers_dir, "check_ascii_maps.py"), os.path.join(spoilers_dir, "companion.jp.md")], capture_output=True, text=True)
     if res.returncode == 0:
         print("[OK] ASCII マップ整合性検証に合格しました（倉庫番・城・マップ全ブロック完全一致）。")
         return True

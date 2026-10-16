@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-docs/segments_ja/step_XXX.md を順次結合し、spoilers/companion.ja.md を生成するスクリプト。
+docs/segments_jp/step_XXX.md を順次結合し、spoilers/companion.jp.md を生成するスクリプト。
 """
 
 import json
@@ -14,7 +14,7 @@ if sys.platform == 'win32':
     except Exception:
         pass
 
-def assemble(progress_json='docs/translation_progress.json', segments_dir='docs/segments_ja', output_md='spoilers/companion.ja.md'):
+def assemble(progress_json='docs/translation_progress.json', segments_dir='docs/segments_jp', output_md='spoilers/companion.jp.md'):
     with open(progress_json, 'r', encoding='utf-8') as f:
         data = json.load(f)
 

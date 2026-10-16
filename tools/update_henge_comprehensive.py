@@ -6,7 +6,7 @@ and related terms across all segments.
 import os
 import re
 
-segments_dir = os.path.join("docs", "segments_ja")
+segments_dir = os.path.join("docs", "segments_jp")
 
 # Regex-based replacements for precision
 rules = [

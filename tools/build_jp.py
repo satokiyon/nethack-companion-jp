@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 NetHack Companion 日本語版 ビルドスクリプト (Python)
-companion.ja.md → index.ja.html → companion.ja.pdf
+companion.jp.md → index.jp.html → companion.jp.pdf
 """
 
 import os
@@ -33,10 +33,10 @@ def build(skip_pdf=False):
             break
 
     print("=== 1. ASCII マップ整合性検証 ===")
-    ja_md = 'companion.ja.md'
-    if os.path.exists(ja_md):
+    jp_md = 'companion.jp.md'
+    if os.path.exists(jp_md):
         try:
-            res = subprocess.run([sys.executable, 'check_ascii_maps.py', ja_md], capture_output=True, text=True)
+            res = subprocess.run([sys.executable, 'check_ascii_maps.py', jp_md], capture_output=True, text=True)
             if res.returncode == 0:
                 print("✓ ASCII マップ検証に合格しました。")
             else:
@@ -44,23 +44,23 @@ def build(skip_pdf=False):
         except Exception as e:
             print(f"ASCII マップ検証の実行をスキップしました ({e})")
     else:
-        print("companion.ja.md が存在しないためスキップします。")
+        print("companion.jp.md が存在しないためスキップします。")
 
     print("\n=== 2. 日本語 HTML 版のビルド (Pandoc) ===")
     cmd_pandoc = [
         'pandoc',
-        ja_md,
+        jp_md,
         '--from=markdown',
         '--to=html5',
-        '--template=template.ja.html',
+        '--template=template.jp.html',
         '--section-divs',
         '--syntax-highlighting=none',
-        '--output=index.ja.html'
+        '--output=index.jp.html'
     ]
     
     try:
         subprocess.run(cmd_pandoc, check=True)
-        print("✓ index.ja.html を正常に生成しました。")
+        print("✓ index.jp.html を正常に生成しました。")
     except FileNotFoundError:
         print("エラー: pandoc が見つかりません。PATH を確認してください。")
         return False
@@ -81,8 +81,8 @@ def build(skip_pdf=False):
 
         if browser_path:
             import tempfile
-            html_abs = os.path.abspath('index.ja.html')
-            pdf_out = os.path.abspath('companion.ja.pdf')
+            html_abs = os.path.abspath('index.jp.html')
+            pdf_out = os.path.abspath('companion.jp.pdf')
             html_uri = 'file:///' + html_abs.replace('\\', '/')
             temp_profile = os.path.join(tempfile.gettempdir(), 'nh_pdf_profile')
             
@@ -99,7 +99,7 @@ def build(skip_pdf=False):
                 subprocess.run(cmd_browser, check=True)
                 if os.path.exists(pdf_out):
                     size_kb = os.path.getsize(pdf_out) // 1024
-                    print(f"✓ companion.ja.pdf を正常に生成しました ({size_kb} KB)。")
+                    print(f"✓ companion.jp.pdf を正常に生成しました ({size_kb} KB)。")
                 else:
                     print("警告: PDF ファイルが生成されませんでした。")
             except Exception as e:

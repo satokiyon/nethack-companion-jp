@@ -96,7 +96,7 @@ def load_master_glossary():
 
 def audit_segments():
     glossary = load_master_glossary()
-    segment_files = sorted(glob.glob('docs/segments_ja/step_*.md'))
+    segment_files = sorted(glob.glob('docs/segments_jp/step_*.md'))
 
     print(f"マスター辞書エントリ数: {len(glossary)}")
     print(f"検査対象セグメント数: {len(segment_files)}\n")

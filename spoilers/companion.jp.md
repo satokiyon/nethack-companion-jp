@@ -56,7 +56,7 @@ NetHack の世界へようこそ！
 ::: web-only
 
 <aside class="download-box">
-<strong>オフラインで読みたい場合:</strong> 日本語版の印刷・閲覧用PDF（<a href="companion.ja.pdf">companion.ja.pdf</a>）をご利用いただけます。
+<strong>オフラインで読みたい場合:</strong> 日本語版の印刷・閲覧用PDF（<a href="companion.jp.pdf">companion.jp.pdf</a>）をご利用いただけます。
 </aside>
 
 :::

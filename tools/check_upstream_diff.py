@@ -73,7 +73,7 @@ def check_upstream_diff(progress_json='docs/translation_progress.json', upstream
 
     print("\n次のアクション:")
     print(" 1. 上記セグメントの status を 'pending' に戻して差分翻訳を実施")
-    print(" 2. レビュー後に companion.ja.md を更新")
+    print(" 2. レビュー後に companion.jp.md を更新")
 
 if __name__ == '__main__':
     branch = sys.argv[1] if len(sys.argv) > 1 else 'upstream/main'

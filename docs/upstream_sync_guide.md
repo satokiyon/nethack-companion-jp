@@ -12,7 +12,7 @@
 - **セグメント管理台帳**: `docs/translation_progress.json`（全セクション・行番号をマッピング）
 - **用語集・整合性検証**: `tools/check_glossary.py`
 - **原本ファイル**: `spoilers/companion.md`
-- **日本語原本**: `spoilers/companion.ja.md`
+- **日本語原本**: `spoilers/companion.jp.md`
 
 ---
 
@@ -64,14 +64,14 @@ git merge upstream/main -m "Sync: 本家の最新コミットを取り込み"
 ### ステップ 5: 差分箇所の翻訳とレビュー
 1. 用語集（`docs/glossary_references/` および `docs/glossary_custom.txt`）を参照して翻訳。
 2. 誤訳・不自然な表現ナレッジ（`docs/translation_review_notes.md`）に違反していないかセルフレビュー。
-3. `spoilers/companion.ja.md` の該当箇所を慎重に書き換えます。
+3. 該当するセグメントファイル（`docs/segments_jp/step_*.md`）を書き換え、`python tools/assemble_companion.py` で `spoilers/companion.jp.md` を再生成します。
 
 ### ステップ 6: 自動品質チェックの実行
 修正後、用語集チェックおよびASCIIマップチェックを実行します。
 
 ```powershell
-python tools/check_glossary.py spoilers/companion.ja.md
-python spoilers/check_ascii_maps.py spoilers/companion.ja.md
+python tools/check_glossary.py spoilers/companion.jp.md
+python spoilers/check_ascii_maps.py spoilers/companion.jp.md
 ```
 
 問題がなければ、`docs/translation_progress.json` の該当ステップを `"reviewed"` に戻します。
@@ -83,18 +83,18 @@ python spoilers/check_ascii_maps.py spoilers/companion.ja.md
 HTMLおよびPDFを再生成してレイアウトや表示を確認します。
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File spoilers/build.ja.ps1
+powershell -ExecutionPolicy Bypass -File spoilers/build.jp.ps1
 ```
 
-- 生成された `spoilers/index.ja.html` をブラウザで開き、目次リンクやテーブル崩れがないか確認。
-- PDF（`spoilers/companion.ja.pdf`）の組版を確認。
+- 生成された `spoilers/index.jp.html` をブラウザで開き、目次リンクやテーブル崩れがないか確認。
+- PDF（`spoilers/companion.jp.pdf`）の組版を確認。
 
 ---
 
 ## 5. コミットとプッシュ
 
 ```powershell
-git add spoilers/companion.ja.md spoilers/index.ja.html docs/translation_progress.json
+git add docs/segments_jp/ spoilers/companion.jp.md spoilers/index.jp.html spoilers/companion.jp.pdf docs/translation_progress.json
 git commit -m "docs: 本家 upstream の更新を追従翻訳 (step_042)"
 ```
 

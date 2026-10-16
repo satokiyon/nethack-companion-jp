@@ -4,9 +4,9 @@
 『NetHack 5.0 スポイラー書籍 (A Traveler's Companion to the Mazes of Menace)』の原本（全14,997行）を対象に、**全374セグメント（100%）**の日本語翻訳・品質レビュー・結合・ビルドが完全に完了しました。
 
 - **総セグメント数**: 374 / 374 セグメント完了（進捗率 100.0%）
-- **日本語Markdown**: `spoilers/companion.ja.md`（9,683行、完全結合済み）
-- **日本語HTML版**: `spoilers/index.ja.html`（動的識別計算機・SVG価格表・ASCIIマップ完全動作）
-- **日本語PDF版**: `spoilers/companion.ja.pdf`（約18.9MB、Chromium Headless による高精細組版）
+- **日本語Markdown**: `spoilers/companion.jp.md`（9,683行、完全結合済み）
+- **日本語HTML版**: `spoilers/index.jp.html`（動的識別計算機・SVG価格表・ASCIIマップ完全動作）
+- **日本語PDF版**: `spoilers/companion.jp.pdf`（約18.9MB、Chromium Headless による高精細組版）
 
 ---
 
@@ -37,7 +37,7 @@
 ---
 
 ## 3. 5重の完全性検証結果
-`tools/verify_completion.py` および `tools/build_ja.py` により、以下の全項目で合格を確認しました：
+`tools/verify_completion.py` および `tools/build_jp.py` により、以下の全項目で合格を確認しました：
 1. **全374セグメント存在確認**: `[OK]`（全374セグメントのMarkdownファイルが正常に存在）
 2. **厳格定訳および表記揺れ検証**: `[OK]`
    - 「浮遊する目」の完全排除 → 「**さまよう目 (Floating eye)**」に統一

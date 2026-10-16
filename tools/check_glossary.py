@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-翻訳済みテキスト（または companion.ja.md 全体）に対して、
+翻訳済みテキスト（または companion.jp.md 全体）に対して、
 用語集（mon_jp.txt, obj_jp.txt, glossary_custom.txt）の適用状況や
 Markdown構文（テーブル、コードブロック）の整合性を検証するツール。
 """
@@ -92,7 +92,7 @@ def check_text(text, orig_text=""):
     return warnings
 
 if __name__ == '__main__':
-    target = sys.argv[1] if len(sys.argv) > 1 else 'spoilers/companion.ja.md'
+    target = sys.argv[1] if len(sys.argv) > 1 else 'spoilers/companion.jp.md'
     if os.path.exists(target):
         with open(target, 'r', encoding='utf-8') as f:
             content = f.read()

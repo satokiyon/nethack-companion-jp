@@ -16,7 +16,7 @@ General Polymorph action/trap/conduct -> 変身(へんげ)
 import os
 import re
 
-segments_dir = os.path.join("docs", "segments_ja")
+segments_dir = os.path.join("docs", "segments_jp")
 
 replacements = [
     # Specific items

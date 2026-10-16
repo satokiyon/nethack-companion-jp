@@ -22,8 +22,8 @@ html = html.replace('<div class="sidebar-title">Search</div>', '<div class="side
 html = html.replace('placeholder="Search the guide..."', 'placeholder="ガイド内を検索..."')
 html = html.replace('<span class="page-fold-text">New!<br>Updated for 5.0</span>', '<span class="page-fold-text">5.0対応<br>完全改訂</span>')
 
-with open('spoilers/template.ja.html', 'w', encoding='utf-8') as f:
+with open('spoilers/template.jp.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print("spoilers/template.ja.html generated successfully.")
+print("spoilers/template.jp.html generated successfully.")
 

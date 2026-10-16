@@ -21,7 +21,7 @@ for s in progress["segments"]:
         chunk = "".join(companion_lines[start:end])
         # Replace the header line if it starts with ## Index of Useful Knowledge
         chunk = chunk.replace("## Index of Useful Knowledge", "## 有用な知識の索引 (Index of Useful Knowledge)")
-        out_path = os.path.join("docs", "segments_ja", f"{s['id']}.md")
+        out_path = os.path.join("docs", "segments_jp", f"{s['id']}.md")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(chunk.strip() + "\n")
         print(f"Generated {out_path}")
@@ -85,7 +85,7 @@ Reddit の **[r/nethack](https://www.reddit.com/r/nethack/) コミュニティ**
 *本著作物は [クリエイティブ・コモンズ 表示 - 継承 4.0 国際 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.ja) ライセンスの下で許諾されています。*
 """
 
-step_374_path = os.path.join("docs", "segments_ja", "step_374.md")
+step_374_path = os.path.join("docs", "segments_jp", "step_374.md")
 with open(step_374_path, "w", encoding="utf-8") as f:
     f.write(ack_content.strip() + "\n")
 print(f"Generated {step_374_path}")

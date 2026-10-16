@@ -18,7 +18,7 @@ if sys.platform == 'win32':
 
 PROGRESS_FILE = 'docs/translation_progress.json'
 ORIG_MD = 'spoilers/companion.md'
-JA_MD = 'spoilers/companion.ja.md'
+JP_MD = 'spoilers/companion.jp.md'
 REVIEW_NOTES = 'docs/translation_review_notes.md'
 
 def load_progress():

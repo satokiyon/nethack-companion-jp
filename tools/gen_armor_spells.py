@@ -295,7 +295,7 @@ segments["step_297"] = """### 呪文一覧表 (Spell Tables)
 """
 
 for step_id, content in segments.items():
-    filepath = os.path.join("docs", "segments_ja", f"{step_id}.md")
+    filepath = os.path.join("docs", "segments_jp", f"{step_id}.md")
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content.strip() + "\n")
     print(f"Written {filepath}")

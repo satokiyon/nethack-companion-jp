@@ -10,9 +10,9 @@ NetHack 5.0 対応の世界的名スポイラー『A Traveler's Companion to the
 
 本プロジェクトは、NetHack 5.0 のコードベースに完全に照合・監査された [スポイラー](https://davidbau.github.io/nethack-companion/spoilers/) を日本語化したものです。用語は [NetHackJP](https://github.com/satokiyon/NetHackJP) に準拠する方針としています。
 
-- **Web版（HTML）**: `spoilers/index.ja.html`
-- **印刷・閲覧用PDF版**: `spoilers/companion.ja.pdf`
-- **原本Markdown**: `spoilers/companion.ja.md`
+- **Web版（HTML）**: `spoilers/index.jp.html`
+- **印刷・閲覧用PDF版**: `spoilers/companion.jp.pdf`
+- **原本Markdown**: `spoilers/companion.jp.md`
 - LaTeX版は日本語化していません
 
 ---
@@ -29,10 +29,10 @@ NetHack 5.0 対応の世界的名スポイラー『A Traveler's Companion to the
 python tools/check_upstream_diff.py
 
 # 用語集・構文・テーブル整合性チェック
-python tools/check_glossary.py spoilers/companion.ja.md
+python tools/check_glossary.py spoilers/companion.jp.md
 
 # 日本語 HTML および PDF をビルド
-python tools/build_ja.py
+python tools/build_jp.py
 ```
 
 ---

@@ -1,11 +1,11 @@
-<!-- Modified by NetHackJP contributor @satokiyon; latest change date: 2026-10-15. -->
+<!-- Modified by NetHackJP contributor @satokiyon; latest change date: 2026-10-17. -->
 # NetHack Companion JP 開発・翻訳ルール
 
 ## 1. 原本セグメント駆動編集の原則
-- `spoilers/companion.ja.md`、`spoilers/index.ja.html`、`spoilers/companion.ja.pdf` を直接手動編集してはなりません。
-- すべての文章修正・翻訳修正は、大元のセグメントファイル（`docs/segments_ja/step_*.md`）に対して行い、修正後に必ず以下の手順で再生成・ビルドしてください。
-  1. `python tools/assemble_companion.py` で `spoilers/companion.ja.md` を再生成。
-  2. `python tools/build_ja.py` で HTML (`index.ja.html`) および PDF (`companion.ja.pdf`) をビルド。
+- `spoilers/companion.jp.md`、`spoilers/index.jp.html`、`spoilers/companion.jp.pdf` を直接手動編集してはなりません。
+- すべての文章修正・翻訳修正は、大元のセグメントファイル（`docs/segments_jp/step_*.md`）に対して行い、修正後に必ず以下の手順で再生成・ビルドしてください。
+  1. `python tools/assemble_companion.py` で `spoilers/companion.jp.md` を再生成。
+  2. `python tools/build_jp.py` で HTML (`index.jp.html`) および PDF (`companion.jp.pdf`) をビルド。
 
 ## 2. NetHackJP 公式C実装（Single Source of Truth）への準拠
 - モンスター名、アイテム名、アーティファクト名、呪文名、役職名、状態異常名などは、独自訳や直訳を用いず、必ず `NetHackJP` リポジトリの公式C実装（`src/obj_jp.c`, `src/mon_jp.c`, `src/spell_jp.c`, `src/botl.c`, `src/role.c` 等）および `docs/glossary_custom.txt` に厳密に準拠してください。

@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RootDir = Split-Path -Parent $ScriptDir
-$PyScript = Join-Path $RootDir "tools\build_ja.py"
+$PyScript = Join-Path $RootDir "tools\build_jp.py"
 
 if ($SkipPdf) {
     python $PyScript --skip-pdf

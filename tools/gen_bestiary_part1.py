@@ -256,7 +256,7 @@ for s in progress["segments"]:
     idx = int(s["id"].split("_")[1])
     if 298 <= idx <= 325:
         content = translate_bestiary_segment(s)
-        out_path = os.path.join("docs", "segments_ja", f"{s['id']}.md")
+        out_path = os.path.join("docs", "segments_jp", f"{s['id']}.md")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(content.strip() + "\n")
         print(f"Generated {out_path}")
