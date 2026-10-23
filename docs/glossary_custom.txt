@@ -211,7 +211,7 @@ Excalibur: エクスカリバー
 Mjollnir: ミョルニル
 Demonbane: デーモンベイン
 Platinum Yendorian Express Card: プラチナイェンダー印エクスプレスカード
-Bell of Opening: 開放の鐘
+Bell of Opening: 開放のベル
 Candelabrum of Invocation: 祈りの燭台
 Book of the Dead: 死者の書
 Amulet of Yendor: イェンダーの魔除け
