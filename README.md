@@ -1,4 +1,4 @@
-# NetHack Companion 日本語版 (A Traveler's Companion to the Mazes of Menace)
+# NetHack の歩き方 (脅威の迷宮への旅人の手引)
 
 NetHack 5.0 対応の世界的名スポイラー『A Traveler's Companion to the Mazes of Menace』（David Bau 著）の(非公式)日本語翻訳プロジェクトです。
 
