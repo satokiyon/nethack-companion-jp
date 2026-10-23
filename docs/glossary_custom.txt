@@ -48,7 +48,7 @@ Wood nymph: 木のニンフ
 Mountain nymph: 山のニンフ
 Pony: 仔馬
 Horse: 馬
-Warhorse: 戦闘用の馬
+Warhorse: 軍馬
 Kitten: 小猫
 Fire ant: 火蟻
 Killer bee: 殺人蜂
@@ -66,6 +66,8 @@ Fedora: フィドーラ
 Tinning kit: 缶詰作成道具
 Tin opener: 缶切り
 Lock pick: 鍵開け器具
+Beartrap: トラバサミ
+Bear trap: トラバサミ
 Luckstone: 幸せの石
 Oilskin sack: 防水袋
 Magic marker: 魔法のマーカー

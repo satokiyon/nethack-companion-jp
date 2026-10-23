@@ -71,7 +71,7 @@ Lurker above: ラーカー
 Trapper: トラッパー
 Pony: 仔馬
 Horse: 馬
-Warhorse: 戦闘用の馬
+Warhorse: 軍馬
 Fog cloud: 霧の雲
 Dust vortex: ほこりの渦
 Ice vortex: 氷の渦

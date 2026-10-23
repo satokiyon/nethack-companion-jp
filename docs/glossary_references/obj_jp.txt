@@ -213,7 +213,7 @@ Can of grease: 脂の缶
 Figurine: 人形
 Magic marker: 魔法のマーカー
 Land mine: 地雷
-Beartrap: 熊の罠
+Beartrap: トラバサミ
 Tin whistle: ブリキの笛
 Magic whistle: 魔法の笛
 Wooden flute: 木のフルート
